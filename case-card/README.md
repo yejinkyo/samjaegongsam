@@ -22,6 +22,20 @@ research-engine  ──PipelineResult(JSON)──▶  case-card/index.html
 
 `PipelineResult` 전체와 `CaseAnalysis` 단독 둘 다 받는다. 파일을 불러오기 전에는 `tests/fixtures/long_unsolved_missing` 기준의 **예시 데이터**가 떠 있고, 상단에 예시임을 알리는 띠가 보인다.
 
+## 예시 데이터 갱신
+
+`index.html`은 의존성 없는 단일 파일로 유지한다. 그래서 예시 데이터도 파일 안
+`/* SAMPLE:BEGIN */ … /* SAMPLE:END */` 구간에 박아 두고, 아래 명령으로 덮어쓴다.
+
+```bash
+cd research-engine
+uv run research-engine run tests/fixtures/long_unsolved_missing/case.json --out out/long.json
+uv run python ../case-card/make-sample.py out/long.json
+```
+
+카드가 쓰는 필드만 추려 넣으므로 결과 JSON 전체(180KB 남짓)가 그대로 들어가지는 않는다.
+**이 구간은 손으로 고치지 않는다.**
+
 ## 화면 구성
 
 카드와 타임라인은 같은 데이터의 두 배율이다. 카드 위 스테퍼를 누르면 해당 단계의 타임라인 항목으로 이동한다.
