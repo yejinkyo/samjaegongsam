@@ -7,10 +7,11 @@ from itertools import combinations
 
 from ..schema import Claim, ClaimSlot, ExtractionResult, Timeline
 from ..timeline.coref import mask_compatible
+from .changes import CHANGE_OF, is_after_change, latest_change
 
 S = ClaimSlot
 # 한 사건 안에 여러 번 일어날 수 있어 슬롯만으로는 같은 일인지 알 수 없는 항목 — 쌍으로 비교하지 않는다
-UNPAIRED_SLOTS = {S.INCIDENT_TIME}
+UNPAIRED_SLOTS = {S.INCIDENT_TIME, *CHANGE_OF}
 
 
 @dataclass
@@ -68,6 +69,12 @@ def candidate_pairs(extraction: ExtractionResult, timeline: Timeline | None = No
             if a.doc_id == b.doc_id:
                 continue
             relation = _relation(a, b, transfer_times)
+            change = latest_change(extraction.claims, a.slot, extraction.document_dates)  # type: ignore[arg-type]
+            if change is not None:
+                # 변경 전 값과 후 값은 모순이 아니라 시점 차이다
+                dd = extraction.document_dates
+                if is_after_change(a, change, dd) != is_after_change(b, change, dd):
+                    relation = "different"
             if relation == "different":
                 continue
             pairs.append(ClaimPair(a, b, relation == "same"))

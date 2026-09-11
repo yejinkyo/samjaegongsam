@@ -46,6 +46,7 @@ PRIORITY = {
     C.UNREADABLE: 20,
     C.UNRECORDED_FACT: 25,
     C.MISSING: 30,
+    C.POSSIBLY_OUTDATED: 30,
     C.STAGE_STALLED: 35,
     C.STAGE_SKIPPED: 45,
     C.CLAIMED_ONLY: 50,
@@ -56,6 +57,7 @@ PRIORITY = {
 }
 SLOT_STATE_ISSUE = {
     SlotState.CLAIMED_ONLY: (IssueCategory.UNVERIFIED, C.CLAIMED_ONLY),
+    SlotState.OUTDATED: (IssueCategory.UNVERIFIED, C.POSSIBLY_OUTDATED),
     SlotState.LOW_CONFIDENCE: (IssueCategory.UNVERIFIED, C.LOW_CONFIDENCE),
     SlotState.MISSING: (IssueCategory.MISSING, C.MISSING),
     SlotState.UNREADABLE: (IssueCategory.UNREADABLE, C.UNREADABLE),
@@ -94,7 +96,8 @@ class CaseAnalyzer:
     ) -> CaseAnalysis:
         claims = {c.claim_id: c for c in extraction.claims}
         decisions = self._decide(extraction, timeline)
-        slots = evaluate_slots(requirements, extraction.claims, decisions, docs, timeline, self.min_slot_confidence)
+        slots = evaluate_slots(requirements, extraction.claims, decisions, docs, timeline, self.min_slot_confidence,
+                               extraction.document_dates)
         ct = requirements.case_type
         issues: list[Issue] = []
         current_idx = (
@@ -140,6 +143,9 @@ class CaseAnalyzer:
         slot_label = {s.slot: s.label for s in requirements.slots}
         checked_docs = [d.doc_id for d in docs]
 
+        q_by_line = {(q.doc_id, q.line_no): q.request_id for q in clarifications
+                     if q.kind is ClarificationKind.UNREADABLE_TEXT and q.status == "pending"}
+
         # 1) 자료 간 불일치 (확정) — 슬롯별로 묶는다
         confirmed = [d for d in decisions if d.label is NliLabel.CONTRADICTION]
         for slot, group in _group_by_slot(confirmed).items():
@@ -171,6 +177,16 @@ class CaseAnalyzer:
                 speakers = sorted({claims[cid].speaker for cid in st.claim_ids})
                 quotes = " / ".join(f"‘{claims[cid].content.value}’({claims[cid].content.cite()})" for cid in st.claim_ids[:3])
                 msg = f"{st.label}: {', '.join(speakers)}의 말만 있고 이를 뒷받침하는 기록 자료가 없습니다 — {quotes}"
+            elif st.state is SlotState.OUTDATED:
+                *old_ids, change_id = st.claim_ids
+                old, change = claims[old_ids[0]], claims[change_id]
+                old_when = claim_date_label(old, extraction)
+                change_when = f", {change.slot_time.iso()}" if change.slot_time and change.slot_time.is_resolved else ""
+                msg = (f"{st.label}: 기록상 ‘{display_value(old)}’({old.content.cite()}{old_when})이지만, 이후 바뀌었다는 내용이 있습니다"
+                       f" — ‘{change.content.value}’({change.content.cite()}{change_when}). 현재 {st.label} 확인이 필요합니다")
+                unreadable_here = [s for s in st.sources if s.quote is None]
+                if unreadable_here:
+                    msg += f" (바뀐 정보가 있을 수 있는 부분이 읽히지 않았습니다: {', '.join(s.cite() for s in unreadable_here)})"
             elif st.state is SlotState.LOW_CONFIDENCE:
                 values = " / ".join(
                     f"‘{display_value(claims[cid])}’({claims[cid].content.cite()})" for cid in st.claim_ids[:3]
@@ -180,13 +196,17 @@ class CaseAnalyzer:
                 msg = f"{st.label}: 올린 자료에서 찾지 못했고, 해당 내용이 있을 수 있는 부분이 읽히지 않았습니다"
             else:
                 msg = f"{st.label}: 올린 자료에서 찾지 못했습니다"
+            region_q = [q_by_line[(s.source_doc_id, s.source_line)] for s in st.sources
+                        if s.quote is None and (s.source_doc_id, s.source_line) in q_by_line]
+            since = None
+            if st.state is SlotState.OUTDATED:
+                change = claims[st.claim_ids[-1]]
+                since = change.slot_time.start if change.slot_time and change.slot_time.is_resolved else None
             add(category, condition, msg, stage=st.stage, slot=st.slot, sources=st.sources,
                 checked=checked_docs if st.state in (SlotState.MISSING, SlotState.UNREADABLE) else (),
-                claim_ids=st.claim_ids)
+                claim_ids=st.claim_ids, q_ids=region_q, since=since)
 
         # 4) 읽히지 않은 부분 — 문서별 1건, 질문은 줄마다
-        q_by_line = {(q.doc_id, q.line_no): q.request_id for q in clarifications
-                     if q.kind is ClarificationKind.UNREADABLE_TEXT and q.status == "pending"}
         for d in docs:
             if not d.unreadable:
                 continue
@@ -331,6 +351,11 @@ class CaseAnalyzer:
         if days < requirements.stall_days:
             return None
         return timeline.current_stage, last, since, days
+
+
+def claim_date_label(claim: Claim, extraction: ExtractionResult) -> str:
+    doc_date = extraction.document_dates.get(claim.doc_id)
+    return f", {doc_date.value.iso()}" if doc_date and doc_date.value.is_resolved else ""
 
 
 def _span_label(hours: float) -> str:

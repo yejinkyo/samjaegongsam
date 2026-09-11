@@ -79,12 +79,14 @@ class GapCondition(StrEnum):
     STAGE_SKIPPED = "stage_skipped"  # 중간 단계 자료 없음
     STAGE_STALLED = "stage_stalled"  # 현재 단계 이후 진행 기록 없음
     UNRECORDED_FACT = "unrecorded_fact"  # 사건 이후 나온 사실이 기록 자료에서 확인되지 않음
+    POSSIBLY_OUTDATED = "possibly_outdated"  # 기록된 값이 이후 바뀌었다는 내용이 있음 (예: 담당 수사관 교체)
 
 
 class SlotState(StrEnum):
     CONFIRMED = "confirmed"
     CLAIMED_ONLY = "claimed_only"
     CONFLICTING = "conflicting"
+    OUTDATED = "outdated"  # 기록은 있으나 그 뒤에 바뀌었다는 내용이 있고, 바뀐 값은 확인되지 않음
     LOW_CONFIDENCE = "low_confidence"
     UNREADABLE = "unreadable"
     MISSING = "missing"

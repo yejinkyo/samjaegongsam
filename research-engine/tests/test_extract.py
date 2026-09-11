@@ -137,3 +137,18 @@ def test_last_seen_claim_from_reported_speech():
     seen = next(c for c in res.claims if c.slot is ClaimSlot.LAST_SEEN_TIME)
     assert seen.speaker == "경찰" and seen.speaker_basis == "reported_speech"
     assert seen.slot_time.start == datetime(2015, 10, 10, 22)  # '지난해'(연 단위)보다 구체적인 시각을 쓴다
+
+
+def test_investigator_change_and_new_investigator_claims():
+    doc = _doc("memo", ["15년 10월 10일 밤 연락 끊김", "작년 추석 무렵 수사관한테 전화 → 담당자 바뀌었다고 함", "새 담당 형사 이름 김영수"],
+               DocumentType.MEMO)
+    res = Extractor().extract([doc], date(2026, 9, 11))
+    change = next(c for c in res.claims if c.slot is ClaimSlot.INVESTIGATOR_CHANGE)
+    assert change.content.source_line == 2 and change.slot_time is not None
+    new = next(c for c in res.claims if c.slot is ClaimSlot.INVESTIGATOR)
+    assert new.slot_value == "김영수" and new.content.source_line == 3
+    assert not any(c.slot is ClaimSlot.INVESTIGATOR_CHANGE for c in _doc_claims("담당 형사가 바뀌지 않았다"))
+
+
+def _doc_claims(text):
+    return Extractor().extract([_doc("x", [text], DocumentType.MEMO)], date(2026, 9, 11)).claims

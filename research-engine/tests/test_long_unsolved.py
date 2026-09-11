@@ -52,3 +52,22 @@ def test_dates_resolved_from_context(result):
 def test_gaps_respect_the_2016_news_article(result):
     starts = [g.start.year for g in result.timeline.gaps]
     assert 2015 not in starts and starts[0] == 2016
+
+
+def test_investigator_change_memo_marks_record_as_possibly_outdated(result):
+    issue = next(i for i in result.analysis.issues if i.slot is ClaimSlot.INVESTIGATOR)
+    assert issue.condition is GapCondition.POSSIBLY_OUTDATED
+    assert "박정호" in issue.message and "담당자 바뀌었다고 함" in issue.message
+    assert issue.clarification_request_ids == ["mother_memo:u5:q"]  # 새 담당자 이름이 있을 수 있는 읽히지 않은 줄
+    assert issue.trigger.since.year == 2025
+    assert result.analysis.case_card.slots_done == 5
+
+
+def test_answering_the_unreadable_memo_line_updates_current_investigator(result):
+    pipeline = ResearchPipeline()
+    after = pipeline.answer(result, "mother_memo:u5:q", "새 담당 형사 이름 김영수 연락처 모름")
+    status = next(s for s in after.analysis.slot_statuses if s.slot is ClaimSlot.INVESTIGATOR)
+    assert status.state is SlotState.CLAIMED_ONLY  # 가족 메모에만 있으므로 기록으로 확인되지는 않음
+    assert [after.extraction.claims[[c.claim_id for c in after.extraction.claims].index(cid)].slot_value
+            for cid in status.claim_ids] == ["김영수"]
+    assert not [d for d in after.analysis.pair_decisions if d.slot is ClaimSlot.INVESTIGATOR]

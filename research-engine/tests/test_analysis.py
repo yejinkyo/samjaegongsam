@@ -1,5 +1,5 @@
 import itertools
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 
 from research_engine.analysis import CaseAnalyzer, ConservativePolicy, SlotRuleNli, candidate_pairs
 from research_engine.requirements import load_requirements
@@ -134,3 +134,34 @@ def test_claim_only_and_missing_slots_feed_action_triggers():
     assert "used_goods_fraud/investigation/investigator/missing" in keys
     holder_issue = next(i for i in result.issues if i.slot is ClaimSlot.ACCOUNT_HOLDER)
     assert holder_issue.category is IssueCategory.UNVERIFIED and holder_issue.sources[0].source_doc_id == "chat"
+
+
+def _dated(c, doc_date):
+    value = tv(doc_date, doc_date + timedelta(days=1))
+    return {c.doc_id: Sourced[TimeValue](value=value, source_doc_id=c.doc_id, source_line=1, confidence=0.9)}
+
+
+def test_value_changed_after_record_becomes_outdated_not_confirmed():
+    record = claim(ClaimSlot.INVESTIGATOR, "박정호", "notice")
+    change = claim(ClaimSlot.INVESTIGATOR_CHANGE, "changed", "memo", conf=0.6, level=EvidenceLevel.STATEMENT,
+                   time=tv(datetime(2025, 10, 4), datetime(2025, 10, 9), approximate=True))
+    ex = ExtractionResult(claims=[record, change], document_dates=_dated(record, datetime(2022, 3, 15)))
+    result = CaseAnalyzer().analyze("c1", REQ, date(2026, 9, 11), [], ex, timeline(Stage.RECEIPT), [])
+    status = next(s for s in result.slot_statuses if s.slot is ClaimSlot.INVESTIGATOR)
+    assert status.state.value == "outdated" and status.value == "박정호"
+    issue = next(i for i in result.issues if i.slot is ClaimSlot.INVESTIGATOR)
+    assert issue.condition is GapCondition.POSSIBLY_OUTDATED and issue.category is IssueCategory.UNVERIFIED
+    assert issue.trigger.key == "used_goods_fraud/investigation/investigator/possibly_outdated"
+    assert {s.source_doc_id for s in issue.sources} == {"notice", "memo"}
+
+
+def test_record_issued_after_the_change_is_confirmed_and_not_compared_with_old_value():
+    change = claim(ClaimSlot.INVESTIGATOR_CHANGE, "changed", "memo", level=EvidenceLevel.STATEMENT,
+                   time=tv(datetime(2023, 1, 1), datetime(2023, 1, 2)))
+    old = claim(ClaimSlot.INVESTIGATOR, "박정호", "notice2022", time=tv(datetime(2022, 3, 15), datetime(2022, 3, 16)))
+    new = claim(ClaimSlot.INVESTIGATOR, "김영수", "notice2024", time=tv(datetime(2024, 5, 1), datetime(2024, 5, 2)))
+    result = analyze([change, old, new])
+    status = next(s for s in result.slot_statuses if s.slot is ClaimSlot.INVESTIGATOR)
+    assert status.state.value == "confirmed" and status.value == "김영수"
+    assert not [i for i in result.issues if i.category is IssueCategory.INCONSISTENCY]
+    assert not [d for d in result.pair_decisions if d.slot is ClaimSlot.INVESTIGATOR]

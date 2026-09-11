@@ -48,6 +48,16 @@ RECEIVED = re.compile(
 INVESTIGATOR = re.compile(
     r"담당\s*(?:수사관|형사|경찰관|조사관)\s*(?:은|는|:|：)?\s*(?:경위|경사|경장|순경|경감|경정)?\s*(?P<name>[가-힣]{2,4})"
 )
+_POLICE_TITLE = r"(?:자|수사관|형사|경찰관|조사관)"
+# "담당자 바뀌었다고 함", "담당 형사가 교체됐다"
+INVESTIGATOR_CHANGE = re.compile(
+    rf"담당\s*{_POLICE_TITLE}?\s*(?:이|가|은|는|도)?\s*(?:또\s*)?(?:바뀌|바꼈|변경|교체|새로\s*(?:왔|배정))"
+)
+# "새 담당 형사 이름 김영수" — 바뀐 뒤의 담당자
+NEW_INVESTIGATOR = re.compile(
+    rf"(?:새|새로운|바뀐)\s*담당\s*{_POLICE_TITLE}?\s*(?:이름|성명)?\s*(?:은|는|:|：)?\s*"
+    r"(?:경위|경사|경장|순경|경감|경정)?\s*(?P<name>[가-힣]{2,4})"
+)
 POLICE_ROLES = P.ROLE_GROUPS["police"]
 # "판매자는 물건을 보냈다고 하였으나" → 인용 구간의 화자는 판매자
 REPORTED = re.compile(
@@ -254,6 +264,17 @@ def claims_from_line(
     for m in P.TRACKING_NUMBER.finditer(clause):
         add(S.TRACKING_NUMBER, clause_start + m.start("no"), clause_start + m.end("no"), re.sub(r"\D", "", m["no"]))
 
+    change = INVESTIGATOR_CHANGE.search(clause)
+    if change and not is_request and not P.is_negated(clause[change.end():]):
+        # 바뀐 사실 자체는 시각이 흐려도 유효하므로 시각 신뢰도로 깎지 않는다
+        tm = pick_time(matches, clause_start, len(text), clause_start + change.start())
+        add(S.INVESTIGATOR_CHANGE, clause_start + change.start(), clause_start + change.end(), "changed",
+            slot_time=tm.value if tm else None)
+    for m in NEW_INVESTIGATOR.finditer(clause):
+        name = P.strip_particles(m["name"])
+        if name not in P.NOT_NAMES and not any(c.slot is S.INVESTIGATOR for c in out):
+            s = clause_start + m.start("name")
+            add(S.INVESTIGATOR, s, s + len(name), name)
     for m in INVESTIGATOR.finditer(clause):
         if m["name"] not in P.NOT_NAMES and not any(c.slot is S.INVESTIGATOR for c in out):
             add(S.INVESTIGATOR, clause_start + m.start("name"), clause_start + m.end("name"), m["name"])

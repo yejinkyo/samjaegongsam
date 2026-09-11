@@ -197,6 +197,7 @@ class ClaimSlot(StrEnum):
     RECEIPT_NUMBER = "receipt_number"
     RECEIPT_TIME = "receipt_time"
     INVESTIGATOR = "investigator"
+    INVESTIGATOR_CHANGE = "investigator_change"  # "담당자 바뀌었다고 함" — 이전 담당자 기록이 낡았을 수 있음
     CASE_NUMBER = "case_number"
     DECISION_TIME = "decision_time"
     DECISION_TYPE = "decision_type"
