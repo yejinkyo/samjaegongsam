@@ -12,7 +12,10 @@
 
 ## 실행
 
+명령은 모두 `research-engine/` 폴더 안에서 실행한다 (저장소 루트에는 `pyproject.toml`이 없어 `uv run`이 명령을 찾지 못한다).
+
 ```bash
+cd research-engine
 uv sync
 uv run pytest
 uv run research-engine run tests/fixtures/used_goods_fraud/case.json --out out/result.json

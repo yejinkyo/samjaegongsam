@@ -67,7 +67,7 @@ def test_answering_unreadable_question_reruns_analysis(fraud_result):
 
 
 def test_cli_run_and_schema(tmp_path, capsys):
-    out = tmp_path / "result.json"
+    out = tmp_path / "nested" / "result.json"  # 없는 폴더도 만들어 저장한다
     assert main(["run", "tests/fixtures/used_goods_fraud/case.json", "--out", str(out)]) == 0
     data = json.loads(out.read_text(encoding="utf-8"))
     assert data["analysis"]["case_card"]["current_stage"] == "receipt"

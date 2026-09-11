@@ -47,7 +47,7 @@ def cmd_run(args: argparse.Namespace) -> int:
     result = pipeline.run(case)
     payload = result.model_dump_json(indent=2)
     if args.out:
-        Path(args.out).write_text(payload, encoding="utf-8")
+        _prepare(args.out).write_text(payload, encoding="utf-8")
     analysis = result.analysis
     card = analysis.case_card
     lines = [
@@ -109,7 +109,7 @@ def cmd_train_readability(args: argparse.Namespace) -> int:
     report = evaluate_ocr(labels, scorer, args.max_cer, args.target_precision)
     if report["recommended_threshold"] is not None:
         scorer.threshold = report["recommended_threshold"]
-    scorer.to_json(args.out)
+    scorer.to_json(_prepare(args.out))
     sys.stdout.write(f"저장: {args.out} (threshold={scorer.threshold})\n")
     return 0
 
@@ -120,7 +120,7 @@ def cmd_train_doc_classifier(args: argparse.Namespace) -> int:
 
     rows = [json.loads(r) for r in Path(args.labels).read_text(encoding="utf-8").splitlines() if r.strip()]
     clf = NaiveBayesDocClassifier().fit((r["text"], DocumentType(r["doc_type"])) for r in rows)
-    clf.to_json(args.out)
+    clf.to_json(_prepare(args.out))
     sys.stdout.write(f"저장: {args.out} ({len(rows)}건, 유형 {len(clf.class_counts)}개)\n")
     return 0
 
@@ -139,15 +139,22 @@ def cmd_eval_nli(args: argparse.Namespace) -> int:
     report = tune_thresholds(load_pair_labels(args.pairs), args.target_precision)
     if args.out and report["recommended_policy"]:
         policy = {k: v for k, v in report["recommended_policy"].items() if k != "contradiction"}
-        Path(args.out).write_text(json.dumps(policy, indent=2), encoding="utf-8")
+        _prepare(args.out).write_text(json.dumps(policy, indent=2), encoding="utf-8")
         sys.stdout.write(f"정책 저장: {args.out}\n")
     _print(report)
     return 0
 
 
+def _prepare(out: str) -> Path:
+    """--out 경로의 상위 폴더가 없으면 만든다."""
+    path = Path(out)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    return path
+
+
 def _write_or_print(report: dict, out: str | None) -> None:
     if out:
-        Path(out).write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+        _prepare(out).write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
     _print(report)
 
 
