@@ -22,7 +22,16 @@ uv run research-engine run tests/fixtures/used_goods_fraud/case.json --out out/r
 uv run research-engine schema --out-dir out/schemas
 ```
 
-`tests/fixtures/used_goods_fraud/`는 목업의 중고거래 사기 사례(메신저 캡처, 이체확인증, 접수증, 손글씨 메모, 진술서)를 OCR 결과 형태로 옮긴 것이다.
+예시 사례 두 개가 OCR 결과 형태로 들어 있다 (인물·사건은 가상).
+
+| 픽스처 | 사건 유형 | 자료 |
+|---|---|---|
+| `tests/fixtures/used_goods_fraud/` | `used_goods_fraud` | 목업의 중고거래 사기 — 메신저 캡처, 이체확인증, 접수증, 손글씨 메모, 진술서 |
+| `tests/fixtures/long_unsolved_missing/` | `missing_person_suspended` | 장기 미제 실종 — 2015 실종신고 접수증, 2016 보도, 2019 목격자 진술서, 2022 수사중지 결정 통지서, 2023 진정서, 가족 손글씨 메모 |
+
+```bash
+uv run research-engine run tests/fixtures/long_unsolved_missing/case.json --out out/long.json
+```
 
 ## 원칙이 코드에 들어간 자리
 
@@ -54,7 +63,11 @@ Claim은 화자(메신저 접두어, 문/답, 진술서 작성자, 인용 "판�
 - `ActionTrigger` — 행동 강령 매칭 엔진 입력. `since`·`elapsed_days`로 "접수 후 3주 경과" 같은 기한 계산이 가능
 - `CaseCard` — 기능 2 카드 (단계 진행, 확보 자료 수, 확인 필요 수, 완료 n/m, 다음 트리거)
 
-사건 유형별 추적 항목은 `requirements/*.json`에 데이터로 둔다. 현재 `used_goods_fraud`, `investigation_suspended` 모두 `draft_unverified` — 법률 전문가 검수 전 초안이다.
+사건 유형별 추적 항목은 `requirements/*.json`에 데이터로 둔다. 현재 `used_goods_fraud`, `investigation_suspended`, `missing_person_suspended` 모두 `draft_unverified` — 법률 전문가 검수 전 초안이다.
+
+장기 미제 유형(`flag_unrecorded_facts`, `stall_after_final_stage`)에서는 두 가지를 더 본다.
+- **기록에서 확인되지 않는 사건 이후 사실** — 첫 발생 이후의 목격·제보 같은 진술 중 통지서·접수증 같은 기록 자료로 뒷받침되지 않는 것. 마지막 결정보다 앞선 내용인지 뒤의 내용인지 함께 적는다. proposal.md 사례 B("2019년 목격 진술이 기존 수사 기록에 포함되어 있지 않습니다")의 트리거(`…/occurrence/new_fact/unrecorded_fact`)다. 엔진은 수사 기록 원본을 보지 못하므로 "포함되지 않았다"고 단정하지 않고 "반영 여부 확인 필요"로만 올린다
+- **결정 이후 경과** — 수사중지 같은 마지막 단계도 멈춘 상태로 보고 결정일부터 경과일을 센다
 
 ## 먼저 검증할 것: 라벨링 파일럿
 
