@@ -1,0 +1,702 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>나의 사건 카드</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+  :root{
+    --bg:#fff; --sunken:#fbfbfd; --raised:#fff; --banner:#f4f1fe;
+    --line:#eaeaf0; --line-2:#dcdbe5;
+    --ink:#1c1b22; --ink-2:#63626f; --ink-3:#9694a2;
+    --accent:#6c4ce0; --accent-soft:#efebfd;
+    --ok:#2fa98a;   --ok-bg:#e3f3ee;
+    --warn:#c98a2e; --warn-bg:#faf0dd;
+    --bad:#d2544f;  --bad-bg:#fbe9e8;
+    --idle:#b7b5c2;
+    --shadow:0 1px 2px rgba(28,27,34,.04), 0 8px 24px -12px rgba(28,27,34,.10);
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#131218; --sunken:#0e0d12; --raised:#1a1922; --banner:#1f1a30;
+      --line:#2a2833; --line-2:#3b3846;
+      --ink:#ecebf2; --ink-2:#a5a3b2; --ink-3:#75737f;
+      --accent:#9b85f5; --accent-soft:#241f3a;
+      --ok:#4fc9a5;   --ok-bg:#153630;
+      --warn:#e0a94e; --warn-bg:#352a12;
+      --bad:#ee7b76;  --bad-bg:#381c1b;
+      --idle:#55525f;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#131218; --sunken:#0e0d12; --raised:#1a1922; --banner:#1f1a30;
+    --line:#2a2833; --line-2:#3b3846;
+    --ink:#ecebf2; --ink-2:#a5a3b2; --ink-3:#75737f;
+    --accent:#9b85f5; --accent-soft:#241f3a;
+    --ok:#4fc9a5;   --ok-bg:#153630;
+    --warn:#e0a94e; --warn-bg:#352a12;
+    --bad:#ee7b76;  --bad-bg:#381c1b;
+    --idle:#55525f;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+  }
+
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:"Noto Sans KR",Pretendard,-apple-system,"Malgun Gothic",sans-serif;
+    font-size:13px; line-height:1.55; -webkit-font-smoothing:antialiased;
+  }
+  button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+
+  /* ── 상단 ── */
+  .topbar{display:flex;align-items:center;gap:14px;padding:14px 24px 0;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px}
+  .brand i{width:14px;height:14px;border-radius:4px;background:var(--accent)}
+  .chip{display:flex;align-items:center;gap:10px;background:var(--sunken);
+        border:1px solid var(--line);border-radius:999px;padding:5px 14px;font-size:12px}
+  .chip b{font-weight:500}
+  .chip span{color:var(--ink-2);font-variant-numeric:tabular-nums}
+  .topbar .right{margin-left:auto;display:flex;align-items:center;gap:12px;font-size:12px;color:var(--ink-2)}
+  .loadbtn{border:1px solid var(--line-2);border-radius:7px;padding:5px 11px;font-size:12px}
+  .loadbtn:hover{border-color:var(--accent);color:var(--accent)}
+
+  .tabs{display:flex;gap:26px;padding:12px 24px 0;border-bottom:1px solid var(--line);overflow-x:auto}
+  .tab{padding-bottom:10px;font-size:12.5px;color:var(--ink-3);border-bottom:2px solid transparent;
+       margin-bottom:-1px;white-space:nowrap}
+  .tab b{font-weight:400;color:var(--ink-3);margin-right:5px;font-variant-numeric:tabular-nums}
+  .tab[aria-current]{color:var(--ink);font-weight:500;border-bottom-color:var(--accent)}
+  .tab[aria-current] b{color:var(--ink-2)}
+
+  .notice{background:var(--banner);padding:11px 24px;font-size:12.5px;border-bottom:1px solid var(--line)}
+  .notice b{font-weight:500}
+  .notice span{color:var(--ink-2)}
+  .sample{background:var(--warn-bg);padding:9px 24px;font-size:12px;border-bottom:1px solid var(--line);
+          display:flex;align-items:center;gap:8px}
+  .sample::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--warn);flex:none}
+  .sample[hidden]{display:none!important}
+
+  /* ── 레이아웃 ── */
+  .shell{display:grid;grid-template-columns:248px minmax(0,1fr) 340px;align-items:start}
+  .col{padding:20px 22px 56px;min-width:0}
+  .col-left{border-right:1px solid var(--line)}
+  .col-right{border-left:1px solid var(--line);background:var(--sunken);min-height:100vh}
+  .colhead{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px}
+  .colhead h2{margin:0;font-size:13.5px;font-weight:700}
+  .colhead em{font-style:normal;color:var(--ink-3);font-size:12px;font-variant-numeric:tabular-nums}
+
+  /* ── 자료함 ── */
+  .docs{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+  .docs li{display:grid;grid-template-columns:16px 1fr;gap:9px;padding:8px;border-radius:8px}
+  .docs .idx{color:var(--ink-3);font-size:11px;font-variant-numeric:tabular-nums;padding-top:2px}
+  .docs .name{font-size:12.5px;font-weight:500;word-break:break-all}
+  .docs .meta{display:flex;align-items:center;gap:6px;margin-top:4px;font-size:11px;color:var(--ink-3);flex-wrap:wrap}
+  .kind{border:1px solid var(--line-2);border-radius:3px;padding:0 4px;font-size:9.5px;letter-spacing:.04em;color:var(--ink-2)}
+  .hint{margin-top:18px;padding-left:12px;border-left:2px solid var(--accent);font-size:12px;color:var(--ink-2)}
+
+  /* ── 사건 카드 ── */
+  .eyebrow{display:flex;align-items:center;gap:8px;margin-bottom:10px;font-size:11.5px;color:var(--ink-3);flex-wrap:wrap}
+  .eyebrow strong{color:var(--accent);font-weight:500;display:flex;align-items:center;gap:5px}
+  .eyebrow strong::before{content:"";width:11px;height:11px;border-radius:3px;background:var(--accent);opacity:.85}
+  .eyebrow .dot{width:2px;height:2px;border-radius:50%;background:var(--ink-3)}
+
+  .card{background:var(--raised);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+  .card-top{display:flex;align-items:center;gap:12px;padding:16px 18px 14px;flex-wrap:wrap}
+  .casetype{font-size:16px;font-weight:700;letter-spacing:-.01em;margin:0}
+  .range{font-size:11.5px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+  .stage-now{margin-left:auto;display:flex;align-items:center;gap:7px;background:var(--ok-bg);
+             border-radius:999px;padding:5px 12px;font-size:12px;font-weight:500;white-space:nowrap}
+  .stage-now::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ok)}
+  .stage-now em{font-style:normal;color:var(--ink-2);font-weight:400}
+
+  .stepper{display:flex;padding:4px 18px 20px;overflow-x:auto}
+  .step{flex:1;position:relative;text-align:left;padding-top:20px;min-width:74px}
+  .step::before{content:"";position:absolute;top:5px;left:0;right:0;height:1.5px;background:var(--line-2)}
+  .step:first-child::before{left:5px}
+  .step:last-child::before{right:calc(100% - 6px)}
+  .step .node{position:absolute;top:0;left:0;width:11px;height:11px;border-radius:50%;
+              background:var(--raised);border:2.5px solid var(--idle);transition:border-color .3s,background .3s}
+  .step[data-state="done"]    .node{border-color:var(--ok);background:var(--ok)}
+  .step[data-state="current"] .node{border-color:var(--accent);background:var(--raised);box-shadow:0 0 0 3px var(--accent-soft)}
+  .step[data-state="skipped"] .node{border-color:var(--warn);border-style:dashed;background:var(--raised)}
+  .step[data-state="pending"] .node{border-color:var(--line-2);background:var(--raised)}
+  .step .lab{display:block;font-size:12.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .step .sub{display:block;font-size:11px;color:var(--ink-3);margin-top:1px}
+  .step[data-state="pending"] .lab{color:var(--ink-3);font-weight:400}
+  .step[data-state="current"] .lab{color:var(--accent);font-weight:700}
+  .step:hover .lab{color:var(--accent)}
+
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+  .stat{padding:13px 18px;border-right:1px solid var(--line)}
+  .stat:last-child{border-right:none}
+  .stat .k{font-size:11.5px;color:var(--ink-3)}
+  .stat .v{font-size:15px;font-weight:700;font-variant-numeric:tabular-nums;margin-top:3px;letter-spacing:-.01em}
+  .stat .v small{font-size:11.5px;font-weight:400;color:var(--ink-3);margin-left:1px}
+  .stat.alert .v{color:var(--bad)}
+  .bars{display:flex;gap:3px;margin-top:7px}
+  .bars i{flex:1;height:3px;border-radius:2px;background:var(--line-2)}
+  .bars i.on{background:var(--ok)}
+
+  .needline{display:flex;align-items:center;gap:9px;padding:12px 18px;border-top:1px solid var(--line);
+            background:var(--bad-bg);font-size:12.5px}
+  .needline::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--bad);flex:none}
+  .needline span{color:var(--ink-2)}
+  .needline b{font-weight:500}
+
+  .nextact{padding:15px 18px;border-top:1px solid var(--line)}
+  .nextact .k{font-size:11px;color:var(--accent);font-weight:500;letter-spacing:.03em}
+  .nextact .t{font-size:14.5px;font-weight:700;margin-top:2px;letter-spacing:-.01em}
+  .nextact .why{font-size:11.5px;color:var(--ink-3);margin-top:3px;word-break:break-all}
+  .kbpend{margin-top:10px;padding:9px 12px;border:1px dashed var(--line-2);border-radius:8px;
+          font-size:11.5px;color:var(--ink-2);line-height:1.5}
+  .kbpend b{color:var(--ink);font-weight:500}
+
+  .bridge{display:flex;align-items:center;gap:9px;margin:14px 0 16px;font-size:11.5px;color:var(--ink-3)}
+  .bridge::after{content:"";flex:1;height:1px;background:var(--line)}
+
+  /* ── 타임라인 ── */
+  .tl-tabs{display:flex;gap:22px;border-bottom:1px solid var(--line);margin-bottom:18px}
+  .tl-tabs button{padding-bottom:9px;font-size:12.5px;color:var(--ink-3);
+                  border-bottom:2px solid transparent;margin-bottom:-1px}
+  .tl-tabs button[aria-current]{color:var(--ink);font-weight:500;border-bottom-color:var(--accent)}
+
+  .tl{list-style:none;margin:0;padding:0;position:relative}
+  .tl::before{content:"";position:absolute;left:5px;top:6px;bottom:16px;width:1.5px;background:var(--line)}
+  .tl>li{position:relative;padding:0 0 22px 40px;border-radius:8px;margin-left:-6px}
+  .tl>li.gaprow{padding-left:40px;padding-bottom:14px}
+  .tl .node{position:absolute;left:6px;top:4px;width:11px;height:11px;border-radius:50%;
+            background:var(--bg);border:2.5px solid var(--idle)}
+  .tl li[data-ev="record"]    .node{border-color:var(--ok);background:var(--ok)}
+  .tl li[data-ev="statement"] .node{border-color:var(--warn);background:var(--warn)}
+  .tl li[data-ev="user"]      .node{border-style:dashed;background:var(--bg)}
+  .tl .row{display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap}
+  .tl .when{font-size:12.5px;color:var(--ink-2);font-variant-numeric:tabular-nums;flex:none;width:100px}
+  .tl .body{min-width:0;flex:1}
+  .tl .what{font-size:14px;font-weight:500;letter-spacing:-.01em}
+  .tl .src{margin-top:4px;font-size:11.5px;color:var(--ink-3);word-break:break-all}
+  .tl .src b{font-weight:400;color:var(--ink-2)}
+  .tl .pills{display:flex;gap:6px;flex:none;flex-wrap:wrap}
+  .tl li.lit{animation:lit 1.4s ease}
+  @keyframes lit{0%,60%{background:var(--accent-soft)}100%{background:transparent}}
+
+  .pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:3px 10px;
+        font-size:11.5px;white-space:nowrap}
+  .pill::before{content:"";width:5px;height:5px;border-radius:50%}
+  .pill.ok{background:var(--ok-bg)}     .pill.ok::before{background:var(--ok)}
+  .pill.warn{background:var(--warn-bg)} .pill.warn::before{background:var(--warn)}
+  .pill.bad{background:var(--bad-bg)}   .pill.bad::before{background:var(--bad)}
+  .pill.self{border:1px solid var(--line-2);color:var(--ink-2)} .pill.self::before{display:none}
+
+  .gap{display:flex;align-items:center;gap:10px;border:1px dashed var(--line-2);border-radius:9px;
+       padding:10px 13px;font-size:12px;color:var(--ink-2);font-variant-numeric:tabular-nums;flex-wrap:wrap}
+
+  /* ── 확인이 필요해요 ── */
+  .group{margin-bottom:20px}
+  .grouphead{display:flex;align-items:center;gap:7px;margin-bottom:9px;font-size:12.5px;font-weight:500}
+  .grouphead::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--idle)}
+  .grouphead.bad::before{background:var(--bad)}
+  .grouphead.warn::before{background:var(--warn)}
+  .grouphead em{margin-left:auto;font-style:normal;color:var(--ink-3);font-size:12px;font-variant-numeric:tabular-nums}
+  .issue{background:var(--raised);border:1px solid var(--line);border-left:2.5px solid var(--idle);
+         border-radius:0 9px 9px 0;padding:12px 14px;margin-bottom:8px}
+  .issue.bad{border-left-color:var(--bad)}
+  .issue.warn{border-left-color:var(--warn)}
+  .issue p{margin:0;font-size:12.5px}
+  .issue .how{margin-top:7px;font-size:11.5px;color:var(--ink-3);word-break:break-all}
+  .issue .how b{font-weight:400;color:var(--ink-2)}
+  .issue .trig{margin-top:6px;font-size:10.5px;color:var(--ink-3);font-family:ui-monospace,monospace;word-break:break-all}
+
+  .empty{color:var(--ink-3);font-size:12.5px;padding:8px 0}
+
+  @media (max-width:1080px){
+    .shell{grid-template-columns:1fr}
+    .col-left,.col-right{border:none;border-top:1px solid var(--line);min-height:0}
+    .col-left{order:2} .col-right{order:3}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="topbar">
+    <div class="brand"><i></i>사건 정리</div>
+    <div class="chip"><b id="caseLabel">—</b><span id="caseRange"></span></div>
+    <div class="right">
+      <button class="loadbtn" id="loadBtn">결과 JSON 불러오기</button>
+      <input type="file" id="fileInput" accept=".json" hidden>
+    </div>
+  </div>
+  <nav class="tabs">
+    <span class="tab"><b>01</b>사건 시작</span>
+    <span class="tab"><b>02</b>자료 수집</span>
+    <span class="tab"><b>03</b>재구성</span>
+    <span class="tab" aria-current="page"><b>04</b>재구성 결과</span>
+    <span class="tab"><b>05</b>다음 행동</span>
+  </nav>
+  <p class="notice" style="margin:0">
+    <b>이 서비스는 범인이나 사건의 진실을 판단하지 않습니다.</b>
+    <span>지금 자료로 확인되는 것과 아직 확인되지 않은 것을 나누어 보여드립니다.</span>
+  </p>
+  <p class="sample" id="sampleBar" style="margin:0">
+    <span><b>예시 데이터</b>입니다 — <code>research-engine/tests/fixtures/long_unsolved_missing</code> 기준.
+    실제 값은 <code>uv run research-engine run … --out result.json</code> 결과를 불러오면 대체됩니다.</span>
+  </p>
+</header>
+
+<main class="shell">
+  <aside class="col col-left">
+    <div class="colhead"><h2>자료함</h2><em id="docCount">0</em></div>
+    <ul class="docs" id="docList"></ul>
+    <p class="hint">자료를 더 올리면 위 사건 카드와 아래 타임라인이 자동으로 다시 정리됩니다.</p>
+  </aside>
+
+  <section class="col">
+    <div class="eyebrow">
+      <strong>AI가 재구성한 현재 사건 상태</strong>
+      <span class="dot"></span><span id="basis">—</span>
+      <span class="dot"></span><span id="asOf">—</span>
+    </div>
+
+    <article class="card">
+      <div class="card-top">
+        <h1 class="casetype" id="cardTitle">—</h1>
+        <span class="range" id="cardRange"></span>
+        <span class="stage-now" id="stageNow" hidden><em>현재 단계</em> <span id="stageNowLabel"></span></span>
+      </div>
+
+      <div class="stepper" id="stepper"></div>
+
+      <div class="stats">
+        <div class="stat"><div class="k">확보 자료</div><div class="v" id="sEv">—</div></div>
+        <div class="stat"><div class="k">완료 항목</div><div class="v" id="sDone">—</div><div class="bars" id="sBars"></div></div>
+        <div class="stat alert"><div class="k">확인 필요</div><div class="v" id="sNeed">—</div></div>
+      </div>
+
+      <div class="needline" id="needLine" hidden><span>확인 필요</span><b id="topNeed"></b></div>
+
+      <div class="nextact">
+        <div class="k">다음 행동</div>
+        <div class="t" id="nextTitle">—</div>
+        <div class="why" id="nextWhy"></div>
+        <div class="kbpend" id="kbPend" hidden>
+          <b>절차 안내는 아직 연결되지 않았습니다.</b>
+          무엇을·어디에·어떻게·언제까지는 검증된 절차 지식베이스에서만 가져옵니다.
+          지식베이스가 붙기 전까지 이 자리는 비워 둡니다.
+        </div>
+      </div>
+    </article>
+
+    <p class="bridge">위 카드는 아래 타임라인에서 자동으로 만들어집니다 · 단계를 누르면 해당 기록으로 이동</p>
+
+    <div class="tl-tabs">
+      <button aria-current="page">타임라인</button>
+      <button>인물 · 관계</button>
+      <button>주장 대조</button>
+    </div>
+    <ul class="tl" id="tl"></ul>
+  </section>
+
+  <aside class="col col-right">
+    <div class="colhead"><h2>확인이 필요해요</h2><em id="issueCount">0</em></div>
+    <div id="issueGroups"></div>
+  </aside>
+</main>
+
+<script>
+/* ──────────────────────────────────────────────────────────────
+   research-engine 출력(PipelineResult / CaseAnalysis)을 그대로 소비한다.
+   필드명은 research-engine/src/research_engine/schema/ 와 1:1 대응.
+   ────────────────────────────────────────────────────────────── */
+
+const STAGE_LABELS = {
+  occurrence:"발생", transfer:"송금", report:"신고",
+  receipt:"접수", investigation:"수사", outcome:"결과",
+};
+
+// EvidenceLevel → 목업 배지
+const EVIDENCE = {
+  record:    {cls:"ok",   text:"확인됨"},
+  statement: {cls:"warn", text:"주장 · 미확인"},
+  user:      {cls:"self", text:"내가 입력"},
+};
+
+// IssueCategory → 우측 패널 묶음 (schema/analysis.py ISSUE_CATEGORY_LABELS)
+const CATEGORY = {
+  inconsistency:{label:"자료끼리 어긋남", cls:"bad"},
+  unverified:   {label:"확인되지 않음",   cls:"warn"},
+  missing:      {label:"빠진 정보",       cls:""},
+  unreadable:   {label:"읽히지 않은 부분", cls:""},
+};
+const CATEGORY_ORDER = ["inconsistency","unverified","missing","unreadable"];
+
+// GapCondition → 사람이 읽는 상태 설명. 절차 안내가 아니라 '무엇이 비어 있는가'만 말한다.
+const CONDITION = {
+  conflicting:"자료끼리 어긋남",
+  suspected_conflict:"모순 의심 · 근거 부족",
+  claimed_only:"진술만 있고 기록 자료 없음",
+  low_confidence:"추출 신뢰도 낮음",
+  missing:"필수 항목이 어디에도 없음",
+  unreadable:"원문이 읽히지 않음",
+  identity_unconfirmed:"동일인 여부 미확인",
+  time_gap:"기록 공백 구간",
+  stage_skipped:"중간 단계 자료 없음",
+  stage_stalled:"이후 진행 기록 없음",
+  unrecorded_fact:"기록 자료에서 확인되지 않은 사실",
+  possibly_outdated:"기록된 값이 이후 바뀌었을 수 있음",
+};
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function fmtDate(iso, withTime){
+  if(!iso) return "";
+  const d = new Date(iso);
+  if(isNaN(d)) return String(iso);
+  const s = `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,"0")}.${String(d.getDate()).padStart(2,"0")}`;
+  return withTime && (d.getHours() || d.getMinutes())
+    ? `${s} ${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}` : s;
+}
+
+/** TimelineEvent.time 은 TimeValue (Sourced 아님) — start/raw/needs_confirmation 을 쓴다. */
+function eventWhen(ev){
+  if(ev.time_unknown || !ev.time) return "시각 정보 없음";
+  if(ev.time.start) return fmtDate(ev.time.start, ev.time.granularity === "minute" || ev.time.granularity === "hour");
+  return ev.time.raw || "시각 미상";
+}
+
+function srcText(sources){
+  if(!sources || !sources.length) return "";
+  return sources.map(s => {
+    const line = s.source_line ? ` · ${s.source_line}줄` : "";
+    return `${s.source_doc_id}${line}`;
+  }).join(" / ");
+}
+
+/* ── 렌더 ───────────────────────────────────────────────── */
+
+let DATA = null;
+
+function render(result){
+  DATA = result;
+  const analysis = result.analysis || {};
+  const card     = analysis.case_card || {};
+  const timeline = result.timeline || {};
+  const docs     = result.documents || [];
+  const issues   = (analysis.issues || []).slice().sort((a,b) => (a.priority ?? 99) - (b.priority ?? 99));
+
+  // 머리말
+  const label = card.case_type_label || result.case_type || "사건";
+  $("caseLabel").textContent = label;
+  $("cardTitle").textContent = label;
+  const span = timelineSpan(timeline.events || []);
+  $("caseRange").textContent = span;
+  $("cardRange").textContent = span;
+  $("basis").textContent = `자료 ${card.evidence_doc_count ?? docs.length}개 기준`;
+  $("asOf").textContent = result.as_of ? `기준일 ${fmtDate(result.as_of)}` : "";
+
+  // 현재 단계
+  const cur = card.current_stage || timeline.current_stage;
+  if(cur){
+    $("stageNow").hidden = false;
+    $("stageNowLabel").textContent = STAGE_LABELS[cur] || cur;
+  } else $("stageNow").hidden = true;
+
+  renderDocs(docs);
+  renderStepper(card.stages || timeline.stages || []);
+  renderStats(card, issues.length);
+  renderNext(card.next_trigger, issues);
+  renderTimeline(timeline);
+  renderIssues(issues);
+}
+
+function timelineSpan(events){
+  const times = events.map(e => e.time && e.time.start).filter(Boolean).sort();
+  if(!times.length) return "";
+  const a = fmtDate(times[0]), b = fmtDate(times[times.length-1]);
+  return a === b ? a : `${a} – ${b}`;
+}
+
+function renderDocs(docs){
+  $("docCount").textContent = docs.length;
+  $("docList").innerHTML = docs.map((d,i) => `
+    <li>
+      <span class="idx">${i+1}</span>
+      <div>
+        <div class="name">${esc(d.file_name || d.doc_id)}</div>
+        <div class="meta">
+          <span class="kind">${esc((d.doc_type || "doc").toUpperCase())}</span>
+          <span>${esc(EVIDENCE[d.evidence_level]?.text || d.evidence_level || "")}</span>
+        </div>
+      </div>
+    </li>`).join("");
+}
+
+function renderStepper(stages){
+  $("stepper").innerHTML = stages.map(s => `
+    <button class="step" data-state="${esc(s.state)}" data-stage="${esc(s.stage)}">
+      <span class="node"></span>
+      <span class="lab">${esc(s.label || STAGE_LABELS[s.stage] || s.stage)}</span>
+      <span class="sub">${s.state === "current" ? "지금 여기"
+                        : s.state === "skipped" ? "자료 없음"
+                        : s.state === "pending" ? "예정"
+                        : `${(s.timeline_event_ids||[]).length}건`}</span>
+    </button>`).join("");
+}
+
+function renderStats(card, issueCount){
+  $("sEv").innerHTML = `${card.evidence_doc_count ?? "—"}<small>개</small>`;
+  const done = card.slots_done ?? 0, total = card.slots_total ?? 0;
+  $("sDone").innerHTML = `${done}<small>/${total}</small>`;
+  $("sBars").innerHTML = Array.from({length: total}, (_,i) => `<i class="${i < done ? "on" : ""}"></i>`).join("");
+  $("sNeed").innerHTML = `${card.needs_confirmation_count ?? issueCount}<small>건</small>`;
+}
+
+function renderNext(trigger, issues){
+  const top = issues[0];
+  if(!trigger && !top){
+    $("nextTitle").textContent = "확인이 필요한 항목이 없습니다";
+    $("nextWhy").textContent = "";
+    $("needLine").hidden = true;
+    $("kbPend").hidden = true;
+    return;
+  }
+  const t = trigger || (top && top.trigger);
+  const cond = t && CONDITION[t.condition] || (top && CONDITION[top.condition]) || "확인 필요";
+
+  // 절차 문구는 지어내지 않는다. 조건 이름만 보여주고 안내는 지식베이스로 넘긴다.
+  $("nextTitle").textContent = cond;
+  const bits = [];
+  if(t){
+    if(t.stage) bits.push(`${STAGE_LABELS[t.stage] || t.stage} 단계`);
+    if(t.elapsed_days != null) bits.push(`마지막 기록 이후 ${t.elapsed_days}일`);
+    if(t.since) bits.push(`기준 ${fmtDate(t.since)}`);
+    bits.push(t.key);
+  }
+  $("nextWhy").textContent = bits.join(" · ");
+  $("kbPend").hidden = false;
+
+  if(top){
+    $("needLine").hidden = false;
+    $("topNeed").textContent = top.message;
+  } else $("needLine").hidden = true;
+}
+
+function renderTimeline(timeline){
+  const events = (timeline.events || []).slice().sort((a,b) => {
+    const x = a.time && a.time.start, y = b.time && b.time.start;
+    if(!x) return 1; if(!y) return -1;
+    return new Date(x) - new Date(y);
+  });
+  const gaps = timeline.gaps || [];
+  const rows = [];
+
+  events.forEach(ev => {
+    const badge = EVIDENCE[ev.evidence_level] || EVIDENCE.statement;
+    const pills = [`<span class="pill ${badge.cls}">${badge.text}</span>`];
+    if(ev.needs_confirmation) pills.push(`<span class="pill bad">확인 필요</span>`);
+    (ev.flags || []).forEach(f => pills.push(`<span class="pill warn">${esc(f)}</span>`));
+
+    rows.push(`
+      <li data-ev="${esc(ev.evidence_level)}" id="tl-${esc(ev.timeline_event_id)}" data-stage="${esc(ev.stage)}">
+        <span class="node"></span>
+        <div class="row">
+          <span class="when">${esc(eventWhen(ev))}</span>
+          <div class="body">
+            <div class="what">${esc(ev.title)}</div>
+            <div class="src">출처 <b>${esc(srcText(ev.sources))}</b></div>
+          </div>
+          <div class="pills">${pills.join("")}</div>
+        </div>
+      </li>`);
+
+    // 이 이벤트 다음에 오는 공백 구간
+    gaps.filter(g => g.before_event_id === ev.timeline_event_id).forEach(g => {
+      const days = Math.round((g.hours || 0) / 24);
+      rows.push(`
+        <li class="gaprow">
+          <div class="gap">
+            <span>${esc(fmtDate(g.start))} — ${esc(fmtDate(g.end))}</span>
+            <span style="color:var(--ink-3)">이 기간의 기록이 없습니다 · ${days}일</span>
+          </div>
+        </li>`);
+    });
+  });
+
+  $("tl").innerHTML = rows.join("") || `<li class="empty">타임라인 이벤트가 없습니다.</li>`;
+}
+
+function renderIssues(issues){
+  $("issueCount").textContent = issues.length;
+  const byCat = {};
+  issues.forEach(i => (byCat[i.category] ||= []).push(i));
+
+  const html = CATEGORY_ORDER.filter(c => byCat[c]).map(c => {
+    const meta = CATEGORY[c];
+    const items = byCat[c].map(i => `
+      <div class="issue ${meta.cls}">
+        <p>${esc(i.message)}</p>
+        <p class="how">상태 · <b>${esc(CONDITION[i.condition] || i.condition)}</b></p>
+        ${i.sources && i.sources.length ? `<p class="how">근거 · <b>${esc(srcText(i.sources))}</b></p>` : ""}
+        <p class="trig">${esc(i.trigger ? i.trigger.key : "")}</p>
+      </div>`).join("");
+    return `<div class="group">
+      <div class="grouphead ${meta.cls}">${meta.label}<em>${byCat[c].length}</em></div>
+      ${items}
+    </div>`;
+  }).join("");
+
+  $("issueGroups").innerHTML = html || `<p class="empty">확인이 필요한 항목이 없습니다.</p>`;
+}
+
+/* ── 상호작용 ───────────────────────────────────────────── */
+
+$("stepper").addEventListener("click", e => {
+  const step = e.target.closest(".step"); if(!step) return;
+  const row = document.querySelector(`.tl > li[data-stage="${step.dataset.stage}"]`);
+  if(!row) return;
+  row.scrollIntoView({behavior:"smooth", block:"center"});
+  row.classList.remove("lit"); void row.offsetWidth; row.classList.add("lit");
+});
+
+$("loadBtn").addEventListener("click", () => $("fileInput").click());
+$("fileInput").addEventListener("change", async e => {
+  const file = e.target.files[0]; if(!file) return;
+  try{
+    const json = JSON.parse(await file.text());
+    // PipelineResult 전체 / CaseAnalysis 단독 둘 다 받는다
+    render(json.analysis ? json : {case_type:json.case_type, as_of:json.as_of, documents:[], timeline:{}, analysis:json});
+    $("sampleBar").hidden = true;
+  }catch(err){
+    alert("JSON을 읽지 못했습니다: " + err.message);
+  }
+});
+
+/* ── 예시 데이터 ────────────────────────────────────────────
+   tests/fixtures/long_unsolved_missing 기준. 실제 수치는 파이프라인 실행 결과로 대체된다.
+   ────────────────────────────────────────────────────────── */
+const SAMPLE = {
+  case_id:"demo-long-unsolved-missing",
+  case_type:"missing_person_suspended",
+  as_of:"2026-09-11",
+  documents:[
+    {doc_id:"missing_report_2015",    file_name:"실종신고 접수증 (2015)",   doc_type:"receipt",   evidence_level:"record"},
+    {doc_id:"news_2016",              file_name:"언론 보도 (2016)",         doc_type:"news",      evidence_level:"statement"},
+    {doc_id:"witness_statement_2019", file_name:"목격자 진술서 (2019)",     doc_type:"statement", evidence_level:"statement"},
+    {doc_id:"suspension_notice_2022", file_name:"수사중지 결정 통지서 (2022)", doc_type:"notice", evidence_level:"record"},
+    {doc_id:"petition_2023",          file_name:"진정서 (2023)",            doc_type:"petition",  evidence_level:"record"},
+    {doc_id:"mother_memo",            file_name:"가족 손글씨 메모",          doc_type:"memo",      evidence_level:"statement"},
+    {doc_id:"note_family",            file_name:"직접 입력 메모",            doc_type:"note",      evidence_level:"user"},
+  ],
+  timeline:{
+    case_type:"missing_person_suspended",
+    current_stage:"outcome",
+    stages:[
+      {stage:"occurrence",    label:"발생", state:"done",    timeline_event_ids:["t1","t4"]},
+      {stage:"report",        label:"신고", state:"done",    timeline_event_ids:["t2"]},
+      {stage:"receipt",       label:"접수", state:"done",    timeline_event_ids:["t2"]},
+      {stage:"investigation", label:"수사", state:"done",    timeline_event_ids:["t3"]},
+      {stage:"outcome",       label:"결과", state:"current", timeline_event_ids:["t5","t6"]},
+    ],
+    events:[
+      {timeline_event_id:"t1", stage:"occurrence", title:"최종 목격", evidence_level:"record",
+       time:{raw:"2015-04-12", start:"2015-04-12T00:00:00", granularity:"day"},
+       event_ids:["e1"], sources:[{source_doc_id:"missing_report_2015", source_line:12}]},
+      {timeline_event_id:"t2", stage:"receipt", title:"실종신고 접수", evidence_level:"record",
+       time:{raw:"2015-04-14", start:"2015-04-14T00:00:00", granularity:"day"},
+       event_ids:["e2"], sources:[{source_doc_id:"missing_report_2015", source_line:3}]},
+      {timeline_event_id:"t3", stage:"investigation", title:"실종 사건 언론 보도", evidence_level:"statement",
+       time:{raw:"2016-02-20", start:"2016-02-20T00:00:00", granularity:"day"},
+       event_ids:["e3"], sources:[{source_doc_id:"news_2016", source_line:1}]},
+      {timeline_event_id:"t4", stage:"occurrence", title:"목격자 진술 — 실종 이후 목격", evidence_level:"statement",
+       time:{raw:"2019-08-03", start:"2019-08-03T00:00:00", granularity:"day"}, needs_confirmation:true,
+       event_ids:["e4"], sources:[{source_doc_id:"witness_statement_2019", source_line:7}]},
+      {timeline_event_id:"t5", stage:"outcome", title:"수사중지 결정 (참고인중지)", evidence_level:"record",
+       time:{raw:"2022-03-15", start:"2022-03-15T00:00:00", granularity:"day"},
+       event_ids:["e5"], sources:[{source_doc_id:"suspension_notice_2022", source_line:5}]},
+      {timeline_event_id:"t6", stage:"outcome", title:"진정서 제출", evidence_level:"record",
+       time:{raw:"2023-11-02", start:"2023-11-02T00:00:00", granularity:"day"},
+       event_ids:["e6"], sources:[{source_doc_id:"petition_2023", source_line:2}]},
+    ],
+    gaps:[
+      {start:"2016-02-20T00:00:00", end:"2019-08-03T00:00:00", hours:30360, before_event_id:"t3", after_event_id:"t4"},
+      {start:"2019-08-03T00:00:00", end:"2022-03-15T00:00:00", hours:22800, before_event_id:"t4", after_event_id:"t5"},
+    ],
+    entities:[], mention_to_entity:{},
+  },
+  analysis:{
+    case_id:"demo-long-unsolved-missing", case_type:"missing_person_suspended", as_of:"2026-09-11",
+    issues:[
+      {issue_id:"i1", category:"unverified", condition:"unrecorded_fact", priority:10,
+       message:"2019년 목격자 진술이 2022년 수사중지 결정 통지서에서 확인되지 않습니다. 앞선 자료에만 있습니다.",
+       stage:"occurrence",
+       sources:[{source_doc_id:"witness_statement_2019", source_line:7},{source_doc_id:"petition_2023", source_line:9}],
+       trigger:{key:"missing_person_suspended/occurrence/new_fact/unrecorded_fact",
+                case_type:"missing_person_suspended", condition:"unrecorded_fact",
+                stage:"occurrence", since:"2019-08-03T00:00:00"}},
+      {issue_id:"i2", category:"missing", condition:"stage_stalled", priority:20,
+       message:"수사중지 결정 이후 진행 기록이 없습니다.",
+       stage:"outcome", sources:[{source_doc_id:"suspension_notice_2022", source_line:5}],
+       trigger:{key:"missing_person_suspended/outcome/-/stage_stalled",
+                case_type:"missing_person_suspended", condition:"stage_stalled",
+                stage:"outcome", since:"2022-03-15T00:00:00", elapsed_days:1641}},
+      {issue_id:"i3", category:"unverified", condition:"possibly_outdated", priority:30,
+       message:"기록된 담당 수사관은 박정호이지만, 가족 메모에 담당자 바뀌었다고 함 이라는 내용이 있습니다.",
+       stage:"investigation", slot:"investigator",
+       sources:[{source_doc_id:"suspension_notice_2022", source_line:11},{source_doc_id:"mother_memo", source_line:5}],
+       clarification_request_ids:["mother_memo:u5:q"],
+       trigger:{key:"missing_person_suspended/investigation/investigator/possibly_outdated",
+                case_type:"missing_person_suspended", condition:"possibly_outdated",
+                stage:"investigation", slot:"investigator", since:"2025-01-01T00:00:00"}},
+      {issue_id:"i4", category:"missing", condition:"time_gap", priority:40,
+       message:"2016년 2월부터 2019년 8월까지 기록이 없습니다.",
+       sources:[{source_doc_id:"news_2016", source_line:1}],
+       trigger:{key:"missing_person_suspended/-/-/time_gap",
+                case_type:"missing_person_suspended", condition:"time_gap"}},
+      {issue_id:"i5", category:"missing", condition:"missing", priority:50,
+       message:"사건번호가 어느 자료에서도 확인되지 않습니다.",
+       stage:"investigation", slot:"case_number",
+       checked_doc_ids:["suspension_notice_2022","petition_2023"],
+       sources:[{source_doc_id:"suspension_notice_2022", source_line:1}],
+       trigger:{key:"missing_person_suspended/investigation/case_number/missing",
+                case_type:"missing_person_suspended", condition:"missing",
+                stage:"investigation", slot:"case_number"}},
+      {issue_id:"i6", category:"unreadable", condition:"unreadable", priority:60,
+       message:"가족 메모의 한 줄이 읽히지 않았습니다. 새 담당자 이름이 적혀 있을 수 있습니다.",
+       sources:[{source_doc_id:"mother_memo", source_line:5}],
+       clarification_request_ids:["mother_memo:u5:q"],
+       trigger:{key:"missing_person_suspended/-/-/unreadable",
+                case_type:"missing_person_suspended", condition:"unreadable"}},
+    ],
+    slot_statuses:[], pair_decisions:[], action_triggers:[],
+    case_card:{
+      case_type:"missing_person_suspended",
+      case_type_label:"실종 사건 · 수사중지",
+      requirements_status:"draft_unverified",
+      current_stage:"outcome",
+      evidence_doc_count:7,
+      needs_confirmation_count:6,
+      slots_done:5, slots_total:8,
+      stages:[
+        {stage:"occurrence",    label:"발생", state:"done",    timeline_event_ids:["t1","t4"]},
+        {stage:"report",        label:"신고", state:"done",    timeline_event_ids:["t2"]},
+        {stage:"receipt",       label:"접수", state:"done",    timeline_event_ids:["t2"]},
+        {stage:"investigation", label:"수사", state:"done",    timeline_event_ids:["t3"]},
+        {stage:"outcome",       label:"결과", state:"current", timeline_event_ids:["t5","t6"]},
+      ],
+      next_trigger:{key:"missing_person_suspended/outcome/-/stage_stalled",
+                    case_type:"missing_person_suspended", condition:"stage_stalled",
+                    stage:"outcome", since:"2022-03-15T00:00:00", elapsed_days:1641},
+    },
+  },
+};
+
+render(SAMPLE);
+</script>
+</body>
+</html>
