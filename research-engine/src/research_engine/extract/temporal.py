@@ -4,14 +4,14 @@
 
 지원 범위
 - 절대 날짜: 2026년 6월 1일 / 2026.6.1. / 2026-06-01 / '23.03.05 / 단기 4290년 …
-- 부분 날짜: 6월 1일, 6/1, 6월 (연도는 기준일에서 과거 쪽으로 추정)
+- 부분 날짜: 6월 1일, 6/1, 6월 (연도는 직전에 언급된 날짜, 없으면 기준일에서 과거 쪽으로 추정)
 - 시각: 오후 2:05, 14:05, 오후 3시 20분경, 저녁 (앞 날짜에 붙임)
 - 상대 날짜
     · 발화 기준(deictic): 오늘, 어제, 그저께, 지난주 금요일, 지난달, 작년, 3일 전 …
       → 발화 시점(메신저 날짜 줄 / 문서 작성일 / 촬영일) 기준
     · 문맥 기준(anaphoric): 그날, 다음날, 전날, 이튿날, 3일 후 …
       → 직전에 언급된 날짜 기준 (없으면 발화 기준 + 확인 필요)
-- 음력: 음력 8월 15일, 윤2월 10일, 8월 15일(음) → 양력 변환
+- 음력: 음력 8월 15일, 윤2월 10일, 8월 15일(음), 작년 추석 무렵 → 양력 변환
 - 오탈자·OCR 혼동: 2O26 → 2026 (확인 필요), 달력에 없는 날짜·요일 불일치 → 교정 후보만 제시
 
 원칙: 교정은 '후보'로만 두고 확정하지 않는다. 후보가 여러 개면 start/end를 비워 둔다.
@@ -63,7 +63,9 @@ class TimeMatch:
 # ── 정규식 ──────────────────────────────────────────────────────────────
 
 _D = r"[0-9OoIl|]"
-_APPROX = r"(?P<approx>\s*(?:경|쯤|무렵|초순|중순|하순|초|말))?"
+# 뒤에 한글이 바로 붙으면 다른 낱말이다 ("10월 12일 경찰서"의 '경'). 조사는 허용.
+_AFTER_APPROX = r"(?:(?![가-힣])|(?=에|부터|까지|엔|께|의))"
+_APPROX = r"(?P<approx>\s*(?:경|쯤|무렵|초순|중순|하순|초|말)" + _AFTER_APPROX + ")?"
 
 FULL_DATE = re.compile(
     r"(?<![0-9A-Za-z])"
@@ -95,7 +97,7 @@ CLOCK = re.compile(
 KO_TIME = re.compile(
     r"(?<![0-9])(?:(?P<ampm>오전|오후|새벽|아침|저녁|밤|낮)\s*)?"
     r"(?P<h>\d{1,2})\s*시(?![간각작])(?:\s*(?P<mi>\d{1,2})\s*분|\s*(?P<half>반))?"
-    r"(?P<approx>\s*(?:경|쯤|무렵))?"
+    r"(?P<approx>\s*(?:경|쯤|무렵)" + _AFTER_APPROX + ")?"
 )
 DAYPART = re.compile(r"(?P<part>새벽|아침|오전|점심|낮|오후|저녁|밤)(?!\s*\d)")
 DAYPART_HOURS = {
@@ -125,6 +127,12 @@ WEEK_REL = re.compile(
 WEEKDAY_ALONE = re.compile(r"(?<![주매])(?:(?P<rel>지난|이번|다음)\s*)?(?P<wd>[월화수목금토일])요일")
 MONTH_REL = re.compile(r"(?P<rel>지지난|지난|저번|이번|다음|다다음)\s*달")
 MONTH_REL_NAMED = re.compile(r"(?P<rel>지난|작년|올해|내년)\s*(?P<m>\d{1,2})\s*월(?!\s*\d)")
+HOLIDAYS = {"설날": (1, 1), "구정": (1, 1), "설연휴": (1, 1), "추석": (8, 15), "한가위": (8, 15), "정월대보름": (1, 15)}
+HOLIDAY = re.compile(
+    r"(?:(?P<yrel>재작년|작년|지난해|올해|금년)\s*|(?P<y>\d{4})\s*년\s*|(?P<y2>\d{2})\s*년\s*)?"
+    r"(?P<h>설날|구정|설\s*연휴|추석|한가위|정월\s*대보름)"
+    r"(?P<approx>\s*(?:무렵|쯤|경|연휴|때|즈음)" + _AFTER_APPROX + ")?"
+)
 YEAR_REL = re.compile(r"(?P<w>재작년|작년|지난\s*해|올해|금년|내년|다음\s*해|이듬해)")
 
 _OCR_DIGIT = str.maketrans({"O": "0", "o": "0", "I": "1", "l": "1", "|": "1"})
@@ -194,9 +202,11 @@ class TemporalNormalizer:
             self._full_dates(text)
             + self._year_month(text)
             + self._year_only(text)
-            + self._month_day(text, deictic)
-            + self._slash_md(text, deictic)
-            + self._month_only(text, deictic)
+            # 연도 없는 날짜는 직전에 언급된 날짜의 연도를 따른다 ("15년 10월 10일 … / 10월 12일 신고")
+            + self._month_day(text, anaphoric or deictic)
+            + self._slash_md(text, anaphoric or deictic)
+            + self._month_only(text, anaphoric or deictic)
+            + self._holidays(text, deictic)
             + self._relative(text, deictic, anaphoric)
         )
         clocks = [
@@ -510,6 +520,43 @@ class TemporalNormalizer:
             if value.kind is K.PARTIAL:
                 value.note = f"연도는 기준일({anchor.day.isoformat()})에서 추정"
             out.append(TimeMatch(m.start(), m.end(), value, conf, day))
+        return out
+
+    def _holidays(self, text: str, anchor: Anchor) -> list[TimeMatch]:
+        """설날·추석 등 음력 명절 → 양력. 연도가 없으면 기준일 이전 가장 가까운 명절."""
+        out = []
+        for m in HOLIDAY.finditer(text):
+            lm, ld = HOLIDAYS[re.sub(r"\s+", "", m["h"])]
+            if m["y"]:
+                years, inferred = [int(m["y"])], False
+            elif m["y2"]:
+                years, inferred = [2000 + int(m["y2"]) if int(m["y2"]) <= self.today.year % 100 + 1 else 1900 + int(m["y2"])], False
+            elif m["yrel"]:
+                offset = {"재작년": -2, "작년": -1, "지난해": -1, "올해": 0, "금년": 0}[m["yrel"]]
+                years, inferred = [anchor.day.year + offset], True
+            else:
+                years, inferred = [anchor.day.year, anchor.day.year - 1], True
+            day = None
+            for y in years:
+                solar = lunar_to_solar(y, lm, ld) if 1900 <= y <= self.today.year + 5 else None
+                if solar and (m["y"] or m["y2"] or m["yrel"] or solar <= anchor.day):
+                    day = solar
+                    break
+            if day is None:
+                out.append(TimeMatch(m.start(), m.end(), self._unresolved(m.group(0).strip(), "명절 날짜를 계산할 수 없습니다"), 0.15))
+                continue
+            start, end = _day_iv(day)
+            approx = bool(m["approx"]) or "연휴" in m["h"]
+            if approx:
+                start, end = start - timedelta(days=2), end + timedelta(days=2)
+            value = TimeValue(
+                raw=m.group(0).strip(), start=start, end=end, granularity=G.DAY, kind=K.LUNAR, approximate=approx,
+                anchor=anchor.day if inferred else None, anchor_source=anchor.source if inferred else None,
+                needs_confirmation=inferred and anchor.source in WEAK_ANCHORS,
+                note=f"음력 {lm}월 {ld}일 → 양력 변환",
+            )
+            conf = 0.8 * (ANCHOR_FACTOR.get(anchor.source, 0.5) if inferred else 1.0)
+            out.append(TimeMatch(m.start(), m.end(), value, conf, None if approx else day))
         return out
 
     def _slash_md(self, text: str, anchor: Anchor) -> list[TimeMatch]:
