@@ -42,10 +42,30 @@ uv run python ../case-card/make-sample.py out/long.json
 
 | 영역 | 소비하는 필드 |
 |---|---|
+| 되묻기 (상단) | `clarifications[]` — `status: "pending"` 인 것만 |
 | 자료함 (좌) | `documents[]` — `file_name` · `doc_type` · `evidence_level` |
 | 사건 카드 | `analysis.case_card` — `case_type_label` · `stages[]` · `current_stage` · `evidence_doc_count` · `slots_done`/`slots_total` · `needs_confirmation_count` · `next_trigger` |
 | 타임라인 | `timeline.events[]` · `timeline.gaps[]` |
 | 확인이 필요해요 (우) | `analysis.issues[]` — `category`별로 묶어 표시 |
+
+## 되묻기
+
+`ClarificationRequest` 주석대로 **한 화면에 하나만 묻는다.** `priority` 순으로 하나씩 보여주고, `context`(앞뒤로 읽힌 줄)를 판독 보조로 함께 띄운다. `options`가 있으면 버튼으로, 없으면 직접 입력한다.
+
+우측 `확인이 필요해요` 항목에 `clarification_request_ids`가 있으면 **이 부분 답하러 가기** 버튼이 붙고, 누르면 해당 질문으로 이동한다.
+
+받은 답은 **화면에만 쌓인다.** 정적 HTML이라 파이프라인을 다시 돌릴 수 없기 때문이다. 답을 다 하면 아래 형태로 모아 주고, 이걸 넣어 다시 분석해야 카드와 타임라인에 반영된다.
+
+```json
+[{"request_id": "mother_memo:u5:q", "answer": "새 담당 형사 김영수"}]
+```
+
+```python
+for a in answers:
+    result = pipeline.answer(result, a["request_id"], a["answer"])
+```
+
+숫자를 임의로 깎지 않는다 — 답변했다고 `확인 필요 10건`을 화면에서 줄이면 실제 재분석 결과와 어긋나기 때문이다.
 
 ## 스키마 대응
 

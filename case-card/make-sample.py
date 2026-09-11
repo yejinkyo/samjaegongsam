@@ -24,6 +24,10 @@ ISSUE_FIELDS = (
     "issue_id", "category", "condition", "message", "stage", "slot",
     "sources", "clarification_request_ids", "trigger", "priority",
 )
+CLARIFICATION_FIELDS = (
+    "request_id", "kind", "question", "doc_id", "page", "line_no",
+    "options", "context", "priority", "status", "answer",
+)
 
 
 def pick(obj: dict, fields) -> dict:
@@ -37,6 +41,7 @@ def build(d: dict) -> dict:
         "case_type": d["case_type"],
         "as_of": d["as_of"],
         "documents": [pick(x, DOC_FIELDS) for x in d["documents"]],
+        "clarifications": [pick(c, CLARIFICATION_FIELDS) for c in d.get("clarifications", [])],
         "timeline": {
             "current_stage": tl["current_stage"],
             "stages": tl["stages"],

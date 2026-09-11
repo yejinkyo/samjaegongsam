@@ -99,6 +99,50 @@
   .kind{border:1px solid var(--line-2);border-radius:3px;padding:0 4px;font-size:9.5px;letter-spacing:.04em;color:var(--ink-2)}
   .hint{margin-top:18px;padding-left:12px;border-left:2px solid var(--accent);font-size:12px;color:var(--ink-2)}
 
+  /* ── 되묻기 ── 한 화면에 하나만 묻는다 (schema/document.py ClarificationRequest) */
+  .ask{border:1px solid var(--accent);border-radius:14px;background:var(--raised);
+       box-shadow:var(--shadow);margin-bottom:22px;overflow:hidden}
+  .ask[hidden]{display:none!important}
+  .ask-head{display:flex;align-items:center;gap:10px;padding:12px 18px;
+            background:var(--accent-soft);border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .ask-k{font-size:12px;font-weight:700;color:var(--accent);display:flex;align-items:center;gap:7px}
+  .ask-k::before{content:"";width:7px;height:7px;border-radius:2px;background:var(--accent)}
+  .ask-n{margin-left:auto;font-size:11.5px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+  .ask-n b{color:var(--ink);font-weight:700}
+  .ask-body{padding:16px 18px 18px}
+  .ask-q{margin:0 0 4px;font-size:15px;font-weight:700;letter-spacing:-.01em}
+  .ask-where{font-size:11.5px;color:var(--ink-3);margin-bottom:12px;word-break:break-all}
+  .ask-ctx{background:var(--sunken);border:1px solid var(--line);border-radius:9px;
+           padding:11px 13px;margin-bottom:13px;font-size:12.5px;color:var(--ink-2)}
+  .ask-ctx .ctxk{display:block;font-size:10.5px;color:var(--ink-3);margin-bottom:5px;letter-spacing:.03em}
+  .ask-ctx p{margin:0 0 3px}
+  .ask-ctx p:last-child{margin:0}
+  .ask-ctx .blank{color:var(--accent);font-weight:700}
+  .ask-in{width:100%;border:1px solid var(--line-2);border-radius:9px;padding:10px 12px;
+          font:inherit;font-size:13.5px;background:var(--bg);color:var(--ink)}
+  .ask-in:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+  .ask-opts{display:flex;gap:7px;margin-top:9px;flex-wrap:wrap}
+  .ask-opt{border:1px solid var(--line-2);border-radius:999px;padding:5px 12px;font-size:12px;color:var(--ink-2)}
+  .ask-opt:hover{border-color:var(--accent);color:var(--accent)}
+  .ask-act{display:flex;gap:8px;margin-top:14px;align-items:center;flex-wrap:wrap}
+  .ask-act .skip{font-size:12.5px;color:var(--ink-3);padding:8px 4px}
+  .ask-act .skip:hover{color:var(--ink-2)}
+  .ask-act .go{margin-left:auto;background:var(--accent);color:#fff;border-radius:9px;
+               padding:9px 18px;font-size:13px;font-weight:500}
+  .ask-act .go:hover{filter:brightness(1.08)}
+  .ask-act .go:disabled{opacity:.45;cursor:default;filter:none}
+
+  .ask-done{border-color:var(--ok)}
+  .ask-done .ask-head{background:var(--ok-bg)}
+  .ask-done .ask-k{color:var(--ink)}
+  .ask-done .ask-k::before{background:var(--ok);border-radius:50%}
+  .ask-out{width:100%;min-height:74px;border:1px solid var(--line-2);border-radius:9px;
+           padding:10px 12px;font-family:ui-monospace,monospace;font-size:11.5px;
+           background:var(--sunken);color:var(--ink-2);resize:vertical}
+  .ask-note{font-size:12px;color:var(--ink-2);margin:0 0 11px}
+  .ask-note code{font-family:ui-monospace,monospace;font-size:11.5px;
+                 background:var(--sunken);padding:1px 5px;border-radius:3px}
+
   /* ── 사건 카드 ── */
   .eyebrow{display:flex;align-items:center;gap:8px;margin-bottom:10px;font-size:11.5px;color:var(--ink-3);flex-wrap:wrap}
   .eyebrow strong{color:var(--accent);font-weight:500;display:flex;align-items:center;gap:5px}
@@ -257,6 +301,46 @@
   </aside>
 
   <section class="col">
+
+    <!-- 되묻기: 한 번에 하나만 묻는다 -->
+    <section class="ask" id="ask" hidden>
+      <div class="ask-head">
+        <span class="ask-k" id="askKind">읽히지 않은 부분</span>
+        <span class="ask-n"><b id="askIdx">1</b> / <span id="askTotal">1</span></span>
+      </div>
+      <div class="ask-body">
+        <p class="ask-q" id="askQ"></p>
+        <div class="ask-where" id="askWhere"></div>
+        <div class="ask-ctx" id="askCtx" hidden></div>
+        <input class="ask-in" id="askInput" type="text" autocomplete="off"
+               placeholder="사진에 보이는 글자를 그대로 적어주세요">
+        <div class="ask-opts" id="askOpts"></div>
+        <div class="ask-act">
+          <button class="skip" id="askSkip">이 질문 건너뛰기</button>
+          <button class="go" id="askSave" disabled>답하기</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 답변 모음 -->
+    <section class="ask ask-done" id="askDone" hidden>
+      <div class="ask-head">
+        <span class="ask-k" id="askDoneK">되물을 질문에 모두 답했습니다</span>
+        <button class="ask-opt" id="askReopen" style="margin-left:auto">다시 보기</button>
+      </div>
+      <div class="ask-body">
+        <p class="ask-note">
+          답변은 이 화면에만 저장됩니다. 아래 내용을 <code>pipeline.answer()</code>에 넣어
+          다시 분석해야 카드와 타임라인에 반영됩니다.
+        </p>
+        <textarea class="ask-out" id="askOut" readonly></textarea>
+        <div class="ask-act">
+          <button class="ask-opt" id="askCopy">복사</button>
+          <span style="font-size:11.5px;color:var(--ink-3)" id="askCopied"></span>
+        </div>
+      </div>
+    </section>
+
     <div class="eyebrow">
       <strong>AI가 재구성한 현재 사건 상태</strong>
       <span class="dot"></span><span id="basis">—</span>
@@ -422,6 +506,7 @@ function render(result){
   renderNext(card.next_trigger, issues);
   renderTimeline(timeline);
   renderIssues(issues);
+  renderAsk(result.clarifications || []);
 }
 
 function timelineSpan(events){
@@ -556,13 +641,18 @@ function renderIssues(issues){
 
   const html = CATEGORY_ORDER.filter(c => byCat[c]).map(c => {
     const meta = CATEGORY[c];
-    const items = byCat[c].map(i => `
+    const items = byCat[c].map(i => {
+      const reqs = i.clarification_request_ids || [];
+      return `
       <div class="issue ${meta.cls}">
         <p>${esc(i.message)}</p>
         <p class="how">상태 · <b>${esc(CONDITION[i.condition] || i.condition)}</b></p>
         ${i.sources && i.sources.length ? `<p class="how">근거 · <b>${esc(srcText(i.sources))}</b></p>` : ""}
+        ${reqs.length ? `<p class="how"><button class="ask-opt" data-goask="${esc(reqs[0])}"
+            style="padding:3px 10px;font-size:11.5px">이 부분 답하러 가기</button></p>` : ""}
         <p class="trig">${esc(i.trigger ? i.trigger.key : "")}</p>
-      </div>`).join("");
+      </div>`;
+    }).join("");
     return `<div class="group">
       <div class="grouphead ${meta.cls}">${meta.label}<em>${byCat[c].length}</em></div>
       ${items}
@@ -571,6 +661,112 @@ function renderIssues(issues){
 
   $("issueGroups").innerHTML = html || `<p class="empty">확인이 필요한 항목이 없습니다.</p>`;
 }
+
+/* ── 되묻기 ────────────────────────────────────────────────
+   ClarificationRequest 는 "한 화면에 하나만 묻는다"(schema/document.py).
+   여기서 받은 답은 화면에만 쌓이고, 실제 반영은 pipeline.answer() 가 한다.
+   ────────────────────────────────────────────────────────── */
+
+const KIND_LABEL = {
+  unreadable_text:"읽히지 않은 부분",
+  ambiguous_date:"날짜가 여러 가지로 읽힙니다",
+};
+
+let ASK = {queue:[], at:0, answers:{}};
+
+function renderAsk(clarifications){
+  ASK.queue = (clarifications || [])
+    .filter(c => c.status === "pending")
+    .sort((a,b) => (a.priority ?? 99) - (b.priority ?? 99));
+  ASK.at = 0;
+  showAsk();
+}
+
+function showAsk(){
+  const q = ASK.queue[ASK.at];
+  const answered = Object.keys(ASK.answers).length;
+
+  if(!q){
+    $("ask").hidden = true;
+    // 물을 게 원래 없었으면 완료 패널도 띄우지 않는다
+    $("askDone").hidden = ASK.queue.length === 0;
+    if(ASK.queue.length){
+      $("askDoneK").textContent = answered
+        ? `되물을 질문 ${ASK.queue.length}개 중 ${answered}개에 답했습니다`
+        : "되물을 질문을 모두 건너뛰었습니다";
+      $("askOut").value = JSON.stringify(
+        Object.entries(ASK.answers).map(([request_id, answer]) => ({request_id, answer})),
+        null, 2);
+    }
+    return;
+  }
+
+  $("askDone").hidden = true;
+  $("ask").hidden = false;
+  $("askKind").textContent = KIND_LABEL[q.kind] || q.kind;
+  $("askIdx").textContent = ASK.at + 1;
+  $("askTotal").textContent = ASK.queue.length;
+  $("askQ").textContent = q.question;
+
+  const doc = (DATA?.documents || []).find(d => d.doc_id === q.doc_id);
+  $("askWhere").textContent =
+    `${doc ? doc.file_name : q.doc_id}${q.line_no ? ` · ${q.line_no}줄` : ""}`;
+
+  const ctx = q.context || [];
+  $("askCtx").hidden = !ctx.length;
+  if(ctx.length){
+    $("askCtx").innerHTML =
+      `<span class="ctxk">앞뒤로 읽힌 줄</span>` +
+      ctx.map(l => `<p>${esc(l)}</p>`).join("") +
+      `<p class="blank">← 이 줄이 읽히지 않았습니다</p>`;
+  }
+
+  $("askOpts").innerHTML = (q.options || [])
+    .map((o,i) => `<button class="ask-opt" data-opt="${i}">${esc(o)}</button>`).join("");
+
+  const input = $("askInput");
+  input.value = ASK.answers[q.request_id] || "";
+  $("askSave").disabled = !input.value.trim();
+  input.focus();
+}
+
+function saveAnswer(text){
+  const q = ASK.queue[ASK.at];
+  if(!q || !text.trim()) return;
+  ASK.answers[q.request_id] = text.trim();
+  ASK.at += 1;
+  showAsk();
+}
+
+$("askInput").addEventListener("input", e => { $("askSave").disabled = !e.target.value.trim(); });
+$("askInput").addEventListener("keydown", e => { if(e.key === "Enter") saveAnswer(e.target.value); });
+$("askSave").addEventListener("click", () => saveAnswer($("askInput").value));
+$("askSkip").addEventListener("click", () => { ASK.at += 1; showAsk(); });
+$("askOpts").addEventListener("click", e => {
+  const b = e.target.closest("[data-opt]"); if(!b) return;
+  saveAnswer(b.textContent);
+});
+$("askReopen").addEventListener("click", () => { ASK.at = 0; showAsk(); });
+
+// 확인이 필요해요 항목 → 해당 질문으로 이동
+$("issueGroups").addEventListener("click", e => {
+  const b = e.target.closest("[data-goask]"); if(!b) return;
+  const idx = ASK.queue.findIndex(q => q.request_id === b.dataset.goask);
+  if(idx < 0) return;
+  ASK.at = idx;
+  showAsk();
+  $("ask").scrollIntoView({behavior:"smooth", block:"center"});
+});
+$("askCopy").addEventListener("click", async () => {
+  try{
+    await navigator.clipboard.writeText($("askOut").value);
+    $("askCopied").textContent = "복사했습니다";
+  }catch{
+    $("askOut").select();
+    $("askCopied").textContent = "Ctrl+C 로 복사하세요";
+  }
+  setTimeout(() => { $("askCopied").textContent = ""; }, 2500);
+});
 
 /* ── 상호작용 ───────────────────────────────────────────── */
 
@@ -642,6 +838,44 @@ const SAMPLE = {
       "file_name": "직접 입력",
       "doc_type": "user_note",
       "evidence_level": "user"
+    }
+  ],
+  "clarifications": [
+    {
+      "request_id": "missing_report_2015:u8:q",
+      "kind": "unreadable_text",
+      "question": "이 부분이 잘 읽히지 않습니다. 사진 속 글자를 보이는 대로 적어주시겠어요?",
+      "doc_id": "missing_report_2015",
+      "page": 1,
+      "line_no": 8,
+      "options": [
+        "읽을 수 없어요",
+        "중요하지 않은 부분이에요"
+      ],
+      "context": [
+        "접수관서 ○○경찰서 여성청소년과"
+      ],
+      "priority": 20,
+      "status": "pending",
+      "answer": null
+    },
+    {
+      "request_id": "mother_memo:u5:q",
+      "kind": "unreadable_text",
+      "question": "이 부분이 잘 읽히지 않습니다. 사진 속 글자를 보이는 대로 적어주시겠어요?",
+      "doc_id": "mother_memo",
+      "page": 1,
+      "line_no": 5,
+      "options": [
+        "읽을 수 없어요",
+        "중요하지 않은 부분이에요"
+      ],
+      "context": [
+        "작년 추석 무렵 수사관한테 전화 → 담당자 바뀌었다고 함"
+      ],
+      "priority": 20,
+      "status": "pending",
+      "answer": null
     }
   ],
   "timeline": {
