@@ -1,0 +1,71 @@
+{
+  "status": "draft_unverified",
+  "note": "기한 값은 비어 있다. 법령 원문을 확인해 period_days 와 statute 를 채우기 전까지 그대로 둔다. 값이 null 이면 엔진은 D-day 를 만들지 않고 unresolved 로 표시한다. 잘못된 기한 한 줄이 파이프라인 전체를 통과하므로 추측으로 채우지 않는다.",
+  "deadlines": [
+    {
+      "code": "TIM-011",
+      "applies_to_st": ["ST-301"],
+      "basis": "decision_time",
+      "basis_label": "불송치 결정 통지 수령일",
+      "period_days": null,
+      "statute": null,
+      "check": "기간의 유무와 길이, 기산점이 처분일인지 통지 수령일인지, 초일 산입 여부"
+    },
+    {
+      "code": "TIM-012",
+      "applies_to_st": ["ST-302"],
+      "basis": "decision_time",
+      "basis_label": "불기소 결정 통지 수령일",
+      "period_days": null,
+      "statute": null,
+      "check": "기간의 길이와 기산점, 개정 이력"
+    },
+    {
+      "code": "TIM-013",
+      "applies_to_st": ["ST-303"],
+      "basis": "decision_time",
+      "basis_label": "항고기각 통지 수령일",
+      "period_days": null,
+      "statute": null,
+      "check": "기간의 길이와 기산점"
+    },
+    {
+      "code": "TIM-021",
+      "applies_to_st": ["*"],
+      "basis": "incident_end",
+      "basis_label": "범행 종료일",
+      "period_days": null,
+      "statute": null,
+      "requires": ["죄명"],
+      "check": "죄명별 시효표가 먼저 있어야 한다. 살인은 2015년 폐지되었고 다른 죄명은 개정 전후로 적용이 갈린다"
+    },
+    {
+      "code": "TIM-031",
+      "applies_to_st": ["*"],
+      "basis": "document_created",
+      "basis_label": "자료 생성일",
+      "period_days": null,
+      "statute": null,
+      "requires": ["사업자"],
+      "check": "통신사·플랫폼마다 보존 기간이 다르다"
+    },
+    {
+      "code": "TIM-041",
+      "applies_to_st": ["*"],
+      "basis": null,
+      "basis_label": "기한 제한 없음",
+      "period_days": null,
+      "statute": null,
+      "unlimited": true
+    },
+    {
+      "code": "TIM-042",
+      "applies_to_st": ["*"],
+      "basis": null,
+      "basis_label": "기한 제한 없음",
+      "period_days": null,
+      "statute": null,
+      "unlimited": true
+    }
+  ]
+}

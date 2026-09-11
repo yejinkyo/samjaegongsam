@@ -1,0 +1,67 @@
+{
+  "hit_policy": "PRIORITY",
+  "sort_principle": "놓치면 영원히 못 하는 것 → 시간이 걸리는 것 → 나중에도 할 수 있는 것",
+  "note": "순서는 회복 불가능성에서 도출된다. 순서를 바꾸고 싶으면 줄 순서만 바꾼다. 새 코드가 생기면 줄을 하나 추가한다.",
+  "rules": [
+    {
+      "no": 1,
+      "when": {"tim_severity": ["expired", "critical"], "tim_code": ["TIM-021"]},
+      "action": "ACT-공소시효",
+      "why": "공소시효가 지나면 사건 자체가 소멸한다"
+    },
+    {
+      "no": 2,
+      "when": {"tim_severity": ["expired", "critical"], "tim_code": ["TIM-011", "TIM-012", "TIM-013"]},
+      "action": "ACT-불복기한",
+      "why": "기한이 지나면 그 불복 경로가 소멸한다"
+    },
+    {
+      "no": 3,
+      "when": {"tim_severity": ["expired", "critical"], "tim_code": ["TIM-031"]},
+      "action": "ACT-증거보존",
+      "why": "보존 기한이 지나면 증거가 소멸한다"
+    },
+    {
+      "no": 4,
+      "when": {"st": ["ST-UNKNOWN"]},
+      "action": "ACT-단계확인",
+      "why": "단계를 모르면 나머지 판단이 전부 무의미하다"
+    },
+    {
+      "no": 5,
+      "when": {"inf": ["INF-011", "INF-012", "INF-013", "INF-014"]},
+      "action": "ACT-신규정보제출",
+      "why": "새 정보는 중지·종결된 절차를 되살릴 수 있다"
+    },
+    {
+      "no": 6,
+      "when": {"inf": ["INF-021", "INF-023"]},
+      "action": "ACT-모순확인",
+      "why": "진술 모순은 재수사 사유가 된다"
+    },
+    {
+      "no": 7,
+      "when": {"inf": ["INF-042"]},
+      "action": "ACT-기록열람",
+      "why": "수사 기록 없이는 다른 판단이 불가능하다"
+    },
+    {
+      "no": 8,
+      "when": {"inf": ["INF-041", "INF-043"]},
+      "action": "ACT-근거보완",
+      "why": "근거 없는 주장은 판단 대상이 되지 않는다"
+    },
+    {
+      "no": 9,
+      "when": {"inf": ["INF-03"]},
+      "action": "ACT-공백보완",
+      "why": "기록 공백은 반박 여지를 남긴다"
+    },
+    {
+      "no": 10,
+      "when": {},
+      "action": "ACT-상시",
+      "why": "기한이 지난 사건에도 상시 가능한 경로가 남는다"
+    }
+  ]
+}

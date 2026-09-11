@@ -1,0 +1,6115 @@
+{
+  "case_id": "demo-long-unsolved-missing",
+  "case_type": "missing_person_suspended",
+  "as_of": "2026-09-11",
+  "documents": [
+    {
+      "doc_id": "missing_report_2015",
+      "file_name": "실종신고_접수증_2015.jpg",
+      "doc_type": "receipt",
+      "doc_type_confidence": 0.9701,
+      "doc_type_scores": {
+        "judgment": 0.0032,
+        "complaint": 0.0032,
+        "statement": 0.0032,
+        "transcript": 0.0032,
+        "receipt": 0.9701,
+        "notice": 0.0032,
+        "messenger": 0.0032,
+        "news": 0.0032,
+        "memo": 0.0072
+      },
+      "evidence_level": "record",
+      "captured_at": "2026-09-01T10:00:00",
+      "pages": [
+        {
+          "page_no": 1,
+          "width": 1080.0,
+          "height": 560.0,
+          "image_ref": null
+        }
+      ],
+      "lines": [
+        {
+          "doc_id": "missing_report_2015",
+          "line_no": 1,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 216.0,
+            "y1": 84.0
+          },
+          "text": "실종신고 접수증",
+          "ocr_confidence": 0.93,
+          "readability": 0.9292,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "missing_report_2015",
+          "line_no": 2,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 370.0,
+            "y1": 144.0
+          },
+          "text": "접수번호 2015-00123",
+          "ocr_confidence": 0.9,
+          "readability": 0.9129,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "missing_report_2015",
+          "line_no": 3,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 568.0,
+            "y1": 204.0
+          },
+          "text": "접수일시 2015. 10. 12. 21:30",
+          "ocr_confidence": 0.9,
+          "readability": 0.9129,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "missing_report_2015",
+          "line_no": 4,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 392.0,
+            "y1": 264.0
+          },
+          "text": "실종자 김민수 (남, 24세)",
+          "ocr_confidence": 0.88,
+          "readability": 0.9002,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "missing_report_2015",
+          "line_no": 5,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 282.0,
+            "y1": 324.0
+          },
+          "text": "신고인 이순자 (모)",
+          "ocr_confidence": 0.89,
+          "readability": 0.9068,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "missing_report_2015",
+          "line_no": 6,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 340.0,
+            "x1": 722.0,
+            "y1": 384.0
+          },
+          "text": "최종 목격 2015. 10. 10. 23시경 ○○역 부근",
+          "ocr_confidence": 0.86,
+          "readability": 0.8859,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "missing_report_2015",
+          "line_no": 7,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 400.0,
+            "x1": 414.0,
+            "y1": 444.0
+          },
+          "text": "접수관서 ○○경찰서 여성청소년과",
+          "ocr_confidence": 0.87,
+          "readability": 0.8933,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "missing_report_2015",
+          "line_no": 8,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 460.0,
+            "x1": 370.0,
+            "y1": 504.0
+          },
+          "text": "특이사항 ▒▒ ◈▒▒ 휴대▒",
+          "ocr_confidence": 0.38,
+          "readability": 0.003,
+          "readable": false,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        }
+      ],
+      "unreadable": [
+        {
+          "region_id": "missing_report_2015:u8",
+          "doc_id": "missing_report_2015",
+          "page": 1,
+          "line_no": 8,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 460.0,
+            "x1": 370.0,
+            "y1": 504.0
+          },
+          "readability": 0.003,
+          "reason": "판독 신뢰도 0.00 < 기준 0.65",
+          "ocr_guess": "특이사항 ▒▒ ◈▒▒ 휴대▒"
+        }
+      ]
+    },
+    {
+      "doc_id": "news_2016",
+      "file_name": "기사캡처_2016.png",
+      "doc_type": "news",
+      "doc_type_confidence": 0.9489,
+      "doc_type_scores": {
+        "judgment": 0.0064,
+        "complaint": 0.0064,
+        "statement": 0.0064,
+        "transcript": 0.0064,
+        "receipt": 0.0064,
+        "notice": 0.0064,
+        "messenger": 0.0064,
+        "news": 0.9489,
+        "memo": 0.0064
+      },
+      "evidence_level": "statement",
+      "captured_at": "2026-09-01T10:05:00",
+      "pages": [
+        {
+          "page_no": 1,
+          "width": 1080.0,
+          "height": 380.0,
+          "image_ref": null
+        }
+      ],
+      "lines": [
+        {
+          "doc_id": "news_2016",
+          "line_no": 1,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 568.0,
+            "y1": 84.0
+          },
+          "text": "○○시 20대 남성 실종 넉 달째 행방 묘연",
+          "ocr_confidence": 0.97,
+          "readability": 0.9636,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "news_2016",
+          "line_no": 2,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 634.0,
+            "y1": 144.0
+          },
+          "text": "입력 2016.02.03 09:10  김○○ 기자",
+          "ocr_confidence": 0.96,
+          "readability": 0.9608,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "news_2016",
+          "line_no": 3,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 1040.0,
+            "y1": 204.0
+          },
+          "text": "경찰은 김씨가 지난해 10월 10일 밤 11시쯤 ○○역 인근 CCTV에 마지막으로 찍혔다고 밝혔다.",
+          "ocr_confidence": 0.95,
+          "readability": 0.9579,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "news_2016",
+          "line_no": 4,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 942.0,
+            "y1": 264.0
+          },
+          "text": "가족은 김씨가 10월 11일 새벽까지 친구와 연락을 주고받았다고 주장했다.",
+          "ocr_confidence": 0.95,
+          "readability": 0.9579,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "news_2016",
+          "line_no": 5,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 326.0,
+            "y1": 324.0
+          },
+          "text": "무단전재 및 재배포 금지",
+          "ocr_confidence": 0.97,
+          "readability": 0.9636,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        }
+      ],
+      "unreadable": []
+    },
+    {
+      "doc_id": "witness_statement_2019",
+      "file_name": "최영호_진술서.jpg",
+      "doc_type": "statement",
+      "doc_type_confidence": 0.9793,
+      "doc_type_scores": {
+        "judgment": 0.0004,
+        "complaint": 0.0004,
+        "statement": 0.9793,
+        "transcript": 0.0004,
+        "receipt": 0.0004,
+        "notice": 0.0004,
+        "messenger": 0.0004,
+        "news": 0.0004,
+        "memo": 0.0179
+      },
+      "evidence_level": "statement",
+      "captured_at": "2026-09-01T10:10:00",
+      "pages": [
+        {
+          "page_no": 1,
+          "width": 1080.0,
+          "height": 500.0,
+          "image_ref": null
+        }
+      ],
+      "lines": [
+        {
+          "doc_id": "witness_statement_2019",
+          "line_no": 1,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 150.0,
+            "y1": 84.0
+          },
+          "text": "진 술 서",
+          "ocr_confidence": 0.9,
+          "readability": 0.81,
+          "readable": true,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "witness_statement_2019",
+          "line_no": 2,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 194.0,
+            "y1": 144.0
+          },
+          "text": "성명: 최영호",
+          "ocr_confidence": 0.88,
+          "readability": 0.8581,
+          "readable": true,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "witness_statement_2019",
+          "line_no": 3,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 1040.0,
+            "y1": 204.0
+          },
+          "text": "본인은 2019년 3월 초순 오후 ○○시장 입구에서 김민수로 보이는 남성을 목격하였습니다.",
+          "ocr_confidence": 0.86,
+          "readability": 0.8389,
+          "readable": true,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "witness_statement_2019",
+          "line_no": 4,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 766.0,
+            "y1": 264.0
+          },
+          "text": "그날은 장날이라 사람이 많았고 회색 점퍼를 입고 있었습니다.",
+          "ocr_confidence": 0.85,
+          "readability": 0.8285,
+          "readable": true,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "witness_statement_2019",
+          "line_no": 5,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 458.0,
+            "y1": 324.0
+          },
+          "text": "위 내용은 사실과 다름이 없습니다.",
+          "ocr_confidence": 0.88,
+          "readability": 0.8581,
+          "readable": true,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "witness_statement_2019",
+          "line_no": 6,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 340.0,
+            "x1": 304.0,
+            "y1": 384.0
+          },
+          "text": "2019. 3. 20.",
+          "ocr_confidence": 0.9,
+          "readability": 0.8754,
+          "readable": true,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "witness_statement_2019",
+          "line_no": 7,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 400.0,
+            "x1": 304.0,
+            "y1": 444.0
+          },
+          "text": "진술인 최영호 (서명)",
+          "ocr_confidence": 0.87,
+          "readability": 0.8488,
+          "readable": true,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        }
+      ],
+      "unreadable": []
+    },
+    {
+      "doc_id": "suspension_notice_2022",
+      "file_name": "수사중지_결정통지서.jpg",
+      "doc_type": "notice",
+      "doc_type_confidence": 0.986,
+      "doc_type_scores": {
+        "judgment": 0.003,
+        "complaint": 0.0013,
+        "statement": 0.0013,
+        "transcript": 0.0013,
+        "receipt": 0.0013,
+        "notice": 0.986,
+        "messenger": 0.0013,
+        "news": 0.0013,
+        "memo": 0.003
+      },
+      "evidence_level": "record",
+      "captured_at": "2026-09-01T10:15:00",
+      "pages": [
+        {
+          "page_no": 1,
+          "width": 1080.0,
+          "height": 620.0,
+          "image_ref": null
+        }
+      ],
+      "lines": [
+        {
+          "doc_id": "suspension_notice_2022",
+          "line_no": 1,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 282.0,
+            "y1": 84.0
+          },
+          "text": "수사중지 결정 통지서",
+          "ocr_confidence": 0.97,
+          "readability": 0.9636,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "suspension_notice_2022",
+          "line_no": 2,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 392.0,
+            "y1": 144.0
+          },
+          "text": "사건번호 2016형제12345",
+          "ocr_confidence": 0.95,
+          "readability": 0.9579,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "suspension_notice_2022",
+          "line_no": 3,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 216.0,
+            "y1": 204.0
+          },
+          "text": "피의자 성명불상",
+          "ocr_confidence": 0.95,
+          "readability": 0.9579,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "suspension_notice_2022",
+          "line_no": 4,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 194.0,
+            "y1": 264.0
+          },
+          "text": "죄명 약취유인",
+          "ocr_confidence": 0.94,
+          "readability": 0.9548,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "suspension_notice_2022",
+          "line_no": 5,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 414.0,
+            "y1": 324.0
+          },
+          "text": "결정일자 2022. 3. 15.",
+          "ocr_confidence": 0.95,
+          "readability": 0.9579,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "suspension_notice_2022",
+          "line_no": 6,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 340.0,
+            "x1": 392.0,
+            "y1": 384.0
+          },
+          "text": "결정내용 수사중지(피의자중지)",
+          "ocr_confidence": 0.95,
+          "readability": 0.9579,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "suspension_notice_2022",
+          "line_no": 7,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 400.0,
+            "x1": 568.0,
+            "y1": 444.0
+          },
+          "text": "이유 피의자를 특정할 수 없어 수사를 중지함",
+          "ocr_confidence": 0.94,
+          "readability": 0.9548,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "suspension_notice_2022",
+          "line_no": 8,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 460.0,
+            "x1": 326.0,
+            "y1": 504.0
+          },
+          "text": "담당 수사관 경위 박정호",
+          "ocr_confidence": 0.93,
+          "readability": 0.9514,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "suspension_notice_2022",
+          "line_no": 9,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 520.0,
+            "x1": 172.0,
+            "y1": 564.0
+          },
+          "text": "○○경찰서장",
+          "ocr_confidence": 0.95,
+          "readability": 0.9579,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        }
+      ],
+      "unreadable": []
+    },
+    {
+      "doc_id": "petition_2023",
+      "file_name": "진정서_2023.jpg",
+      "doc_type": "complaint",
+      "doc_type_confidence": 0.9806,
+      "doc_type_scores": {
+        "judgment": 0.0024,
+        "complaint": 0.9806,
+        "statement": 0.0024,
+        "transcript": 0.0024,
+        "receipt": 0.0024,
+        "notice": 0.0024,
+        "messenger": 0.0024,
+        "news": 0.0024,
+        "memo": 0.0024
+      },
+      "evidence_level": "statement",
+      "captured_at": "2026-09-01T10:20:00",
+      "pages": [
+        {
+          "page_no": 1,
+          "width": 1080.0,
+          "height": 620.0,
+          "image_ref": null
+        }
+      ],
+      "lines": [
+        {
+          "doc_id": "petition_2023",
+          "line_no": 1,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 150.0,
+            "y1": 84.0
+          },
+          "text": "진 정 서",
+          "ocr_confidence": 0.96,
+          "readability": 0.937,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "petition_2023",
+          "line_no": 2,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 194.0,
+            "y1": 144.0
+          },
+          "text": "진정인 이순자",
+          "ocr_confidence": 0.95,
+          "readability": 0.9579,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "petition_2023",
+          "line_no": 3,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 128.0,
+            "y1": 204.0
+          },
+          "text": "진정취지",
+          "ocr_confidence": 0.95,
+          "readability": 0.9579,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "petition_2023",
+          "line_no": 4,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 1040.0,
+            "y1": 264.0
+          },
+          "text": "2015. 10. 10. 실종된 아들 김민수 사건(2016형제12345)의 재수사를 요청합니다.",
+          "ocr_confidence": 0.94,
+          "readability": 0.9548,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "petition_2023",
+          "line_no": 5,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 964.0,
+            "y1": 324.0
+          },
+          "text": "아들은 10월 10일 밤 11시경 ○○역 부근에서 마지막으로 목격되었습니다.",
+          "ocr_confidence": 0.94,
+          "readability": 0.9548,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "petition_2023",
+          "line_no": 6,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 340.0,
+            "x1": 1040.0,
+            "y1": 384.0
+          },
+          "text": "2019년 3월경 이웃 주민 최영호가 아들을 ○○시장 근처에서 보았다고 말했습니다.",
+          "ocr_confidence": 0.93,
+          "readability": 0.9514,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "petition_2023",
+          "line_no": 7,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 400.0,
+            "x1": 1040.0,
+            "y1": 444.0
+          },
+          "text": "이 내용은 당시 담당 형사에게 전화로 알렸으나 수사 기록에 반영되었는지 알 수 없습니다.",
+          "ocr_confidence": 0.93,
+          "readability": 0.9514,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "petition_2023",
+          "line_no": 8,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 460.0,
+            "x1": 282.0,
+            "y1": 504.0
+          },
+          "text": "2023. 4. 2.",
+          "ocr_confidence": 0.95,
+          "readability": 0.9579,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "petition_2023",
+          "line_no": 9,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 520.0,
+            "x1": 282.0,
+            "y1": 564.0
+          },
+          "text": "진정인 이순자 (인)",
+          "ocr_confidence": 0.93,
+          "readability": 0.9514,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        }
+      ],
+      "unreadable": []
+    },
+    {
+      "doc_id": "mother_memo",
+      "file_name": "엄마_메모.jpg",
+      "doc_type": "memo",
+      "doc_type_confidence": 0.7152,
+      "doc_type_scores": {
+        "judgment": 0.0356,
+        "complaint": 0.0356,
+        "statement": 0.0356,
+        "transcript": 0.0356,
+        "receipt": 0.0356,
+        "notice": 0.0356,
+        "messenger": 0.0356,
+        "news": 0.0356,
+        "memo": 0.7152
+      },
+      "evidence_level": "statement",
+      "captured_at": "2026-09-01T10:25:00",
+      "pages": [
+        {
+          "page_no": 1,
+          "width": 1080.0,
+          "height": 380.0,
+          "image_ref": null
+        }
+      ],
+      "lines": [
+        {
+          "doc_id": "mother_memo",
+          "line_no": 1,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 370.0,
+            "y1": 84.0
+          },
+          "text": "민수 생일 음력 8월 15일",
+          "ocr_confidence": 0.86,
+          "readability": 0.8389,
+          "readable": true,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "mother_memo",
+          "line_no": 2,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 458.0,
+            "y1": 144.0
+          },
+          "text": "15년 10월 10일 밤 연락 끊김",
+          "ocr_confidence": 0.84,
+          "readability": 0.8176,
+          "readable": true,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "mother_memo",
+          "line_no": 3,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 392.0,
+            "y1": 204.0
+          },
+          "text": "10월 12일 경찰서 실종신고",
+          "ocr_confidence": 0.85,
+          "readability": 0.8285,
+          "readable": true,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "mother_memo",
+          "line_no": 4,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 722.0,
+            "y1": 264.0
+          },
+          "text": "작년 추석 무렵 수사관한테 전화 → 담당자 바뀌었다고 함",
+          "ocr_confidence": 0.8,
+          "readability": 0.701,
+          "readable": true,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "mother_memo",
+          "line_no": 5,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 502.0,
+            "y1": 324.0
+          },
+          "text": "새 담당 형사 이름 ▒▒▒ 연락처 ◈▒",
+          "ocr_confidence": 0.4,
+          "readability": 0.0073,
+          "readable": false,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        }
+      ],
+      "unreadable": [
+        {
+          "region_id": "mother_memo:u5",
+          "doc_id": "mother_memo",
+          "page": 1,
+          "line_no": 5,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 502.0,
+            "y1": 324.0
+          },
+          "readability": 0.0073,
+          "reason": "판독 신뢰도 0.01 < 기준 0.65",
+          "ocr_guess": "새 담당 형사 이름 ▒▒▒ 연락처 ◈▒"
+        }
+      ]
+    },
+    {
+      "doc_id": "note_family",
+      "file_name": "직접 입력",
+      "doc_type": "user_note",
+      "doc_type_confidence": 1.0,
+      "doc_type_scores": {},
+      "evidence_level": "user",
+      "captured_at": "2026-09-01T11:00:00",
+      "pages": [
+        {
+          "page_no": 1,
+          "width": null,
+          "height": null,
+          "image_ref": null
+        }
+      ],
+      "lines": [
+        {
+          "doc_id": "note_family",
+          "line_no": 1,
+          "page": 1,
+          "bbox": null,
+          "text": "결정 통지서를 받은 뒤로 경찰에서 따로 연락 온 적이 없습니다.",
+          "ocr_confidence": 1.0,
+          "readability": 1.0,
+          "readable": true,
+          "script": "unknown",
+          "low_confidence_spans": [],
+          "origin": "user_input"
+        }
+      ],
+      "unreadable": []
+    }
+  ],
+  "clarifications": [
+    {
+      "request_id": "missing_report_2015:u8:q",
+      "kind": "unreadable_text",
+      "question": "이 부분이 잘 읽히지 않습니다. 사진 속 글자를 보이는 대로 적어주시겠어요?",
+      "doc_id": "missing_report_2015",
+      "page": 1,
+      "line_no": 8,
+      "bbox": {
+        "x0": 40.0,
+        "y0": 460.0,
+        "x1": 370.0,
+        "y1": 504.0
+      },
+      "options": [
+        "읽을 수 없어요",
+        "중요하지 않은 부분이에요"
+      ],
+      "context": [
+        "접수관서 ○○경찰서 여성청소년과"
+      ],
+      "priority": 20,
+      "status": "pending",
+      "answer": null
+    },
+    {
+      "request_id": "mother_memo:u5:q",
+      "kind": "unreadable_text",
+      "question": "이 부분이 잘 읽히지 않습니다. 사진 속 글자를 보이는 대로 적어주시겠어요?",
+      "doc_id": "mother_memo",
+      "page": 1,
+      "line_no": 5,
+      "bbox": {
+        "x0": 40.0,
+        "y0": 280.0,
+        "x1": 502.0,
+        "y1": 324.0
+      },
+      "options": [
+        "읽을 수 없어요",
+        "중요하지 않은 부분이에요"
+      ],
+      "context": [
+        "작년 추석 무렵 수사관한테 전화 → 담당자 바뀌었다고 함"
+      ],
+      "priority": 20,
+      "status": "pending",
+      "answer": null
+    }
+  ],
+  "extraction": {
+    "mentions": [
+      {
+        "mention_id": "missing_report_2015:m1",
+        "doc_id": "missing_report_2015",
+        "kind": "receipt_number",
+        "name": {
+          "source_doc_id": "missing_report_2015",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 370.0,
+            "y1": 144.0
+          },
+          "char_start": 5,
+          "char_end": 15,
+          "quote": "2015-00123",
+          "value": "2015-00123",
+          "confidence": 0.776
+        },
+        "normalized": "2015-00123",
+        "role": null
+      },
+      {
+        "mention_id": "missing_report_2015:m2",
+        "doc_id": "missing_report_2015",
+        "kind": "person",
+        "name": {
+          "source_doc_id": "missing_report_2015",
+          "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 392.0,
+            "y1": 264.0
+          },
+          "char_start": 4,
+          "char_end": 7,
+          "quote": "김민수",
+          "value": "김민수",
+          "confidence": 0.7202
+        },
+        "normalized": "김민수",
+        "role": "실종자"
+      },
+      {
+        "mention_id": "missing_report_2015:m3",
+        "doc_id": "missing_report_2015",
+        "kind": "person",
+        "name": {
+          "source_doc_id": "missing_report_2015",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 282.0,
+            "y1": 324.0
+          },
+          "char_start": 4,
+          "char_end": 7,
+          "quote": "이순자",
+          "value": "이순자",
+          "confidence": 0.7254
+        },
+        "normalized": "이순자",
+        "role": "신고인"
+      },
+      {
+        "mention_id": "missing_report_2015:m4",
+        "doc_id": "missing_report_2015",
+        "kind": "organization",
+        "name": {
+          "source_doc_id": "missing_report_2015",
+          "page": 1,
+          "source_line": 7,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 400.0,
+            "x1": 414.0,
+            "y1": 444.0
+          },
+          "char_start": 5,
+          "char_end": 10,
+          "quote": "○○경찰서",
+          "value": "○○경찰서",
+          "confidence": 0.67
+        },
+        "normalized": "**경찰서",
+        "role": null
+      },
+      {
+        "mention_id": "witness_statement_2019:m1",
+        "doc_id": "witness_statement_2019",
+        "kind": "person",
+        "name": {
+          "source_doc_id": "witness_statement_2019",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 194.0,
+            "y1": 144.0
+          },
+          "char_start": 4,
+          "char_end": 7,
+          "quote": "최영호",
+          "value": "최영호",
+          "confidence": 0.6865
+        },
+        "normalized": "최영호",
+        "role": null
+      },
+      {
+        "mention_id": "witness_statement_2019:m2",
+        "doc_id": "witness_statement_2019",
+        "kind": "person",
+        "name": {
+          "source_doc_id": "witness_statement_2019",
+          "page": 1,
+          "source_line": 7,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 400.0,
+            "x1": 304.0,
+            "y1": 444.0
+          },
+          "char_start": 4,
+          "char_end": 7,
+          "quote": "최영호",
+          "value": "최영호",
+          "confidence": 0.679
+        },
+        "normalized": "최영호",
+        "role": "진술인"
+      },
+      {
+        "mention_id": "suspension_notice_2022:m1",
+        "doc_id": "suspension_notice_2022",
+        "kind": "case_number",
+        "name": {
+          "source_doc_id": "suspension_notice_2022",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 392.0,
+            "y1": 144.0
+          },
+          "char_start": 5,
+          "char_end": 16,
+          "quote": "2016형제12345",
+          "value": "2016형제12345",
+          "confidence": 0.8621
+        },
+        "normalized": "2016형제12345",
+        "role": null
+      },
+      {
+        "mention_id": "suspension_notice_2022:m2",
+        "doc_id": "suspension_notice_2022",
+        "kind": "person",
+        "name": {
+          "source_doc_id": "suspension_notice_2022",
+          "page": 1,
+          "source_line": 8,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 460.0,
+            "x1": 326.0,
+            "y1": 504.0
+          },
+          "char_start": 10,
+          "char_end": 13,
+          "quote": "박정호",
+          "value": "박정호",
+          "confidence": 0.7611
+        },
+        "normalized": "박정호",
+        "role": "담당수사관"
+      },
+      {
+        "mention_id": "suspension_notice_2022:m3",
+        "doc_id": "suspension_notice_2022",
+        "kind": "organization",
+        "name": {
+          "source_doc_id": "suspension_notice_2022",
+          "page": 1,
+          "source_line": 9,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 520.0,
+            "x1": 172.0,
+            "y1": 564.0
+          },
+          "char_start": 0,
+          "char_end": 5,
+          "quote": "○○경찰서",
+          "value": "○○경찰서",
+          "confidence": 0.7184
+        },
+        "normalized": "**경찰서",
+        "role": null
+      },
+      {
+        "mention_id": "petition_2023:m1",
+        "doc_id": "petition_2023",
+        "kind": "person",
+        "name": {
+          "source_doc_id": "petition_2023",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 194.0,
+            "y1": 144.0
+          },
+          "char_start": 4,
+          "char_end": 7,
+          "quote": "이순자",
+          "value": "이순자",
+          "confidence": 0.7663
+        },
+        "normalized": "이순자",
+        "role": "진정인"
+      },
+      {
+        "mention_id": "petition_2023:m2",
+        "doc_id": "petition_2023",
+        "kind": "case_number",
+        "name": {
+          "source_doc_id": "petition_2023",
+          "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 1040.0,
+            "y1": 264.0
+          },
+          "char_start": 28,
+          "char_end": 39,
+          "quote": "2016형제12345",
+          "value": "2016형제12345",
+          "confidence": 0.8593
+        },
+        "normalized": "2016형제12345",
+        "role": null
+      },
+      {
+        "mention_id": "petition_2023:m3",
+        "doc_id": "petition_2023",
+        "kind": "person",
+        "name": {
+          "source_doc_id": "petition_2023",
+          "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 1040.0,
+            "y1": 264.0
+          },
+          "char_start": 21,
+          "char_end": 24,
+          "quote": "김민수",
+          "value": "김민수",
+          "confidence": 0.7638
+        },
+        "normalized": "김민수",
+        "role": "아들"
+      },
+      {
+        "mention_id": "petition_2023:m4",
+        "doc_id": "petition_2023",
+        "kind": "person",
+        "name": {
+          "source_doc_id": "petition_2023",
+          "page": 1,
+          "source_line": 9,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 520.0,
+            "x1": 282.0,
+            "y1": 564.0
+          },
+          "char_start": 4,
+          "char_end": 7,
+          "quote": "이순자",
+          "value": "이순자",
+          "confidence": 0.7611
+        },
+        "normalized": "이순자",
+        "role": "진정인"
+      },
+      {
+        "mention_id": "mother_memo:m1",
+        "doc_id": "mother_memo",
+        "kind": "organization",
+        "name": {
+          "source_doc_id": "mother_memo",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 392.0,
+            "y1": 204.0
+          },
+          "char_start": 8,
+          "char_end": 11,
+          "quote": "경찰서",
+          "value": "경찰서",
+          "confidence": 0.6214
+        },
+        "normalized": "경찰서",
+        "role": null
+      }
+    ],
+    "events": [
+      {
+        "event_id": "missing_report_2015:e9",
+        "doc_id": "missing_report_2015",
+        "stage": "receipt",
+        "action": {
+          "source_doc_id": "missing_report_2015",
+          "page": 1,
+          "source_line": 1,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 216.0,
+            "y1": 84.0
+          },
+          "char_start": null,
+          "char_end": null,
+          "quote": "실종신고 접수증",
+          "value": "실종신고 접수증",
+          "confidence": 0.8827
+        },
+        "time": {
+          "source_doc_id": "missing_report_2015",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 568.0,
+            "y1": 204.0
+          },
+          "char_start": 5,
+          "char_end": 24,
+          "quote": "2015. 10. 12. 21:30",
+          "value": {
+            "raw": "2015. 10. 12. 21:30",
+            "start": "2015-10-12T21:30:00",
+            "end": "2015-10-12T21:31:00",
+            "granularity": "minute",
+            "kind": "absolute",
+            "approximate": false,
+            "anchor": null,
+            "anchor_source": null,
+            "candidates": [],
+            "needs_confirmation": false,
+            "note": null
+          },
+          "confidence": 0.8673
+        },
+        "amount": null,
+        "participant_mention_ids": [
+          "missing_report_2015:m1",
+          "missing_report_2015:m2",
+          "missing_report_2015:m3",
+          "missing_report_2015:m4"
+        ],
+        "evidence_level": "record",
+        "action_kind": null
+      },
+      {
+        "event_id": "news_2016:e1",
+        "doc_id": "news_2016",
+        "stage": "occurrence",
+        "action": {
+          "source_doc_id": "news_2016",
+          "page": 1,
+          "source_line": 1,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 568.0,
+            "y1": 84.0
+          },
+          "char_start": 0,
+          "char_end": 24,
+          "quote": "○○시 20대 남성 실종 넉 달째 행방 묘연",
+          "value": "○○시 20대 남성 실종 넉 달째 행방 묘연",
+          "confidence": 0.7709
+        },
+        "time": null,
+        "amount": null,
+        "participant_mention_ids": [],
+        "evidence_level": "statement",
+        "action_kind": "disappearance"
+      },
+      {
+        "event_id": "news_2016:e3",
+        "doc_id": "news_2016",
+        "stage": "occurrence",
+        "action": {
+          "source_doc_id": "news_2016",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 1040.0,
+            "y1": 204.0
+          },
+          "char_start": 0,
+          "char_end": 55,
+          "quote": "경찰은 김씨가 지난해 10월 10일 밤 11시쯤 ○○역 인근 CCTV에 마지막으로 찍혔다고 밝혔다.",
+          "value": "경찰은 김씨가 지난해 10월 10일 밤 11시쯤 ○○역 인근 CCTV에 마지막으로 찍혔다고 밝혔다.",
+          "confidence": 0.7663
+        },
+        "time": {
+          "source_doc_id": "news_2016",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 1040.0,
+            "y1": 204.0
+          },
+          "char_start": 12,
+          "char_end": 26,
+          "quote": "10월 10일 밤 11시쯤",
+          "value": {
+            "raw": "10월 10일 밤 11시쯤",
+            "start": "2015-10-10T22:00:00",
+            "end": "2015-10-11T01:00:00",
+            "granularity": "hour",
+            "kind": "partial",
+            "approximate": true,
+            "anchor": "2016-02-03",
+            "anchor_source": "mentioned_date",
+            "candidates": [],
+            "needs_confirmation": false,
+            "note": "연도는 기준일(2016-02-03)에서 추정"
+          },
+          "confidence": 0.6921
+        },
+        "amount": null,
+        "participant_mention_ids": [],
+        "evidence_level": "statement",
+        "action_kind": "sighting"
+      },
+      {
+        "event_id": "witness_statement_2019:e3",
+        "doc_id": "witness_statement_2019",
+        "stage": "occurrence",
+        "action": {
+          "source_doc_id": "witness_statement_2019",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 1040.0,
+            "y1": 204.0
+          },
+          "char_start": 0,
+          "char_end": 50,
+          "quote": "본인은 2019년 3월 초순 오후 ○○시장 입구에서 김민수로 보이는 남성을 목격하였습니다.",
+          "value": "본인은 2019년 3월 초순 오후 ○○시장 입구에서 김민수로 보이는 남성을 목격하였습니다.",
+          "confidence": 0.6711
+        },
+        "time": {
+          "source_doc_id": "witness_statement_2019",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 1040.0,
+            "y1": 204.0
+          },
+          "char_start": 4,
+          "char_end": 15,
+          "quote": "2019년 3월 초순",
+          "value": {
+            "raw": "2019년 3월 초순",
+            "start": "2019-03-01T00:00:00",
+            "end": "2019-03-11T00:00:00",
+            "granularity": "month",
+            "kind": "absolute",
+            "approximate": true,
+            "anchor": null,
+            "anchor_source": null,
+            "candidates": [],
+            "needs_confirmation": false,
+            "note": null
+          },
+          "confidence": 0.755
+        },
+        "amount": null,
+        "participant_mention_ids": [],
+        "evidence_level": "statement",
+        "action_kind": "sighting"
+      },
+      {
+        "event_id": "suspension_notice_2022:e9",
+        "doc_id": "suspension_notice_2022",
+        "stage": "outcome",
+        "action": {
+          "source_doc_id": "suspension_notice_2022",
+          "page": 1,
+          "source_line": 1,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 282.0,
+            "y1": 84.0
+          },
+          "char_start": null,
+          "char_end": null,
+          "quote": "수사중지 결정 통지서",
+          "value": "수사중지 결정 통지서",
+          "confidence": 0.9154
+        },
+        "time": {
+          "source_doc_id": "suspension_notice_2022",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 414.0,
+            "y1": 324.0
+          },
+          "char_start": 5,
+          "char_end": 17,
+          "quote": "2022. 3. 15.",
+          "value": {
+            "raw": "2022. 3. 15.",
+            "start": "2022-03-15T00:00:00",
+            "end": "2022-03-16T00:00:00",
+            "granularity": "day",
+            "kind": "absolute",
+            "approximate": false,
+            "anchor": null,
+            "anchor_source": null,
+            "candidates": [],
+            "needs_confirmation": false,
+            "note": null
+          },
+          "confidence": 0.91
+        },
+        "amount": null,
+        "participant_mention_ids": [
+          "suspension_notice_2022:m1",
+          "suspension_notice_2022:m2",
+          "suspension_notice_2022:m3"
+        ],
+        "evidence_level": "record",
+        "action_kind": null
+      },
+      {
+        "event_id": "petition_2023:e5",
+        "doc_id": "petition_2023",
+        "stage": "report",
+        "action": {
+          "source_doc_id": "petition_2023",
+          "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 1040.0,
+            "y1": 264.0
+          },
+          "char_start": 0,
+          "char_end": 53,
+          "quote": "2015. 10. 10. 실종된 아들 김민수 사건(2016형제12345)의 재수사를 요청합니다.",
+          "value": "2015. 10. 10. 실종된 아들 김민수 사건(2016형제12345)의 재수사를 요청합니다.",
+          "confidence": 0.7638
+        },
+        "time": {
+          "source_doc_id": "petition_2023",
+          "page": 1,
+          "source_line": 8,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 460.0,
+            "x1": 282.0,
+            "y1": 504.0
+          },
+          "char_start": 0,
+          "char_end": 11,
+          "quote": "2023. 4. 2.",
+          "value": {
+            "raw": "2023. 4. 2.",
+            "start": "2023-04-02T00:00:00",
+            "end": "2023-04-03T00:00:00",
+            "granularity": "day",
+            "kind": "absolute",
+            "approximate": false,
+            "anchor": null,
+            "anchor_source": null,
+            "candidates": [],
+            "needs_confirmation": false,
+            "note": null
+          },
+          "confidence": 0.91
+        },
+        "amount": null,
+        "participant_mention_ids": [
+          "petition_2023:m2",
+          "petition_2023:m3"
+        ],
+        "evidence_level": "statement",
+        "action_kind": "petition"
+      },
+      {
+        "event_id": "petition_2023:e8",
+        "doc_id": "petition_2023",
+        "stage": "occurrence",
+        "action": {
+          "source_doc_id": "petition_2023",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 964.0,
+            "y1": 324.0
+          },
+          "char_start": 0,
+          "char_end": 42,
+          "quote": "아들은 10월 10일 밤 11시경 ○○역 부근에서 마지막으로 목격되었습니다.",
+          "value": "아들은 10월 10일 밤 11시경 ○○역 부근에서 마지막으로 목격되었습니다.",
+          "confidence": 0.7638
+        },
+        "time": {
+          "source_doc_id": "petition_2023",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 964.0,
+            "y1": 324.0
+          },
+          "char_start": 4,
+          "char_end": 18,
+          "quote": "10월 10일 밤 11시경",
+          "value": {
+            "raw": "10월 10일 밤 11시경",
+            "start": "2015-10-10T22:00:00",
+            "end": "2015-10-11T01:00:00",
+            "granularity": "hour",
+            "kind": "partial",
+            "approximate": true,
+            "anchor": "2015-10-10",
+            "anchor_source": "mentioned_date",
+            "candidates": [],
+            "needs_confirmation": false,
+            "note": "연도는 기준일(2015-10-10)에서 추정"
+          },
+          "confidence": 0.6898
+        },
+        "amount": null,
+        "participant_mention_ids": [],
+        "evidence_level": "statement",
+        "action_kind": "sighting"
+      },
+      {
+        "event_id": "petition_2023:e11",
+        "doc_id": "petition_2023",
+        "stage": "occurrence",
+        "action": {
+          "source_doc_id": "petition_2023",
+          "page": 1,
+          "source_line": 6,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 340.0,
+            "x1": 1040.0,
+            "y1": 384.0
+          },
+          "char_start": 0,
+          "char_end": 46,
+          "quote": "2019년 3월경 이웃 주민 최영호가 아들을 ○○시장 근처에서 보았다고 말했습니다.",
+          "value": "2019년 3월경 이웃 주민 최영호가 아들을 ○○시장 근처에서 보았다고 말했습니다.",
+          "confidence": 0.7611
+        },
+        "time": {
+          "source_doc_id": "petition_2023",
+          "page": 1,
+          "source_line": 6,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 340.0,
+            "x1": 1040.0,
+            "y1": 384.0
+          },
+          "char_start": 0,
+          "char_end": 9,
+          "quote": "2019년 3월경",
+          "value": {
+            "raw": "2019년 3월경",
+            "start": "2019-02-14T00:00:00",
+            "end": "2019-04-16T00:00:00",
+            "granularity": "month",
+            "kind": "absolute",
+            "approximate": true,
+            "anchor": null,
+            "anchor_source": null,
+            "candidates": [],
+            "needs_confirmation": false,
+            "note": null
+          },
+          "confidence": 0.8563
+        },
+        "amount": null,
+        "participant_mention_ids": [],
+        "evidence_level": "statement",
+        "action_kind": "sighting"
+      },
+      {
+        "event_id": "mother_memo:e2",
+        "doc_id": "mother_memo",
+        "stage": "occurrence",
+        "action": {
+          "source_doc_id": "mother_memo",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 458.0,
+            "y1": 144.0
+          },
+          "char_start": 0,
+          "char_end": 19,
+          "quote": "15년 10월 10일 밤 연락 끊김",
+          "value": "15년 10월 10일 밤 연락 끊김",
+          "confidence": 0.6541
+        },
+        "time": {
+          "source_doc_id": "mother_memo",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 458.0,
+            "y1": 144.0
+          },
+          "char_start": 0,
+          "char_end": 13,
+          "quote": "15년 10월 10일 밤",
+          "value": {
+            "raw": "15년 10월 10일 밤",
+            "start": "2015-10-10T20:00:00",
+            "end": "2015-10-11T00:00:00",
+            "granularity": "hour",
+            "kind": "absolute",
+            "approximate": true,
+            "anchor": null,
+            "anchor_source": null,
+            "candidates": [],
+            "needs_confirmation": false,
+            "note": null
+          },
+          "confidence": 0.695
+        },
+        "amount": null,
+        "participant_mention_ids": [],
+        "evidence_level": "statement",
+        "action_kind": "contact_lost"
+      },
+      {
+        "event_id": "mother_memo:e5",
+        "doc_id": "mother_memo",
+        "stage": "report",
+        "action": {
+          "source_doc_id": "mother_memo",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 392.0,
+            "y1": 204.0
+          },
+          "char_start": 0,
+          "char_end": 16,
+          "quote": "10월 12일 경찰서 실종신고",
+          "value": "10월 12일 경찰서 실종신고",
+          "confidence": 0.6628
+        },
+        "time": {
+          "source_doc_id": "mother_memo",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 392.0,
+            "y1": 204.0
+          },
+          "char_start": 0,
+          "char_end": 7,
+          "quote": "10월 12일",
+          "value": {
+            "raw": "10월 12일",
+            "start": "2015-10-12T00:00:00",
+            "end": "2015-10-13T00:00:00",
+            "granularity": "day",
+            "kind": "partial",
+            "approximate": false,
+            "anchor": "2015-10-10",
+            "anchor_source": "mentioned_date",
+            "candidates": [],
+            "needs_confirmation": false,
+            "note": "연도는 기준일(2015-10-10)에서 추정"
+          },
+          "confidence": 0.5986
+        },
+        "amount": null,
+        "participant_mention_ids": [
+          "mother_memo:m1"
+        ],
+        "evidence_level": "statement",
+        "action_kind": null
+      }
+    ],
+    "claims": [
+      {
+        "claim_id": "missing_report_2015:c5",
+        "doc_id": "missing_report_2015",
+        "speaker": "**경찰서",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "missing_report_2015:m4",
+        "content": {
+          "source_doc_id": "missing_report_2015",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 370.0,
+            "y1": 144.0
+          },
+          "char_start": 0,
+          "char_end": 15,
+          "quote": "접수번호 2015-00123",
+          "value": "접수번호 2015-00123",
+          "confidence": 0.8216
+        },
+        "slot": "receipt_number",
+        "slot_value": "2015-00123",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "missing_report_2015:c6",
+        "doc_id": "missing_report_2015",
+        "speaker": "**경찰서",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "missing_report_2015:m4",
+        "content": {
+          "source_doc_id": "missing_report_2015",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 568.0,
+            "y1": 204.0
+          },
+          "char_start": 0,
+          "char_end": 24,
+          "quote": "접수일시 2015. 10. 12. 21:30",
+          "value": "접수일시 2015. 10. 12. 21:30",
+          "confidence": 0.8216
+        },
+        "slot": "receipt_time",
+        "slot_value": "2015-10-12 21:30",
+        "slot_time": {
+          "raw": "2015. 10. 12. 21:30",
+          "start": "2015-10-12T21:30:00",
+          "end": "2015-10-12T21:31:00",
+          "granularity": "minute",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "missing_report_2015:c7",
+        "doc_id": "missing_report_2015",
+        "speaker": "**경찰서",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "missing_report_2015:m4",
+        "content": {
+          "source_doc_id": "missing_report_2015",
+          "page": 1,
+          "source_line": 6,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 340.0,
+            "x1": 722.0,
+            "y1": 384.0
+          },
+          "char_start": 0,
+          "char_end": 31,
+          "quote": "최종 목격 2015. 10. 10. 23시경 ○○역 부근",
+          "value": "최종 목격 2015. 10. 10. 23시경 ○○역 부근",
+          "confidence": 0.7973
+        },
+        "slot": "last_seen_time",
+        "slot_value": "2015-10-10 22시~01시",
+        "slot_time": {
+          "raw": "2015. 10. 10. 23시경",
+          "start": "2015-10-10T22:00:00",
+          "end": "2015-10-11T01:00:00",
+          "granularity": "hour",
+          "kind": "absolute",
+          "approximate": true,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "missing_report_2015:c8",
+        "doc_id": "missing_report_2015",
+        "speaker": "**경찰서",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "missing_report_2015:m4",
+        "content": {
+          "source_doc_id": "missing_report_2015",
+          "page": 1,
+          "source_line": 6,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 340.0,
+            "x1": 722.0,
+            "y1": 384.0
+          },
+          "char_start": 0,
+          "char_end": 31,
+          "quote": "최종 목격 2015. 10. 10. 23시경 ○○역 부근",
+          "value": "최종 목격 2015. 10. 10. 23시경 ○○역 부근",
+          "confidence": 0.7973
+        },
+        "slot": "incident_time",
+        "slot_value": "2015-10-10 22시~01시",
+        "slot_time": {
+          "raw": "2015. 10. 10. 23시경",
+          "start": "2015-10-10T22:00:00",
+          "end": "2015-10-11T01:00:00",
+          "granularity": "hour",
+          "kind": "absolute",
+          "approximate": true,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "news_2016:c2",
+        "doc_id": "news_2016",
+        "speaker": "보도",
+        "speaker_basis": "document_author",
+        "speaker_mention_id": null,
+        "content": {
+          "source_doc_id": "news_2016",
+          "page": 1,
+          "source_line": 1,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 568.0,
+            "y1": 84.0
+          },
+          "char_start": 0,
+          "char_end": 24,
+          "quote": "○○시 20대 남성 실종 넉 달째 행방 묘연",
+          "value": "○○시 20대 남성 실종 넉 달째 행방 묘연",
+          "confidence": 0.8191
+        },
+        "slot": null,
+        "slot_value": null,
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "statement"
+      },
+      {
+        "claim_id": "news_2016:c4",
+        "doc_id": "news_2016",
+        "speaker": "경찰",
+        "speaker_basis": "reported_speech",
+        "speaker_mention_id": null,
+        "content": {
+          "source_doc_id": "news_2016",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 1040.0,
+            "y1": 204.0
+          },
+          "char_start": 0,
+          "char_end": 55,
+          "quote": "경찰은 김씨가 지난해 10월 10일 밤 11시쯤 ○○역 인근 CCTV에 마지막으로 찍혔다고 밝혔다.",
+          "value": "경찰은 김씨가 지난해 10월 10일 밤 11시쯤 ○○역 인근 CCTV에 마지막으로 찍혔다고 밝혔다.",
+          "confidence": 0.6192
+        },
+        "slot": "last_seen_time",
+        "slot_value": "2015-10-10 22시~01시",
+        "slot_time": {
+          "raw": "10월 10일 밤 11시쯤",
+          "start": "2015-10-10T22:00:00",
+          "end": "2015-10-11T01:00:00",
+          "granularity": "hour",
+          "kind": "partial",
+          "approximate": true,
+          "anchor": "2016-02-03",
+          "anchor_source": "mentioned_date",
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": "연도는 기준일(2016-02-03)에서 추정"
+        },
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "statement"
+      },
+      {
+        "claim_id": "news_2016:c5",
+        "doc_id": "news_2016",
+        "speaker": "경찰",
+        "speaker_basis": "reported_speech",
+        "speaker_mention_id": null,
+        "content": {
+          "source_doc_id": "news_2016",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 1040.0,
+            "y1": 204.0
+          },
+          "char_start": 0,
+          "char_end": 55,
+          "quote": "경찰은 김씨가 지난해 10월 10일 밤 11시쯤 ○○역 인근 CCTV에 마지막으로 찍혔다고 밝혔다.",
+          "value": "경찰은 김씨가 지난해 10월 10일 밤 11시쯤 ○○역 인근 CCTV에 마지막으로 찍혔다고 밝혔다.",
+          "confidence": 0.6192
+        },
+        "slot": "incident_time",
+        "slot_value": "2015-10-10 22시~01시",
+        "slot_time": {
+          "raw": "10월 10일 밤 11시쯤",
+          "start": "2015-10-10T22:00:00",
+          "end": "2015-10-11T01:00:00",
+          "granularity": "hour",
+          "kind": "partial",
+          "approximate": true,
+          "anchor": "2016-02-03",
+          "anchor_source": "mentioned_date",
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": "연도는 기준일(2016-02-03)에서 추정"
+        },
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "statement"
+      },
+      {
+        "claim_id": "news_2016:c6",
+        "doc_id": "news_2016",
+        "speaker": "가족",
+        "speaker_basis": "reported_speech",
+        "speaker_mention_id": null,
+        "content": {
+          "source_doc_id": "news_2016",
+          "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 942.0,
+            "y1": 264.0
+          },
+          "char_start": 0,
+          "char_end": 41,
+          "quote": "가족은 김씨가 10월 11일 새벽까지 친구와 연락을 주고받았다고 주장했다.",
+          "value": "가족은 김씨가 10월 11일 새벽까지 친구와 연락을 주고받았다고 주장했다.",
+          "confidence": 0.6192
+        },
+        "slot": "last_contact_time",
+        "slot_value": "2015-10-11 00~06시",
+        "slot_time": {
+          "raw": "10월 11일 새벽",
+          "start": "2015-10-11T00:00:00",
+          "end": "2015-10-11T06:00:00",
+          "granularity": "hour",
+          "kind": "partial",
+          "approximate": true,
+          "anchor": "2015-10-10",
+          "anchor_source": "mentioned_date",
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": "연도는 기준일(2015-10-10)에서 추정"
+        },
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "statement"
+      },
+      {
+        "claim_id": "witness_statement_2019:c4",
+        "doc_id": "witness_statement_2019",
+        "speaker": "최영호",
+        "speaker_basis": "document_author",
+        "speaker_mention_id": "witness_statement_2019:m1",
+        "content": {
+          "source_doc_id": "witness_statement_2019",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 1040.0,
+            "y1": 204.0
+          },
+          "char_start": 0,
+          "char_end": 50,
+          "quote": "본인은 2019년 3월 초순 오후 ○○시장 입구에서 김민수로 보이는 남성을 목격하였습니다.",
+          "value": "본인은 2019년 3월 초순 오후 ○○시장 입구에서 김민수로 보이는 남성을 목격하였습니다.",
+          "confidence": 0.6755
+        },
+        "slot": "incident_time",
+        "slot_value": "2019-03-01~03-10",
+        "slot_time": {
+          "raw": "2019년 3월 초순",
+          "start": "2019-03-01T00:00:00",
+          "end": "2019-03-11T00:00:00",
+          "granularity": "month",
+          "kind": "absolute",
+          "approximate": true,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "statement"
+      },
+      {
+        "claim_id": "suspension_notice_2022:c4",
+        "doc_id": "suspension_notice_2022",
+        "speaker": "**경찰서",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "suspension_notice_2022:m3",
+        "content": {
+          "source_doc_id": "suspension_notice_2022",
+          "page": 1,
+          "source_line": 1,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 282.0,
+            "y1": 84.0
+          },
+          "char_start": 0,
+          "char_end": 11,
+          "quote": "수사중지 결정 통지서",
+          "value": "수사중지 결정 통지서",
+          "confidence": 0.8672
+        },
+        "slot": "decision_type",
+        "slot_value": "수사중지",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "suspension_notice_2022:c5",
+        "doc_id": "suspension_notice_2022",
+        "speaker": "**경찰서",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "suspension_notice_2022:m3",
+        "content": {
+          "source_doc_id": "suspension_notice_2022",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 392.0,
+            "y1": 144.0
+          },
+          "char_start": 0,
+          "char_end": 16,
+          "quote": "사건번호 2016형제12345",
+          "value": "사건번호 2016형제12345",
+          "confidence": 0.8621
+        },
+        "slot": "case_number",
+        "slot_value": "2016형제12345",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "suspension_notice_2022:c6",
+        "doc_id": "suspension_notice_2022",
+        "speaker": "**경찰서",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "suspension_notice_2022:m3",
+        "content": {
+          "source_doc_id": "suspension_notice_2022",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 414.0,
+            "y1": 324.0
+          },
+          "char_start": 0,
+          "char_end": 17,
+          "quote": "결정일자 2022. 3. 15.",
+          "value": "결정일자 2022. 3. 15.",
+          "confidence": 0.8621
+        },
+        "slot": "decision_time",
+        "slot_value": "2022-03-15",
+        "slot_time": {
+          "raw": "2022. 3. 15.",
+          "start": "2022-03-15T00:00:00",
+          "end": "2022-03-16T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "value_is_speaker_self": false,
+        "subject": "수사중지",
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "suspension_notice_2022:c7",
+        "doc_id": "suspension_notice_2022",
+        "speaker": "**경찰서",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "suspension_notice_2022:m3",
+        "content": {
+          "source_doc_id": "suspension_notice_2022",
+          "page": 1,
+          "source_line": 6,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 340.0,
+            "x1": 392.0,
+            "y1": 384.0
+          },
+          "char_start": 0,
+          "char_end": 16,
+          "quote": "결정내용 수사중지(피의자중지)",
+          "value": "결정내용 수사중지(피의자중지)",
+          "confidence": 0.8621
+        },
+        "slot": "decision_type",
+        "slot_value": "수사중지(피의자중지)",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "suspension_notice_2022:c8",
+        "doc_id": "suspension_notice_2022",
+        "speaker": "**경찰서",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "suspension_notice_2022:m3",
+        "content": {
+          "source_doc_id": "suspension_notice_2022",
+          "page": 1,
+          "source_line": 8,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 460.0,
+            "x1": 326.0,
+            "y1": 504.0
+          },
+          "char_start": 0,
+          "char_end": 13,
+          "quote": "담당 수사관 경위 박정호",
+          "value": "담당 수사관 경위 박정호",
+          "confidence": 0.8563
+        },
+        "slot": "investigator",
+        "slot_value": "박정호",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "petition_2023:c6",
+        "doc_id": "petition_2023",
+        "speaker": "이순자",
+        "speaker_basis": "document_author",
+        "speaker_mention_id": "petition_2023:m1",
+        "content": {
+          "source_doc_id": "petition_2023",
+          "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 1040.0,
+            "y1": 264.0
+          },
+          "char_start": 0,
+          "char_end": 53,
+          "quote": "2015. 10. 10. 실종된 아들 김민수 사건(2016형제12345)의 재수사를 요청합니다.",
+          "value": "2015. 10. 10. 실종된 아들 김민수 사건(2016형제12345)의 재수사를 요청합니다.",
+          "confidence": 0.8116
+        },
+        "slot": "case_number",
+        "slot_value": "2016형제12345",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "statement"
+      },
+      {
+        "claim_id": "petition_2023:c7",
+        "doc_id": "petition_2023",
+        "speaker": "이순자",
+        "speaker_basis": "document_author",
+        "speaker_mention_id": "petition_2023:m1",
+        "content": {
+          "source_doc_id": "petition_2023",
+          "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 1040.0,
+            "y1": 264.0
+          },
+          "char_start": 0,
+          "char_end": 53,
+          "quote": "2015. 10. 10. 실종된 아들 김민수 사건(2016형제12345)의 재수사를 요청합니다.",
+          "value": "2015. 10. 10. 실종된 아들 김민수 사건(2016형제12345)의 재수사를 요청합니다.",
+          "confidence": 0.8116
+        },
+        "slot": "incident_time",
+        "slot_value": "2015-10-10",
+        "slot_time": {
+          "raw": "2015. 10. 10.",
+          "start": "2015-10-10T00:00:00",
+          "end": "2015-10-11T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "statement"
+      },
+      {
+        "claim_id": "petition_2023:c9",
+        "doc_id": "petition_2023",
+        "speaker": "이순자",
+        "speaker_basis": "document_author",
+        "speaker_mention_id": "petition_2023:m1",
+        "content": {
+          "source_doc_id": "petition_2023",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 964.0,
+            "y1": 324.0
+          },
+          "char_start": 0,
+          "char_end": 42,
+          "quote": "아들은 10월 10일 밤 11시경 ○○역 부근에서 마지막으로 목격되었습니다.",
+          "value": "아들은 10월 10일 밤 11시경 ○○역 부근에서 마지막으로 목격되었습니다.",
+          "confidence": 0.6172
+        },
+        "slot": "last_seen_time",
+        "slot_value": "2015-10-10 22시~01시",
+        "slot_time": {
+          "raw": "10월 10일 밤 11시경",
+          "start": "2015-10-10T22:00:00",
+          "end": "2015-10-11T01:00:00",
+          "granularity": "hour",
+          "kind": "partial",
+          "approximate": true,
+          "anchor": "2015-10-10",
+          "anchor_source": "mentioned_date",
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": "연도는 기준일(2015-10-10)에서 추정"
+        },
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "statement"
+      },
+      {
+        "claim_id": "petition_2023:c10",
+        "doc_id": "petition_2023",
+        "speaker": "이순자",
+        "speaker_basis": "document_author",
+        "speaker_mention_id": "petition_2023:m1",
+        "content": {
+          "source_doc_id": "petition_2023",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 964.0,
+            "y1": 324.0
+          },
+          "char_start": 0,
+          "char_end": 42,
+          "quote": "아들은 10월 10일 밤 11시경 ○○역 부근에서 마지막으로 목격되었습니다.",
+          "value": "아들은 10월 10일 밤 11시경 ○○역 부근에서 마지막으로 목격되었습니다.",
+          "confidence": 0.6172
+        },
+        "slot": "incident_time",
+        "slot_value": "2015-10-10 22시~01시",
+        "slot_time": {
+          "raw": "10월 10일 밤 11시경",
+          "start": "2015-10-10T22:00:00",
+          "end": "2015-10-11T01:00:00",
+          "granularity": "hour",
+          "kind": "partial",
+          "approximate": true,
+          "anchor": "2015-10-10",
+          "anchor_source": "mentioned_date",
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": "연도는 기준일(2015-10-10)에서 추정"
+        },
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "statement"
+      },
+      {
+        "claim_id": "petition_2023:c12",
+        "doc_id": "petition_2023",
+        "speaker": "이순자",
+        "speaker_basis": "document_author",
+        "speaker_mention_id": "petition_2023:m1",
+        "content": {
+          "source_doc_id": "petition_2023",
+          "page": 1,
+          "source_line": 6,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 340.0,
+            "x1": 1040.0,
+            "y1": 384.0
+          },
+          "char_start": 0,
+          "char_end": 46,
+          "quote": "2019년 3월경 이웃 주민 최영호가 아들을 ○○시장 근처에서 보았다고 말했습니다.",
+          "value": "2019년 3월경 이웃 주민 최영호가 아들을 ○○시장 근처에서 보았다고 말했습니다.",
+          "confidence": 0.7661
+        },
+        "slot": "incident_time",
+        "slot_value": "2019-02-14~04-15",
+        "slot_time": {
+          "raw": "2019년 3월경",
+          "start": "2019-02-14T00:00:00",
+          "end": "2019-04-16T00:00:00",
+          "granularity": "month",
+          "kind": "absolute",
+          "approximate": true,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "statement"
+      },
+      {
+        "claim_id": "mother_memo:c3",
+        "doc_id": "mother_memo",
+        "speaker": "나",
+        "speaker_basis": "document_author",
+        "speaker_mention_id": null,
+        "content": {
+          "source_doc_id": "mother_memo",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 458.0,
+            "y1": 144.0
+          },
+          "char_start": 0,
+          "char_end": 19,
+          "quote": "15년 10월 10일 밤 연락 끊김",
+          "value": "15년 10월 10일 밤 연락 끊김",
+          "confidence": 0.6218
+        },
+        "slot": "last_contact_time",
+        "slot_value": "2015-10-10 20~24시",
+        "slot_time": {
+          "raw": "15년 10월 10일 밤",
+          "start": "2015-10-10T20:00:00",
+          "end": "2015-10-11T00:00:00",
+          "granularity": "hour",
+          "kind": "absolute",
+          "approximate": true,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "statement"
+      },
+      {
+        "claim_id": "mother_memo:c4",
+        "doc_id": "mother_memo",
+        "speaker": "나",
+        "speaker_basis": "document_author",
+        "speaker_mention_id": null,
+        "content": {
+          "source_doc_id": "mother_memo",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 458.0,
+            "y1": 144.0
+          },
+          "char_start": 0,
+          "char_end": 19,
+          "quote": "15년 10월 10일 밤 연락 끊김",
+          "value": "15년 10월 10일 밤 연락 끊김",
+          "confidence": 0.6218
+        },
+        "slot": "incident_time",
+        "slot_value": "2015-10-10 20~24시",
+        "slot_time": {
+          "raw": "15년 10월 10일 밤",
+          "start": "2015-10-10T20:00:00",
+          "end": "2015-10-11T00:00:00",
+          "granularity": "hour",
+          "kind": "absolute",
+          "approximate": true,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "statement"
+      },
+      {
+        "claim_id": "mother_memo:c6",
+        "doc_id": "mother_memo",
+        "speaker": "나",
+        "speaker_basis": "document_author",
+        "speaker_mention_id": null,
+        "content": {
+          "source_doc_id": "mother_memo",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 392.0,
+            "y1": 204.0
+          },
+          "char_start": 0,
+          "char_end": 16,
+          "quote": "10월 12일 경찰서 실종신고",
+          "value": "10월 12일 경찰서 실종신고",
+          "confidence": 0.5356
+        },
+        "slot": "incident_time",
+        "slot_value": "2015-10-12",
+        "slot_time": {
+          "raw": "10월 12일",
+          "start": "2015-10-12T00:00:00",
+          "end": "2015-10-13T00:00:00",
+          "granularity": "day",
+          "kind": "partial",
+          "approximate": false,
+          "anchor": "2015-10-10",
+          "anchor_source": "mentioned_date",
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": "연도는 기준일(2015-10-10)에서 추정"
+        },
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "statement"
+      },
+      {
+        "claim_id": "mother_memo:c7",
+        "doc_id": "mother_memo",
+        "speaker": "나",
+        "speaker_basis": "document_author",
+        "speaker_mention_id": null,
+        "content": {
+          "source_doc_id": "mother_memo",
+          "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 722.0,
+            "y1": 264.0
+          },
+          "char_start": 0,
+          "char_end": 31,
+          "quote": "작년 추석 무렵 수사관한테 전화 → 담당자 바뀌었다고 함",
+          "value": "작년 추석 무렵 수사관한테 전화 → 담당자 바뀌었다고 함",
+          "confidence": 0.5958
+        },
+        "slot": "investigator_change",
+        "slot_value": "changed",
+        "slot_time": {
+          "raw": "작년 추석 무렵",
+          "start": "2025-10-04T00:00:00",
+          "end": "2025-10-09T00:00:00",
+          "granularity": "day",
+          "kind": "lunar",
+          "approximate": true,
+          "anchor": "2026-09-01",
+          "anchor_source": "capture_date",
+          "candidates": [],
+          "needs_confirmation": true,
+          "note": "음력 8월 15일 → 양력 변환"
+        },
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "statement"
+      }
+    ],
+    "times": [
+      {
+        "source_doc_id": "missing_report_2015",
+        "page": 1,
+        "source_line": 3,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 160.0,
+          "x1": 568.0,
+          "y1": 204.0
+        },
+        "char_start": 5,
+        "char_end": 24,
+        "quote": "2015. 10. 12. 21:30",
+        "value": {
+          "raw": "2015. 10. 12. 21:30",
+          "start": "2015-10-12T21:30:00",
+          "end": "2015-10-12T21:31:00",
+          "granularity": "minute",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8673
+      },
+      {
+        "source_doc_id": "missing_report_2015",
+        "page": 1,
+        "source_line": 6,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 340.0,
+          "x1": 722.0,
+          "y1": 384.0
+        },
+        "char_start": 6,
+        "char_end": 24,
+        "quote": "2015. 10. 10. 23시경",
+        "value": {
+          "raw": "2015. 10. 10. 23시경",
+          "start": "2015-10-10T22:00:00",
+          "end": "2015-10-11T01:00:00",
+          "granularity": "hour",
+          "kind": "absolute",
+          "approximate": true,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8416
+      },
+      {
+        "source_doc_id": "news_2016",
+        "page": 1,
+        "source_line": 2,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 100.0,
+          "x1": 634.0,
+          "y1": 144.0
+        },
+        "char_start": 3,
+        "char_end": 19,
+        "quote": "2016.02.03 09:10",
+        "value": {
+          "raw": "2016.02.03 09:10",
+          "start": "2016-02-03T09:10:00",
+          "end": "2016-02-03T09:11:00",
+          "granularity": "minute",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.9128
+      },
+      {
+        "source_doc_id": "news_2016",
+        "page": 1,
+        "source_line": 3,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 160.0,
+          "x1": 1040.0,
+          "y1": 204.0
+        },
+        "char_start": 8,
+        "char_end": 11,
+        "quote": "지난해",
+        "value": {
+          "raw": "지난해",
+          "start": "2015-01-01T00:00:00",
+          "end": "2016-01-01T00:00:00",
+          "granularity": "year",
+          "kind": "relative",
+          "approximate": false,
+          "anchor": "2016-02-03",
+          "anchor_source": "document_date",
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.7328
+      },
+      {
+        "source_doc_id": "news_2016",
+        "page": 1,
+        "source_line": 3,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 160.0,
+          "x1": 1040.0,
+          "y1": 204.0
+        },
+        "char_start": 12,
+        "char_end": 26,
+        "quote": "10월 10일 밤 11시쯤",
+        "value": {
+          "raw": "10월 10일 밤 11시쯤",
+          "start": "2015-10-10T22:00:00",
+          "end": "2015-10-11T01:00:00",
+          "granularity": "hour",
+          "kind": "partial",
+          "approximate": true,
+          "anchor": "2016-02-03",
+          "anchor_source": "mentioned_date",
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": "연도는 기준일(2016-02-03)에서 추정"
+        },
+        "confidence": 0.6921
+      },
+      {
+        "source_doc_id": "news_2016",
+        "page": 1,
+        "source_line": 4,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 220.0,
+          "x1": 942.0,
+          "y1": 264.0
+        },
+        "char_start": 8,
+        "char_end": 18,
+        "quote": "10월 11일 새벽",
+        "value": {
+          "raw": "10월 11일 새벽",
+          "start": "2015-10-11T00:00:00",
+          "end": "2015-10-11T06:00:00",
+          "granularity": "hour",
+          "kind": "partial",
+          "approximate": true,
+          "anchor": "2015-10-10",
+          "anchor_source": "mentioned_date",
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": "연도는 기준일(2015-10-10)에서 추정"
+        },
+        "confidence": 0.6921
+      },
+      {
+        "source_doc_id": "witness_statement_2019",
+        "page": 1,
+        "source_line": 3,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 160.0,
+          "x1": 1040.0,
+          "y1": 204.0
+        },
+        "char_start": 4,
+        "char_end": 15,
+        "quote": "2019년 3월 초순",
+        "value": {
+          "raw": "2019년 3월 초순",
+          "start": "2019-03-01T00:00:00",
+          "end": "2019-03-11T00:00:00",
+          "granularity": "month",
+          "kind": "absolute",
+          "approximate": true,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.755
+      },
+      {
+        "source_doc_id": "witness_statement_2019",
+        "page": 1,
+        "source_line": 4,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 220.0,
+          "x1": 766.0,
+          "y1": 264.0
+        },
+        "char_start": 0,
+        "char_end": 2,
+        "quote": "그날",
+        "value": {
+          "raw": "그날",
+          "start": "2019-03-20T00:00:00",
+          "end": "2019-03-21T00:00:00",
+          "granularity": "day",
+          "kind": "relative",
+          "approximate": false,
+          "anchor": "2019-03-20",
+          "anchor_source": "document_date",
+          "candidates": [],
+          "needs_confirmation": true,
+          "note": "문맥상 기준 날짜가 없어 발화 시점 기준으로 계산"
+        },
+        "confidence": 0.3803
+      },
+      {
+        "source_doc_id": "witness_statement_2019",
+        "page": 1,
+        "source_line": 6,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 340.0,
+          "x1": 304.0,
+          "y1": 384.0
+        },
+        "char_start": 0,
+        "char_end": 12,
+        "quote": "2019. 3. 20.",
+        "value": {
+          "raw": "2019. 3. 20.",
+          "start": "2019-03-20T00:00:00",
+          "end": "2019-03-21T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8316
+      },
+      {
+        "source_doc_id": "suspension_notice_2022",
+        "page": 1,
+        "source_line": 5,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 280.0,
+          "x1": 414.0,
+          "y1": 324.0
+        },
+        "char_start": 5,
+        "char_end": 17,
+        "quote": "2022. 3. 15.",
+        "value": {
+          "raw": "2022. 3. 15.",
+          "start": "2022-03-15T00:00:00",
+          "end": "2022-03-16T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.91
+      },
+      {
+        "source_doc_id": "petition_2023",
+        "page": 1,
+        "source_line": 4,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 220.0,
+          "x1": 1040.0,
+          "y1": 264.0
+        },
+        "char_start": 0,
+        "char_end": 13,
+        "quote": "2015. 10. 10.",
+        "value": {
+          "raw": "2015. 10. 10.",
+          "start": "2015-10-10T00:00:00",
+          "end": "2015-10-11T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.9071
+      },
+      {
+        "source_doc_id": "petition_2023",
+        "page": 1,
+        "source_line": 5,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 280.0,
+          "x1": 964.0,
+          "y1": 324.0
+        },
+        "char_start": 4,
+        "char_end": 18,
+        "quote": "10월 10일 밤 11시경",
+        "value": {
+          "raw": "10월 10일 밤 11시경",
+          "start": "2015-10-10T22:00:00",
+          "end": "2015-10-11T01:00:00",
+          "granularity": "hour",
+          "kind": "partial",
+          "approximate": true,
+          "anchor": "2015-10-10",
+          "anchor_source": "mentioned_date",
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": "연도는 기준일(2015-10-10)에서 추정"
+        },
+        "confidence": 0.6898
+      },
+      {
+        "source_doc_id": "petition_2023",
+        "page": 1,
+        "source_line": 6,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 340.0,
+          "x1": 1040.0,
+          "y1": 384.0
+        },
+        "char_start": 0,
+        "char_end": 9,
+        "quote": "2019년 3월경",
+        "value": {
+          "raw": "2019년 3월경",
+          "start": "2019-02-14T00:00:00",
+          "end": "2019-04-16T00:00:00",
+          "granularity": "month",
+          "kind": "absolute",
+          "approximate": true,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8563
+      },
+      {
+        "source_doc_id": "petition_2023",
+        "page": 1,
+        "source_line": 8,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 460.0,
+          "x1": 282.0,
+          "y1": 504.0
+        },
+        "char_start": 0,
+        "char_end": 11,
+        "quote": "2023. 4. 2.",
+        "value": {
+          "raw": "2023. 4. 2.",
+          "start": "2023-04-02T00:00:00",
+          "end": "2023-04-03T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.91
+      },
+      {
+        "source_doc_id": "mother_memo",
+        "page": 1,
+        "source_line": 1,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 40.0,
+          "x1": 370.0,
+          "y1": 84.0
+        },
+        "char_start": 6,
+        "char_end": 15,
+        "quote": "음력 8월 15일",
+        "value": {
+          "raw": "음력 8월 15일",
+          "start": "2026-09-25T00:00:00",
+          "end": "2026-09-26T00:00:00",
+          "granularity": "day",
+          "kind": "lunar",
+          "approximate": false,
+          "anchor": "2026-09-01",
+          "anchor_source": "capture_date",
+          "candidates": [],
+          "needs_confirmation": true,
+          "note": "음력 2026.8.15 → 양력 변환"
+        },
+        "confidence": 0.4278
+      },
+      {
+        "source_doc_id": "mother_memo",
+        "page": 1,
+        "source_line": 2,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 100.0,
+          "x1": 458.0,
+          "y1": 144.0
+        },
+        "char_start": 0,
+        "char_end": 13,
+        "quote": "15년 10월 10일 밤",
+        "value": {
+          "raw": "15년 10월 10일 밤",
+          "start": "2015-10-10T20:00:00",
+          "end": "2015-10-11T00:00:00",
+          "granularity": "hour",
+          "kind": "absolute",
+          "approximate": true,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.695
+      },
+      {
+        "source_doc_id": "mother_memo",
+        "page": 1,
+        "source_line": 3,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 160.0,
+          "x1": 392.0,
+          "y1": 204.0
+        },
+        "char_start": 0,
+        "char_end": 7,
+        "quote": "10월 12일",
+        "value": {
+          "raw": "10월 12일",
+          "start": "2015-10-12T00:00:00",
+          "end": "2015-10-13T00:00:00",
+          "granularity": "day",
+          "kind": "partial",
+          "approximate": false,
+          "anchor": "2015-10-10",
+          "anchor_source": "mentioned_date",
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": "연도는 기준일(2015-10-10)에서 추정"
+        },
+        "confidence": 0.5986
+      },
+      {
+        "source_doc_id": "mother_memo",
+        "page": 1,
+        "source_line": 4,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 220.0,
+          "x1": 722.0,
+          "y1": 264.0
+        },
+        "char_start": 0,
+        "char_end": 8,
+        "quote": "작년 추석 무렵",
+        "value": {
+          "raw": "작년 추석 무렵",
+          "start": "2025-10-04T00:00:00",
+          "end": "2025-10-09T00:00:00",
+          "granularity": "day",
+          "kind": "lunar",
+          "approximate": true,
+          "anchor": "2026-09-01",
+          "anchor_source": "capture_date",
+          "candidates": [],
+          "needs_confirmation": true,
+          "note": "음력 8월 15일 → 양력 변환"
+        },
+        "confidence": 0.3365
+      }
+    ],
+    "document_dates": {
+      "missing_report_2015": {
+        "source_doc_id": "missing_report_2015",
+        "page": 1,
+        "source_line": 3,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 160.0,
+          "x1": 568.0,
+          "y1": 204.0
+        },
+        "char_start": 5,
+        "char_end": 24,
+        "quote": "2015. 10. 12. 21:30",
+        "value": {
+          "raw": "2015. 10. 12. 21:30",
+          "start": "2015-10-12T21:30:00",
+          "end": "2015-10-12T21:31:00",
+          "granularity": "minute",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8673
+      },
+      "news_2016": {
+        "source_doc_id": "news_2016",
+        "page": 1,
+        "source_line": 2,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 100.0,
+          "x1": 634.0,
+          "y1": 144.0
+        },
+        "char_start": 3,
+        "char_end": 19,
+        "quote": "2016.02.03 09:10",
+        "value": {
+          "raw": "2016.02.03 09:10",
+          "start": "2016-02-03T09:10:00",
+          "end": "2016-02-03T09:11:00",
+          "granularity": "minute",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.9128
+      },
+      "witness_statement_2019": {
+        "source_doc_id": "witness_statement_2019",
+        "page": 1,
+        "source_line": 6,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 340.0,
+          "x1": 304.0,
+          "y1": 384.0
+        },
+        "char_start": 0,
+        "char_end": 12,
+        "quote": "2019. 3. 20.",
+        "value": {
+          "raw": "2019. 3. 20.",
+          "start": "2019-03-20T00:00:00",
+          "end": "2019-03-21T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8316
+      },
+      "suspension_notice_2022": {
+        "source_doc_id": "suspension_notice_2022",
+        "page": 1,
+        "source_line": 5,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 280.0,
+          "x1": 414.0,
+          "y1": 324.0
+        },
+        "char_start": 5,
+        "char_end": 17,
+        "quote": "2022. 3. 15.",
+        "value": {
+          "raw": "2022. 3. 15.",
+          "start": "2022-03-15T00:00:00",
+          "end": "2022-03-16T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.91
+      },
+      "petition_2023": {
+        "source_doc_id": "petition_2023",
+        "page": 1,
+        "source_line": 8,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 460.0,
+          "x1": 282.0,
+          "y1": 504.0
+        },
+        "char_start": 0,
+        "char_end": 11,
+        "quote": "2023. 4. 2.",
+        "value": {
+          "raw": "2023. 4. 2.",
+          "start": "2023-04-02T00:00:00",
+          "end": "2023-04-03T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.91
+      }
+    },
+    "clarifications": []
+  },
+  "timeline": {
+    "case_type": "missing_person_suspended",
+    "events": [
+      {
+        "timeline_event_id": "tl4",
+        "stage": "occurrence",
+        "title": "15년 10월 10일 밤 연락 끊김",
+        "time": {
+          "raw": "15년 10월 10일 밤",
+          "start": "2015-10-10T20:00:00",
+          "end": "2015-10-11T00:00:00",
+          "granularity": "hour",
+          "kind": "absolute",
+          "approximate": true,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "time_unknown": false,
+        "amount": null,
+        "participant_entity_ids": [],
+        "event_ids": [
+          "mother_memo:e2"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "mother_memo",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 458.0,
+              "y1": 144.0
+            },
+            "char_start": 0,
+            "char_end": 19,
+            "quote": "15년 10월 10일 밤 연락 끊김"
+          }
+        ],
+        "evidence_level": "statement",
+        "needs_confirmation": false,
+        "flags": [
+          "claim_only"
+        ]
+      },
+      {
+        "timeline_event_id": "tl3",
+        "stage": "occurrence",
+        "title": "경찰은 김씨가 지난해 10월 10일 밤 11시쯤 ○○역 인근 CCTV에…",
+        "time": {
+          "raw": "10월 10일 밤 11시쯤",
+          "start": "2015-10-10T22:00:00",
+          "end": "2015-10-11T01:00:00",
+          "granularity": "hour",
+          "kind": "partial",
+          "approximate": true,
+          "anchor": "2016-02-03",
+          "anchor_source": "mentioned_date",
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": "연도는 기준일(2016-02-03)에서 추정"
+        },
+        "time_unknown": false,
+        "amount": null,
+        "participant_entity_ids": [],
+        "event_ids": [
+          "news_2016:e3",
+          "petition_2023:e8"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "news_2016",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 1040.0,
+              "y1": 204.0
+            },
+            "char_start": 0,
+            "char_end": 55,
+            "quote": "경찰은 김씨가 지난해 10월 10일 밤 11시쯤 ○○역 인근 CCTV에 마지막으로 찍혔다고 밝혔다."
+          },
+          {
+            "source_doc_id": "news_2016",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 1040.0,
+              "y1": 204.0
+            },
+            "char_start": 12,
+            "char_end": 26,
+            "quote": "10월 10일 밤 11시쯤"
+          },
+          {
+            "source_doc_id": "petition_2023",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 964.0,
+              "y1": 324.0
+            },
+            "char_start": 0,
+            "char_end": 42,
+            "quote": "아들은 10월 10일 밤 11시경 ○○역 부근에서 마지막으로 목격되었습니다."
+          },
+          {
+            "source_doc_id": "petition_2023",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 964.0,
+              "y1": 324.0
+            },
+            "char_start": 4,
+            "char_end": 18,
+            "quote": "10월 10일 밤 11시경"
+          }
+        ],
+        "evidence_level": "statement",
+        "needs_confirmation": false,
+        "flags": [
+          "claim_only",
+          "multi_source"
+        ]
+      },
+      {
+        "timeline_event_id": "tl6",
+        "stage": "report",
+        "title": "10월 12일 경찰서 실종신고",
+        "time": {
+          "raw": "10월 12일",
+          "start": "2015-10-12T00:00:00",
+          "end": "2015-10-13T00:00:00",
+          "granularity": "day",
+          "kind": "partial",
+          "approximate": false,
+          "anchor": "2015-10-10",
+          "anchor_source": "mentioned_date",
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": "연도는 기준일(2015-10-10)에서 추정"
+        },
+        "time_unknown": false,
+        "amount": null,
+        "participant_entity_ids": [
+          "ent8"
+        ],
+        "event_ids": [
+          "mother_memo:e5"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "mother_memo",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 392.0,
+              "y1": 204.0
+            },
+            "char_start": 0,
+            "char_end": 16,
+            "quote": "10월 12일 경찰서 실종신고"
+          }
+        ],
+        "evidence_level": "statement",
+        "needs_confirmation": false,
+        "flags": [
+          "claim_only"
+        ]
+      },
+      {
+        "timeline_event_id": "tl1",
+        "stage": "receipt",
+        "title": "실종신고 접수증",
+        "time": {
+          "raw": "2015. 10. 12. 21:30",
+          "start": "2015-10-12T21:30:00",
+          "end": "2015-10-12T21:31:00",
+          "granularity": "minute",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "time_unknown": false,
+        "amount": null,
+        "participant_entity_ids": [
+          "ent1",
+          "ent2",
+          "ent3",
+          "ent4"
+        ],
+        "event_ids": [
+          "missing_report_2015:e9"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "missing_report_2015",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 216.0,
+              "y1": 84.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": "실종신고 접수증"
+          },
+          {
+            "source_doc_id": "missing_report_2015",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 568.0,
+              "y1": 204.0
+            },
+            "char_start": 5,
+            "char_end": 24,
+            "quote": "2015. 10. 12. 21:30"
+          }
+        ],
+        "evidence_level": "record",
+        "needs_confirmation": false,
+        "flags": []
+      },
+      {
+        "timeline_event_id": "tl7",
+        "stage": "occurrence",
+        "title": "본인은 2019년 3월 초순 오후 ○○시장 입구에서 김민수로 보이는 남…",
+        "time": {
+          "raw": "2019년 3월 초순",
+          "start": "2019-03-01T00:00:00",
+          "end": "2019-03-11T00:00:00",
+          "granularity": "month",
+          "kind": "absolute",
+          "approximate": true,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "time_unknown": false,
+        "amount": null,
+        "participant_entity_ids": [],
+        "event_ids": [
+          "witness_statement_2019:e3",
+          "petition_2023:e11"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "witness_statement_2019",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 1040.0,
+              "y1": 204.0
+            },
+            "char_start": 0,
+            "char_end": 50,
+            "quote": "본인은 2019년 3월 초순 오후 ○○시장 입구에서 김민수로 보이는 남성을 목격하였습니다."
+          },
+          {
+            "source_doc_id": "witness_statement_2019",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 1040.0,
+              "y1": 204.0
+            },
+            "char_start": 4,
+            "char_end": 15,
+            "quote": "2019년 3월 초순"
+          },
+          {
+            "source_doc_id": "petition_2023",
+            "page": 1,
+            "source_line": 6,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 340.0,
+              "x1": 1040.0,
+              "y1": 384.0
+            },
+            "char_start": 0,
+            "char_end": 46,
+            "quote": "2019년 3월경 이웃 주민 최영호가 아들을 ○○시장 근처에서 보았다고 말했습니다."
+          }
+        ],
+        "evidence_level": "statement",
+        "needs_confirmation": false,
+        "flags": [
+          "claim_only",
+          "multi_source"
+        ]
+      },
+      {
+        "timeline_event_id": "tl8",
+        "stage": "occurrence",
+        "title": "○○시 20대 남성 실종 넉 달째 행방 묘연",
+        "time": null,
+        "time_unknown": true,
+        "amount": null,
+        "participant_entity_ids": [],
+        "event_ids": [
+          "news_2016:e1"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "news_2016",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 568.0,
+              "y1": 84.0
+            },
+            "char_start": 0,
+            "char_end": 24,
+            "quote": "○○시 20대 남성 실종 넉 달째 행방 묘연"
+          }
+        ],
+        "evidence_level": "statement",
+        "needs_confirmation": true,
+        "flags": [
+          "claim_only"
+        ]
+      },
+      {
+        "timeline_event_id": "tl2",
+        "stage": "outcome",
+        "title": "수사중지 결정 통지서",
+        "time": {
+          "raw": "2022. 3. 15.",
+          "start": "2022-03-15T00:00:00",
+          "end": "2022-03-16T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "time_unknown": false,
+        "amount": null,
+        "participant_entity_ids": [
+          "ent4",
+          "ent6",
+          "ent7"
+        ],
+        "event_ids": [
+          "suspension_notice_2022:e9"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "suspension_notice_2022",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 282.0,
+              "y1": 84.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": "수사중지 결정 통지서"
+          },
+          {
+            "source_doc_id": "suspension_notice_2022",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 414.0,
+              "y1": 324.0
+            },
+            "char_start": 5,
+            "char_end": 17,
+            "quote": "2022. 3. 15."
+          }
+        ],
+        "evidence_level": "record",
+        "needs_confirmation": false,
+        "flags": []
+      },
+      {
+        "timeline_event_id": "tl5",
+        "stage": "report",
+        "title": "2015. 10. 10. 실종된 아들 김민수 사건(2016형제12345…",
+        "time": {
+          "raw": "2023. 4. 2.",
+          "start": "2023-04-02T00:00:00",
+          "end": "2023-04-03T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "time_unknown": false,
+        "amount": null,
+        "participant_entity_ids": [
+          "ent2",
+          "ent6"
+        ],
+        "event_ids": [
+          "petition_2023:e5"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "petition_2023",
+            "page": 1,
+            "source_line": 4,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 220.0,
+              "x1": 1040.0,
+              "y1": 264.0
+            },
+            "char_start": 0,
+            "char_end": 53,
+            "quote": "2015. 10. 10. 실종된 아들 김민수 사건(2016형제12345)의 재수사를 요청합니다."
+          },
+          {
+            "source_doc_id": "petition_2023",
+            "page": 1,
+            "source_line": 8,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 460.0,
+              "x1": 282.0,
+              "y1": 504.0
+            },
+            "char_start": 0,
+            "char_end": 11,
+            "quote": "2023. 4. 2."
+          }
+        ],
+        "evidence_level": "statement",
+        "needs_confirmation": false,
+        "flags": [
+          "claim_only"
+        ]
+      }
+    ],
+    "stages": [
+      {
+        "stage": "occurrence",
+        "label": "발생",
+        "state": "done",
+        "timeline_event_ids": [
+          "tl4",
+          "tl3",
+          "tl7",
+          "tl8"
+        ],
+        "evidence_level": "statement"
+      },
+      {
+        "stage": "report",
+        "label": "신고",
+        "state": "done",
+        "timeline_event_ids": [
+          "tl6",
+          "tl5"
+        ],
+        "evidence_level": "statement"
+      },
+      {
+        "stage": "receipt",
+        "label": "접수",
+        "state": "done",
+        "timeline_event_ids": [
+          "tl1"
+        ],
+        "evidence_level": "record"
+      },
+      {
+        "stage": "investigation",
+        "label": "수사",
+        "state": "skipped",
+        "timeline_event_ids": [],
+        "evidence_level": null
+      },
+      {
+        "stage": "outcome",
+        "label": "결과",
+        "state": "current",
+        "timeline_event_ids": [
+          "tl2"
+        ],
+        "evidence_level": "record"
+      }
+    ],
+    "current_stage": "outcome",
+    "gaps": [
+      {
+        "start": "2016-02-03T09:11:00",
+        "end": "2019-02-14T00:00:00",
+        "hours": 26558.8,
+        "before_event_id": "doc:news_2016",
+        "after_event_id": "tl7"
+      },
+      {
+        "start": "2019-04-16T00:00:00",
+        "end": "2022-03-15T00:00:00",
+        "hours": 25536.0,
+        "before_event_id": "tl7",
+        "after_event_id": "tl2"
+      },
+      {
+        "start": "2022-03-16T00:00:00",
+        "end": "2023-04-02T00:00:00",
+        "hours": 9168.0,
+        "before_event_id": "tl2",
+        "after_event_id": "tl5"
+      }
+    ],
+    "entities": [
+      {
+        "entity_id": "ent1",
+        "kind": "receipt_number",
+        "canonical_name": "2015-00123",
+        "aliases": [
+          "2015-00123"
+        ],
+        "roles": [],
+        "mention_ids": [
+          "missing_report_2015:m1"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "missing_report_2015",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 370.0,
+              "y1": 144.0
+            },
+            "char_start": 5,
+            "char_end": 15,
+            "quote": "2015-00123"
+          }
+        ],
+        "merge_confidence": 1.0,
+        "possible_same_as": []
+      },
+      {
+        "entity_id": "ent2",
+        "kind": "person",
+        "canonical_name": "김민수",
+        "aliases": [
+          "김민수"
+        ],
+        "roles": [
+          "실종자",
+          "아들"
+        ],
+        "mention_ids": [
+          "missing_report_2015:m2",
+          "petition_2023:m3"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "missing_report_2015",
+            "page": 1,
+            "source_line": 4,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 220.0,
+              "x1": 392.0,
+              "y1": 264.0
+            },
+            "char_start": 4,
+            "char_end": 7,
+            "quote": "김민수"
+          },
+          {
+            "source_doc_id": "petition_2023",
+            "page": 1,
+            "source_line": 4,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 220.0,
+              "x1": 1040.0,
+              "y1": 264.0
+            },
+            "char_start": 21,
+            "char_end": 24,
+            "quote": "김민수"
+          }
+        ],
+        "merge_confidence": 0.9,
+        "possible_same_as": []
+      },
+      {
+        "entity_id": "ent3",
+        "kind": "person",
+        "canonical_name": "이순자",
+        "aliases": [
+          "이순자"
+        ],
+        "roles": [
+          "신고인",
+          "진정인"
+        ],
+        "mention_ids": [
+          "missing_report_2015:m3",
+          "petition_2023:m1",
+          "petition_2023:m4"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "missing_report_2015",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 282.0,
+              "y1": 324.0
+            },
+            "char_start": 4,
+            "char_end": 7,
+            "quote": "이순자"
+          },
+          {
+            "source_doc_id": "petition_2023",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 194.0,
+              "y1": 144.0
+            },
+            "char_start": 4,
+            "char_end": 7,
+            "quote": "이순자"
+          },
+          {
+            "source_doc_id": "petition_2023",
+            "page": 1,
+            "source_line": 9,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 520.0,
+              "x1": 282.0,
+              "y1": 564.0
+            },
+            "char_start": 4,
+            "char_end": 7,
+            "quote": "이순자"
+          }
+        ],
+        "merge_confidence": 0.9,
+        "possible_same_as": []
+      },
+      {
+        "entity_id": "ent4",
+        "kind": "organization",
+        "canonical_name": "**경찰서",
+        "aliases": [
+          "○○경찰서"
+        ],
+        "roles": [],
+        "mention_ids": [
+          "missing_report_2015:m4",
+          "suspension_notice_2022:m3"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "missing_report_2015",
+            "page": 1,
+            "source_line": 7,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 400.0,
+              "x1": 414.0,
+              "y1": 444.0
+            },
+            "char_start": 5,
+            "char_end": 10,
+            "quote": "○○경찰서"
+          },
+          {
+            "source_doc_id": "suspension_notice_2022",
+            "page": 1,
+            "source_line": 9,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 520.0,
+              "x1": 172.0,
+              "y1": 564.0
+            },
+            "char_start": 0,
+            "char_end": 5,
+            "quote": "○○경찰서"
+          }
+        ],
+        "merge_confidence": 0.9,
+        "possible_same_as": [
+          {
+            "other_entity_id": "ent8",
+            "confidence": 0.4,
+            "reason": "일반 명칭이라 같은 기관인지 확인되지 않음"
+          }
+        ]
+      },
+      {
+        "entity_id": "ent5",
+        "kind": "person",
+        "canonical_name": "최영호",
+        "aliases": [
+          "최영호"
+        ],
+        "roles": [
+          "진술인"
+        ],
+        "mention_ids": [
+          "witness_statement_2019:m1",
+          "witness_statement_2019:m2"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "witness_statement_2019",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 194.0,
+              "y1": 144.0
+            },
+            "char_start": 4,
+            "char_end": 7,
+            "quote": "최영호"
+          },
+          {
+            "source_doc_id": "witness_statement_2019",
+            "page": 1,
+            "source_line": 7,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 400.0,
+              "x1": 304.0,
+              "y1": 444.0
+            },
+            "char_start": 4,
+            "char_end": 7,
+            "quote": "최영호"
+          }
+        ],
+        "merge_confidence": 0.9,
+        "possible_same_as": []
+      },
+      {
+        "entity_id": "ent6",
+        "kind": "case_number",
+        "canonical_name": "2016형제12345",
+        "aliases": [
+          "2016형제12345"
+        ],
+        "roles": [],
+        "mention_ids": [
+          "suspension_notice_2022:m1",
+          "petition_2023:m2"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "suspension_notice_2022",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 392.0,
+              "y1": 144.0
+            },
+            "char_start": 5,
+            "char_end": 16,
+            "quote": "2016형제12345"
+          },
+          {
+            "source_doc_id": "petition_2023",
+            "page": 1,
+            "source_line": 4,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 220.0,
+              "x1": 1040.0,
+              "y1": 264.0
+            },
+            "char_start": 28,
+            "char_end": 39,
+            "quote": "2016형제12345"
+          }
+        ],
+        "merge_confidence": 0.95,
+        "possible_same_as": []
+      },
+      {
+        "entity_id": "ent7",
+        "kind": "person",
+        "canonical_name": "박정호",
+        "aliases": [
+          "박정호"
+        ],
+        "roles": [
+          "담당수사관"
+        ],
+        "mention_ids": [
+          "suspension_notice_2022:m2"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "suspension_notice_2022",
+            "page": 1,
+            "source_line": 8,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 460.0,
+              "x1": 326.0,
+              "y1": 504.0
+            },
+            "char_start": 10,
+            "char_end": 13,
+            "quote": "박정호"
+          }
+        ],
+        "merge_confidence": 1.0,
+        "possible_same_as": []
+      },
+      {
+        "entity_id": "ent8",
+        "kind": "organization",
+        "canonical_name": "경찰서",
+        "aliases": [
+          "경찰서"
+        ],
+        "roles": [],
+        "mention_ids": [
+          "mother_memo:m1"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "mother_memo",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 392.0,
+              "y1": 204.0
+            },
+            "char_start": 8,
+            "char_end": 11,
+            "quote": "경찰서"
+          }
+        ],
+        "merge_confidence": 1.0,
+        "possible_same_as": [
+          {
+            "other_entity_id": "ent4",
+            "confidence": 0.4,
+            "reason": "일반 명칭이라 같은 기관인지 확인되지 않음"
+          }
+        ]
+      }
+    ],
+    "mention_to_entity": {
+      "missing_report_2015:m1": "ent1",
+      "missing_report_2015:m2": "ent2",
+      "petition_2023:m3": "ent2",
+      "missing_report_2015:m3": "ent3",
+      "petition_2023:m1": "ent3",
+      "petition_2023:m4": "ent3",
+      "missing_report_2015:m4": "ent4",
+      "suspension_notice_2022:m3": "ent4",
+      "witness_statement_2019:m1": "ent5",
+      "witness_statement_2019:m2": "ent5",
+      "suspension_notice_2022:m1": "ent6",
+      "petition_2023:m2": "ent6",
+      "suspension_notice_2022:m2": "ent7",
+      "mother_memo:m1": "ent8"
+    }
+  },
+  "analysis": {
+    "case_id": "demo-long-unsolved-missing",
+    "case_type": "missing_person_suspended",
+    "as_of": "2026-09-11",
+    "issues": [
+      {
+        "issue_id": "iss1",
+        "category": "unreadable",
+        "condition": "unreadable",
+        "message": "실종신고_접수증_2015.jpg에서 읽히지 않은 부분이 1곳 있습니다 (8줄). 사진을 보고 알려주세요",
+        "stage": null,
+        "slot": null,
+        "sources": [
+          {
+            "source_doc_id": "missing_report_2015",
+            "page": 1,
+            "source_line": 8,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 460.0,
+              "x1": 370.0,
+              "y1": 504.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": null
+          }
+        ],
+        "checked_doc_ids": [],
+        "related_claim_ids": [],
+        "related_event_ids": [],
+        "related_entity_ids": [],
+        "clarification_request_ids": [
+          "missing_report_2015:u8:q"
+        ],
+        "decision": null,
+        "trigger": {
+          "key": "missing_person_suspended/-/document:receipt/unreadable",
+          "case_type": "missing_person_suspended",
+          "condition": "unreadable",
+          "stage": null,
+          "slot": null,
+          "since": null,
+          "elapsed_days": null,
+          "evidence": [
+            {
+              "source_doc_id": "missing_report_2015",
+              "page": 1,
+              "source_line": 8,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 460.0,
+                "x1": 370.0,
+                "y1": 504.0
+              },
+              "char_start": null,
+              "char_end": null,
+              "quote": null
+            }
+          ]
+        },
+        "priority": 20
+      },
+      {
+        "issue_id": "iss2",
+        "category": "unreadable",
+        "condition": "unreadable",
+        "message": "엄마_메모.jpg에서 읽히지 않은 부분이 1곳 있습니다 (5줄). 사진을 보고 알려주세요",
+        "stage": null,
+        "slot": null,
+        "sources": [
+          {
+            "source_doc_id": "mother_memo",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 502.0,
+              "y1": 324.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": null
+          }
+        ],
+        "checked_doc_ids": [],
+        "related_claim_ids": [],
+        "related_event_ids": [],
+        "related_entity_ids": [],
+        "clarification_request_ids": [
+          "mother_memo:u5:q"
+        ],
+        "decision": null,
+        "trigger": {
+          "key": "missing_person_suspended/-/document:memo/unreadable",
+          "case_type": "missing_person_suspended",
+          "condition": "unreadable",
+          "stage": null,
+          "slot": null,
+          "since": null,
+          "elapsed_days": null,
+          "evidence": [
+            {
+              "source_doc_id": "mother_memo",
+              "page": 1,
+              "source_line": 5,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 280.0,
+                "x1": 502.0,
+                "y1": 324.0
+              },
+              "char_start": null,
+              "char_end": null,
+              "quote": null
+            }
+          ]
+        },
+        "priority": 20
+      },
+      {
+        "issue_id": "iss3",
+        "category": "unverified",
+        "condition": "unrecorded_fact",
+        "message": "‘본인은 2019년 3월 초순 오후 ○○시장 입구에서 김민수로 보이는 남…’(2019-03-01~03-10, witness_statement_2019 · 3줄, petition_2023 · 6줄) — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다. ‘수사중지 결정 통지서’(2022-03-15)보다 앞선 내용입니다. 수사 기록에 반영됐는지 확인이 필요합니다",
+        "stage": "occurrence",
+        "slot": null,
+        "sources": [
+          {
+            "source_doc_id": "witness_statement_2019",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 1040.0,
+              "y1": 204.0
+            },
+            "char_start": 0,
+            "char_end": 50,
+            "quote": "본인은 2019년 3월 초순 오후 ○○시장 입구에서 김민수로 보이는 남성을 목격하였습니다."
+          },
+          {
+            "source_doc_id": "witness_statement_2019",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 1040.0,
+              "y1": 204.0
+            },
+            "char_start": 4,
+            "char_end": 15,
+            "quote": "2019년 3월 초순"
+          },
+          {
+            "source_doc_id": "petition_2023",
+            "page": 1,
+            "source_line": 6,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 340.0,
+              "x1": 1040.0,
+              "y1": 384.0
+            },
+            "char_start": 0,
+            "char_end": 46,
+            "quote": "2019년 3월경 이웃 주민 최영호가 아들을 ○○시장 근처에서 보았다고 말했습니다."
+          }
+        ],
+        "checked_doc_ids": [
+          "missing_report_2015",
+          "news_2016",
+          "witness_statement_2019",
+          "suspension_notice_2022",
+          "petition_2023",
+          "mother_memo",
+          "note_family"
+        ],
+        "related_claim_ids": [],
+        "related_event_ids": [
+          "tl7"
+        ],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": null,
+        "trigger": {
+          "key": "missing_person_suspended/occurrence/new_fact/unrecorded_fact",
+          "case_type": "missing_person_suspended",
+          "condition": "unrecorded_fact",
+          "stage": "occurrence",
+          "slot": null,
+          "since": "2019-03-01T00:00:00",
+          "elapsed_days": null,
+          "evidence": [
+            {
+              "source_doc_id": "witness_statement_2019",
+              "page": 1,
+              "source_line": 3,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 160.0,
+                "x1": 1040.0,
+                "y1": 204.0
+              },
+              "char_start": 0,
+              "char_end": 50,
+              "quote": "본인은 2019년 3월 초순 오후 ○○시장 입구에서 김민수로 보이는 남성을 목격하였습니다."
+            },
+            {
+              "source_doc_id": "witness_statement_2019",
+              "page": 1,
+              "source_line": 3,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 160.0,
+                "x1": 1040.0,
+                "y1": 204.0
+              },
+              "char_start": 4,
+              "char_end": 15,
+              "quote": "2019년 3월 초순"
+            },
+            {
+              "source_doc_id": "petition_2023",
+              "page": 1,
+              "source_line": 6,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 340.0,
+                "x1": 1040.0,
+                "y1": 384.0
+              },
+              "char_start": 0,
+              "char_end": 46,
+              "quote": "2019년 3월경 이웃 주민 최영호가 아들을 ○○시장 근처에서 보았다고 말했습니다."
+            }
+          ]
+        },
+        "priority": 25
+      },
+      {
+        "issue_id": "iss4",
+        "category": "unverified",
+        "condition": "possibly_outdated",
+        "message": "담당 수사관: 기록상 ‘박정호’(suspension_notice_2022 · 8줄, 2022-03-15)이지만, 이후 바뀌었다는 내용이 있습니다 — ‘작년 추석 무렵 수사관한테 전화 → 담당자 바뀌었다고 함’(mother_memo · 4줄, 2025-10-04~10-08). 현재 담당 수사관 확인이 필요합니다 (바뀐 정보가 있을 수 있는 부분이 읽히지 않았습니다: mother_memo · 5줄)",
+        "stage": "investigation",
+        "slot": "investigator",
+        "sources": [
+          {
+            "source_doc_id": "suspension_notice_2022",
+            "page": 1,
+            "source_line": 8,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 460.0,
+              "x1": 326.0,
+              "y1": 504.0
+            },
+            "char_start": 0,
+            "char_end": 13,
+            "quote": "담당 수사관 경위 박정호"
+          },
+          {
+            "source_doc_id": "mother_memo",
+            "page": 1,
+            "source_line": 4,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 220.0,
+              "x1": 722.0,
+              "y1": 264.0
+            },
+            "char_start": 0,
+            "char_end": 31,
+            "quote": "작년 추석 무렵 수사관한테 전화 → 담당자 바뀌었다고 함"
+          },
+          {
+            "source_doc_id": "mother_memo",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 502.0,
+              "y1": 324.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": null
+          }
+        ],
+        "checked_doc_ids": [],
+        "related_claim_ids": [
+          "suspension_notice_2022:c8",
+          "mother_memo:c7"
+        ],
+        "related_event_ids": [],
+        "related_entity_ids": [],
+        "clarification_request_ids": [
+          "mother_memo:u5:q"
+        ],
+        "decision": null,
+        "trigger": {
+          "key": "missing_person_suspended/investigation/investigator/possibly_outdated",
+          "case_type": "missing_person_suspended",
+          "condition": "possibly_outdated",
+          "stage": "investigation",
+          "slot": "investigator",
+          "since": "2025-10-04T00:00:00",
+          "elapsed_days": null,
+          "evidence": [
+            {
+              "source_doc_id": "suspension_notice_2022",
+              "page": 1,
+              "source_line": 8,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 460.0,
+                "x1": 326.0,
+                "y1": 504.0
+              },
+              "char_start": 0,
+              "char_end": 13,
+              "quote": "담당 수사관 경위 박정호"
+            },
+            {
+              "source_doc_id": "mother_memo",
+              "page": 1,
+              "source_line": 4,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 220.0,
+                "x1": 722.0,
+                "y1": 264.0
+              },
+              "char_start": 0,
+              "char_end": 31,
+              "quote": "작년 추석 무렵 수사관한테 전화 → 담당자 바뀌었다고 함"
+            },
+            {
+              "source_doc_id": "mother_memo",
+              "page": 1,
+              "source_line": 5,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 280.0,
+                "x1": 502.0,
+                "y1": 324.0
+              },
+              "char_start": null,
+              "char_end": null,
+              "quote": null
+            }
+          ]
+        },
+        "priority": 30
+      },
+      {
+        "issue_id": "iss5",
+        "category": "missing",
+        "condition": "stage_stalled",
+        "message": "‘수사중지 결정 통지서’(2022-03-15) 이후 기관의 진행 기록이 없습니다 (1641일 경과)",
+        "stage": "outcome",
+        "slot": null,
+        "sources": [
+          {
+            "source_doc_id": "suspension_notice_2022",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 282.0,
+              "y1": 84.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": "수사중지 결정 통지서"
+          }
+        ],
+        "checked_doc_ids": [
+          "missing_report_2015",
+          "news_2016",
+          "witness_statement_2019",
+          "suspension_notice_2022",
+          "petition_2023",
+          "mother_memo",
+          "note_family"
+        ],
+        "related_claim_ids": [],
+        "related_event_ids": [
+          "tl2"
+        ],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": null,
+        "trigger": {
+          "key": "missing_person_suspended/outcome/stage/stage_stalled",
+          "case_type": "missing_person_suspended",
+          "condition": "stage_stalled",
+          "stage": "outcome",
+          "slot": null,
+          "since": "2022-03-15T00:00:00",
+          "elapsed_days": 1641,
+          "evidence": [
+            {
+              "source_doc_id": "suspension_notice_2022",
+              "page": 1,
+              "source_line": 1,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 40.0,
+                "x1": 282.0,
+                "y1": 84.0
+              },
+              "char_start": null,
+              "char_end": null,
+              "quote": "수사중지 결정 통지서"
+            }
+          ]
+        },
+        "priority": 35
+      },
+      {
+        "issue_id": "iss6",
+        "category": "missing",
+        "condition": "stage_skipped",
+        "message": "‘수사’ 단계에 해당하는 자료가 없습니다",
+        "stage": "investigation",
+        "slot": null,
+        "sources": [],
+        "checked_doc_ids": [
+          "missing_report_2015",
+          "news_2016",
+          "witness_statement_2019",
+          "suspension_notice_2022",
+          "petition_2023",
+          "mother_memo",
+          "note_family"
+        ],
+        "related_claim_ids": [],
+        "related_event_ids": [],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": null,
+        "trigger": {
+          "key": "missing_person_suspended/investigation/stage/stage_skipped",
+          "case_type": "missing_person_suspended",
+          "condition": "stage_skipped",
+          "stage": "investigation",
+          "slot": null,
+          "since": null,
+          "elapsed_days": null,
+          "evidence": []
+        },
+        "priority": 45
+      },
+      {
+        "issue_id": "iss7",
+        "category": "unverified",
+        "condition": "low_confidence",
+        "message": "마지막 연락 시점: ‘2015-10-11 00~06시’(news_2016 · 4줄) / ‘2015-10-10 20~24시’(mother_memo · 2줄) — 자료에서 읽어낸 값의 신뢰도가 낮아 확인이 필요합니다",
+        "stage": "occurrence",
+        "slot": "last_contact_time",
+        "sources": [
+          {
+            "source_doc_id": "news_2016",
+            "page": 1,
+            "source_line": 4,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 220.0,
+              "x1": 942.0,
+              "y1": 264.0
+            },
+            "char_start": 0,
+            "char_end": 41,
+            "quote": "가족은 김씨가 10월 11일 새벽까지 친구와 연락을 주고받았다고 주장했다."
+          },
+          {
+            "source_doc_id": "mother_memo",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 458.0,
+              "y1": 144.0
+            },
+            "char_start": 0,
+            "char_end": 19,
+            "quote": "15년 10월 10일 밤 연락 끊김"
+          }
+        ],
+        "checked_doc_ids": [],
+        "related_claim_ids": [
+          "news_2016:c6",
+          "mother_memo:c3"
+        ],
+        "related_event_ids": [],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": null,
+        "trigger": {
+          "key": "missing_person_suspended/occurrence/last_contact_time/low_confidence",
+          "case_type": "missing_person_suspended",
+          "condition": "low_confidence",
+          "stage": "occurrence",
+          "slot": "last_contact_time",
+          "since": null,
+          "elapsed_days": null,
+          "evidence": [
+            {
+              "source_doc_id": "news_2016",
+              "page": 1,
+              "source_line": 4,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 220.0,
+                "x1": 942.0,
+                "y1": 264.0
+              },
+              "char_start": 0,
+              "char_end": 41,
+              "quote": "가족은 김씨가 10월 11일 새벽까지 친구와 연락을 주고받았다고 주장했다."
+            },
+            {
+              "source_doc_id": "mother_memo",
+              "page": 1,
+              "source_line": 2,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 100.0,
+                "x1": 458.0,
+                "y1": 144.0
+              },
+              "char_start": 0,
+              "char_end": 19,
+              "quote": "15년 10월 10일 밤 연락 끊김"
+            }
+          ]
+        },
+        "priority": 55
+      },
+      {
+        "issue_id": "iss8",
+        "category": "missing",
+        "condition": "time_gap",
+        "message": "2016-02-03 ~ 2019-02-14 사이의 기록이 없습니다 (약 3.0년)",
+        "stage": null,
+        "slot": null,
+        "sources": [
+          {
+            "source_doc_id": "news_2016",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 634.0,
+              "y1": 144.0
+            },
+            "char_start": 3,
+            "char_end": 19,
+            "quote": "2016.02.03 09:10"
+          },
+          {
+            "source_doc_id": "witness_statement_2019",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 1040.0,
+              "y1": 204.0
+            },
+            "char_start": 0,
+            "char_end": 50,
+            "quote": "본인은 2019년 3월 초순 오후 ○○시장 입구에서 김민수로 보이는 남성을 목격하였습니다."
+          }
+        ],
+        "checked_doc_ids": [
+          "missing_report_2015",
+          "news_2016",
+          "witness_statement_2019",
+          "suspension_notice_2022",
+          "petition_2023",
+          "mother_memo",
+          "note_family"
+        ],
+        "related_claim_ids": [],
+        "related_event_ids": [
+          "tl7"
+        ],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": null,
+        "trigger": {
+          "key": "missing_person_suspended/-/timeline/time_gap",
+          "case_type": "missing_person_suspended",
+          "condition": "time_gap",
+          "stage": null,
+          "slot": null,
+          "since": null,
+          "elapsed_days": null,
+          "evidence": [
+            {
+              "source_doc_id": "news_2016",
+              "page": 1,
+              "source_line": 2,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 100.0,
+                "x1": 634.0,
+                "y1": 144.0
+              },
+              "char_start": 3,
+              "char_end": 19,
+              "quote": "2016.02.03 09:10"
+            },
+            {
+              "source_doc_id": "witness_statement_2019",
+              "page": 1,
+              "source_line": 3,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 160.0,
+                "x1": 1040.0,
+                "y1": 204.0
+              },
+              "char_start": 0,
+              "char_end": 50,
+              "quote": "본인은 2019년 3월 초순 오후 ○○시장 입구에서 김민수로 보이는 남성을 목격하였습니다."
+            }
+          ]
+        },
+        "priority": 70
+      },
+      {
+        "issue_id": "iss9",
+        "category": "missing",
+        "condition": "time_gap",
+        "message": "2019-04-16 ~ 2022-03-15 사이의 기록이 없습니다 (약 2.9년)",
+        "stage": null,
+        "slot": null,
+        "sources": [
+          {
+            "source_doc_id": "witness_statement_2019",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 1040.0,
+              "y1": 204.0
+            },
+            "char_start": 0,
+            "char_end": 50,
+            "quote": "본인은 2019년 3월 초순 오후 ○○시장 입구에서 김민수로 보이는 남성을 목격하였습니다."
+          },
+          {
+            "source_doc_id": "suspension_notice_2022",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 282.0,
+              "y1": 84.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": "수사중지 결정 통지서"
+          }
+        ],
+        "checked_doc_ids": [
+          "missing_report_2015",
+          "news_2016",
+          "witness_statement_2019",
+          "suspension_notice_2022",
+          "petition_2023",
+          "mother_memo",
+          "note_family"
+        ],
+        "related_claim_ids": [],
+        "related_event_ids": [
+          "tl7",
+          "tl2"
+        ],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": null,
+        "trigger": {
+          "key": "missing_person_suspended/-/timeline/time_gap",
+          "case_type": "missing_person_suspended",
+          "condition": "time_gap",
+          "stage": null,
+          "slot": null,
+          "since": null,
+          "elapsed_days": null,
+          "evidence": [
+            {
+              "source_doc_id": "witness_statement_2019",
+              "page": 1,
+              "source_line": 3,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 160.0,
+                "x1": 1040.0,
+                "y1": 204.0
+              },
+              "char_start": 0,
+              "char_end": 50,
+              "quote": "본인은 2019년 3월 초순 오후 ○○시장 입구에서 김민수로 보이는 남성을 목격하였습니다."
+            },
+            {
+              "source_doc_id": "suspension_notice_2022",
+              "page": 1,
+              "source_line": 1,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 40.0,
+                "x1": 282.0,
+                "y1": 84.0
+              },
+              "char_start": null,
+              "char_end": null,
+              "quote": "수사중지 결정 통지서"
+            }
+          ]
+        },
+        "priority": 70
+      },
+      {
+        "issue_id": "iss10",
+        "category": "missing",
+        "condition": "time_gap",
+        "message": "2022-03-16 ~ 2023-04-02 사이의 기록이 없습니다 (약 1.0년)",
+        "stage": null,
+        "slot": null,
+        "sources": [
+          {
+            "source_doc_id": "suspension_notice_2022",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 282.0,
+              "y1": 84.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": "수사중지 결정 통지서"
+          },
+          {
+            "source_doc_id": "petition_2023",
+            "page": 1,
+            "source_line": 4,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 220.0,
+              "x1": 1040.0,
+              "y1": 264.0
+            },
+            "char_start": 0,
+            "char_end": 53,
+            "quote": "2015. 10. 10. 실종된 아들 김민수 사건(2016형제12345)의 재수사를 요청합니다."
+          }
+        ],
+        "checked_doc_ids": [
+          "missing_report_2015",
+          "news_2016",
+          "witness_statement_2019",
+          "suspension_notice_2022",
+          "petition_2023",
+          "mother_memo",
+          "note_family"
+        ],
+        "related_claim_ids": [],
+        "related_event_ids": [
+          "tl2",
+          "tl5"
+        ],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": null,
+        "trigger": {
+          "key": "missing_person_suspended/-/timeline/time_gap",
+          "case_type": "missing_person_suspended",
+          "condition": "time_gap",
+          "stage": null,
+          "slot": null,
+          "since": null,
+          "elapsed_days": null,
+          "evidence": [
+            {
+              "source_doc_id": "suspension_notice_2022",
+              "page": 1,
+              "source_line": 1,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 40.0,
+                "x1": 282.0,
+                "y1": 84.0
+              },
+              "char_start": null,
+              "char_end": null,
+              "quote": "수사중지 결정 통지서"
+            },
+            {
+              "source_doc_id": "petition_2023",
+              "page": 1,
+              "source_line": 4,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 220.0,
+                "x1": 1040.0,
+                "y1": 264.0
+              },
+              "char_start": 0,
+              "char_end": 53,
+              "quote": "2015. 10. 10. 실종된 아들 김민수 사건(2016형제12345)의 재수사를 요청합니다."
+            }
+          ]
+        },
+        "priority": 70
+      }
+    ],
+    "slot_statuses": [
+      {
+        "slot": "last_seen_time",
+        "label": "최종 목격 일시",
+        "stage": "occurrence",
+        "required": true,
+        "state": "confirmed",
+        "value": "2015-10-10 22시~01시",
+        "claim_ids": [
+          "missing_report_2015:c7"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "missing_report_2015",
+            "page": 1,
+            "source_line": 6,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 340.0,
+              "x1": 722.0,
+              "y1": 384.0
+            },
+            "char_start": 0,
+            "char_end": 31,
+            "quote": "최종 목격 2015. 10. 10. 23시경 ○○역 부근"
+          }
+        ]
+      },
+      {
+        "slot": "last_contact_time",
+        "label": "마지막 연락 시점",
+        "stage": "occurrence",
+        "required": false,
+        "state": "low_confidence",
+        "value": null,
+        "claim_ids": [
+          "news_2016:c6",
+          "mother_memo:c3"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "news_2016",
+            "page": 1,
+            "source_line": 4,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 220.0,
+              "x1": 942.0,
+              "y1": 264.0
+            },
+            "char_start": 0,
+            "char_end": 41,
+            "quote": "가족은 김씨가 10월 11일 새벽까지 친구와 연락을 주고받았다고 주장했다."
+          },
+          {
+            "source_doc_id": "mother_memo",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 458.0,
+              "y1": 144.0
+            },
+            "char_start": 0,
+            "char_end": 19,
+            "quote": "15년 10월 10일 밤 연락 끊김"
+          }
+        ]
+      },
+      {
+        "slot": "receipt_number",
+        "label": "실종신고 접수번호",
+        "stage": "receipt",
+        "required": true,
+        "state": "confirmed",
+        "value": "2015-00123",
+        "claim_ids": [
+          "missing_report_2015:c5"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "missing_report_2015",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 370.0,
+              "y1": 144.0
+            },
+            "char_start": 0,
+            "char_end": 15,
+            "quote": "접수번호 2015-00123"
+          }
+        ]
+      },
+      {
+        "slot": "receipt_time",
+        "label": "실종신고 접수 일시",
+        "stage": "receipt",
+        "required": false,
+        "state": "confirmed",
+        "value": "2015-10-12 21:30",
+        "claim_ids": [
+          "missing_report_2015:c6"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "missing_report_2015",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 568.0,
+              "y1": 204.0
+            },
+            "char_start": 0,
+            "char_end": 24,
+            "quote": "접수일시 2015. 10. 12. 21:30"
+          }
+        ]
+      },
+      {
+        "slot": "case_number",
+        "label": "사건번호",
+        "stage": "investigation",
+        "required": true,
+        "state": "confirmed",
+        "value": "2016형제12345",
+        "claim_ids": [
+          "suspension_notice_2022:c5"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "suspension_notice_2022",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 392.0,
+              "y1": 144.0
+            },
+            "char_start": 0,
+            "char_end": 16,
+            "quote": "사건번호 2016형제12345"
+          }
+        ]
+      },
+      {
+        "slot": "investigator",
+        "label": "담당 수사관",
+        "stage": "investigation",
+        "required": true,
+        "state": "outdated",
+        "value": "박정호",
+        "claim_ids": [
+          "suspension_notice_2022:c8",
+          "mother_memo:c7"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "suspension_notice_2022",
+            "page": 1,
+            "source_line": 8,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 460.0,
+              "x1": 326.0,
+              "y1": 504.0
+            },
+            "char_start": 0,
+            "char_end": 13,
+            "quote": "담당 수사관 경위 박정호"
+          },
+          {
+            "source_doc_id": "mother_memo",
+            "page": 1,
+            "source_line": 4,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 220.0,
+              "x1": 722.0,
+              "y1": 264.0
+            },
+            "char_start": 0,
+            "char_end": 31,
+            "quote": "작년 추석 무렵 수사관한테 전화 → 담당자 바뀌었다고 함"
+          },
+          {
+            "source_doc_id": "mother_memo",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 502.0,
+              "y1": 324.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": null
+          }
+        ]
+      },
+      {
+        "slot": "decision_type",
+        "label": "결정 내용",
+        "stage": "outcome",
+        "required": true,
+        "state": "confirmed",
+        "value": "수사중지",
+        "claim_ids": [
+          "suspension_notice_2022:c4",
+          "suspension_notice_2022:c7"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "suspension_notice_2022",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 282.0,
+              "y1": 84.0
+            },
+            "char_start": 0,
+            "char_end": 11,
+            "quote": "수사중지 결정 통지서"
+          },
+          {
+            "source_doc_id": "suspension_notice_2022",
+            "page": 1,
+            "source_line": 6,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 340.0,
+              "x1": 392.0,
+              "y1": 384.0
+            },
+            "char_start": 0,
+            "char_end": 16,
+            "quote": "결정내용 수사중지(피의자중지)"
+          }
+        ]
+      },
+      {
+        "slot": "decision_time",
+        "label": "결정 일자",
+        "stage": "outcome",
+        "required": true,
+        "state": "confirmed",
+        "value": "2022-03-15",
+        "claim_ids": [
+          "suspension_notice_2022:c6"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "suspension_notice_2022",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 414.0,
+              "y1": 324.0
+            },
+            "char_start": 0,
+            "char_end": 17,
+            "quote": "결정일자 2022. 3. 15."
+          }
+        ]
+      }
+    ],
+    "pair_decisions": [
+      {
+        "pair_id": "pair1",
+        "claim_a_id": "missing_report_2015:c7",
+        "claim_b_id": "news_2016:c4",
+        "slot": "last_seen_time",
+        "scores": {
+          "entailment": 0.2167,
+          "contradiction": 0.0124,
+          "neutral": 0.7709
+        },
+        "model_label": "neutral",
+        "label": "neutral",
+        "downgraded": false,
+        "reasons": [],
+        "model_name": "slot-rule-v1"
+      },
+      {
+        "pair_id": "pair2",
+        "claim_a_id": "missing_report_2015:c7",
+        "claim_b_id": "petition_2023:c9",
+        "slot": "last_seen_time",
+        "scores": {
+          "entailment": 0.216,
+          "contradiction": 0.0123,
+          "neutral": 0.7716
+        },
+        "model_label": "neutral",
+        "label": "neutral",
+        "downgraded": false,
+        "reasons": [],
+        "model_name": "slot-rule-v1"
+      },
+      {
+        "pair_id": "pair3",
+        "claim_a_id": "news_2016:c4",
+        "claim_b_id": "petition_2023:c9",
+        "slot": "last_seen_time",
+        "scores": {
+          "entailment": 0.216,
+          "contradiction": 0.0123,
+          "neutral": 0.7716
+        },
+        "model_label": "neutral",
+        "label": "neutral",
+        "downgraded": false,
+        "reasons": [],
+        "model_name": "slot-rule-v1"
+      },
+      {
+        "pair_id": "pair4",
+        "claim_a_id": "news_2016:c6",
+        "claim_b_id": "mother_memo:c3",
+        "slot": "last_contact_time",
+        "scores": {
+          "entailment": 0.031,
+          "contradiction": 0.2786,
+          "neutral": 0.6904
+        },
+        "model_label": "neutral",
+        "label": "neutral",
+        "downgraded": false,
+        "reasons": [],
+        "model_name": "slot-rule-v1"
+      },
+      {
+        "pair_id": "pair5",
+        "claim_a_id": "suspension_notice_2022:c5",
+        "claim_b_id": "petition_2023:c6",
+        "slot": "case_number",
+        "scores": {
+          "entailment": 0.771,
+          "contradiction": 0.0162,
+          "neutral": 0.2127
+        },
+        "model_label": "entailment",
+        "label": "entailment",
+        "downgraded": false,
+        "reasons": [],
+        "model_name": "slot-rule-v1"
+      }
+    ],
+    "action_triggers": [
+      {
+        "key": "missing_person_suspended/-/document:receipt/unreadable",
+        "case_type": "missing_person_suspended",
+        "condition": "unreadable",
+        "stage": null,
+        "slot": null,
+        "since": null,
+        "elapsed_days": null,
+        "evidence": [
+          {
+            "source_doc_id": "missing_report_2015",
+            "page": 1,
+            "source_line": 8,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 460.0,
+              "x1": 370.0,
+              "y1": 504.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": null
+          }
+        ]
+      },
+      {
+        "key": "missing_person_suspended/-/document:memo/unreadable",
+        "case_type": "missing_person_suspended",
+        "condition": "unreadable",
+        "stage": null,
+        "slot": null,
+        "since": null,
+        "elapsed_days": null,
+        "evidence": [
+          {
+            "source_doc_id": "mother_memo",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 502.0,
+              "y1": 324.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": null
+          }
+        ]
+      },
+      {
+        "key": "missing_person_suspended/occurrence/new_fact/unrecorded_fact",
+        "case_type": "missing_person_suspended",
+        "condition": "unrecorded_fact",
+        "stage": "occurrence",
+        "slot": null,
+        "since": "2019-03-01T00:00:00",
+        "elapsed_days": null,
+        "evidence": [
+          {
+            "source_doc_id": "witness_statement_2019",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 1040.0,
+              "y1": 204.0
+            },
+            "char_start": 0,
+            "char_end": 50,
+            "quote": "본인은 2019년 3월 초순 오후 ○○시장 입구에서 김민수로 보이는 남성을 목격하였습니다."
+          },
+          {
+            "source_doc_id": "witness_statement_2019",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 1040.0,
+              "y1": 204.0
+            },
+            "char_start": 4,
+            "char_end": 15,
+            "quote": "2019년 3월 초순"
+          },
+          {
+            "source_doc_id": "petition_2023",
+            "page": 1,
+            "source_line": 6,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 340.0,
+              "x1": 1040.0,
+              "y1": 384.0
+            },
+            "char_start": 0,
+            "char_end": 46,
+            "quote": "2019년 3월경 이웃 주민 최영호가 아들을 ○○시장 근처에서 보았다고 말했습니다."
+          }
+        ]
+      },
+      {
+        "key": "missing_person_suspended/investigation/investigator/possibly_outdated",
+        "case_type": "missing_person_suspended",
+        "condition": "possibly_outdated",
+        "stage": "investigation",
+        "slot": "investigator",
+        "since": "2025-10-04T00:00:00",
+        "elapsed_days": null,
+        "evidence": [
+          {
+            "source_doc_id": "suspension_notice_2022",
+            "page": 1,
+            "source_line": 8,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 460.0,
+              "x1": 326.0,
+              "y1": 504.0
+            },
+            "char_start": 0,
+            "char_end": 13,
+            "quote": "담당 수사관 경위 박정호"
+          },
+          {
+            "source_doc_id": "mother_memo",
+            "page": 1,
+            "source_line": 4,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 220.0,
+              "x1": 722.0,
+              "y1": 264.0
+            },
+            "char_start": 0,
+            "char_end": 31,
+            "quote": "작년 추석 무렵 수사관한테 전화 → 담당자 바뀌었다고 함"
+          },
+          {
+            "source_doc_id": "mother_memo",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 502.0,
+              "y1": 324.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": null
+          }
+        ]
+      },
+      {
+        "key": "missing_person_suspended/outcome/stage/stage_stalled",
+        "case_type": "missing_person_suspended",
+        "condition": "stage_stalled",
+        "stage": "outcome",
+        "slot": null,
+        "since": "2022-03-15T00:00:00",
+        "elapsed_days": 1641,
+        "evidence": [
+          {
+            "source_doc_id": "suspension_notice_2022",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 282.0,
+              "y1": 84.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": "수사중지 결정 통지서"
+          }
+        ]
+      },
+      {
+        "key": "missing_person_suspended/investigation/stage/stage_skipped",
+        "case_type": "missing_person_suspended",
+        "condition": "stage_skipped",
+        "stage": "investigation",
+        "slot": null,
+        "since": null,
+        "elapsed_days": null,
+        "evidence": []
+      },
+      {
+        "key": "missing_person_suspended/occurrence/last_contact_time/low_confidence",
+        "case_type": "missing_person_suspended",
+        "condition": "low_confidence",
+        "stage": "occurrence",
+        "slot": "last_contact_time",
+        "since": null,
+        "elapsed_days": null,
+        "evidence": [
+          {
+            "source_doc_id": "news_2016",
+            "page": 1,
+            "source_line": 4,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 220.0,
+              "x1": 942.0,
+              "y1": 264.0
+            },
+            "char_start": 0,
+            "char_end": 41,
+            "quote": "가족은 김씨가 10월 11일 새벽까지 친구와 연락을 주고받았다고 주장했다."
+          },
+          {
+            "source_doc_id": "mother_memo",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 458.0,
+              "y1": 144.0
+            },
+            "char_start": 0,
+            "char_end": 19,
+            "quote": "15년 10월 10일 밤 연락 끊김"
+          }
+        ]
+      },
+      {
+        "key": "missing_person_suspended/-/timeline/time_gap",
+        "case_type": "missing_person_suspended",
+        "condition": "time_gap",
+        "stage": null,
+        "slot": null,
+        "since": null,
+        "elapsed_days": null,
+        "evidence": [
+          {
+            "source_doc_id": "news_2016",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 634.0,
+              "y1": 144.0
+            },
+            "char_start": 3,
+            "char_end": 19,
+            "quote": "2016.02.03 09:10"
+          },
+          {
+            "source_doc_id": "witness_statement_2019",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 1040.0,
+              "y1": 204.0
+            },
+            "char_start": 0,
+            "char_end": 50,
+            "quote": "본인은 2019년 3월 초순 오후 ○○시장 입구에서 김민수로 보이는 남성을 목격하였습니다."
+          }
+        ]
+      }
+    ],
+    "case_card": {
+      "case_type": "missing_person_suspended",
+      "case_type_label": "실종 사건 · 수사중지",
+      "requirements_status": "draft_unverified",
+      "stages": [
+        {
+          "stage": "occurrence",
+          "label": "발생",
+          "state": "done",
+          "timeline_event_ids": [
+            "tl4",
+            "tl3",
+            "tl7",
+            "tl8"
+          ],
+          "evidence_level": "statement"
+        },
+        {
+          "stage": "report",
+          "label": "신고",
+          "state": "done",
+          "timeline_event_ids": [
+            "tl6",
+            "tl5"
+          ],
+          "evidence_level": "statement"
+        },
+        {
+          "stage": "receipt",
+          "label": "접수",
+          "state": "done",
+          "timeline_event_ids": [
+            "tl1"
+          ],
+          "evidence_level": "record"
+        },
+        {
+          "stage": "investigation",
+          "label": "수사",
+          "state": "skipped",
+          "timeline_event_ids": [],
+          "evidence_level": null
+        },
+        {
+          "stage": "outcome",
+          "label": "결과",
+          "state": "current",
+          "timeline_event_ids": [
+            "tl2"
+          ],
+          "evidence_level": "record"
+        }
+      ],
+      "current_stage": "outcome",
+      "evidence_doc_count": 6,
+      "needs_confirmation_count": 10,
+      "slots_done": 5,
+      "slots_total": 6,
+      "next_trigger": {
+        "key": "missing_person_suspended/-/document:receipt/unreadable",
+        "case_type": "missing_person_suspended",
+        "condition": "unreadable",
+        "stage": null,
+        "slot": null,
+        "since": null,
+        "elapsed_days": null,
+        "evidence": [
+          {
+            "source_doc_id": "missing_report_2015",
+            "page": 1,
+            "source_line": 8,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 460.0,
+              "x1": 370.0,
+              "y1": 504.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": null
+          }
+        ]
+      }
+    }
+  }
+}
