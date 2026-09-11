@@ -1,0 +1,20 @@
+{
+  "case_id": "demo-long-unsolved-missing",
+  "case_type": "missing_person_suspended",
+  "as_of": "2026-09-11",
+  "documents": [
+    "missing_report_2015.json",
+    "news_2016.json",
+    "witness_statement_2019.json",
+    "suspension_notice_2022.json",
+    "petition_2023.json",
+    "mother_memo.json"
+  ],
+  "user_notes": [
+    {
+      "note_id": "note_family",
+      "text": "결정 통지서를 받은 뒤로 경찰에서 따로 연락 온 적이 없습니다.",
+      "created_at": "2026-09-01T11:00:00"
+    }
+  ]
+}

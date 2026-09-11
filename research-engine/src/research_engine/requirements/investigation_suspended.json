@@ -1,0 +1,19 @@
+{
+  "case_type": "investigation_suspended",
+  "label": "수사중지 사건",
+  "status": "draft_unverified",
+  "note": "파일럿 유형(proposal.md §10) 자리표시자. 재개 요건 지식베이스와 함께 법률 전문가 검수로 채워야 한다. 실종 사건은 missing_person_suspended 사용.",
+  "stages": ["occurrence", "report", "receipt", "investigation", "outcome"],
+  "gap_threshold_hours": 8760,
+  "stall_days": 365,
+  "stall_after_final_stage": true,
+  "flag_unrecorded_facts": true,
+  "slots": [
+    {"slot": "incident_time", "stage": "occurrence", "label": "사건 발생 시점", "required": true},
+    {"slot": "receipt_number", "stage": "receipt", "label": "신고·진정 접수번호", "required": false},
+    {"slot": "case_number", "stage": "investigation", "label": "사건번호", "required": true},
+    {"slot": "investigator", "stage": "investigation", "label": "담당 수사관", "required": false},
+    {"slot": "decision_type", "stage": "outcome", "label": "결정 내용", "required": true},
+    {"slot": "decision_time", "stage": "outcome", "label": "결정 일자", "required": true}
+  ]
+}

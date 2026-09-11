@@ -1,0 +1,12 @@
+{"doc_id": "scan01", "line_no": 1, "script": "typewriter", "ocr_text": "판 결", "gold_text": "판 결", "ocr_confidence": 0.93, "min_word_confidence": 0.9}
+{"doc_id": "scan01", "line_no": 2, "script": "typewriter", "ocr_text": "피고인은 2O19. 3. 5. 피해자에게", "gold_text": "피고인은 2019. 3. 5. 피해자에게", "ocr_confidence": 0.84, "min_word_confidence": 0.61}
+{"doc_id": "scan01", "line_no": 3, "script": "typewriter", "ocr_text": "금 1,5OO,OOO원을 편취하였다", "gold_text": "금 1,500,000원을 편취하였다", "ocr_confidence": 0.71, "min_word_confidence": 0.44}
+{"doc_id": "scan01", "line_no": 4, "script": "typewriter", "ocr_text": "ㅍl고ㅇl ㄴ ▒▒", "gold_text": "피고인은 이를", "ocr_confidence": 0.42, "min_word_confidence": 0.2}
+{"doc_id": "memo01", "line_no": 1, "script": "handwritten", "ocr_text": "6/2 저녁 전화 안받음", "gold_text": "6/2 저녁 전화 안받음", "ocr_confidence": 0.9, "min_word_confidence": 0.86}
+{"doc_id": "memo01", "line_no": 2, "script": "handwritten", "ocr_text": "6/3 사이버수사대 신고함", "gold_text": "6/3 사이버수사대 신고함", "ocr_confidence": 0.88, "min_word_confidence": 0.85}
+{"doc_id": "memo01", "line_no": 3, "script": "handwritten", "ocr_text": "ㅈ ㄷ 겨ㅣ좌 ??", "gold_text": "재단 계좌 확인", "ocr_confidence": 0.45, "min_word_confidence": 0.2}
+{"doc_id": "memo01", "line_no": 4, "script": "handwritten", "ocr_text": "경찰서 담당자 박경위", "gold_text": "경찰서 담당자 박경위", "ocr_confidence": 0.8, "min_word_confidence": 0.7}
+{"doc_id": "memo01", "line_no": 5, "script": "handwritten", "ocr_text": "앙 계좌 흐긴 필오", "gold_text": "은행 계좌 확인 필요", "ocr_confidence": 0.62, "min_word_confidence": 0.35}
+{"doc_id": "rcpt01", "line_no": 1, "script": "printed", "ocr_text": "이체확인증", "gold_text": "이체확인증", "ocr_confidence": 0.99, "min_word_confidence": 0.99}
+{"doc_id": "rcpt01", "line_no": 2, "script": "printed", "ocr_text": "이체금액 350,000원", "gold_text": "이체금액 350,000원", "ocr_confidence": 0.97, "min_word_confidence": 0.95}
+{"doc_id": "rcpt01", "line_no": 3, "script": "printed", "ocr_text": "받는분 메모 ▒▒▒ ◈◈", "gold_text": "받는분 메모 중고거래", "ocr_confidence": 0.41, "min_word_confidence": 0.15}
