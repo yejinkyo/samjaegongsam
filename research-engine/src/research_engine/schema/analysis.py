@@ -78,6 +78,7 @@ class GapCondition(StrEnum):
     TIME_GAP = "time_gap"  # 기록 공백 구간
     STAGE_SKIPPED = "stage_skipped"  # 중간 단계 자료 없음
     STAGE_STALLED = "stage_stalled"  # 현재 단계 이후 진행 기록 없음
+    UNRECORDED_FACT = "unrecorded_fact"  # 사건 이후 나온 사실이 기록 자료에서 확인되지 않음
 
 
 class SlotState(StrEnum):

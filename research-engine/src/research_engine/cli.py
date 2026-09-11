@@ -63,7 +63,9 @@ def cmd_run(args: argparse.Namespace) -> int:
         lines.append(f"      trigger: {issue.trigger.key}")
     pending = [q for q in result.clarifications if q.status == "pending"]
     if pending:
-        lines += ["", f"되물을 질문 {len(pending)}개 (첫 질문)", f"  {pending[0].question} — {pending[0].doc_id} {pending[0].line_no}줄"]
+        first = pending[0]
+        where = f"{first.doc_id} {first.line_no}줄" if first.line_no else first.doc_id
+        lines += ["", f"되물을 질문 {len(pending)}개 (첫 질문)", f"  {first.question} — {where}"]
     if not args.out:
         sys.stdout.write(payload + "\n")
     else:

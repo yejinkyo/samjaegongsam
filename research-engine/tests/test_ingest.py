@@ -114,3 +114,8 @@ def test_user_note_becomes_user_level_document():
     assert doc.evidence_level is EvidenceLevel.USER
     assert [ln.line_no for ln in doc.lines] == [1, 2]
     assert doc.lines[0].ref().source_doc_id == "n1"
+
+
+def test_keyword_classifier_notice():
+    lines = ["수사중지 결정 통지서", "사건번호 2016형제12345", "결정일자 2022. 3. 15.", "○○경찰서장"]
+    assert KeywordDocClassifier().predict(lines).doc_type is DocumentType.NOTICE

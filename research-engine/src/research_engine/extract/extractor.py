@@ -18,14 +18,14 @@ from ..schema import (
     TimeKind,
     TimeValue,
 )
-from .claims import claims_from_line, document_speaker, line_speaker
+from .claims import claims_from_line, decision_base, document_speaker, line_speaker
 from .entities import EntityExtractor, RuleBasedEntityExtractor
 from .events import event_from_line, record_event
 from .temporal import Anchor, TemporalNormalizer, TimeMatch
 
 DOC_DATE_LABEL = re.compile(
     r"판결\s*선고|선\s*고\s*일?|작성\s*일자?|거래\s*일시|이체\s*일시|거래\s*일자|접수\s*일시|접수\s*일자?|"
-    r"발급\s*일자?|발행\s*일자?|신고\s*일시|녹취\s*일시|녹음\s*일시|입력\s*[:：]?"
+    r"발급\s*일자?|발행\s*일자?|신고\s*일시|녹취\s*일시|녹음\s*일시|결정\s*일자?|통지\s*일자?|입력\s*[:：]?"
 )
 ANCHOR_KINDS = (TimeKind.ABSOLUTE, TimeKind.PARTIAL, TimeKind.RELATIVE, TimeKind.LUNAR)
 
@@ -91,7 +91,7 @@ class Extractor:
         mentioned: Anchor | None = None
         matches_by_line: dict[int, list[TimeMatch]] = {}
         line_events = []
-        is_record = doc.doc_type is DocumentType.RECEIPT
+        is_record = doc.doc_type in (DocumentType.RECEIPT, DocumentType.NOTICE)
 
         for ln in lines:
             if doc.doc_type is DocumentType.MESSENGER:
@@ -116,7 +116,7 @@ class Extractor:
             mentions = mentions_by_line[ln.line_no]
 
             if not is_record:
-                ev = event_from_line(ln, clause_start, doc, matches, mentions, said_at, ids)
+                ev = event_from_line(ln, clause_start, doc, matches, mentions, said_at, ids, doc_date)
                 if ev is not None:
                     line_events.append(ev)
             claims = claims_from_line(ln, clause_start, speaker, doc, matches, mentions, said_at, ids)
@@ -137,7 +137,8 @@ class Extractor:
         """오탈자로 보이는 날짜만 되묻는다 (기준일이 약한 상대 날짜는 고를 보기가 없으므로 제외)."""
         for m in matches:
             v = m.value
-            if v.kind not in (TimeKind.CORRECTED, TimeKind.UNRESOLVED) or not (used or doc.doc_type is DocumentType.RECEIPT):
+            is_record = doc.doc_type in (DocumentType.RECEIPT, DocumentType.NOTICE)
+            if v.kind not in (TimeKind.CORRECTED, TimeKind.UNRESOLVED) or not (used or is_record):
                 continue
             options = [c.start.date().isoformat() for c in v.candidates]
             if v.is_resolved and not v.candidates:
@@ -174,3 +175,7 @@ class Extractor:
                 c.subject = next(iter(accounts))
             elif c.slot is ClaimSlot.TRANSFER_TIME and len(amounts) == 1:
                 c.subject = next(iter(amounts))
+        decisions = {decision_base(c.slot_value) for c in claims if c.slot is ClaimSlot.DECISION_TYPE and c.slot_value}
+        for c in claims:
+            if c.slot is ClaimSlot.DECISION_TIME and len(decisions) == 1:
+                c.subject = next(iter(decisions))

@@ -12,12 +12,14 @@ from __future__ import annotations
 
 from typing import Protocol
 
+from ..extract.claims import decision_base
 from ..schema import Claim, ClaimSlot, NliScores, Polarity
 from ..timeline.coref import mask_compatible
 
 S = ClaimSlot
 AMOUNT_SLOTS = {S.TRANSFER_AMOUNT}
-TIME_SLOTS = {S.TRANSFER_TIME, S.RECEIPT_TIME, S.INCIDENT_TIME}
+TIME_SLOTS = {S.TRANSFER_TIME, S.RECEIPT_TIME, S.INCIDENT_TIME, S.LAST_SEEN_TIME, S.LAST_CONTACT_TIME, S.DECISION_TIME}
+CATEGORY_SLOTS = {S.DECISION_TYPE}
 ID_SLOTS = {S.ACCOUNT_NUMBER, S.TRACKING_NUMBER, S.RECEIPT_NUMBER, S.CASE_NUMBER}
 NAME_SLOTS = {S.ACCOUNT_HOLDER, S.INVESTIGATOR}
 BOOL_SLOTS = {S.SHIPMENT_SENT, S.ITEM_RECEIVED}
@@ -86,6 +88,13 @@ class SlotRuleNli:
             if len(va) == len(vb) or ("*" not in va and "*" not in vb):
                 return _scores(0.02, 0.88)
             return _scores(0.05, 0.3)
+
+        if slot in CATEGORY_SLOTS:
+            if a.slot_value == b.slot_value:
+                return _scores(0.9, 0.02)
+            if decision_base(a.slot_value) == decision_base(b.slot_value):
+                return _scores(0.75, 0.02)  # '수사중지' vs '수사중지(피의자중지)'
+            return _scores(0.02, 0.85)
 
         if slot in NAME_SLOTS:
             if a.value_is_speaker_self or b.value_is_speaker_self:

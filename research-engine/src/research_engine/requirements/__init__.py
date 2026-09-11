@@ -32,6 +32,8 @@ class CaseRequirements(BaseModel):
     stages: list[Stage]
     gap_threshold_hours: float | None = None
     stall_days: int | None = None
+    stall_after_final_stage: bool = Field(default=False, description="마지막 단계(예: 수사중지)도 멈춘 상태로 볼지")
+    flag_unrecorded_facts: bool = Field(default=False, description="기록으로 확인되지 않는 사건 이후 사실을 올릴지")
     slots: list[SlotRequirement]
 
     def slot(self, slot: ClaimSlot) -> SlotRequirement | None:

@@ -17,6 +17,7 @@ class DocumentType(StrEnum):
     STATEMENT = "statement"  # 진술서
     TRANSCRIPT = "transcript"  # 녹취록
     RECEIPT = "receipt"  # 영수증·이체확인증·접수증 (기관/업체 발급 기록)
+    NOTICE = "notice"  # 수사결과·처분 통지서 (수사기관 발급 기록)
     MEMO = "memo"  # 손글씨 메모
     MESSENGER = "messenger"  # 메신저 대화 캡처
     NEWS = "news"  # 보도
@@ -30,6 +31,7 @@ DOC_TYPE_LABELS: dict[DocumentType, str] = {
     DocumentType.STATEMENT: "진술서",
     DocumentType.TRANSCRIPT: "녹취록",
     DocumentType.RECEIPT: "영수증·확인증",
+    DocumentType.NOTICE: "수사·처분 통지서",
     DocumentType.MEMO: "메모",
     DocumentType.MESSENGER: "메신저 대화",
     DocumentType.NEWS: "보도",
@@ -50,7 +52,7 @@ EVIDENCE_RANK = {EvidenceLevel.RECORD: 3, EvidenceLevel.STATEMENT: 2, EvidenceLe
 
 
 def evidence_level_for(doc_type: DocumentType) -> EvidenceLevel:
-    if doc_type in (DocumentType.JUDGMENT, DocumentType.RECEIPT):
+    if doc_type in (DocumentType.JUDGMENT, DocumentType.RECEIPT, DocumentType.NOTICE):
         return EvidenceLevel.RECORD
     if doc_type is DocumentType.USER_NOTE:
         return EvidenceLevel.USER

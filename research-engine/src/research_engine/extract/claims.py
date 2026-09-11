@@ -52,10 +52,22 @@ POLICE_ROLES = P.ROLE_GROUPS["police"]
 # "판매자는 물건을 보냈다고 하였으나" → 인용 구간의 화자는 판매자
 REPORTED = re.compile(
     r"(?P<who>판매자|구매자|피고인|피고소인|피의자|피해자|고소인|상대방|[가-힣]{2,4}?)(?:은|는|이|가|측은)\s+"
-    r"(?P<content>[^.。]+?)(?:다고|라고|자고|냐고)\s*(?:하였|했|말했|말하였|주장|진술|얘기|이야기)"
+    r"(?P<content>[^.。]+?)(?:다고|라고|자고|냐고)\s*(?:하였|했|말했|말하였|주장|진술|얘기|이야기|밝혔|밝히|전했|알렸|설명)"
+)
+SPEAKER_STOP = {"내용", "사실", "이것", "그것", "자료", "기록", "당시", "이후", "그날"}
+LAST_SEEN = re.compile(r"(?:최종|마지막(?:으로)?)\s*(?:목격|찍|확인|모습|보)")
+LAST_CONTACT = re.compile(r"연락\s*(?:두절|이?\s*끊|이\s*안\s*(?:되|됐|됨))|까지\s*(?:\S+\s+){0,2}?연락")
+DECISION_TIME_LABEL = re.compile(r"(?:결정|처분|통지)\s*일\s*자?")
+DECISION_TYPE = re.compile(
+    r"수사\s*중지(?:\s*\([^)]*\))?|기소\s*중지|불송치(?:\s*\([^)]*\))?|불기소(?:\s*\([^)]*\))?|혐의\s*없음|내사\s*종결|각하|기각"
 )
 ACCOUNT_IN = re.compile(r"입금|받는|수취|(?:로|으로)\s*(?:[\d,]+\s*만?\s*원\s*(?:을|를)?\s*)?(?:보내|송금|이체|입금)")
 ACCOUNT_OUT = re.compile(r"출금|보내는|제\s*계좌에서|내\s*계좌에서")
+
+
+def decision_base(value: str | None) -> str:
+    """'수사중지(피의자중지)' → '수사중지'."""
+    return re.sub(r"\(.*?\)|\s", "", value or "")
 
 
 @dataclass
@@ -76,7 +88,7 @@ def document_speaker(doc: ProcessedDocument, mentions: list[EntityMention]) -> S
         return Speaker(who.normalized, "document_author", who.mention_id) if who else Speaker("고소인", "document_author")
     if t is DocumentType.JUDGMENT:
         return Speaker("법원(판결문)", "document_issuer")
-    if t is DocumentType.RECEIPT:
+    if t in (DocumentType.RECEIPT, DocumentType.NOTICE):
         org = next((m for m in mentions if m.kind is EntityKind.ORGANIZATION), None)
         return Speaker(org.normalized if org else f"{doc.file_name} 발급처", "document_issuer",
                        org.mention_id if org else None)
@@ -130,7 +142,7 @@ def claims_from_line(
     reported = [
         (clause_start + m.start("content"), clause_start + m.end("content"), m["who"])
         for m in REPORTED.finditer(clause)
-        if m["who"] not in P.NOT_NAMES
+        if m["who"] not in SPEAKER_STOP
     ]
 
     def add(
@@ -245,6 +257,25 @@ def claims_from_line(
     for m in INVESTIGATOR.finditer(clause):
         if m["name"] not in P.NOT_NAMES and not any(c.slot is S.INVESTIGATOR for c in out):
             add(S.INVESTIGATOR, clause_start + m.start("name"), clause_start + m.end("name"), m["name"])
+
+    def timed(slot: ClaimSlot, cue: re.Match[str] | None) -> None:
+        if cue is None:
+            return
+        tm = pick_time(matches, clause_start, len(text), clause_start + cue.start())
+        if tm is not None:
+            add(slot, tm.start, tm.end, tm.value.iso(), slot_time=tm.value, conf_factor=tm.confidence / 0.95)
+
+    if not is_request:
+        timed(S.LAST_SEEN_TIME, LAST_SEEN.search(clause))
+        timed(S.LAST_CONTACT_TIME, LAST_CONTACT.search(clause))
+    decision_cue = DECISION_TIME_LABEL.search(clause) or (
+        STAGE_TRIGGERS[0][1].search(clause) if doc.doc_type is DocumentType.NOTICE else None
+    )
+    timed(S.DECISION_TIME, decision_cue)
+    if doc.doc_type is DocumentType.NOTICE or re.search(r"결정|처분|통지", clause):
+        for m in DECISION_TYPE.finditer(clause):
+            add(S.DECISION_TYPE, clause_start + m.start(), clause_start + m.end(), re.sub(r"\s", "", m.group(0)))
+            break
 
     receipt_label = RECEIPT_TIME_LABEL.search(clause)
     receipt_trigger = STAGE_TRIGGERS[1][1].search(clause)

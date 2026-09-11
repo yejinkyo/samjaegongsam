@@ -28,6 +28,9 @@ UNREADABLE_HINTS: dict[ClaimSlot, tuple[str, ...]] = {
     S.CASE_NUMBER: ("사건번호", "사건 번호"),
     S.INVESTIGATOR: ("담당", "수사관"),
     S.TRACKING_NUMBER: ("송장",),
+    S.LAST_SEEN_TIME: ("목격",),
+    S.DECISION_TIME: ("결정", "처분"),
+    S.DECISION_TYPE: ("결정", "처분"),
 }
 
 

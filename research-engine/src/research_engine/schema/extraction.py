@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from enum import StrEnum
 
 from pydantic import BaseModel, Field
@@ -117,8 +117,18 @@ class TimeValue(BaseModel):
         return best
 
     def iso(self) -> str | None:
+        """표시용 문자열. 폭이 있는 표현('밤', '3월 초순', '23시경')은 구간으로 보여준다."""
         if not self.is_resolved:
             return None
+        s, e = self.start, self.end
+        if self.approximate or self.granularity is TimeGranularity.RANGE:
+            if self.granularity in (TimeGranularity.MINUTE, TimeGranularity.HOUR) and e - s < timedelta(days=1):  # type: ignore[operator]
+                if e.minute:  # type: ignore[union-attr]
+                    return f"{s:%Y-%m-%d %H:%M}~{e:%H:%M}"  # type: ignore[union-attr]
+                end_hour = 24 if e.hour == 0 and e.date() > s.date() else e.hour  # type: ignore[union-attr]
+                return f"{s:%Y-%m-%d %H}~{end_hour:02d}시" if end_hour > s.hour else f"{s:%Y-%m-%d %H시}~{e:%H시}"  # type: ignore[union-attr]
+            last = e - timedelta(days=1)  # type: ignore[operator]
+            return f"{s:%Y-%m-%d}~{last:%m-%d}" if s.year == last.year else f"{s:%Y-%m-%d}~{last:%Y-%m-%d}"  # type: ignore[union-attr]
         fmt = {
             TimeGranularity.MINUTE: "%Y-%m-%d %H:%M",
             TimeGranularity.HOUR: "%Y-%m-%d %H시",
@@ -165,6 +175,7 @@ class Event(BaseModel):
     amount: Sourced[int] | None = None
     participant_mention_ids: list[str] = Field(default_factory=list)
     evidence_level: EvidenceLevel
+    action_kind: str | None = Field(default=None, description="같은 단계 안의 행위 종류 (sighting, contact_lost 등)")
 
 
 # ── 주장 ────────────────────────────────────────────────────────────────
@@ -174,6 +185,8 @@ class ClaimSlot(StrEnum):
     """구조화 비교가 가능한 주장 항목. 4단계 모순·공백 탐지의 기본 단위."""
 
     INCIDENT_TIME = "incident_time"
+    LAST_SEEN_TIME = "last_seen_time"
+    LAST_CONTACT_TIME = "last_contact_time"
     TRANSFER_AMOUNT = "transfer_amount"
     TRANSFER_TIME = "transfer_time"
     ACCOUNT_NUMBER = "account_number"
@@ -185,6 +198,8 @@ class ClaimSlot(StrEnum):
     RECEIPT_TIME = "receipt_time"
     INVESTIGATOR = "investigator"
     CASE_NUMBER = "case_number"
+    DECISION_TIME = "decision_time"
+    DECISION_TYPE = "decision_type"
 
 
 class Polarity(StrEnum):

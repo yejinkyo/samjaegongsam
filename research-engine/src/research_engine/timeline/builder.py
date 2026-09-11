@@ -10,7 +10,7 @@
 
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from ..requirements import CaseRequirements
 from ..schema import (
@@ -68,6 +68,13 @@ class TimelineBuilder:
                 clusters.append([ev])
 
         events = [self._to_timeline_event(n, c, participants) for n, c in enumerate(clusters, start=1)]
+        # 공백 계산에는 합쳐진 이벤트의 대표 시각만이 아니라 구성 이벤트 각각의 시각을 모두 쓴다
+        event_points = [
+            (ev.time.value.start, ev.time.value.end, tl.timeline_event_id)
+            for tl, cluster in zip(events, clusters, strict=True)
+            for ev in cluster
+            if ev.time is not None and ev.time.value.is_resolved
+        ]
         events = self._order(events)
         stages, current = self._stage_status(events, requirements)
         return Timeline(
@@ -75,7 +82,13 @@ class TimelineBuilder:
             events=events,
             stages=stages,
             current_stage=current,
-            gaps=self._gaps(events, requirements.gap_threshold_hours),
+            gaps=self._gaps(
+                event_points,
+                requirements.gap_threshold_hours,
+                # 문서 자체의 작성·발행일도 '그 시점에 기록이 있었다'는 근거다 (예: 2016년 보도)
+                [(d.value.start, d.value.end, f"doc:{doc_id}") for doc_id, d in extraction.document_dates.items()
+                 if d.value.is_resolved],
+            ),
             entities=entities,
             mention_to_entity=mention_to_entity,
         )
@@ -97,6 +110,9 @@ class TimelineBuilder:
                 GRANULARITY_RANK[ta.granularity] <= GRANULARITY_RANK[TimeGranularity.DAY]  # type: ignore[union-attr]
                 and GRANULARITY_RANK[tb.granularity] <= GRANULARITY_RANK[TimeGranularity.DAY]  # type: ignore[union-attr]
             )
+        if time_match and a.stage is Stage.OCCURRENCE:
+            # 발생 단계는 여러 일이 섞이므로 같은 종류의 행위(목격끼리, 연락 두절끼리)일 때만 합친다
+            evidence = evidence or (a.action_kind is not None and a.action_kind == b.action_kind)
         return evidence
 
     @staticmethod
@@ -107,8 +123,8 @@ class TimelineBuilder:
         if timed:
             time = min(
                 timed,
-                key=lambda t: (t.value.needs_confirmation, GRANULARITY_RANK[t.value.granularity], t.value.approximate,
-                               -t.confidence),
+                key=lambda t: (t.value.needs_confirmation, GRANULARITY_RANK[t.value.granularity],
+                               t.value.end - t.value.start, t.value.approximate, -t.confidence),
             )
         amounts = [ev.amount for ev in cluster if ev.amount]
         amount = max(amounts, key=lambda a: a.confidence).value if amounts else None
@@ -195,25 +211,44 @@ class TimelineBuilder:
         return statuses, flow[current_idx] if current_idx is not None else None
 
     @staticmethod
-    def _gaps(events: list[TimelineEvent], threshold_hours: float | None) -> list[TimeGap]:
+    def _gaps(
+        event_points: list[tuple[datetime, datetime, str]],
+        threshold_hours: float | None,
+        doc_points: list[tuple[datetime, datetime, str]] | None = None,
+    ) -> list[TimeGap]:
+        """기록 공백. 점은 (시작, 끝, 타임라인 이벤트 id 또는 'doc:{문서 id}').
+
+        공백은 이벤트 사이에서만 찾고, 문서 작성·발행일은 그 공백을 나누는 데만 쓴다
+        (사건 뒤에 쓴 진술서가 새 공백을 만들지 않도록).
+        """
         if not threshold_hours:
             return []
-        timed = [
-            e for e in events
-            if e.time is not None and GRANULARITY_RANK[e.time.granularity] <= GRANULARITY_RANK[TimeGranularity.DAY]
-        ]
-        gaps = []
+        threshold = timedelta(hours=threshold_hours)
+        # 공백 기준보다 충분히 짧은 구간만 '그때 기록이 있다'로 친다 (장기 사건은 '2019년 3월 초순'도 포함)
+        max_span = timedelta(hours=max(24.0, threshold_hours / 2))
+        points = sorted(p for p in event_points if p[1] - p[0] <= max_span)
+        docs = sorted(p for p in (doc_points or []) if p[1] - p[0] <= max_span)
+
+        spans: list[tuple[datetime, datetime, str, str]] = []
         latest_end: datetime | None = None
-        latest_id = None
-        for ev in sorted(timed, key=lambda e: e.time.start):  # type: ignore[union-attr]
-            start, end = ev.time.start, ev.time.end  # type: ignore[union-attr]
-            if latest_end is not None and start > latest_end:
-                hours = (start - latest_end).total_seconds() / 3600
-                if hours > threshold_hours:
-                    gaps.append(
-                        TimeGap(start=latest_end, end=start, hours=round(hours, 1),
-                                before_event_id=latest_id, after_event_id=ev.timeline_event_id)  # type: ignore[arg-type]
-                    )
-            if latest_end is None or end > latest_end:  # type: ignore[operator]
-                latest_end, latest_id = end, ev.timeline_event_id
-        return gaps
+        latest_id = ""
+        for start, end, point_id in points:
+            if latest_end is not None and start - latest_end > threshold:
+                spans.append((latest_end, start, latest_id, point_id))
+            if latest_end is None or end > latest_end:
+                latest_end, latest_id = end, point_id
+
+        gaps = []
+        for g_start, g_end, before, after in spans:
+            cursor, cursor_id = g_start, before
+            for d_start, d_end, doc_id in docs:
+                if g_start < d_start and d_end <= g_end:
+                    if d_start - cursor > threshold:
+                        gaps.append((cursor, d_start, cursor_id, doc_id))
+                    cursor, cursor_id = max(cursor, d_end), doc_id
+            if g_end - cursor > threshold:
+                gaps.append((cursor, g_end, cursor_id, after))
+        return [
+            TimeGap(start=s, end=e, hours=round((e - s).total_seconds() / 3600, 1), before_event_id=b, after_event_id=a)
+            for s, e, b, a in gaps
+        ]

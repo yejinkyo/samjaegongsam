@@ -44,7 +44,10 @@ def _relation(a: Claim, b: Claim, transfer_times: dict[str, list[Claim]]) -> str
                 return "same"
             return "different" if compatible is False else "unknown"
         return "unknown"
-    if slot is S.RECEIPT_TIME:
+    if slot is S.DECISION_TIME:
+        # 한 사건에 결정이 여러 번(불송치 → 재수사 → 수사중지) 있을 수 있다: 같은 종류의 결정일 때만 확실
+        return "same" if a.subject and a.subject == b.subject else "unknown"
+    if slot in (S.RECEIPT_TIME, S.DECISION_TYPE):
         return "unknown"
     return "same"
 

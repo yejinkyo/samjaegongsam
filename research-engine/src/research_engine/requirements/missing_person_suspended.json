@@ -1,0 +1,21 @@
+{
+  "case_type": "missing_person_suspended",
+  "label": "실종 사건 · 수사중지",
+  "status": "draft_unverified",
+  "note": "장기 미제 실종 사건 파일럿용 초안 (proposal.md §4 1차 타겟, §10 파일럿). 재개 요건과 필수 항목은 법률 전문가 검수 후 확정해야 한다. 절차 안내 문구는 두지 않는다.",
+  "stages": ["occurrence", "report", "receipt", "investigation", "outcome"],
+  "gap_threshold_hours": 8760,
+  "stall_days": 365,
+  "stall_after_final_stage": true,
+  "flag_unrecorded_facts": true,
+  "slots": [
+    {"slot": "last_seen_time", "stage": "occurrence", "label": "최종 목격 일시", "required": true},
+    {"slot": "last_contact_time", "stage": "occurrence", "label": "마지막 연락 시점", "required": false},
+    {"slot": "receipt_number", "stage": "receipt", "label": "실종신고 접수번호", "required": true},
+    {"slot": "receipt_time", "stage": "receipt", "label": "실종신고 접수 일시", "required": false},
+    {"slot": "case_number", "stage": "investigation", "label": "사건번호", "required": true},
+    {"slot": "investigator", "stage": "investigation", "label": "담당 수사관", "required": true},
+    {"slot": "decision_type", "stage": "outcome", "label": "결정 내용", "required": true},
+    {"slot": "decision_time", "stage": "outcome", "label": "결정 일자", "required": true}
+  ]
+}

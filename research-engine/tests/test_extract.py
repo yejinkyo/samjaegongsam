@@ -100,3 +100,40 @@ def test_typo_date_used_in_record_is_asked_back():
     res = Extractor().extract([doc], date(2026, 9, 1))
     [q] = res.clarifications
     assert q.line_no == 2 and "2026-03-05" in q.options and q.options[-1] == "모르겠어요"
+
+
+def test_police_rank_is_not_a_name_and_reporter_byline_is_not_a_person():
+    ms = _mentions("담당 수사관 경위 박정호")
+    assert [(m.normalized, m.role) for m in ms if m.kind is EntityKind.PERSON] == [("박정호", "담당수사관")]
+    assert not [m for m in _mentions("입력 2016.02.03  김○○ 기자", DocumentType.NEWS) if m.kind is EntityKind.PERSON]
+
+
+def test_notice_document_is_a_record_with_decision_slots():
+    doc = _doc("notice", ["수사중지 결정 통지서", "사건번호 2016형제12345", "결정일자 2022. 3. 15.",
+                          "결정내용 수사중지(피의자중지)", "담당 수사관 경위 박정호", "○○경찰서장"], DocumentType.NOTICE)
+    assert doc.evidence_level.value == "record"
+    res = Extractor().extract([doc], date(2026, 9, 11))
+    [event] = res.events
+    assert event.stage is Stage.OUTCOME and event.time.value.start == datetime(2022, 3, 15)
+    slots = {c.slot: c for c in res.claims}
+    assert slots[ClaimSlot.DECISION_TIME].subject == "수사중지"
+    assert slots[ClaimSlot.INVESTIGATOR].slot_value == "박정호"
+    assert slots[ClaimSlot.CASE_NUMBER].speaker == "**경찰서"  # 발급 기관이 화자
+
+
+def test_petition_request_is_placed_at_document_date_not_the_past_date_in_the_sentence():
+    doc = _doc("petition", ["진 정 서", "진정인 이순자", "2015. 10. 10. 실종된 아들 김민수 사건의 재수사를 요청합니다.", "2023. 4. 2."],
+               DocumentType.COMPLAINT)
+    res = Extractor().extract([doc], date(2026, 9, 11))
+    petition = next(e for e in res.events if e.action_kind == "petition")
+    assert petition.stage is Stage.REPORT and petition.time.value.start == datetime(2023, 4, 2)
+    assert petition.time.source_line == 4
+
+
+def test_last_seen_claim_from_reported_speech():
+    doc = _doc("news", ["입력 2016.02.03 09:10", "경찰은 김씨가 지난해 10월 10일 밤 11시쯤 ○○역 인근 CCTV에 마지막으로 찍혔다고 밝혔다."],
+               DocumentType.NEWS)
+    res = Extractor().extract([doc], date(2026, 9, 11))
+    seen = next(c for c in res.claims if c.slot is ClaimSlot.LAST_SEEN_TIME)
+    assert seen.speaker == "경찰" and seen.speaker_basis == "reported_speech"
+    assert seen.slot_time.start == datetime(2015, 10, 10, 22)  # '지난해'(연 단위)보다 구체적인 시각을 쓴다

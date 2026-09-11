@@ -7,6 +7,7 @@ import re
 from datetime import timedelta
 
 from ..schema import (
+    GRANULARITY_RANK,
     EntityMention,
     Event,
     EvidenceLevel,
@@ -14,11 +15,24 @@ from ..schema import (
     Sourced,
     Stage,
     TextLine,
+    TimeGranularity,
     TimeKind,
     TimeValue,
 )
 from . import patterns as P
 from .temporal import TimeMatch
+
+# 발생 단계 안의 행위 종류. 같은 종류끼리만 타임라인에서 합친다
+OCCURRENCE_KINDS: list[tuple[str, re.Pattern[str]]] = [
+    ("sighting", re.compile(r"목격|마지막(?:으로)?\s*(?:찍|보|확인)|(?:근처|부근|입구|앞|인근)에서\s*(?:보았|봤)")),
+    ("contact_lost", re.compile(
+        r"연락\s*(?:두절|이?\s*끊|이\s*안\s*(?:되|됐|됨))|전화\s*(?:를\s*)?(?:안\s*받|받지\s*않)")),
+    ("disappearance", re.compile(r"실종|가출|행방\s*불명")),
+    ("fraud", re.compile(r"사기|편취")),
+    ("violence", re.compile(r"폭행|상해")),
+    ("harm", re.compile(r"피해를?\s*(?:입|당)")),
+    ("dealing", re.compile(r"거래\s*(?:대화|문의)|구매\s*문의|판매\s*중")),
+]
 
 # 우선순위 순서: 한 줄에 여러 단서가 있으면 절차상 더 뒤 단계를 택한다 ("신고 접수" → 접수)
 STAGE_TRIGGERS: list[tuple[Stage, re.Pattern[str]]] = [
@@ -27,24 +41,33 @@ STAGE_TRIGGERS: list[tuple[Stage, re.Pattern[str]]] = [
         r"수사\s*중지|기소\s*중지|사건\s*종결")),
     (Stage.RECEIPT, re.compile(r"접수(?!\s*번호|\s*일시|\s*일자)")),
     (Stage.INVESTIGATION, re.compile(
-        r"수사(?!\s*중지|관|팀|대|과|기관)|조사(?!관)|출석|소환|압수|수색|입건|송치|피의자\s*신문")),
-    (Stage.REPORT, re.compile(r"신고(?!인|번호)|고소(?!인|장)|고발(?!인)|진정(?!인|서)|112에")),
+        r"(?<!재)수사(?!\s*중지|관|팀|대|과|기관|\s*기록|\s*자료)|조사(?!관)|출석|소환|압수|수색|입건|송치|피의자\s*신문")),
+    (Stage.REPORT, re.compile(r"신고(?!인|번호)|고소(?!인|장|\s*취지)|고발(?!인)|진정(?!인|서|\s*취지)|112에")),
     (Stage.TRANSFER, re.compile(r"송금|이체(?!\s*금액|\s*일시|\s*확인증)|입금(?!\s*계좌|\s*은행)")),
-    (Stage.OCCURRENCE, re.compile(
-        r"사기|편취|폭행|상해|실종|피해를?\s*(?:입|당)|연락\s*(?:두절|이\s*끊|이\s*안\s*(?:되|됐|됨))|"
-        r"전화\s*(?:를\s*)?(?:안\s*받|받지\s*않)|거래\s*(?:대화|문의)|구매\s*문의|판매\s*중")),
+    (Stage.OCCURRENCE, re.compile("|".join(f"(?:{p.pattern})" for _, p in OCCURRENCE_KINDS))),
 ]
+# 문서 자체가 하는 요청 ("재수사를 요청합니다") — 시각은 본문 속 과거 날짜가 아니라 문서 작성일
+PETITION = re.compile(r"재수사\s*(?:를|을)?\s*(?:요청|신청)|이의\s*신청|재기\s*신청|(?:고소|고발|진정)\s*(?:합니다|하오니)")
+FORMAL_PRESENT = re.compile(r"(?:합니다|하오니|바랍니다|청구함|요청함)\s*\.?\s*$")
 
 RECORD_TITLES: list[tuple[Stage, re.Pattern[str]]] = [
     (Stage.TRANSFER, re.compile(r"이체\s*확인증|송금\s*확인증|거래\s*내역|입출금\s*내역")),
     (Stage.RECEIPT, re.compile(r"접\s*수\s*증|접수\s*확인")),
     (Stage.OUTCOME, re.compile(r"결\s*과\s*통\s*지|처분\s*결과|불송치\s*결정|수사\s*중지\s*결정")),
 ]
-RECORD_TIME_LABEL = re.compile(r"(거래|이체|송금|접수|신고|발급|처리)\s*(일시|일자|시각)|일\s*시")
+RECORD_TIME_LABEL = re.compile(r"(거래|이체|송금|접수|신고|발급|처리|결정|처분|통지)\s*(일시|일자|시각|일)|일\s*시")
 RECORD_AMOUNT_LABEL = re.compile(r"(이체|거래|송금|입금|결제)\s*금액|합\s*계|총\s*액|금\s*액")
 
 
+def occurrence_kind(clause: str) -> str | None:
+    found = [(m.start(), kind) for kind, p in OCCURRENCE_KINDS if (m := p.search(clause))]
+    return min(found)[1] if found else None
+
+
 def find_trigger(clause: str) -> tuple[Stage, re.Match[str]] | None:
+    petition = PETITION.search(clause)
+    if petition:
+        return Stage.REPORT, petition
     for stage, pattern in STAGE_TRIGGERS:
         m = pattern.search(clause)
         if m:
@@ -77,7 +100,9 @@ def pick_time(matches: list[TimeMatch], lo: int, hi: int, near: int) -> TimeMatc
     inside = [m for m in matches if lo <= m.start and m.end <= hi and (m.value.is_resolved or m.value.candidates)]
     if not inside:
         return None
-    return min(inside, key=lambda m: abs(m.start - near))
+    # '지난해 10월 10일 밤 11시쯤'처럼 여러 표현이 있으면 하루 이하 입도를 우선, 그다음 가까운 것
+    day = GRANULARITY_RANK[TimeGranularity.DAY]
+    return min(inside, key=lambda m: (max(GRANULARITY_RANK[m.value.granularity], day), abs(m.start - near)))
 
 
 def event_from_line(
@@ -88,6 +113,7 @@ def event_from_line(
     mentions: list[EntityMention],
     said_at: TimeMatch | None,
     ids: itertools.count,
+    doc_date: Sourced[TimeValue] | None = None,
 ) -> Event | None:
     text = line.text
     clause = text[clause_start:]
@@ -107,7 +133,9 @@ def event_from_line(
 
     time = None
     tm = pick_time(matches, clause_start, len(text), t_start)
-    if tm is not None:
+    if PETITION.search(clause) and FORMAL_PRESENT.search(clause) and doc_date is not None:
+        time = doc_date
+    elif tm is not None:
         time = Sourced[TimeValue].at(line.ref(tm.start, tm.end), tm.value, round(tm.confidence * line.readability, 4))
     elif said_at is not None and said_at.value.is_resolved:
         time = Sourced[TimeValue].at(
@@ -133,6 +161,7 @@ def event_from_line(
         amount=amount,
         participant_mention_ids=[mm.mention_id for mm in mentions],
         evidence_level=doc.evidence_level,
+        action_kind="petition" if PETITION.search(clause) else occurrence_kind(clause) if stage is Stage.OCCURRENCE else None,
     )
 
 

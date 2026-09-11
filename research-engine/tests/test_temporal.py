@@ -129,3 +129,26 @@ def test_partial_date_year_inferred_toward_past():
 def test_daypart_attaches_to_date():
     v = one("6/2 저녁 전화 안받음")
     assert v.start == datetime(2026, 6, 2, 17) and v.end == datetime(2026, 6, 2, 22)
+
+
+def test_approx_suffix_is_not_the_start_of_another_word():
+    v = one("10월 12일 경찰서 실종신고", Anchor(date(2026, 9, 1), "document_date"))
+    assert not v.approximate and v.start == datetime(2025, 10, 12)
+
+
+def test_partial_date_takes_year_from_last_mentioned_date():
+    v = one("10월 12일 경찰서 실종신고", Anchor(date(2026, 9, 1), "capture_date"), Anchor(date(2015, 10, 10), "mentioned_date"))
+    assert v.start == datetime(2015, 10, 12) and not v.needs_confirmation
+
+
+def test_lunar_holidays():
+    chuseok = one("작년 추석 무렵 수사관한테 전화", Anchor(date(2026, 9, 1), "capture_date"))
+    assert chuseok.kind is TimeKind.LUNAR and chuseok.approximate
+    assert chuseok.start <= datetime(2025, 10, 6) < chuseok.end  # 2025년 추석 = 10월 6일
+    assert chuseok.needs_confirmation  # '작년'의 기준이 촬영일뿐
+    assert one("2015년 추석에 집에 왔다").start == datetime(2015, 9, 27)
+
+
+def test_display_of_approximate_intervals():
+    assert one("15년 10월 10일 밤 연락 끊김").iso() == "2015-10-10 20~24시"
+    assert one("2019년 3월 초순 목격").iso() == "2019-03-01~03-10"

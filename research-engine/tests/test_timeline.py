@@ -110,3 +110,12 @@ def test_untimed_event_placed_after_earlier_stages():
     tl = TimelineBuilder().build(ex, REQ)
     assert [e.stage for e in tl.events] == [Stage.TRANSFER, Stage.REPORT, Stage.OUTCOME]
     assert tl.events[1].time_unknown and tl.events[1].needs_confirmation
+
+
+def test_document_dates_split_gaps_but_never_create_new_ones():
+    points = [(datetime(2015, 10, 10), datetime(2015, 10, 11), "tl1"), (datetime(2022, 3, 15), datetime(2022, 3, 16), "tl2")]
+    news = [(datetime(2016, 2, 3, 9, 10), datetime(2016, 2, 3, 9, 11), "doc:news")]
+    late_doc = [(datetime(2024, 1, 1), datetime(2024, 1, 2), "doc:late")]
+    gaps = TimelineBuilder._gaps(points, 8760, news + late_doc)
+    assert [(g.before_event_id, g.after_event_id) for g in gaps] == [("doc:news", "tl2")]  # 2015→2016은 1년 미만
+    assert gaps[0].start == datetime(2016, 2, 3, 9, 11)

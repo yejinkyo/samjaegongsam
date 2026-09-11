@@ -20,6 +20,7 @@ from ..schema import (
     ClarificationRequest,
     DocumentType,
     EntityKind,
+    EvidenceLevel,
     ExtractionResult,
     GapCondition,
     Issue,
@@ -32,6 +33,7 @@ from ..schema import (
     Stage,
     StageState,
     Timeline,
+    TimelineEvent,
 )
 from .nli import CombinedNli, NliModel
 from .pairing import candidate_pairs
@@ -42,6 +44,7 @@ C = GapCondition
 PRIORITY = {
     C.CONFLICTING: 10,
     C.UNREADABLE: 20,
+    C.UNRECORDED_FACT: 25,
     C.MISSING: 30,
     C.STAGE_STALLED: 35,
     C.STAGE_SKIPPED: 45,
@@ -169,7 +172,10 @@ class CaseAnalyzer:
                 quotes = " / ".join(f"‘{claims[cid].content.value}’({claims[cid].content.cite()})" for cid in st.claim_ids[:3])
                 msg = f"{st.label}: {', '.join(speakers)}의 말만 있고 이를 뒷받침하는 기록 자료가 없습니다 — {quotes}"
             elif st.state is SlotState.LOW_CONFIDENCE:
-                msg = f"{st.label}: 자료에서 읽어낸 값의 신뢰도가 낮아 확인이 필요합니다"
+                values = " / ".join(
+                    f"‘{display_value(claims[cid])}’({claims[cid].content.cite()})" for cid in st.claim_ids[:3]
+                )
+                msg = f"{st.label}: {values} — 자료에서 읽어낸 값의 신뢰도가 낮아 확인이 필요합니다"
             elif st.state is SlotState.UNREADABLE:
                 msg = f"{st.label}: 올린 자료에서 찾지 못했고, 해당 내용이 있을 수 있는 부분이 읽히지 않았습니다"
             else:
@@ -220,12 +226,18 @@ class CaseAnalyzer:
 
         # 7) 타임라인 공백·단계
         events = {ev.timeline_event_id: ev for ev in timeline.events}
+        def point_sources(point_id: str) -> list[SourceRef]:
+            if point_id.startswith("doc:"):
+                doc_date = extraction.document_dates.get(point_id[4:])
+                return [doc_date.ref()] if doc_date else []
+            return events[point_id].sources[:1] if point_id in events else []
+
         for gap in timeline.gaps:
-            before, after = events[gap.before_event_id], events[gap.after_event_id]
+            fmt = "%m/%d %H:%M" if gap.start.year == gap.end.year else "%Y-%m-%d"
             add(IssueCategory.MISSING, C.TIME_GAP,
-                f"{gap.start:%m/%d %H:%M} ~ {gap.end:%m/%d %H:%M} 사이의 기록이 없습니다",
-                sources=before.sources[:1] + after.sources[:1], checked=checked_docs,
-                event_ids=[before.timeline_event_id, after.timeline_event_id], subject="timeline")
+                f"{gap.start:{fmt}} ~ {gap.end:{fmt}} 사이의 기록이 없습니다 (약 {_span_label(gap.hours)})",
+                sources=point_sources(gap.before_event_id) + point_sources(gap.after_event_id), checked=checked_docs,
+                event_ids=[p for p in (gap.before_event_id, gap.after_event_id) if p in events], subject="timeline")
         for st in timeline.stages:
             if st.state is StageState.SKIPPED:
                 add(IssueCategory.MISSING, C.STAGE_SKIPPED, f"‘{st.label}’ 단계에 해당하는 자료가 없습니다",
@@ -233,11 +245,27 @@ class CaseAnalyzer:
         stalled = self._stall(timeline, requirements, as_of)
         if stalled is not None:
             stage, last_ev, since, days = stalled
-            label = next(s.label for s in timeline.stages if s.stage is stage)
+            who = "기관의 " if last_ev.evidence_level is EvidenceLevel.RECORD else ""
             add(IssueCategory.MISSING, C.STAGE_STALLED,
-                f"‘{label}’ 이후 진행 기록이 없습니다 ({label} 후 {days}일 경과)",
+                f"‘{last_ev.title}’({last_ev.time.iso()}) 이후 {who}진행 기록이 없습니다 ({days}일 경과)",  # type: ignore[union-attr]
                 stage=stage, sources=last_ev.sources[:1], checked=checked_docs,
                 event_ids=[last_ev.timeline_event_id], subject="stage", since=since, elapsed=days)
+
+        # 8) 사건 이후에 나왔지만 기록 자료로 확인되지 않는 사실 — 재수사 요청의 '새로 확인된 사실' 후보
+        if requirements.flag_unrecorded_facts:
+            for ev, decision in _unrecorded_facts(timeline):
+                cites = ", ".join(dict.fromkeys(s.cite() for s in ev.sources))
+                when = ev.time.iso() if ev.time else "시점 미상"  # type: ignore[union-attr]
+                relation = ""
+                if decision is not None and decision.time is not None and ev.time is not None:
+                    d_when = decision.time.iso()
+                    relation = (f" ‘{decision.title}’({d_when})보다 앞선 내용입니다." if ev.time.end <= decision.time.start
+                                else f" ‘{decision.title}’({d_when}) 이후에 나온 내용입니다.")
+                add(IssueCategory.UNVERIFIED, C.UNRECORDED_FACT,
+                    f"‘{ev.title}’({when}, {cites}) — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다."
+                    f"{relation} 수사 기록에 반영됐는지 확인이 필요합니다",
+                    stage=ev.stage, sources=ev.sources, checked=checked_docs, event_ids=[ev.timeline_event_id],
+                    subject="new_fact", since=ev.time.start if ev.time else None)
 
         issues.sort(key=lambda i: (i.priority, i.stage and requirements.stages.index(i.stage)
                                    if i.stage in requirements.stages else 99))
@@ -290,9 +318,11 @@ class CaseAnalyzer:
     def _stall(timeline: Timeline, requirements: CaseRequirements, as_of: date):
         if timeline.current_stage is None or requirements.stall_days is None:
             return None
-        if timeline.current_stage is requirements.stages[-1]:
+        if timeline.current_stage is requirements.stages[-1] and not requirements.stall_after_final_stage:
             return None
         evs = [e for e in timeline.events if e.stage is timeline.current_stage and e.time is not None]
+        records = [e for e in evs if e.evidence_level is EvidenceLevel.RECORD]
+        evs = records or evs  # 기관 기록이 있으면 그 시점부터 센다
         if not evs:
             return None
         last = max(evs, key=lambda e: e.time.end)  # type: ignore[union-attr]
@@ -301,6 +331,31 @@ class CaseAnalyzer:
         if days < requirements.stall_days:
             return None
         return timeline.current_stage, last, since, days
+
+
+def _span_label(hours: float) -> str:
+    if hours >= 24 * 365:
+        return f"{hours / (24 * 365):.1f}년"
+    if hours >= 24 * 60:
+        return f"{hours / (24 * 30):.0f}개월"
+    if hours >= 48:
+        return f"{hours / 24:.0f}일"
+    return f"{hours:.0f}시간"
+
+
+def _unrecorded_facts(timeline: Timeline) -> list[tuple[TimelineEvent, TimelineEvent | None]]:
+    """첫 발생 기록 이후의 발생 단계 사실 중 기록 자료로 뒷받침되지 않는 것 (목격·제보 등)."""
+    occurrences = [e for e in timeline.events if e.stage is Stage.OCCURRENCE and e.time is not None]
+    if not occurrences:
+        return []
+    first = min(occurrences, key=lambda e: e.time.start)  # type: ignore[union-attr]
+    decisions = [e for e in timeline.events
+                 if e.stage is Stage.OUTCOME and e.evidence_level is EvidenceLevel.RECORD and e.time is not None]
+    decision = max(decisions, key=lambda e: e.time.start) if decisions else None  # type: ignore[union-attr]
+    return [
+        (e, decision) for e in occurrences
+        if e.evidence_level is not EvidenceLevel.RECORD and e.time.start >= first.time.end  # type: ignore[union-attr,operator]
+    ]
 
 
 def _group_by_slot(decisions: list[PairDecision]) -> dict[ClaimSlot | None, list[PairDecision]]:
