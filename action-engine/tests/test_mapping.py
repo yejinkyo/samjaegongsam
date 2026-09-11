@@ -97,6 +97,40 @@ def test_송금액_모순은_진술간_모순으로_옮긴다(fraud):
     assert any("transfer_amount" in k for k in hits[INF.CONTRADICTION_ACROSS].source_trigger_keys)
 
 
+def _conflict(speaker_a: str, speaker_b: str) -> dict:
+    return {
+        "documents": [],
+        "extraction": {"claims": [
+            {"claim_id": "c1", "speaker": speaker_a},
+            {"claim_id": "c2", "speaker": speaker_b},
+        ]},
+        "analysis": {"issues": [{
+            "condition": "conflicting", "message": "값이 엇갈립니다", "sources": [],
+            "trigger": {"key": "x/conflicting"},
+            "decision": {"claim_a_id": "c1", "claim_b_id": "c2"},
+        }]},
+    }
+
+
+def test_같은_화자가_말을_바꾸면_동일인_번복이다():
+    """PairDecision 에 화자 필드가 없어 Claim.speaker 로 가른다."""
+    codes = {h.code for h in resolve_inf(_conflict("김민수", "김민수"))}
+    assert INF.CONTRADICTION_SELF in codes
+    assert INF.CONTRADICTION_ACROSS not in codes
+
+
+def test_다른_화자면_진술_간_모순이다():
+    codes = {h.code for h in resolve_inf(_conflict("김민수", "최영호"))}
+    assert INF.CONTRADICTION_ACROSS in codes
+    assert INF.CONTRADICTION_SELF not in codes
+
+
+def test_화자를_모르면_동일인으로_올리지_않는다():
+    codes = {h.code for h in resolve_inf(_conflict("", ""))}
+    assert INF.CONTRADICTION_ACROSS in codes
+    assert INF.CONTRADICTION_SELF not in codes
+
+
 def test_감정자료가_없으면_전문분석_미실시(missing, fraud):
     for result in (missing, fraud):
         assert INF.ANALYSIS_NOT_DONE in {h.code for h in resolve_inf(result)}

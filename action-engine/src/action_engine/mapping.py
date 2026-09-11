@@ -177,13 +177,14 @@ def resolve_inf(result: dict[str, Any]) -> list[CodeHit]:
                     key=key, doc_ids=[doc.get("doc_id")])
 
     # 2) 모순·공백·근거미비 → issue 의 condition 으로 판정
+    speakers = {c["claim_id"]: c.get("speaker") for c in result.get("extraction", {}).get("claims", [])}
     for issue in analysis.get("issues", []):
         cond = issue.get("condition")
         code = CONDITION_TO_INF.get(cond)
         if code is None:
             continue
         # 같은 화자의 진술이 엇갈리면 INF-023
-        if cond == "conflicting" and _same_speaker(issue):
+        if cond == "conflicting" and _same_speaker(issue, speakers):
             code = INF.CONTRADICTION_SELF
         conf = Confidence.PRESUMED if cond == "suspected_conflict" else Confidence.CONFIRMED
         add(code, issue.get("message", ""), key=(issue.get("trigger") or {}).get("key"),
@@ -196,10 +197,17 @@ def resolve_inf(result: dict[str, Any]) -> list[CodeHit]:
     return sorted(hits.values(), key=lambda h: h.code)
 
 
-def _same_speaker(issue: dict[str, Any]) -> bool:
-    """모순 난 두 진술이 같은 사람 것인지. 판단 근거가 없으면 False (INF-021 로 둔다)."""
+def _same_speaker(issue: dict[str, Any], speakers: dict[str, str | None]) -> bool:
+    """모순 난 두 진술이 같은 사람 것인지 — INF-021(진술 간) 과 INF-023(동일인 번복) 을 가른다.
+
+    PairDecision 에는 화자 필드가 없다. 대신 Claim 에 ``speaker`` 가 있으므로
+    모순 쌍의 claim_id 두 개를 찾아 화자를 비교한다.
+    화자를 못 찾으면 False — 억지로 INF-023 으로 올리지 않고 INF-021 로 둔다.
+    """
     decision = issue.get("decision") or {}
-    return bool(decision.get("same_speaker"))
+    a = speakers.get(decision.get("claim_a_id"))
+    b = speakers.get(decision.get("claim_b_id"))
+    return bool(a and b and a == b)
 
 
 def to_case_state(result: dict[str, Any]) -> CaseState:
