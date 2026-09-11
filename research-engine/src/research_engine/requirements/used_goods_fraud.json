@@ -1,0 +1,21 @@
+{
+  "case_type": "used_goods_fraud",
+  "label": "중고거래 사기",
+  "status": "draft_unverified",
+  "note": "엔진 개발용 초안. 어떤 항목이 절차상 필수인지는 법률 전문가 검수 후 확정해야 한다 (proposal.md §3, §11). 절차 안내 문구는 이 파일에 두지 않는다.",
+  "stages": ["occurrence", "transfer", "report", "receipt", "investigation", "outcome"],
+  "gap_threshold_hours": 12,
+  "stall_days": 14,
+  "slots": [
+    {"slot": "transfer_amount", "stage": "transfer", "label": "송금 금액", "required": true},
+    {"slot": "transfer_time", "stage": "transfer", "label": "송금 일시", "required": true},
+    {"slot": "account_number", "stage": "transfer", "label": "입금 계좌번호", "required": true, "subject": "deposit"},
+    {"slot": "account_holder", "stage": "transfer", "label": "입금 계좌 예금주 명의", "required": true},
+    {"slot": "shipment_sent", "stage": "transfer", "label": "판매자 발송 여부", "required": false},
+    {"slot": "tracking_number", "stage": "transfer", "label": "송장번호", "required": false},
+    {"slot": "receipt_number", "stage": "receipt", "label": "신고 접수번호", "required": true},
+    {"slot": "receipt_time", "stage": "receipt", "label": "신고 접수 일시", "required": true},
+    {"slot": "investigator", "stage": "investigation", "label": "담당 수사관", "required": true},
+    {"slot": "case_number", "stage": "investigation", "label": "사건번호", "required": true}
+  ]
+}
