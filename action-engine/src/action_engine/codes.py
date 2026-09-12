@@ -8,6 +8,14 @@
 제외한 8개(ST-203·204, INF-022·031·032·033, TIM-022·032·033)는 자동 판정이
 원리적으로 불가능하거나 사용자가 자료를 구할 수 없어서 뺐다. 되살릴 때는
 여기에 코드를 추가하고 rules.json 에 줄을 하나 넣으면 된다.
+
+TIM-014 는 기획 목록에 없던 코드를 나중에 추가한 것이다. 수사중지 결정에 대한
+이의제기는 통지 수령일부터 30일(경찰수사규칙 제101조)인데, 장기·미제 사건의
+출발점이 바로 수사중지(ST-201/202)라 담을 자리가 반드시 필요했다.
+
+같은 이유로 TIM-041 의 이름을 '상시 재수사 요청'에서 '상시 진정·자료 제출'로
+바꿨다. '재수사 요청'은 검사가 사법경찰관에게 하는 절차(형사소송법 제245조의8)이고
+시민이 하는 절차가 아니어서, 그 이름이 남아 있으면 화면이 없는 절차를 안내하게 된다.
 """
 
 from __future__ import annotations
@@ -59,6 +67,7 @@ class TIM(StrEnum):
     APPEAL_NO_REFERRAL = "TIM-011"  # 불송치 이의신청
     APPEAL_PROSECUTION = "TIM-012"  # 검찰 항고 기한
     ADJUDICATION = "TIM-013"  # 법원 재정신청 기한
+    APPEAL_SUSPENSION = "TIM-014"  # 수사중지 이의제기 기한
     STATUTE_LIMITATION = "TIM-021"  # 형사 공소시효 임박
     DIGITAL_RETENTION = "TIM-031"  # 디지털 데이터 보존 기한
     ALWAYS_REINVESTIGATION = "TIM-041"  # 상시 재수사 요청
@@ -92,9 +101,10 @@ LABELS: dict[str, str] = {
     TIM.APPEAL_NO_REFERRAL: "불송치 이의신청",
     TIM.APPEAL_PROSECUTION: "검찰 항고 기한",
     TIM.ADJUDICATION: "법원 재정신청 기한",
+    TIM.APPEAL_SUSPENSION: "수사중지 이의제기 기한",
     TIM.STATUTE_LIMITATION: "형사 공소시효 임박",
     TIM.DIGITAL_RETENTION: "디지털 데이터 보존 기한",
-    TIM.ALWAYS_REINVESTIGATION: "상시 재수사 요청",
+    TIM.ALWAYS_REINVESTIGATION: "상시 진정·자료 제출",
     TIM.ALWAYS_DISCLOSURE: "상시 정보공개청구",
 }
 

@@ -2,22 +2,23 @@
   "hit_policy": "PRIORITY",
   "sort_principle": "놓치면 영원히 못 하는 것 → 시간이 걸리는 것 → 나중에도 할 수 있는 것",
   "note": "순서는 회복 불가능성에서 도출된다. 순서를 바꾸고 싶으면 줄 순서만 바꾼다. 새 코드가 생기면 줄을 하나 추가한다.",
+  "expired_note": "이미 지난 기한(severity=expired)은 규칙을 발화시키지 않는다. 닫힌 경로를 '다음 행동'으로 안내하면 안 되기 때문이다. 만료 사실은 카드의 tim 목록에 그대로 남으므로 화면이 따로 알릴 수 있다.",
   "rules": [
     {
       "no": 1,
-      "when": {"tim_severity": ["expired", "critical"], "tim_code": ["TIM-021"]},
+      "when": {"tim_severity": ["critical"], "tim_code": ["TIM-021"]},
       "action": "ACT-공소시효",
       "why": "공소시효가 지나면 사건 자체가 소멸한다"
     },
     {
       "no": 2,
-      "when": {"tim_severity": ["expired", "critical"], "tim_code": ["TIM-011", "TIM-012", "TIM-013"]},
+      "when": {"tim_severity": ["critical"], "tim_code": ["TIM-011", "TIM-012", "TIM-013", "TIM-014"]},
       "action": "ACT-불복기한",
       "why": "기한이 지나면 그 불복 경로가 소멸한다"
     },
     {
       "no": 3,
-      "when": {"tim_severity": ["expired", "critical"], "tim_code": ["TIM-031"]},
+      "when": {"tim_severity": ["critical"], "tim_code": ["TIM-031"]},
       "action": "ACT-증거보존",
       "why": "보존 기한이 지나면 증거가 소멸한다"
     },
