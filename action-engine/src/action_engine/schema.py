@@ -47,6 +47,8 @@ class Deadline(BaseModel):
     severity: str = "unknown"  # expired / critical / soon / ok / unknown
     statute: str | None = Field(default=None, description="근거 법령. 지식베이스에서만 온다")
     unresolved: str | None = Field(default=None, description="계산을 막은 이유")
+    advisory: str | None = Field(default=None, description="기한은 없지만 알려줄 것")
+    submit_to: str | None = Field(default=None, description="제출처. 지식베이스에서만 온다")
 
 
 class CheckItem(BaseModel):

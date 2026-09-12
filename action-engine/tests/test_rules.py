@@ -71,18 +71,52 @@ def test_발화한_규칙번호와_근거코드가_결과에_실린다():
 
 
 def test_기한값이_비어있으면_Dday를_만들지_않는다():
-    """지식베이스가 비어 있는 지금은 이게 정상 동작이다."""
-    tims = compute_deadlines(state(st=ST.POLICE_NO_REFERRAL), {"decision_time": date(2026, 8, 20)})
-    t011 = next(t for t in tims if t.code == "TIM-011")
-    assert t011.days_left is None
-    assert t011.due_date is None
-    assert "법령 확인" in t011.unresolved
+    """공소시효는 죄명표가 없어 아직 못 채웠다. 그때는 D-day 를 만들지 않는다."""
+    t021 = next(t for t in compute_deadlines(state()) if t.code == "TIM-021")
+    assert t021.days_left is None
+    assert t021.due_date is None
+    assert t021.unresolved
 
 
 def test_기산일을_못_찾으면_이유를_남긴다():
-    tims = compute_deadlines(state(st=ST.POLICE_NO_REFERRAL), {})
-    t011 = next(t for t in tims if t.code == "TIM-011")
-    assert "찾지 못했" in t011.unresolved
+    """기한은 채워졌는데 기산일이 없는 경우 — 항고 기한 30일."""
+    t012 = next(t for t in compute_deadlines(state(st=ST.PROSECUTION_NO_CHARGE), {}) if t.code == "TIM-012")
+    assert t012.days_left is None
+    assert "찾지 못했" in t012.unresolved
+
+
+def test_불송치_이의신청은_기한이_없다():
+    """형사소송법 제245조의7 에 기간 규정이 없다. '못 채운 것'이 아니라 '없는 것'이다."""
+    t011 = next(t for t in compute_deadlines(state(st=ST.POLICE_NO_REFERRAL)) if t.code == "TIM-011")
+    assert t011.unresolved is None  # 화면에 "확인 필요"를 띄우면 안 된다
+    assert t011.severity == "ok"
+    assert t011.advisory and "조속한" in t011.advisory
+    assert t011.statute == "형사소송법 제245조의7"
+
+
+def test_채워진_기한은_실제로_계산된다():
+    """검찰 항고 30일 — 검찰청법 제10조."""
+    t012 = next(
+        t for t in compute_deadlines(state(st=ST.PROSECUTION_NO_CHARGE), {"decision_time": date(2026, 9, 1)})
+        if t.code == "TIM-012"
+    )
+    assert t012.period_days == 30
+    assert t012.due_date == date(2026, 10, 1)
+    assert t012.days_left == 20
+    assert t012.severity == "soon"
+    assert t012.submit_to and "고등검찰청" in t012.submit_to
+
+
+def test_재정신청은_10일이다():
+    """형사소송법 제260조 제3항."""
+    t013 = next(
+        t for t in compute_deadlines(state(st=ST.APPEAL_PENDING), {"decision_time": date(2026, 9, 8)})
+        if t.code == "TIM-013"
+    )
+    assert t013.period_days == 10
+    assert t013.due_date == date(2026, 9, 18)
+    assert t013.days_left == 7
+    assert t013.severity == "critical"  # 7일 이하
 
 
 def test_죄명이_필요한_공소시효는_계산하지_않는다():
@@ -105,14 +139,36 @@ def test_단계에_맞는_기한만_나온다():
     assert "TIM-012" not in codes  # 불기소 기한은 해당 없음
 
 
-def test_기한값은_전부_미검증_표시다():
-    """값을 추측으로 채우지 않았다는 것을 테스트로 고정한다."""
+def test_기한에는_반드시_출처가_붙는다():
+    """출처 없는 기한은 넣지 않는다. 값을 추측으로 채우지 못하게 막는 장치."""
     kb = load_deadlines()
-    assert kb["status"] == "draft_unverified"
+    assert kb["status"] == "draft_unverified"  # 법률 전문가 검수 전
     for row in kb["deadlines"]:
-        if not row.get("unlimited"):
-            assert row["period_days"] is None, f"{row['code']} 에 검증 안 된 기한이 들어갔습니다"
-            assert row["statute"] is None
+        if row.get("period_days") is not None:
+            assert row.get("statute"), f"{row['code']} 에 근거 법령이 없습니다"
+            assert row.get("source"), f"{row['code']} 에 출처 URL 이 없습니다"
+
+
+def test_기한없음과_못채움을_구별한다():
+    """'법정 기한 없음'과 '아직 못 채움'은 다른 상태다.
+
+    사용자에게 "기한 제한이 없습니다"는 그 자체로 필요한 정보이고,
+    "아직 확인 못 했습니다"는 화면에 아무것도 띄우면 안 되는 상태다.
+    """
+    rows = {r["code"]: r for r in load_deadlines()["deadlines"]}
+    assert rows["TIM-011"]["no_statutory_limit"] is True  # 불송치 이의신청 — 조문에 기간 규정 없음
+    assert rows["TIM-021"].get("no_statutory_limit") is None  # 공소시효 — 있는데 못 채운 것
+    assert rows["TIM-021"]["period_days"] is None
+
+
+def test_매핑못한_절차를_따로_기록한다():
+    """TIM 코드에 자리가 없는 절차를 조용히 버리지 않는다."""
+    kb = load_deadlines()
+    unmapped = {u["procedure"]: u for u in kb.get("unmapped", [])}
+    u = unmapped["수사중지 결정에 대한 이의제기"]
+    assert u["period_days"] == 30
+    assert u["applies_to_st"] == ["ST-201", "ST-202"]  # 장기미제의 출발점
+    assert u["why_unmapped"] and u["source"]
 
 
 def test_기한이_채워지면_계산된다(monkeypatch):
