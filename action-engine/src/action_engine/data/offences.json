@@ -1,0 +1,102 @@
+{
+  "status": "draft_unverified",
+  "note": "죄명 → 법정형 매핑. 공소시효는 법정형(선고형이 아니다)으로 구간이 갈리는데 사용자는 죄명으로 말한다. 이 표가 그 사이를 잇는다. 장기·미제 사건에 실제로 나오는 죄명부터 채웠고, 나머지는 비워 두었다.",
+  "filled_at": "2026-09-12",
+  "bracket_note": "bracket 은 statute_limitations.json 의 brackets 와 같은 문자열이어야 한다. 값이 어긋나면 계산이 조용히 틀린다.",
+
+  "offences": [
+    {
+      "name": "살인",
+      "aliases": ["살인죄", "사람을 살해"],
+      "statute": "형법 제250조 제1항",
+      "penalty": "사형, 무기 또는 5년 이상의 징역",
+      "bracket": "사형",
+      "source": "https://casenote.kr/법령/형법/제250조",
+      "limitation_abolished": true,
+      "abolition_basis": "형사소송법 제253조의2 (사람을 살해한 범죄로 사형에 해당하는 범죄)"
+    },
+    {
+      "name": "존속살해",
+      "statute": "형법 제250조 제2항",
+      "penalty": "사형, 무기 또는 7년 이상의 징역",
+      "bracket": "사형",
+      "source": "https://casenote.kr/법령/형법/제250조",
+      "limitation_abolished": true,
+      "abolition_basis": "형사소송법 제253조의2"
+    },
+    {
+      "name": "강도살인",
+      "statute": "형법 제338조 전단",
+      "penalty": "사형 또는 무기징역",
+      "bracket": "사형",
+      "source": "https://casenote.kr/법령/형법/제338조",
+      "limitation_abolished": true,
+      "abolition_basis": "형사소송법 제253조의2"
+    },
+    {
+      "name": "강도치사",
+      "statute": "형법 제338조 후단",
+      "penalty": "무기 또는 10년 이상의 징역",
+      "bracket": "무기징역 또는 무기금고",
+      "source": "https://casenote.kr/법령/형법/제338조",
+      "limitation_abolished": false,
+      "note": "살해의 고의가 없으므로 시효 폐지 대상이 아니다. 신법 15년 / 구법 10년"
+    },
+    {
+      "name": "상해치사",
+      "statute": "형법 제259조 제1항",
+      "penalty": "3년 이상의 유기징역",
+      "bracket": "장기 10년 이상의 징역 또는 금고",
+      "source": "https://casenote.kr/법령/형법/제259조",
+      "limitation_abolished": false,
+      "note": "유기징역의 상한이 30년(가중 시 50년)이므로 '장기 10년 이상' 구간이다. 신법 10년 / 구법 7년"
+    },
+    {
+      "name": "존속상해치사",
+      "statute": "형법 제259조 제2항",
+      "penalty": "무기 또는 5년 이상의 징역",
+      "bracket": "무기징역 또는 무기금고",
+      "source": "https://casenote.kr/법령/형법/제259조",
+      "limitation_abolished": false
+    },
+    {
+      "name": "사기",
+      "aliases": ["사기죄", "중고거래 사기"],
+      "statute": "형법 제347조 제1항",
+      "penalty": "10년 이하의 징역 또는 2천만원 이하의 벌금",
+      "bracket": "장기 10년 이상의 징역 또는 금고",
+      "source": "https://casenote.kr/법령/형법/제347조",
+      "limitation_abolished": false,
+      "note": "신법 10년 / 구법 7년. 특정경제범죄가중처벌법이 적용되는 고액 사기는 법정형이 달라 별도 확인이 필요하다"
+    }
+  ],
+
+  "not_filled": [
+    {
+      "name": "약취·유인",
+      "statute": "형법 제287조 이하",
+      "why": "실종 사건에서 자주 나오는데 대상(미성년자·성년)과 목적(추행·영리·국외이송)마다 법정형이 갈린다. 조문별로 하나씩 확인해야 한다"
+    },
+    {
+      "name": "성폭력범죄",
+      "statute": "성폭력범죄의 처벌 등에 관한 특례법 제21조",
+      "why": "이 표 구조로는 담을 수 없다. 기간이 아니라 기산점과 배제 규칙이 다르다 — 미성년자 대상은 피해자가 성년이 된 날부터 기산하고, DNA 등 증거가 있으면 10년 연장되며, 13세 미만·장애인 대상 일부는 시효가 배제된다",
+      "needs": "offences 에 special_rule 필드를 두고 limitation.py 에 분기를 넣어야 한다. 지금 구조로 넣으면 조용히 틀린 값이 나온다"
+    },
+    {
+      "name": "특정경제범죄 가중처벌 대상 사기",
+      "statute": "특정경제범죄 가중처벌 등에 관한 법률 제3조",
+      "why": "이득액 5억 이상이면 법정형이 올라가 시효 구간이 달라진다. 이득액을 알아야 판정되므로 입력 항목이 먼저 필요하다"
+    }
+  ],
+
+  "how_to_use": [
+    "1. 죄명으로 이 표에서 bracket 을 찾는다",
+    "2. limitation_abolished 가 true 면 시효가 없다 (단 시행일 당시 이미 완성된 사건은 제외)",
+    "3. 아니면 범행 종료일로 statute_limitations.json 의 버전(current/old)을 고른다",
+    "4. 그 버전의 brackets 에서 같은 bracket 문자열을 찾아 years 를 얻는다",
+    "5. 범행 종료일 + years 가 만료일이다 (시효 정지 기간은 빼지 않았다)"
+  ],
+
+  "warning": "이 표에 없는 죄명은 계산하지 않는다. 비슷해 보이는 죄명으로 대신 계산하면 안 된다 — 법정형이 한 구간만 달라도 시효가 5년 이상 차이 난다."
+}

@@ -30,19 +30,50 @@ def _kb(monkeypatch, items):
 
 def test_필요서류가_비어있으면_체크리스트를_만들지_않는다():
     """기한과 같은 원칙. 없는 것을 지어내면 신청이 반려된다."""
-    c = build_checklist("ACT-기록열람", DOCS)
+    c = build_checklist("ACT-근거보완", DOCS)
     assert c.items == []
     assert c.total == 0
     assert "법령·서식 확인" in c.unresolved
 
 
-def test_모든_액션의_필요서류가_비어있다():
-    """값을 추측으로 채우지 않았다는 것을 테스트로 고정한다."""
+def test_서류를_채웠으면_근거가_붙는다():
+    """채운 액션에는 서식명과 제출처가 있어야 한다. 비운 액션에는 무엇을 확인할지가 있어야 한다."""
     kb = load_documents()
-    assert kb["status"] == "draft_unverified"
+    assert kb["status"] == "draft_unverified"  # 법률 전문가 검수 전
     for action, entry in kb["actions"].items():
-        assert entry["items"] == [], f"{action} 에 검수 안 된 서류가 들어갔습니다"
-        assert entry["check"], f"{action} 에 무엇을 확인해야 하는지가 없습니다"
+        if entry.get("items"):
+            assert entry.get("form_name"), f"{action} 에 서식명이 없습니다"
+            assert entry.get("submit_to"), f"{action} 에 제출처가 없습니다"
+        elif not entry.get("by_stage"):
+            assert entry.get("check"), f"{action} 에 무엇을 확인해야 하는지가 없습니다"
+
+
+def test_단계마다_서류가_다르면_ST로_갈라_조회한다():
+    """'불복'은 불송치면 이의신청서, 불기소면 항고장, 수사중지면 이의제기서다."""
+    c1 = build_checklist("ACT-불복기한", DOCS, st="ST-301")
+    assert c1.form_name == "불송치 결정 이의신청서"
+    assert "경찰수사규칙 별지" not in (c1.form_url or "")  # URL 은 다운로드 주소다
+    assert c1.form_url and c1.form_url.startswith("http")
+
+    c2 = build_checklist("ACT-불복기한", DOCS, st="ST-201")
+    assert c2.form_name == "수사중지 결정 이의제기서"
+    assert "상급경찰관서" in c2.submit_to
+
+    c3 = build_checklist("ACT-불복기한", DOCS, st="ST-302")
+    assert c3.form_name == "항고장"
+    assert "고등검찰청" in c3.submit_to
+
+
+def test_아직_못_채운_액션은_체크리스트를_만들지_않는다():
+    c = build_checklist("ACT-근거보완", DOCS)
+    assert c.items == []
+    assert "확인 필요" in c.unresolved
+
+
+def test_재정신청은_선행절차를_알려준다():
+    c = build_checklist("ACT-불복기한", DOCS, st="ST-303")
+    assert c.form_name == "재정신청서"
+    assert c.prerequisite and "항고" in c.prerequisite
 
 
 def test_모르는_액션도_깨지지_않는다():

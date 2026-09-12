@@ -48,7 +48,11 @@ def _severity(days_left: int | None) -> str:
     return "ok"
 
 
-def compute_deadlines(state: CaseState, basis: dict[str, date | None] | None = None) -> list[Deadline]:
+def compute_deadlines(
+    state: CaseState,
+    basis: dict[str, date | None] | None = None,
+    offence: str | None = None,
+) -> list[Deadline]:
     """D3 — 기한 산출.
 
     ``period_days`` 나 기산일이 없으면 D-day 를 만들지 않고 ``unresolved`` 에 이유를 적는다.
@@ -75,7 +79,29 @@ def compute_deadlines(state: CaseState, basis: dict[str, date | None] | None = N
             out.append(d)
             continue
 
-        missing = [k for k in row.get("requires", [])]
+        # 공소시효는 죄명 → 법정형 → 기간표를 거쳐야 해서 별도 계산기를 쓴다
+        if code == "TIM-021":
+            from .limitation import compute_limitation
+
+            r = compute_limitation(offence, basis.get("incident_end"), state.as_of)
+            if not r["resolved"]:
+                d.unresolved = r["reason"]
+            elif r.get("abolished"):
+                d.severity = "ok"
+                d.advisory = f"{r['offence']} — {r['note']}"
+                d.statute = r.get("basis")
+            else:
+                d.basis_date = r["incident_end"]
+                d.period_days = r["years"] * 365
+                d.due_date = r["due_date"]
+                d.days_left = r["days_left"]
+                d.severity = _severity(r["days_left"])
+                d.statute = r["statute"]
+                d.advisory = f"{r['version_note']} ({r['years']}년). {r['caveat']}"
+            out.append(d)
+            continue
+
+        missing = [k for k in row.get("requires", []) if k != "죄명"]
         if missing:
             d.unresolved = f"{', '.join(missing)} 정보가 없어 계산할 수 없습니다"
             out.append(d)
@@ -170,7 +196,9 @@ def run(result: dict[str, Any]) -> ActionDecision:
     basis.setdefault("decision_time", _parse_date((slots.get("decision_time") or {}).get("value")))
     basis.setdefault("incident_end", _parse_date((slots.get("last_seen_time") or {}).get("value")))
     basis.setdefault("document_created", None)
-    state.tim = compute_deadlines(state, basis)
+    # 죄명은 research-engine 이 아직 뽑지 않는다. 슬롯에 생기면 여기서 넘어간다.
+    offence = (slots.get("offence") or {}).get("value")
+    state.tim = compute_deadlines(state, basis, offence=offence)
     return decide(state)
 
 
@@ -188,6 +216,7 @@ def build_card(result: dict[str, Any]) -> CaseCardOut:
         decision.main.action if decision.main else None,
         result.get("documents", []),
         decision.state.tim,
+        st=decision.state.st.code,
     )
     return CaseCardOut(
         case_type=card.get("case_type", result.get("case_type", "")),

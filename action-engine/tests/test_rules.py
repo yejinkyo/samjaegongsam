@@ -161,14 +161,53 @@ def test_기한없음과_못채움을_구별한다():
     assert rows["TIM-021"]["period_days"] is None
 
 
-def test_매핑못한_절차를_따로_기록한다():
-    """TIM 코드에 자리가 없는 절차를 조용히 버리지 않는다."""
-    kb = load_deadlines()
-    unmapped = {u["procedure"]: u for u in kb.get("unmapped", [])}
-    u = unmapped["수사중지 결정에 대한 이의제기"]
-    assert u["period_days"] == 30
-    assert u["applies_to_st"] == ["ST-201", "ST-202"]  # 장기미제의 출발점
-    assert u["why_unmapped"] and u["source"]
+def test_수사중지_이의제기는_30일이다():
+    """장기·미제 사건의 출발점. 경찰수사규칙 제101조."""
+    t014 = next(
+        t for t in compute_deadlines(state(st=ST.SUSPENDED_SUSPECT), {"decision_time": date(2026, 9, 1)})
+        if t.code == "TIM-014"
+    )
+    assert t014.period_days == 30
+    assert t014.due_date == date(2026, 10, 1)
+    assert t014.severity == "soon"
+    assert "상급경찰관서" in t014.submit_to  # 결정한 경찰서가 아니다
+    assert "제101조" in t014.statute
+
+
+def test_수사중지_기한임박이_규칙2번을_발화시킨다():
+    """TIM-014 를 만들기 전에는 이 상태에서 기한 규칙이 아예 안 걸렸다."""
+    s = state(st=ST.SUSPENDED_SUSPECT)
+    s.tim = compute_deadlines(s, {"decision_time": date(2026, 8, 18)})  # 30일 중 6일 남음
+    d = decide(s)
+    assert d.main.rule_no == 2
+    assert d.main.action == "ACT-불복기한"
+    assert "TIM-014" in d.main.codes
+
+
+def test_이미_지난_기한은_다음_행동이_되지_않는다():
+    """닫힌 경로를 '지금 하세요'로 안내하면 안 된다.
+
+    장기·미제 사건은 결정이 몇 년 전인 경우가 대부분이라 기한이 지나 있다.
+    그때 "이의제기 하세요"를 1순위로 띄우면 잘못된 안내가 된다.
+    만료 사실은 tim 목록에 남으므로 화면이 따로 알릴 수 있다.
+    """
+    s = state(st=ST.SUSPENDED_SUSPECT, inf=[INF.NEW_STATEMENT])
+    s.tim = compute_deadlines(s, {"decision_time": date(2022, 3, 15)})  # 4년 전
+    t014 = next(t for t in s.tim if t.code == "TIM-014")
+    assert t014.severity == "expired"  # 만료 사실은 남는다
+
+    d = decide(s)
+    assert d.main.rule_no == 5  # 기한이 아니라 신규 정보가 1순위
+    assert d.main.action == "ACT-신규정보제출"
+    assert not any("TIM-014" in h.codes for h in [d.main, *d.also])
+
+
+def test_정정_내역을_기록으로_남긴다():
+    """수집 자료를 고친 곳은 근거와 함께 남긴다. 나중에 왜 바꿨는지 추적할 수 있어야 한다."""
+    corrections = load_deadlines()["corrections"]
+    assert len(corrections) >= 2
+    for c in corrections:
+        assert c["fixed"] and c["why_it_matters"] and c["verified_at"]
 
 
 def test_기한이_채워지면_계산된다(monkeypatch):
@@ -202,8 +241,12 @@ def test_실제_출력으로_끝까지_돈다(missing):
     d = run(missing)
     assert d.state.st.code == ST.SUSPENDED_SUSPECT
     assert d.main is not None and d.main.why
-    assert d.state.tim  # 기한 항목은 나오되 값은 비어 있다
-    assert all(t.days_left is None for t in d.state.tim if t.code != "TIM-041")
+    assert d.state.tim
+    # 수사중지 이의제기 30일은 계산되지만 2022년 결정이라 이미 지났다
+    t014 = next(t for t in d.state.tim if t.code == "TIM-014")
+    assert t014.severity == "expired"
+    # 공소시효·디지털 보존은 아직 못 채운 값이라 D-day 가 없다
+    assert all(t.days_left is None for t in d.state.tim if t.code in ("TIM-021", "TIM-031"))
 
 
 def test_사기_사건도_끝까지_돈다(fraud):
