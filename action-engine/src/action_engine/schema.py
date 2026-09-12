@@ -49,6 +49,29 @@ class Deadline(BaseModel):
     unresolved: str | None = Field(default=None, description="계산을 막은 이유")
 
 
+class CheckItem(BaseModel):
+    """제출 준비물 하나. '미보유'와 '확보불가'는 다른 정보다 — 후자는 다른 경로를 안내해야 한다."""
+
+    label: str
+    required: bool = False
+    state: str = "미보유"  # 보유 / 미보유 / 생성가능 / 확보불가
+    reason: str | None = None
+    doc_ids: list[str] = Field(default_factory=list, description="이 항목을 채운 자료함 문서")
+
+
+class Checklist(BaseModel):
+    """5단계 대조 결과.
+
+    ``unresolved`` 가 차 있으면 사전에 필요 서류가 없다는 뜻이고, 화면은 아무것도 그리지 않는다.
+    """
+
+    action: str | None = None
+    items: list[CheckItem] = Field(default_factory=list)
+    done: int = 0
+    total: int = 0
+    unresolved: str | None = None
+
+
 class CaseState(BaseModel):
     """29개 코드로 본 사건의 현재 상태."""
 
@@ -113,4 +136,5 @@ class CaseCardOut(BaseModel):
     tim: list[Deadline] = Field(default_factory=list)
     next_action: RuleHit | None = Field(default=None, description="우선순위 규칙이 고른 하나")
     also: list[RuleHit] = Field(default_factory=list, description="참고사항")
+    checklist: Checklist | None = Field(default=None, description="5단계 대조 — 제출 준비물")
     procedure: None = Field(default=None, description="절차 문구 자리. 지식베이스가 붙기 전까지 항상 None")

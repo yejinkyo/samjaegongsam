@@ -177,8 +177,15 @@ def build_card(result: dict[str, Any]) -> CaseCardOut:
     research-engine 의 ``CaseCard`` 를 통과시키고 기능 2가 판정한 값을 덧붙인다.
     화면은 이 함수의 결과만 읽으면 되고, research-engine 출력을 따로 뒤지지 않는다.
     """
+    from .checklist import build_checklist
+
     decision = run(result)
     card = result.get("analysis", {}).get("case_card", {}) or {}
+    checklist = build_checklist(
+        decision.main.action if decision.main else None,
+        result.get("documents", []),
+        decision.state.tim,
+    )
     return CaseCardOut(
         case_type=card.get("case_type", result.get("case_type", "")),
         case_type_label=card.get("case_type_label", ""),
@@ -195,4 +202,5 @@ def build_card(result: dict[str, Any]) -> CaseCardOut:
         tim=decision.state.tim,
         next_action=decision.main,
         also=decision.also,
+        checklist=checklist,
     )
