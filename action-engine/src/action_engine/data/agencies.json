@@ -1,0 +1,25 @@
+{
+  "status": "empty",
+  "note": "전국 경찰서·검찰청·법원의 관할과 주소·연락처. 수천 건이라 검색으로 만들 수 없고 공공데이터 파일을 받아 넣어야 한다. 지금은 자리만 만들어 두었다 — 비어 있으면 화면은 기관 이름만 보여주고 주소·연락처는 그리지 않는다.",
+
+  "why_needed": "제출처를 '바로 위 상급경찰관서의 장'처럼 말로만 알려주면 사용자가 어디로 가야 하는지 모른다. 30일 기한이 있는 절차에서 이건 실패로 이어진다.",
+
+  "how_to_fill": [
+    "1. 공공데이터포털(data.go.kr)에서 아래 데이터셋을 받는다",
+    "2. agencies 배열에 {type, name, region, address, phone, parent} 형태로 넣는다",
+    "3. parent 는 상급관서 이름 — '바로 위 상급경찰관서' 를 찾는 데 쓴다",
+    "4. deadlines.json 의 submit_to 문구와 이 표를 이어 붙이면 구체적인 주소가 나온다"
+  ],
+
+  "sources": [
+    {"what": "전국 경찰관서 현황", "where": "https://www.data.go.kr", "note": "경찰청 제공. 지구대·파출소까지 포함되므로 경찰서 단위만 걸러야 한다"},
+    {"what": "검찰청 관할 구역", "where": "https://www.spo.go.kr", "note": "지방검찰청·지청과 그 상급 고등검찰청 관계가 필요하다"},
+    {"what": "법원 관할 구역", "where": "https://www.scourt.go.kr", "note": "재정신청 관할 고등법원"},
+    {"what": "대한법률구조공단 사무소", "where": "https://www.klac.or.kr"},
+    {"what": "스마일센터", "where": "https://www.resmile.or.kr"}
+  ],
+
+  "agencies": [],
+
+  "blocked": "공공데이터 파일을 받아야 채울 수 있다. 검색으로 몇 건씩 채우면 빠진 관할이 생기고, 사용자가 자기 지역을 못 찾으면 없는 것과 같다."
+}

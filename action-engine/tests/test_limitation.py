@@ -17,8 +17,8 @@ def test_별칭으로도_찾는다():
 
 def test_표에_없는_죄명은_계산하지_않는다():
     """비슷해 보이는 죄명으로 대신 계산하면 안 된다. 한 구간만 달라도 시효가 5년 이상 차이 난다."""
-    assert find_offence("상해치사") is None  # not_filled 에 있다
-    r = compute_limitation("상해치사", date(2010, 1, 1), TODAY)
+    assert find_offence("약취유인") is None  # not_filled 에 있다
+    r = compute_limitation("약취유인", date(2010, 1, 1), TODAY)
     assert r["resolved"] is False
     assert "찾지 못했" in r["reason"]
 
