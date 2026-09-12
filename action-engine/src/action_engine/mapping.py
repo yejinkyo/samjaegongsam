@@ -98,7 +98,8 @@ def resolve_st(result: dict[str, Any]) -> CodeHit:
     slots = _slot_map(result)
     decision = slots.get("decision_type") or {}
     value = (decision.get("value") or "").strip()
-    doc_ids = [s["source_doc_id"] for s in decision.get("sources", [])]
+    # 같은 문서의 여러 줄이 근거일 수 있다. 화면에는 문서 이름을 한 번만 보여준다.
+    doc_ids = list(dict.fromkeys(s["source_doc_id"] for s in decision.get("sources", [])))
 
     if value:
         for needles, excludes, code, conf in DECISION_TABLE:
