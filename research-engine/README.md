@@ -22,15 +22,17 @@ uv run research-engine run tests/fixtures/used_goods_fraud/case.json --out out/r
 uv run research-engine schema --out-dir out/schemas
 ```
 
-예시 사례 두 개가 OCR 결과 형태로 들어 있다 (인물·사건은 가상).
+예시 사례 세 개가 OCR 결과 형태로 들어 있다 (인물·사건은 가상).
 
 | 픽스처 | 사건 유형 | 자료 |
 |---|---|---|
 | `tests/fixtures/used_goods_fraud/` | `used_goods_fraud` | 목업의 중고거래 사기 — 메신저 캡처, 이체확인증, 접수증, 손글씨 메모, 진술서 |
 | `tests/fixtures/long_unsolved_missing/` | `missing_person_suspended` | 장기 미제 실종 — 2015 실종신고 접수증, 2016 보도, 2019 목격자 진술서, 2022 수사중지 결정 통지서, 2023 진정서, 가족 손글씨 메모 |
+| `tests/fixtures/investigation_suspended/` | `investigation_suspended` | 수사중지 — 2021 고소장·접수증, 2023 참고인중지 결정 통지서, 2025 목격 진술서 (실종 서식이 없는 일반 수사중지 유형) |
 
 ```bash
 uv run research-engine run tests/fixtures/long_unsolved_missing/case.json --out out/long.json
+uv run research-engine run tests/fixtures/investigation_suspended/case.json --out out/suspended.json
 ```
 
 ## 원칙이 코드에 들어간 자리
