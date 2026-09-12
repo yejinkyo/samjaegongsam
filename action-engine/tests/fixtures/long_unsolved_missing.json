@@ -5593,27 +5593,12 @@
         "stage": "outcome",
         "required": true,
         "state": "confirmed",
-        "value": "수사중지",
+        "value": "수사중지(피의자중지)",
         "claim_ids": [
-          "suspension_notice_2022:c4",
-          "suspension_notice_2022:c7"
+          "suspension_notice_2022:c7",
+          "suspension_notice_2022:c4"
         ],
         "sources": [
-          {
-            "source_doc_id": "suspension_notice_2022",
-            "page": 1,
-            "source_line": 1,
-            "source_line_end": null,
-            "source_bbox": {
-              "x0": 40.0,
-              "y0": 40.0,
-              "x1": 282.0,
-              "y1": 84.0
-            },
-            "char_start": 0,
-            "char_end": 11,
-            "quote": "수사중지 결정 통지서"
-          },
           {
             "source_doc_id": "suspension_notice_2022",
             "page": 1,
@@ -5628,6 +5613,21 @@
             "char_start": 0,
             "char_end": 16,
             "quote": "결정내용 수사중지(피의자중지)"
+          },
+          {
+            "source_doc_id": "suspension_notice_2022",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 282.0,
+              "y1": 84.0
+            },
+            "char_start": 0,
+            "char_end": 11,
+            "quote": "수사중지 결정 통지서"
           }
         ]
       },
