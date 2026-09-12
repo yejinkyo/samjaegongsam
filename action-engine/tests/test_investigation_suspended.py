@@ -45,12 +45,20 @@ def test_다음_행동은_신규_정보_제출이다(suspended):
     assert card.source_trigger["key"] == "investigation_suspended/occurrence/new_fact/unrecorded_fact"
 
 
-def test_기한은_하나도_계산하지_않는다(suspended):
-    """중지 사건에는 불복 기한이 없고, 공소시효는 죄명 없이 계산할 수 없다."""
+def test_이의제기_기한은_이미_지났고_공소시효는_계산할_수_없다(suspended):
+    """중지 사건에도 불복 기한이 있다 — 통지 수령일부터 30일(경찰수사규칙 제101조).
+
+    2023년 결정이라 이미 지났다. 만료 사실은 남기되 '다음 행동'으로는 올리지 않는다.
+    공소시효는 죄명이 없어 계산 자체가 불가능하다.
+    """
     deadlines = {d.code: d for d in build_card(suspended).tim}
+    t014 = deadlines[TIM.APPEAL_SUSPENSION]
+    assert t014.period_days == 30
+    assert t014.severity == "expired"
+    assert "상급경찰관서" in t014.submit_to
+
     assert deadlines[TIM.STATUTE_LIMITATION].due_date is None
     assert "죄명" in deadlines[TIM.STATUTE_LIMITATION].unresolved
-    assert all(d.due_date is None for d in deadlines.values())
     assert TIM.ALWAYS_REINVESTIGATION in deadlines  # 상시 가능한 것은 남는다
 
 
