@@ -18,7 +18,7 @@ from pathlib import Path
 from typing import Any
 
 from .codes import label
-from .schema import ActionDecision, CaseState, Deadline, RuleHit
+from .schema import ActionDecision, CaseCardOut, CaseState, Deadline, RuleHit
 
 DATA = Path(__file__).parent / "data"
 
@@ -156,14 +156,43 @@ def decide(state: CaseState) -> ActionDecision:
 
 def run(result: dict[str, Any]) -> ActionDecision:
     """research-engine 출력 dict → 다음 행동 판정. 이 패키지의 입구."""
-    from .mapping import _parse_date, _slot_map, to_case_state
+    from .mapping import _parse_date, _slot_map, basis_from_triggers, to_case_state
 
     state = to_case_state(result)
     slots = _slot_map(result)
+    # 슬롯에서 먼저 찾고, 없으면 트리거의 since 로 메운다
     basis: dict[str, date | None] = {
-        "decision_time": _parse_date((slots.get("decision_time") or {}).get("value")),
-        "incident_end": _parse_date((slots.get("last_seen_time") or {}).get("value")),
-        "document_created": None,
+        **basis_from_triggers(result.get("analysis", {}).get("action_triggers", [])),
     }
+    basis.setdefault("decision_time", _parse_date((slots.get("decision_time") or {}).get("value")))
+    basis.setdefault("incident_end", _parse_date((slots.get("last_seen_time") or {}).get("value")))
+    basis.setdefault("document_created", None)
     state.tim = compute_deadlines(state, basis)
     return decide(state)
+
+
+def build_card(result: dict[str, Any]) -> CaseCardOut:
+    """화면이 읽을 카드 하나를 만든다.
+
+    research-engine 의 ``CaseCard`` 를 통과시키고 기능 2가 판정한 값을 덧붙인다.
+    화면은 이 함수의 결과만 읽으면 되고, research-engine 출력을 따로 뒤지지 않는다.
+    """
+    decision = run(result)
+    card = result.get("analysis", {}).get("case_card", {}) or {}
+    return CaseCardOut(
+        case_type=card.get("case_type", result.get("case_type", "")),
+        case_type_label=card.get("case_type_label", ""),
+        requirements_status=card.get("requirements_status", "unknown"),
+        stages=card.get("stages", []),
+        current_stage=card.get("current_stage"),
+        evidence_doc_count=card.get("evidence_doc_count", 0),
+        needs_confirmation_count=card.get("needs_confirmation_count", 0),
+        slots_done=card.get("slots_done", 0),
+        slots_total=card.get("slots_total", 0),
+        source_trigger=card.get("next_trigger"),
+        st=decision.state.st,
+        inf=decision.state.inf,
+        tim=decision.state.tim,
+        next_action=decision.main,
+        also=decision.also,
+    )

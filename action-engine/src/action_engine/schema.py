@@ -81,3 +81,36 @@ class ActionDecision(BaseModel):
     also: list[RuleHit] = Field(default_factory=list, description="동시에 맞은 나머지 규칙 (참고사항)")
     state: CaseState
     generated_at: datetime | None = None
+
+
+class CaseCardOut(BaseModel):
+    """화면이 읽는 최종 카드.
+
+    research-engine 의 ``CaseCard`` 를 그대로 담고 기능 2가 판정한 값을 덧붙인다.
+    화면은 이 객체 하나만 읽으면 된다 — research-engine 출력을 따로 뒤지지 않는다.
+
+        research-engine  ──CaseCard + ActionTrigger[]──▶  action-engine  ──CaseCardOut──▶  화면
+
+    앞쪽 필드는 research-engine 이 만든 값을 손대지 않고 통과시킨다. 기능 2가 채운 것은
+    ``st`` 아래부터다.
+    """
+
+    # ── research-engine CaseCard 통과 ──
+    case_type: str
+    case_type_label: str
+    requirements_status: str = Field(description="draft_unverified 면 화면에 '검수 전' 표시")
+    stages: list[dict] = Field(default_factory=list)
+    current_stage: str | None = None
+    evidence_doc_count: int = 0
+    needs_confirmation_count: int = 0
+    slots_done: int = 0
+    slots_total: int = 0
+    source_trigger: dict | None = Field(default=None, description="research-engine 이 고른 next_trigger 원본")
+
+    # ── action-engine 이 채운 값 ──
+    st: CodeHit
+    inf: list[CodeHit] = Field(default_factory=list)
+    tim: list[Deadline] = Field(default_factory=list)
+    next_action: RuleHit | None = Field(default=None, description="우선순위 규칙이 고른 하나")
+    also: list[RuleHit] = Field(default_factory=list, description="참고사항")
+    procedure: None = Field(default=None, description="절차 문구 자리. 지식베이스가 붙기 전까지 항상 None")

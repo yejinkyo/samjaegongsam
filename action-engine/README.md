@@ -19,16 +19,48 @@ uv run pytest
 
 ```python
 import json
-from action_engine import run
+from action_engine import build_card
 
 result = json.load(open("result.json", encoding="utf-8"))   # research-engine 출력
-decision = run(result)
+card = build_card(result)
 
-print(decision.state.st.code)        # ST-201
-print(decision.main.rule_no)         # 5
-print(decision.main.action)          # ACT-신규정보제출
-print(decision.main.why)             # 새 정보는 중지·종결된 절차를 되살릴 수 있다
+print(card.case_type_label)          # 실종 사건 · 수사중지
+print(card.st.code)                  # ST-201
+print(card.next_action.rule_no)      # 5
+print(card.next_action.action)       # ACT-신규정보제출
+print(card.next_action.why)          # 새 정보는 중지·종결된 절차를 되살릴 수 있다
+print(card.procedure)                # None — 지식베이스가 붙기 전까지
 ```
+
+## 연동 계약
+
+`research-engine`이 `schema/analysis.py`에 선언한 두 창구를 그대로 씁니다.
+
+> 이 스키마는 기능 2(나의 사건 카드)와 행동 강령 매칭 엔진이 **그대로 소비하도록** 설계했다.
+
+### `CaseCard` → `CaseCardOut`
+
+`build_card()`는 `CaseCard`를 **손대지 않고 통과시키고** 기능 2가 판정한 값을 덧붙입니다. 화면은 이 객체 하나만 읽으면 되고 `research-engine` 출력을 따로 뒤지지 않습니다.
+
+```
+research-engine ──CaseCard + ActionTrigger[]──▶ action-engine ──CaseCardOut──▶ 화면
+```
+
+| 통과시키는 것 | 덧붙이는 것 |
+|---|---|
+| `case_type_label` · `stages` · `current_stage` | `st` · `inf` · `tim` |
+| `evidence_doc_count` · `slots_done`/`slots_total` | `next_action` · `also` |
+| `requirements_status` · `needs_confirmation_count` | `procedure` (항상 `None`) |
+
+`research-engine`이 고른 `next_trigger`는 `source_trigger`에 원본 그대로 남깁니다. 우리 판정과 대조할 수 있게 하기 위해서입니다.
+
+### `ActionTrigger`를 1급 입력으로
+
+`inf_from_triggers()`는 `action_triggers[]`만 받아 INF를 판정합니다. `issues[]` 전체를 뒤지지 않아도 되고, 트리거에 판정에 필요한 것이 다 들어 있습니다(`condition` · `stage` · `slot` · `since` · `elapsed_days` · `evidence`).
+
+`basis_from_triggers()`는 `since`("기한 계산용"으로 선언된 필드)로 기산일을 채웁니다.
+
+다만 트리거에는 사람이 읽을 메시지와 화자 정보가 없어서, 화면 문장까지 필요하면 `resolve_inf()`를 씁니다. 두 경로가 같은 코드를 내는지는 `test_트리거_판정은_issues_판정과_어긋나지_않는다`가 확인합니다.
 
 ## 세 단계
 

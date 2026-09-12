@@ -197,6 +197,49 @@ def resolve_inf(result: dict[str, Any]) -> list[CodeHit]:
     return sorted(hits.values(), key=lambda h: h.code)
 
 
+def inf_from_triggers(triggers: list[dict[str, Any]]) -> list[CodeHit]:
+    """``action_triggers[]`` 만으로 INF 를 판정한다 — research-engine 이 선언한 연동 계약.
+
+    ``ActionTrigger`` 에는 판정에 필요한 것이 다 들어 있다(``condition`` · ``stage`` · ``slot``
+    · ``since`` · ``elapsed_days`` · ``evidence``). issues[] 전체를 뒤지지 않아도 된다.
+
+    다만 트리거에는 사람이 읽을 메시지와 화자 정보가 없다. 그래서
+    - 근거 문장은 트리거 키로 대신한다
+    - 모순은 화자를 알 수 없으므로 INF-021 로만 둔다 (INF-023 으로 올리지 않는다)
+
+    화면에 보여줄 문장까지 필요하면 ``resolve_inf`` 를 쓴다.
+    """
+    hits: dict[str, CodeHit] = {}
+    for t in triggers:
+        code = CONDITION_TO_INF.get(t.get("condition"))
+        if code is None:
+            continue
+        hit = hits.get(code)
+        if hit is None:
+            hits[code] = CodeHit(
+                code=code, label=label(code),
+                reason=f"{t.get('condition')} 트리거가 발생했습니다",
+                source_trigger_keys=[t["key"]],
+                source_doc_ids=[e["source_doc_id"] for e in t.get("evidence", [])],
+            )
+        elif t["key"] not in hit.source_trigger_keys:
+            hit.source_trigger_keys.append(t["key"])
+    return sorted(hits.values(), key=lambda h: h.code)
+
+
+def basis_from_triggers(triggers: list[dict[str, Any]]) -> dict[str, date | None]:
+    """트리거의 ``since`` 로 기한 기산일을 채운다 — '기한 계산용'이라고 선언된 필드다."""
+    out: dict[str, date | None] = {}
+    for t in triggers:
+        since = _parse_date(t.get("since"))
+        if since is None:
+            continue
+        # 결정 이후 진행이 멈춘 트리거의 since 가 곧 결정 통지 시점이다
+        if t.get("condition") == "stage_stalled" and "decision_time" not in out:
+            out["decision_time"] = since
+    return out
+
+
 def _same_speaker(issue: dict[str, Any], speakers: dict[str, str | None]) -> bool:
     """모순 난 두 진술이 같은 사람 것인지 — INF-021(진술 간) 과 INF-023(동일인 번복) 을 가른다.
 
