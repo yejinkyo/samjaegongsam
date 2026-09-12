@@ -1,0 +1,3569 @@
+{
+  "case_id": "demo-suspension-recent",
+  "case_type": "investigation_suspended",
+  "as_of": "2026-09-12",
+  "documents": [
+    {
+      "doc_id": "complaint_2021",
+      "file_name": "고소장_2021.jpg",
+      "doc_type": "complaint",
+      "doc_type_confidence": 0.9969,
+      "doc_type_scores": {
+        "judgment": 0.0003,
+        "complaint": 0.9969,
+        "statement": 0.0003,
+        "transcript": 0.0003,
+        "receipt": 0.0003,
+        "notice": 0.0003,
+        "messenger": 0.0003,
+        "news": 0.0003,
+        "memo": 0.0007
+      },
+      "evidence_level": "statement",
+      "captured_at": "2026-09-05T09:00:00",
+      "pages": [
+        {
+          "page_no": 1,
+          "width": 1080.0,
+          "height": 580.0,
+          "image_ref": null
+        }
+      ],
+      "lines": [
+        {
+          "doc_id": "complaint_2021",
+          "line_no": 1,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 150.0,
+            "y1": 84.0
+          },
+          "text": "고 소 장",
+          "ocr_confidence": 0.96,
+          "readability": 0.937,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "complaint_2021",
+          "line_no": 2,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 392.0,
+            "y1": 144.0
+          },
+          "text": "고소인 정하늘 (여, 41세)",
+          "ocr_confidence": 0.94,
+          "readability": 0.9548,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "complaint_2021",
+          "line_no": 3,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 238.0,
+            "y1": 204.0
+          },
+          "text": "피고소인 성명불상",
+          "ocr_confidence": 0.94,
+          "readability": 0.9548,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "complaint_2021",
+          "line_no": 4,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 128.0,
+            "y1": 264.0
+          },
+          "text": "고소취지",
+          "ocr_confidence": 0.95,
+          "readability": 0.9579,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "complaint_2021",
+          "line_no": 5,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 1272.0,
+            "y1": 324.0
+          },
+          "text": "2021. 5. 18. 인테리어 공사대금 명목으로 1,800만원을 편취당하는 사기 피해를 입었습니다.",
+          "ocr_confidence": 0.93,
+          "readability": 0.9514,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "complaint_2021",
+          "line_no": 6,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 340.0,
+            "x1": 810.0,
+            "y1": 384.0
+          },
+          "text": "공사를 중개한 사람은 박현수라고만 알고 있고 연락처는 모릅니다.",
+          "ocr_confidence": 0.92,
+          "readability": 0.9478,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "complaint_2021",
+          "line_no": 7,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 400.0,
+            "x1": 656.0,
+            "y1": 444.0
+          },
+          "text": "2021. 5. 25. ○○경찰서에 고소하였습니다.",
+          "ocr_confidence": 0.93,
+          "readability": 0.9514,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "complaint_2021",
+          "line_no": 8,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 460.0,
+            "x1": 304.0,
+            "y1": 504.0
+          },
+          "text": "2021. 5. 25.",
+          "ocr_confidence": 0.95,
+          "readability": 0.9579,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "complaint_2021",
+          "line_no": 9,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 520.0,
+            "x1": 282.0,
+            "y1": 564.0
+          },
+          "text": "고소인 정하늘 (인)",
+          "ocr_confidence": 0.93,
+          "readability": 0.9514,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        }
+      ],
+      "unreadable": []
+    },
+    {
+      "doc_id": "receipt_2021",
+      "file_name": "접수증_2021.jpg",
+      "doc_type": "receipt",
+      "doc_type_confidence": 0.9701,
+      "doc_type_scores": {
+        "judgment": 0.0032,
+        "complaint": 0.0032,
+        "statement": 0.0032,
+        "transcript": 0.0032,
+        "receipt": 0.9701,
+        "notice": 0.0032,
+        "messenger": 0.0032,
+        "news": 0.0032,
+        "memo": 0.0072
+      },
+      "evidence_level": "record",
+      "captured_at": "2026-09-05T09:05:00",
+      "pages": [
+        {
+          "page_no": 1,
+          "width": 1080.0,
+          "height": 400.0,
+          "image_ref": null
+        }
+      ],
+      "lines": [
+        {
+          "doc_id": "receipt_2021",
+          "line_no": 1,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 150.0,
+            "y1": 84.0
+          },
+          "text": "접 수 증",
+          "ocr_confidence": 0.95,
+          "readability": 0.9025,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "receipt_2021",
+          "line_no": 2,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 392.0,
+            "y1": 144.0
+          },
+          "text": "접수번호 2021-005821",
+          "ocr_confidence": 0.93,
+          "readability": 0.9292,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "receipt_2021",
+          "line_no": 3,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 546.0,
+            "y1": 204.0
+          },
+          "text": "접수일시 2021. 5. 25. 14:20",
+          "ocr_confidence": 0.92,
+          "readability": 0.9241,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "receipt_2021",
+          "line_no": 4,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 150.0,
+            "y1": 264.0
+          },
+          "text": "죄명 사기",
+          "ocr_confidence": 0.93,
+          "readability": 0.9292,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "receipt_2021",
+          "line_no": 5,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 194.0,
+            "y1": 324.0
+          },
+          "text": "신고인 정하늘",
+          "ocr_confidence": 0.93,
+          "readability": 0.9292,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "receipt_2021",
+          "line_no": 6,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 340.0,
+            "x1": 348.0,
+            "y1": 384.0
+          },
+          "text": "접수관서 ○○경찰서 경제팀",
+          "ocr_confidence": 0.92,
+          "readability": 0.9241,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        }
+      ],
+      "unreadable": []
+    },
+    {
+      "doc_id": "suspension_notice_2023",
+      "file_name": "수사중지_결정통지서.jpg",
+      "doc_type": "notice",
+      "doc_type_confidence": 0.9318,
+      "doc_type_scores": {
+        "judgment": 0.0051,
+        "complaint": 0.0464,
+        "statement": 0.0023,
+        "transcript": 0.0023,
+        "receipt": 0.0023,
+        "notice": 0.9318,
+        "messenger": 0.0023,
+        "news": 0.0023,
+        "memo": 0.0051
+      },
+      "evidence_level": "record",
+      "captured_at": "2026-09-05T09:10:00",
+      "pages": [
+        {
+          "page_no": 1,
+          "width": 1080.0,
+          "height": 640.0,
+          "image_ref": null
+        }
+      ],
+      "lines": [
+        {
+          "doc_id": "suspension_notice_2023",
+          "line_no": 1,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 282.0,
+            "y1": 84.0
+          },
+          "text": "수사중지 결정 통지서",
+          "ocr_confidence": 0.97,
+          "readability": 0.9636,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "suspension_notice_2023",
+          "line_no": 2,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 392.0,
+            "y1": 144.0
+          },
+          "text": "사건번호 2021형제45678",
+          "ocr_confidence": 0.95,
+          "readability": 0.9579,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "suspension_notice_2023",
+          "line_no": 3,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 194.0,
+            "y1": 204.0
+          },
+          "text": "고소인 정하늘",
+          "ocr_confidence": 0.95,
+          "readability": 0.9579,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "suspension_notice_2023",
+          "line_no": 4,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 238.0,
+            "y1": 264.0
+          },
+          "text": "피고소인 성명불상",
+          "ocr_confidence": 0.94,
+          "readability": 0.9548,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "suspension_notice_2023",
+          "line_no": 5,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 150.0,
+            "y1": 324.0
+          },
+          "text": "죄명 사기",
+          "ocr_confidence": 0.94,
+          "readability": 0.9548,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "suspension_notice_2023",
+          "line_no": 6,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 340.0,
+            "x1": 392.0,
+            "y1": 384.0
+          },
+          "text": "결정일자 2023. 2. 9.",
+          "ocr_confidence": 0.95,
+          "readability": 0.9579,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "suspension_notice_2023",
+          "line_no": 7,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 400.0,
+            "x1": 392.0,
+            "y1": 444.0
+          },
+          "text": "결정내용 수사중지(참고인중지)",
+          "ocr_confidence": 0.95,
+          "readability": 0.9579,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "suspension_notice_2023",
+          "line_no": 8,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 460.0,
+            "x1": 700.0,
+            "y1": 504.0
+          },
+          "text": "이유 참고인 소재불명으로 수사를 계속할 수 없어 중지함",
+          "ocr_confidence": 0.94,
+          "readability": 0.9548,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "suspension_notice_2023",
+          "line_no": 9,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 520.0,
+            "x1": 326.0,
+            "y1": 564.0
+          },
+          "text": "담당 수사관 경사 한지훈",
+          "ocr_confidence": 0.93,
+          "readability": 0.9514,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "suspension_notice_2023",
+          "line_no": 10,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 580.0,
+            "x1": 172.0,
+            "y1": 624.0
+          },
+          "text": "○○경찰서장",
+          "ocr_confidence": 0.95,
+          "readability": 0.9579,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        }
+      ],
+      "unreadable": []
+    },
+    {
+      "doc_id": "witness_statement_2025",
+      "file_name": "조미래_진술서.jpg",
+      "doc_type": "statement",
+      "doc_type_confidence": 0.9793,
+      "doc_type_scores": {
+        "judgment": 0.0004,
+        "complaint": 0.0004,
+        "statement": 0.9793,
+        "transcript": 0.0004,
+        "receipt": 0.0004,
+        "notice": 0.0004,
+        "messenger": 0.0004,
+        "news": 0.0004,
+        "memo": 0.0179
+      },
+      "evidence_level": "statement",
+      "captured_at": "2026-09-05T09:15:00",
+      "pages": [
+        {
+          "page_no": 1,
+          "width": 1080.0,
+          "height": 460.0,
+          "image_ref": null
+        }
+      ],
+      "lines": [
+        {
+          "doc_id": "witness_statement_2025",
+          "line_no": 1,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 150.0,
+            "y1": 84.0
+          },
+          "text": "진 술 서",
+          "ocr_confidence": 0.9,
+          "readability": 0.81,
+          "readable": true,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "witness_statement_2025",
+          "line_no": 2,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 216.0,
+            "y1": 144.0
+          },
+          "text": "진술인: 조미래",
+          "ocr_confidence": 0.88,
+          "readability": 0.8581,
+          "readable": true,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "witness_statement_2025",
+          "line_no": 3,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 876.0,
+            "y1": 204.0
+          },
+          "text": "2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다.",
+          "ocr_confidence": 0.86,
+          "readability": 0.8389,
+          "readable": true,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "witness_statement_2025",
+          "line_no": 4,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 568.0,
+            "y1": 264.0
+          },
+          "text": "정하늘 씨가 몇 해째 찾던 사람이 맞습니다.",
+          "ocr_confidence": 0.85,
+          "readability": 0.8285,
+          "readable": true,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "witness_statement_2025",
+          "line_no": 5,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 414.0,
+            "y1": 324.0
+          },
+          "text": "위 내용은 사실과 다름없습니다.",
+          "ocr_confidence": 0.88,
+          "readability": 0.8581,
+          "readable": true,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "witness_statement_2025",
+          "line_no": 6,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 340.0,
+            "x1": 304.0,
+            "y1": 384.0
+          },
+          "text": "2025. 6. 10.",
+          "ocr_confidence": 0.9,
+          "readability": 0.8754,
+          "readable": true,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "witness_statement_2025",
+          "line_no": 7,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 400.0,
+            "x1": 304.0,
+            "y1": 444.0
+          },
+          "text": "진술인 조미래 (서명)",
+          "ocr_confidence": 0.87,
+          "readability": 0.8488,
+          "readable": true,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        }
+      ],
+      "unreadable": []
+    },
+    {
+      "doc_id": "note_victim",
+      "file_name": "직접 입력",
+      "doc_type": "user_note",
+      "doc_type_confidence": 1.0,
+      "doc_type_scores": {},
+      "evidence_level": "user",
+      "captured_at": "2026-09-05T09:20:00",
+      "pages": [
+        {
+          "page_no": 1,
+          "width": null,
+          "height": null,
+          "image_ref": null
+        }
+      ],
+      "lines": [
+        {
+          "doc_id": "note_victim",
+          "line_no": 1,
+          "page": 1,
+          "bbox": null,
+          "text": "결정 통지서를 받은 뒤로 경찰에서 따로 연락이 온 적이 없습니다.",
+          "ocr_confidence": 1.0,
+          "readability": 1.0,
+          "readable": true,
+          "script": "unknown",
+          "low_confidence_spans": [],
+          "origin": "user_input"
+        }
+      ],
+      "unreadable": []
+    }
+  ],
+  "clarifications": [],
+  "extraction": {
+    "mentions": [
+      {
+        "mention_id": "complaint_2021:m1",
+        "doc_id": "complaint_2021",
+        "kind": "person",
+        "name": {
+          "source_doc_id": "complaint_2021",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 392.0,
+            "y1": 144.0
+          },
+          "char_start": 4,
+          "char_end": 7,
+          "quote": "정하늘",
+          "value": "정하늘",
+          "confidence": 0.7638
+        },
+        "normalized": "정하늘",
+        "role": "고소인"
+      },
+      {
+        "mention_id": "complaint_2021:m2",
+        "doc_id": "complaint_2021",
+        "kind": "organization",
+        "name": {
+          "source_doc_id": "complaint_2021",
+          "page": 1,
+          "source_line": 7,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 400.0,
+            "x1": 656.0,
+            "y1": 444.0
+          },
+          "char_start": 13,
+          "char_end": 18,
+          "quote": "○○경찰서",
+          "value": "○○경찰서",
+          "confidence": 0.7136
+        },
+        "normalized": "**경찰서",
+        "role": null
+      },
+      {
+        "mention_id": "complaint_2021:m3",
+        "doc_id": "complaint_2021",
+        "kind": "person",
+        "name": {
+          "source_doc_id": "complaint_2021",
+          "page": 1,
+          "source_line": 9,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 520.0,
+            "x1": 282.0,
+            "y1": 564.0
+          },
+          "char_start": 4,
+          "char_end": 7,
+          "quote": "정하늘",
+          "value": "정하늘",
+          "confidence": 0.7611
+        },
+        "normalized": "정하늘",
+        "role": "고소인"
+      },
+      {
+        "mention_id": "receipt_2021:m1",
+        "doc_id": "receipt_2021",
+        "kind": "receipt_number",
+        "name": {
+          "source_doc_id": "receipt_2021",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 392.0,
+            "y1": 144.0
+          },
+          "char_start": 5,
+          "char_end": 16,
+          "quote": "2021-005821",
+          "value": "2021-005821",
+          "confidence": 0.7898
+        },
+        "normalized": "2021-005821",
+        "role": null
+      },
+      {
+        "mention_id": "receipt_2021:m2",
+        "doc_id": "receipt_2021",
+        "kind": "person",
+        "name": {
+          "source_doc_id": "receipt_2021",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 194.0,
+            "y1": 324.0
+          },
+          "char_start": 4,
+          "char_end": 7,
+          "quote": "정하늘",
+          "value": "정하늘",
+          "confidence": 0.7434
+        },
+        "normalized": "정하늘",
+        "role": "신고인"
+      },
+      {
+        "mention_id": "receipt_2021:m3",
+        "doc_id": "receipt_2021",
+        "kind": "organization",
+        "name": {
+          "source_doc_id": "receipt_2021",
+          "page": 1,
+          "source_line": 6,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 340.0,
+            "x1": 348.0,
+            "y1": 384.0
+          },
+          "char_start": 5,
+          "char_end": 10,
+          "quote": "○○경찰서",
+          "value": "○○경찰서",
+          "confidence": 0.6931
+        },
+        "normalized": "**경찰서",
+        "role": null
+      },
+      {
+        "mention_id": "suspension_notice_2023:m1",
+        "doc_id": "suspension_notice_2023",
+        "kind": "case_number",
+        "name": {
+          "source_doc_id": "suspension_notice_2023",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 392.0,
+            "y1": 144.0
+          },
+          "char_start": 5,
+          "char_end": 16,
+          "quote": "2021형제45678",
+          "value": "2021형제45678",
+          "confidence": 0.8621
+        },
+        "normalized": "2021형제45678",
+        "role": null
+      },
+      {
+        "mention_id": "suspension_notice_2023:m2",
+        "doc_id": "suspension_notice_2023",
+        "kind": "person",
+        "name": {
+          "source_doc_id": "suspension_notice_2023",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 194.0,
+            "y1": 204.0
+          },
+          "char_start": 4,
+          "char_end": 7,
+          "quote": "정하늘",
+          "value": "정하늘",
+          "confidence": 0.7663
+        },
+        "normalized": "정하늘",
+        "role": "고소인"
+      },
+      {
+        "mention_id": "suspension_notice_2023:m3",
+        "doc_id": "suspension_notice_2023",
+        "kind": "person",
+        "name": {
+          "source_doc_id": "suspension_notice_2023",
+          "page": 1,
+          "source_line": 9,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 520.0,
+            "x1": 326.0,
+            "y1": 564.0
+          },
+          "char_start": 10,
+          "char_end": 13,
+          "quote": "한지훈",
+          "value": "한지훈",
+          "confidence": 0.7611
+        },
+        "normalized": "한지훈",
+        "role": "담당수사관"
+      },
+      {
+        "mention_id": "suspension_notice_2023:m4",
+        "doc_id": "suspension_notice_2023",
+        "kind": "organization",
+        "name": {
+          "source_doc_id": "suspension_notice_2023",
+          "page": 1,
+          "source_line": 10,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 580.0,
+            "x1": 172.0,
+            "y1": 624.0
+          },
+          "char_start": 0,
+          "char_end": 5,
+          "quote": "○○경찰서",
+          "value": "○○경찰서",
+          "confidence": 0.7184
+        },
+        "normalized": "**경찰서",
+        "role": null
+      },
+      {
+        "mention_id": "witness_statement_2025:m1",
+        "doc_id": "witness_statement_2025",
+        "kind": "person",
+        "name": {
+          "source_doc_id": "witness_statement_2025",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 216.0,
+            "y1": 144.0
+          },
+          "char_start": 5,
+          "char_end": 8,
+          "quote": "조미래",
+          "value": "조미래",
+          "confidence": 0.6865
+        },
+        "normalized": "조미래",
+        "role": "진술인"
+      },
+      {
+        "mention_id": "witness_statement_2025:m2",
+        "doc_id": "witness_statement_2025",
+        "kind": "person",
+        "name": {
+          "source_doc_id": "witness_statement_2025",
+          "page": 1,
+          "source_line": 7,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 400.0,
+            "x1": 304.0,
+            "y1": 444.0
+          },
+          "char_start": 4,
+          "char_end": 7,
+          "quote": "조미래",
+          "value": "조미래",
+          "confidence": 0.679
+        },
+        "normalized": "조미래",
+        "role": "진술인"
+      }
+    ],
+    "events": [
+      {
+        "event_id": "complaint_2021:e4",
+        "doc_id": "complaint_2021",
+        "stage": "occurrence",
+        "action": {
+          "source_doc_id": "complaint_2021",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 1272.0,
+            "y1": 324.0
+          },
+          "char_start": 0,
+          "char_end": 56,
+          "quote": "2021. 5. 18. 인테리어 공사대금 명목으로 1,800만원을 편취당하는 사기 피해를 입었습니다.",
+          "value": "2021. 5. 18. 인테리어 공사대금 명목으로 1,800만원을 편취당하는 사기 피해를 입었습니다.",
+          "confidence": 0.7611
+        },
+        "time": {
+          "source_doc_id": "complaint_2021",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 1272.0,
+            "y1": 324.0
+          },
+          "char_start": 0,
+          "char_end": 12,
+          "quote": "2021. 5. 18.",
+          "value": {
+            "raw": "2021. 5. 18.",
+            "start": "2021-05-18T00:00:00",
+            "end": "2021-05-19T00:00:00",
+            "granularity": "day",
+            "kind": "absolute",
+            "approximate": false,
+            "anchor": null,
+            "anchor_source": null,
+            "candidates": [],
+            "needs_confirmation": false,
+            "note": null
+          },
+          "confidence": 0.9038
+        },
+        "amount": {
+          "source_doc_id": "complaint_2021",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 1272.0,
+            "y1": 324.0
+          },
+          "char_start": 28,
+          "char_end": 35,
+          "quote": "1,800만원",
+          "value": 18000000,
+          "confidence": 0.8563
+        },
+        "participant_mention_ids": [],
+        "evidence_level": "statement",
+        "action_kind": "fraud"
+      },
+      {
+        "event_id": "complaint_2021:e6",
+        "doc_id": "complaint_2021",
+        "stage": "report",
+        "action": {
+          "source_doc_id": "complaint_2021",
+          "page": 1,
+          "source_line": 7,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 400.0,
+            "x1": 656.0,
+            "y1": 444.0
+          },
+          "char_start": 0,
+          "char_end": 28,
+          "quote": "2021. 5. 25. ○○경찰서에 고소하였습니다.",
+          "value": "2021. 5. 25. ○○경찰서에 고소하였습니다.",
+          "confidence": 0.7611
+        },
+        "time": {
+          "source_doc_id": "complaint_2021",
+          "page": 1,
+          "source_line": 7,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 400.0,
+            "x1": 656.0,
+            "y1": 444.0
+          },
+          "char_start": 0,
+          "char_end": 12,
+          "quote": "2021. 5. 25.",
+          "value": {
+            "raw": "2021. 5. 25.",
+            "start": "2021-05-25T00:00:00",
+            "end": "2021-05-26T00:00:00",
+            "granularity": "day",
+            "kind": "absolute",
+            "approximate": false,
+            "anchor": null,
+            "anchor_source": null,
+            "candidates": [],
+            "needs_confirmation": false,
+            "note": null
+          },
+          "confidence": 0.9038
+        },
+        "amount": null,
+        "participant_mention_ids": [
+          "complaint_2021:m2"
+        ],
+        "evidence_level": "statement",
+        "action_kind": null
+      },
+      {
+        "event_id": "receipt_2021:e6",
+        "doc_id": "receipt_2021",
+        "stage": "receipt",
+        "action": {
+          "source_doc_id": "receipt_2021",
+          "page": 1,
+          "source_line": 1,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 150.0,
+            "y1": 84.0
+          },
+          "char_start": null,
+          "char_end": null,
+          "quote": "접 수 증",
+          "value": "접 수 증",
+          "confidence": 0.8574
+        },
+        "time": {
+          "source_doc_id": "receipt_2021",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 546.0,
+            "y1": 204.0
+          },
+          "char_start": 5,
+          "char_end": 23,
+          "quote": "2021. 5. 25. 14:20",
+          "value": {
+            "raw": "2021. 5. 25. 14:20",
+            "start": "2021-05-25T14:20:00",
+            "end": "2021-05-25T14:21:00",
+            "granularity": "minute",
+            "kind": "absolute",
+            "approximate": false,
+            "anchor": null,
+            "anchor_source": null,
+            "candidates": [],
+            "needs_confirmation": false,
+            "note": null
+          },
+          "confidence": 0.8779
+        },
+        "amount": null,
+        "participant_mention_ids": [
+          "receipt_2021:m1",
+          "receipt_2021:m2",
+          "receipt_2021:m3"
+        ],
+        "evidence_level": "record",
+        "action_kind": null
+      },
+      {
+        "event_id": "suspension_notice_2023:e10",
+        "doc_id": "suspension_notice_2023",
+        "stage": "outcome",
+        "action": {
+          "source_doc_id": "suspension_notice_2023",
+          "page": 1,
+          "source_line": 1,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 282.0,
+            "y1": 84.0
+          },
+          "char_start": null,
+          "char_end": null,
+          "quote": "수사중지 결정 통지서",
+          "value": "수사중지 결정 통지서",
+          "confidence": 0.9154
+        },
+        "time": {
+          "source_doc_id": "suspension_notice_2023",
+          "page": 1,
+          "source_line": 6,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 340.0,
+            "x1": 392.0,
+            "y1": 384.0
+          },
+          "char_start": 5,
+          "char_end": 16,
+          "quote": "2023. 2. 9.",
+          "value": {
+            "raw": "2023. 2. 9.",
+            "start": "2023-02-09T00:00:00",
+            "end": "2023-02-10T00:00:00",
+            "granularity": "day",
+            "kind": "absolute",
+            "approximate": false,
+            "anchor": null,
+            "anchor_source": null,
+            "candidates": [],
+            "needs_confirmation": false,
+            "note": null
+          },
+          "confidence": 0.91
+        },
+        "amount": null,
+        "participant_mention_ids": [
+          "suspension_notice_2023:m1",
+          "suspension_notice_2023:m2",
+          "suspension_notice_2023:m3",
+          "suspension_notice_2023:m4"
+        ],
+        "evidence_level": "record",
+        "action_kind": null
+      },
+      {
+        "event_id": "witness_statement_2025:e3",
+        "doc_id": "witness_statement_2025",
+        "stage": "occurrence",
+        "action": {
+          "source_doc_id": "witness_statement_2025",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 876.0,
+            "y1": 204.0
+          },
+          "char_start": 0,
+          "char_end": 38,
+          "quote": "2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다.",
+          "value": "2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다.",
+          "confidence": 0.6711
+        },
+        "time": {
+          "source_doc_id": "witness_statement_2025",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 876.0,
+            "y1": 204.0
+          },
+          "char_start": 0,
+          "char_end": 11,
+          "quote": "2025. 6. 3.",
+          "value": {
+            "raw": "2025. 6. 3.",
+            "start": "2025-06-03T00:00:00",
+            "end": "2025-06-04T00:00:00",
+            "granularity": "day",
+            "kind": "absolute",
+            "approximate": false,
+            "anchor": null,
+            "anchor_source": null,
+            "candidates": [],
+            "needs_confirmation": false,
+            "note": null
+          },
+          "confidence": 0.797
+        },
+        "amount": null,
+        "participant_mention_ids": [],
+        "evidence_level": "statement",
+        "action_kind": "sighting"
+      }
+    ],
+    "claims": [
+      {
+        "claim_id": "complaint_2021:c5",
+        "doc_id": "complaint_2021",
+        "speaker": "정하늘",
+        "speaker_basis": "document_author",
+        "speaker_mention_id": "complaint_2021:m1",
+        "content": {
+          "source_doc_id": "complaint_2021",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 1272.0,
+            "y1": 324.0
+          },
+          "char_start": 0,
+          "char_end": 56,
+          "quote": "2021. 5. 18. 인테리어 공사대금 명목으로 1,800만원을 편취당하는 사기 피해를 입었습니다.",
+          "value": "2021. 5. 18. 인테리어 공사대금 명목으로 1,800만원을 편취당하는 사기 피해를 입었습니다.",
+          "confidence": 0.8087
+        },
+        "slot": "incident_time",
+        "slot_value": "2021-05-18",
+        "slot_time": {
+          "raw": "2021. 5. 18.",
+          "start": "2021-05-18T00:00:00",
+          "end": "2021-05-19T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "statement"
+      },
+      {
+        "claim_id": "complaint_2021:c7",
+        "doc_id": "complaint_2021",
+        "speaker": "정하늘",
+        "speaker_basis": "document_author",
+        "speaker_mention_id": "complaint_2021:m1",
+        "content": {
+          "source_doc_id": "complaint_2021",
+          "page": 1,
+          "source_line": 7,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 400.0,
+            "x1": 656.0,
+            "y1": 444.0
+          },
+          "char_start": 0,
+          "char_end": 28,
+          "quote": "2021. 5. 25. ○○경찰서에 고소하였습니다.",
+          "value": "2021. 5. 25. ○○경찰서에 고소하였습니다.",
+          "confidence": 0.8087
+        },
+        "slot": null,
+        "slot_value": null,
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "statement"
+      },
+      {
+        "claim_id": "receipt_2021:c4",
+        "doc_id": "receipt_2021",
+        "speaker": "**경찰서",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "receipt_2021:m3",
+        "content": {
+          "source_doc_id": "receipt_2021",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 392.0,
+            "y1": 144.0
+          },
+          "char_start": 0,
+          "char_end": 16,
+          "quote": "접수번호 2021-005821",
+          "value": "접수번호 2021-005821",
+          "confidence": 0.8363
+        },
+        "slot": "receipt_number",
+        "slot_value": "2021-005821",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "receipt_2021:c5",
+        "doc_id": "receipt_2021",
+        "speaker": "**경찰서",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "receipt_2021:m3",
+        "content": {
+          "source_doc_id": "receipt_2021",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 546.0,
+            "y1": 204.0
+          },
+          "char_start": 0,
+          "char_end": 23,
+          "quote": "접수일시 2021. 5. 25. 14:20",
+          "value": "접수일시 2021. 5. 25. 14:20",
+          "confidence": 0.8317
+        },
+        "slot": "receipt_time",
+        "slot_value": "2021-05-25 14:20",
+        "slot_time": {
+          "raw": "2021. 5. 25. 14:20",
+          "start": "2021-05-25T14:20:00",
+          "end": "2021-05-25T14:21:00",
+          "granularity": "minute",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "suspension_notice_2023:c5",
+        "doc_id": "suspension_notice_2023",
+        "speaker": "**경찰서",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "suspension_notice_2023:m4",
+        "content": {
+          "source_doc_id": "suspension_notice_2023",
+          "page": 1,
+          "source_line": 1,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 282.0,
+            "y1": 84.0
+          },
+          "char_start": 0,
+          "char_end": 11,
+          "quote": "수사중지 결정 통지서",
+          "value": "수사중지 결정 통지서",
+          "confidence": 0.8672
+        },
+        "slot": "decision_type",
+        "slot_value": "수사중지",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "suspension_notice_2023:c6",
+        "doc_id": "suspension_notice_2023",
+        "speaker": "**경찰서",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "suspension_notice_2023:m4",
+        "content": {
+          "source_doc_id": "suspension_notice_2023",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 392.0,
+            "y1": 144.0
+          },
+          "char_start": 0,
+          "char_end": 16,
+          "quote": "사건번호 2021형제45678",
+          "value": "사건번호 2021형제45678",
+          "confidence": 0.8621
+        },
+        "slot": "case_number",
+        "slot_value": "2021형제45678",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "suspension_notice_2023:c7",
+        "doc_id": "suspension_notice_2023",
+        "speaker": "**경찰서",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "suspension_notice_2023:m4",
+        "content": {
+          "source_doc_id": "suspension_notice_2023",
+          "page": 1,
+          "source_line": 6,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 340.0,
+            "x1": 392.0,
+            "y1": 384.0
+          },
+          "char_start": 0,
+          "char_end": 16,
+          "quote": "결정일자 2023. 2. 9.",
+          "value": "결정일자 2023. 2. 9.",
+          "confidence": 0.8621
+        },
+        "slot": "decision_time",
+        "slot_value": "2023-02-09",
+        "slot_time": {
+          "raw": "2023. 2. 9.",
+          "start": "2023-02-09T00:00:00",
+          "end": "2023-02-10T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "value_is_speaker_self": false,
+        "subject": "수사중지",
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "suspension_notice_2023:c8",
+        "doc_id": "suspension_notice_2023",
+        "speaker": "**경찰서",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "suspension_notice_2023:m4",
+        "content": {
+          "source_doc_id": "suspension_notice_2023",
+          "page": 1,
+          "source_line": 7,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 400.0,
+            "x1": 392.0,
+            "y1": 444.0
+          },
+          "char_start": 0,
+          "char_end": 16,
+          "quote": "결정내용 수사중지(참고인중지)",
+          "value": "결정내용 수사중지(참고인중지)",
+          "confidence": 0.8621
+        },
+        "slot": "decision_type",
+        "slot_value": "수사중지(참고인중지)",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "suspension_notice_2023:c9",
+        "doc_id": "suspension_notice_2023",
+        "speaker": "**경찰서",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "suspension_notice_2023:m4",
+        "content": {
+          "source_doc_id": "suspension_notice_2023",
+          "page": 1,
+          "source_line": 9,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 520.0,
+            "x1": 326.0,
+            "y1": 564.0
+          },
+          "char_start": 0,
+          "char_end": 13,
+          "quote": "담당 수사관 경사 한지훈",
+          "value": "담당 수사관 경사 한지훈",
+          "confidence": 0.8563
+        },
+        "slot": "investigator",
+        "slot_value": "한지훈",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "witness_statement_2025:c4",
+        "doc_id": "witness_statement_2025",
+        "speaker": "조미래",
+        "speaker_basis": "document_author",
+        "speaker_mention_id": "witness_statement_2025:m1",
+        "content": {
+          "source_doc_id": "witness_statement_2025",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 876.0,
+            "y1": 204.0
+          },
+          "char_start": 0,
+          "char_end": 38,
+          "quote": "2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다.",
+          "value": "2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다.",
+          "confidence": 0.7131
+        },
+        "slot": "incident_time",
+        "slot_value": "2025-06-03",
+        "slot_time": {
+          "raw": "2025. 6. 3.",
+          "start": "2025-06-03T00:00:00",
+          "end": "2025-06-04T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "statement"
+      }
+    ],
+    "times": [
+      {
+        "source_doc_id": "complaint_2021",
+        "page": 1,
+        "source_line": 5,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 280.0,
+          "x1": 1272.0,
+          "y1": 324.0
+        },
+        "char_start": 0,
+        "char_end": 12,
+        "quote": "2021. 5. 18.",
+        "value": {
+          "raw": "2021. 5. 18.",
+          "start": "2021-05-18T00:00:00",
+          "end": "2021-05-19T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.9038
+      },
+      {
+        "source_doc_id": "complaint_2021",
+        "page": 1,
+        "source_line": 7,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 400.0,
+          "x1": 656.0,
+          "y1": 444.0
+        },
+        "char_start": 0,
+        "char_end": 12,
+        "quote": "2021. 5. 25.",
+        "value": {
+          "raw": "2021. 5. 25.",
+          "start": "2021-05-25T00:00:00",
+          "end": "2021-05-26T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.9038
+      },
+      {
+        "source_doc_id": "complaint_2021",
+        "page": 1,
+        "source_line": 8,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 460.0,
+          "x1": 304.0,
+          "y1": 504.0
+        },
+        "char_start": 0,
+        "char_end": 12,
+        "quote": "2021. 5. 25.",
+        "value": {
+          "raw": "2021. 5. 25.",
+          "start": "2021-05-25T00:00:00",
+          "end": "2021-05-26T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.91
+      },
+      {
+        "source_doc_id": "receipt_2021",
+        "page": 1,
+        "source_line": 3,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 160.0,
+          "x1": 546.0,
+          "y1": 204.0
+        },
+        "char_start": 5,
+        "char_end": 23,
+        "quote": "2021. 5. 25. 14:20",
+        "value": {
+          "raw": "2021. 5. 25. 14:20",
+          "start": "2021-05-25T14:20:00",
+          "end": "2021-05-25T14:21:00",
+          "granularity": "minute",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8779
+      },
+      {
+        "source_doc_id": "suspension_notice_2023",
+        "page": 1,
+        "source_line": 6,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 340.0,
+          "x1": 392.0,
+          "y1": 384.0
+        },
+        "char_start": 5,
+        "char_end": 16,
+        "quote": "2023. 2. 9.",
+        "value": {
+          "raw": "2023. 2. 9.",
+          "start": "2023-02-09T00:00:00",
+          "end": "2023-02-10T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.91
+      },
+      {
+        "source_doc_id": "witness_statement_2025",
+        "page": 1,
+        "source_line": 3,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 160.0,
+          "x1": 876.0,
+          "y1": 204.0
+        },
+        "char_start": 0,
+        "char_end": 11,
+        "quote": "2025. 6. 3.",
+        "value": {
+          "raw": "2025. 6. 3.",
+          "start": "2025-06-03T00:00:00",
+          "end": "2025-06-04T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.797
+      },
+      {
+        "source_doc_id": "witness_statement_2025",
+        "page": 1,
+        "source_line": 6,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 340.0,
+          "x1": 304.0,
+          "y1": 384.0
+        },
+        "char_start": 0,
+        "char_end": 12,
+        "quote": "2025. 6. 10.",
+        "value": {
+          "raw": "2025. 6. 10.",
+          "start": "2025-06-10T00:00:00",
+          "end": "2025-06-11T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8316
+      }
+    ],
+    "document_dates": {
+      "complaint_2021": {
+        "source_doc_id": "complaint_2021",
+        "page": 1,
+        "source_line": 8,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 460.0,
+          "x1": 304.0,
+          "y1": 504.0
+        },
+        "char_start": 0,
+        "char_end": 12,
+        "quote": "2021. 5. 25.",
+        "value": {
+          "raw": "2021. 5. 25.",
+          "start": "2021-05-25T00:00:00",
+          "end": "2021-05-26T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.91
+      },
+      "receipt_2021": {
+        "source_doc_id": "receipt_2021",
+        "page": 1,
+        "source_line": 3,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 160.0,
+          "x1": 546.0,
+          "y1": 204.0
+        },
+        "char_start": 5,
+        "char_end": 23,
+        "quote": "2021. 5. 25. 14:20",
+        "value": {
+          "raw": "2021. 5. 25. 14:20",
+          "start": "2021-05-25T14:20:00",
+          "end": "2021-05-25T14:21:00",
+          "granularity": "minute",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8779
+      },
+      "suspension_notice_2023": {
+        "source_doc_id": "suspension_notice_2023",
+        "page": 1,
+        "source_line": 6,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 340.0,
+          "x1": 392.0,
+          "y1": 384.0
+        },
+        "char_start": 5,
+        "char_end": 16,
+        "quote": "2023. 2. 9.",
+        "value": {
+          "raw": "2023. 2. 9.",
+          "start": "2023-02-09T00:00:00",
+          "end": "2023-02-10T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.91
+      },
+      "witness_statement_2025": {
+        "source_doc_id": "witness_statement_2025",
+        "page": 1,
+        "source_line": 6,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 340.0,
+          "x1": 304.0,
+          "y1": 384.0
+        },
+        "char_start": 0,
+        "char_end": 12,
+        "quote": "2025. 6. 10.",
+        "value": {
+          "raw": "2025. 6. 10.",
+          "start": "2025-06-10T00:00:00",
+          "end": "2025-06-11T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8316
+      }
+    },
+    "clarifications": []
+  },
+  "timeline": {
+    "case_type": "investigation_suspended",
+    "events": [
+      {
+        "timeline_event_id": "tl3",
+        "stage": "occurrence",
+        "title": "18,000,000원 발생",
+        "time": {
+          "raw": "2021. 5. 18.",
+          "start": "2021-05-18T00:00:00",
+          "end": "2021-05-19T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "time_unknown": false,
+        "amount": 18000000,
+        "participant_entity_ids": [],
+        "event_ids": [
+          "complaint_2021:e4"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "complaint_2021",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 1272.0,
+              "y1": 324.0
+            },
+            "char_start": 0,
+            "char_end": 56,
+            "quote": "2021. 5. 18. 인테리어 공사대금 명목으로 1,800만원을 편취당하는 사기 피해를 입었습니다."
+          },
+          {
+            "source_doc_id": "complaint_2021",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 1272.0,
+              "y1": 324.0
+            },
+            "char_start": 28,
+            "char_end": 35,
+            "quote": "1,800만원"
+          }
+        ],
+        "evidence_level": "statement",
+        "needs_confirmation": false,
+        "flags": [
+          "claim_only"
+        ]
+      },
+      {
+        "timeline_event_id": "tl4",
+        "stage": "report",
+        "title": "2021. 5. 25. ○○경찰서에 고소하였습니다.",
+        "time": {
+          "raw": "2021. 5. 25.",
+          "start": "2021-05-25T00:00:00",
+          "end": "2021-05-26T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "time_unknown": false,
+        "amount": null,
+        "participant_entity_ids": [
+          "ent2"
+        ],
+        "event_ids": [
+          "complaint_2021:e6"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "complaint_2021",
+            "page": 1,
+            "source_line": 7,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 400.0,
+              "x1": 656.0,
+              "y1": 444.0
+            },
+            "char_start": 0,
+            "char_end": 28,
+            "quote": "2021. 5. 25. ○○경찰서에 고소하였습니다."
+          }
+        ],
+        "evidence_level": "statement",
+        "needs_confirmation": false,
+        "flags": [
+          "claim_only"
+        ]
+      },
+      {
+        "timeline_event_id": "tl1",
+        "stage": "receipt",
+        "title": "접 수 증",
+        "time": {
+          "raw": "2021. 5. 25. 14:20",
+          "start": "2021-05-25T14:20:00",
+          "end": "2021-05-25T14:21:00",
+          "granularity": "minute",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "time_unknown": false,
+        "amount": null,
+        "participant_entity_ids": [
+          "ent1",
+          "ent2",
+          "ent3"
+        ],
+        "event_ids": [
+          "receipt_2021:e6"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "receipt_2021",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 150.0,
+              "y1": 84.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": "접 수 증"
+          },
+          {
+            "source_doc_id": "receipt_2021",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 546.0,
+              "y1": 204.0
+            },
+            "char_start": 5,
+            "char_end": 23,
+            "quote": "2021. 5. 25. 14:20"
+          }
+        ],
+        "evidence_level": "record",
+        "needs_confirmation": false,
+        "flags": []
+      },
+      {
+        "timeline_event_id": "tl2",
+        "stage": "outcome",
+        "title": "수사중지 결정 통지서",
+        "time": {
+          "raw": "2023. 2. 9.",
+          "start": "2023-02-09T00:00:00",
+          "end": "2023-02-10T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "time_unknown": false,
+        "amount": null,
+        "participant_entity_ids": [
+          "ent1",
+          "ent2",
+          "ent4",
+          "ent5"
+        ],
+        "event_ids": [
+          "suspension_notice_2023:e10"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "suspension_notice_2023",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 282.0,
+              "y1": 84.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": "수사중지 결정 통지서"
+          },
+          {
+            "source_doc_id": "suspension_notice_2023",
+            "page": 1,
+            "source_line": 6,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 340.0,
+              "x1": 392.0,
+              "y1": 384.0
+            },
+            "char_start": 5,
+            "char_end": 16,
+            "quote": "2023. 2. 9."
+          }
+        ],
+        "evidence_level": "record",
+        "needs_confirmation": false,
+        "flags": []
+      },
+      {
+        "timeline_event_id": "tl5",
+        "stage": "occurrence",
+        "title": "2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다.",
+        "time": {
+          "raw": "2025. 6. 3.",
+          "start": "2025-06-03T00:00:00",
+          "end": "2025-06-04T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "time_unknown": false,
+        "amount": null,
+        "participant_entity_ids": [],
+        "event_ids": [
+          "witness_statement_2025:e3"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "witness_statement_2025",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 876.0,
+              "y1": 204.0
+            },
+            "char_start": 0,
+            "char_end": 38,
+            "quote": "2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다."
+          }
+        ],
+        "evidence_level": "statement",
+        "needs_confirmation": false,
+        "flags": [
+          "claim_only"
+        ]
+      }
+    ],
+    "stages": [
+      {
+        "stage": "occurrence",
+        "label": "발생",
+        "state": "done",
+        "timeline_event_ids": [
+          "tl3",
+          "tl5"
+        ],
+        "evidence_level": "statement"
+      },
+      {
+        "stage": "report",
+        "label": "신고",
+        "state": "done",
+        "timeline_event_ids": [
+          "tl4"
+        ],
+        "evidence_level": "statement"
+      },
+      {
+        "stage": "receipt",
+        "label": "접수",
+        "state": "done",
+        "timeline_event_ids": [
+          "tl1"
+        ],
+        "evidence_level": "record"
+      },
+      {
+        "stage": "investigation",
+        "label": "수사",
+        "state": "skipped",
+        "timeline_event_ids": [],
+        "evidence_level": null
+      },
+      {
+        "stage": "outcome",
+        "label": "결과",
+        "state": "current",
+        "timeline_event_ids": [
+          "tl2"
+        ],
+        "evidence_level": "record"
+      }
+    ],
+    "current_stage": "outcome",
+    "gaps": [
+      {
+        "start": "2021-05-26T00:00:00",
+        "end": "2023-02-09T00:00:00",
+        "hours": 14976.0,
+        "before_event_id": "tl4",
+        "after_event_id": "tl2"
+      },
+      {
+        "start": "2023-02-10T00:00:00",
+        "end": "2025-06-03T00:00:00",
+        "hours": 20256.0,
+        "before_event_id": "tl2",
+        "after_event_id": "tl5"
+      }
+    ],
+    "entities": [
+      {
+        "entity_id": "ent1",
+        "kind": "person",
+        "canonical_name": "정하늘",
+        "aliases": [
+          "정하늘"
+        ],
+        "roles": [
+          "고소인",
+          "신고인"
+        ],
+        "mention_ids": [
+          "complaint_2021:m1",
+          "complaint_2021:m3",
+          "receipt_2021:m2",
+          "suspension_notice_2023:m2"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "complaint_2021",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 392.0,
+              "y1": 144.0
+            },
+            "char_start": 4,
+            "char_end": 7,
+            "quote": "정하늘"
+          },
+          {
+            "source_doc_id": "complaint_2021",
+            "page": 1,
+            "source_line": 9,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 520.0,
+              "x1": 282.0,
+              "y1": 564.0
+            },
+            "char_start": 4,
+            "char_end": 7,
+            "quote": "정하늘"
+          },
+          {
+            "source_doc_id": "receipt_2021",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 194.0,
+              "y1": 324.0
+            },
+            "char_start": 4,
+            "char_end": 7,
+            "quote": "정하늘"
+          },
+          {
+            "source_doc_id": "suspension_notice_2023",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 194.0,
+              "y1": 204.0
+            },
+            "char_start": 4,
+            "char_end": 7,
+            "quote": "정하늘"
+          }
+        ],
+        "merge_confidence": 0.9,
+        "possible_same_as": []
+      },
+      {
+        "entity_id": "ent2",
+        "kind": "organization",
+        "canonical_name": "대구성서경찰서",
+        "aliases": [
+          "○○경찰서"
+        ],
+        "roles": [],
+        "mention_ids": [
+          "complaint_2021:m2",
+          "receipt_2021:m3",
+          "suspension_notice_2023:m4"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "complaint_2021",
+            "page": 1,
+            "source_line": 7,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 400.0,
+              "x1": 656.0,
+              "y1": 444.0
+            },
+            "char_start": 13,
+            "char_end": 18,
+            "quote": "○○경찰서"
+          },
+          {
+            "source_doc_id": "receipt_2021",
+            "page": 1,
+            "source_line": 6,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 340.0,
+              "x1": 348.0,
+              "y1": 384.0
+            },
+            "char_start": 5,
+            "char_end": 10,
+            "quote": "○○경찰서"
+          },
+          {
+            "source_doc_id": "suspension_notice_2023",
+            "page": 1,
+            "source_line": 10,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 580.0,
+              "x1": 172.0,
+              "y1": 624.0
+            },
+            "char_start": 0,
+            "char_end": 5,
+            "quote": "○○경찰서"
+          }
+        ],
+        "merge_confidence": 0.9,
+        "possible_same_as": []
+      },
+      {
+        "entity_id": "ent3",
+        "kind": "receipt_number",
+        "canonical_name": "2021-005821",
+        "aliases": [
+          "2021-005821"
+        ],
+        "roles": [],
+        "mention_ids": [
+          "receipt_2021:m1"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "receipt_2021",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 392.0,
+              "y1": 144.0
+            },
+            "char_start": 5,
+            "char_end": 16,
+            "quote": "2021-005821"
+          }
+        ],
+        "merge_confidence": 1.0,
+        "possible_same_as": []
+      },
+      {
+        "entity_id": "ent4",
+        "kind": "case_number",
+        "canonical_name": "2021형제45678",
+        "aliases": [
+          "2021형제45678"
+        ],
+        "roles": [],
+        "mention_ids": [
+          "suspension_notice_2023:m1"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "suspension_notice_2023",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 392.0,
+              "y1": 144.0
+            },
+            "char_start": 5,
+            "char_end": 16,
+            "quote": "2021형제45678"
+          }
+        ],
+        "merge_confidence": 1.0,
+        "possible_same_as": []
+      },
+      {
+        "entity_id": "ent5",
+        "kind": "person",
+        "canonical_name": "한지훈",
+        "aliases": [
+          "한지훈"
+        ],
+        "roles": [
+          "담당수사관"
+        ],
+        "mention_ids": [
+          "suspension_notice_2023:m3"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "suspension_notice_2023",
+            "page": 1,
+            "source_line": 9,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 520.0,
+              "x1": 326.0,
+              "y1": 564.0
+            },
+            "char_start": 10,
+            "char_end": 13,
+            "quote": "한지훈"
+          }
+        ],
+        "merge_confidence": 1.0,
+        "possible_same_as": []
+      },
+      {
+        "entity_id": "ent6",
+        "kind": "person",
+        "canonical_name": "조미래",
+        "aliases": [
+          "조미래"
+        ],
+        "roles": [
+          "진술인"
+        ],
+        "mention_ids": [
+          "witness_statement_2025:m1",
+          "witness_statement_2025:m2"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "witness_statement_2025",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 216.0,
+              "y1": 144.0
+            },
+            "char_start": 5,
+            "char_end": 8,
+            "quote": "조미래"
+          },
+          {
+            "source_doc_id": "witness_statement_2025",
+            "page": 1,
+            "source_line": 7,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 400.0,
+              "x1": 304.0,
+              "y1": 444.0
+            },
+            "char_start": 4,
+            "char_end": 7,
+            "quote": "조미래"
+          }
+        ],
+        "merge_confidence": 0.9,
+        "possible_same_as": []
+      }
+    ],
+    "mention_to_entity": {
+      "complaint_2021:m1": "ent1",
+      "complaint_2021:m3": "ent1",
+      "receipt_2021:m2": "ent1",
+      "suspension_notice_2023:m2": "ent1",
+      "complaint_2021:m2": "ent2",
+      "receipt_2021:m3": "ent2",
+      "suspension_notice_2023:m4": "ent2",
+      "receipt_2021:m1": "ent3",
+      "suspension_notice_2023:m1": "ent4",
+      "suspension_notice_2023:m3": "ent5",
+      "witness_statement_2025:m1": "ent6",
+      "witness_statement_2025:m2": "ent6"
+    }
+  },
+  "analysis": {
+    "case_id": "demo-suspension-recent",
+    "case_type": "investigation_suspended",
+    "as_of": "2026-09-12",
+    "issues": [
+      {
+        "issue_id": "iss1",
+        "category": "unverified",
+        "condition": "unrecorded_fact",
+        "message": "‘2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다.’(2025-06-03, witness_statement_2025 · 3줄) — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다. ‘수사중지 결정 통지서’(2023-02-09) 이후에 나온 내용입니다. 수사 기록에 반영됐는지 확인이 필요합니다",
+        "stage": "occurrence",
+        "slot": null,
+        "sources": [
+          {
+            "source_doc_id": "witness_statement_2025",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 876.0,
+              "y1": 204.0
+            },
+            "char_start": 0,
+            "char_end": 38,
+            "quote": "2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다."
+          }
+        ],
+        "checked_doc_ids": [
+          "complaint_2021",
+          "receipt_2021",
+          "suspension_notice_2023",
+          "witness_statement_2025",
+          "note_victim"
+        ],
+        "related_claim_ids": [],
+        "related_event_ids": [
+          "tl5"
+        ],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": null,
+        "trigger": {
+          "key": "investigation_suspended/occurrence/new_fact/unrecorded_fact",
+          "case_type": "investigation_suspended",
+          "condition": "unrecorded_fact",
+          "stage": "occurrence",
+          "slot": null,
+          "since": "2025-06-03T00:00:00",
+          "elapsed_days": null,
+          "evidence": [
+            {
+              "source_doc_id": "witness_statement_2025",
+              "page": 1,
+              "source_line": 3,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 160.0,
+                "x1": 876.0,
+                "y1": 204.0
+              },
+              "char_start": 0,
+              "char_end": 38,
+              "quote": "2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다."
+            }
+          ]
+        },
+        "priority": 25
+      },
+      {
+        "issue_id": "iss2",
+        "category": "missing",
+        "condition": "stage_stalled",
+        "message": "‘수사중지 결정 통지서’(2023-02-09) 이후 기관의 진행 기록이 없습니다 (1311일 경과)",
+        "stage": "outcome",
+        "slot": null,
+        "sources": [
+          {
+            "source_doc_id": "suspension_notice_2023",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 282.0,
+              "y1": 84.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": "수사중지 결정 통지서"
+          }
+        ],
+        "checked_doc_ids": [
+          "complaint_2021",
+          "receipt_2021",
+          "suspension_notice_2023",
+          "witness_statement_2025",
+          "note_victim"
+        ],
+        "related_claim_ids": [],
+        "related_event_ids": [
+          "tl2"
+        ],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": null,
+        "trigger": {
+          "key": "investigation_suspended/outcome/stage/stage_stalled",
+          "case_type": "investigation_suspended",
+          "condition": "stage_stalled",
+          "stage": "outcome",
+          "slot": null,
+          "since": "2023-02-09T00:00:00",
+          "elapsed_days": 1311,
+          "evidence": [
+            {
+              "source_doc_id": "suspension_notice_2023",
+              "page": 1,
+              "source_line": 1,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 40.0,
+                "x1": 282.0,
+                "y1": 84.0
+              },
+              "char_start": null,
+              "char_end": null,
+              "quote": "수사중지 결정 통지서"
+            }
+          ]
+        },
+        "priority": 35
+      },
+      {
+        "issue_id": "iss3",
+        "category": "missing",
+        "condition": "stage_skipped",
+        "message": "‘수사’ 단계에 해당하는 자료가 없습니다",
+        "stage": "investigation",
+        "slot": null,
+        "sources": [],
+        "checked_doc_ids": [
+          "complaint_2021",
+          "receipt_2021",
+          "suspension_notice_2023",
+          "witness_statement_2025",
+          "note_victim"
+        ],
+        "related_claim_ids": [],
+        "related_event_ids": [],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": null,
+        "trigger": {
+          "key": "investigation_suspended/investigation/stage/stage_skipped",
+          "case_type": "investigation_suspended",
+          "condition": "stage_skipped",
+          "stage": "investigation",
+          "slot": null,
+          "since": null,
+          "elapsed_days": null,
+          "evidence": []
+        },
+        "priority": 45
+      },
+      {
+        "issue_id": "iss4",
+        "category": "unverified",
+        "condition": "claimed_only",
+        "message": "사건 발생 시점: 정하늘, 조미래의 말만 있고 이를 뒷받침하는 기록 자료가 없습니다 — ‘2021. 5. 18. 인테리어 공사대금 명목으로 1,800만원을 편취당하는 사기 피해를 입었습니다.’(complaint_2021 · 5줄) / ‘2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다.’(witness_statement_2025 · 3줄)",
+        "stage": "occurrence",
+        "slot": "incident_time",
+        "sources": [
+          {
+            "source_doc_id": "complaint_2021",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 1272.0,
+              "y1": 324.0
+            },
+            "char_start": 0,
+            "char_end": 56,
+            "quote": "2021. 5. 18. 인테리어 공사대금 명목으로 1,800만원을 편취당하는 사기 피해를 입었습니다."
+          },
+          {
+            "source_doc_id": "witness_statement_2025",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 876.0,
+              "y1": 204.0
+            },
+            "char_start": 0,
+            "char_end": 38,
+            "quote": "2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다."
+          }
+        ],
+        "checked_doc_ids": [],
+        "related_claim_ids": [
+          "complaint_2021:c5",
+          "witness_statement_2025:c4"
+        ],
+        "related_event_ids": [],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": null,
+        "trigger": {
+          "key": "investigation_suspended/occurrence/incident_time/claimed_only",
+          "case_type": "investigation_suspended",
+          "condition": "claimed_only",
+          "stage": "occurrence",
+          "slot": "incident_time",
+          "since": null,
+          "elapsed_days": null,
+          "evidence": [
+            {
+              "source_doc_id": "complaint_2021",
+              "page": 1,
+              "source_line": 5,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 280.0,
+                "x1": 1272.0,
+                "y1": 324.0
+              },
+              "char_start": 0,
+              "char_end": 56,
+              "quote": "2021. 5. 18. 인테리어 공사대금 명목으로 1,800만원을 편취당하는 사기 피해를 입었습니다."
+            },
+            {
+              "source_doc_id": "witness_statement_2025",
+              "page": 1,
+              "source_line": 3,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 160.0,
+                "x1": 876.0,
+                "y1": 204.0
+              },
+              "char_start": 0,
+              "char_end": 38,
+              "quote": "2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다."
+            }
+          ]
+        },
+        "priority": 50
+      },
+      {
+        "issue_id": "iss5",
+        "category": "missing",
+        "condition": "time_gap",
+        "message": "2021-05-26 ~ 2023-02-09 사이의 기록이 없습니다 (약 1.7년)",
+        "stage": null,
+        "slot": null,
+        "sources": [
+          {
+            "source_doc_id": "complaint_2021",
+            "page": 1,
+            "source_line": 7,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 400.0,
+              "x1": 656.0,
+              "y1": 444.0
+            },
+            "char_start": 0,
+            "char_end": 28,
+            "quote": "2021. 5. 25. ○○경찰서에 고소하였습니다."
+          },
+          {
+            "source_doc_id": "suspension_notice_2023",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 282.0,
+              "y1": 84.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": "수사중지 결정 통지서"
+          }
+        ],
+        "checked_doc_ids": [
+          "complaint_2021",
+          "receipt_2021",
+          "suspension_notice_2023",
+          "witness_statement_2025",
+          "note_victim"
+        ],
+        "related_claim_ids": [],
+        "related_event_ids": [
+          "tl4",
+          "tl2"
+        ],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": null,
+        "trigger": {
+          "key": "investigation_suspended/-/timeline/time_gap",
+          "case_type": "investigation_suspended",
+          "condition": "time_gap",
+          "stage": null,
+          "slot": null,
+          "since": null,
+          "elapsed_days": null,
+          "evidence": [
+            {
+              "source_doc_id": "complaint_2021",
+              "page": 1,
+              "source_line": 7,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 400.0,
+                "x1": 656.0,
+                "y1": 444.0
+              },
+              "char_start": 0,
+              "char_end": 28,
+              "quote": "2021. 5. 25. ○○경찰서에 고소하였습니다."
+            },
+            {
+              "source_doc_id": "suspension_notice_2023",
+              "page": 1,
+              "source_line": 1,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 40.0,
+                "x1": 282.0,
+                "y1": 84.0
+              },
+              "char_start": null,
+              "char_end": null,
+              "quote": "수사중지 결정 통지서"
+            }
+          ]
+        },
+        "priority": 70
+      },
+      {
+        "issue_id": "iss6",
+        "category": "missing",
+        "condition": "time_gap",
+        "message": "2023-02-10 ~ 2025-06-03 사이의 기록이 없습니다 (약 2.3년)",
+        "stage": null,
+        "slot": null,
+        "sources": [
+          {
+            "source_doc_id": "suspension_notice_2023",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 282.0,
+              "y1": 84.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": "수사중지 결정 통지서"
+          },
+          {
+            "source_doc_id": "witness_statement_2025",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 876.0,
+              "y1": 204.0
+            },
+            "char_start": 0,
+            "char_end": 38,
+            "quote": "2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다."
+          }
+        ],
+        "checked_doc_ids": [
+          "complaint_2021",
+          "receipt_2021",
+          "suspension_notice_2023",
+          "witness_statement_2025",
+          "note_victim"
+        ],
+        "related_claim_ids": [],
+        "related_event_ids": [
+          "tl2",
+          "tl5"
+        ],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": null,
+        "trigger": {
+          "key": "investigation_suspended/-/timeline/time_gap",
+          "case_type": "investigation_suspended",
+          "condition": "time_gap",
+          "stage": null,
+          "slot": null,
+          "since": null,
+          "elapsed_days": null,
+          "evidence": [
+            {
+              "source_doc_id": "suspension_notice_2023",
+              "page": 1,
+              "source_line": 1,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 40.0,
+                "x1": 282.0,
+                "y1": 84.0
+              },
+              "char_start": null,
+              "char_end": null,
+              "quote": "수사중지 결정 통지서"
+            },
+            {
+              "source_doc_id": "witness_statement_2025",
+              "page": 1,
+              "source_line": 3,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 160.0,
+                "x1": 876.0,
+                "y1": 204.0
+              },
+              "char_start": 0,
+              "char_end": 38,
+              "quote": "2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다."
+            }
+          ]
+        },
+        "priority": 70
+      }
+    ],
+    "slot_statuses": [
+      {
+        "slot": "incident_time",
+        "label": "사건 발생 시점",
+        "stage": "occurrence",
+        "required": true,
+        "state": "claimed_only",
+        "value": null,
+        "claim_ids": [
+          "complaint_2021:c5",
+          "witness_statement_2025:c4"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "complaint_2021",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 1272.0,
+              "y1": 324.0
+            },
+            "char_start": 0,
+            "char_end": 56,
+            "quote": "2021. 5. 18. 인테리어 공사대금 명목으로 1,800만원을 편취당하는 사기 피해를 입었습니다."
+          },
+          {
+            "source_doc_id": "witness_statement_2025",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 876.0,
+              "y1": 204.0
+            },
+            "char_start": 0,
+            "char_end": 38,
+            "quote": "2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다."
+          }
+        ]
+      },
+      {
+        "slot": "receipt_number",
+        "label": "신고·진정 접수번호",
+        "stage": "receipt",
+        "required": false,
+        "state": "confirmed",
+        "value": "2021-005821",
+        "claim_ids": [
+          "receipt_2021:c4"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "receipt_2021",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 392.0,
+              "y1": 144.0
+            },
+            "char_start": 0,
+            "char_end": 16,
+            "quote": "접수번호 2021-005821"
+          }
+        ]
+      },
+      {
+        "slot": "case_number",
+        "label": "사건번호",
+        "stage": "investigation",
+        "required": true,
+        "state": "confirmed",
+        "value": "2021형제45678",
+        "claim_ids": [
+          "suspension_notice_2023:c6"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "suspension_notice_2023",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 392.0,
+              "y1": 144.0
+            },
+            "char_start": 0,
+            "char_end": 16,
+            "quote": "사건번호 2021형제45678"
+          }
+        ]
+      },
+      {
+        "slot": "investigator",
+        "label": "담당 수사관",
+        "stage": "investigation",
+        "required": false,
+        "state": "confirmed",
+        "value": "한지훈",
+        "claim_ids": [
+          "suspension_notice_2023:c9"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "suspension_notice_2023",
+            "page": 1,
+            "source_line": 9,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 520.0,
+              "x1": 326.0,
+              "y1": 564.0
+            },
+            "char_start": 0,
+            "char_end": 13,
+            "quote": "담당 수사관 경사 한지훈"
+          }
+        ]
+      },
+      {
+        "slot": "decision_type",
+        "label": "결정 내용",
+        "stage": "outcome",
+        "required": true,
+        "state": "confirmed",
+        "value": "수사중지(피의자중지)",
+        "claim_ids": [
+          "suspension_notice_2023:c8",
+          "suspension_notice_2023:c5"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "suspension_notice_2023",
+            "page": 1,
+            "source_line": 7,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 400.0,
+              "x1": 392.0,
+              "y1": 444.0
+            },
+            "char_start": 0,
+            "char_end": 16,
+            "quote": "결정내용 수사중지(참고인중지)"
+          },
+          {
+            "source_doc_id": "suspension_notice_2023",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 282.0,
+              "y1": 84.0
+            },
+            "char_start": 0,
+            "char_end": 11,
+            "quote": "수사중지 결정 통지서"
+          }
+        ]
+      },
+      {
+        "slot": "decision_time",
+        "label": "결정 일자",
+        "stage": "outcome",
+        "required": true,
+        "state": "confirmed",
+        "value": "2026-08-18",
+        "claim_ids": [
+          "suspension_notice_2023:c7"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "suspension_notice_2023",
+            "page": 1,
+            "source_line": 6,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 340.0,
+              "x1": 392.0,
+              "y1": 384.0
+            },
+            "char_start": 0,
+            "char_end": 16,
+            "quote": "결정일자 2023. 2. 9."
+          }
+        ]
+      }
+    ],
+    "pair_decisions": [],
+    "action_triggers": [
+      {
+        "key": "investigation_suspended/occurrence/new_fact/unrecorded_fact",
+        "case_type": "investigation_suspended",
+        "condition": "unrecorded_fact",
+        "stage": "occurrence",
+        "slot": null,
+        "since": "2025-06-03T00:00:00",
+        "elapsed_days": null,
+        "evidence": [
+          {
+            "source_doc_id": "witness_statement_2025",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 876.0,
+              "y1": 204.0
+            },
+            "char_start": 0,
+            "char_end": 38,
+            "quote": "2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다."
+          }
+        ]
+      },
+      {
+        "key": "investigation_suspended/outcome/stage/stage_stalled",
+        "case_type": "investigation_suspended",
+        "condition": "stage_stalled",
+        "stage": "outcome",
+        "slot": null,
+        "since": "2026-08-18T00:00:00",
+        "elapsed_days": 25,
+        "evidence": [
+          {
+            "source_doc_id": "suspension_notice_2023",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 282.0,
+              "y1": 84.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": "수사중지 결정 통지서"
+          }
+        ]
+      },
+      {
+        "key": "investigation_suspended/investigation/stage/stage_skipped",
+        "case_type": "investigation_suspended",
+        "condition": "stage_skipped",
+        "stage": "investigation",
+        "slot": null,
+        "since": null,
+        "elapsed_days": null,
+        "evidence": []
+      },
+      {
+        "key": "investigation_suspended/occurrence/incident_time/claimed_only",
+        "case_type": "investigation_suspended",
+        "condition": "claimed_only",
+        "stage": "occurrence",
+        "slot": "incident_time",
+        "since": null,
+        "elapsed_days": null,
+        "evidence": [
+          {
+            "source_doc_id": "complaint_2021",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 1272.0,
+              "y1": 324.0
+            },
+            "char_start": 0,
+            "char_end": 56,
+            "quote": "2021. 5. 18. 인테리어 공사대금 명목으로 1,800만원을 편취당하는 사기 피해를 입었습니다."
+          },
+          {
+            "source_doc_id": "witness_statement_2025",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 876.0,
+              "y1": 204.0
+            },
+            "char_start": 0,
+            "char_end": 38,
+            "quote": "2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다."
+          }
+        ]
+      },
+      {
+        "key": "investigation_suspended/-/timeline/time_gap",
+        "case_type": "investigation_suspended",
+        "condition": "time_gap",
+        "stage": null,
+        "slot": null,
+        "since": null,
+        "elapsed_days": null,
+        "evidence": [
+          {
+            "source_doc_id": "complaint_2021",
+            "page": 1,
+            "source_line": 7,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 400.0,
+              "x1": 656.0,
+              "y1": 444.0
+            },
+            "char_start": 0,
+            "char_end": 28,
+            "quote": "2021. 5. 25. ○○경찰서에 고소하였습니다."
+          },
+          {
+            "source_doc_id": "suspension_notice_2023",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 282.0,
+              "y1": 84.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": "수사중지 결정 통지서"
+          }
+        ]
+      }
+    ],
+    "case_card": {
+      "case_type": "investigation_suspended",
+      "case_type_label": "수사중지 사건",
+      "requirements_status": "draft_unverified",
+      "stages": [
+        {
+          "stage": "occurrence",
+          "label": "발생",
+          "state": "done",
+          "timeline_event_ids": [
+            "tl3",
+            "tl5"
+          ],
+          "evidence_level": "statement"
+        },
+        {
+          "stage": "report",
+          "label": "신고",
+          "state": "done",
+          "timeline_event_ids": [
+            "tl4"
+          ],
+          "evidence_level": "statement"
+        },
+        {
+          "stage": "receipt",
+          "label": "접수",
+          "state": "done",
+          "timeline_event_ids": [
+            "tl1"
+          ],
+          "evidence_level": "record"
+        },
+        {
+          "stage": "investigation",
+          "label": "수사",
+          "state": "skipped",
+          "timeline_event_ids": [],
+          "evidence_level": null
+        },
+        {
+          "stage": "outcome",
+          "label": "결과",
+          "state": "current",
+          "timeline_event_ids": [
+            "tl2"
+          ],
+          "evidence_level": "record"
+        }
+      ],
+      "current_stage": "outcome",
+      "evidence_doc_count": 4,
+      "needs_confirmation_count": 6,
+      "slots_done": 3,
+      "slots_total": 4,
+      "next_trigger": {
+        "key": "investigation_suspended/occurrence/new_fact/unrecorded_fact",
+        "case_type": "investigation_suspended",
+        "condition": "unrecorded_fact",
+        "stage": "occurrence",
+        "slot": null,
+        "since": "2025-06-03T00:00:00",
+        "elapsed_days": null,
+        "evidence": [
+          {
+            "source_doc_id": "witness_statement_2025",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 876.0,
+              "y1": 204.0
+            },
+            "char_start": 0,
+            "char_end": 38,
+            "quote": "2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다."
+          }
+        ]
+      }
+    }
+  }
+}

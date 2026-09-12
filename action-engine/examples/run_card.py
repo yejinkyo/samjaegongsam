@@ -21,6 +21,31 @@ DEFAULT = Path(__file__).parent.parent / "tests" / "fixtures" / "long_unsolved_m
 LINE = "-" * 58
 
 
+def _print_agency(submit_to: str, result: dict) -> None:
+    """제출처가 관계로만 적힌 경우 실제 관서명을 찾아 덧붙인다.
+
+    '바로 위 상급경찰관서의 장'은 법령 문구 그대로라 사용자가 어디로 가야 할지 모른다.
+    research-engine 은 아직 수사관서를 슬롯으로 뽑지 않으므로, 여기서는 엔티티 중
+    이름이 '경찰서'로 끝나는 것을 관서로 본다. 슬롯이 생기면 그걸 쓰면 된다.
+    """
+    from action_engine.agencies import describe_submit_to
+
+    station = next(
+        (e.get("canonical_name") for e in result.get("timeline", {}).get("entities", [])
+         if (e.get("canonical_name") or "").endswith("경찰서")),
+        None,
+    )
+    if not station:
+        return
+    found = describe_submit_to(submit_to, station)
+    if found.get("resolved"):
+        print(f"             -> {found['target']['name']}")
+        if found.get("hint"):
+            print(f"             -> {found['hint']}")
+    elif found.get("reason"):
+        print(f"             -> {found['reason']}")
+
+
 def main() -> None:
     src = Path(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT
     if not src.exists():
@@ -61,12 +86,20 @@ def main() -> None:
     print(f"             {card.procedure}   <- 지식베이스를 채우기 전까지 비어 있다")
 
     if card.checklist:
-        if card.checklist.unresolved:
-            print(f"\n[제출 준비물]  {card.checklist.unresolved}")
+        c = card.checklist
+        if c.unresolved:
+            print(f"\n[제출 준비물]  {c.unresolved}")
         else:
-            print(f"\n[제출 준비물]  {card.checklist.done}/{card.checklist.total}")
-            for i in card.checklist.items:
+            print(f"\n[제출 준비물]  {c.done}/{c.total}")
+            for i in c.items:
                 print(f"   [{i.state}] {i.label}" + (f" - {i.reason}" if i.reason else ""))
+            if c.form_name:
+                print(f"\n[서식]        {c.form_name}" + (f"  {c.form_url}" if c.form_url else ""))
+            if c.statute:
+                print(f"[근거 조문]    {c.statute}")
+            if c.submit_to:
+                print(f"[제출처]      {c.submit_to}")
+                _print_agency(c.submit_to, result)
 
     print(f"\n전체 JSON 은 {len(card.model_dump_json())} 바이트입니다. 화면은 이것만 읽으면 됩니다.\n")
 
