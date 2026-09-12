@@ -54,6 +54,19 @@ def _materialize(labels: list[PairLabel], nli: NliModel) -> list[tuple[NliScores
     return rows
 
 
+def score_labels(labels: list[PairLabel], nli: NliModel) -> list[PairLabel]:
+    """모델을 한 번만 돌려 점수를 채운 라벨을 돌려준다.
+
+    임계값 스윕은 점수만 있으면 되는데 모델 추론이 가장 비싸다. 점수를 저장해 두면
+    임계값·목표 precision 을 바꿔 다시 재는 일이 모델 없이 즉시 끝난다.
+    """
+    out: list[PairLabel] = []
+    for lb, (scores, conf, certain, gold) in zip(labels, _materialize(labels, nli), strict=True):
+        out.append(PairLabel(gold=gold, scores=scores, min_confidence=conf, subject_certain=certain,
+                             a=lb.a, b=lb.b))
+    return out
+
+
 def _predict(scores: NliScores, conf: float, subject_certain: bool, policy: ConservativePolicy) -> bool:
     margin = scores.contradiction - max(scores.entailment, scores.neutral)
     return (

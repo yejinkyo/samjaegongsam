@@ -93,6 +93,34 @@ uv run research-engine eval-nli pilot/nli_pairs.jsonl --target-precision 0.95 --
 uv run research-engine run case.json --scorer models/scorer.json --policy models/policy.json
 ```
 
+### 공개 데이터셋으로 재는 것
+
+직접 만든 픽스처만으로는 "우리가 만든 사건에서 잘 된다"까지만 말할 수 있다. 공개 데이터셋으로 **숫자**를 만든다.
+
+```bash
+uv sync --extra nli --extra data           # transformers·torch·datasets (개발 전용)
+
+# KLUE NLI(3K) → eval-nli 라벨. --from 으로 내려받은 파일을 쓸 수도 있다
+uv run research-engine import-klue-nli --split validation --out out/klue_nli.jsonl
+
+uv run research-engine eval-nli out/klue_nli.jsonl                                  # 규칙만
+uv run research-engine eval-nli out/klue_nli.jsonl --nli-model Huffon/klue-roberta-base-nli
+```
+
+변환된 Claim 은 `slot=None` 이다. **슬롯 없는 자유 서술 경로**를 재기 위해서다 — 금액·일시·계좌처럼 슬롯이 있는 주장은 `SlotRuleNli`가 값을 직접 비교하므로 텍스트 모델을 쓰지 않는다.
+
+무엇을 재는 것이 아닌지도 분명히 해 둔다. KLUE NLI 는 숙박 후기·위키·뉴스 문장이고 우리 입력은 수사 서류다. 여기서 나온 수치는 **한국어 문장 쌍 판정 능력의 추정치**이고, 사건 자료에서의 성능은 `tests/fixtures/pilot/` 라벨로만 알 수 있다.
+
+### 데이터셋 라이선스
+
+| 데이터셋 | 라이선스 | 제품에 쓸 수 있나 |
+|---|---|---|
+| KLUE (NLI·NER) | CC BY-SA 4.0 | 상업적 사용 가능. **파생물에 동일 조건**이 붙으므로 학습 모델 배포 시 조건 확인 |
+| lbox_open (판결문) | CC BY-**NC** 4.0 | **비영리 한정 — 출시 모델 학습에 쓸 수 없다.** 기술 검증·벤치마크용으로만 |
+| AI Hub (손글씨·영수증 OCR 등) | AI Hub 이용약관 | 승인 절차 필요. 약관의 사용 범위를 건별로 확인해야 한다 |
+
+`proposal.md §9`의 수익 모델이 B2C·B2G이므로 비영리 조건 데이터가 학습 파이프라인에 섞이면 안 된다. 변환 결과는 저장소에 커밋하지 않는다(`out/`은 gitignore).
+
 모델 교체 지점: `OcrEngine`, `DocumentClassifier`, `EntityExtractor`, `NliModel`(슬롯 없는 자유 서술은 `HuggingFaceNli`로 한국어 NLI 체크포인트 연결).
 
 ## 현재 한계

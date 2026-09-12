@@ -6,7 +6,8 @@
     research-engine train-readability lines.jsonl --out scorer.json
     research-engine train-doc-classifier docs.jsonl --out doc_classifier.json
     research-engine eval-ner gold.jsonl
-    research-engine eval-nli pairs.jsonl --out policy.json
+    research-engine eval-nli pairs.jsonl --out policy.json [--nli-model HF_CHECKPOINT] [--save-scored scored.jsonl]
+    research-engine import-klue-nli --split validation --out pairs.jsonl
 """
 
 from __future__ import annotations
@@ -136,14 +137,41 @@ def cmd_eval_ner(args: argparse.Namespace) -> int:
 
 
 def cmd_eval_nli(args: argparse.Namespace) -> int:
+    from .analysis.nli import CombinedNli, HuggingFaceNli
     from .eval.nli_eval import load_pair_labels, tune_thresholds
 
-    report = tune_thresholds(load_pair_labels(args.pairs), args.target_precision)
+    # --nli-model 이 없으면 규칙만으로 돈다. 슬롯 없는 주장은 규칙이 판단하지 못하므로
+    # 자유 서술 라벨에서는 recall 0 이 나온다 — 그것이 현재 상태의 측정값이다.
+    nli = CombinedNli(text=HuggingFaceNli(args.nli_model)) if args.nli_model else None
+    labels = load_pair_labels(args.pairs)
+    if args.save_scored:
+        from .eval.nli_eval import score_labels
+
+        labels = score_labels(labels, nli or CombinedNli())
+        _prepare(args.save_scored).write_text(
+            "".join(lb.model_dump_json(exclude={"a", "b"}) + "\n" for lb in labels), encoding="utf-8"
+        )
+        sys.stdout.write(f"점수 저장: {args.save_scored} (임계값 재측정에 모델이 다시 필요하지 않다)\n")
+    report = tune_thresholds(labels, args.target_precision, nli=nli)
+    report["nli_model"] = nli.name if nli else CombinedNli().name
     if args.out and report["recommended_policy"]:
         policy = {k: v for k, v in report["recommended_policy"].items() if k != "contradiction"}
         _prepare(args.out).write_text(json.dumps(policy, indent=2), encoding="utf-8")
         sys.stdout.write(f"정책 저장: {args.out}\n")
     _print(report)
+    return 0
+
+
+def cmd_import_klue_nli(args: argparse.Namespace) -> int:
+    from .eval.klue import load_klue_nli, write_labels
+
+    rows = load_klue_nli(split=args.split, limit=args.limit, path=getattr(args, "from_file", None))
+    out = write_labels(rows, args.out)
+    counts: dict[str, int] = {}
+    for row in rows:
+        counts[row["gold"]] = counts.get(row["gold"], 0) + 1
+    sys.stdout.write(f"라벨 저장: {out} ({len(rows)}쌍)\n")
+    _print({"out": str(out), "pairs": len(rows), "gold": counts, "license": "KLUE: CC BY-SA 4.0"})
     return 0
 
 
@@ -208,7 +236,16 @@ def build_parser() -> argparse.ArgumentParser:
     nli.add_argument("pairs")
     nli.add_argument("--target-precision", type=float, default=0.95)
     nli.add_argument("--out")
+    nli.add_argument("--nli-model", help="슬롯 없는 주장용 한국어 NLI 체크포인트 (예: Huffon/klue-roberta-base-nli)")
+    nli.add_argument("--save-scored", help="모델 점수를 채운 라벨을 저장한다 (임계값 재측정 시 모델 불필요)")
     nli.set_defaults(func=cmd_eval_nli)
+
+    klue = sub.add_parser("import-klue-nli", help="KLUE NLI → eval-nli 라벨 (CC BY-SA 4.0)")
+    klue.add_argument("--split", default="validation")
+    klue.add_argument("--limit", type=int)
+    klue.add_argument("--from", dest="from_file", help="내려받은 파일 (.jsonl · .json · .parquet). 없으면 허브에서 받는다")
+    klue.add_argument("--out", required=True)
+    klue.set_defaults(func=cmd_import_klue_nli)
     return p
 
 
