@@ -29,14 +29,29 @@ def build_checklist(
     action: str | None,
     documents: list[dict[str, Any]],
     deadlines: list[Deadline] | None = None,
+    st: str | None = None,
 ) -> Checklist:
     """액션 하나에 필요한 서류를 자료함과 맞춰 본다.
+
+    같은 액션이라도 절차 단계에 따라 서류가 다르다 — '불복'은 불송치면 이의신청서,
+    불기소면 항고장, 수사중지면 이의제기서다. 사전에 ``by_stage`` 가 있으면 ST 로 한 번 더
+    갈라 조회한다.
 
     사전에 항목이 없으면 빈 체크리스트를 돌려준다 — 화면은 아무것도 그리지 않는다.
     기한과 같은 원칙이다. 없는 것을 지어내면 빠진 서류 때문에 신청이 반려된다.
     """
     kb = load_documents()
-    entry = (kb.get("actions") or {}).get(action or "") or {}
+    actions = kb.get("actions") or {}
+    entry = actions.get(action or "") or {}
+
+    # 단계별로 서류가 갈리는 액션은 ST 로 다시 조회한다
+    by_stage = entry.get("by_stage") or {}
+    if by_stage and st:
+        resolved = by_stage.get(st)
+        if resolved:
+            action = resolved
+            entry = actions.get(resolved) or {}
+
     rows = entry.get("items") or []
 
     if not rows:
@@ -79,4 +94,11 @@ def build_checklist(
         ))
 
     done = sum(1 for i in items if i.state == "보유")
-    return Checklist(action=action, items=items, done=done, total=len(items))
+    return Checklist(
+        action=action, items=items, done=done, total=len(items),
+        form_name=entry.get("form_name"),
+        form_url=entry.get("form_url"),
+        submit_to=entry.get("submit_to"),
+        statute=entry.get("statute"),
+        prerequisite=entry.get("prerequisite"),
+    )

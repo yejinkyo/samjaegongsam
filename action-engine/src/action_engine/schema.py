@@ -72,6 +72,12 @@ class Checklist(BaseModel):
     done: int = 0
     total: int = 0
     unresolved: str | None = None
+    # 아래는 전부 지식베이스에서만 온다. 없으면 화면은 빈칸으로 둔다.
+    form_name: str | None = Field(default=None, description="제출할 서류의 정식 명칭")
+    form_url: str | None = Field(default=None, description="공식 서식 내려받기 주소")
+    submit_to: str | None = Field(default=None, description="제출처")
+    statute: str | None = Field(default=None, description="근거 법령")
+    prerequisite: str | None = Field(default=None, description="먼저 거쳐야 하는 절차")
 
 
 class CaseState(BaseModel):

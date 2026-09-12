@@ -188,6 +188,7 @@ def build_card(result: dict[str, Any]) -> CaseCardOut:
         decision.main.action if decision.main else None,
         result.get("documents", []),
         decision.state.tim,
+        st=decision.state.st.code,
     )
     return CaseCardOut(
         case_type=card.get("case_type", result.get("case_type", "")),
