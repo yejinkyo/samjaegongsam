@@ -60,6 +60,33 @@
       "limitation_abolished": false
     },
     {
+      "name": "미성년자 약취·유인",
+      "aliases": ["미성년자약취유인", "미성년자 약취", "미성년자 유인"],
+      "statute": "형법 제287조",
+      "penalty": "10년 이하의 징역",
+      "bracket": "장기 10년 이상의 징역 또는 금고",
+      "source": "https://casenote.kr/법령/형법/제287조",
+      "limitation_abolished": false,
+      "note": "실종 사건에서 자주 검토되는 죄명. 신법 10년 / 구법 7년"
+    },
+    {
+      "name": "추행·간음·결혼·영리 목적 약취·유인",
+      "aliases": ["영리목적 약취유인", "추행목적 약취유인"],
+      "statute": "형법 제288조 제1항",
+      "penalty": "1년 이상 10년 이하의 징역",
+      "bracket": "장기 10년 이상의 징역 또는 금고",
+      "source": "https://casenote.kr/법령/형법/제288조",
+      "limitation_abolished": false
+    },
+    {
+      "name": "노동력 착취·성착취·장기적출 목적 약취·유인",
+      "statute": "형법 제288조 제2항",
+      "penalty": "2년 이상 15년 이하의 징역",
+      "bracket": "장기 10년 이상의 징역 또는 금고",
+      "source": "https://casenote.kr/법령/형법/제288조",
+      "limitation_abolished": false
+    },
+    {
       "name": "사기",
       "aliases": ["사기죄", "중고거래 사기"],
       "statute": "형법 제347조 제1항",
@@ -73,9 +100,9 @@
 
   "not_filled": [
     {
-      "name": "약취·유인",
-      "statute": "형법 제287조 이하",
-      "why": "실종 사건에서 자주 나오는데 대상(미성년자·성년)과 목적(추행·영리·국외이송)마다 법정형이 갈린다. 조문별로 하나씩 확인해야 한다"
+      "name": "국외이송 목적 약취·유인",
+      "statute": "형법 제289조",
+      "why": "제287조·제288조는 채웠으나 제289조(인신매매·국외이송)는 항별로 법정형이 갈려 아직 확인하지 못했다"
     },
     {
       "name": "성폭력범죄",
