@@ -30,7 +30,7 @@ def _kb(monkeypatch, items):
 
 def test_필요서류가_비어있으면_체크리스트를_만들지_않는다():
     """기한과 같은 원칙. 없는 것을 지어내면 신청이 반려된다."""
-    c = build_checklist("ACT-기록열람", DOCS)
+    c = build_checklist("ACT-근거보완", DOCS)
     assert c.items == []
     assert c.total == 0
     assert "법령·서식 확인" in c.unresolved
@@ -65,7 +65,7 @@ def test_단계마다_서류가_다르면_ST로_갈라_조회한다():
 
 
 def test_아직_못_채운_액션은_체크리스트를_만들지_않는다():
-    c = build_checklist("ACT-기록열람", DOCS)
+    c = build_checklist("ACT-근거보완", DOCS)
     assert c.items == []
     assert "확인 필요" in c.unresolved
 
