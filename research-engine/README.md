@@ -65,6 +65,8 @@ Claim은 화자(메신저 접두어, 문/답, 진술서 작성자, 인용 "판�
 - `ActionTrigger` — 행동 강령 매칭 엔진 입력. `since`·`elapsed_days`로 "접수 후 3주 경과" 같은 기한 계산이 가능
 - `CaseCard` — 기능 2 카드 (단계 진행, 확보 자료 수, 확인 필요 수, 완료 n/m, 다음 트리거)
 
+한 항목에 기록 자료가 여러 줄 걸리면 **더 구체적인 값**을 대표로 세운다. 통지서는 제목(`수사중지 결정 통지서`)과 결정내용란(`수사중지(참고인중지)`)에 같은 결정을 다르게 적는데, 앞줄이 대표가 되면 중지 사유가 사라져 행동 강령 엔진이 피의자중지·참고인중지를 가르지 못한다. 한 값이 다른 값을 그대로 품고 있을 때만 순서를 바꾸고, 서로 다른 값이면 모순 판정에 맡긴다.
+
 사건 유형별 추적 항목은 `requirements/*.json`에 데이터로 둔다. 현재 `used_goods_fraud`, `investigation_suspended`, `missing_person_suspended` 모두 `draft_unverified` — 법률 전문가 검수 전 초안이다.
 
 장기 미제 유형(`flag_unrecorded_facts`, `stall_after_final_stage`)에서는 두 가지를 더 본다.
