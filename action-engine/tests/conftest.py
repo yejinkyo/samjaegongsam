@@ -30,3 +30,9 @@ def missing() -> dict:
 def fraud() -> dict:
     """중고거래 사기 — 송금 후 연락 두절, 신고 접수까지."""
     return _load("used_goods_fraud.json")
+
+
+@pytest.fixture(scope="session")
+def suspended() -> dict:
+    """수사중지 — 2021 고소 → 2023 참고인중지 → 2025 목격 제보."""
+    return _load("investigation_suspended.json")
