@@ -1,0 +1,79 @@
+{
+  "status": "draft_unverified",
+  "note": "죄명 → 법정형 매핑. 공소시효는 법정형(선고형이 아니다)으로 구간이 갈리는데 사용자는 죄명으로 말한다. 이 표가 그 사이를 잇는다. 장기·미제 사건에 실제로 나오는 죄명부터 채웠고, 나머지는 비워 두었다.",
+  "filled_at": "2026-09-12",
+  "bracket_note": "bracket 은 statute_limitations.json 의 brackets 와 같은 문자열이어야 한다. 값이 어긋나면 계산이 조용히 틀린다.",
+
+  "offences": [
+    {
+      "name": "살인",
+      "aliases": ["살인죄", "사람을 살해"],
+      "statute": "형법 제250조 제1항",
+      "penalty": "사형, 무기 또는 5년 이상의 징역",
+      "bracket": "사형",
+      "source": "https://casenote.kr/법령/형법/제250조",
+      "limitation_abolished": true,
+      "abolition_basis": "형사소송법 제253조의2 (사람을 살해한 범죄로 사형에 해당하는 범죄)"
+    },
+    {
+      "name": "존속살해",
+      "statute": "형법 제250조 제2항",
+      "penalty": "사형, 무기 또는 7년 이상의 징역",
+      "bracket": "사형",
+      "source": "https://casenote.kr/법령/형법/제250조",
+      "limitation_abolished": true,
+      "abolition_basis": "형사소송법 제253조의2"
+    },
+    {
+      "name": "강도살인",
+      "statute": "형법 제338조 전단",
+      "penalty": "사형 또는 무기징역",
+      "bracket": "사형",
+      "source": "https://casenote.kr/법령/형법/제338조",
+      "limitation_abolished": true,
+      "abolition_basis": "형사소송법 제253조의2"
+    },
+    {
+      "name": "강도치사",
+      "statute": "형법 제338조 후단",
+      "penalty": "무기 또는 10년 이상의 징역",
+      "bracket": "무기징역 또는 무기금고",
+      "source": "https://casenote.kr/법령/형법/제338조",
+      "limitation_abolished": false,
+      "note": "살해의 고의가 없으므로 시효 폐지 대상이 아니다. 신법 15년 / 구법 10년"
+    }
+  ],
+
+  "not_filled": [
+    {
+      "name": "상해치사",
+      "statute": "형법 제259조",
+      "why": "법정형을 확인하지 못했다. 조문 원문을 봐야 한다"
+    },
+    {
+      "name": "약취·유인",
+      "statute": "형법 제287조 이하",
+      "why": "실종 사건에서 자주 나오는데 유형별로 법정형이 갈린다"
+    },
+    {
+      "name": "성폭력범죄",
+      "statute": "성폭력범죄의 처벌 등에 관한 특례법",
+      "why": "특별법에 시효 배제·연장·기산점 특례가 있어 이 표 구조로는 담을 수 없다. 미성년자 대상은 피해자가 성년이 된 날부터 기산한다"
+    },
+    {
+      "name": "사기",
+      "statute": "형법 제347조",
+      "why": "중고거래 사기 유형에 필요하나 아직 확인하지 않았다"
+    }
+  ],
+
+  "how_to_use": [
+    "1. 죄명으로 이 표에서 bracket 을 찾는다",
+    "2. limitation_abolished 가 true 면 시효가 없다 (단 시행일 당시 이미 완성된 사건은 제외)",
+    "3. 아니면 범행 종료일로 statute_limitations.json 의 버전(current/old)을 고른다",
+    "4. 그 버전의 brackets 에서 같은 bracket 문자열을 찾아 years 를 얻는다",
+    "5. 범행 종료일 + years 가 만료일이다 (시효 정지 기간은 빼지 않았다)"
+  ],
+
+  "warning": "이 표에 없는 죄명은 계산하지 않는다. 비슷해 보이는 죄명으로 대신 계산하면 안 된다 — 법정형이 한 구간만 달라도 시효가 5년 이상 차이 난다."
+}
