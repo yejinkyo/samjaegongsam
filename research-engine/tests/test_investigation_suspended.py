@@ -30,15 +30,17 @@ def test_결정_통지서가_기록으로_읽히고_결정_항목을_채운다(r
     assert result.analysis.case_card.slots_done == 3  # 필수 4개 중 사건 발생 시점만 기록으로 확인되지 않음
 
 
-def test_중지_사유가_주장으로는_남지만_항목_값에는_오르지_않는다(result):
-    """‘수사중지(참고인중지)’ 는 추출되지만 항목 값은 제목 줄의 ‘수사중지’ 가 차지한다.
+def test_중지_사유가_항목_값까지_올라온다(result):
+    """통지서 제목은 ‘수사중지’, 결정내용란은 ‘수사중지(참고인중지)’ 다.
 
-    행동 강령 엔진은 이 값으로 피의자중지·참고인중지를 가르므로, 사유가 항목까지 올라오지
-    않으면 둘 중 무엇인지 되물어야 한다. 현재 동작을 고정해 둔다.
+    둘 다 기록이라 앞줄이 대표가 되면 사유가 사라진다. 행동 강령 엔진은 이 값으로
+    피의자중지·참고인중지를 가르므로 더 구체적인 쪽이 항목 값이 되어야 한다.
     """
     values = [c.slot_value for c in result.extraction.claims if c.slot is ClaimSlot.DECISION_TYPE]
-    assert "수사중지(참고인중지)" in values
-    assert next(s for s in result.analysis.slot_statuses if s.slot is ClaimSlot.DECISION_TYPE).value == "수사중지"
+    assert "수사중지" in values and "수사중지(참고인중지)" in values  # 두 줄 다 주장으로는 남는다
+    status = next(s for s in result.analysis.slot_statuses if s.slot is ClaimSlot.DECISION_TYPE)
+    assert status.value == "수사중지(참고인중지)"
+    assert status.sources[0].source_line == 7  # 제목(1줄)이 아니라 결정내용란
 
 
 def test_중지_이후의_목격_진술이_기록에_없는_사실로_올라온다(result):

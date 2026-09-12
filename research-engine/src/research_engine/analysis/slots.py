@@ -53,6 +53,31 @@ def display_value(claim: Claim) -> str:
     return text
 
 
+def most_specific_first(claims: list[Claim]) -> list[Claim]:
+    """같은 사실을 덜 구체적으로 적은 자료가 섞이면 더 구체적인 쪽을 대표로 세운다.
+
+    통지서는 제목과 결정내용란에 같은 결정을 다르게 적는다.
+
+        1줄  수사중지 결정 통지서          → '수사중지'
+        6줄  결정내용 수사중지(참고인중지)  → '수사중지(참고인중지)'
+
+    둘 다 기록이라 앞줄이 대표가 되면 중지 사유가 사라지고, 행동 강령 엔진은
+    피의자중지·참고인중지를 가르지 못해 되묻게 된다. 한 값이 다른 값을 그대로
+    품고 있을 때만 순서를 바꾼다 — 서로 다른 값이면 모순 판정의 몫이다.
+    """
+    if len(claims) < 2:
+        return claims
+    values = [display_value(c) for c in claims]
+
+    def covers(i: int) -> int:
+        return sum(1 for j, v in enumerate(values) if v != values[i] and v in values[i])
+
+    best = max(range(len(claims)), key=lambda i: (covers(i), len(values[i])))
+    if covers(best) == 0:
+        return claims
+    return [claims[best]] + [c for i, c in enumerate(claims) if i != best]
+
+
 def evaluate_slots(
     requirements: CaseRequirements,
     claims: list[Claim],
@@ -85,7 +110,7 @@ def evaluate_slots(
         if any(c.claim_id in contradicted for c in cs):
             state, chosen = SlotState.CONFLICTING, [c for c in cs if c.claim_id in contradicted]
         elif records:
-            state, chosen = SlotState.CONFIRMED, records
+            state, chosen = SlotState.CONFIRMED, most_specific_first(records)
         elif confident:
             state, chosen = SlotState.CLAIMED_ONLY, confident
         elif cs:

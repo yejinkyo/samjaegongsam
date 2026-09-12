@@ -19,6 +19,7 @@ def test_notice_is_record_and_decision_is_current_stage(result):
     assert result.timeline.current_stage is Stage.OUTCOME
     slots = {s.slot: s for s in result.analysis.slot_statuses}
     assert slots[ClaimSlot.DECISION_TYPE].state is SlotState.CONFIRMED
+    assert slots[ClaimSlot.DECISION_TYPE].value == "수사중지(피의자중지)"  # 제목 줄의 '수사중지' 가 아니라 결정내용란
     assert slots[ClaimSlot.INVESTIGATOR].value == "박정호"
     assert slots[ClaimSlot.LAST_SEEN_TIME].state is SlotState.CONFIRMED  # 2015 접수증의 '최종 목격'
 

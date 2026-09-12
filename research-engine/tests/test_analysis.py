@@ -2,6 +2,7 @@ import itertools
 from datetime import date, datetime, timedelta
 
 from research_engine.analysis import CaseAnalyzer, ConservativePolicy, SlotRuleNli, candidate_pairs
+from research_engine.analysis.slots import most_specific_first
 from research_engine.requirements import load_requirements
 from research_engine.schema import (
     Claim,
@@ -165,3 +166,19 @@ def test_record_issued_after_the_change_is_confirmed_and_not_compared_with_old_v
     assert status.state.value == "confirmed" and status.value == "김영수"
     assert not [i for i in result.issues if i.category is IssueCategory.INCONSISTENCY]
     assert not [d for d in result.pair_decisions if d.slot is ClaimSlot.INVESTIGATOR]
+def test_같은_기록_안에서_더_구체적인_값이_대표가_된다():
+    """통지서 제목('수사중지')과 결정내용란('수사중지(참고인중지)')은 같은 결정이다."""
+    claims = [
+        claim(ClaimSlot.DECISION_TYPE, "수사중지", "notice"),
+        claim(ClaimSlot.DECISION_TYPE, "수사중지(참고인중지)", "notice"),
+    ]
+    assert [c.slot_value for c in most_specific_first(claims)] == ["수사중지(참고인중지)", "수사중지"]
+
+
+def test_서로_다른_값이면_순서를_바꾸지_않는다():
+    """한쪽이 다른 쪽을 품고 있지 않으면 어느 것이 맞는지는 모순 판정의 몫이다."""
+    claims = [
+        claim(ClaimSlot.DECISION_TYPE, "불송치", "notice_a"),
+        claim(ClaimSlot.DECISION_TYPE, "수사중지", "notice_b"),
+    ]
+    assert most_specific_first(claims) == claims

@@ -11,16 +11,16 @@ from action_engine.codes import INF, TIM
 from action_engine.schema import Confidence
 
 
-def test_결정_통지서에_사유가_적혀_있어도_중지_종류를_가리지_못한다(suspended):
-    """통지서에 '수사중지(참고인중지)' 가 있지만 decision_type 항목에는 '수사중지' 만 올라온다.
+def test_통지서의_중지_사유로_참고인중지를_가른다(suspended):
+    """통지서 결정내용란의 '수사중지(참고인중지)' 가 그대로 항목 값으로 올라온다.
 
-    research-engine 이 제목 줄의 값을 항목 값으로 고르기 때문이다. 값이 그것뿐이면
-    피의자중지·참고인중지를 가를 수 없으므로 확정하지 않고 둘 다 남겨 되묻는다.
+    사유가 없으면 피의자중지·참고인중지를 가를 수 없어 되물어야 한다
+    (``test_사유가_없으면_중지_종류를_가르지_않는다``).
     """
     st = to_case_state(suspended).st
-    assert st.code == ST.SUSPENDED_SUSPECT
-    assert st.confidence is Confidence.PRESUMED
-    assert set(st.ambiguous_between) == {ST.SUSPENDED_SUSPECT, ST.SUSPENDED_WITNESS}
+    assert st.code == ST.SUSPENDED_WITNESS
+    assert st.confidence is Confidence.CONFIRMED
+    assert not st.ambiguous_between
     assert set(st.source_doc_ids) == {"suspension_notice_2023"}
 
 

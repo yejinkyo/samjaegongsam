@@ -7,12 +7,26 @@ from action_engine import INF, ST, Confidence, resolve_inf, resolve_st, to_case_
 
 def test_수사중지_결정을_ST200대로_옮긴다(missing):
     st = resolve_st(missing)
-    # decision_type 값이 '수사중지' 뿐이라 피의자·참고인 구분이 안 된다 → 추정으로 두고 둘 다 남긴다
+    # 통지서 결정내용란의 '수사중지(피의자중지)' 가 항목 값으로 올라온다 → 사유까지 확정된다
+    assert st.code == ST.SUSPENDED_SUSPECT
+    assert st.confidence is Confidence.CONFIRMED
+    assert not st.ambiguous_between
+    assert "수사중지(피의자중지)" in st.reason
+    assert "suspension_notice_2022" in st.source_doc_ids
+
+
+def test_사유가_없으면_중지_종류를_가르지_않는다():
+    """통지서에 '수사중지' 만 적혀 있는 경우 — 추정으로 두고 둘 다 남겨 되묻는다."""
+    st = resolve_st({
+        "analysis": {"slot_statuses": [
+            {"slot": "decision_type", "value": "수사중지", "state": "confirmed", "stage": "outcome",
+             "required": True, "sources": []}
+        ]},
+        "timeline": {"current_stage": "outcome"},
+    })
     assert st.code == ST.SUSPENDED_SUSPECT
     assert st.confidence is Confidence.PRESUMED
     assert set(st.ambiguous_between) == {ST.SUSPENDED_SUSPECT, ST.SUSPENDED_WITNESS}
-    assert "수사중지" in st.reason
-    assert "suspension_notice_2022" in st.source_doc_ids
 
 
 def test_결정내용이_없으면_단계로_추정한다(fraud):
