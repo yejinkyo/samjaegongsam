@@ -1,6 +1,7 @@
 {
   "status": "draft_unverified",
-  "note": "기한 값은 비어 있다. 법령 원문을 확인해 period_days 와 statute 를 채우기 전까지 그대로 둔다. 값이 null 이면 엔진은 D-day 를 만들지 않고 unresolved 로 표시한다. 잘못된 기한 한 줄이 파이프라인 전체를 통과하므로 추측으로 채우지 않는다.",
+  "note": "법령 원문에서 확인한 값이지만 법률 전문가 검수는 받지 않았다. 값을 넣거나 고칠 때는 statute 와 source 를 반드시 함께 적는다. 출처 없는 기한은 넣지 않는다. period_days 가 null 이면 엔진은 D-day 를 만들지 않고 unresolved 로 표시한다.",
+  "filled_at": "2026-09-12",
   "deadlines": [
     {
       "code": "TIM-011",
@@ -8,26 +9,42 @@
       "basis": "decision_time",
       "basis_label": "불송치 결정 통지 수령일",
       "period_days": null,
-      "statute": null,
-      "check": "기간의 유무와 길이, 기산점이 처분일인지 통지 수령일인지, 초일 산입 여부"
+      "no_statutory_limit": true,
+      "statute": "형사소송법 제245조의7",
+      "source": "https://casenote.kr/법령/형사소송법/제245조의7",
+      "statute_text": "제245조의6의 통지를 받은 사람(고발인을 제외한다)은 해당 사법경찰관의 소속 관서의 장에게 이의를 신청할 수 있다.",
+      "submit_to": "불송치 결정을 한 사법경찰관의 소속 관서의 장",
+      "advisory": "법정 기한이 없지만 시간이 지날수록 자료 확보가 어려워지므로 조속한 제기를 권한다.",
+      "check": "국가인권위원회가 이의신청 기간 제한 도입을 권고한 바 있어 개정 가능성이 있다. 시행일 기준으로 다시 확인할 것."
     },
     {
       "code": "TIM-012",
       "applies_to_st": ["ST-302"],
       "basis": "decision_time",
-      "basis_label": "불기소 결정 통지 수령일",
-      "period_days": null,
-      "statute": null,
-      "check": "기간의 길이와 기산점, 개정 이력"
+      "basis_label": "불기소 처분 통지 수령일",
+      "period_days": 30,
+      "statute": "검찰청법 제10조",
+      "source": "https://casenote.kr/법령/검찰청법/제10조",
+      "submit_to": "불기소 처분을 한 검사가 속한 지방검찰청 또는 지청을 거쳐 관할 고등검찰청 검사장",
+      "check": "초일 산입 여부와 말일이 공휴일인 경우의 처리"
     },
     {
       "code": "TIM-013",
       "applies_to_st": ["ST-303"],
       "basis": "decision_time",
-      "basis_label": "항고기각 통지 수령일",
-      "period_days": null,
-      "statute": null,
-      "check": "기간의 길이와 기산점"
+      "basis_label": "항고기각 결정 통지 수령일",
+      "period_days": 10,
+      "statute": "형사소송법 제260조 제3항",
+      "source": "https://casenote.kr/법령/형사소송법/제260조",
+      "statute_text": "제1항에 따른 재정신청을 하려는 자는 항고기각 결정을 통지받은 날 또는 제2항 각 호의 사유가 발생한 날부터 10일 이내에 지방검찰청검사장 또는 지청장에게 재정신청서를 제출하여야 한다.",
+      "submit_to": "지방검찰청 검사장 또는 지청장",
+      "prerequisite": "검찰청법 제10조에 따른 항고를 먼저 거쳐야 한다 (항고전치주의, 형사소송법 제260조 제2항)",
+      "exception": {
+        "when": "검사가 공소시효 만료일 30일 전까지 공소를 제기하지 아니한 경우",
+        "deadline": "공소시효 만료일 전날까지",
+        "note": "조건부 기한이라 엔진이 아직 계산하지 않는다. 공소시효를 알아야 하므로 TIM-021 이 먼저 채워져야 한다."
+      },
+      "check": "제2항 각 호의 나머지 사유(재기수사 후 재차 불기소, 항고 후 3개월 경과)도 기산점이 된다"
     },
     {
       "code": "TIM-021",
@@ -35,9 +52,10 @@
       "basis": "incident_end",
       "basis_label": "범행 종료일",
       "period_days": null,
-      "statute": null,
+      "statute": "형사소송법 제249조",
+      "source": null,
       "requires": ["죄명"],
-      "check": "죄명별 시효표가 먼저 있어야 한다. 살인은 2015년 폐지되었고 다른 죄명은 개정 전후로 적용이 갈린다"
+      "check": "죄명별 시효표가 먼저 있어야 한다. 살인죄는 2015년 폐지(태완이법)되었고 다른 죄명은 개정 전후로 적용이 갈린다. 범행 종료일 기준 시행 법률을 따져야 한다."
     },
     {
       "code": "TIM-031",
@@ -46,8 +64,9 @@
       "basis_label": "자료 생성일",
       "period_days": null,
       "statute": null,
+      "source": null,
       "requires": ["사업자"],
-      "check": "통신사·플랫폼마다 보존 기간이 다르다"
+      "check": "통신사·플랫폼마다 보존 기간이 다르다. 통신사실확인자료 보존기간은 전기통신사업법 관련 고시를 확인할 것."
     },
     {
       "code": "TIM-041",
@@ -55,8 +74,10 @@
       "basis": null,
       "basis_label": "기한 제한 없음",
       "period_days": null,
+      "unlimited": true,
       "statute": null,
-      "unlimited": true
+      "source": null,
+      "check": "수사중지 결정에 대한 이의제기는 통지 수령일부터 30일(경찰수사규칙 제101조)로 기한이 있다. 이 코드가 그 절차를 가리키는지, 기한 없는 다른 재수사 요청을 가리키는지 정리가 필요하다. 아래 note 참조."
     },
     {
       "code": "TIM-042",
@@ -64,8 +85,24 @@
       "basis": null,
       "basis_label": "기한 제한 없음",
       "period_days": null,
-      "statute": null,
-      "unlimited": true
+      "unlimited": true,
+      "statute": "공공기관의 정보공개에 관한 법률",
+      "source": "https://www.open.go.kr/",
+      "advisory": "정보공개 청구 자체는 기한이 없다. 다만 거부처분을 받은 뒤의 이의신청은 통지 수령일부터 30일이다(같은 법 제18조).",
+      "check": "거부처분 이의신청을 별도 코드로 둘지 결정 필요"
+    }
+  ],
+  "unmapped": [
+    {
+      "procedure": "수사중지 결정에 대한 이의제기",
+      "period_days": 30,
+      "basis_label": "수사중지 결정 통지 수령일",
+      "statute": "경찰수사규칙 제101조 (수사준칙 제54조 제1항)",
+      "source": "https://lbox.kr/v2/statute/경찰수사규칙/본문 > 제4편 > 제2장 > 제101조",
+      "submit_to": "해당 사법경찰관이 소속된 바로 위 상급경찰관서의 장 (소속 경찰관서에 제출하면 상급관서로 송부된다)",
+      "applies_to_st": ["ST-201", "ST-202"],
+      "why_unmapped": "TIM 코드 7개 중 수사중지 이의제기에 대응하는 것이 없다. 장기·미제 사건의 출발점이 수사중지(ST-201/202)인데 그 불복 기한을 담을 자리가 없다. 코드를 추가할지 TIM-041 의 정의를 바꿀지 정해야 한다.",
+      "note": "팀원 자료에는 '재수사 요청 (경찰의 수사중지 결정 시): 30일 (경찰수사규칙 제108조)' 로 적혀 있으나, 제108조는 불송치 결정 규정이고 수사중지 이의제기는 제101조다. 절차명도 '재수사 요청'이 아니라 '수사중지 결정 이의제기'이며 제출처가 원래 경찰서가 아니라 상급경찰관서장이다."
     }
   ]
 }

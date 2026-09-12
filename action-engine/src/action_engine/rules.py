@@ -64,11 +64,14 @@ def compute_deadlines(state: CaseState, basis: dict[str, date | None] | None = N
 
         code = row["code"]
         d = Deadline(code=code, label=label(code), basis_reason=row.get("basis_label"),
-                     statute=row.get("statute"))
+                     statute=row.get("statute"), submit_to=row.get("submit_to"))
 
-        if row.get("unlimited"):
+        # 기한이 아예 없는 절차. "아직 못 채웠다"와 구별해야 한다 —
+        # 사용자에게는 "기한 제한이 없습니다"가 그 자체로 필요한 정보다.
+        if row.get("unlimited") or row.get("no_statutory_limit"):
             d.severity = "ok"
             d.unresolved = None
+            d.advisory = row.get("advisory")
             out.append(d)
             continue
 
