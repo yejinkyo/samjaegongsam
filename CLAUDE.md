@@ -8,17 +8,19 @@
 ## 1. 프로젝트 개요
 
 - **프로젝트명**: 삼재공삼 — 장기·미제 사건 정리 서비스
-- **스택**: Python 3.11+ (백엔드 `research-engine`), 프론트는 정적 HTML
+- **스택**: Python 3.11+ (백엔드 `research-engine` · `action-engine`), 프론트는 정적 HTML
 - **패키지 매니저**: `uv`
 - **테스트 실행**: `uv run pytest`
 - **린트/포맷**: `uv run ruff check .` (line-length 140, target py311)
 - **CLI 실행**: `uv run research-engine run <case.json> --out <out.json>`
+- **카드 예제**: `uv run python examples/run_card.py` (`action-engine`)
 
-> ⚠️ **위 명령은 모두 `research-engine/` 폴더 안에서 실행한다.**
+> ⚠️ **위 명령은 모두 패키지 폴더(`research-engine/` 또는 `action-engine/`) 안에서 실행한다.**
 > 저장소 루트에는 `pyproject.toml`이 없어서 `uv run`이 명령을 찾지 못한다.
+> 두 패키지는 서로 import 하지 않으므로 **고친 패키지에서** 테스트·린트를 돌린다.
 >
 > ```bash
-> cd research-engine
+> cd research-engine   # 또는 cd action-engine
 > uv sync
 > uv run pytest
 > ```
@@ -28,15 +30,28 @@
 ```
 2026 wanted/
 ├── CLAUDE.md            협업 규칙 (이 파일)
-└── research-engine/     기능 1 · 사건 리서치·재구성 엔진
-    ├── src/research_engine/
-    │   ├── ingest/      OCR · 레이아웃 · 판독 신뢰도
-    │   ├── extract/     Event · Entity · Claim · 시간 표현 정규화
-    │   ├── timeline/    coreference · 시간축 병합 · 기록 공백
-    │   ├── analysis/    Claim 쌍 NLI · 불일치/미확인/빠진 정보 판정
-    │   ├── schema/      Pydantic 스키마 (provenance 포함)
-    │   └── requirements/ 사건 유형별 필요 자료 정의
-    └── tests/fixtures/  사건 예시 (인물·사건은 가상)
+├── docs/proposal.md     서비스 기획서
+├── mockups/             기능 1 HTML 목업
+├── research-engine/     기능 1 · 사건 리서치·재구성 엔진 ("무엇이 비어 있는가")
+│   ├── src/research_engine/
+│   │   ├── ingest/      OCR · 레이아웃 · 판독 신뢰도
+│   │   ├── extract/     Event · Entity · Claim · 시간 표현 정규화
+│   │   ├── timeline/    coreference · 시간축 병합 · 기록 공백
+│   │   ├── analysis/    Claim 쌍 NLI · 불일치/미확인/빠진 정보 판정
+│   │   ├── eval/        OCR · NER · NLI 평가 (라벨링 파일럿)
+│   │   ├── schema/      Pydantic 스키마 (provenance 포함)
+│   │   └── requirements/ 사건 유형별 필요 자료 정의
+│   └── tests/fixtures/  사건 예시 (인물·사건은 가상)
+└── action-engine/       기능 2 · 다음 행동 강령 엔진 ("무엇을 해야 하는가")
+    ├── src/action_engine/
+    │   ├── mapping.py   research-engine 출력 → ST · INF 코드
+    │   ├── rules.py     우선순위 규칙 평가 · 기한 계산
+    │   ├── limitation.py 죄명별 공소시효
+    │   ├── checklist.py 필요 서류 ↔ 자료함 대조
+    │   ├── agencies.py  관할 경찰관서 조회
+    │   └── data/        지식베이스 (rules · deadlines · documents · offences · agencies)
+    ├── tools/           지식베이스 생성 스크립트
+    └── tests/fixtures/  research-engine 실제 출력
 ```
 
 ---
@@ -81,10 +96,12 @@ git checkout -b feature/<설명>   # 새 작업 브랜치 생성
 
 - 요청받은 범위만 구현한다. 관련 없는 리팩터링/포맷팅은 섞지 않는다.
 - 주변 코드의 스타일(네이밍, 들여쓰기, 주석 밀도)을 그대로 따른다.
-- 구현 후 `research-engine/`에서 테스트와 린트를 돌려 통과를 확인하고, 결과를 사실대로 보고한다(실패하면 실패했다고 말한다).
+- 구현 후 **고친 패키지 폴더**에서 테스트와 린트를 돌려 통과를 확인하고, 결과를 사실대로 보고한다(실패하면 실패했다고 말한다).
   ```bash
   cd research-engine && uv run pytest && uv run ruff check .
+  cd action-engine && uv run pytest && uv run ruff check .
   ```
+- `research-engine` 출력 스키마를 바꾸면 `action-engine/tests/fixtures/`를 다시 만들고(방법은 `action-engine/README.md`) 양쪽 테스트를 모두 돌린다.
 - 커밋은 **의미 단위로 작게** 나눈다. "일단 전부 한 커밋"은 피한다.
 
 ---
