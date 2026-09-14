@@ -93,6 +93,58 @@ uv run research-engine eval-nli pilot/nli_pairs.jsonl --target-precision 0.95 --
 uv run research-engine run case.json --scorer models/scorer.json --policy models/policy.json
 ```
 
+### 공개 데이터셋으로 재는 것
+
+직접 만든 픽스처만으로는 "우리가 만든 사건에서 잘 된다"까지만 말할 수 있다. 공개 데이터셋으로 **숫자**를 만든다.
+
+```bash
+uv sync --extra nli --extra data           # transformers·torch·datasets (개발 전용)
+
+# KLUE NLI(3K) → eval-nli 라벨. --from 으로 내려받은 파일을 쓸 수도 있다
+uv run research-engine import-klue-nli --split validation --out out/klue_nli.jsonl
+
+uv run research-engine eval-nli out/klue_nli.jsonl                                  # 규칙만
+uv run research-engine eval-nli out/klue_nli.jsonl --nli-model Huffon/klue-roberta-base-nli
+```
+
+변환된 Claim 은 `slot=None` 이다. **슬롯 없는 자유 서술 경로**를 재기 위해서다 — 금액·일시·계좌처럼 슬롯이 있는 주장은 `SlotRuleNli`가 값을 직접 비교하므로 텍스트 모델을 쓰지 않는다.
+
+무엇을 재는 것이 아닌지도 분명히 해 둔다. KLUE NLI 는 숙박 후기·위키·뉴스 문장이고 우리 입력은 수사 서류다. 여기서 나온 수치는 **한국어 문장 쌍 판정 능력의 추정치**이고, 사건 자료에서의 성능은 `tests/fixtures/pilot/` 라벨로만 알 수 있다.
+
+### 측정값 (KLUE NLI 검증셋 3000쌍 · 모순 1000건)
+
+| NLI | precision | recall | tp / fp / fn |
+|---|---|---|---|
+| 규칙만 (`slot-rule-v1`, 현재 기본값) | — | **0.000** | 0 / 0 / 1000 |
+| `Huffon/klue-roberta-base-nli` (KLUE 학습) | 0.877 | 0.839 | 839 / 118 / 161 |
+| `pongjin/roberta_with_kornli` (KorNLI 학습 → 교차 검증) | 0.850 | 0.799 | 799 / 141 / 201 |
+
+규칙만으로는 **모순 1000건 중 0건**을 잡는다. `CombinedNli(text=None)`이 기본값이라 슬롯 없는 주장은 비교 자체를 하지 않는다. 텍스트 모델을 붙이면 recall 0.84가 나오지만 precision 이 0.88 을 넘지 못한다.
+
+임계값을 올려도 precision 이 올라가지 않는다 — **모델이 확신하며 틀리는 쪽이라 임계값으로 걸러지지 않는다.**
+
+| `contradiction_min` | precision | recall |
+|---|---|---|
+| 0.35 | 0.861 | 0.850 |
+| 0.70 | 0.877 | 0.839 |
+| 0.85 | 0.888 | 0.809 |
+
+그래서 목표 precision 0.95 를 만족하는 임계값이 없고 `eval-nli` 는 정책을 내보내지 않는다. 판정을 버리지 않고 **한 단계 낮춰 쓴다** — 자유 서술은 `conflicting`(확정)이 아니라 `suspected_conflict`("차이가 있어 보이지만 판단 근거가 부족합니다")로 올린다. 이 단계에서 모순 1000건 중 859건이 확인 목록에 오르고, 잘못 올라온 142건은 단정하지 않는 문구로 표시된다. 확정 판정은 값을 직접 비교할 수 있는 슬롯(금액·일시·계좌)에 계속 맡긴다.
+
+`ConservativePolicy.confirm_free_text=True` 로 켤 수 있다. 사건 자료 라벨에서 목표를 넘기면 그때 바꾼다.
+
+한 가지 더. 점수는 추출 신뢰도로 수축되므로(`shrink_by_confidence`) 신뢰도 0.9 자료에서 모순 점수는 0.9 를 넘지 못한다. `contradiction_min` 을 0.9 이상으로 올리면 판정이 통째로 사라지니, 임계값 표의 위쪽 구간은 비어 있는 것이 정상이다.
+
+### 데이터셋 라이선스
+
+| 데이터셋 | 라이선스 | 제품에 쓸 수 있나 |
+|---|---|---|
+| KLUE (NLI·NER) | CC BY-SA 4.0 | 상업적 사용 가능. **파생물에 동일 조건**이 붙으므로 학습 모델 배포 시 조건 확인 |
+| lbox_open (판결문) | CC BY-**NC** 4.0 | **비영리 한정 — 출시 모델 학습에 쓸 수 없다.** 기술 검증·벤치마크용으로만 |
+| AI Hub (손글씨·영수증 OCR 등) | AI Hub 이용약관 | 승인 절차 필요. 약관의 사용 범위를 건별로 확인해야 한다 |
+
+`proposal.md §9`의 수익 모델이 B2C·B2G이므로 비영리 조건 데이터가 학습 파이프라인에 섞이면 안 된다. 변환 결과는 저장소에 커밋하지 않는다(`out/`은 gitignore).
+
 모델 교체 지점: `OcrEngine`, `DocumentClassifier`, `EntityExtractor`, `NliModel`(슬롯 없는 자유 서술은 `HuggingFaceNli`로 한국어 NLI 체크포인트 연결).
 
 ## 현재 한계

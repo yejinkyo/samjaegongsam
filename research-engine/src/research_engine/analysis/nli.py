@@ -113,24 +113,59 @@ class SlotRuleNli:
 
 
 class HuggingFaceNli:
-    """premise=a.content, hypothesis=b.content. label_map으로 체크포인트 라벨명을 맞춘다."""
+    """premise=a.content, hypothesis=b.content. label_map으로 체크포인트 라벨명을 맞춘다.
 
-    def __init__(self, model_name: str, label_map: dict[str, str] | None = None, device: int | str | None = None):
-        from transformers import pipeline
+    ``pipeline`` 을 쓰지 않고 토크나이저·모델을 직접 다룬다. 한국어 NLI 체크포인트는
+    RoBERTa 본체에 BertTokenizer 가 붙은 조합이 많은데, 토크나이저는 문장 쌍에
+    ``token_type_ids=1`` 을 내보내고 모델은 ``type_vocab_size=1`` 로 학습돼 있어
+    ``pipeline`` 경로가 IndexError 로 죽는다. 그래서 세그먼트 임베딩이 한 종류뿐인
+    모델에는 ``token_type_ids`` 를 넘기지 않는다.
+    """
 
+    def __init__(self, model_name: str, label_map: dict[str, str] | None = None, device: str | None = None,
+                 max_length: int = 256):
+        import torch
+        from transformers import AutoModelForSequenceClassification, AutoTokenizer
+
+        self._torch = torch
         self.name = f"hf:{model_name}"
-        self._pipe = pipeline("text-classification", model=model_name, top_k=None, device=device)
+        self.max_length = max_length
+        self._tokenizer = AutoTokenizer.from_pretrained(model_name)
+        self._model = AutoModelForSequenceClassification.from_pretrained(model_name)
+        self._model.eval()
+        if device:
+            self._model.to(device)
+        self.device = device
+        # 세그먼트 임베딩이 한 종류면 문장 쌍 구분자를 넘길 수 없다
+        self._drop_token_type = getattr(self._model.config, "type_vocab_size", 1) <= 1
         self.label_map = label_map or {"entailment": "entailment", "contradiction": "contradiction", "neutral": "neutral"}
+        self._id2label = {int(i): str(name) for i, name in (self._model.config.id2label or {}).items()}
 
     def score(self, a: Claim, b: Claim) -> NliScores | None:
-        out = self._pipe({"text": a.content.value, "text_pair": b.content.value})
-        rows = out[0] if out and isinstance(out[0], list) else out
-        probs = {"entailment": 0.0, "contradiction": 0.0, "neutral": 0.0}
-        for row in rows:
-            key = self.label_map.get(row["label"]) or self.label_map.get(row["label"].lower())
-            if key in probs:
-                probs[key] = float(row["score"])
+        probs = self._probabilities(a.content.value, b.content.value)
+        if probs is None:
+            return None
         return shrink_by_confidence(_scores(probs["entailment"], probs["contradiction"]), a, b)
+
+    def _probabilities(self, premise: str, hypothesis: str) -> dict[str, float] | None:
+        torch = self._torch
+        inputs = self._tokenizer(premise, hypothesis, truncation=True, max_length=self.max_length, return_tensors="pt")
+        if self._drop_token_type:
+            inputs.pop("token_type_ids", None)
+        if self.device:
+            inputs = {k: v.to(self.device) for k, v in inputs.items()}
+        with torch.no_grad():
+            logits = self._model(**inputs).logits[0]
+        scores = torch.softmax(logits, dim=-1).tolist()
+        probs = {"entailment": 0.0, "contradiction": 0.0, "neutral": 0.0}
+        found = False
+        for idx, value in enumerate(scores):
+            raw = self._id2label.get(idx, "")
+            key = self.label_map.get(raw) or self.label_map.get(raw.lower())
+            if key in probs:
+                probs[key] = float(value)
+                found = True
+        return probs if found else None
 
 
 class CombinedNli:
