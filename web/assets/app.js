@@ -1,0 +1,417 @@
+/* 타래 화면 렌더링.
+ *
+ * 데이터는 data/cases.js 의 window.TARAE_CASES 에서만 읽는다(action-engine/tools/export_web.py 가 만든다).
+ * 화면 문장을 여기서 지어내지 않는다 — 비어 있는 값은 비어 있다고 보여준다.
+ * 사용자·엔진 문자열이 섞이므로 innerHTML 을 쓰지 않고 textContent 로만 넣는다.
+ */
+(function () {
+  "use strict";
+
+  var CASES = window.TARAE_CASES || [];
+
+  function h(tag, attrs, children) {
+    var node = document.createElement(tag);
+    if (attrs) {
+      Object.keys(attrs).forEach(function (key) {
+        var value = attrs[key];
+        if (value == null || value === false) return;
+        if (key === "class") node.className = value;
+        else if (key === "text") node.textContent = value;
+        else if (key.indexOf("on") === 0) node.addEventListener(key.slice(2), value);
+        else node.setAttribute(key, value === true ? "" : value);
+      });
+    }
+    (children || []).forEach(function (child) {
+      if (child == null) return;
+      node.appendChild(typeof child === "string" ? document.createTextNode(child) : child);
+    });
+    return node;
+  }
+
+  function icon(name, size) {
+    return h("span", { class: "icon" + (size ? " icon--" + size : ""), "aria-hidden": "true" }, [
+      h("img", { src: "assets/icons/" + name + ".svg", alt: "", width: "24", height: "24" }),
+    ]);
+  }
+
+  function caseHref(id) { return "case.html?id=" + encodeURIComponent(id); }
+
+  // ── 공통 ────────────────────────────────────────────────
+  function nav() {
+    return h("header", { class: "nav" }, [
+      h("a", { class: "nav__brand", href: "index.html" }, [
+        h("span", { class: "nav__logo", "aria-hidden": "true" }),
+        h("span", { class: "nav__name t-heading c-primary", text: "타래" }),
+      ]),
+      h("nav", { class: "nav__right", "aria-label": "주 메뉴" }, [
+        h("a", { class: "t-body-m-strong c-primary", href: "index.html", text: "내 사건" }),
+        h("a", { class: "t-body-m c-secondary", href: "#", text: "도움말" }),
+        h("span", { class: "nav__avatar", "aria-label": "내 정보" }, [h("span", { class: "t-label c-brand", text: "나" })]),
+      ]),
+    ]);
+  }
+
+  function backLink() {
+    return h("a", { class: "back", href: "index.html" }, [icon("arrow-left", 20), h("span", { class: "t-body-m c-secondary", text: "내 사건" })]);
+  }
+
+  function track(stages, fixed) {
+    return h("div", { class: "track" + (fixed ? " track--fixed" : ""), role: "list", "aria-label": "진행 단계" },
+      stages.map(function (s) {
+        return h("div", { class: "step step--" + s.state, role: "listitem", "aria-current": s.state === "current" ? "step" : null }, [
+          h("div", { class: "step__rail", "aria-hidden": "true" }, [h("span", { class: "step__line" }), h("span", { class: "step__dot" }), h("span", { class: "step__line" })]),
+          h("span", { class: "step__label", text: s.label }),
+        ]);
+      }));
+  }
+
+  function badge(kind, label) {
+    return h("span", { class: "badge badge--" + kind + " t-caption", text: label });
+  }
+
+  // ── 01 내 사건 ──────────────────────────────────────────
+  function renderHome(root) {
+    var grid = h("div", { class: "case-grid" });
+    CASES.forEach(function (c) {
+      var next = c.next_action;
+      grid.appendChild(h("a", { class: "card case-card", href: caseHref(c.id) }, [
+        h("div", { class: "case-card__top" }, [
+          h("span", { class: "tag t-label", text: c.type_label }),
+          h("span", { class: "t-caption c-tertiary", text: "기준일 " + c.as_of }),
+        ]),
+        h("div", { class: "case-card__titles" }, [
+          h("p", { class: "t-title c-primary", text: c.title }),
+          h("p", { class: "t-body-s c-tertiary", text: c.period + " · 자료 " + c.doc_count + "개" }),
+        ]),
+        track(c.stages, false),
+        h("div", { class: "stats" }, [
+          h("span", { class: "stat stat--need t-label", text: "확인 필요 " + c.need_count }),
+          h("span", { class: "stat t-label", text: "확보 자료 " + c.doc_count }),
+        ]),
+        h("div", { class: "divider" }),
+        h("div", { class: "case-card__next" }, [
+          h("div", { class: "case-card__next-text" }, [
+            h("p", { class: "t-caption c-brand", text: "다음 행동" + (next && next.due ? " · " + next.due.label : "") }),
+            h("p", { class: "t-body-m-strong c-primary", text: next ? next.label : "판단할 수 있는 행동이 아직 없어요" }),
+          ]),
+          icon("chevron-right"),
+        ]),
+      ]));
+    });
+    grid.appendChild(h("a", { class: "new-card", href: "new.html" }, [
+      h("span", { class: "circle-56" }, [icon("plus")]),
+      h("p", { class: "t-heading c-primary", text: "새 사건 등록" }),
+      h("p", { class: "t-body-s c-tertiary", text: "사건 유형을 고르고 자료를 올리면 정리가 시작돼요" }),
+    ]));
+
+    root.appendChild(h("main", { class: "page page--home" }, [
+      h("div", { class: "page-head" }, [
+        h("div", { class: "page-head__title" }, [
+          h("h1", { class: "t-display c-primary", text: "내 사건" }),
+          h("p", { class: "t-body-l c-secondary", text: "사건 카드를 선택하면 정리된 타임라인을 볼 수 있어요." }),
+        ]),
+        h("a", { class: "btn btn--primary t-body-m-strong", href: "new.html", text: "+  새 사건 등록" }),
+      ]),
+      grid,
+    ]));
+  }
+
+  // ── 02 새 사건 등록 ─────────────────────────────────────
+  var CATEGORIES = ["중고거래 사기", "온라인 괴롭힘", "폭행 · 상해", "금전 피해", "실종 · 미제", "수사중지"];
+
+  function fileKind(name) {
+    var ext = (name.split(".").pop() || "").toLowerCase();
+    if (ext === "pdf") return "PDF";
+    if (["png", "jpg", "jpeg", "heic", "webp", "gif"].indexOf(ext) >= 0) return "IMG";
+    if (["m4a", "mp3", "wav", "aac"].indexOf(ext) >= 0) return "음성";
+    return "문서";
+  }
+
+  function renderNew(root) {
+    var files = [];
+    var list = h("div", { class: "file-list" });
+    var count = h("span", { class: "t-label c-brand", text: "0" });
+
+    function chip(label, unsure) {
+      var node = h("button", { type: "button", class: "chip" + (unsure ? " chip--unsure" : ""), "aria-pressed": "false", text: label });
+      node.addEventListener("click", function () {
+        chips.querySelectorAll(".chip").forEach(function (c) { c.setAttribute("aria-pressed", "false"); });
+        node.setAttribute("aria-pressed", "true");
+      });
+      return node;
+    }
+    var chips = h("div", { class: "chips", role: "group", "aria-label": "사건 유형" },
+      CATEGORIES.map(function (c) { return chip(c, false); }).concat([chip("잘 모르겠어요", true)]));
+    chips.firstChild.setAttribute("aria-pressed", "true");
+
+    function drawList() {
+      list.textContent = "";
+      count.textContent = String(files.length);
+      if (!files.length) {
+        list.appendChild(h("p", { class: "empty-files t-body-s c-tertiary", text: "아직 올린 자료가 없어요. 사진 한 장부터 시작해도 괜찮아요." }));
+        return;
+      }
+      files.forEach(function (f) {
+        list.appendChild(h("div", { class: "file-row" }, [
+          h("span", { class: "file-row__kind t-caption", text: f.kind }),
+          h("div", { class: "file-row__texts" }, [
+            h("p", { class: "t-body-m-strong c-primary", text: f.name, title: f.name }),
+            h("p", { class: "t-body-s c-tertiary", text: f.meta }),
+          ]),
+          f.link ? badge("unverified", "언제인가요?") : badge("unverified", "날짜 읽기 전"),
+        ]));
+      });
+    }
+
+    var picker = h("input", { type: "file", multiple: true, accept: "image/*,application/pdf,audio/*", hidden: true });
+    var camera = h("input", { type: "file", accept: "image/*", capture: "environment", hidden: true });
+    function addFiles(fileList) {
+      Array.prototype.forEach.call(fileList, function (f) {
+        files.push({ kind: fileKind(f.name), name: f.name, meta: "방금 추가 · 정리를 시작하면 날짜를 읽어요" });
+      });
+      drawList();
+    }
+    picker.addEventListener("change", function () { addFiles(picker.files); picker.value = ""; });
+    camera.addEventListener("change", function () { addFiles(camera.files); camera.value = ""; });
+
+    var dropzone = h("div", { class: "dropzone" }, [
+      h("span", { class: "circle-56" }, [icon("upload")]),
+      h("p", { class: "t-heading c-primary", text: "여기에 끌어다 놓거나, 휴대폰으로 찍어 올려주세요" }),
+      h("p", { class: "dropzone__hint t-body-s c-tertiary", text: "이미지 · PDF · 음성 · 문서  |  여러 장을 한 번에 올릴 수 있어요" }),
+      h("div", { class: "dropzone__actions" }, [
+        h("button", { type: "button", class: "btn btn--primary t-body-m-strong", text: "파일 선택", onclick: function () { picker.click(); } }),
+        h("button", { type: "button", class: "btn btn--secondary t-body-m-strong", text: "사진 찍기", onclick: function () { camera.click(); } }),
+      ]),
+      picker, camera,
+    ]);
+    ["dragenter", "dragover"].forEach(function (type) {
+      dropzone.addEventListener(type, function (e) { e.preventDefault(); dropzone.classList.add("is-over"); });
+    });
+    ["dragleave", "drop"].forEach(function (type) {
+      dropzone.addEventListener(type, function () { dropzone.classList.remove("is-over"); });
+    });
+    dropzone.addEventListener("drop", function (e) { e.preventDefault(); addFiles(e.dataTransfer.files); });
+
+    var url = h("input", { type: "url", placeholder: "글 주소 붙여넣기 (삭제된 글도 찾아봅니다)", "aria-label": "글 주소" });
+    function addUrl() {
+      var value = url.value.trim();
+      if (!value) return;
+      files.push({ kind: "LINK", name: value, meta: "글 주소 · 올린 날짜를 알려주세요", link: true });
+      url.value = "";
+      drawList();
+    }
+    url.addEventListener("keydown", function (e) { if (e.key === "Enter") addUrl(); });
+
+    drawList();
+    root.appendChild(h("main", { class: "page page--new" }, [
+      backLink(),
+      h("div", { class: "page-head page-head--stack" }, [
+        h("h1", { class: "t-display c-primary", text: "새 사건 등록" }),
+        h("p", { class: "t-body-l c-secondary", text: "사건 유형을 고르고 가진 자료를 올려주세요. 자료가 적어도 시작할 수 있어요." }),
+      ]),
+      h("section", { class: "card section", "aria-labelledby": "s1" }, [
+        h("div", { class: "section__head" }, [h("span", { class: "section__num t-label", text: "1" }), h("h2", { id: "s1", class: "t-heading c-primary", text: "어떤 일에 가까운가요?" })]),
+        chips,
+        h("p", { class: "t-body-s c-tertiary", text: "유형에 따라 확인할 항목과 다음 행동이 달라져요. 잘 모르겠다면 자료를 보고 제안해 드려요." }),
+      ]),
+      h("section", { class: "card section", "aria-labelledby": "s2" }, [
+        h("div", { class: "section__head" }, [
+          h("span", { class: "section__num t-label", text: "2" }),
+          h("h2", { id: "s2", class: "t-heading c-primary", text: "가진 자료를 올려주세요" }),
+          h("span", { class: "t-body-s c-tertiary", text: "캡처 · 사진 · 접수증 무엇이든" }),
+        ]),
+        dropzone,
+        h("div", { class: "url-row" }, [
+          h("label", { class: "input" }, [icon("link", 20), url]),
+          h("button", { type: "button", class: "btn btn--secondary t-body-m-strong", text: "추가", onclick: addUrl }),
+        ]),
+        h("div", { class: "list-head" }, [h("span", { class: "t-label c-secondary", text: "올린 자료" }), count]),
+        list,
+        h("p", { class: "note t-body-s c-secondary", text: "날짜가 정리의 뼈대가 됩니다. 날짜를 모르는 자료는 “언제인가요?”를 눌러 알려주세요." }),
+        h("button", { type: "button", class: "add-event t-body-m-strong c-brand", text: "+  기억나는 내용을 직접 적기 (선택)", style: "padding:0" }),
+      ]),
+      h("div", { class: "cta" }, [
+        // 서버가 없어 올린 파일을 실제로 정리하지 않는다. 예시 사건의 결과 화면으로 이동한다.
+        h("a", { class: "btn btn--primary t-body-m-strong", href: CASES.length ? caseHref(CASES[0].id) : "index.html", text: "정리 시작하기" }),
+        h("a", { class: "btn btn--secondary t-body-m-strong", href: "index.html", text: "자료는 나중에 더 추가할게요" }),
+      ]),
+    ]));
+  }
+
+  // ── 03 사건 상세 ────────────────────────────────────────
+  function timelineCard(c) {
+    var wrap = h("div", { class: "card timeline" });
+    var events = c.timeline;
+    var lastEvent = -1;
+    events.forEach(function (row, i) { if (row.type === "event") lastEvent = i; });
+    events.forEach(function (row, i) {
+      if (row.type === "gap") {
+        wrap.appendChild(h("div", { class: "record-gap" }, [
+          h("span", { class: "t-label c-secondary", text: row.range }),
+          h("span", { class: "t-body-s c-tertiary", text: row.text }),
+          h("button", { type: "button", class: "record-gap__add t-label c-brand", text: "이 기간 자료 추가" }),
+        ]));
+        return;
+      }
+      var badges = [badge(row.kind === "verified" ? "verified" : row.kind === "mine" ? "mine" : "unverified", row.badge)];
+      if (row.conflict) badges.push(badge("conflict", "불일치"));
+      if (row.needs_date) badges.push(badge("unverified", "날짜 확인 필요"));
+      wrap.appendChild(h("div", { class: "event" + (row.conflict ? " event--highlight" : "") + (i === lastEvent ? " event--last" : "") }, [
+        h("p", { class: "event__time t-label c-secondary", text: row.time }),
+        h("div", { class: "event__rail", "aria-hidden": "true" }, [h("span", { class: "event__dot event__dot--" + row.kind }), h("span", { class: "event__line" })]),
+        h("div", { class: "event__content" }, [
+          h("div", { class: "event__title-row" }, [h("p", { class: "t-body-l-strong c-primary", text: row.title })].concat(badges)),
+          h("p", { class: "t-body-s c-tertiary", text: row.source }),
+        ]),
+      ]));
+    });
+    wrap.appendChild(h("button", { type: "button", class: "add-event t-body-m-strong c-brand", text: "+  기억나는 일을 직접 추가" }));
+    return wrap;
+  }
+
+  function nextActionCard(next) {
+    if (!next) return null;
+    var details;
+    if (next.state === "filled") {
+      details = h("div", { class: "next-action__details" }, next.rows.map(function (r) {
+        return h("div", { class: "next-action__row" }, [
+          h("span", { class: "next-action__key t-caption", text: r.k }),
+          h("span", { class: "next-action__val t-body-s", text: r.v }),
+        ]);
+      }));
+      if (next.prepare) {
+        details.appendChild(h("div", { class: "next-action__row" }, [
+          h("span", { class: "next-action__key t-caption", text: "준비물" }),
+          h("div", { class: "next-action__val" }, [
+            h("span", { class: "t-body-s", text: next.prepare.done + " / " + next.prepare.total + " 확보" }),
+            h("ul", { class: "next-action__prepare t-body-s" }, next.prepare.items.map(function (it) {
+              var mark = it.state === "보유" ? "✓ " : "· ";
+              return h("li", { text: mark + it.label + " — " + it.state + (it.required ? " (필수)" : "") });
+            })),
+          ]),
+        ]));
+      }
+    } else {
+      var message = next.state === "no_submission"
+        ? next.note
+        : "무엇을·어디에·어떻게·언제까지는 검수된 절차 데이터에서만 안내해요. 이 행동의 절차는 아직 확인 중이에요.";
+      details = h("div", { class: "next-action__details" }, [h("p", { class: "t-body-s", text: message })]);
+    }
+
+    var also = h("ul", { class: "next-action__also t-body-s", hidden: true }, next.also.map(function (a) {
+      return h("li", { text: a.label + " — " + a.why });
+    }));
+    var toggle = h("button", { type: "button", class: "btn btn--secondary btn--block t-body-m-strong", "aria-expanded": "false", text: "자세히 보기" });
+    toggle.addEventListener("click", function () {
+      var open = also.hidden;
+      also.hidden = !open;
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.textContent = open ? "접기" : "자세히 보기";
+    });
+
+    return h("section", { class: "next-action", "aria-labelledby": "na-title" }, [
+      h("div", { class: "next-action__head" }, [
+        h("span", { class: "t-label", text: "다음 행동" }),
+        h("span", { class: "t-caption", text: next.due ? next.due.label : next.unverified ? "검수 전 안내" : "" }),
+      ]),
+      h("h2", { id: "na-title", class: "t-heading", text: next.label }),
+      details,
+      next.state === "filled" && next.note ? h("p", { class: "t-caption next-action__why", text: next.note }) : null,
+      h("p", { class: "t-caption next-action__why", text: "왜 필요한가요? " + next.why }),
+      next.also.length ? toggle : null,
+      also,
+    ]);
+  }
+
+  function issuesCard(c) {
+    var card = h("section", { class: "card issues", "aria-labelledby": "issues-title" }, [
+      h("div", { class: "issues__head" }, [
+        h("h2", { id: "issues-title", class: "t-heading c-primary", text: "확인이 필요해요" }),
+        h("span", { class: "count-pill t-label", text: String(c.need_count) }),
+      ]),
+    ]);
+    c.issues.forEach(function (g) {
+      card.appendChild(h("div", { class: "issue-group sev-" + g.severity }, [
+        h("div", { class: "issue-group__head" }, [
+          h("span", { class: "t-label c-secondary", text: g.label }),
+          h("span", { class: "t-label c-tertiary", text: String(g.items.length) }),
+        ]),
+      ].concat(g.items.map(function (it) {
+        return h("div", { class: "issue" + (g.severity === "conflict" ? " issue--conflict" : "") }, [
+          h("span", { class: "issue__bar" }),
+          h("div", { class: "issue__inner" }, [
+            h("p", { class: "t-body-m c-primary", text: it.text }),
+            it.how ? h("p", { class: "t-caption c-tertiary", text: it.how }) : null,
+          ]),
+        ]);
+      }))));
+    });
+    card.appendChild(h("button", { type: "button", class: "btn btn--secondary btn--block t-body-m-strong", text: "전문가에게 물어볼 질문 만들기" }));
+    return card;
+  }
+
+  function renderCase(root) {
+    var id = new URLSearchParams(location.search).get("id");
+    var c = CASES.filter(function (x) { return x.id === id; })[0] || CASES[0];
+    if (!c) {
+      root.appendChild(h("main", { class: "page page--case" }, [backLink(), h("p", { class: "t-body-l", text: "사건을 찾지 못했어요." })]));
+      return;
+    }
+    document.title = c.title + " · 타래";
+
+    var panel = h("div", { role: "tabpanel", id: "panel" }, [timelineCard(c)]);
+    var tabNames = ["타임라인", "인물 · 관계", "주장 대조"];
+    var tabs = h("div", { class: "tabs", role: "tablist" }, tabNames.map(function (name, i) {
+      var tab = h("button", { type: "button", class: "tab", role: "tab", "aria-selected": i === 0 ? "true" : "false", "aria-controls": "panel", text: name });
+      tab.addEventListener("click", function () {
+        tabs.querySelectorAll(".tab").forEach(function (t) { t.setAttribute("aria-selected", "false"); });
+        tab.setAttribute("aria-selected", "true");
+        panel.textContent = "";
+        panel.appendChild(i === 0 ? timelineCard(c) : h("div", { class: "card tab-empty" }, [
+          h("p", { class: "t-body-m c-tertiary", text: name + " 화면은 아직 설계 중이에요." }),
+        ]));
+      });
+      return tab;
+    }));
+
+    root.appendChild(h("div", { class: "disclaimer" }, [
+      icon("info", 18),
+      h("p", { class: "t-body-s c-secondary", text: "타래는 범인이나 사건의 진실을 판단하지 않습니다. 지금 자료로 확인되는 것과 아직 확인되지 않은 것을 나누어 보여드립니다." }),
+    ]));
+    root.appendChild(h("main", { class: "page page--case" }, [
+      backLink(),
+      h("section", { class: "card case-head" }, [
+        h("div", { class: "case-head__info" }, [
+          h("div", { class: "case-head__tags" }, [
+            h("span", { class: "tag t-label", text: c.type_label }),
+            h("span", { class: "t-caption c-tertiary", text: "기준일 " + c.as_of }),
+          ]),
+          h("h1", { class: "t-display c-primary", text: c.title }),
+          h("p", { class: "case-head__meta t-body-m c-secondary", text: c.period + "  ·  자료 " + c.doc_count + "개  ·  확인 필요 " + c.need_count }),
+        ]),
+        h("div", { class: "case-head__progress" }, [h("span", { class: "t-caption c-tertiary", text: "진행 단계" }), track(c.stages, true)]),
+      ]),
+      h("div", { class: "columns" }, [
+        h("div", { class: "main" }, [
+          h("div", { class: "sources" }, [
+            h("span", { class: "sources__label" }, [h("span", { class: "t-label c-secondary", text: "자료" }), h("span", { class: "t-label c-brand", text: String(c.sources.length) })]),
+          ].concat(c.sources.map(function (s) {
+            return h("span", { class: "source-pill" }, [h("span", { class: "t-caption c-tertiary", text: s.kind }), h("span", { class: "t-body-s c-primary", text: s.name })]);
+          })).concat([h("a", { class: "sources__add t-label c-brand", href: "new.html", text: "+ 자료 추가" })])),
+          tabs,
+          panel,
+        ]),
+        h("aside", { class: "rail" }, [nextActionCard(c.next_action), issuesCard(c)]),
+      ]),
+    ]));
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    var root = document.getElementById("app");
+    root.appendChild(nav());
+    var page = document.body.getAttribute("data-page");
+    if (page === "home") renderHome(root);
+    else if (page === "new") renderNew(root);
+    else if (page === "case") renderCase(root);
+  });
+})();
