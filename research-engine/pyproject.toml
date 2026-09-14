@@ -21,7 +21,10 @@ data = ["datasets>=2.19"]
 research-engine = "research_engine.cli:main"
 
 [dependency-groups]
-dev = ["pytest>=8"]
+dev = [
+    "pytest>=8",
+    "ruff>=0.16.7",
+]
 
 [build-system]
 requires = ["hatchling"]
