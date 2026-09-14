@@ -52,6 +52,10 @@ def build_checklist(
             action = resolved
             entry = actions.get(resolved) or {}
 
+    # 자료를 확보하는 단계는 제출 서류가 원래 없다. '못 채움'으로 띄우면 안 된다
+    if entry.get("no_submission"):
+        return Checklist(action=action, no_submission=entry.get("why"), advisory=entry.get("advisory"))
+
     rows = entry.get("items") or []
 
     if not rows:
@@ -101,4 +105,6 @@ def build_checklist(
         submit_to=entry.get("submit_to"),
         statute=entry.get("statute"),
         prerequisite=entry.get("prerequisite"),
+        source=entry.get("source"),
+        advisory=entry.get("advisory"),
     )
