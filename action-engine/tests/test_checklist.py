@@ -30,22 +30,86 @@ def _kb(monkeypatch, items):
 
 def test_필요서류가_비어있으면_체크리스트를_만들지_않는다():
     """기한과 같은 원칙. 없는 것을 지어내면 신청이 반려된다."""
-    c = build_checklist("ACT-근거보완", DOCS)
+    c = build_checklist("ACT-신규정보제출", DOCS)
     assert c.items == []
     assert c.total == 0
     assert "법령·서식 확인" in c.unresolved
 
 
 def test_서류를_채웠으면_근거가_붙는다():
-    """채운 액션에는 서식명과 제출처가 있어야 한다. 비운 액션에는 무엇을 확인할지가 있어야 한다."""
+    """채운 액션에는 서식명·제출처·근거가 있어야 한다. 비운 액션에는 무엇을 확인할지가 있어야 한다."""
     kb = load_documents()
     assert kb["status"] == "draft_unverified"  # 법률 전문가 검수 전
     for action, entry in kb["actions"].items():
         if entry.get("items"):
             assert entry.get("form_name"), f"{action} 에 서식명이 없습니다"
             assert entry.get("submit_to"), f"{action} 에 제출처가 없습니다"
+            assert entry.get("statute") or entry.get("source"), f"{action} 에 근거 법령도 출처도 없습니다"
+        elif entry.get("no_submission"):
+            assert entry.get("why"), f"{action} 에 제출 서류가 없는 이유가 없습니다"
         elif not entry.get("by_stage"):
             assert entry.get("check"), f"{action} 에 무엇을 확인해야 하는지가 없습니다"
+
+
+def test_제출서류가_없는_단계는_못채움과_구별한다():
+    """'제출할 서류가 원래 없음'과 '아직 못 채움'은 다른 상태다.
+
+    자료를 확보하는 단계에 "법령·서식 확인 필요"를 띄우면, 사용자는 뭔가 빠진 줄 알고 멈춘다.
+    """
+    c = build_checklist("ACT-근거보완", DOCS)
+    assert c.items == []
+    assert c.unresolved is None
+    assert c.no_submission and "확보" in c.no_submission
+
+    empty = build_checklist("ACT-신규정보제출", DOCS)
+    assert empty.no_submission is None  # 못 채운 것은 여전히 못 채운 것이다
+    assert empty.unresolved
+
+
+def test_피해자가_청구할_수_없는_증거보전은_안내하지_않는다():
+    """형사소송법 제184조 제1항 — 청구권자는 검사·피고인·피의자·변호인뿐이다."""
+    entry = load_documents()["actions"]["ACT-증거보존"]
+    assert entry["items"] == []
+    assert any("제184조" in r["statute"] for r in entry["not_available"])
+
+    c = build_checklist("ACT-증거보존", DOCS)
+    assert c.unresolved
+    assert not any("증거보전" in i.label for i in c.items)
+
+
+def test_시효임박_재정신청은_불기소_단계에만_연결한다():
+    """형사소송법 제260조 제2항 제3호 — 항고 없이, 공소시효 만료일 전날까지.
+
+    제1항이 '공소를 제기하지 아니한다는 통지를 받은 때'를 요건으로 두므로 불기소(ST-302)에만 붙인다.
+    """
+    c = build_checklist("ACT-공소시효", DOCS, st="ST-302")
+    assert c.form_name == "재정신청서"
+    assert "제3호" in c.statute
+    assert c.prerequisite and "항고를 거치지 않아도" in c.prerequisite
+    assert c.advisory and "전날까지" in c.advisory
+    assert c.source and c.source.startswith("https://www.law.go.kr")
+
+    police = build_checklist("ACT-공소시효", DOCS, st="ST-201")
+    assert police.items == []
+    assert police.unresolved  # 경찰 단계는 확인 전이라 안내하지 않는다
+
+
+def test_단계확인은_사건조회_경로와_출처를_준다():
+    c = build_checklist("ACT-단계확인", DOCS)
+    assert "사건조회" in c.form_name
+    assert "kics.go.kr" in c.submit_to
+    assert c.source and c.source.startswith("https://www.gov.kr")
+    by = {i.label: i for i in c.items}
+    assert by["사건 접수증 또는 통지서"].state == "보유"  # 접수증이 자료함에 있다
+    assert by["인증서 (형사사법포털 로그인용)"].required is True
+
+
+def test_정정_내역을_기록으로_남긴다():
+    """확인 메모를 고친 곳은 근거와 함께 남긴다. 같은 오류가 다시 들어오지 않게 하기 위해서다."""
+    corrections = load_documents()["corrections"]
+    assert len(corrections) >= 2
+    for c in corrections:
+        assert c["fixed"] and c["why_it_matters"] and c["verified_at"]
 
 
 def test_단계마다_서류가_다르면_ST로_갈라_조회한다():
@@ -65,7 +129,7 @@ def test_단계마다_서류가_다르면_ST로_갈라_조회한다():
 
 
 def test_아직_못_채운_액션은_체크리스트를_만들지_않는다():
-    c = build_checklist("ACT-근거보완", DOCS)
+    c = build_checklist("ACT-모순확인", DOCS)
     assert c.items == []
     assert "확인 필요" in c.unresolved
 
@@ -137,5 +201,5 @@ def test_카드에_체크리스트가_붙는다(missing, fraud):
         card = build_card(result)
         assert card.checklist is not None
         assert card.checklist.action == card.next_action.action
-        # 지금은 지식베이스가 비어 있으므로 항목이 없는 것이 정상이다
+        # 두 사건의 다음 행동(신규정보제출 · 모순확인)은 공식 경로를 확인하기 전이라 비어 있는 것이 정상이다
         assert card.checklist.unresolved

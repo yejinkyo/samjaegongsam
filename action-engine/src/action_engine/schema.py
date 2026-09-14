@@ -65,6 +65,8 @@ class Checklist(BaseModel):
     """5단계 대조 결과.
 
     ``unresolved`` 가 차 있으면 사전에 필요 서류가 없다는 뜻이고, 화면은 아무것도 그리지 않는다.
+    ``no_submission`` 은 다르다 — 서류를 못 채운 게 아니라 **제출할 서류가 없는 단계**라는 정보다.
+    기한의 '법정 기한 없음'과 '아직 못 채움'을 가르는 것과 같은 이유다.
     """
 
     action: str | None = None
@@ -72,12 +74,15 @@ class Checklist(BaseModel):
     done: int = 0
     total: int = 0
     unresolved: str | None = None
+    no_submission: str | None = Field(default=None, description="제출 절차가 아닌 단계일 때 그 이유")
     # 아래는 전부 지식베이스에서만 온다. 없으면 화면은 빈칸으로 둔다.
     form_name: str | None = Field(default=None, description="제출할 서류의 정식 명칭")
     form_url: str | None = Field(default=None, description="공식 서식 내려받기 주소")
     submit_to: str | None = Field(default=None, description="제출처")
     statute: str | None = Field(default=None, description="근거 법령")
     prerequisite: str | None = Field(default=None, description="먼저 거쳐야 하는 절차")
+    source: str | None = Field(default=None, description="확인한 공식 출처 주소")
+    advisory: str | None = Field(default=None, description="서류 외에 함께 알려줄 것")
 
 
 class CaseState(BaseModel):
