@@ -31,7 +31,8 @@
 2026 wanted/
 ├── CLAUDE.md            협업 규칙 (이 파일)
 ├── docs/proposal.md     서비스 기획서
-├── mockups/             기능 1 HTML 목업
+├── mockups/             기능 1 HTML 목업 (초기안 — 화면은 web/ 이 기준)
+├── web/                 피그마 UI를 옮긴 정적 화면 (데이터: action-engine/tools/export_web.py)
 ├── research-engine/     기능 1 · 사건 리서치·재구성 엔진 ("무엇이 비어 있는가")
 │   ├── src/research_engine/
 │   │   ├── ingest/      OCR · 레이아웃 · 판독 신뢰도
