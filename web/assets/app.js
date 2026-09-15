@@ -118,12 +118,12 @@
     ]));
 
     root.appendChild(h("main", { class: "page page--home" }, [
+      // 새 사건 등록은 그리드 끝의 점선 폴더가 맡는다 — 머리말에 같은 버튼을 두지 않는다
       h("div", { class: "page-head" }, [
         h("div", { class: "page-head__title" }, [
           h("h1", { class: "t-display c-primary", text: "내 사건" }),
           h("p", { class: "t-body-l c-secondary", text: "사건 카드를 선택하면 정리된 타임라인을 볼 수 있어요." }),
         ]),
-        h("a", { class: "btn btn--primary t-body-m-strong", href: "new.html", text: "+  새 사건 등록" }),
       ]),
       grid,
     ]));
