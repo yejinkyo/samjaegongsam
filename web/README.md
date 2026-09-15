@@ -67,4 +67,19 @@ uv run python tools/export_web.py
 | 진행 단계는 흰 굵은 선 + 현재 마디가 빛남 | 어디까지 왔는지를 색 대비로 먼저 읽히게 한다. 남은 구간은 흐린 흰색 |
 | 1024px 이하에서 한 열로 접힘 | 시안은 1440px 데스크톱. 1차 사용자가 휴대폰을 쓴다 |
 
+## 로고
+
+`assets/logo-original.png` 가 손으로 그린 원본(흰 배경 · 검은 그림)이다. 화면에 쓰는 두 파일은 여기서 만든다.
+
+| 파일 | 어디에 |
+|---|---|
+| `assets/logo.png` | 밝은 화면 — 앱 상단바, 파비콘 |
+| `assets/logo-light.png` | 어두운 화면 — 시작 · 로그인 · 회원가입 |
+
+만드는 법은 `tools/make_logo.py` 에 있다. 바깥 흰 배경만 투명하게 하고(원 안쪽 흰 줄무늬는 그림의 일부라 남긴다) 검은 부분에 색을 올린다. 원본을 다시 그리면 이 스크립트를 다시 돌린다.
+
+```bash
+py web/tools/make_logo.py
+```
+
 토큰(`assets/tokens.css`)은 피그마 변수 이름과 1:1이다(`bg/canvas` → `--bg-canvas`). 아이콘은 피그마 에셋 원본(`assets/icons/`)이다.

@@ -140,7 +140,7 @@
     // 왼쪽은 로고만, 오른쪽은 도움말 · 프로필 · 메뉴 순서
     return h("header", { class: "nav" }, [
       h("a", { class: "nav__brand", href: "index.html" }, [
-        h("img", { class: "nav__logo", src: "assets/logo.svg", alt: "", width: "28", height: "28" }),
+        h("img", { class: "nav__logo", src: "assets/logo.png", alt: "", width: "28", height: "28" }),
         h("span", { class: "nav__name t-heading c-primary", text: "타래" }),
       ]),
       h("nav", { class: "nav__right", "aria-label": "주 메뉴" }, [help, account, menu]),
