@@ -186,8 +186,8 @@
   function caseStatus(c) {
     var current = (c.stages || []).filter(function (s) { return s.state === "current"; })[0];
     if (!current) return "진행 상태 확인 필요";
-    // 마지막 단계에 멈춘 중지 사건은 '결과 단계'가 아니라 멈춰 있다는 것이 핵심이다
-    if (current.label === "결과" && c.type_label.indexOf("중지") >= 0) return "중지";
+    // '중지'는 그 자체가 상태다 — '중지 단계'라고 쓰지 않는다
+    if (current.label === "중지") return "중지";
     return current.label + " 단계";
   }
 

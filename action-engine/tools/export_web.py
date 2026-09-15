@@ -95,6 +95,53 @@ SLOT_STATES = {
 CIRCLED = "".join(chr(0x2460 + i) for i in range(20))  # ①~⑳
 
 
+# 사건 유형별 진행 단계 — 화면에 보이는 이름이다.
+#
+# 엔진의 Stage 는 여섯 가지(발생·송금·신고·접수·수사·결과)로 사건 유형을 가리지 않는다.
+# 화면에서는 그 사건이 실제로 밟는 절차 이름으로 보여야 한다. 수사중지 사건에서 마지막이
+# '결과'로 끝나면 사용자는 사건이 끝난 줄 안다 — 실제로는 '중지'이고 그 뒤에 되살릴 길이 남아 있다.
+# 엔진 코드는 그대로 두고 여기서 묶어서 이름만 바꾼다.
+STAGE_TRACKS = {
+    "missing_person_suspended": [
+        ("발생", ["occurrence"]),
+        ("신고", ["report", "receipt"]),
+        ("수사", ["investigation"]),
+        ("중지", ["outcome"]),
+        ("재수사", []),      # 아직 오지 않은 단계 — 이의제기·새 자료로 열린다
+    ],
+    "investigation_suspended": [
+        ("고소", ["occurrence", "report"]),
+        ("접수", ["receipt"]),
+        ("수사", ["investigation"]),
+        ("중지", ["outcome"]),
+        ("재개", []),
+    ],
+}
+
+
+def _stages(card) -> list[dict[str, str]]:
+    engine = {s["stage"]: s["state"] for s in card.stages}
+    track = STAGE_TRACKS.get(card.case_type)
+    if not track:
+        # 유형별 이름을 정하지 않은 사건은 엔진 단계를 그대로 쓴다
+        return [{"label": s["label"], "state": {"done": "done", "current": "current"}.get(s["state"], "todo")}
+                for s in card.stages]
+
+    rows = []
+    for label, codes in track:
+        states = [engine[c] for c in codes if c in engine]
+        if "current" in states:
+            state = "current"
+        elif states and all(st == "done" for st in states):
+            state = "done"
+        elif "done" in states:
+            state = "done"
+        else:
+            state = "todo"   # 자료가 없거나(skipped) 아직 오지 않은 단계
+        rows.append({"label": label, "state": state})
+    return rows
+
+
 def _dt(value: str | None) -> datetime | None:
     return datetime.fromisoformat(value) if value else None
 
@@ -364,7 +411,6 @@ def build_view(case_id: str, title: str, result: dict[str, Any]) -> dict[str, An
     evidence = [d for d in result["documents"] if d["doc_type"] != "user_note"]
     doc_index = {d["doc_id"]: i for i, d in enumerate(evidence)}
     as_of = date.fromisoformat(result["as_of"])
-    stage_state = {"done": "done", "current": "current"}
     return {
         "id": case_id,
         "title": title,
@@ -373,7 +419,7 @@ def build_view(case_id: str, title: str, result: dict[str, Any]) -> dict[str, An
         "period": _period(result),
         "doc_count": card.evidence_doc_count,
         "need_count": card.needs_confirmation_count,
-        "stages": [{"label": s["label"], "state": stage_state.get(s["state"], "todo")} for s in card.stages],
+        "stages": _stages(card),
         "sources": [{"kind": _kind(d["file_name"], d["doc_type"]), "name": d["file_name"]} for d in evidence],
         "timeline": _timeline(result, docs, doc_index),
         "people": _people(result, docs),

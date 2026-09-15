@@ -470,16 +470,16 @@ window.TARAE_CASES = [
         "state": "done"
       },
       {
-        "label": "접수",
-        "state": "done"
-      },
-      {
         "label": "수사",
         "state": "todo"
       },
       {
-        "label": "결과",
+        "label": "중지",
         "state": "current"
+      },
+      {
+        "label": "재수사",
+        "state": "todo"
       }
     ],
     "sources": [
@@ -957,11 +957,7 @@ window.TARAE_CASES = [
     "need_count": 6,
     "stages": [
       {
-        "label": "발생",
-        "state": "done"
-      },
-      {
-        "label": "신고",
+        "label": "고소",
         "state": "done"
       },
       {
@@ -973,8 +969,12 @@ window.TARAE_CASES = [
         "state": "todo"
       },
       {
-        "label": "결과",
+        "label": "중지",
         "state": "current"
+      },
+      {
+        "label": "재개",
+        "state": "todo"
       }
     ],
     "sources": [
