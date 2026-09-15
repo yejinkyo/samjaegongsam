@@ -267,33 +267,83 @@
   }
 
   // ── 03 사건 상세 ────────────────────────────────────────
+
+  /** 팝업. 자료 목록·행동 설명처럼 평소엔 접어 두는 것을 담는다. */
+  function openModal(title, body) {
+    // 닫힌 팝업이 남아 있으면 먼저 치운다 — close 이벤트가 늦게 오는 브라우저가 있다
+    document.querySelectorAll("dialog.modal").forEach(function (old) { old.remove(); });
+
+    var dialog = h("dialog", { class: "modal" }, [
+      h("div", { class: "modal__head" }, [
+        h("h2", { class: "t-heading c-primary", text: title }),
+        h("button", { type: "button", class: "modal__close", "aria-label": "닫기", text: "✕" }),
+      ]),
+      h("div", { class: "modal__body" }, [body]),
+    ]);
+    dialog.querySelector(".modal__close").addEventListener("click", function () { dialog.close(); });
+    // 바깥을 누르면 닫는다
+    dialog.addEventListener("click", function (e) {
+      if (e.target === dialog) dialog.close();
+    });
+    dialog.addEventListener("close", function () { dialog.remove(); });
+    document.body.appendChild(dialog);
+    dialog.showModal();
+  }
+
+  /** '06/01 13~16시경' 처럼 두 줄로 오던 시각을 날짜와 시각으로 가른다.
+      사건이 여러 해에 걸치면 엔진이 '2021.05.25 14:20' 처럼 연도까지 준다. */
+  function splitTime(text) {
+    var clean = String(text || "").replace(/\s+/g, " ").trim();
+    var m = clean.match(/^(\d{4}\.\d{2}\.\d{2}|\d{2}\/\d{2})\s*(.*)$/);
+    return m ? { day: m[1], time: m[2] } : { day: clean, time: "" };
+  }
+
   function timelineCard(c) {
-    var wrap = h("div", { class: "card timeline" });
-    var events = c.timeline;
+    var wrap = h("div", { class: "card tl" });
+    var rows = c.timeline;
     var lastEvent = -1;
-    events.forEach(function (row, i) { if (row.type === "event") lastEvent = i; });
-    events.forEach(function (row, i) {
+    rows.forEach(function (row, i) { if (row.type === "event") lastEvent = i; });
+
+    var lastDay = null;
+    rows.forEach(function (row, i) {
       if (row.type === "gap") {
-        wrap.appendChild(h("div", { class: "record-gap" }, [
-          h("span", { class: "t-label c-secondary", text: row.range }),
-          h("span", { class: "t-body-s c-tertiary", text: row.text }),
-          h("button", { type: "button", class: "record-gap__add t-label c-brand", text: "이 기간 자료 추가" }),
+        lastDay = null;
+        wrap.appendChild(h("div", { class: "tl__gap" }, [
+          h("span", { class: "t-label", text: row.range }),
+          h("span", { class: "t-body-s", text: row.text }),
         ]));
         return;
       }
-      var badges = [badge(row.kind === "verified" ? "verified" : row.kind === "mine" ? "mine" : "unverified", row.badge)];
-      if (row.conflict) badges.push(badge("conflict", "불일치"));
-      if (row.needs_date) badges.push(badge("unverified", "날짜 확인 필요"));
-      wrap.appendChild(h("div", { class: "event" + (row.conflict ? " event--highlight" : "") + (i === lastEvent ? " event--last" : "") }, [
-        h("p", { class: "event__time t-label c-secondary", text: row.time }),
-        h("div", { class: "event__rail", "aria-hidden": "true" }, [h("span", { class: "event__dot event__dot--" + row.kind }), h("span", { class: "event__line" })]),
-        h("div", { class: "event__content" }, [
-          h("div", { class: "event__title-row" }, [h("p", { class: "t-body-l-strong c-primary", text: row.title })].concat(badges)),
-          h("p", { class: "t-body-s c-tertiary", text: row.source }),
+
+      var t = splitTime(row.time);
+      var sameDay = t.day === lastDay;
+      lastDay = t.day;
+
+      // 뜻이 있는 것만 뱃지로 남긴다 — 나머지는 점 색과 작은 글씨가 말해 준다
+      var flags = [];
+      if (row.conflict) flags.push(badge("conflict", "불일치"));
+      if (row.needs_date) flags.push(badge("unverified", "날짜 확인 필요"));
+
+      wrap.appendChild(h("div", { class: "tl__row" + (row.conflict ? " tl__row--flag" : "") + (i === lastEvent ? " tl__row--last" : "") }, [
+        h("div", { class: "tl__when" }, [
+          h("span", { class: "tl__day t-label" + (sameDay ? " tl__day--same" : ""), text: sameDay ? "" : t.day }),
+          h("span", { class: "tl__time t-caption", text: t.time }),
+        ]),
+        h("div", { class: "tl__rail", "aria-hidden": "true" }, [
+          h("span", { class: "tl__dot tl__dot--" + row.kind }),
+          h("span", { class: "tl__line" }),
+        ]),
+        h("div", { class: "tl__body" }, [
+          h("p", { class: "tl__title", text: row.title }),
+          h("div", { class: "tl__meta" }, [
+            h("span", { class: "tl__kind tl__kind--" + row.kind, text: row.badge }),
+            h("span", { class: "tl__source", text: row.source }),
+          ].concat(flags)),
         ]),
       ]));
     });
-    wrap.appendChild(h("button", { type: "button", class: "add-event t-body-m-strong c-brand", text: "+  기억나는 일을 직접 추가" }));
+
+    wrap.appendChild(h("button", { type: "button", class: "tl__add t-body-m-strong c-brand", text: "+  기억나는 일을 직접 추가" }));
     return wrap;
   }
 
@@ -379,56 +429,92 @@
       details = h("div", { class: "next-action__details" }, [h("p", { class: "t-body-s", text: message })]);
     }
 
-    var also = h("ul", { class: "next-action__also t-body-s", hidden: true }, next.also.map(function (a) {
-      return h("li", { text: a.label + " — " + a.why });
-    }));
-    var toggle = h("button", { type: "button", class: "btn btn--secondary btn--block t-body-m-strong", "aria-expanded": "false", text: "자세히 보기" });
-    toggle.addEventListener("click", function () {
-      var open = also.hidden;
-      also.hidden = !open;
-      toggle.setAttribute("aria-expanded", String(open));
-      toggle.textContent = open ? "접기" : "자세히 보기";
-    });
+    // 자세한 것은 평소엔 접어 두고 팝업에서만 보여 준다 — 카드에는 할 일만 크게 남긴다
+    function detailBody() {
+      var body = h("div", { class: "na-detail" }, [details]);
+      if (next.state === "filled" && next.note) {
+        body.appendChild(h("p", { class: "t-body-s c-secondary", text: next.note }));
+      }
+      body.appendChild(h("p", { class: "na-detail__why t-body-m c-secondary", text: "왜 필요한가요? " + next.why }));
+      if (next.also.length) {
+        body.appendChild(h("p", { class: "t-label c-secondary na-detail__also-label", text: "함께 볼 것" }));
+        body.appendChild(h("ul", { class: "na-detail__also t-body-s c-secondary" }, next.also.map(function (a) {
+          return h("li", { text: a.label + " — " + a.why });
+        })));
+      }
+      return body;
+    }
+
+    var more = h("button", { type: "button", class: "na__more t-body-m-strong", text: "자세히 보기" });
+    more.addEventListener("click", function () { openModal(next.label, detailBody()); });
 
     return h("section", { class: "next-action", "aria-labelledby": "na-title" }, [
       h("div", { class: "next-action__head" }, [
         h("span", { class: "t-label", text: "다음 행동" }),
-        h("span", { class: "t-caption", text: next.due ? next.due.label : next.unverified ? "검수 전 안내" : "" }),
+        next.due
+          ? h("span", { class: "na__due t-label", text: next.due.label })
+          : next.unverified ? h("span", { class: "t-caption", text: "검수 전 안내" }) : null,
       ]),
-      h("h2", { id: "na-title", class: "t-heading", text: next.label }),
-      details,
-      next.state === "filled" && next.note ? h("p", { class: "t-caption next-action__why", text: next.note }) : null,
-      h("p", { class: "t-caption next-action__why", text: "왜 필요한가요? " + next.why }),
-      next.also.length ? toggle : null,
-      also,
+      h("h2", { id: "na-title", class: "na__title", text: next.label }),
+      more,
     ]);
   }
 
+  /** 평소엔 버튼 한 줄로 접혀 있고, 누르면 아래로 펼쳐진다. */
   function issuesCard(c) {
-    var card = h("section", { class: "card issues", "aria-labelledby": "issues-title" }, [
-      h("div", { class: "issues__head" }, [
-        h("h2", { id: "issues-title", class: "t-heading c-primary", text: "확인이 필요해요" }),
-        h("span", { class: "count-pill t-label", text: String(c.need_count) }),
-      ]),
-    ]);
+    var list = h("div", { class: "issues__list", hidden: true });
     c.issues.forEach(function (g) {
-      card.appendChild(h("div", { class: "issue-group sev-" + g.severity }, [
-        h("div", { class: "issue-group__head" }, [
-          h("span", { class: "t-label c-secondary", text: g.label }),
-          h("span", { class: "t-label c-tertiary", text: String(g.items.length) }),
-        ]),
-      ].concat(g.items.map(function (it) {
-        return h("div", { class: "issue" + (g.severity === "conflict" ? " issue--conflict" : "") }, [
-          h("span", { class: "issue__bar" }),
-          h("div", { class: "issue__inner" }, [
-            h("p", { class: "t-body-m c-primary", text: it.text }),
-            it.how ? h("p", { class: "t-caption c-tertiary", text: it.how }) : null,
-          ]),
-        ]);
-      }))));
+      list.appendChild(h("p", { class: "issue-group__head t-label sev-" + g.severity }, [
+        h("span", { class: "issue-group__dot" }),
+        h("span", { text: g.label }),
+        h("span", { class: "issue-group__count", text: String(g.items.length) }),
+      ]));
+      g.items.forEach(function (it) {
+        list.appendChild(h("div", { class: "issue issue--" + g.severity }, [
+          h("p", { class: "issue__text", text: it.text }),
+          it.how ? h("p", { class: "issue__how", text: it.how }) : null,
+        ]));
+      });
     });
-    card.appendChild(h("button", { type: "button", class: "btn btn--secondary btn--block t-body-m-strong", text: "전문가에게 물어볼 질문 만들기" }));
-    return card;
+
+    var toggle = h("button", { type: "button", class: "issues__toggle", "aria-expanded": "false" }, [
+      h("span", { class: "issues__mark", "aria-hidden": "true", text: "!" }),
+      h("span", { class: "issues__label", text: "확인이 필요해요" }),
+      h("span", { class: "issues__count", text: String(c.need_count) }),
+      h("span", { class: "issues__chev", "aria-hidden": "true" }),
+    ]);
+    toggle.addEventListener("click", function () {
+      var open = list.hidden;
+      list.hidden = !open;
+      toggle.setAttribute("aria-expanded", String(open));
+    });
+
+    return h("section", { class: "issues" }, [
+      toggle,
+      list,
+      h("button", { type: "button", class: "issues__ask t-body-m-strong", text: "전문가에게 물어볼 질문 만들기" }),
+    ]);
+  }
+
+  /** 자료는 목록으로 늘어놓지 않고 버튼 뒤에 둔다. */
+  function sourcesBar(c) {
+    var open = h("button", { type: "button", class: "srcbar__btn" }, [
+      h("span", { text: "첨부한 자료" }),
+      h("span", { class: "srcbar__count", text: String(c.sources.length) }),
+    ]);
+    open.addEventListener("click", function () {
+      openModal("첨부한 자료 " + c.sources.length + "개", h("ul", { class: "srclist" }, c.sources.map(function (s) {
+        return h("li", { class: "srclist__item" }, [
+          h("span", { class: "srclist__kind t-caption", text: s.kind }),
+          h("span", { class: "t-body-m c-primary", text: s.name }),
+        ]);
+      })));
+    });
+
+    return h("div", { class: "srcbar" }, [
+      h("a", { class: "srcbar__btn srcbar__btn--add", href: "new.html" }, [h("span", { text: "+  자료 추가하기" })]),
+      open,
+    ]);
   }
 
   function renderCase(root) {
@@ -481,15 +567,7 @@
         ]),
       ]),
       h("div", { class: "columns" }, [
-        h("div", { class: "main" }, [
-          h("div", { class: "sources" }, [
-            h("span", { class: "sources__label" }, [h("span", { class: "t-label c-secondary", text: "자료" }), h("span", { class: "t-label c-brand", text: String(c.sources.length) })]),
-          ].concat(c.sources.map(function (s) {
-            return h("span", { class: "source-pill" }, [h("span", { class: "t-caption c-tertiary", text: s.kind }), h("span", { class: "t-body-s c-primary", text: s.name })]);
-          })).concat([h("a", { class: "sources__add t-label c-brand", href: "new.html", text: "+ 자료 추가" })])),
-          tabs,
-          panel,
-        ]),
+        h("div", { class: "main" }, [tabs, panel, sourcesBar(c)]),
         h("aside", { class: "rail" }, [nextActionCard(c.next_action), issuesCard(c)]),
       ]),
     ]));
