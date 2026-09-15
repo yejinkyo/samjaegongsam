@@ -27,12 +27,13 @@ body {
   /* 위는 진보라, 아래로 내려가면 흰색. 화면이 아니라 문서 전체에 걸린다 —
      그래야 스크롤해 내려갈수록 실제로 밝아진다 */
   background: linear-gradient(180deg,
-    #120b26 0%,
-    #1a1038 26%,
-    #2c1a58 46%,
-    #64409f 66%,
-    #b39ee0 82%,
-    #f1ecfa 94%,
+    #0f0a22 0%,
+    #1d1140 18%,
+    #35205f 34%,
+    #5b3a9e 50%,
+    #8a63cf 64%,
+    #c9b6e9 78%,
+    #f3eefb 91%,
     #ffffff 100%);
   color: var(--lp-text);
   font-family: var(--font);
@@ -53,8 +54,11 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
   gap: 40px;
   padding: 80px 64px;
-  /* 바탕 그라데이션은 body 가 그린다. 여기는 실 뭉치 뒤의 번짐만 얹는다 */
-  background: radial-gradient(1000px 580px at 76% 44%, rgba(154, 92, 240, 0.28), transparent 64%);
+  /* 문서 그라데이션과 별개로, 첫 화면 안에서도 위아래 색이 달라지게 한 겹 더 얹는다.
+     화면 높이가 어떻든 스크롤 전에 보이는 만큼은 이 층이 책임진다. */
+  background:
+    radial-gradient(1000px 580px at 76% 44%, rgba(154, 92, 240, 0.3), transparent 64%),
+    linear-gradient(180deg, rgba(10, 6, 22, 0.72) 0%, rgba(10, 6, 22, 0.28) 32%, rgba(10, 6, 22, 0) 58%, rgba(179, 158, 224, 0.18) 100%);
   overflow: hidden;
 }
 
