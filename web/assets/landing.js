@@ -1,6 +1,8 @@
 /* 시작 화면의 실 그림.
  *
- * 가운데 몇 개의 매듭에서 실이 뻗어 나가고, 마디마다 다른 박자로 반짝인다.
+ * 곡선이 아니라 곧은 선으로 엮는다 — 자료와 자료가 어떻게 이어지는지를 보여주는
+ * 그림이라 부드러운 것보다 날카로운 쪽이 맞다. 가까운 마디끼리 잇고, 매듭에서는
+ * 화면을 가로지르는 긴 선을 뻗는다.
  * 같은 그림이 매번 나오도록 난수는 씨앗을 고정해서 쓴다.
  */
 (function () {
@@ -12,12 +14,6 @@
 
   // 마디 색 — 왼쪽(핑크)에서 오른쪽(남색)으로 옮겨 가게 x 좌표로 고른다
   var NODE_TONES = ["node--pink", "node--violet", "node--navy"];
-  var THREAD_TONES = ["thread--pink", "", "thread--navy"];
-
-  function toneFor(x, rand) {
-    var t = x / W + (rand() - 0.5) * 0.35;   // 경계가 칼같지 않게 흔든다
-    return NODE_TONES[t < 0.36 ? 0 : t < 0.68 ? 1 : 2];
-  }
 
   /** 씨앗 고정 난수 — 새로고침해도 같은 그림이 나온다 */
   function rng(seed) {
@@ -34,6 +30,11 @@
     return node;
   }
 
+  function toneFor(x, rand) {
+    var t = x / W + (rand() - 0.5) * 0.3;   // 경계가 칼같지 않게 흔든다
+    return NODE_TONES[t < 0.36 ? 0 : t < 0.68 ? 1 : 2];
+  }
+
   function build() {
     var host = document.getElementById("net");
     if (!host) return;
@@ -41,64 +42,98 @@
     var rand = rng(20260915);
     var svg = el("svg", { viewBox: "0 0 " + W + " " + H, role: "presentation" });
     var threads = el("g", {});
+    var rings = el("g", {});
     var nodes = el("g", {});
     svg.appendChild(threads);
+    svg.appendChild(rings);
     svg.appendChild(nodes);
 
-    // 매듭 — 실이 모였다 갈라지는 자리
+    // ── 마디 자리 잡기 ────────────────────────────────
+    // 매듭 몇 개를 두고 그 둘레에 흩뿌린다. 가장자리에도 몇 개 흘려 성글게 만든다.
     var hubs = [
-      { x: 250, y: 250, r: 8 },
-      { x: 150, y: 150, r: 6 },
-      { x: 370, y: 190, r: 6 },
-      { x: 320, y: 380, r: 6 },
-      { x: 130, y: 350, r: 5.5 },
-      { x: 420, y: 300, r: 5 },
-      { x: 210, y: 430, r: 5 },
+      { x: 250, y: 250 }, { x: 150, y: 165 }, { x: 360, y: 190 },
+      { x: 330, y: 370 }, { x: 140, y: 350 }, { x: 430, y: 290 }, { x: 215, y: 435 },
     ];
+    var points = hubs.map(function (p) { return { x: p.x, y: p.y, hub: true, deg: 0 }; });
 
-    // 매듭끼리 잇는 실
-    [[0, 1], [0, 2], [0, 3], [0, 4], [1, 2], [3, 4], [0, 5], [2, 5], [0, 6], [4, 6], [3, 5]].forEach(function (pair, i) {
-      var a = hubs[pair[0]];
-      var b = hubs[pair[1]];
-      var mx = (a.x + b.x) / 2 + (rand() - 0.5) * 60;
-      var my = (a.y + b.y) / 2 + (rand() - 0.5) * 60;
-      var path = el("path", { class: "thread " + THREAD_TONES[i % THREAD_TONES.length], d: "M" + a.x + " " + a.y + " Q" + mx + " " + my + " " + b.x + " " + b.y });
-      path.style.animationDelay = (i * 0.6).toFixed(2) + "s";
-      threads.appendChild(path);
-    });
-
-    // 매듭에서 바깥으로 뻗는 실과 그 끝의 마디
-    var tips = [];
-    hubs.forEach(function (hub, hi) {
-      var count = hi === 0 ? 14 : 8;
+    hubs.forEach(function (hub) {
+      var count = 5 + Math.floor(rand() * 4);
       for (var i = 0; i < count; i++) {
         var angle = rand() * Math.PI * 2;
-        var len = 60 + rand() * 160;
-        var x = hub.x + Math.cos(angle) * len;
-        var y = hub.y + Math.sin(angle) * len;
-        var cx = hub.x + Math.cos(angle) * len * 0.55 + (rand() - 0.5) * 50;
-        var cy = hub.y + Math.sin(angle) * len * 0.55 + (rand() - 0.5) * 50;
-        var path = el("path", { class: "thread " + (x < W * 0.4 ? "thread--pink" : x > W * 0.7 ? "thread--navy" : ""), d: "M" + hub.x + " " + hub.y + " Q" + cx + " " + cy + " " + x + " " + y });
-        path.style.animationDelay = (rand() * 5).toFixed(2) + "s";
-        threads.appendChild(path);
-        tips.push({ x: x, y: y, r: 2.6 + rand() * 3.6 });
-        if (rand() > 0.45) {
-          var t = 0.45 + rand() * 0.3;   // 실 위의 한 점
-          tips.push({
-            x: (1 - t) * (1 - t) * hub.x + 2 * (1 - t) * t * cx + t * t * x,
-            y: (1 - t) * (1 - t) * hub.y + 2 * (1 - t) * t * cy + t * t * y,
-            r: 1.4 + rand() * 1.8,
-          });
-        }
+        var len = 40 + rand() * 120;
+        points.push({ x: hub.x + Math.cos(angle) * len, y: hub.y + Math.sin(angle) * len, deg: 0 });
+      }
+    });
+    for (var i = 0; i < 26; i++) {
+      points.push({ x: rand() * W, y: rand() * H, deg: 0 });
+    }
+
+    // ── 가까운 것끼리 곧은 선으로 잇기 ────────────────
+    var seen = {};
+    function link(a, b, faint) {
+      if (a === b) return;
+      var key = Math.min(a, b) + ":" + Math.max(a, b);
+      if (seen[key]) return;
+      seen[key] = true;
+      var p = points[a];
+      var q = points[b];
+      var mid = (p.x + q.x) / 2;
+      var tone = mid < W * 0.4 ? "thread--pink" : mid > W * 0.66 ? "thread--navy" : "";
+      var line = el("line", {
+        class: "thread " + tone + (faint ? " thread--faint" : ""),
+        x1: p.x.toFixed(1), y1: p.y.toFixed(1), x2: q.x.toFixed(1), y2: q.y.toFixed(1),
+      });
+      line.style.animationDelay = (rand() * 6).toFixed(2) + "s";
+      threads.appendChild(line);
+      p.deg += 1;
+      q.deg += 1;
+    }
+
+    points.forEach(function (p, idx) {
+      var near = points
+        .map(function (q, j) { return { j: j, d: Math.sqrt((q.x - p.x) * (q.x - p.x) + (q.y - p.y) * (q.y - p.y)) }; })
+        .filter(function (n) { return n.j !== idx; })
+        .sort(function (a, b) { return a.d - b.d; });
+      var k = p.hub ? 5 : 2 + Math.floor(rand() * 2);
+      near.slice(0, k).forEach(function (n) { link(idx, n.j, n.d > 150); });
+    });
+
+    // 매듭에서 멀리 뻗는 긴 선 — 화면을 가로지르는 결을 만든다
+    hubs.forEach(function (_, hi) {
+      for (var j = 0; j < 3; j++) link(hi, Math.floor(rand() * points.length), true);
+    });
+
+    // ── 마디 그리기 ───────────────────────────────────
+    points.forEach(function (p) {
+      var r = p.hub ? 4.5 + rand() * 2 : 1 + Math.min(p.deg, 5) * 0.55 + rand() * 1.1;
+      var tone = toneFor(p.x, rand);
+      var circle = el("circle", {
+        class: "node " + (p.hub ? "node--hub" : tone),
+        cx: p.x.toFixed(1), cy: p.y.toFixed(1), r: r.toFixed(1),
+      });
+      circle.style.animationDelay = (rand() * 4.5).toFixed(2) + "s";
+      nodes.appendChild(circle);
+
+      // 굵은 마디 둘레에 얇은 테 — 참고 그림의 겹친 동심원 느낌
+      if (r > 2.6 && rand() > 0.3) {
+        rings.appendChild(el("circle", {
+          class: "ring " + tone.replace("node--", "ring--"),
+          cx: p.x.toFixed(1), cy: p.y.toFixed(1), r: (r + 2.5 + rand() * 4).toFixed(1),
+        }));
       }
     });
 
-    tips.concat(hubs.map(function (hub) { return { x: hub.x, y: hub.y, r: hub.r, hub: true }; }))
-      .forEach(function (n) {
-        var circle = el("circle", { class: "node " + (n.hub ? "node--hub" : toneFor(n.x, rand)), cx: n.x, cy: n.y, r: n.r });
-        circle.style.animationDelay = (rand() * 4.5).toFixed(2) + "s";
-        nodes.appendChild(circle);
+    // 아주 작은 점 몇 개 — 성긴 자리를 메운다
+    for (var k = 0; k < 22; k++) {
+      var x = rand() * W;
+      var y = rand() * H;
+      var dot = el("circle", {
+        class: "node node--dot " + toneFor(x, rand),
+        cx: x.toFixed(1), cy: y.toFixed(1), r: (0.8 + rand() * 0.9).toFixed(1),
       });
+      dot.style.animationDelay = (rand() * 5).toFixed(2) + "s";
+      nodes.appendChild(dot);
+    }
 
     host.appendChild(svg);
   }

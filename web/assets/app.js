@@ -124,13 +124,6 @@
     var menu = dropdown(menuButton, [
       { label: "내 사건", href: "cases.html" },
       { label: "새 사건 등록", href: "new.html" },
-      {
-        label: "자료 추가하기",
-        onClick: function () {
-          if (addFilesHandler) pickFiles(addFilesHandler);
-          else location.href = "new.html";
-        },
-      },
     ]);
 
     var avatar = h("button", { type: "button", class: "nav__avatar", "aria-label": "내 정보" }, [
