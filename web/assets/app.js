@@ -70,38 +70,51 @@
   }
 
   // ── 01 내 사건 ──────────────────────────────────────────
-  function renderHome(root) {
-    var grid = h("div", { class: "case-grid" });
-    CASES.forEach(function (c) {
-      var next = c.next_action;
-      grid.appendChild(h("a", { class: "card case-card", href: caseHref(c.id) }, [
-        h("div", { class: "case-card__top" }, [
-          h("span", { class: "tag t-label", text: c.type_label }),
-          h("span", { class: "t-caption c-tertiary", text: "기준일 " + c.as_of }),
-        ]),
-        h("div", { class: "case-card__titles" }, [
-          h("p", { class: "t-title c-primary", text: c.title }),
-          h("p", { class: "t-body-s c-tertiary", text: c.period + " · 자료 " + c.doc_count + "개" }),
-        ]),
-        track(c.stages, false),
-        h("div", { class: "stats" }, [
-          h("span", { class: "stat stat--need t-label", text: "확인 필요 " + c.need_count }),
-          h("span", { class: "stat t-label", text: "확보 자료 " + c.doc_count }),
-        ]),
-        h("div", { class: "divider" }),
-        h("div", { class: "case-card__next" }, [
-          h("div", { class: "case-card__next-text" }, [
-            h("p", { class: "t-caption c-brand", text: "다음 행동" + (next && next.due ? " · " + next.due.label : "") }),
-            h("p", { class: "t-body-m-strong c-primary", text: next ? next.label : "판단할 수 있는 행동이 아직 없어요" }),
+
+  /** 폴더 앞면에 적는 한 줄. 엔진이 준 단계 값에서만 만든다. */
+  function caseStatus(c) {
+    var current = (c.stages || []).filter(function (s) { return s.state === "current"; })[0];
+    if (!current) return "진행 상태 확인 필요";
+    // 마지막 단계에 멈춘 중지 사건은 '결과 단계'가 아니라 멈춰 있다는 것이 핵심이다
+    if (current.label === "결과" && c.type_label.indexOf("중지") >= 0) return "중지";
+    return current.label + " 단계";
+  }
+
+  function folder(c, tone) {
+    var next = c.next_action;
+    var due = next && next.due;
+
+    return h("a", { class: "folder folder--tone" + tone, href: caseHref(c.id) }, [
+      h("span", { class: "folder__tab", "aria-hidden": "true" }),
+      h("span", { class: "folder__sheet", "aria-hidden": "true" }),
+      h("div", { class: "folder__body" }, [
+        // 기한은 놓치면 되돌릴 수 없어서 마우스를 올리기 전에도 보이게 둔다
+        due ? h("span", { class: "folder__due t-label", text: due.label }) : null,
+        h("p", { class: "folder__title t-title", text: c.title }),
+        h("p", { class: "folder__status t-body-l", text: caseStatus(c) }),
+        h("div", { class: "folder__peek" }, [
+          h("p", { class: "folder__meta t-body-s", text: "확인 필요 " + c.need_count + " · 자료 " + c.doc_count + "개" }),
+          h("p", { class: "folder__next t-body-m-strong", text: next ? next.label : "판단할 수 있는 행동이 아직 없어요" }),
+          h("span", { class: "folder__more t-body-m-strong" }, [
+            h("span", { text: "자세히 보기" }),
+            icon("chevron-right", 20),
           ]),
-          icon("chevron-right"),
         ]),
-      ]));
-    });
-    grid.appendChild(h("a", { class: "new-card", href: "new.html" }, [
-      h("span", { class: "circle-56" }, [icon("plus")]),
-      h("p", { class: "t-heading c-primary", text: "새 사건 등록" }),
-      h("p", { class: "t-body-s c-tertiary", text: "사건 유형을 고르고 자료를 올리면 정리가 시작돼요" }),
+      ]),
+    ]);
+  }
+
+  function renderHome(root) {
+    var grid = h("div", { class: "folder-grid" });
+    CASES.forEach(function (c, i) { grid.appendChild(folder(c, (i % 3) + 1)); });
+
+    grid.appendChild(h("a", { class: "folder folder--new", href: "new.html" }, [
+      h("span", { class: "folder__tab", "aria-hidden": "true" }),
+      h("div", { class: "folder__body" }, [
+        h("span", { class: "circle-56" }, [icon("plus")]),
+        h("p", { class: "t-heading c-secondary", text: "사건 등록" }),
+        h("p", { class: "t-body-s c-tertiary", text: "유형을 고르고 자료를 올리면 정리가 시작돼요" }),
+      ]),
     ]));
 
     root.appendChild(h("main", { class: "page page--home" }, [
