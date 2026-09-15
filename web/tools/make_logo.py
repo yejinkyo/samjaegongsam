@@ -21,7 +21,6 @@ ASSETS = Path(__file__).resolve().parents[1] / "assets"
 SRC = ASSETS / "logo-original.png"
 
 DEEP = (74, 46, 160)      # #4A2EA0 — 밝은 화면용
-LIGHT = (198, 177, 240)   # #C6B1F0 — 어두운 화면에서 읽히는 밝기
 SIZE = 256
 WHITE_ENOUGH = 200        # 이보다 밝으면 '배경 후보'
 
@@ -58,7 +57,11 @@ def _outside_mask(img: Image.Image) -> bytearray:
     return mask
 
 
-def tint(img: Image.Image, mask: bytearray, color: tuple[int, int, int]) -> Image.Image:
+def tint(img: Image.Image, mask: bytearray, color: tuple[int, int, int], carve: bool = False) -> Image.Image:
+    """``carve`` 가 참이면 줄무늬를 흰색으로 채우지 않고 뚫는다.
+
+    어두운 화면에서는 원판을 칠하는 대신 그린 선만 남겨야 바탕이 비쳐 보인다.
+    """
     w, h = img.size
     px = img.load()
     out = Image.new("RGBA", (w, h), (0, 0, 0, 0))
@@ -69,12 +72,15 @@ def tint(img: Image.Image, mask: bytearray, color: tuple[int, int, int]) -> Imag
             if mask[row + x]:
                 continue
             t = 1 - _lum(px[x, y]) / 255          # 검을수록 1, 흰 줄무늬는 0
-            op[x, y] = (
-                round(255 + (color[0] - 255) * t),
-                round(255 + (color[1] - 255) * t),
-                round(255 + (color[2] - 255) * t),
-                255,
-            )
+            if carve:
+                op[x, y] = (color[0], color[1], color[2], round(255 * t))
+            else:
+                op[x, y] = (
+                    round(255 + (color[0] - 255) * t),
+                    round(255 + (color[1] - 255) * t),
+                    round(255 + (color[2] - 255) * t),
+                    255,
+                )
 
     box = out.getbbox()
     out = out.crop(box)
@@ -87,8 +93,9 @@ def tint(img: Image.Image, mask: bytearray, color: tuple[int, int, int]) -> Imag
 def main() -> None:
     src = Image.open(SRC).convert("RGB")
     mask = _outside_mask(src)
-    for name, color in (("logo.png", DEEP), ("logo-light.png", LIGHT)):
-        tint(src, mask, color).save(ASSETS / name)
+    # 밝은 화면은 원판을 진보라로 칠하고, 어두운 화면은 선만 흰색으로 남긴다
+    for name, color, carve in (("logo.png", DEEP, False), ("logo-light.png", (255, 255, 255), True)):
+        tint(src, mask, color, carve).save(ASSETS / name)
         print(f"{name}: {SIZE}x{SIZE}")
 
 
