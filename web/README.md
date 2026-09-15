@@ -83,4 +83,6 @@ uv run python tools/export_web.py
 py web/tools/make_logo.py
 ```
 
+글꼴은 두 가지다. 본문은 **IBM Plex Sans KR**(`--font`), 이름 '타래'만 **Gugi**(`--font-brand`)를 쓴다 — 붓 느낌이라 실타래라는 이름과 맞고, 굵기가 하나뿐이라 400 으로 쓴다. 바꾸려면 `tokens.css` 의 `--font-brand` 한 줄과 각 HTML 의 구글 폰트 주소만 고치면 된다.
+
 토큰(`assets/tokens.css`)은 피그마 변수 이름과 1:1이다(`bg/canvas` → `--bg-canvas`). 아이콘은 피그마 에셋 원본(`assets/icons/`)이다.

@@ -39,7 +39,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 .nav__brand { display: flex; align-items: center; gap: 10px; }
 .nav__logo { width: 28px; height: 28px; display: block; }
-.nav__name { font-weight: 700; }
+.nav__name { font-family: var(--font-brand); font-weight: 400; letter-spacing: 0; }
 .nav__right { display: flex; align-items: center; gap: 20px; }
 .nav__avatar {
   display: flex; align-items: center; justify-content: center;
