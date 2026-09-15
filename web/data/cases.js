@@ -225,13 +225,13 @@ window.TARAE_CASES = [
         "severity": "conflict",
         "said": [
           {
-            "value": "350000",
+            "value": "350,000",
             "doc": "이체확인증.pdf",
             "speaker": "신한은행",
             "record": true
           },
           {
-            "value": "300000",
+            "value": "300,000",
             "doc": "진술서.jpg",
             "speaker": "홍길동",
             "record": false
@@ -305,13 +305,13 @@ window.TARAE_CASES = [
         "severity": "unverified",
         "said": [
           {
-            "value": "true",
+            "value": "예",
             "doc": "카톡_0601.png",
             "speaker": "찬찬",
             "record": false
           },
           {
-            "value": "true",
+            "value": "예",
             "doc": "진술서.jpg",
             "speaker": "판매자",
             "record": false
@@ -319,7 +319,7 @@ window.TARAE_CASES = [
         ]
       },
       {
-        "slot": "tracking_number",
+        "slot": "송장번호",
         "value": null,
         "state": "자료에 없음",
         "severity": "unverified",

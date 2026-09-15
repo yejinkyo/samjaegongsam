@@ -71,6 +71,7 @@ SLOT_LABELS = {
     "account_number": "계좌번호",
     "account_holder": "예금주",
     "shipment_sent": "발송 여부",
+    "tracking_number": "송장번호",
     "report_time": "신고 시점",
     "receipt_number": "접수번호",
     "receipt_time": "접수일시",
@@ -215,6 +216,18 @@ def _issues(result: dict[str, Any], docs: dict[str, dict]) -> list[dict[str, Any
     return groups
 
 
+def _slot_value(value: Any) -> str:
+    """엔진 값을 사람이 읽는 꼴로. 단위를 붙이거나 뜻을 바꾸지는 않는다."""
+    text = str(value)
+    if text in {"True", "true"}:
+        return "예"
+    if text in {"False", "false"}:
+        return "아니오"
+    if text.isdigit() and len(text) > 3:
+        return f"{int(text):,}"
+    return text
+
+
 def _people(result: dict[str, Any], docs: dict[str, dict]) -> list[dict[str, Any]]:
     """인물 · 관계 탭. 엔진이 합치지 못하고 남긴 '같은 사람일 수 있음'까지 그대로 보여준다."""
     entities = result["timeline"]["entities"]
@@ -264,7 +277,7 @@ def _slots(result: dict[str, Any], docs: dict[str, dict]) -> list[dict[str, Any]
                 continue
             doc = docs.get(c["doc_id"], {})
             said.append({
-                "value": str(c["slot_value"]),
+                "value": _slot_value(c["slot_value"]),
                 "doc": doc.get("file_name", c["doc_id"]),
                 "speaker": c.get("speaker") or "",
                 "record": c.get("evidence_level") == "record",

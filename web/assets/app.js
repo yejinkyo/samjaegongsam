@@ -401,27 +401,44 @@
     ]);
   }
 
+  var SLOT_ORDER = { conflict: 0, unverified: 1, verified: 2 };
+
+  /** 주장 대조 — 볼 것이 있는 항목을 위로 올리고, 자료마다 적은 값을 나란히 놓는다. */
   function slotsCard(c) {
-    var rows = c.slots || [];
+    function rank(row) { return row.severity in SLOT_ORDER ? SLOT_ORDER[row.severity] : 3; }
+    var rows = (c.slots || []).slice().sort(function (a, b) { return rank(a) - rank(b); });
     if (!rows.length) return h("div", { class: "card tab-empty" }, [h("p", { class: "t-body-m c-tertiary", text: "비교할 항목이 아직 없어요." })]);
 
-    var wrap = h("div", { class: "card slots" });
-    wrap.appendChild(h("p", { class: "t-body-s c-tertiary", text: "같은 항목을 자료마다 뭐라고 적었는지 나란히 놓았어요. 기록 자료와 사람의 말을 구분합니다." }));
+    var wrap = h("div", { class: "card slots" }, [
+      h("p", { class: "slots__lead", text: "같은 항목을 자료마다 뭐라고 적었는지 나란히 놓았어요. 확인이 필요한 항목이 위에 옵니다." }),
+    ]);
+
     rows.forEach(function (row) {
-      var head = h("div", { class: "slots__head" }, [
-        h("span", { class: "t-body-m-strong c-primary", text: row.slot }),
-        badge(row.severity === "verified" ? "verified" : row.severity === "conflict" ? "conflict" : "unverified", row.state),
+      var item = h("section", { class: "slot slot--" + row.severity }, [
+        h("div", { class: "slot__head" }, [
+          h("span", { class: "slot__name", text: row.slot }),
+          h("span", { class: "slot__state", text: row.state }),
+        ]),
       ]);
-      var body = h("div", { class: "slots__said" }, row.said.map(function (s) {
-        return h("div", { class: "slots__row" + (row.value !== null && s.value === row.value ? " slots__row--chosen" : "") }, [
-          h("span", { class: "slots__value t-body-m c-primary", text: s.value }),
-          h("span", { class: "t-body-s c-tertiary", text: (s.record ? "기록 · " : "말 · ") + (s.speaker || "화자 미상") + " · " + s.doc }),
-        ]);
-      }));
+
       if (!row.said.length) {
-        body.appendChild(h("p", { class: "t-body-s c-tertiary", text: "이 항목을 적은 자료가 없어요." }));
+        item.appendChild(h("p", { class: "slot__empty", text: "이 항목을 적은 자료가 없어요." }));
+      } else {
+        row.said.forEach(function (s) {
+          var chosen = row.value !== null && s.value === row.value;
+          item.appendChild(h("div", { class: "slot__said" + (chosen ? " slot__said--chosen" : "") }, [
+            h("div", { class: "slot__valwrap" }, [
+              h("span", { class: "slot__value", text: s.value }),
+              chosen ? h("span", { class: "slot__pick", text: "대표" }) : null,
+            ]),
+            h("p", { class: "slot__from" }, [
+              h("span", { class: "slot__src slot__src--" + (s.record ? "record" : "said"), text: s.record ? "기록" : "말" }),
+              h("span", { text: (s.speaker || "화자 미상") + " · " + s.doc }),
+            ]),
+          ]));
+        });
       }
-      wrap.appendChild(h("div", { class: "slots__item" }, [head, body]));
+      wrap.appendChild(item);
     });
     return wrap;
   }
@@ -583,6 +600,8 @@
         tab.setAttribute("aria-selected", "true");
         panel.textContent = "";
         panel.appendChild(i === 0 ? timelineCard(c) : i === 1 ? peopleCard(c) : slotsCard(c));
+        // 타임라인만 한 화면에 맞춰 안에서 스크롤한다. 나머지 둘은 길게 펼친다
+        panel.classList.toggle("panel--tall", i !== 0);
         fillSide(i);
       });
       return tab;
