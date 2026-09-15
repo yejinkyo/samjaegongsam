@@ -298,11 +298,27 @@
     return m ? { day: m[1], time: m[2] } : { day: clean, time: "" };
   }
 
+  // 점 색이 뜻하는 것. 줄마다 글씨로 적지 않고 타임라인 위에 한 번만 적는다.
+  var KIND_LEGEND = [
+    ["verified", "기록 자료로 확인"],
+    ["claim", "사람의 말 · 미확인"],
+    ["mine", "내가 적음"],
+  ];
+
   function timelineCard(c) {
     var wrap = h("div", { class: "card tl" });
     var rows = c.timeline;
     var lastEvent = -1;
     rows.forEach(function (row, i) { if (row.type === "event") lastEvent = i; });
+
+    var used = {};
+    rows.forEach(function (row) { if (row.type === "event") used[row.kind] = true; });
+    wrap.appendChild(h("div", { class: "tl__legend" }, KIND_LEGEND.filter(function (k) { return used[k[0]]; }).map(function (k) {
+      return h("span", { class: "tl__legend-item" }, [
+        h("span", { class: "tl__dot tl__dot--" + k[0], "aria-hidden": "true" }),
+        h("span", { text: k[1] }),
+      ]);
+    })));
 
     var lastDay = null;
     rows.forEach(function (row, i) {
@@ -336,7 +352,6 @@
         h("div", { class: "tl__body" }, [
           h("p", { class: "tl__title", text: row.title }),
           h("div", { class: "tl__meta" }, [
-            h("span", { class: "tl__kind tl__kind--" + row.kind, text: row.badge }),
             h("span", { class: "tl__source", text: row.source }),
           ].concat(flags)),
         ]),

@@ -318,7 +318,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 .columns { display: flex; align-items: flex-start; gap: 24px; }
 .main { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 16px; }
-.rail { flex: 0 0 384px; display: flex; flex-direction: column; gap: 20px; }
+.rail { flex: 0 1 360px; min-width: 264px; display: flex; flex-direction: column; gap: 14px; }
 
 /* 탭 · 패널 — 아무것도 누르지 않아도 한 화면에 들어오도록 패널만 안에서 스크롤한다 */
 .tabs { display: flex; gap: 28px; padding-top: 8px; box-shadow: inset 0 -1px 0 var(--border-default); }
@@ -332,7 +332,14 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 /* ── 타임라인 ────────────────────────────────────────────────
    같은 날이면 날짜를 비워 눈이 한 번만 읽게 하고, 제목을 가장 크게 둔다.
    판정(주장·미확인 / 확인됨)은 뱃지 대신 점 색과 작은 글씨로 내린다. */
-.tl { display: flex; flex-direction: column; padding: 18px 20px 14px; }
+.tl { display: flex; flex-direction: column; padding: 14px 20px 14px; }
+.tl__legend {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 6px 16px;
+  padding: 0 4px 10px; margin-bottom: 6px;
+  border-bottom: 1px solid var(--border-default);
+  font: 400 12px/1.5 var(--font); color: var(--text-tertiary);
+}
+.tl__legend-item { display: inline-flex; align-items: center; gap: 6px; }
 .tl__row { display: flex; gap: 14px; padding: 10px 10px 10px 8px; border-radius: 12px; }
 .tl__row--flag { background: #fdf6f4; box-shadow: inset 0 0 0 1px rgba(194, 74, 56, 0.18); }
 
@@ -473,9 +480,19 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .track--fixed .step { flex: 1 0 0; }
 }
 @media (max-width: 1024px) {
-  .columns { flex-direction: column; }
-  .rail { flex-basis: auto; width: 100%; }
   .folder-grid { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  /* 화면을 반으로 나눠 봐도 다음 행동·확인이 필요해요는 타임라인 옆에 남는다 */
+  .rail { flex-basis: 300px; min-width: 232px; }
+  .columns { gap: 16px; }
+  .tl__when { width: 74px; }
+  /* 머리말이 세로로 접히며 키가 커지므로 패널을 그만큼 줄여 한 화면을 지킨다 */
+  #panel { max-height: clamp(200px, 28vh, 360px); }
+  .na__title { font-size: 19px; }
+}
+/* 여기부터는 옆에 둘 자리가 없어 한 열로 접는다 */
+@media (max-width: 760px) {
+  .columns { flex-direction: column; }
+  .rail { flex-basis: auto; min-width: 0; width: 100%; }
 }
 @media (max-width: 800px) {
   .nav { padding: 12px 20px; }
