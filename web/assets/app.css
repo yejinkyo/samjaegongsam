@@ -288,14 +288,80 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .case-folder__body .step--current .step__dot { animation: none; box-shadow: 0 0 14px 3px rgba(255, 255, 255, 0.6); }
 }
 
-/* 인물 · 관계 탭 */
-.people { display: flex; flex-direction: column; gap: 4px; padding: 24px 28px; }
-.people__group { margin-top: 16px; }
-.people__group:first-child { margin-top: 0; }
-.people__item { display: flex; flex-direction: column; gap: 6px; padding: 14px 0; border-bottom: 1px solid var(--border-default); }
-.people__item:last-child { border-bottom: none; }
-.people__head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.people__link { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+/* 인물 · 관계 — 사건을 뿌리로 두고 갈래마다 뻗는 나무.
+   연결선은 목록 항목의 가상 요소로 그린다(왼쪽 세로선 + 각 항목의 가로선). */
+.tree { display: flex; align-items: flex-start; gap: 0; padding: 22px 24px; overflow-x: auto; }
+
+.tree__rootwrap { flex-shrink: 0; display: flex; align-items: center; padding: 8px 0; }
+.tree__root {
+  display: inline-flex; align-items: center;
+  max-width: 190px; padding: 11px 16px;
+  border-radius: 999px; background: var(--brand-primary); color: var(--text-on-brand);
+  font: 600 15px/1.3 var(--font); letter-spacing: -0.01em;
+}
+/* 뿌리에서 갈래로 나가는 가로선 */
+.tree__rootwrap::after { content: ""; width: 26px; height: 2px; background: var(--border-strong); }
+
+.tree__branches, .tree__leaves { margin: 0; padding: 0; list-style: none; }
+.tree__branches { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+
+.tree__branch { position: relative; display: flex; align-items: flex-start; gap: 0; padding-left: 26px; }
+/* 갈래를 잇는 세로선 — 첫 갈래 위쪽과 마지막 갈래 아래쪽은 비운다 */
+.tree__branch::before {
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--border-strong);
+}
+.tree__branch:first-child::before { top: 24px; }
+.tree__branch:last-child::before { bottom: calc(100% - 24px); }
+/* 갈래 이름으로 들어가는 가로선 */
+.tree__branch::after {
+  content: ""; position: absolute; left: 0; top: 23px; width: 26px; height: 2px; background: var(--border-strong);
+}
+
+.tree__group {
+  flex-shrink: 0; display: inline-flex; align-items: center; gap: 7px;
+  margin-top: 12px; padding: 7px 14px;
+  border-radius: 999px; background: var(--bg-brand-soft); color: var(--brand-primary);
+  font: 600 13px/1.3 var(--font);
+}
+.tree__group-count { color: var(--text-tertiary); font-weight: 500; }
+
+.tree__leaves { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 6px; padding-left: 26px; position: relative; }
+.tree__leaves::before {
+  content: ""; position: absolute; left: 0; top: 24px; bottom: 24px; width: 2px; background: var(--border-default);
+}
+.tree__leaf { position: relative; padding-left: 24px; }
+.tree__leaf::before {
+  content: ""; position: absolute; left: -26px; top: 22px; width: 50px; height: 2px; background: var(--border-default);
+}
+.tree__leaf:only-child::before { left: -26px; }
+
+.tnode {
+  display: flex; flex-direction: column; gap: 5px;
+  padding: 11px 14px; border-radius: 12px;
+  background: var(--bg-surface); box-shadow: inset 0 0 0 1.5px var(--border-default);
+}
+.tnode__head { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
+.tnode__name { font: 600 15px/1.4 var(--font); color: var(--text-primary); }
+.tnode__role {
+  padding: 2px 8px; border-radius: 999px;
+  background: var(--bg-sunken); color: var(--text-secondary);
+  font: 500 11.5px/1.5 var(--font);
+}
+.tnode__docs { font: 400 12px/1.5 var(--font); color: var(--text-tertiary); }
+/* 엔진이 합치지 못하고 남긴 링크 — 점선으로 '아직 단정하지 않았다'를 보인다 */
+.tnode__same {
+  display: flex; align-items: flex-start; gap: 6px;
+  margin-top: 2px; padding: 7px 10px;
+  border: 1px dashed var(--status-unverified); border-radius: 9px;
+  background: var(--status-unverified-bg); color: var(--status-unverified);
+  font: 400 11.5px/1.5 var(--font);
+}
+.tnode__same-mark { flex-shrink: 0; font-weight: 700; }
+
+/* 인물 · 주장 탭에서는 오른쪽 열이 자료 버튼과 질문 버튼만 갖는다 */
+.srcbar--stack { flex-direction: column; }
+.srcbar--stack .srcbar__btn { justify-content: center; padding: 14px 18px; }
+.main__under:empty { display: none; }
 
 /* 주장 대조 탭 */
 .slots { display: flex; flex-direction: column; gap: 18px; padding: 24px 28px; }

@@ -362,32 +362,43 @@
     return wrap;
   }
 
+  /** 인물 · 관계 — 사건을 뿌리로 두고 갈래마다 뻗는 나무로 그린다. */
   function peopleCard(c) {
     var groups = c.people || [];
     if (!groups.length) return h("div", { class: "card tab-empty" }, [h("p", { class: "t-body-m c-tertiary", text: "자료에서 찾은 인물이 아직 없어요." })]);
 
-    var wrap = h("div", { class: "card people" });
-    groups.forEach(function (g) {
-      wrap.appendChild(h("p", { class: "people__group t-label c-secondary", text: g.label }));
-      g.items.forEach(function (p) {
-        var rows = [
-          h("div", { class: "people__head" }, [h("span", { class: "t-body-l-strong c-primary", text: p.name })].concat(
-            p.roles.map(function (r) { return h("span", { class: "tag t-caption", text: r }); }))),
-        ];
+    var branches = h("ul", { class: "tree__branches" }, groups.map(function (g) {
+      var leaves = h("ul", { class: "tree__leaves" }, g.items.map(function (p) {
+        var node = h("div", { class: "tnode" }, [
+          h("div", { class: "tnode__head" }, [h("span", { class: "tnode__name", text: p.name })].concat(
+            p.roles.map(function (r) { return h("span", { class: "tnode__role", text: r }); }))),
+        ]);
         if (p.docs.length) {
-          rows.push(h("p", { class: "t-body-s c-tertiary", text: "나온 자료 · " + p.docs.join(" / ") }));
+          node.appendChild(h("p", { class: "tnode__docs", text: p.docs.length + "개 자료에 나옴" }));
         }
         // 엔진이 합치지 못하고 남긴 링크 — 단정하지 않는다
         p.same_as.forEach(function (link) {
-          rows.push(h("p", { class: "people__link t-body-s" }, [
-            badge("unverified", "같은 대상일 수 있음"),
-            h("span", { class: "c-secondary", text: link.name + " — " + link.reason }),
+          node.appendChild(h("p", { class: "tnode__same" }, [
+            h("span", { class: "tnode__same-mark", text: "≈" }),
+            h("span", { text: link.name + " 과 같은 대상일 수 있음 — " + link.reason }),
           ]));
         });
-        wrap.appendChild(h("div", { class: "people__item" }, rows));
-      });
-    });
-    return wrap;
+        return h("li", { class: "tree__leaf" }, [node]);
+      }));
+
+      return h("li", { class: "tree__branch" }, [
+        h("span", { class: "tree__group" }, [
+          h("span", { text: g.label }),
+          h("span", { class: "tree__group-count", text: String(g.items.length) }),
+        ]),
+        leaves,
+      ]);
+    }));
+
+    return h("div", { class: "card tree" }, [
+      h("div", { class: "tree__rootwrap" }, [h("span", { class: "tree__root", text: c.title })]),
+      branches,
+    ]);
   }
 
   function slotsCard(c) {
@@ -511,8 +522,12 @@
     ]);
   }
 
+  function askButton() {
+    return h("button", { type: "button", class: "issues__ask", text: "전문가에게 물어볼 질문 만들기" });
+  }
+
   /** 자료는 목록으로 늘어놓지 않고 버튼 뒤에 둔다. */
-  function sourcesBar(c) {
+  function sourcesBar(c, vertical) {
     var open = h("button", { type: "button", class: "srcbar__btn" }, [
       h("span", { text: "첨부한 자료" }),
       h("span", { class: "srcbar__count", text: String(c.sources.length) }),
@@ -526,7 +541,7 @@
       })));
     });
 
-    return h("div", { class: "srcbar" }, [
+    return h("div", { class: "srcbar" + (vertical ? " srcbar--stack" : "") }, [
       h("a", { class: "srcbar__btn srcbar__btn--add", href: "new.html" }, [h("span", { text: "+  자료 추가하기" })]),
       open,
     ]);
@@ -542,6 +557,24 @@
     document.title = c.title + " · 타래";
 
     var panel = h("div", { role: "tabpanel", id: "panel" }, [timelineCard(c)]);
+    var rail = h("aside", { class: "rail" });
+    var underPanel = h("div", { class: "main__under" });
+
+    // 다음 행동·확인이 필요해요는 타임라인에서만 본다. 인물·주장 탭에서는
+    // 그 화면에서 실제로 쓰는 것(자료 · 전문가 질문)만 옆에 둔다.
+    function fillSide(index) {
+      rail.textContent = "";
+      underPanel.textContent = "";
+      if (index === 0) {
+        rail.appendChild(nextActionCard(c.next_action));
+        rail.appendChild(issuesCard(c));
+        underPanel.appendChild(sourcesBar(c));
+      } else {
+        rail.appendChild(sourcesBar(c, true));
+        rail.appendChild(askButton());
+      }
+    }
+
     var tabNames = ["타임라인", "인물 · 관계", "주장 대조"];
     var tabs = h("div", { class: "tabs", role: "tablist" }, tabNames.map(function (name, i) {
       var tab = h("button", { type: "button", class: "tab", role: "tab", "aria-selected": i === 0 ? "true" : "false", "aria-controls": "panel", text: name });
@@ -550,9 +583,11 @@
         tab.setAttribute("aria-selected", "true");
         panel.textContent = "";
         panel.appendChild(i === 0 ? timelineCard(c) : i === 1 ? peopleCard(c) : slotsCard(c));
+        fillSide(i);
       });
       return tab;
     }));
+    fillSide(0);
 
     root.appendChild(h("div", { class: "disclaimer" }, [
       icon("info", 18),
@@ -582,8 +617,8 @@
         ]),
       ]),
       h("div", { class: "columns" }, [
-        h("div", { class: "main" }, [tabs, panel, sourcesBar(c)]),
-        h("aside", { class: "rail" }, [nextActionCard(c.next_action), issuesCard(c)]),
+        h("div", { class: "main" }, [tabs, panel, underPanel]),
+        rail,
       ]),
     ]));
   }
