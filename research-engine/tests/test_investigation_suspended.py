@@ -31,13 +31,17 @@ def test_결정_통지서가_기록으로_읽히고_결정_항목을_채운다(r
 
 
 def test_중지_사유가_항목_값까지_올라온다(result):
-    """통지서 제목은 ‘수사중지’, 결정내용란은 ‘수사중지(참고인중지)’ 다.
+    """결정 종류는 제목이 아니라 결정내용란에서 온다.
 
-    둘 다 기록이라 앞줄이 대표가 되면 사유가 사라진다. 행동 강령 엔진은 이 값으로
-    피의자중지·참고인중지를 가르므로 더 구체적인 쪽이 항목 값이 되어야 한다.
+    실제 서식(경찰수사규칙 별지 제100호 ‘수사결과 통지서’)은 제목에 결정 종류를 적지 않는다.
+    수사중지인지 송치인지는 결정내용란에만 있고, 행동 강령 엔진은 이 값으로
+    피의자중지·참고인중지를 가른다. 사유가 붙은 값이 그대로 항목 값이 되어야 한다.
+
+    한 항목에 기록 여러 줄이 걸릴 때 더 구체적인 값을 세우는 규칙 자체는
+    ``test_analysis.py`` 가 따로 덮는다 — 이 픽스처에서는 겹치는 줄이 생기지 않는다.
     """
     values = [c.slot_value for c in result.extraction.claims if c.slot is ClaimSlot.DECISION_TYPE]
-    assert "수사중지" in values and "수사중지(참고인중지)" in values  # 두 줄 다 주장으로는 남는다
+    assert values == ["수사중지(참고인중지)"]
     status = next(s for s in result.analysis.slot_statuses if s.slot is ClaimSlot.DECISION_TYPE)
     assert status.value == "수사중지(참고인중지)"
     assert status.sources[0].source_line == 7  # 제목(1줄)이 아니라 결정내용란
@@ -48,7 +52,7 @@ def test_중지_이후의_목격_진술이_기록에_없는_사실로_올라온�
     assert issue.category is IssueCategory.UNVERIFIED
     assert issue.trigger.key == "investigation_suspended/occurrence/new_fact/unrecorded_fact"
     assert {s.source_doc_id for s in issue.sources} == {"witness_statement_2025"}
-    assert "수사중지 결정 통지서" in issue.message and "이후에 나온 내용" in issue.message
+    assert "수사결과 통지서" in issue.message and "이후에 나온 내용" in issue.message
     assert issue.trigger.since.year == 2025
     assert result.analysis.case_card.next_trigger.key == issue.trigger.key  # 가장 먼저 다룰 것
 
