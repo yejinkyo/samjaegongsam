@@ -575,19 +575,17 @@
 
     var panel = h("div", { role: "tabpanel", id: "panel" }, [timelineCard(c)]);
     var rail = h("aside", { class: "rail" });
-    var underPanel = h("div", { class: "main__under" });
 
     // 다음 행동·확인이 필요해요는 타임라인에서만 본다. 인물·주장 탭에서는
     // 그 화면에서 실제로 쓰는 것(자료 · 전문가 질문)만 옆에 둔다.
     function fillSide(index) {
       rail.textContent = "";
-      underPanel.textContent = "";
+      // 자료는 어느 탭에서나 같은 자리(맨 위)에 둔다
+      rail.appendChild(sourcesBar(c, true));
       if (index === 0) {
         rail.appendChild(nextActionCard(c.next_action));
         rail.appendChild(issuesCard(c));
-        underPanel.appendChild(sourcesBar(c));
       } else {
-        rail.appendChild(sourcesBar(c, true));
         rail.appendChild(askButton());
       }
     }
@@ -600,8 +598,6 @@
         tab.setAttribute("aria-selected", "true");
         panel.textContent = "";
         panel.appendChild(i === 0 ? timelineCard(c) : i === 1 ? peopleCard(c) : slotsCard(c));
-        // 타임라인만 한 화면에 맞춰 안에서 스크롤한다. 나머지 둘은 길게 펼친다
-        panel.classList.toggle("panel--tall", i !== 0);
         fillSide(i);
       });
       return tab;
@@ -636,7 +632,7 @@
         ]),
       ]),
       h("div", { class: "columns" }, [
-        h("div", { class: "main" }, [tabs, panel, underPanel]),
+        h("div", { class: "main" }, [tabs, panel]),
         rail,
       ]),
     ]));
