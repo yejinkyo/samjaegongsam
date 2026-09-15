@@ -606,6 +606,23 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .next-action__val { flex: 1 0 0; min-width: 0; }
 .next-action__prepare { margin: 4px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 4px; }
 
+
+/* 도움말의 사용 순서 */
+.help__how { padding: 14px 16px; border-radius: 14px; background: var(--bg-brand-soft); }
+.help__steps { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; }
+.help__steps li { font: 400 13.5px/1.7 var(--font); color: var(--text-secondary); }
+
+/* 전문가에게 물어볼 질문 */
+.ask { display: flex; flex-direction: column; gap: 12px; }
+.ask__lead { font: 400 13px/1.6 var(--font); color: var(--text-secondary); }
+.ask__text {
+  width: 100%; padding: 14px; resize: vertical;
+  border: 1.5px solid var(--border-strong); border-radius: 12px;
+  background: var(--bg-sunken); color: var(--text-primary);
+  font: 400 13.5px/1.7 var(--font);
+}
+.ask__text:focus { outline: none; border-color: var(--brand-primary); }
+
 /* ── 확인이 필요해요 — 접혀 있다가 눌러서 펼친다 ───────────────── */
 .issues { display: flex; flex-direction: column; gap: 10px; }
 .issues__toggle {
@@ -633,7 +650,8 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .issue-group__head:first-child { padding-top: 0; }
 .issue-group__dot { width: 8px; height: 8px; border-radius: 999px; background: var(--dot); }
 .issue-group__count { color: var(--text-tertiary); }
-.issue { padding: 12px 14px; border-radius: 12px; background: var(--bg-sunken); border-left: 3px solid var(--bar); }
+/* 갈래는 선이 아니라 배경색으로 가른다 */
+.issue { padding: 12px 14px; border-radius: 12px; background: var(--bg-sunken); }
 .issue__text { font: 400 14px/1.6 var(--font); color: var(--text-primary); }
 .issue__how { margin-top: 6px; font: 400 12px/1.5 var(--font); color: var(--text-tertiary); }
 /* 갈래 색과 배경을 맞춘다 — 어긋남은 붉게, 확인되지 않음은 노랗게 */

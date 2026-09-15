@@ -94,6 +94,16 @@
       ].concat(lines.map(function (t) { return h("p", { class: "help__text", text: t }); })));
     }
     openModal("타래는 무엇을 하나요?", h("div", { class: "help" }, [
+      h("section", { class: "help__block help__how" }, [
+        h("h3", { class: "help__title", text: "이렇게 쓰세요" }),
+        h("ol", { class: "help__steps" }, [
+          h("li", { text: "사건을 등록하고 가진 자료를 사진으로 올려요. 접수증 · 통지서 · 문자 캡처 · 손으로 쓴 메모 무엇이든 괜찮아요." }),
+          h("li", { text: "타임라인에서 언제 무슨 일이 있었는지 확인해요. 줄 옆 '자세히'를 누르면 원문과 어느 자료에서 왔는지가 나와요." }),
+          h("li", { text: "'확인이 필요해요'를 펼쳐 어긋난 것 · 아직 확인되지 않은 것 · 빠진 것을 봐요." }),
+          h("li", { text: "'다음 행동'에서 지금 할 일 하나를 확인해요. 기한이 있으면 남은 날짜가 함께 떠요." }),
+          h("li", { text: "막히면 '전문가에게 물어볼 질문 만들기'를 눌러 상담에 가져갈 질문을 뽑아요." }),
+        ]),
+      ]),
       block("흩어진 자료를 시간 순으로 엮어요", [
         "사건 자료는 보통 여기저기 흩어져 있어요. 접수증은 서랍에, 문자는 휴대폰에, 통지서는 봉투 안에요.",
         "사진으로 찍어 올리면 글자를 읽어서 '언제 무슨 일이 있었는지' 한 줄로 세워 드려요.",
@@ -729,12 +739,73 @@
     return h("section", { class: "issues" }, [
       toggle,
       list,
-      h("button", { type: "button", class: "issues__ask t-body-m-strong", text: "전문가에게 물어볼 질문 만들기" }),
+      askButton(c),
     ]);
   }
 
-  function askButton() {
-    return h("button", { type: "button", class: "issues__ask", text: "전문가에게 물어볼 질문 만들기" });
+  // 갈래마다 어떻게 물을지. 질문 문장은 여기서 정하고, 내용은 엔진이 올린 것을 그대로 넣는다.
+  var ASK_FRAME = {
+    "자료끼리 어긋남": "자료마다 다르게 적혀 있습니다. 어느 쪽을 기준으로 봐야 하나요?",
+    "확인되지 않음": "기록으로 확인되지 않는 내용입니다. 어떻게 확인할 수 있을까요?",
+    "빠진 정보": "이 자료가 없습니다. 어디에서 받을 수 있나요?",
+    "읽히지 않은 부분": "자료가 잘 읽히지 않습니다. 원본을 다시 내야 하나요?",
+  };
+
+  /** 상담에 가져갈 질문지를 만든다 — 사건 요약 + 확인이 필요한 것 + 다음 행동. */
+  function askSheet(c) {
+    var lines = [];
+    lines.push("[사건] " + c.title + " (" + c.type_label + ")");
+    lines.push("[기간] " + c.period + " · 자료 " + c.sources.length + "개 · 확인 필요 " + c.need_count);
+    lines.push("");
+
+    (c.issues || []).forEach(function (g) {
+      var frame = ASK_FRAME[g.label] || "이 부분을 어떻게 보면 될까요?";
+      lines.push("■ " + g.label + " — " + frame);
+      g.items.forEach(function (it) {
+        lines.push("  · " + it.text + (it.how ? " (" + it.how + ")" : ""));
+      });
+      lines.push("");
+    });
+
+    var next = c.next_action;
+    if (next) {
+      lines.push("■ 다음 행동 — " + next.label);
+      if (next.due) lines.push("  · 기한: " + next.due.text);
+      if (next.state === "filled" && next.rows.length) {
+        next.rows.forEach(function (r) { lines.push("  · " + r.k + ": " + r.v); });
+        lines.push("  · 이 절차를 진행하려면 무엇을 더 준비해야 하나요?");
+      } else {
+        lines.push("  · 이 행동을 어디에 어떻게 해야 하는지 알고 싶습니다.");
+      }
+    }
+    return lines.join(String.fromCharCode(10)).trim();
+  }
+
+  function askButton(c) {
+    var button = h("button", { type: "button", class: "issues__ask", text: "전문가에게 물어볼 질문 만들기" });
+    button.addEventListener("click", function () {
+      var text = askSheet(c);
+      var area = h("textarea", { class: "ask__text", rows: "14", readonly: true });
+      area.value = text;
+
+      var copy = h("button", { type: "button", class: "modal__save", text: "복사하기" });
+      copy.addEventListener("click", function () {
+        function done() { copy.textContent = "복사했어요"; setTimeout(function () { copy.textContent = "복사하기"; }, 1600); }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done, function () { area.select(); });
+        } else {
+          area.select();
+        }
+      });
+
+      openModal("전문가에게 물어볼 질문", h("div", { class: "ask" }, [
+        h("p", { class: "ask__lead", text: "지금 화면에 올라온 것에서 뽑았어요. 상담 전에 읽어 보고 빼거나 더할 수 있어요." }),
+        area,
+        copy,
+        h("p", { class: "modal__note", text: "법률 자문이 아니라 물어볼 거리입니다. 답은 변호사·법률구조공단 같은 곳에서 들으세요." }),
+      ]));
+    });
+    return button;
   }
 
   function sourceListModal(c) {
@@ -795,7 +866,7 @@
         rail.appendChild(nextActionCard(c.next_action));
         rail.appendChild(issuesCard(c));
       } else {
-        rail.appendChild(askButton());
+        rail.appendChild(askButton(c));
       }
     }
 
