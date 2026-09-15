@@ -7,6 +7,9 @@
 (function () {
   "use strict";
 
+  // 서버가 없어 진짜 인증은 없다. 발표·시연에서 쓸 계정 하나만 화면 안에서 맞춰 본다.
+  var DEMO = { username: "삼재공삼", password: "삼재공삼" };
+
   var RULES = {
     username: function (v) {
       if (!v) return "아이디를 입력해 주세요.";
@@ -71,6 +74,17 @@
         first.focus();
         return;
       }
+
+      if (page === "login") {
+        var id = form.querySelector("#username").value.trim();
+        var pw = form.querySelector("#password").value;
+        if (id !== DEMO.username || pw !== DEMO.password) {
+          show("password", "아이디나 비밀번호가 달라요. 데모 계정은 삼재공삼 / 삼재공삼 이에요.", defaults.password);
+          form.querySelector("#password").focus();
+          return;
+        }
+      }
+
       // 입력값은 들고 가지 않는다 — 데모 사건 목록으로만 이동한다
       form.reset();
       location.href = "cases.html";
