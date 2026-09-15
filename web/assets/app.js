@@ -633,8 +633,9 @@
           ]),
         ]),
       ]),
+      tabs,
       h("div", { class: "columns" }, [
-        h("div", { class: "main" }, [tabs, panel]),
+        h("div", { class: "main" }, [panel]),
         rail,
       ]),
     ]));

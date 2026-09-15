@@ -414,7 +414,8 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .rail { flex: 0 1 360px; min-width: 264px; display: flex; flex-direction: column; gap: 14px; }
 
 /* 탭 · 패널 — 아무것도 누르지 않아도 한 화면에 들어오도록 패널만 안에서 스크롤한다 */
-.tabs { display: flex; gap: 28px; padding-top: 8px; box-shadow: inset 0 -1px 0 var(--border-default); }
+/* 탭 줄은 두 열 위에 걸친다 — 회색 선 밑에서 타임라인과 오른쪽 열이 같이 시작한다 */
+.tabs { display: flex; gap: 28px; padding-top: 4px; margin-bottom: -4px; box-shadow: inset 0 -1px 0 var(--border-default); }
 .tab { display: flex; flex-direction: column; align-items: center; gap: 10px; font: 400 17px/1.55 var(--font); color: var(--text-tertiary); }
 .tab::after { content: ""; align-self: stretch; height: 3px; }
 .tab[aria-selected="true"] { font: 500 17px/1.5 var(--font); letter-spacing: -0.051px; color: var(--text-primary); }
