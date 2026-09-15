@@ -101,7 +101,7 @@
           h("li", { text: "타임라인에서 언제 무슨 일이 있었는지 확인해요. 줄 옆 '자세히'를 누르면 원문과 어느 자료에서 왔는지가 나와요." }),
           h("li", { text: "'확인이 필요해요'를 펼쳐 어긋난 것 · 아직 확인되지 않은 것 · 빠진 것을 봐요." }),
           h("li", { text: "'다음 행동'에서 지금 할 일 하나를 확인해요. 기한이 있으면 남은 날짜가 함께 떠요." }),
-          h("li", { text: "막히면 '전문가에게 물어볼 질문 만들기'를 눌러 상담에 가져갈 질문을 뽑아요." }),
+          h("li", { text: "막히면 '전문가에게 물어볼 질문'을 눌러 상담에 가져갈 질문을 뽑아요." }),
         ]),
       ]),
       block("흩어진 자료를 시간 순으로 엮어요", [
@@ -865,7 +865,7 @@
   }
 
   function askButton(c) {
-    var button = h("button", { type: "button", class: "issues__ask", text: "전문가에게 물어볼 질문 만들기" });
+    var button = h("button", { type: "button", class: "issues__ask", text: "전문가에게 물어볼 질문" });
     button.addEventListener("click", function () {
       var text = askSheet(c);
       var area = h("textarea", { class: "ask__text", rows: "14", readonly: true });
