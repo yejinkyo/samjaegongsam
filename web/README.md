@@ -5,6 +5,7 @@
 | 파일 | 피그마 프레임 | 하는 일 |
 |---|---|---|
 | `index.html` | — | 시작 화면. 실 그림 + 로그인·회원가입 (`assets/landing.css` · `assets/landing.js`) |
+| `login.html` · `signup.html` | — | 로그인 · 회원가입 폼 (`assets/auth.css` · `assets/auth.js`) |
 | `cases.html` | 01 내 사건 | 사건 카드 목록. 카드를 누르면 사건 상세로 간다 |
 | `new.html` | 02 새 사건 등록 | 사건 유형 선택과 자료 올리기를 한 화면에서 |
 | `case.html?id=…` | 03 사건 상세 · 타임라인 | 타임라인 · 인물 · 주장 대조 · 다음 행동 · 확인이 필요해요 |

@@ -1,0 +1,90 @@
+/* 로그인 · 회원가입. 바탕과 버튼은 시작 화면(landing.css)을 그대로 쓰고,
+   폼만 여기서 그린다. 서류철에서 꺼낸 종이 한 장처럼 탭을 달았다. */
+
+.auth {
+  min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 20px;
+  padding: 72px 24px 96px;
+}
+
+.auth__brand { display: flex; align-items: center; gap: 10px; color: var(--lp-text); }
+.auth__brand .lp-mark { width: 26px; height: 26px; border-radius: 8px; box-shadow: 0 0 0 5px rgba(94, 61, 187, 0.22); }
+.auth__brand-name { font: 700 22px/1 var(--font); letter-spacing: -0.03em; }
+
+/* 종이 한 장 */
+.sheet { position: relative; width: min(420px, 100%); padding-top: 24px; }
+.sheet__tab {
+  position: absolute; left: 0; top: 0;
+  display: flex; align-items: center; height: 32px; padding: 0 18px;
+  border-radius: 12px 12px 0 0; background: var(--brand-primary); color: #fff;
+  font: 600 13px/1 var(--font);
+}
+.sheet__body {
+  display: flex; flex-direction: column; gap: 18px;
+  padding: 28px 26px 26px;
+  border-radius: 0 16px 16px 16px;
+  background: #fff;
+  box-shadow: 0 24px 60px -24px rgba(24, 12, 54, 0.55);
+  color: var(--lp-ink);
+}
+.sheet__title { font: 600 22px/1.35 var(--font); letter-spacing: -0.02em; }
+.sheet__desc { font: 400 13.5px/1.6 var(--font); color: var(--lp-ink-dim); }
+
+/* 입력칸 */
+.field { display: flex; flex-direction: column; gap: 7px; }
+.field > label { font: 600 13px/1 var(--font); color: var(--lp-ink); }
+.field input {
+  height: 48px; padding: 0 14px;
+  border: 1.5px solid var(--border-strong); border-radius: 12px;
+  background: #fff; color: var(--lp-ink);
+  font: 400 15px/1 var(--font);
+}
+.field input::placeholder { color: #a9a2bd; }
+.field input:focus { outline: none; border-color: var(--brand-primary); box-shadow: 0 0 0 3px rgba(94, 61, 187, 0.14); }
+.field__hint { font: 400 12px/1.5 var(--font); color: var(--lp-ink-dim); }
+.field__hint--warn { color: #c24a38; }
+
+.auth__form { display: flex; flex-direction: column; gap: 16px; }
+
+.sheet .lp-btn { height: 50px; font-size: 15px; }
+
+/* 간편 가입 */
+.social { display: flex; flex-direction: column; gap: 12px; }
+.social__label {
+  display: flex; align-items: center; gap: 12px;
+  font: 500 12.5px/1 var(--font); color: var(--lp-ink-dim);
+}
+.social__label::before, .social__label::after {
+  content: ""; flex: 1 0 0; height: 1px; background: var(--border-default);
+}
+.social__buttons { display: flex; justify-content: center; gap: 16px; }
+.social__btn {
+  display: flex; align-items: center; justify-content: center;
+  width: 52px; height: 52px; border-radius: 999px;
+  border: 1px solid rgba(24, 12, 54, 0.1);
+  transition: transform 0.15s ease;
+}
+.social__btn:hover { transform: translateY(-2px); }
+.social__btn--kakao { background: #fee500; border-color: transparent; }
+.social__btn--naver { background: #03c75a; border-color: transparent; }
+.social__btn--google { background: #fff; }
+
+/* 폼 아래쪽은 바탕이 밝아지는 자리라 글자를 어두운 색으로 둔다 */
+.auth__switch { font: 400 13.5px/1.6 var(--font); color: var(--lp-ink); text-align: center; }
+.auth__switch a { color: var(--brand-primary); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+
+/* 데모라서 실제로 가입·로그인되지 않는다는 안내 */
+.auth__demo {
+  width: min(420px, 100%);
+  padding: 12px 16px; border-radius: 12px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(24, 12, 54, 0.08);
+  color: var(--lp-ink-dim);
+  font: 400 12.5px/1.6 var(--font);
+  text-align: center;
+}
+
+@media (max-width: 520px) {
+  .auth { padding: 56px 20px 72px; }
+}
