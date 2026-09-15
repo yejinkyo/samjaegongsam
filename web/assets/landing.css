@@ -1,0 +1,148 @@
+/* 시작 화면. 앱 안쪽(밝은 화면)과 달리 어두운 진보라 바탕을 쓴다 —
+   실이 뻗어 나가는 그림이 어두운 바탕에서만 읽히기 때문이다.
+   색은 tokens.css 의 브랜드 보라에서 파생시켜 앱과 같은 계열을 유지한다. */
+
+:root {
+  --lp-bg: #150e2e;
+  --lp-bg-deep: #0d0820;
+  --lp-text: #f4f1fb;
+  --lp-dim: #a79cc9;
+  --lp-thread: #8f6fe0;
+  --lp-node: #c9b3ec;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--lp-bg-deep);
+  color: var(--lp-text);
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+}
+p, h1 { margin: 0; }
+a { color: inherit; text-decoration: none; }
+:focus-visible { outline: 2px solid var(--lp-node); outline-offset: 4px; }
+
+.lp { display: flex; flex-direction: column; }
+
+/* ── 히어로 ─────────────────────────────────────────────── */
+.lp-hero {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 40px;
+  padding: 80px 64px;
+  background:
+    radial-gradient(1100px 620px at 78% 42%, rgba(143, 111, 224, 0.22), transparent 62%),
+    linear-gradient(160deg, var(--lp-bg) 0%, var(--lp-bg-deep) 70%);
+  overflow: hidden;
+}
+
+.lp-hero__text { display: flex; flex-direction: column; gap: 18px; max-width: 30ch; }
+
+.lp-mark {
+  width: 34px; height: 34px; border-radius: 10px;
+  background: var(--brand-primary);
+  box-shadow: 0 0 0 6px rgba(94, 61, 187, 0.22);
+}
+
+.lp-title {
+  font: 700 88px/1 var(--font);
+  letter-spacing: -0.04em;
+}
+
+.lp-lead { font: 500 24px/1.45 var(--font); letter-spacing: -0.02em; }
+.lp-sub { font: 400 16px/1.7 var(--font); color: var(--lp-dim); }
+
+/* ── 실 그림 ────────────────────────────────────────────── */
+.lp-net { position: relative; height: min(70vh, 620px); }
+.lp-net svg { width: 100%; height: 100%; overflow: visible; }
+
+.lp-net .thread {
+  stroke: var(--lp-thread);
+  stroke-width: 1;
+  fill: none;
+  opacity: 0.32;
+}
+.lp-net .node { fill: var(--lp-node); }
+.lp-net .node--hub { fill: #fff; }
+
+/* 마디가 하나씩 켜졌다 꺼진다 — 지연 시간은 landing.js 가 노드마다 다르게 준다.
+   반지름(r)은 브라우저마다 CSS 로 못 움직이는 곳이 있어 transform 으로 키운다. */
+@keyframes lp-twinkle {
+  0%, 100% { opacity: 0.28; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.8); }
+}
+.lp-net .node {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: lp-twinkle 4.5s ease-in-out infinite;
+}
+
+@keyframes lp-pulse {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.55; }
+}
+.lp-net .thread { animation: lp-pulse 7s ease-in-out infinite; }
+
+/* ── 스크롤 안내 ────────────────────────────────────────── */
+.lp-scroll {
+  position: absolute; left: 64px; bottom: 40px;
+  display: flex; align-items: center; gap: 10px;
+  color: var(--lp-dim); font: 500 13px/1 var(--font);
+}
+.lp-scroll__arrow {
+  width: 10px; height: 10px;
+  border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  animation: lp-bob 2s ease-in-out infinite;
+}
+@keyframes lp-bob {
+  0%, 100% { transform: rotate(45deg) translate(0, 0); }
+  50% { transform: rotate(45deg) translate(3px, 3px); }
+}
+.lp-scroll:hover { color: var(--lp-text); }
+
+/* ── 버튼 화면 ──────────────────────────────────────────── */
+.lp-cta {
+  min-height: 62vh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px;
+  padding: 80px 24px 96px;
+  background: linear-gradient(180deg, var(--lp-bg-deep) 0%, #120c26 100%);
+  text-align: center;
+}
+.lp-cta__lead { font: 500 20px/1.5 var(--font); letter-spacing: -0.02em; }
+.lp-cta__buttons { display: flex; flex-direction: column; gap: 12px; width: min(320px, 100%); }
+
+.lp-btn {
+  display: flex; align-items: center; justify-content: center;
+  height: 56px; border-radius: 999px;
+  font: 600 16px/1 var(--font); letter-spacing: -0.01em;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+.lp-btn--primary { background: var(--brand-primary); color: #fff; }
+.lp-btn--primary:hover { background: #6f4cd6; transform: translateY(-2px); }
+.lp-btn--ghost { border: 1.5px solid rgba(201, 179, 236, 0.45); color: var(--lp-text); }
+.lp-btn--ghost:hover { border-color: var(--lp-node); background: rgba(143, 111, 224, 0.12); transform: translateY(-2px); }
+
+.lp-note { font: 400 12.5px/1.6 var(--font); color: var(--lp-dim); opacity: 0.8; }
+
+/* ── 좁은 화면 ──────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .lp-hero { grid-template-columns: 1fr; padding: 72px 28px 96px; gap: 24px; }
+  .lp-hero__text { max-width: none; }
+  .lp-title { font-size: 64px; }
+  .lp-net { height: 46vh; order: 2; }
+  .lp-scroll { left: 28px; bottom: 28px; }
+}
+
+/* 움직임을 줄여 달라고 한 사용자에게는 반짝임을 끈다 */
+@media (prefers-reduced-motion: reduce) {
+  .lp-net .node, .lp-net .thread, .lp-scroll__arrow { animation: none; }
+  .lp-net .node { opacity: 0.85; }
+  .lp-net .thread { opacity: 0.35; }
+  html { scroll-behavior: auto; }
+}
