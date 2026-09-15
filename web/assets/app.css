@@ -578,7 +578,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 .modal::backdrop { background: rgba(24, 12, 54, 0.45); }
 .modal__head { display: flex; align-items: flex-start; gap: 16px; padding: 22px 24px 14px; }
-.modal__head h2 { flex: 1 0 0; }
+.modal__head h2 { flex: 1 0 0; min-width: 0; font: 600 18px/1.5 var(--font); word-break: keep-all; }
 .modal__close { flex-shrink: 0; width: 30px; height: 30px; border-radius: 999px; color: var(--text-tertiary); }
 .modal__close:hover { background: var(--bg-sunken); color: var(--text-primary); }
 .modal__body { padding: 0 24px 24px; overflow-y: auto; max-height: calc(80vh - 70px); }

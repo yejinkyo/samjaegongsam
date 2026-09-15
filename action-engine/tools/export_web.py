@@ -201,6 +201,24 @@ def _short_title(title: str) -> str:
     return text if len(text) <= 24 else text[:23].rstrip() + "…"
 
 
+def _full_text(event: dict[str, Any]) -> str:
+    """'자세히'에 보여줄 원문.
+
+    엔진이 만든 제목은 긴 문장을 '…' 로 줄여 놓는다. 줄인 제목이면 같은 문장을
+    담고 있는 출처 인용으로 되살린다 — 자세히를 눌렀는데 또 잘려 있으면 안 된다.
+    """
+    title = event["title"]
+    quotes = [s["quote"] for s in event["sources"] if s.get("quote")]
+    if not title.endswith("…"):
+        return title
+    stem = title[:-1].strip()[:12]
+    candidates = [q for q in quotes if stem and q.startswith(stem)] or quotes
+    if not candidates:
+        return title
+    longest = max(candidates, key=len)
+    return longest if len(longest) > len(title) else title
+
+
 def _source_line(sources: list[dict[str, Any]], doc_index: dict[str, int], docs: dict[str, dict]) -> str:
     if not sources:
         return "뒷받침하는 자료가 없어요"
@@ -245,7 +263,7 @@ def _timeline(result: dict[str, Any], docs: dict[str, dict], doc_index: dict[str
             "type": "event",
             "time": "시각 미상" if e.get("time_unknown") or not time else _event_time(time, multi_year),
             "title": _short_title(e["title"]),
-            "full": e["title"],
+            "full": _full_text(e),
             "kind": kind,
             "badge": badge,
             "conflict": conflict,

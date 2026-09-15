@@ -569,10 +569,11 @@
 
   /** 줄을 누르면 열리는 자세히 — 원문과 출처를 그대로 보여준다. */
   function timelineDetail(row) {
+    // 제목에 원문을 그대로 쓴다 — 자세히를 눌렀는데 또 잘려 있으면 안 된다
+    var full = row.full || row.title;
     var body = h("div", { class: "tldetail" }, [
       h("div", { class: "tldetail__flags" }, rowFlags(row).map(function (f) { return badge(f[0], f[1]); })),
       h("p", { class: "tldetail__when", text: String(row.time || "").replace(/\s+/g, " ") }),
-      h("p", { class: "tldetail__full", text: row.full || row.title }),
     ]);
 
     var sources = row.sources || [];
@@ -591,7 +592,7 @@
       })));
       body.appendChild(h("p", { class: "modal__note", text: "원본 사진을 띄우는 것은 아직 연결되지 않았어요. 지금은 어느 자료 몇 줄에서 왔는지까지 보여드려요." }));
     }
-    openModal(row.title, body);
+    openModal(full, body);
   }
 
   function timelineCard(c) {
