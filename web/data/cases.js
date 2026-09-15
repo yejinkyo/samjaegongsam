@@ -118,6 +118,256 @@ window.TARAE_CASES = [
         "source": "출처 ③  ECRM_접수증.pdf · 1줄 외 1곳"
       }
     ],
+    "people": [
+      {
+        "label": "사람",
+        "items": [
+          {
+            "name": "나",
+            "roles": [
+              "사용자"
+            ],
+            "docs": [
+              "이체확인증.pdf",
+              "카톡_0601.png"
+            ],
+            "same_as": []
+          },
+          {
+            "name": "홍길동",
+            "roles": [
+              "진술인"
+            ],
+            "docs": [],
+            "same_as": []
+          }
+        ]
+      },
+      {
+        "label": "기관",
+        "items": [
+          {
+            "name": "국민은행",
+            "roles": [],
+            "docs": [
+              "이체확인증.pdf",
+              "카톡_0601.png"
+            ],
+            "same_as": []
+          },
+          {
+            "name": "신한은행",
+            "roles": [],
+            "docs": [
+              "이체확인증.pdf",
+              "카톡_0601.png"
+            ],
+            "same_as": []
+          },
+          {
+            "name": "사이버수사대",
+            "roles": [],
+            "docs": [
+              "메모.jpg"
+            ],
+            "same_as": []
+          },
+          {
+            "name": "경찰서",
+            "roles": [],
+            "docs": [],
+            "same_as": []
+          }
+        ]
+      },
+      {
+        "label": "계좌",
+        "items": [
+          {
+            "name": "940*******21",
+            "roles": [],
+            "docs": [
+              "이체확인증.pdf",
+              "카톡_0601.png"
+            ],
+            "same_as": []
+          },
+          {
+            "name": "110*******88",
+            "roles": [],
+            "docs": [
+              "이체확인증.pdf",
+              "카톡_0601.png"
+            ],
+            "same_as": []
+          }
+        ]
+      },
+      {
+        "label": "접수번호",
+        "items": [
+          {
+            "name": "2026-0603-***",
+            "roles": [],
+            "docs": [
+              "ECRM_접수증.pdf"
+            ],
+            "same_as": []
+          }
+        ]
+      }
+    ],
+    "slots": [
+      {
+        "slot": "송금 금액",
+        "value": null,
+        "state": "자료마다 다름",
+        "severity": "conflict",
+        "said": [
+          {
+            "value": "350000",
+            "doc": "이체확인증.pdf",
+            "speaker": "신한은행",
+            "record": true
+          },
+          {
+            "value": "300000",
+            "doc": "진술서.jpg",
+            "speaker": "홍길동",
+            "record": false
+          }
+        ]
+      },
+      {
+        "slot": "송금 시점",
+        "value": "2026-06-01 14:05",
+        "state": "기록으로 확인",
+        "severity": "verified",
+        "said": [
+          {
+            "value": "2026-06-01 14:05",
+            "doc": "이체확인증.pdf",
+            "speaker": "신한은행",
+            "record": true
+          },
+          {
+            "value": "2026-06-01 13~16시",
+            "doc": "진술서.jpg",
+            "speaker": "홍길동",
+            "record": false
+          }
+        ]
+      },
+      {
+        "slot": "계좌번호",
+        "value": "940*******21",
+        "state": "기록으로 확인",
+        "severity": "verified",
+        "said": [
+          {
+            "value": "940*******21",
+            "doc": "카톡_0601.png",
+            "speaker": "찬찬",
+            "record": false
+          },
+          {
+            "value": "110*******88",
+            "doc": "이체확인증.pdf",
+            "speaker": "신한은행",
+            "record": true
+          },
+          {
+            "value": "940*******21",
+            "doc": "이체확인증.pdf",
+            "speaker": "신한은행",
+            "record": true
+          }
+        ]
+      },
+      {
+        "slot": "예금주",
+        "value": null,
+        "state": "말만 있고 기록 없음",
+        "severity": "unverified",
+        "said": [
+          {
+            "value": "찬찬",
+            "doc": "카톡_0601.png",
+            "speaker": "찬찬",
+            "record": false
+          }
+        ]
+      },
+      {
+        "slot": "발송 여부",
+        "value": null,
+        "state": "말만 있고 기록 없음",
+        "severity": "unverified",
+        "said": [
+          {
+            "value": "true",
+            "doc": "카톡_0601.png",
+            "speaker": "찬찬",
+            "record": false
+          },
+          {
+            "value": "true",
+            "doc": "진술서.jpg",
+            "speaker": "판매자",
+            "record": false
+          }
+        ]
+      },
+      {
+        "slot": "tracking_number",
+        "value": null,
+        "state": "자료에 없음",
+        "severity": "unverified",
+        "said": []
+      },
+      {
+        "slot": "접수번호",
+        "value": "2026-0603-***",
+        "state": "기록으로 확인",
+        "severity": "verified",
+        "said": [
+          {
+            "value": "2026-0603-***",
+            "doc": "ECRM_접수증.pdf",
+            "speaker": "ECRM_접수증.pdf 발급처",
+            "record": true
+          }
+        ]
+      },
+      {
+        "slot": "접수일시",
+        "value": "2026-06-03 09:12",
+        "state": "기록으로 확인",
+        "severity": "verified",
+        "said": [
+          {
+            "value": "2026-06-03 09:12",
+            "doc": "ECRM_접수증.pdf",
+            "speaker": "ECRM_접수증.pdf 발급처",
+            "record": true
+          }
+        ]
+      },
+      {
+        "slot": "담당 수사관",
+        "value": null,
+        "state": "자료에 없음",
+        "severity": "unverified",
+        "said": []
+      },
+      {
+        "slot": "사건번호",
+        "value": null,
+        "state": "자료에 없음",
+        "severity": "unverified",
+        "said": []
+      }
+    ],
     "issues": [
       {
         "label": "자료끼리 어긋남",
@@ -355,6 +605,257 @@ window.TARAE_CASES = [
         "source": "출처 ②  기사캡처_2016.png · 1줄"
       }
     ],
+    "people": [
+      {
+        "label": "사람",
+        "items": [
+          {
+            "name": "김민수",
+            "roles": [
+              "실종자",
+              "아들"
+            ],
+            "docs": [
+              "실종신고_접수증_2015.jpg",
+              "진정서_2023.jpg"
+            ],
+            "same_as": []
+          },
+          {
+            "name": "이순자",
+            "roles": [
+              "신고인",
+              "진정인"
+            ],
+            "docs": [
+              "실종신고_접수증_2015.jpg"
+            ],
+            "same_as": []
+          },
+          {
+            "name": "최영호",
+            "roles": [
+              "진술인"
+            ],
+            "docs": [],
+            "same_as": []
+          },
+          {
+            "name": "박정호",
+            "roles": [
+              "담당수사관"
+            ],
+            "docs": [
+              "수사중지_결정통지서.jpg"
+            ],
+            "same_as": []
+          }
+        ]
+      },
+      {
+        "label": "기관",
+        "items": [
+          {
+            "name": "**경찰서",
+            "roles": [],
+            "docs": [
+              "수사중지_결정통지서.jpg",
+              "실종신고_접수증_2015.jpg"
+            ],
+            "same_as": [
+              {
+                "name": "경찰서",
+                "reason": "일반 명칭이라 같은 기관인지 확인되지 않음"
+              }
+            ]
+          },
+          {
+            "name": "경찰서",
+            "roles": [],
+            "docs": [
+              "엄마_메모.jpg"
+            ],
+            "same_as": [
+              {
+                "name": "**경찰서",
+                "reason": "일반 명칭이라 같은 기관인지 확인되지 않음"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "사건번호",
+        "items": [
+          {
+            "name": "2016형제12345",
+            "roles": [],
+            "docs": [
+              "수사중지_결정통지서.jpg",
+              "진정서_2023.jpg"
+            ],
+            "same_as": []
+          }
+        ]
+      },
+      {
+        "label": "접수번호",
+        "items": [
+          {
+            "name": "2015-00123",
+            "roles": [],
+            "docs": [
+              "실종신고_접수증_2015.jpg"
+            ],
+            "same_as": []
+          }
+        ]
+      }
+    ],
+    "slots": [
+      {
+        "slot": "마지막 목격 시점",
+        "value": "2015-10-10 22시~01시",
+        "state": "기록으로 확인",
+        "severity": "verified",
+        "said": [
+          {
+            "value": "2015-10-10 22시~01시",
+            "doc": "실종신고_접수증_2015.jpg",
+            "speaker": "**경찰서",
+            "record": true
+          },
+          {
+            "value": "2015-10-10 22시~01시",
+            "doc": "기사캡처_2016.png",
+            "speaker": "경찰",
+            "record": false
+          },
+          {
+            "value": "2015-10-10 22시~01시",
+            "doc": "진정서_2023.jpg",
+            "speaker": "이순자",
+            "record": false
+          }
+        ]
+      },
+      {
+        "slot": "마지막 연락 시점",
+        "value": null,
+        "state": "판독 신뢰도 낮음",
+        "severity": "unverified",
+        "said": [
+          {
+            "value": "2015-10-11 00~06시",
+            "doc": "기사캡처_2016.png",
+            "speaker": "가족",
+            "record": false
+          },
+          {
+            "value": "2015-10-10 20~24시",
+            "doc": "엄마_메모.jpg",
+            "speaker": "나",
+            "record": false
+          }
+        ]
+      },
+      {
+        "slot": "접수번호",
+        "value": "2015-00123",
+        "state": "기록으로 확인",
+        "severity": "verified",
+        "said": [
+          {
+            "value": "2015-00123",
+            "doc": "실종신고_접수증_2015.jpg",
+            "speaker": "**경찰서",
+            "record": true
+          }
+        ]
+      },
+      {
+        "slot": "접수일시",
+        "value": "2015-10-12 21:30",
+        "state": "기록으로 확인",
+        "severity": "verified",
+        "said": [
+          {
+            "value": "2015-10-12 21:30",
+            "doc": "실종신고_접수증_2015.jpg",
+            "speaker": "**경찰서",
+            "record": true
+          }
+        ]
+      },
+      {
+        "slot": "사건번호",
+        "value": "2016형제12345",
+        "state": "기록으로 확인",
+        "severity": "verified",
+        "said": [
+          {
+            "value": "2016형제12345",
+            "doc": "수사중지_결정통지서.jpg",
+            "speaker": "**경찰서",
+            "record": true
+          },
+          {
+            "value": "2016형제12345",
+            "doc": "진정서_2023.jpg",
+            "speaker": "이순자",
+            "record": false
+          }
+        ]
+      },
+      {
+        "slot": "담당 수사관",
+        "value": "박정호",
+        "state": "낡았을 수 있음",
+        "severity": "unverified",
+        "said": [
+          {
+            "value": "박정호",
+            "doc": "수사중지_결정통지서.jpg",
+            "speaker": "**경찰서",
+            "record": true
+          }
+        ]
+      },
+      {
+        "slot": "결정 내용",
+        "value": "수사중지(피의자중지)",
+        "state": "기록으로 확인",
+        "severity": "verified",
+        "said": [
+          {
+            "value": "수사중지",
+            "doc": "수사중지_결정통지서.jpg",
+            "speaker": "**경찰서",
+            "record": true
+          },
+          {
+            "value": "수사중지(피의자중지)",
+            "doc": "수사중지_결정통지서.jpg",
+            "speaker": "**경찰서",
+            "record": true
+          }
+        ]
+      },
+      {
+        "slot": "결정일",
+        "value": "2022-03-15",
+        "state": "기록으로 확인",
+        "severity": "verified",
+        "said": [
+          {
+            "value": "2022-03-15",
+            "doc": "수사중지_결정통지서.jpg",
+            "speaker": "**경찰서",
+            "record": true
+          }
+        ]
+      }
+    ],
     "issues": [
       {
         "label": "확인되지 않음",
@@ -554,6 +1055,182 @@ window.TARAE_CASES = [
         "conflict": false,
         "needs_date": false,
         "source": "출처 ④  조미래_진술서.jpg · 3줄"
+      }
+    ],
+    "people": [
+      {
+        "label": "사람",
+        "items": [
+          {
+            "name": "정하늘",
+            "roles": [
+              "고소인",
+              "신고인"
+            ],
+            "docs": [
+              "수사중지_결정통지서.jpg",
+              "접수증_2021.jpg"
+            ],
+            "same_as": []
+          },
+          {
+            "name": "한지훈",
+            "roles": [
+              "담당수사관"
+            ],
+            "docs": [
+              "수사중지_결정통지서.jpg"
+            ],
+            "same_as": []
+          },
+          {
+            "name": "조미래",
+            "roles": [
+              "진술인"
+            ],
+            "docs": [],
+            "same_as": []
+          }
+        ]
+      },
+      {
+        "label": "기관",
+        "items": [
+          {
+            "name": "대구성서경찰서",
+            "roles": [],
+            "docs": [
+              "고소장_2021.jpg",
+              "수사중지_결정통지서.jpg",
+              "접수증_2021.jpg"
+            ],
+            "same_as": []
+          }
+        ]
+      },
+      {
+        "label": "사건번호",
+        "items": [
+          {
+            "name": "2021형제45678",
+            "roles": [],
+            "docs": [
+              "수사중지_결정통지서.jpg"
+            ],
+            "same_as": []
+          }
+        ]
+      },
+      {
+        "label": "접수번호",
+        "items": [
+          {
+            "name": "2021-005821",
+            "roles": [],
+            "docs": [
+              "접수증_2021.jpg"
+            ],
+            "same_as": []
+          }
+        ]
+      }
+    ],
+    "slots": [
+      {
+        "slot": "사건 발생 시점",
+        "value": null,
+        "state": "말만 있고 기록 없음",
+        "severity": "unverified",
+        "said": [
+          {
+            "value": "2021-05-18",
+            "doc": "고소장_2021.jpg",
+            "speaker": "정하늘",
+            "record": false
+          },
+          {
+            "value": "2025-06-03",
+            "doc": "조미래_진술서.jpg",
+            "speaker": "조미래",
+            "record": false
+          }
+        ]
+      },
+      {
+        "slot": "접수번호",
+        "value": "2021-005821",
+        "state": "기록으로 확인",
+        "severity": "verified",
+        "said": [
+          {
+            "value": "2021-005821",
+            "doc": "접수증_2021.jpg",
+            "speaker": "**경찰서",
+            "record": true
+          }
+        ]
+      },
+      {
+        "slot": "사건번호",
+        "value": "2021형제45678",
+        "state": "기록으로 확인",
+        "severity": "verified",
+        "said": [
+          {
+            "value": "2021형제45678",
+            "doc": "수사중지_결정통지서.jpg",
+            "speaker": "**경찰서",
+            "record": true
+          }
+        ]
+      },
+      {
+        "slot": "담당 수사관",
+        "value": "한지훈",
+        "state": "기록으로 확인",
+        "severity": "verified",
+        "said": [
+          {
+            "value": "한지훈",
+            "doc": "수사중지_결정통지서.jpg",
+            "speaker": "**경찰서",
+            "record": true
+          }
+        ]
+      },
+      {
+        "slot": "결정 내용",
+        "value": "수사중지(피의자중지)",
+        "state": "기록으로 확인",
+        "severity": "verified",
+        "said": [
+          {
+            "value": "수사중지",
+            "doc": "수사중지_결정통지서.jpg",
+            "speaker": "**경찰서",
+            "record": true
+          },
+          {
+            "value": "수사중지(참고인중지)",
+            "doc": "수사중지_결정통지서.jpg",
+            "speaker": "**경찰서",
+            "record": true
+          }
+        ]
+      },
+      {
+        "slot": "결정일",
+        "value": "2026-08-18",
+        "state": "기록으로 확인",
+        "severity": "verified",
+        "said": [
+          {
+            "value": "2023-02-09",
+            "doc": "수사중지_결정통지서.jpg",
+            "speaker": "**경찰서",
+            "record": true
+          }
+        ]
       }
     ],
     "issues": [

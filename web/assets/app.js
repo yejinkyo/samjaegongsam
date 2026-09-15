@@ -296,6 +296,59 @@
     return wrap;
   }
 
+  function peopleCard(c) {
+    var groups = c.people || [];
+    if (!groups.length) return h("div", { class: "card tab-empty" }, [h("p", { class: "t-body-m c-tertiary", text: "자료에서 찾은 인물이 아직 없어요." })]);
+
+    var wrap = h("div", { class: "card people" });
+    groups.forEach(function (g) {
+      wrap.appendChild(h("p", { class: "people__group t-label c-secondary", text: g.label }));
+      g.items.forEach(function (p) {
+        var rows = [
+          h("div", { class: "people__head" }, [h("span", { class: "t-body-l-strong c-primary", text: p.name })].concat(
+            p.roles.map(function (r) { return h("span", { class: "tag t-caption", text: r }); }))),
+        ];
+        if (p.docs.length) {
+          rows.push(h("p", { class: "t-body-s c-tertiary", text: "나온 자료 · " + p.docs.join(" / ") }));
+        }
+        // 엔진이 합치지 못하고 남긴 링크 — 단정하지 않는다
+        p.same_as.forEach(function (link) {
+          rows.push(h("p", { class: "people__link t-body-s" }, [
+            badge("unverified", "같은 대상일 수 있음"),
+            h("span", { class: "c-secondary", text: link.name + " — " + link.reason }),
+          ]));
+        });
+        wrap.appendChild(h("div", { class: "people__item" }, rows));
+      });
+    });
+    return wrap;
+  }
+
+  function slotsCard(c) {
+    var rows = c.slots || [];
+    if (!rows.length) return h("div", { class: "card tab-empty" }, [h("p", { class: "t-body-m c-tertiary", text: "비교할 항목이 아직 없어요." })]);
+
+    var wrap = h("div", { class: "card slots" });
+    wrap.appendChild(h("p", { class: "t-body-s c-tertiary", text: "같은 항목을 자료마다 뭐라고 적었는지 나란히 놓았어요. 기록 자료와 사람의 말을 구분합니다." }));
+    rows.forEach(function (row) {
+      var head = h("div", { class: "slots__head" }, [
+        h("span", { class: "t-body-m-strong c-primary", text: row.slot }),
+        badge(row.severity === "verified" ? "verified" : row.severity === "conflict" ? "conflict" : "unverified", row.state),
+      ]);
+      var body = h("div", { class: "slots__said" }, row.said.map(function (s) {
+        return h("div", { class: "slots__row" + (row.value !== null && s.value === row.value ? " slots__row--chosen" : "") }, [
+          h("span", { class: "slots__value t-body-m c-primary", text: s.value }),
+          h("span", { class: "t-body-s c-tertiary", text: (s.record ? "기록 · " : "말 · ") + (s.speaker || "화자 미상") + " · " + s.doc }),
+        ]);
+      }));
+      if (!row.said.length) {
+        body.appendChild(h("p", { class: "t-body-s c-tertiary", text: "이 항목을 적은 자료가 없어요." }));
+      }
+      wrap.appendChild(h("div", { class: "slots__item" }, [head, body]));
+    });
+    return wrap;
+  }
+
   function nextActionCard(next) {
     if (!next) return null;
     var details;
@@ -394,9 +447,7 @@
         tabs.querySelectorAll(".tab").forEach(function (t) { t.setAttribute("aria-selected", "false"); });
         tab.setAttribute("aria-selected", "true");
         panel.textContent = "";
-        panel.appendChild(i === 0 ? timelineCard(c) : h("div", { class: "card tab-empty" }, [
-          h("p", { class: "t-body-m c-tertiary", text: name + " 화면은 아직 설계 중이에요." }),
-        ]));
+        panel.appendChild(i === 0 ? timelineCard(c) : i === 1 ? peopleCard(c) : slotsCard(c));
       });
       return tab;
     }));

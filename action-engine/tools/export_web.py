@@ -52,6 +52,45 @@ ISSUE_GROUPS = [
     ("unreadable", "읽히지 않은 부분", "gap"),
 ]
 
+ENTITY_GROUPS = [
+    ("person", "사람"),
+    ("organization", "기관"),
+    ("account", "계좌"),
+    ("case_number", "사건번호"),
+    ("receipt_number", "접수번호"),
+    ("phone", "연락처"),
+]
+
+# 항목 키의 화면 이름. 엔진이 비교할 수 있게 구조화한 슬롯을 사람 말로 바꾼다.
+SLOT_LABELS = {
+    "incident_time": "사건 발생 시점",
+    "last_seen_time": "마지막 목격 시점",
+    "last_contact_time": "마지막 연락 시점",
+    "transfer_amount": "송금 금액",
+    "transfer_time": "송금 시점",
+    "account_number": "계좌번호",
+    "account_holder": "예금주",
+    "shipment_sent": "발송 여부",
+    "report_time": "신고 시점",
+    "receipt_number": "접수번호",
+    "receipt_time": "접수일시",
+    "case_number": "사건번호",
+    "investigator": "담당 수사관",
+    "decision_type": "결정 내용",
+    "decision_time": "결정일",
+}
+
+# 항목 상태 — '확인됨'과 '말만 있음'을 섞지 않는다
+SLOT_STATES = {
+    "confirmed": ("기록으로 확인", "verified"),
+    "claimed_only": ("말만 있고 기록 없음", "unverified"),
+    "conflicting": ("자료마다 다름", "conflict"),
+    "low_confidence": ("판독 신뢰도 낮음", "unverified"),
+    "outdated": ("낡았을 수 있음", "unverified"),
+    "missing": ("자료에 없음", "unverified"),
+    "suspected_conflict": ("차이 의심", "conflict"),
+}
+
 CIRCLED = "".join(chr(0x2460 + i) for i in range(20))  # ①~⑳
 
 
@@ -176,6 +215,70 @@ def _issues(result: dict[str, Any], docs: dict[str, dict]) -> list[dict[str, Any
     return groups
 
 
+def _people(result: dict[str, Any], docs: dict[str, dict]) -> list[dict[str, Any]]:
+    """인물 · 관계 탭. 엔진이 합치지 못하고 남긴 '같은 사람일 수 있음'까지 그대로 보여준다."""
+    entities = result["timeline"]["entities"]
+    by_id = {e["entity_id"]: e for e in entities}
+
+    # 어느 자료에 나온 이름인지 — claim 의 화자와 timeline 이벤트 참가자에서 모은다
+    seen: dict[str, set[str]] = {}
+    for event in result["timeline"]["events"]:
+        for entity_id in event.get("participant_entity_ids", []):
+            for s in event.get("sources", []):
+                seen.setdefault(entity_id, set()).add(s["source_doc_id"])
+
+    groups = []
+    for kind, label in ENTITY_GROUPS:
+        members = []
+        for e in entities:
+            if e["kind"] != kind:
+                continue
+            links = [
+                {
+                    "name": by_id.get(link["other_entity_id"], {}).get("canonical_name", link["other_entity_id"]),
+                    "reason": link["reason"],
+                }
+                for link in e.get("possible_same_as", [])
+            ]
+            members.append({
+                "name": e["canonical_name"],
+                "roles": e.get("roles", []),
+                "docs": sorted(docs.get(d, {}).get("file_name", d) for d in seen.get(e["entity_id"], set())),
+                "same_as": links,
+            })
+        if members:
+            groups.append({"label": label, "items": members})
+    return groups
+
+
+def _slots(result: dict[str, Any], docs: dict[str, dict]) -> list[dict[str, Any]]:
+    """주장 대조 탭. 한 항목을 자료마다 뭐라고 적었는지 나란히 놓는다."""
+    claims = result["extraction"]["claims"]
+    rows = []
+    for status in result["analysis"]["slot_statuses"]:
+        slot = status["slot"]
+        state_label, severity = SLOT_STATES.get(status["state"], (status["state"], "unknown"))
+        said = []
+        for c in claims:
+            if c.get("slot") != slot or c.get("slot_value") is None:
+                continue
+            doc = docs.get(c["doc_id"], {})
+            said.append({
+                "value": str(c["slot_value"]),
+                "doc": doc.get("file_name", c["doc_id"]),
+                "speaker": c.get("speaker") or "",
+                "record": c.get("evidence_level") == "record",
+            })
+        rows.append({
+            "slot": SLOT_LABELS.get(slot, slot),
+            "value": status.get("value"),
+            "state": state_label,
+            "severity": severity,
+            "said": said,
+        })
+    return rows
+
+
 def _period(result: dict[str, Any]) -> str:
     starts = sorted(d for e in result["timeline"]["events"] if (d := _dt((e.get("time") or {}).get("start"))))
     if not starts:
@@ -260,6 +363,8 @@ def build_view(case_id: str, title: str, result: dict[str, Any]) -> dict[str, An
         "stages": [{"label": s["label"], "state": stage_state.get(s["state"], "todo")} for s in card.stages],
         "sources": [{"kind": _kind(d["file_name"], d["doc_type"]), "name": d["file_name"]} for d in evidence],
         "timeline": _timeline(result, docs, doc_index),
+        "people": _people(result, docs),
+        "slots": _slots(result, docs),
         "issues": _issues(result, docs),
         "next_action": _next_action(card, result),
     }
