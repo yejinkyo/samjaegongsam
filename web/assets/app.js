@@ -298,10 +298,10 @@
     return m ? { day: m[1], time: m[2] } : { day: clean, time: "" };
   }
 
-  // 점 색이 뜻하는 것. 줄마다 글씨로 적지 않고 타임라인 위에 한 번만 적는다.
+  // 뜻이 하나인 색만 위에 적는다. 노란색은 줄마다 이유가 조금씩 달라 그 자리에 적는다
+  // (마우스를 올려야 보이는 설명은 손가락으로 쓰는 사람이 못 본다).
   var KIND_LEGEND = [
     ["verified", "확인완료"],
-    ["claim", "주장 · 미확인"],
     ["mine", "내가 적음"],
   ];
 
@@ -352,6 +352,8 @@
         h("div", { class: "tl__body" }, [
           h("p", { class: "tl__title", text: row.title }),
           h("div", { class: "tl__meta" }, [
+            // 기록으로 확인되지 않은 줄만 왜 그런지 적는다
+            row.kind === "claim" ? h("span", { class: "tl__kind", text: row.badge }) : null,
             h("span", { class: "tl__source", text: row.source }),
           ].concat(flags)),
         ]),
