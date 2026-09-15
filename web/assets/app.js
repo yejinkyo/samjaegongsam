@@ -639,7 +639,8 @@
           h("span", { class: "tl__dot tl__dot--" + (row.conflict ? "conflict" : row.kind) }),
           h("span", { class: "tl__line" }),
         ]),
-        h("p", { class: "tl__title", text: row.title }),
+        // 줄여 적은 제목은 마우스를 올리면 끝까지 보인다 (자세히에도 원문이 있다)
+        h("p", { class: "tl__title", text: row.title, title: row.full && row.full !== row.title ? row.full : null }),
         more,
       ]));
     });
