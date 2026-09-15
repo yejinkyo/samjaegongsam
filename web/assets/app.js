@@ -39,12 +39,13 @@
   // ── 공통 ────────────────────────────────────────────────
   function nav() {
     return h("header", { class: "nav" }, [
+      // 브랜드를 누르면 시작 화면으로 나간다. 사건 목록은 옆의 '내 사건'
       h("a", { class: "nav__brand", href: "index.html" }, [
         h("span", { class: "nav__logo", "aria-hidden": "true" }),
         h("span", { class: "nav__name t-heading c-primary", text: "타래" }),
       ]),
       h("nav", { class: "nav__right", "aria-label": "주 메뉴" }, [
-        h("a", { class: "t-body-m-strong c-primary", href: "index.html", text: "내 사건" }),
+        h("a", { class: "t-body-m-strong c-primary", href: "cases.html", text: "내 사건" }),
         h("a", { class: "t-body-m c-secondary", href: "#", text: "도움말" }),
         h("span", { class: "nav__avatar", "aria-label": "내 정보" }, [h("span", { class: "t-label c-brand", text: "나" })]),
       ]),
@@ -52,7 +53,7 @@
   }
 
   function backLink() {
-    return h("a", { class: "back", href: "index.html" }, [icon("arrow-left", 20), h("span", { class: "t-body-m c-secondary", text: "내 사건" })]);
+    return h("a", { class: "back", href: "cases.html" }, [icon("arrow-left", 20), h("span", { class: "t-body-m c-secondary", text: "내 사건" })]);
   }
 
   function track(stages, fixed) {
@@ -251,8 +252,8 @@
       ]),
       h("div", { class: "cta" }, [
         // 서버가 없어 올린 파일을 실제로 정리하지 않는다. 예시 사건의 결과 화면으로 이동한다.
-        h("a", { class: "btn btn--primary t-body-m-strong", href: CASES.length ? caseHref(CASES[0].id) : "index.html", text: "정리 시작하기" }),
-        h("a", { class: "btn btn--secondary t-body-m-strong", href: "index.html", text: "자료는 나중에 더 추가할게요" }),
+        h("a", { class: "btn btn--primary t-body-m-strong", href: CASES.length ? caseHref(CASES[0].id) : "cases.html", text: "정리 시작하기" }),
+        h("a", { class: "btn btn--secondary t-body-m-strong", href: "cases.html", text: "자료는 나중에 더 추가할게요" }),
       ]),
     ]);
 
