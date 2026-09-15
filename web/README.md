@@ -17,10 +17,14 @@
 `data/cases.js`와 스크립트를 상대 경로로 읽으므로 로컬 서버로 연다.
 
 ```bash
-python -m http.server 8765 --directory web
+python web/serve.py
 ```
 
 <http://localhost:8765>
+
+`python -m http.server` 대신 이 스크립트를 쓴다. 기본 서버는 캐시 헤더를 주지 않아서
+**브라우저가 고친 HTML·CSS 를 안 받아 오고 옛 화면을 계속 보여 준다.** `serve.py` 는 `no-store` 를 붙인다.
+(윈도우 깃배쉬에서는 `python` 이 스토어 스텁이라 `py web/serve.py` 로 실행한다.)
 
 ## 데이터는 엔진에서만 온다
 
