@@ -9,7 +9,7 @@
 }
 
 .auth__brand { display: flex; align-items: center; gap: 10px; color: var(--lp-text); }
-.auth__brand .lp-mark { width: 26px; height: 26px; border-radius: 8px; box-shadow: 0 0 0 5px rgba(94, 61, 187, 0.22); }
+.auth__brand .lp-mark { width: 30px; height: 30px; filter: none; }
 .auth__brand-name { font: 700 22px/1 var(--font); letter-spacing: -0.03em; }
 
 /* 종이 한 장 */

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="타래">
+  <!-- 사용자가 그린 실타래 마크를 옮긴 것. 원본 파일이 들어오면 이 파일을 바꾼다. -->
+  <defs>
+    <clipPath id="tarae-ball">
+      <circle cx="50" cy="50" r="46"/>
+    </clipPath>
+  </defs>
+  <circle cx="50" cy="50" r="46" fill="#4a2ea0"/>
+  <g clip-path="url(#tarae-ball)" fill="none" stroke="#ffffff" stroke-linecap="round">
+    <path d="M26 31 Q49 19 69 29" stroke-width="7"/>
+    <path d="M6 46 Q46 28 84 44" stroke-width="10"/>
+    <path d="M10 63 Q42 80 63 57" stroke-width="13"/>
+    <path d="M78 50 Q77 72 57 86" stroke-width="8"/>
+  </g>
+</svg>
