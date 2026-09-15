@@ -548,7 +548,9 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .issue { padding: 12px 14px; border-radius: 12px; background: var(--bg-sunken); border-left: 3px solid var(--bar); }
 .issue__text { font: 400 14px/1.6 var(--font); color: var(--text-primary); }
 .issue__how { margin-top: 6px; font: 400 12px/1.5 var(--font); color: var(--text-tertiary); }
+/* 갈래 색과 배경을 맞춘다 — 어긋남은 붉게, 확인되지 않음은 노랗게 */
 .issue--conflict { background: var(--status-conflict-bg); }
+.issue--unknown { background: var(--status-unverified-bg); }
 
 .issues__ask {
   padding: 14px; border-radius: 16px;
