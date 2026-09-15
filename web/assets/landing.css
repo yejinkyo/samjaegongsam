@@ -54,11 +54,11 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
   gap: 40px;
   padding: 80px 64px;
-  /* 문서 그라데이션과 별개로, 첫 화면 안에서도 위아래 색이 달라지게 한 겹 더 얹는다.
-     화면 높이가 어떻든 스크롤 전에 보이는 만큼은 이 층이 책임진다. */
+  /* 첫 화면 위쪽만 더 눌러 앉힌다. 아래쪽은 건드리지 않아야 다음 구역과 이어진다 —
+     밝은 층을 여기서 끝내면 구역 경계에 선이 생긴다. 밝아지는 일은 body 그라데이션이 맡는다. */
   background:
     radial-gradient(1000px 580px at 76% 44%, rgba(154, 92, 240, 0.3), transparent 64%),
-    linear-gradient(180deg, rgba(10, 6, 22, 0.72) 0%, rgba(10, 6, 22, 0.28) 32%, rgba(10, 6, 22, 0) 58%, rgba(179, 158, 224, 0.18) 100%);
+    linear-gradient(180deg, rgba(10, 6, 22, 0.72) 0%, rgba(10, 6, 22, 0.3) 34%, rgba(10, 6, 22, 0) 70%);
   overflow: hidden;
 }
 
