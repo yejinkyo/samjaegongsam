@@ -14,6 +14,7 @@ JSON 이 아니라 전역 변수에 담는다.
 from __future__ import annotations
 
 import json
+import re
 from datetime import date, datetime
 from pathlib import Path
 from typing import Any
@@ -178,6 +179,28 @@ def _event_time(t: dict[str, Any], multi_year: bool) -> str:
     return f"{day}\n{clock}" if multi_year and clock else f"{day} {clock}".strip()
 
 
+# 타임라인 줄에 쓰는 짧은 이름.
+#
+# 없는 말을 지어내지 않는다 — 원문에서 덜어내기만 한다. 왼쪽 칸에 이미 날짜가 있으니
+# 앞머리 날짜를 떼고, 여러 문장이면 첫 문장만 남긴다. 전문은 '자세히'에서 보여준다.
+_LEAD_DATE = re.compile(
+    r"^(?:\d{2,4}\s*[.년]\s*)?\d{1,2}\s*[./월]\s*\d{1,2}\s*[.일]?\s*"
+    r"(?:\d{1,2}\s*시(?:\s*\d{1,2}\s*분)?(?:경|쯤)?\s*)?"
+    r"(?:새벽|아침|낮|저녁|밤|오전|오후)?\s*"
+)
+
+
+def _short_title(title: str) -> str:
+    text = _LEAD_DATE.sub("", title.strip(), count=1).strip()
+    if len(text) < 2:
+        text = title.strip()
+    first = re.split(r"(?<=[.!?])\s+", text)[0].strip()
+    if len(first) >= 2:
+        text = first
+    text = text.rstrip(" .")
+    return text if len(text) <= 24 else text[:23].rstrip() + "…"
+
+
 def _source_line(sources: list[dict[str, Any]], doc_index: dict[str, int], docs: dict[str, dict]) -> str:
     if not sources:
         return "뒷받침하는 자료가 없어요"
@@ -221,12 +244,21 @@ def _timeline(result: dict[str, Any], docs: dict[str, dict], doc_index: dict[str
         rows.append((start, {
             "type": "event",
             "time": "시각 미상" if e.get("time_unknown") or not time else _event_time(time, multi_year),
-            "title": e["title"],
+            "title": _short_title(e["title"]),
+            "full": e["title"],
             "kind": kind,
             "badge": badge,
             "conflict": conflict,
             "needs_date": bool(time.get("needs_confirmation")),
             "source": _source_line(e["sources"], doc_index, docs),
+            "sources": [
+                {
+                    "name": docs.get(s["source_doc_id"], {}).get("file_name", s["source_doc_id"]),
+                    "line": s["source_line"],
+                    "quote": s.get("quote"),
+                }
+                for s in e["sources"]
+            ],
         }))
 
     for g in tl.get("gaps") or []:

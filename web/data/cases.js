@@ -60,62 +60,155 @@ window.TARAE_CASES = [
       {
         "type": "event",
         "time": "06/01 10:22",
-        "title": "네 판매 중입니다. 미개봉 새 상품이에요",
+        "title": "네 판매 중입니다",
+        "full": "네 판매 중입니다. 미개봉 새 상품이에요",
         "kind": "claim",
         "badge": "주장 · 미확인",
         "conflict": false,
         "needs_date": false,
-        "source": "출처 ①  카톡_0601.png · 3줄 외 1곳"
+        "source": "출처 ①  카톡_0601.png · 3줄 외 1곳",
+        "sources": [
+          {
+            "name": "카톡_0601.png",
+            "line": 3,
+            "quote": "네 판매 중입니다. 미개봉 새 상품이에요"
+          },
+          {
+            "name": "카톡_0601.png",
+            "line": 3,
+            "quote": "오전 10:22"
+          }
+        ]
       },
       {
         "type": "event",
         "time": "06/01 13~16시경",
         "title": "300,000원 송금",
+        "full": "300,000원 송금",
         "kind": "claim",
         "badge": "주장 · 미확인",
         "conflict": true,
         "needs_date": false,
-        "source": "출처 ⑤  진술서.jpg · 3줄 외 2곳"
+        "source": "출처 ⑤  진술서.jpg · 3줄 외 2곳",
+        "sources": [
+          {
+            "name": "진술서.jpg",
+            "line": 3,
+            "quote": "위 진술인은 2026년 6월 1일 오후 2시경 판매자 계좌로 30만원을 송금하였습니다."
+          },
+          {
+            "name": "진술서.jpg",
+            "line": 3,
+            "quote": "2026년 6월 1일 오후 2시경"
+          },
+          {
+            "name": "진술서.jpg",
+            "line": 3,
+            "quote": "30만원"
+          }
+        ]
       },
       {
         "type": "event",
         "time": "06/01 14:05",
         "title": "350,000원 송금",
+        "full": "350,000원 송금",
         "kind": "verified",
         "badge": "확인됨",
         "conflict": true,
         "needs_date": false,
-        "source": "출처 ②  이체확인증.pdf · 1줄 외 4곳"
+        "source": "출처 ②  이체확인증.pdf · 1줄 외 4곳",
+        "sources": [
+          {
+            "name": "이체확인증.pdf",
+            "line": 1,
+            "quote": "이체확인증"
+          },
+          {
+            "name": "이체확인증.pdf",
+            "line": 2,
+            "quote": "2026-06-01 14:05"
+          },
+          {
+            "name": "이체확인증.pdf",
+            "line": 6,
+            "quote": "350,000원"
+          },
+          {
+            "name": "카톡_0601.png",
+            "line": 6,
+            "quote": "송금했습니다"
+          },
+          {
+            "name": "카톡_0601.png",
+            "line": 6,
+            "quote": "오후 2:05"
+          }
+        ]
       },
       {
         "type": "event",
         "time": "06/02 17~22시경",
-        "title": "6/2 저녁 전화 안받음",
+        "title": "전화 안받음",
+        "full": "6/2 저녁 전화 안받음",
         "kind": "claim",
         "badge": "주장 · 미확인",
         "conflict": false,
         "needs_date": true,
-        "source": "출처 ④  메모.jpg · 1줄 외 1곳"
+        "source": "출처 ④  메모.jpg · 1줄 외 1곳",
+        "sources": [
+          {
+            "name": "메모.jpg",
+            "line": 1,
+            "quote": "6/2 저녁 전화 안받음"
+          },
+          {
+            "name": "직접 입력",
+            "line": 1,
+            "quote": "6월 2일 하루 종일 연락이 안 됐습니다."
+          }
+        ]
       },
       {
         "type": "event",
         "time": "06/03",
-        "title": "6/3 사이버수사대 신고함",
+        "title": "사이버수사대 신고함",
+        "full": "6/3 사이버수사대 신고함",
         "kind": "claim",
         "badge": "주장 · 미확인",
         "conflict": false,
         "needs_date": true,
-        "source": "출처 ④  메모.jpg · 2줄"
+        "source": "출처 ④  메모.jpg · 2줄",
+        "sources": [
+          {
+            "name": "메모.jpg",
+            "line": 2,
+            "quote": "6/3 사이버수사대 신고함"
+          }
+        ]
       },
       {
         "type": "event",
         "time": "06/03 09:12",
         "title": "사이버범죄 신고 접수증",
+        "full": "사이버범죄 신고 접수증",
         "kind": "verified",
         "badge": "확인됨",
         "conflict": false,
         "needs_date": false,
-        "source": "출처 ③  ECRM_접수증.pdf · 1줄 외 1곳"
+        "source": "출처 ③  ECRM_접수증.pdf · 1줄 외 1곳",
+        "sources": [
+          {
+            "name": "ECRM_접수증.pdf",
+            "line": 1,
+            "quote": "사이버범죄 신고 접수증"
+          },
+          {
+            "name": "ECRM_접수증.pdf",
+            "line": 3,
+            "quote": "2026.06.03 09:12"
+          }
+        ]
       }
     ],
     "people": [
@@ -512,42 +605,94 @@ window.TARAE_CASES = [
       {
         "type": "event",
         "time": "2015.10.10\n20~24시경",
-        "title": "15년 10월 10일 밤 연락 끊김",
+        "title": "연락 끊김",
+        "full": "15년 10월 10일 밤 연락 끊김",
         "kind": "claim",
         "badge": "주장 · 미확인",
         "conflict": false,
         "needs_date": false,
-        "source": "출처 ⑥  엄마_메모.jpg · 2줄"
+        "source": "출처 ⑥  엄마_메모.jpg · 2줄",
+        "sources": [
+          {
+            "name": "엄마_메모.jpg",
+            "line": 2,
+            "quote": "15년 10월 10일 밤 연락 끊김"
+          }
+        ]
       },
       {
         "type": "event",
         "time": "2015.10.10\n22시~익일 1시경",
-        "title": "경찰은 김씨가 지난해 10월 10일 밤 11시쯤 ○○역 인근 CCTV에…",
+        "title": "경찰은 김씨가 지난해 10월 10일 밤 1…",
+        "full": "경찰은 김씨가 지난해 10월 10일 밤 11시쯤 ○○역 인근 CCTV에…",
         "kind": "claim",
         "badge": "주장 · 미확인",
         "conflict": false,
         "needs_date": false,
-        "source": "출처 ②  기사캡처_2016.png · 3줄 외 3곳"
+        "source": "출처 ②  기사캡처_2016.png · 3줄 외 3곳",
+        "sources": [
+          {
+            "name": "기사캡처_2016.png",
+            "line": 3,
+            "quote": "경찰은 김씨가 지난해 10월 10일 밤 11시쯤 ○○역 인근 CCTV에 마지막으로 찍혔다고 밝혔다."
+          },
+          {
+            "name": "기사캡처_2016.png",
+            "line": 3,
+            "quote": "10월 10일 밤 11시쯤"
+          },
+          {
+            "name": "진정서_2023.jpg",
+            "line": 5,
+            "quote": "아들은 10월 10일 밤 11시경 ○○역 부근에서 마지막으로 목격되었습니다."
+          },
+          {
+            "name": "진정서_2023.jpg",
+            "line": 5,
+            "quote": "10월 10일 밤 11시경"
+          }
+        ]
       },
       {
         "type": "event",
         "time": "2015.10.12",
-        "title": "10월 12일 경찰서 실종신고",
+        "title": "경찰서 실종신고",
+        "full": "10월 12일 경찰서 실종신고",
         "kind": "claim",
         "badge": "주장 · 미확인",
         "conflict": false,
         "needs_date": false,
-        "source": "출처 ⑥  엄마_메모.jpg · 3줄"
+        "source": "출처 ⑥  엄마_메모.jpg · 3줄",
+        "sources": [
+          {
+            "name": "엄마_메모.jpg",
+            "line": 3,
+            "quote": "10월 12일 경찰서 실종신고"
+          }
+        ]
       },
       {
         "type": "event",
         "time": "2015.10.12\n21:30",
         "title": "실종신고 접수증",
+        "full": "실종신고 접수증",
         "kind": "verified",
         "badge": "확인됨",
         "conflict": false,
         "needs_date": false,
-        "source": "출처 ①  실종신고_접수증_2015.jpg · 1줄 외 1곳"
+        "source": "출처 ①  실종신고_접수증_2015.jpg · 1줄 외 1곳",
+        "sources": [
+          {
+            "name": "실종신고_접수증_2015.jpg",
+            "line": 1,
+            "quote": "실종신고 접수증"
+          },
+          {
+            "name": "실종신고_접수증_2015.jpg",
+            "line": 3,
+            "quote": "2015. 10. 12. 21:30"
+          }
+        ]
       },
       {
         "type": "gap",
@@ -557,12 +702,30 @@ window.TARAE_CASES = [
       {
         "type": "event",
         "time": "2019.03",
-        "title": "본인은 2019년 3월 초순 오후 ○○시장 입구에서 김민수로 보이는 남…",
+        "title": "본인은 2019년 3월 초순 오후 ○○시장…",
+        "full": "본인은 2019년 3월 초순 오후 ○○시장 입구에서 김민수로 보이는 남…",
         "kind": "claim",
         "badge": "주장 · 미확인",
         "conflict": false,
         "needs_date": false,
-        "source": "출처 ③  최영호_진술서.jpg · 3줄 외 2곳"
+        "source": "출처 ③  최영호_진술서.jpg · 3줄 외 2곳",
+        "sources": [
+          {
+            "name": "최영호_진술서.jpg",
+            "line": 3,
+            "quote": "본인은 2019년 3월 초순 오후 ○○시장 입구에서 김민수로 보이는 남성을 목격하였습니다."
+          },
+          {
+            "name": "최영호_진술서.jpg",
+            "line": 3,
+            "quote": "2019년 3월 초순"
+          },
+          {
+            "name": "진정서_2023.jpg",
+            "line": 6,
+            "quote": "2019년 3월경 이웃 주민 최영호가 아들을 ○○시장 근처에서 보았다고 말했습니다."
+          }
+        ]
       },
       {
         "type": "gap",
@@ -573,11 +736,24 @@ window.TARAE_CASES = [
         "type": "event",
         "time": "2022.03.15",
         "title": "수사중지 결정 통지서",
+        "full": "수사중지 결정 통지서",
         "kind": "verified",
         "badge": "확인됨",
         "conflict": false,
         "needs_date": false,
-        "source": "출처 ④  수사중지_결정통지서.jpg · 1줄 외 1곳"
+        "source": "출처 ④  수사중지_결정통지서.jpg · 1줄 외 1곳",
+        "sources": [
+          {
+            "name": "수사중지_결정통지서.jpg",
+            "line": 1,
+            "quote": "수사중지 결정 통지서"
+          },
+          {
+            "name": "수사중지_결정통지서.jpg",
+            "line": 5,
+            "quote": "2022. 3. 15."
+          }
+        ]
       },
       {
         "type": "gap",
@@ -587,22 +763,43 @@ window.TARAE_CASES = [
       {
         "type": "event",
         "time": "2023.04.02",
-        "title": "2015. 10. 10. 실종된 아들 김민수 사건(2016형제12345…",
+        "title": "실종된 아들 김민수 사건(2016형제123…",
+        "full": "2015. 10. 10. 실종된 아들 김민수 사건(2016형제12345…",
         "kind": "claim",
         "badge": "주장 · 미확인",
         "conflict": false,
         "needs_date": false,
-        "source": "출처 ⑤  진정서_2023.jpg · 4줄 외 1곳"
+        "source": "출처 ⑤  진정서_2023.jpg · 4줄 외 1곳",
+        "sources": [
+          {
+            "name": "진정서_2023.jpg",
+            "line": 4,
+            "quote": "2015. 10. 10. 실종된 아들 김민수 사건(2016형제12345)의 재수사를 요청합니다."
+          },
+          {
+            "name": "진정서_2023.jpg",
+            "line": 8,
+            "quote": "2023. 4. 2."
+          }
+        ]
       },
       {
         "type": "event",
         "time": "시각 미상",
         "title": "○○시 20대 남성 실종 넉 달째 행방 묘연",
+        "full": "○○시 20대 남성 실종 넉 달째 행방 묘연",
         "kind": "claim",
         "badge": "주장 · 미확인",
         "conflict": false,
         "needs_date": false,
-        "source": "출처 ②  기사캡처_2016.png · 1줄"
+        "source": "출처 ②  기사캡처_2016.png · 1줄",
+        "sources": [
+          {
+            "name": "기사캡처_2016.png",
+            "line": 1,
+            "quote": "○○시 20대 남성 실종 넉 달째 행방 묘연"
+          }
+        ]
       }
     ],
     "people": [
@@ -1000,31 +1197,65 @@ window.TARAE_CASES = [
         "type": "event",
         "time": "2021.05.18",
         "title": "18,000,000원 발생",
+        "full": "18,000,000원 발생",
         "kind": "claim",
         "badge": "주장 · 미확인",
         "conflict": false,
         "needs_date": false,
-        "source": "출처 ①  고소장_2021.jpg · 5줄 외 1곳"
+        "source": "출처 ①  고소장_2021.jpg · 5줄 외 1곳",
+        "sources": [
+          {
+            "name": "고소장_2021.jpg",
+            "line": 5,
+            "quote": "2021. 5. 18. 인테리어 공사대금 명목으로 1,800만원을 편취당하는 사기 피해를 입었습니다."
+          },
+          {
+            "name": "고소장_2021.jpg",
+            "line": 5,
+            "quote": "1,800만원"
+          }
+        ]
       },
       {
         "type": "event",
         "time": "2021.05.25",
-        "title": "2021. 5. 25. ○○경찰서에 고소하였습니다.",
+        "title": "○○경찰서에 고소하였습니다",
+        "full": "2021. 5. 25. ○○경찰서에 고소하였습니다.",
         "kind": "claim",
         "badge": "주장 · 미확인",
         "conflict": false,
         "needs_date": false,
-        "source": "출처 ①  고소장_2021.jpg · 7줄"
+        "source": "출처 ①  고소장_2021.jpg · 7줄",
+        "sources": [
+          {
+            "name": "고소장_2021.jpg",
+            "line": 7,
+            "quote": "2021. 5. 25. ○○경찰서에 고소하였습니다."
+          }
+        ]
       },
       {
         "type": "event",
         "time": "2021.05.25\n14:20",
         "title": "접 수 증",
+        "full": "접 수 증",
         "kind": "verified",
         "badge": "확인됨",
         "conflict": false,
         "needs_date": false,
-        "source": "출처 ②  접수증_2021.jpg · 1줄 외 1곳"
+        "source": "출처 ②  접수증_2021.jpg · 1줄 외 1곳",
+        "sources": [
+          {
+            "name": "접수증_2021.jpg",
+            "line": 1,
+            "quote": "접 수 증"
+          },
+          {
+            "name": "접수증_2021.jpg",
+            "line": 3,
+            "quote": "2021. 5. 25. 14:20"
+          }
+        ]
       },
       {
         "type": "gap",
@@ -1035,11 +1266,24 @@ window.TARAE_CASES = [
         "type": "event",
         "time": "2023.02.09",
         "title": "수사중지 결정 통지서",
+        "full": "수사중지 결정 통지서",
         "kind": "verified",
         "badge": "확인됨",
         "conflict": false,
         "needs_date": false,
-        "source": "출처 ③  수사중지_결정통지서.jpg · 1줄 외 1곳"
+        "source": "출처 ③  수사중지_결정통지서.jpg · 1줄 외 1곳",
+        "sources": [
+          {
+            "name": "수사중지_결정통지서.jpg",
+            "line": 1,
+            "quote": "수사중지 결정 통지서"
+          },
+          {
+            "name": "수사중지_결정통지서.jpg",
+            "line": 6,
+            "quote": "2023. 2. 9."
+          }
+        ]
       },
       {
         "type": "gap",
@@ -1049,12 +1293,20 @@ window.TARAE_CASES = [
       {
         "type": "event",
         "time": "2025.06.03",
-        "title": "2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다.",
+        "title": "○○시 중앙시장 앞에서 박현수를 목격하였습…",
+        "full": "2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다.",
         "kind": "claim",
         "badge": "주장 · 미확인",
         "conflict": false,
         "needs_date": false,
-        "source": "출처 ④  조미래_진술서.jpg · 3줄"
+        "source": "출처 ④  조미래_진술서.jpg · 3줄",
+        "sources": [
+          {
+            "name": "조미래_진술서.jpg",
+            "line": 3,
+            "quote": "2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다."
+          }
+        ]
       }
     ],
     "people": [

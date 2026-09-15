@@ -455,12 +455,51 @@
     ]));
   }
 
-  // 뜻이 하나인 색만 위에 적는다. 노란색은 줄마다 이유가 조금씩 달라 그 자리에 적는다
-  // (마우스를 올려야 보이는 설명은 손가락으로 쓰는 사람이 못 본다).
+  // 점 색이 뜻하는 것. 줄에는 글씨를 두지 않고 여기서 한 번만 적는다.
   var KIND_LEGEND = [
     ["verified", "확인완료"],
+    ["claim", "주장 · 미확인"],
+    ["conflict", "불일치"],
     ["mine", "내가 적음"],
   ];
+
+  /** 그 줄이 어떤 상태인지 — 팝업 제목 옆에 붙는 말. */
+  function rowFlags(row) {
+    var flags = [];
+    if (row.conflict) flags.push(["conflict", "불일치"]);
+    if (row.kind === "claim") flags.push(["unverified", row.badge]);
+    if (row.kind === "mine") flags.push(["mine", row.badge]);
+    if (row.needs_date) flags.push(["unverified", "날짜 확인 필요"]);
+    if (!flags.length) flags.push(["verified", "확인 완료"]);
+    return flags;
+  }
+
+  /** 줄을 누르면 열리는 자세히 — 원문과 출처를 그대로 보여준다. */
+  function timelineDetail(row) {
+    var body = h("div", { class: "tldetail" }, [
+      h("div", { class: "tldetail__flags" }, rowFlags(row).map(function (f) { return badge(f[0], f[1]); })),
+      h("p", { class: "tldetail__when", text: String(row.time || "").replace(/\s+/g, " ") }),
+      h("p", { class: "tldetail__full", text: row.full || row.title }),
+    ]);
+
+    var sources = row.sources || [];
+    body.appendChild(h("p", { class: "tldetail__label", text: sources.length ? "출처" : "" }));
+    if (!sources.length) {
+      body.appendChild(h("p", { class: "tldetail__none", text: "직접 적은 내용이라 뒷받침하는 자료가 없어요." }));
+    } else {
+      body.appendChild(h("ul", { class: "srclist" }, sources.map(function (s) {
+        return h("li", { class: "srclist__item" }, [
+          h("span", { class: "srclist__kind t-caption", text: s.line + "줄" }),
+          h("div", { class: "srclist__texts" }, [
+            h("span", { class: "t-body-m c-primary", text: s.name }),
+            s.quote ? h("span", { class: "srclist__quote", text: "“" + s.quote + "”" }) : null,
+          ]),
+        ]);
+      })));
+      body.appendChild(h("p", { class: "modal__note", text: "원본 사진을 띄우는 것은 아직 연결되지 않았어요. 지금은 어느 자료 몇 줄에서 왔는지까지 보여드려요." }));
+    }
+    openModal(row.title, body);
+  }
 
   function timelineCard(c) {
     var wrap = h("div", { class: "card tl" });
@@ -469,7 +508,10 @@
     rows.forEach(function (row, i) { if (row.type === "event") lastEvent = i; });
 
     var used = {};
-    rows.forEach(function (row) { if (row.type === "event") used[row.kind] = true; });
+    rows.forEach(function (row) {
+      if (row.type !== "event") return;
+      used[row.conflict ? "conflict" : row.kind] = true;
+    });
     wrap.appendChild(h("div", { class: "tl__legend" }, KIND_LEGEND.filter(function (k) { return used[k[0]]; }).map(function (k) {
       return h("span", { class: "tl__legend-item" }, [
         h("span", { class: "tl__dot tl__dot--" + k[0], "aria-hidden": "true" }),
@@ -492,28 +534,20 @@
       var sameDay = t.day === lastDay;
       lastDay = t.day;
 
-      // 뜻이 있는 것만 뱃지로 남긴다 — 나머지는 점 색과 작은 글씨가 말해 준다
-      var flags = [];
-      if (row.conflict) flags.push(badge("conflict", "불일치"));
-      if (row.needs_date) flags.push(badge("unverified", "날짜 확인 필요"));
+      var more = h("button", { type: "button", class: "tl__more", text: "자세히" });
+      more.addEventListener("click", function () { timelineDetail(row); });
 
-      wrap.appendChild(h("div", { class: "tl__row" + (row.conflict ? " tl__row--flag" : "") + (i === lastEvent ? " tl__row--last" : "") }, [
+      wrap.appendChild(h("div", { class: "tl__row" + (i === lastEvent ? " tl__row--last" : "") }, [
         h("div", { class: "tl__when" }, [
           h("span", { class: "tl__day t-label" + (sameDay ? " tl__day--same" : ""), text: sameDay ? "" : t.day }),
           h("span", { class: "tl__time t-caption", text: t.time }),
         ]),
         h("div", { class: "tl__rail", "aria-hidden": "true" }, [
-          h("span", { class: "tl__dot tl__dot--" + row.kind }),
+          h("span", { class: "tl__dot tl__dot--" + (row.conflict ? "conflict" : row.kind) }),
           h("span", { class: "tl__line" }),
         ]),
-        h("div", { class: "tl__body" }, [
-          h("p", { class: "tl__title", text: row.title }),
-          h("div", { class: "tl__meta" }, [
-            // 기록으로 확인되지 않은 줄만 왜 그런지 적는다
-            row.kind === "claim" ? h("span", { class: "tl__kind", text: row.badge }) : null,
-            h("span", { class: "tl__source", text: row.source }),
-          ].concat(flags)),
-        ]),
+        h("p", { class: "tl__title", text: row.title }),
+        more,
       ]));
     });
 
@@ -523,7 +557,6 @@
     return wrap;
   }
 
-  /** 인물 · 관계 — 사건을 뿌리로 두고 갈래마다 뻗는 나무로 그린다. */
   function peopleCard(c) {
     var groups = c.people || [];
     if (!groups.length) return h("div", { class: "card tab-empty" }, [h("p", { class: "t-body-m c-tertiary", text: "자료에서 찾은 인물이 아직 없어요." })]);
