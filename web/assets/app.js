@@ -252,6 +252,84 @@
     return "문서";
   }
 
+  /** 카메라를 연다. 노트북에서는 웹캠 미리보기를, 휴대폰에서는 기본 카메라를 쓴다. */
+  function openCamera(onShot, fallbackInput) {
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      fallbackInput.click();
+      return;
+    }
+    var video = h("video", { class: "cam__view", autoplay: true, playsinline: true, muted: true });
+    var shoot = h("button", { type: "button", class: "modal__save", text: "찍기" });
+    var note = h("p", { class: "modal__note", text: "찍은 사진은 이 화면의 자료 목록에만 더해집니다. 아직 어디로도 보내지 않아요." });
+    var stream = null;
+
+    function stop() {
+      if (stream) stream.getTracks().forEach(function (t) { t.stop(); });
+      stream = null;
+    }
+
+    shoot.addEventListener("click", function () {
+      if (!stream) return;
+      var canvas = document.createElement("canvas");
+      canvas.width = video.videoWidth || 1280;
+      canvas.height = video.videoHeight || 720;
+      canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.height);
+      var now = new Date();
+      var stamp = now.getFullYear() + pad(now.getMonth() + 1) + pad(now.getDate()) + "_" + pad(now.getHours()) + pad(now.getMinutes()) + pad(now.getSeconds());
+      onShot({ kind: "IMG", name: "사진_" + stamp + ".jpg", meta: "방금 찍음 · 정리를 시작하면 날짜를 읽어요" });
+      stop();
+      var dialog = document.querySelector("dialog.modal");
+      if (dialog) dialog.close();
+    });
+
+    openModal("사진 찍기", h("div", { class: "cam" }, [video, shoot, note]));
+    var dialog = document.querySelector("dialog.modal");
+    dialog.addEventListener("close", stop);
+
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }).then(function (s) {
+      stream = s;
+      video.srcObject = s;
+    }, function () {
+      // 권한을 막았거나 카메라가 없을 때 — 파일 선택으로 물러난다
+      stop();
+      dialog.close();
+      fallbackInput.click();
+    });
+  }
+
+  function pad(n) { return (n < 10 ? "0" : "") + n; }
+
+  /** 자료가 없어도 기억나는 내용을 적어 둘 수 있게 한다. */
+  function openMemoModal(onAdd) {
+    var what = h("textarea", { id: "memo-what", class: "field__input field__input--area", rows: "5", placeholder: "예) 6월 2일 저녁에 판매자에게 전화했지만 받지 않았습니다" });
+    var hint = h("p", { class: "field__hint", text: "날짜가 기억나면 함께 적어 주세요. 정리를 시작하면 시간축에 같이 올립니다." });
+    var save = h("button", { type: "button", class: "modal__save", text: "자료에 더하기" });
+
+    save.addEventListener("click", function () {
+      var text = what.value.trim();
+      if (!text) {
+        hint.textContent = "내용을 적어 주세요.";
+        hint.classList.add("field__hint--warn");
+        what.focus();
+        return;
+      }
+      onAdd({
+        kind: "메모",
+        name: text.length > 28 ? text.slice(0, 27) + "…" : text,
+        meta: "직접 적음 · 기록 자료가 아니라 본인 진술로 다룹니다",
+        text: text,
+      });
+      var dialog = document.querySelector("dialog.modal");
+      if (dialog) dialog.close();
+    });
+
+    openModal("기억나는 내용 적기", h("div", { class: "evform" }, [
+      h("div", { class: "field" }, [h("label", { for: "memo-what", text: "무슨 일이 있었나요?" }), what, hint]),
+      save,
+      h("p", { class: "modal__note", text: "직접 적은 내용은 접수증·통지서 같은 기록 자료와 구분해서 표시됩니다." }),
+    ]));
+  }
+
   function renderNew(root) {
     var files = [];
     var list = h("div", { class: "file-list" });
@@ -305,7 +383,7 @@
       h("p", { class: "dropzone__hint t-body-s c-tertiary", text: "이미지 · PDF · 음성 · 문서  |  여러 장을 한 번에 올릴 수 있어요" }),
       h("div", { class: "dropzone__actions" }, [
         h("button", { type: "button", class: "btn btn--primary t-body-m-strong", text: "파일 선택", onclick: function () { picker.click(); } }),
-        h("button", { type: "button", class: "btn btn--secondary t-body-m-strong", text: "사진 찍기", onclick: function () { camera.click(); } }),
+        h("button", { type: "button", class: "btn btn--secondary t-body-m-strong", text: "사진 찍기", onclick: function () { openCamera(function (shot) { files.push(shot); drawList(); }, camera); } }),
       ]),
       picker, camera,
     ]);
@@ -326,6 +404,11 @@
       drawList();
     }
     url.addEventListener("keydown", function (e) { if (e.key === "Enter") addUrl(); });
+
+    var memoButton = h("button", { type: "button", class: "add-event t-body-m-strong c-brand", text: "+  기억나는 내용을 직접 적기 (선택)", style: "padding:0" });
+    memoButton.addEventListener("click", function () {
+      openMemoModal(function (memo) { files.push(memo); drawList(); });
+    });
 
     drawList();
     // 빈 서류철을 하나 새로 만들어 채우는 화면 — 목록의 점선 폴더가 여기서 이어진다
@@ -353,7 +436,7 @@
         h("div", { class: "list-head" }, [h("span", { class: "t-label c-secondary", text: "올린 자료" }), count]),
         list,
         h("p", { class: "note t-body-s c-secondary", text: "날짜가 정리의 뼈대가 됩니다. 날짜를 모르는 자료는 “언제인가요?”를 눌러 알려주세요." }),
-        h("button", { type: "button", class: "add-event t-body-m-strong c-brand", text: "+  기억나는 내용을 직접 적기 (선택)", style: "padding:0" }),
+        memoButton,
       ]),
       h("div", { class: "cta" }, [
         // 서버가 없어 올린 파일을 실제로 정리하지 않는다. 예시 사건의 결과 화면으로 이동한다.

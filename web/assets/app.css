@@ -583,6 +583,11 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .modal__close:hover { background: var(--bg-sunken); color: var(--text-primary); }
 .modal__body { padding: 0 24px 24px; overflow-y: auto; max-height: calc(80vh - 70px); }
 
+
+/* 사진 찍기 */
+.cam { display: flex; flex-direction: column; gap: 12px; }
+.cam__view { width: 100%; border-radius: 12px; background: #000; aspect-ratio: 4 / 3; object-fit: cover; }
+
 /* ── 다음 행동 — 할 일만 크게, 나머지는 팝업으로 ─────────────── */
 .next-action { display: flex; flex-direction: column; gap: 14px; padding: 24px 26px; border-radius: 18px; background: var(--brand-primary); color: var(--text-on-brand); box-shadow: var(--shadow-card); }
 .next-action__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
