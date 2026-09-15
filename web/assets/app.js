@@ -80,6 +80,12 @@
     return current.label + " 단계";
   }
 
+  /** 목록에서 그 사건이 가졌던 폴더 색. 상세 화면도 같은 색을 써서 '그 폴더를 열었다'가 보이게 한다. */
+  function toneOf(c) {
+    var i = CASES.indexOf(c);
+    return ((i < 0 ? 0 : i) % 3) + 1;
+  }
+
   function folder(c, tone) {
     var next = c.next_action;
     var due = next && next.due;
@@ -106,7 +112,7 @@
 
   function renderHome(root) {
     var grid = h("div", { class: "folder-grid" });
-    CASES.forEach(function (c, i) { grid.appendChild(folder(c, (i % 3) + 1)); });
+    CASES.forEach(function (c) { grid.appendChild(folder(c, toneOf(c))); });
 
     grid.appendChild(h("a", { class: "folder folder--new", href: "new.html" }, [
       h("span", { class: "folder__tab", "aria-hidden": "true" }),
@@ -216,8 +222,8 @@
     url.addEventListener("keydown", function (e) { if (e.key === "Enter") addUrl(); });
 
     drawList();
-    root.appendChild(h("main", { class: "page page--new" }, [
-      backLink(),
+    // 빈 서류철을 하나 새로 만들어 채우는 화면 — 목록의 점선 폴더가 여기서 이어진다
+    var folderBody = h("div", { class: "new-folder__body" }, [
       h("div", { class: "page-head page-head--stack" }, [
         h("h1", { class: "t-display c-primary", text: "새 사건 등록" }),
         h("p", { class: "t-body-l c-secondary", text: "사건 유형을 고르고 가진 자료를 올려주세요. 자료가 적어도 시작할 수 있어요." }),
@@ -247,6 +253,14 @@
         // 서버가 없어 올린 파일을 실제로 정리하지 않는다. 예시 사건의 결과 화면으로 이동한다.
         h("a", { class: "btn btn--primary t-body-m-strong", href: CASES.length ? caseHref(CASES[0].id) : "index.html", text: "정리 시작하기" }),
         h("a", { class: "btn btn--secondary t-body-m-strong", href: "index.html", text: "자료는 나중에 더 추가할게요" }),
+      ]),
+    ]);
+
+    root.appendChild(h("main", { class: "page page--new" }, [
+      backLink(),
+      h("div", { class: "new-folder" }, [
+        h("span", { class: "new-folder__tab" }, [h("span", { class: "t-label c-tertiary", text: "새 서류철" })]),
+        folderBody,
       ]),
     ]));
   }
@@ -393,16 +407,26 @@
     ]));
     root.appendChild(h("main", { class: "page page--case" }, [
       backLink(),
-      h("section", { class: "card case-head" }, [
-        h("div", { class: "case-head__info" }, [
-          h("div", { class: "case-head__tags" }, [
-            h("span", { class: "tag t-label", text: c.type_label }),
-            h("span", { class: "t-caption c-tertiary", text: "기준일 " + c.as_of }),
+      // 목록에서 고른 폴더를 펼친 화면 — 탭과 색을 그대로 물려받는다
+      h("section", { class: "case-folder folder--tone" + toneOf(c) }, [
+        h("span", { class: "case-folder__tab" }, [h("span", { class: "t-label", text: c.type_label })]),
+        h("div", { class: "case-folder__body" }, [
+          h("div", { class: "case-head__info" }, [
+            h("div", { class: "case-head__tags" }, [
+              h("span", { class: "t-caption case-folder__dim", text: "기준일 " + c.as_of }),
+              // 기한은 폴더 앞면에서와 같이 항상 보이게 둔다
+              c.next_action && c.next_action.due
+                ? h("span", { class: "case-folder__due t-label", text: c.next_action.due.label })
+                : null,
+            ]),
+            h("h1", { class: "t-display", text: c.title }),
+            h("p", { class: "case-head__meta t-body-m case-folder__dim", text: c.period + "  ·  자료 " + c.doc_count + "개  ·  확인 필요 " + c.need_count }),
           ]),
-          h("h1", { class: "t-display c-primary", text: c.title }),
-          h("p", { class: "case-head__meta t-body-m c-secondary", text: c.period + "  ·  자료 " + c.doc_count + "개  ·  확인 필요 " + c.need_count }),
+          h("div", { class: "case-head__progress" }, [
+            h("span", { class: "t-caption case-folder__dim", text: "진행 단계" }),
+            track(c.stages, true),
+          ]),
         ]),
-        h("div", { class: "case-head__progress" }, [h("span", { class: "t-caption c-tertiary", text: "진행 단계" }), track(c.stages, true)]),
       ]),
       h("div", { class: "columns" }, [
         h("div", { class: "main" }, [
