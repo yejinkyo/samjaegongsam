@@ -40,7 +40,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .nav__brand { display: flex; align-items: center; gap: 10px; }
 .nav__logo { width: 24px; height: 24px; border-radius: 7px; background: var(--brand-primary); }
 .nav__name { font-weight: 700; }
-.nav__right { display: flex; align-items: center; gap: 28px; }
+.nav__right { display: flex; align-items: center; gap: 20px; }
 .nav__avatar {
   display: flex; align-items: center; justify-content: center;
   width: 36px; height: 36px; border-radius: 999px; background: var(--bg-brand-soft);
@@ -48,7 +48,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .nav__avatar:hover { filter: brightness(0.96); }
 
 /* ── 상단 메뉴 ──────────────────────────────────────────────── */
-.nav__left { display: flex; align-items: center; gap: 14px; }
 .nav__menu {
   display: flex; align-items: center; justify-content: center;
   width: 36px; height: 36px; border-radius: 10px;

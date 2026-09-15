@@ -131,7 +131,6 @@
           else location.href = "new.html";
         },
       },
-      { label: "도움말", onClick: helpModal },
     ]);
 
     var avatar = h("button", { type: "button", class: "nav__avatar", "aria-label": "내 정보" }, [
@@ -145,20 +144,13 @@
     var help = h("button", { type: "button", class: "nav__link t-body-m c-secondary", text: "도움말" });
     help.addEventListener("click", helpModal);
 
+    // 왼쪽은 로고만, 오른쪽은 도움말 · 프로필 · 메뉴 순서
     return h("header", { class: "nav" }, [
-      h("div", { class: "nav__left" }, [
-        menu,
-        // 브랜드를 누르면 시작 화면으로 나간다. 사건 목록은 옆의 '내 사건'
-        h("a", { class: "nav__brand", href: "index.html" }, [
-          h("span", { class: "nav__logo", "aria-hidden": "true" }),
-          h("span", { class: "nav__name t-heading c-primary", text: "타래" }),
-        ]),
+      h("a", { class: "nav__brand", href: "index.html" }, [
+        h("span", { class: "nav__logo", "aria-hidden": "true" }),
+        h("span", { class: "nav__name t-heading c-primary", text: "타래" }),
       ]),
-      h("nav", { class: "nav__right", "aria-label": "주 메뉴" }, [
-        h("a", { class: "nav__link t-body-m-strong c-primary", href: "cases.html", text: "내 사건" }),
-        help,
-        account,
-      ]),
+      h("nav", { class: "nav__right", "aria-label": "주 메뉴" }, [help, account, menu]),
     ]);
   }
 
