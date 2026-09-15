@@ -9,13 +9,31 @@
   --lp-dim: #a79cc9;
   --lp-thread: #8f6fe0;
   --lp-node: #c9b3ec;
+
+  /* 마디 색 — 남색 · 보라 · 어두운 핑크. 빛나는 점처럼 보이게 각자 번짐을 가진다 */
+  --lp-navy: #4a6cf7;
+  --lp-violet: #9a5cf0;
+  --lp-pink: #e0479e;
+
+  /* 아래로 갈수록 밝아진다 */
+  --lp-ink: #251a44;
+  --lp-ink-dim: #6b6288;
 }
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
-  background: var(--lp-bg-deep);
+  /* 위는 진보라, 아래로 내려가면 흰색. 화면이 아니라 문서 전체에 걸린다 —
+     그래야 스크롤해 내려갈수록 실제로 밝아진다 */
+  background: linear-gradient(180deg,
+    #120b26 0%,
+    #1a1038 26%,
+    #2c1a58 46%,
+    #64409f 66%,
+    #b39ee0 82%,
+    #f1ecfa 94%,
+    #ffffff 100%);
   color: var(--lp-text);
   font-family: var(--font);
   -webkit-font-smoothing: antialiased;
@@ -35,9 +53,8 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
   gap: 40px;
   padding: 80px 64px;
-  background:
-    radial-gradient(1100px 620px at 78% 42%, rgba(143, 111, 224, 0.22), transparent 62%),
-    linear-gradient(160deg, var(--lp-bg) 0%, var(--lp-bg-deep) 70%);
+  /* 바탕 그라데이션은 body 가 그린다. 여기는 실 뭉치 뒤의 번짐만 얹는다 */
+  background: radial-gradient(1000px 580px at 76% 44%, rgba(154, 92, 240, 0.28), transparent 64%);
   overflow: hidden;
 }
 
@@ -67,8 +84,15 @@ a { color: inherit; text-decoration: none; }
   fill: none;
   opacity: 0.32;
 }
+.lp-net .thread--navy { stroke: var(--lp-navy); }
+.lp-net .thread--pink { stroke: var(--lp-pink); }
+
+/* 마디는 색마다 같은 색으로 번지게 해서 빛나는 점처럼 보이게 한다 */
 .lp-net .node { fill: var(--lp-node); }
-.lp-net .node--hub { fill: #fff; }
+.lp-net .node--navy { fill: var(--lp-navy); filter: drop-shadow(0 0 5px var(--lp-navy)); }
+.lp-net .node--violet { fill: var(--lp-violet); filter: drop-shadow(0 0 5px var(--lp-violet)); }
+.lp-net .node--pink { fill: var(--lp-pink); filter: drop-shadow(0 0 6px var(--lp-pink)); }
+.lp-net .node--hub { fill: #fff; filter: drop-shadow(0 0 9px rgba(224, 71, 158, 0.9)); }
 
 /* 마디가 하나씩 켜졌다 꺼진다 — 지연 시간은 landing.js 가 노드마다 다르게 준다.
    반지름(r)은 브라우저마다 CSS 로 못 움직이는 곳이 있어 transform 으로 키운다. */
@@ -107,11 +131,15 @@ a { color: inherit; text-decoration: none; }
 .lp-scroll:hover { color: var(--lp-text); }
 
 /* ── 버튼 화면 ──────────────────────────────────────────── */
+/* 아래쪽은 흰 바탕이라 글자를 어두운 색으로 뒤집는다.
+   화면 높이에 따라 문서 그라데이션이 어디까지 밝아졌는지가 달라지므로,
+   버튼이 놓이는 자리는 이 구역이 직접 흰색으로 덮어 글자 대비를 보장한다. */
 .lp-cta {
   min-height: 62vh;
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px;
   padding: 80px 24px 96px;
-  background: linear-gradient(180deg, var(--lp-bg-deep) 0%, #120c26 100%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #fff 38%, #fff 100%);
+  color: var(--lp-ink);
   text-align: center;
 }
 .lp-cta__lead { font: 500 20px/1.5 var(--font); letter-spacing: -0.02em; }
@@ -125,10 +153,10 @@ a { color: inherit; text-decoration: none; }
 }
 .lp-btn--primary { background: var(--brand-primary); color: #fff; }
 .lp-btn--primary:hover { background: #6f4cd6; transform: translateY(-2px); }
-.lp-btn--ghost { border: 1.5px solid rgba(201, 179, 236, 0.45); color: var(--lp-text); }
-.lp-btn--ghost:hover { border-color: var(--lp-node); background: rgba(143, 111, 224, 0.12); transform: translateY(-2px); }
+.lp-btn--ghost { border: 1.5px solid rgba(94, 61, 187, 0.4); color: var(--brand-primary); background: rgba(255, 255, 255, 0.6); }
+.lp-btn--ghost:hover { border-color: var(--brand-primary); background: #fff; transform: translateY(-2px); }
 
-.lp-note { font: 400 12.5px/1.6 var(--font); color: var(--lp-dim); opacity: 0.8; }
+.lp-note { font: 400 12.5px/1.6 var(--font); color: var(--lp-ink-dim); }
 
 /* ── 좁은 화면 ──────────────────────────────────────────── */
 @media (max-width: 900px) {

@@ -10,6 +10,15 @@
   var W = 520;
   var H = 520;
 
+  // 마디 색 — 왼쪽(핑크)에서 오른쪽(남색)으로 옮겨 가게 x 좌표로 고른다
+  var NODE_TONES = ["node--pink", "node--violet", "node--navy"];
+  var THREAD_TONES = ["thread--pink", "", "thread--navy"];
+
+  function toneFor(x, rand) {
+    var t = x / W + (rand() - 0.5) * 0.35;   // 경계가 칼같지 않게 흔든다
+    return NODE_TONES[t < 0.36 ? 0 : t < 0.68 ? 1 : 2];
+  }
+
   /** 씨앗 고정 난수 — 새로고침해도 같은 그림이 나온다 */
   function rng(seed) {
     var s = seed;
@@ -51,7 +60,7 @@
       var b = hubs[pair[1]];
       var mx = (a.x + b.x) / 2 + (rand() - 0.5) * 60;
       var my = (a.y + b.y) / 2 + (rand() - 0.5) * 60;
-      var path = el("path", { class: "thread", d: "M" + a.x + " " + a.y + " Q" + mx + " " + my + " " + b.x + " " + b.y });
+      var path = el("path", { class: "thread " + THREAD_TONES[i % THREAD_TONES.length], d: "M" + a.x + " " + a.y + " Q" + mx + " " + my + " " + b.x + " " + b.y });
       path.style.animationDelay = (i * 0.6).toFixed(2) + "s";
       threads.appendChild(path);
     });
@@ -67,7 +76,7 @@
         var y = hub.y + Math.sin(angle) * len;
         var cx = hub.x + Math.cos(angle) * len * 0.55 + (rand() - 0.5) * 50;
         var cy = hub.y + Math.sin(angle) * len * 0.55 + (rand() - 0.5) * 50;
-        var path = el("path", { class: "thread", d: "M" + hub.x + " " + hub.y + " Q" + cx + " " + cy + " " + x + " " + y });
+        var path = el("path", { class: "thread " + (x < W * 0.4 ? "thread--pink" : x > W * 0.7 ? "thread--navy" : ""), d: "M" + hub.x + " " + hub.y + " Q" + cx + " " + cy + " " + x + " " + y });
         path.style.animationDelay = (rand() * 5).toFixed(2) + "s";
         threads.appendChild(path);
         tips.push({ x: x, y: y, r: 1.6 + rand() * 2 });
@@ -76,7 +85,7 @@
 
     tips.concat(hubs.map(function (hub) { return { x: hub.x, y: hub.y, r: hub.r, hub: true }; }))
       .forEach(function (n) {
-        var circle = el("circle", { class: "node" + (n.hub ? " node--hub" : ""), cx: n.x, cy: n.y, r: n.r });
+        var circle = el("circle", { class: "node " + (n.hub ? "node--hub" : toneFor(n.x, rand)), cx: n.x, cy: n.y, r: n.r });
         circle.style.animationDelay = (rand() * 4.5).toFixed(2) + "s";
         nodes.appendChild(circle);
       });
