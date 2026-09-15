@@ -45,6 +45,78 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   display: flex; align-items: center; justify-content: center;
   width: 36px; height: 36px; border-radius: 999px; background: var(--bg-brand-soft);
 }
+.nav__avatar:hover { filter: brightness(0.96); }
+
+/* ── 상단 메뉴 ──────────────────────────────────────────────── */
+.nav__left { display: flex; align-items: center; gap: 14px; }
+.nav__menu {
+  display: flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; border-radius: 10px;
+}
+.nav__menu:hover { background: var(--bg-sunken); }
+/* 삼단 막대 */
+.nav__bars, .nav__bars::before, .nav__bars::after {
+  display: block; width: 18px; height: 2px; border-radius: 2px; background: var(--text-primary);
+}
+.nav__bars { position: relative; }
+.nav__bars::before, .nav__bars::after { content: ""; position: absolute; left: 0; }
+.nav__bars::before { top: -6px; }
+.nav__bars::after { top: 6px; }
+
+.nav__link { padding: 6px 2px; }
+.nav__link:hover { color: var(--brand-primary); }
+
+.menu-wrap { position: relative; }
+.menu {
+  position: absolute; top: calc(100% + 10px); left: 0; z-index: 30;
+  min-width: 184px; padding: 6px;
+  border-radius: 14px; background: var(--bg-surface);
+  box-shadow: inset 0 0 0 1px var(--border-default), 0 18px 40px -16px rgba(24, 12, 54, 0.4);
+}
+.nav__right .menu { left: auto; right: 0; }
+.menu__item {
+  display: block; width: 100%; text-align: left;
+  padding: 11px 14px; border-radius: 10px;
+  font: 500 14px/1.4 var(--font); color: var(--text-primary);
+}
+.menu__item:hover { background: var(--bg-sunken); }
+.menu__item--danger { color: var(--status-conflict); }
+
+/* ── 도움말 ─────────────────────────────────────────────────── */
+.help { display: flex; flex-direction: column; gap: 18px; }
+.help__block { display: flex; flex-direction: column; gap: 6px; }
+.help__title { font: 600 15px/1.45 var(--font); color: var(--brand-primary); }
+.help__text { font: 400 14px/1.7 var(--font); color: var(--text-secondary); }
+
+/* ── 팝업 안의 입력 ─────────────────────────────────────────── */
+.evform { display: flex; flex-direction: column; gap: 16px; }
+.evform .field { display: flex; flex-direction: column; gap: 7px; }
+.evform .field > label { font: 600 13px/1 var(--font); color: var(--text-primary); }
+.field__input {
+  width: 100%; padding: 12px 14px;
+  border: 1.5px solid var(--border-strong); border-radius: 12px;
+  background: var(--bg-surface); color: var(--text-primary);
+  font: 400 15px/1.5 var(--font);
+}
+.field__input--area { resize: vertical; min-height: 84px; }
+.field__input:focus { outline: none; border-color: var(--brand-primary); box-shadow: 0 0 0 3px rgba(94, 61, 187, 0.14); }
+.field__hint { font: 400 12px/1.5 var(--font); color: var(--text-tertiary); }
+.field__hint--warn { color: var(--status-conflict); }
+
+.modal__save {
+  padding: 13px; border-radius: 999px;
+  background: var(--brand-primary); color: var(--text-on-brand);
+  font: 600 15px/1 var(--font);
+}
+.modal__save:hover { filter: brightness(1.06); }
+.modal__note {
+  padding: 11px 13px; border-radius: 10px;
+  background: var(--bg-sunken); color: var(--text-tertiary);
+  font: 400 12px/1.6 var(--font);
+}
+
+.srclist__item--new { box-shadow: inset 0 0 0 1.5px var(--brand-primary); }
+.srclist__new { margin-left: auto; padding: 2px 8px; border-radius: 999px; background: var(--bg-brand-soft); color: var(--brand-primary); font: 600 11px/1.6 var(--font); }
 
 /* ── 공통 부품 ─────────────────────────────────────────────── */
 .btn {

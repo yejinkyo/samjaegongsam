@@ -37,17 +37,127 @@
   function caseHref(id) { return "case.html?id=" + encodeURIComponent(id); }
 
   // ── 공통 ────────────────────────────────────────────────
+
+  // 사건 화면이 켜져 있으면 자료 추가를 그 화면이 맡는다. 없으면 새 사건 등록으로 보낸다.
+  var addFilesHandler = null;
+
+  /** 버튼에 붙는 작은 메뉴. 바깥을 누르거나 Esc 를 누르면 닫힌다. */
+  function dropdown(trigger, items) {
+    var menu = h("div", { class: "menu", hidden: true }, items.map(function (it) {
+      if (it.href) return h("a", { class: "menu__item", href: it.href, text: it.label });
+      var button = h("button", { type: "button", class: "menu__item" + (it.danger ? " menu__item--danger" : ""), text: it.label });
+      button.addEventListener("click", function () { close(); it.onClick(); });
+      return button;
+    }));
+
+    function close() {
+      menu.hidden = true;
+      trigger.setAttribute("aria-expanded", "false");
+      document.removeEventListener("click", onOutside, true);
+      document.removeEventListener("keydown", onKey);
+    }
+    function onOutside(e) { if (!wrap.contains(e.target)) close(); }
+    function onKey(e) { if (e.key === "Escape") close(); }
+
+    trigger.setAttribute("aria-expanded", "false");
+    trigger.addEventListener("click", function (e) {
+      e.stopPropagation();
+      if (!menu.hidden) return close();
+      menu.hidden = false;
+      trigger.setAttribute("aria-expanded", "true");
+      document.addEventListener("click", onOutside, true);
+      document.addEventListener("keydown", onKey);
+    });
+
+    var wrap = h("div", { class: "menu-wrap" }, [trigger, menu]);
+    return wrap;
+  }
+
+  /** 자료 고르기 — 서버가 없어 파일을 보내지는 않는다. 고른 것을 화면에만 더한다. */
+  function pickFiles(onPicked) {
+    var input = h("input", { type: "file", multiple: true, accept: "image/*,application/pdf,audio/*", hidden: true });
+    input.addEventListener("change", function () {
+      var picked = Array.prototype.map.call(input.files, function (f) {
+        return { kind: fileKind(f.name), name: f.name, isNew: true };
+      });
+      input.remove();
+      if (picked.length) onPicked(picked);
+    });
+    document.body.appendChild(input);
+    input.click();
+  }
+
+  function helpModal() {
+    function block(title, lines) {
+      return h("section", { class: "help__block" }, [
+        h("h3", { class: "help__title", text: title }),
+      ].concat(lines.map(function (t) { return h("p", { class: "help__text", text: t }); })));
+    }
+    openModal("타래는 무엇을 하나요?", h("div", { class: "help" }, [
+      block("흩어진 자료를 시간 순으로 엮어요", [
+        "사건 자료는 보통 여기저기 흩어져 있어요. 접수증은 서랍에, 문자는 휴대폰에, 통지서는 봉투 안에요.",
+        "사진으로 찍어 올리면 글자를 읽어서 '언제 무슨 일이 있었는지' 한 줄로 세워 드려요.",
+      ]),
+      block("확인된 것과 아닌 것을 갈라 놓아요", [
+        "접수증·통지서처럼 기관이 남긴 기록은 '확인완료'로, 사람의 말은 '주장 · 미확인'으로 나눠 표시해요.",
+        "자료끼리 숫자나 날짜가 어긋나면 어느 자료 몇 줄이 다른지 짚어 드려요.",
+      ]),
+      block("비어 있는 곳을 알려 드려요", [
+        "기록이 몇 년씩 비어 있거나, 있어야 할 자료가 없으면 그 자리를 표시해요.",
+        "'없는 것'을 아는 게 중요해요. 수사기관에 무엇을 더 내야 하는지가 거기서 나오거든요.",
+      ]),
+      block("다음에 할 일을 하나 골라 드려요", [
+        "놓치면 되돌릴 수 없는 것부터 봐요. 기한이 있는 절차가 가장 앞에 오고, 왜 그 행동인지 이유를 같이 보여 드려요.",
+      ]),
+      block("하지 않는 것", [
+        "누가 범인인지, 무엇이 진실인지는 판단하지 않아요. 자료에 적힌 것과 적히지 않은 것만 보여 드려요.",
+        "법조문·기한·제출처는 검증된 자료에 있을 때만 알려 드려요. 확인되지 않은 것은 빈칸으로 두고 '확인 중'이라고 적어요. 잘못된 기한 하나가 사건을 끝낼 수 있으니까요.",
+        "법률 자문이 아니에요. 변호사·법률구조공단 상담을 대신하지 않아요.",
+      ]),
+    ]));
+  }
+
   function nav() {
+    var menuButton = h("button", { type: "button", class: "nav__menu", "aria-label": "메뉴 열기" }, [
+      h("span", { class: "nav__bars", "aria-hidden": "true" }),
+    ]);
+    var menu = dropdown(menuButton, [
+      { label: "내 사건", href: "cases.html" },
+      { label: "새 사건 등록", href: "new.html" },
+      {
+        label: "자료 추가하기",
+        onClick: function () {
+          if (addFilesHandler) pickFiles(addFilesHandler);
+          else location.href = "new.html";
+        },
+      },
+      { label: "도움말", onClick: helpModal },
+    ]);
+
+    var avatar = h("button", { type: "button", class: "nav__avatar", "aria-label": "내 정보" }, [
+      h("span", { class: "t-label c-brand", text: "나" }),
+    ]);
+    var account = dropdown(avatar, [
+      { label: "내 정보", onClick: function () { openModal("내 정보", h("p", { class: "help__text", text: "계정 화면은 아직 준비 중이에요." })); } },
+      { label: "로그아웃", href: "index.html", danger: true },
+    ]);
+
+    var help = h("button", { type: "button", class: "nav__link t-body-m c-secondary", text: "도움말" });
+    help.addEventListener("click", helpModal);
+
     return h("header", { class: "nav" }, [
-      // 브랜드를 누르면 시작 화면으로 나간다. 사건 목록은 옆의 '내 사건'
-      h("a", { class: "nav__brand", href: "index.html" }, [
-        h("span", { class: "nav__logo", "aria-hidden": "true" }),
-        h("span", { class: "nav__name t-heading c-primary", text: "타래" }),
+      h("div", { class: "nav__left" }, [
+        menu,
+        // 브랜드를 누르면 시작 화면으로 나간다. 사건 목록은 옆의 '내 사건'
+        h("a", { class: "nav__brand", href: "index.html" }, [
+          h("span", { class: "nav__logo", "aria-hidden": "true" }),
+          h("span", { class: "nav__name t-heading c-primary", text: "타래" }),
+        ]),
       ]),
       h("nav", { class: "nav__right", "aria-label": "주 메뉴" }, [
-        h("a", { class: "t-body-m-strong c-primary", href: "cases.html", text: "내 사건" }),
-        h("a", { class: "t-body-m c-secondary", href: "#", text: "도움말" }),
-        h("span", { class: "nav__avatar", "aria-label": "내 정보" }, [h("span", { class: "t-label c-brand", text: "나" })]),
+        h("a", { class: "nav__link t-body-m-strong c-primary", href: "cases.html", text: "내 사건" }),
+        help,
+        account,
       ]),
     ]);
   }
@@ -298,6 +408,68 @@
     return m ? { day: m[1], time: m[2] } : { day: clean, time: "" };
   }
 
+  /** 그 사건이 쓰는 날짜 표기(연도까지 / 월일만)에 맞춘다. */
+  function formatDay(c, iso) {
+    var multiYear = c.timeline.some(function (r) { return /^\d{4}\./.test(String(r.time || "")); });
+    return multiYear ? iso.replace(/-/g, ".") : iso.slice(5).replace("-", "/");
+  }
+
+  /** 시간 순서를 지켜 끼워 넣는다. 날짜를 모르는 줄은 맨 뒤로 간다. */
+  function insertEvent(c, row, iso) {
+    function key(r) {
+      var t = String(r.time || "");
+      var digits = t.replace(/[^0-9]/g, "");
+      if (!digits) return "999999999999";                       // 시점 미상은 맨 뒤
+      var full = /^\d{4}\./.test(t) ? digits : "0000" + digits;  // 월일만 쓰는 사건은 연도 자리를 비운다
+      return (full + "000000000000").slice(0, 12);
+    }
+    if (!iso) { c.timeline.push(row); return; }
+    var mine = key(row);
+    var at = c.timeline.findIndex(function (r) { return key(r) > mine; });
+    if (at < 0) c.timeline.push(row);
+    else c.timeline.splice(at, 0, row);
+  }
+
+  /** 기억나는 일을 직접 적는 창. 엔진이 읽은 것과 섞이지 않게 '내가 적음'으로 들어간다. */
+  function addEventModal(c) {
+    var when = h("input", { type: "date", id: "ev-when", class: "field__input" });
+    var what = h("textarea", { id: "ev-what", class: "field__input field__input--area", rows: "3", placeholder: "예) 담당 수사관에게 전화했지만 연결되지 않았습니다" });
+    var hint = h("p", { class: "field__hint", text: "날짜를 모르면 비워 두세요. '시점 미상'으로 들어갑니다." });
+
+    var save = h("button", { type: "button", class: "modal__save", text: "타임라인에 추가" });
+    save.addEventListener("click", function () {
+      var text = what.value.trim();
+      if (!text) {
+        hint.textContent = "무슨 일이 있었는지 적어 주세요.";
+        hint.classList.add("field__hint--warn");
+        what.focus();
+        return;
+      }
+      insertEvent(c, {
+        type: "event",
+        time: when.value ? formatDay(c, when.value) : "시점 미상",
+        title: text,
+        kind: "mine",
+        badge: "내가 적음",
+        conflict: false,
+        needs_date: !when.value,
+        source: "직접 입력",
+      }, when.value);
+      var panel = document.getElementById("panel");
+      panel.textContent = "";
+      panel.appendChild(timelineCard(c));
+      var dialog = document.querySelector("dialog.modal");
+      if (dialog) dialog.close();
+    });
+
+    openModal("기억나는 일 적기", h("div", { class: "evform" }, [
+      h("div", { class: "field" }, [h("label", { for: "ev-when", text: "언제 있었나요?" }), when]),
+      h("div", { class: "field" }, [h("label", { for: "ev-what", text: "무슨 일이 있었나요?" }), what, hint]),
+      save,
+      h("p", { class: "modal__note", text: "직접 적은 내용은 기록 자료가 아니라 '내가 적음'으로 표시됩니다. 지금은 이 화면에만 남습니다." }),
+    ]));
+  }
+
   // 뜻이 하나인 색만 위에 적는다. 노란색은 줄마다 이유가 조금씩 달라 그 자리에 적는다
   // (마우스를 올려야 보이는 설명은 손가락으로 쓰는 사람이 못 본다).
   var KIND_LEGEND = [
@@ -360,7 +532,9 @@
       ]));
     });
 
-    wrap.appendChild(h("button", { type: "button", class: "tl__add t-body-m-strong c-brand", text: "+  기억나는 일을 직접 추가" }));
+    var add = h("button", { type: "button", class: "tl__add t-body-m-strong c-brand", text: "+  기억나는 일을 직접 추가" });
+    add.addEventListener("click", function () { addEventModal(c); });
+    wrap.appendChild(add);
     return wrap;
   }
 
@@ -545,25 +719,40 @@
     return h("button", { type: "button", class: "issues__ask", text: "전문가에게 물어볼 질문 만들기" });
   }
 
-  /** 자료는 목록으로 늘어놓지 않고 버튼 뒤에 둔다. */
-  function sourcesBar(c, vertical) {
-    var open = h("button", { type: "button", class: "srcbar__btn" }, [
-      h("span", { text: "첨부한 자료" }),
-      h("span", { class: "srcbar__count", text: String(c.sources.length) }),
-    ]);
-    open.addEventListener("click", function () {
-      openModal("첨부한 자료 " + c.sources.length + "개", h("ul", { class: "srclist" }, c.sources.map(function (s) {
-        return h("li", { class: "srclist__item" }, [
+  function sourceListModal(c) {
+    openModal("첨부한 자료 " + c.sources.length + "개", h("div", {}, [
+      h("ul", { class: "srclist" }, c.sources.map(function (s) {
+        return h("li", { class: "srclist__item" + (s.isNew ? " srclist__item--new" : "") }, [
           h("span", { class: "srclist__kind t-caption", text: s.kind }),
           h("span", { class: "t-body-m c-primary", text: s.name }),
+          s.isNew ? h("span", { class: "srclist__new", text: "방금 추가" }) : null,
         ]);
-      })));
-    });
+      })),
+      h("p", { class: "modal__note", text: "방금 올린 자료는 이 화면에만 더해집니다. 정리 엔진에 넣는 것은 아직 연결되지 않았어요." }),
+    ]));
+  }
 
-    return h("div", { class: "srcbar" + (vertical ? " srcbar--stack" : "") }, [
-      h("a", { class: "srcbar__btn srcbar__btn--add", href: "new.html" }, [h("span", { text: "+  자료 추가하기" })]),
-      open,
+  /** 자료는 목록으로 늘어놓지 않고 버튼 뒤에 둔다. */
+  function sourcesBar(c, vertical) {
+    var count = h("span", { class: "srcbar__count", text: String(c.sources.length) });
+
+    var open = h("button", { type: "button", class: "srcbar__btn" }, [
+      h("span", { text: "첨부한 자료" }),
+      count,
     ]);
+    open.addEventListener("click", function () { sourceListModal(c); });
+
+    var add = h("button", { type: "button", class: "srcbar__btn srcbar__btn--add" }, [h("span", { text: "+  자료 추가하기" })]);
+    add.addEventListener("click", function () { pickFiles(addFiles); });
+
+    function addFiles(picked) {
+      c.sources = c.sources.concat(picked);
+      count.textContent = String(c.sources.length);
+      sourceListModal(c);
+    }
+    addFilesHandler = addFiles;   // 상단 메뉴의 '자료 추가하기'도 같은 일을 한다
+
+    return h("div", { class: "srcbar" + (vertical ? " srcbar--stack" : "") }, [add, open]);
   }
 
   function renderCase(root) {
