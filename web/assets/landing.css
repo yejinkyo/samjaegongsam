@@ -168,9 +168,6 @@ body[data-page="landing"] .lp-title { animation: lp-title-glow 3.6s ease-in-out 
 .lp-btn--ghost { border: 1.5px solid rgba(94, 61, 187, 0.4); color: var(--brand-primary); background: rgba(255, 255, 255, 0.6); }
 .lp-btn--ghost:hover { border-color: var(--brand-primary); background: #fff; transform: translateY(-2px); }
 
-/* 첫 화면 안, 어두운 바탕 위에 있다 */
-.lp-note { font: 400 12.5px/1.6 var(--font); color: var(--lp-dim); }
-
 /* ── 좁은 화면 ──────────────────────────────────────────── */
 @media (max-width: 900px) {
   .lp-hero { grid-template-columns: 1fr; padding: 72px 28px 96px; gap: 24px; }
