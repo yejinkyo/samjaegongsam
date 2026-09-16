@@ -177,65 +177,62 @@
 
   // ── 01 내 사건 ──────────────────────────────────────────
 
-  /** 목록에서 그 사건이 가졌던 띠 색. 상세 화면도 같은 색을 써서 '그 카드를 열었다'가 보이게 한다. */
+  /** 카드 앞면에 적는 한 줄. 엔진이 준 단계 값에서만 만든다. */
+  function caseStatus(c) {
+    var current = (c.stages || []).filter(function (s) { return s.state === "current"; })[0];
+    if (!current) return "진행 상태 확인 필요";
+    // '중지'는 그 자체가 상태다 — '중지 단계'라고 쓰지 않는다
+    if (current.label === "중지") return "중지";
+    return current.label + " 단계";
+  }
+
+  /** 목록에서 그 사건이 가졌던 카드 색. 상세 화면도 같은 색을 써서 '그 카드를 열었다'가 보이게 한다. */
   function toneOf(c) {
     var i = CASES.indexOf(c);
     return ((i < 0 ? 0 : i) % 3) + 1;
   }
 
-  /** 사건 하나 = 네모 카드 하나. 접어 두는 것 없이 한눈에 다 보이게 둔다. */
-  function caseCard(c, tone) {
+  function folder(c, tone) {
     var next = c.next_action;
     var due = next && next.due;
 
-    return h("a", { class: "card case-card case-card--tone" + tone, href: caseHref(c.id) }, [
-      h("span", { class: "case-card__band", "aria-hidden": "true" }),
-      h("div", { class: "case-card__top" }, [
-        h("span", { class: "tag t-label", text: c.type_label }),
-        h("div", { class: "case-card__top-right" }, [
-          h("span", { class: "t-caption c-tertiary", text: "기준일 " + c.as_of }),
-          // 기한은 놓치면 되돌릴 수 없어서 맨 위에 그대로 둔다
-          due ? h("span", { class: "due-pill t-label", text: due.label }) : null,
+    return h("a", { class: "folder folder--tone" + tone, href: caseHref(c.id) }, [
+      h("div", { class: "folder__body" }, [
+        // 기한은 놓치면 되돌릴 수 없어서 마우스를 올리기 전에도 보이게 둔다
+        due ? h("span", { class: "folder__due t-label", text: due.label }) : null,
+        h("p", { class: "folder__title t-title", text: c.title }),
+        h("p", { class: "folder__status t-body-l", text: caseStatus(c) }),
+        h("div", { class: "folder__peek" }, [
+          h("p", { class: "folder__meta t-body-s", text: "확인 필요 " + c.need_count + " · 자료 " + c.doc_count + "개" }),
+          h("p", { class: "folder__next t-body-m-strong", text: next ? next.label : "판단할 수 있는 행동이 아직 없어요" }),
+          h("span", { class: "folder__more t-body-m-strong" }, [
+            h("span", { text: "자세히 보기" }),
+            icon("chevron-right", 20),
+          ]),
         ]),
-      ]),
-      h("div", { class: "case-card__titles" }, [
-        h("p", { class: "t-title c-primary", text: c.title }),
-        h("p", { class: "t-body-s c-tertiary", text: c.period + " · 자료 " + c.doc_count + "개" }),
-      ]),
-      // 어느 단계까지 왔는지는 마우스를 올리기 전에도 보여야 한다
-      track(c.stages, false),
-      h("div", { class: "stats" }, [
-        h("span", { class: "stat stat--need t-label", text: "확인 필요 " + c.need_count }),
-        h("span", { class: "stat t-label", text: "확보 자료 " + c.doc_count }),
-      ]),
-      h("div", { class: "divider" }),
-      h("div", { class: "case-card__next" }, [
-        h("div", { class: "case-card__next-text" }, [
-          h("p", { class: "t-caption c-brand", text: "다음 행동" }),
-          h("p", { class: "t-body-m-strong c-primary", text: next ? next.label : "판단할 수 있는 행동이 아직 없어요" }),
-        ]),
-        icon("chevron-right"),
       ]),
     ]);
   }
 
   function renderHome(root) {
-    var grid = h("div", { class: "case-grid" });
-    CASES.forEach(function (c) { grid.appendChild(caseCard(c, toneOf(c))); });
+    var grid = h("div", { class: "folder-grid" });
+    CASES.forEach(function (c) { grid.appendChild(folder(c, toneOf(c))); });
 
-    grid.appendChild(h("a", { class: "new-card", href: "new.html" }, [
-      h("span", { class: "circle-56" }, [icon("plus")]),
-      h("p", { class: "t-heading c-secondary", text: "사건 등록" }),
-      h("p", { class: "t-body-s c-tertiary", text: "유형을 고르고 자료를 올리면 정리가 시작돼요" }),
+    grid.appendChild(h("a", { class: "folder folder--new", href: "new.html" }, [
+      h("div", { class: "folder__body" }, [
+        h("span", { class: "circle-56" }, [icon("plus")]),
+        h("p", { class: "t-heading c-secondary", text: "사건 등록" }),
+        h("p", { class: "t-body-s c-tertiary", text: "유형을 고르고 자료를 올리면 정리가 시작돼요" }),
+      ]),
     ]));
 
     root.appendChild(h("main", { class: "page page--home" }, [
+      // 새 사건 등록은 그리드 끝의 점선 폴더가 맡는다 — 머리말에 같은 버튼을 두지 않는다
       h("div", { class: "page-head" }, [
         h("div", { class: "page-head__title" }, [
           h("h1", { class: "t-display c-primary", text: "내 사건" }),
           h("p", { class: "t-body-l c-secondary", text: "사건 카드를 선택하면 정리된 타임라인을 볼 수 있어요." }),
         ]),
-        // 새 사건 등록은 그리드 끝의 점선 카드가 맡는다 — 머리말에 같은 버튼을 두지 않는다
       ]),
       grid,
     ]));
@@ -411,8 +408,8 @@
     });
 
     drawList();
-    // 목록 끝의 점선 카드가 여기서 이어진다
-    var sections = h("div", { class: "new-stack" }, [
+    // 빈 카드를 하나 새로 만들어 채우는 화면 — 목록의 점선 카드가 여기서 이어진다
+    var folderBody = h("div", { class: "new-folder__body" }, [
       h("div", { class: "page-head page-head--stack" }, [
         h("h1", { class: "t-display c-primary", text: "새 사건 등록" }),
         h("p", { class: "t-body-l c-secondary", text: "사건 유형을 고르고 가진 자료를 올려주세요. 자료가 적어도 시작할 수 있어요." }),
@@ -445,7 +442,10 @@
       ]),
     ]);
 
-    root.appendChild(h("main", { class: "page page--new" }, [backLink(), sections]));
+    root.appendChild(h("main", { class: "page page--new" }, [
+      backLink(),
+      folderBody,
+    ]));
   }
 
   // ── 03 사건 상세 ────────────────────────────────────────
@@ -969,24 +969,25 @@
     ]));
     root.appendChild(h("main", { class: "page page--case" }, [
       backLink(),
-      // 목록에서 고른 카드를 펼친 머리말 — 색 띠를 그대로 물려받는다
-      h("section", { class: "card case-head case-head--tone" + toneOf(c) }, [
-        h("span", { class: "case-card__band", "aria-hidden": "true" }),
-        h("div", { class: "case-head__info" }, [
-          h("div", { class: "case-head__tags" }, [
-            h("span", { class: "tag t-label", text: c.type_label }),
-            h("span", { class: "t-caption c-tertiary", text: "기준일 " + c.as_of }),
-            // 기한은 목록 카드에서와 같이 항상 보이게 둔다
-            c.next_action && c.next_action.due
-              ? h("span", { class: "due-pill t-label", text: c.next_action.due.label })
-              : null,
+      // 목록에서 고른 카드를 펼친 화면 — 색을 그대로 물려받는다
+      h("section", { class: "case-folder folder--tone" + toneOf(c) }, [
+        h("div", { class: "case-folder__body" }, [
+          h("div", { class: "case-head__info" }, [
+            h("div", { class: "case-head__tags" }, [
+              h("span", { class: "case-folder__type t-label", text: c.type_label }),
+              h("span", { class: "t-caption case-folder__dim", text: "기준일 " + c.as_of }),
+              // 기한은 폴더 앞면에서와 같이 항상 보이게 둔다
+              c.next_action && c.next_action.due
+                ? h("span", { class: "case-folder__due t-label", text: c.next_action.due.label })
+                : null,
+            ]),
+            h("h1", { class: "t-display", text: c.title }),
+            h("p", { class: "case-head__meta t-body-m case-folder__dim", text: c.period + "  ·  자료 " + c.doc_count + "개  ·  확인 필요 " + c.need_count }),
           ]),
-          h("h1", { class: "t-display c-primary", text: c.title }),
-          h("p", { class: "case-head__meta t-body-m c-secondary", text: c.period + "  ·  자료 " + c.doc_count + "개  ·  확인 필요 " + c.need_count }),
-        ]),
-        h("div", { class: "case-head__progress" }, [
-          h("span", { class: "t-caption c-tertiary", text: "진행 단계" }),
-          track(c.stages, true),
+          h("div", { class: "case-head__progress" }, [
+            h("span", { class: "t-caption case-folder__dim", text: "진행 단계" }),
+            track(c.stages, true),
+          ]),
         ]),
       ]),
       tabs,
