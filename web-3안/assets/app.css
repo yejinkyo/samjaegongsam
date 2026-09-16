@@ -193,12 +193,10 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   background: var(--status-conflict-bg); color: var(--status-conflict);
 }
 
-/* 마우스를 올리거나 키보드 포커스가 오면 열리는 부분 */
+/* 접지 않고 늘 보여주는 부분 — 손가락으로 쓰는 화면에는 마우스 올림이 없다 */
 .folder__peek {
   display: flex; flex-direction: column; gap: 4px;
   margin-top: auto; padding-top: 12px;
-  opacity: 0; transform: translateY(6px);
-  transition: opacity 0.18s ease, transform 0.18s ease;
 }
 .folder__meta { color: inherit; opacity: 0.62; }
 .folder__next { color: inherit; opacity: 0.92; }
@@ -211,8 +209,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 .folder:hover .folder__body,
 .folder:focus-visible .folder__body { transform: translateY(-6px); box-shadow: 0 18px 40px -16px rgba(46, 27, 97, 0.45); }
-.folder:hover .folder__peek,
-.folder:focus-visible .folder__peek { opacity: 1; transform: none; }
 .folder:focus-visible { outline: none; }
 .folder:focus-visible .folder__body { box-shadow: 0 0 0 3px var(--brand-primary), 0 18px 40px -16px rgba(46, 27, 97, 0.45); }
 
@@ -229,7 +225,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .folder--new:focus-visible .folder__body { border-color: var(--brand-primary); box-shadow: none; }
 
 @media (prefers-reduced-motion: reduce) {
-  .folder__body, .folder__peek { transition: none; }
+  .folder__body { transition: none; }
   .folder:hover .folder__body { transform: none; }
 }
 .stats { display: flex; gap: 10px; }
