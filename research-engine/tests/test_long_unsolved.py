@@ -29,7 +29,7 @@ def test_later_sighting_flagged_as_unrecorded_fact(result):
     assert issue.category is IssueCategory.UNVERIFIED
     assert issue.trigger.key == "missing_person_suspended/occurrence/new_fact/unrecorded_fact"
     assert {s.source_doc_id for s in issue.sources} == {"witness_statement_2019", "petition_2023"}
-    assert "수사중지 결정 통지서" in issue.message and "앞선" in issue.message
+    assert "수사결과 통지서" in issue.message and "앞선" in issue.message
     assert issue.trigger.since.year == 2019
 
 
