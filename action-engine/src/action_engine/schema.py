@@ -90,7 +90,10 @@ class SubmissionResponse(BaseModel):
 
     received_at: date
     doc_id: str | None = Field(default=None, description="회신 통지서 문서 id. 없으면 받았다는 말뿐이다")
-    decision_type: str | None = Field(default=None, description="결정 내용. 지식베이스 용어로만 적는다")
+    decision_type: str | None = Field(
+        default=None,
+        description="결정 내용. DECISION_TABLE 에 있는 말만 뜻이 있고, 없는 말은 판정에 쓰지 않는다",
+    )
 
 
 class Submission(BaseModel):

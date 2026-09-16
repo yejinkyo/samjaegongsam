@@ -768,12 +768,36 @@
     saveSubs(all);
   }
 
-  /** 아직 내지 않은 것 중 가장 앞선 행동. 전부 냈으면 null. */
+  /** 지금 해야 할 행동 하나. 없으면 null.
+   *
+   * 답을 기다리는 중인 행동만 내린다. 답이 온 것은 그 건이 끝난 것이고, 그 답으로
+   * 새 기한이 열릴 수 있다 — 불기소 통지를 받으면 항고 기한이 열리는 식이다.
+   * 그때는 엔진이 그 답으로 미리 계산해 둔 행동(outcome.next_key)을 쓴다.
+   */
   function activeAction(c) {
-    var done = {};
-    subsOf(c.id).forEach(function (s) { done[s.action] = true; });
     var list = (c.actions && c.actions.length) ? c.actions : (c.next_action ? [c.next_action] : []);
-    var left = list.filter(function (a) { return !done[a.action]; });
+    if (!list.length) return null;
+
+    var waiting = {};
+    var answered = null;
+    subsOf(c.id).forEach(function (s) {
+      if (!s.response) { waiting[s.action] = true; return; }
+      if (s.response.decision_type && (!answered || s.response.received_at > answered.response.received_at)) answered = s;
+    });
+
+    var outcome = answered ? outcomeOf(c, answered) : null;
+    if (outcome && outcome.next_key) {
+      var picked = list.filter(function (a) { return a.action === outcome.next_key; })[0];
+      if (picked && !waiting[picked.action]) {
+        // 기한은 이 카드에 실린 옛 값이 아니라 '낸 것' 카드에서 받은 날짜로 다시 센다
+        var copy = {};
+        for (var k in picked) if (picked.hasOwnProperty(k)) copy[k] = picked[k];
+        copy.due = null;
+        return copy;
+      }
+    }
+
+    var left = list.filter(function (a) { return !waiting[a.action]; });
     return left.length ? left[0] : null;
   }
 
@@ -803,6 +827,31 @@
     var days = waitingDays(sub);
     if (days === null) return "회신 기다리는 중";
     return days === 0 ? "오늘 냈어요 · 회신 기다리는 중" : "회신 기다리는 중 · " + days + "일째";
+  }
+
+  // 「회신 왔어요」에서 고를 수 있는 답. 목록도 결과도 엔진이 내보낸 것을 그대로 쓴다.
+  var UNKNOWN_CHOICE = "잘 모르겠어요";
+
+  /** 기한 = 통지 수령일 + 기간. 엔진이 하는 계산과 같은 식이다(rules.compute_deadlines). */
+  function dueFrom(received, periodDays) {
+    var p = String(received).split("-");
+    if (p.length !== 3 || periodDays === null || periodDays === undefined) return null;
+    var d = new Date(Number(p[0]), Number(p[1]) - 1, Number(p[2]) + periodDays);
+    var now = new Date();
+    var left = Math.round((d - new Date(now.getFullYear(), now.getMonth(), now.getDate())) / 86400000);
+    // 급한 정도를 가르는 기준도 엔진과 같다 (CRITICAL_DAYS 7 · SOON_DAYS 30)
+    var sev = left < 0 ? "expired" : left <= 7 ? "critical" : left <= 30 ? "soon" : "ok";
+    return {
+      text: d.getFullYear() + "." + ("0" + (d.getMonth() + 1)).slice(-2) + "." + ("0" + d.getDate()).slice(-2) + "까지",
+      days: left,
+      severity: sev
+    };
+  }
+
+  /** 기록한 답이 사건을 어떻게 바꾸는지. 엔진이 답마다 미리 내 준 결과에서 꺼낸다. */
+  function outcomeOf(c, sub) {
+    if (!sub.response || !sub.response.decision_type) return null;
+    return (c.outcomes || {})[sub.response.decision_type] || null;
   }
 
   /** 「냈어요」 — 낸 날짜와 접수증을 받는다. 어디로도 보내지 않는다. */
@@ -867,6 +916,13 @@
     var day = h("input", { id: "res-day", type: "date", class: "field__input", value: maxDay, min: sub.submitted_at, max: maxDay });
     var hint = h("p", { class: "field__hint", text: "통지서를 받은 날짜예요." });
 
+    // 고를 수 있는 답은 엔진이 읽을 수 있는 말뿐이다 — 목록을 화면에서 지어내지 않는다
+    var choices = (c.response_choices || []).concat([UNKNOWN_CHOICE]);
+    var what = h("select", { id: "res-what", class: "field__input" },
+      choices.map(function (name) { return h("option", { value: name, text: name }); }));
+    what.value = UNKNOWN_CHOICE;
+    var whatHint = h("p", { class: "field__hint", text: "통지서에 적힌 결정 이름이에요. 모르겠으면 그대로 두세요." });
+
     var save = h("button", { type: "button", class: "modal__save", text: "회신 받았다고 기록하기" });
     save.addEventListener("click", function () {
       if (!day.value) {
@@ -875,7 +931,10 @@
         day.focus();
         return;
       }
-      sub.response = { received_at: day.value };
+      sub.response = {
+        received_at: day.value,
+        decision_type: what.value === UNKNOWN_CHOICE ? null : what.value,
+      };
       putSub(c.id, sub);
       var dialog = document.querySelector("dialog.modal");
       if (dialog) dialog.close();
@@ -886,8 +945,9 @@
       h("p", { class: "t-body-m c-primary", text: sub.label }),
       h("p", { class: "t-body-s c-secondary", text: dotDay(sub.submitted_at) + "에 냈어요" }),
       h("div", { class: "field" }, [h("label", { for: "res-day", text: "언제 받았나요?" }), day, hint]),
+      h("div", { class: "field" }, [h("label", { for: "res-what", text: "어떤 결정이었나요?" }), what, whatHint]),
       save,
-      h("p", { class: "modal__note", text: "어떤 결정이었는지는 통지서를 자료로 올려야 읽을 수 있어요. 여기서는 받았다는 사실과 날짜만 기록합니다." }),
+      h("p", { class: "modal__note", text: "고른 결정으로 사건 단계와 다음 행동을 다시 계산합니다. 통지서를 자료로 올리면 기록으로 확인된 것으로 바뀝니다." }),
     ]));
   }
 
@@ -909,13 +969,40 @@
       undo.addEventListener("click", function () { dropSub(c.id, sub.action); refresh(); });
       actions.appendChild(undo);
 
+      // 받은 답이 사건을 어떻게 바꾸는지. 엔진이 답마다 미리 낸 결과를 그대로 읽는다.
+      var outcome = outcomeOf(c, sub);
+      var result = null;
+      if (outcome) {
+        var lines = [
+          h("p", { class: "sub__outcome-head t-label", text: "이 답으로 달라진 것" }),
+          h("p", { class: "t-body-s", text: "사건 단계 · " + outcome.st }),
+        ];
+        (outcome.deadlines || []).forEach(function (t) {
+          var due = dueFrom(sub.response.received_at, t.period_days);
+          if (!due) return;
+          lines.push(h("div", { class: "sub__due sev-" + due.severity }, [
+            h("p", { class: "t-body-m-strong", text: t.label + " · " + due.text }),
+            h("p", { class: "t-body-s", text: due.days < 0 ? "기한 지남" : "D-" + due.days }),
+            t.submit_to ? h("p", { class: "t-body-s", text: "어디에 · " + t.submit_to }) : null,
+            t.statute ? h("p", { class: "t-caption", text: t.statute }) : null,
+          ]));
+        });
+        if (outcome.next) lines.push(h("p", { class: "t-body-s", text: "다음 행동 · " + outcome.next }));
+        lines.push(h("p", { class: "t-caption sub__outcome-note", text: "고르신 결정으로 계산했어요. 통지서를 자료로 올리면 기록으로 확인된 것이 됩니다." }));
+        result = h("div", { class: "sub__outcome" }, lines);
+      }
+
       return h("div", { class: "sub" }, [
         h("p", { class: "sub__label t-body-m-strong", text: sub.label }),
         h("p", { class: "sub__when t-body-s", text: dotDay(sub.submitted_at) + "에 냄" + (sub.to ? " · " + sub.to : "") }),
         waiting,
+        sub.response && sub.response.decision_type
+          ? h("p", { class: "sub__answer t-body-m-strong", text: "받은 답 · " + sub.response.decision_type })
+          : null,
         sub.receipt
           ? h("p", { class: "sub__receipt t-body-s", text: "접수증 · " + sub.receipt })
           : h("p", { class: "sub__receipt sub__receipt--none t-body-s", text: "낸 기록이 자료로 남아 있지 않아요 (접수증 없음)" }),
+        result,
         actions,
       ]);
     }));

@@ -42,6 +42,37 @@ def waiting_days(sub: Submission, as_of: date) -> int | None:
     return max((as_of - sub.submitted_at).days, 0)
 
 
+def latest_answer(submissions: list[Submission]) -> Submission | None:
+    """받은 답 중 가장 나중 것. 결정 내용이 적힌 것만 센다."""
+    answered = [s for s in submissions if s.response and s.response.decision_type]
+    return max(answered, key=lambda s: s.response.received_at) if answered else None
+
+
+def st_from_responses(submissions: list[Submission]) -> CodeHit | None:
+    """받은 답 중 가장 나중 것으로 사건 단계를 다시 판정한다. 판정할 수 없으면 None.
+
+    결정 내용을 읽는 표는 자료에서 읽을 때와 같은 것을 쓴다(``mapping.DECISION_TABLE``).
+    표에 없는 말은 판정에 쓰지 않는다 — 모르는 결정을 아는 척하지 않는다.
+
+    다만 **'추정'으로만 올린다.** 통지서를 자료로 올린 게 아니라 사용자가 고른 값이다.
+    자료로 확인된 결정과 같은 무게로 두면 안 된다.
+    """
+    from .mapping import st_from_decision
+
+    latest = latest_answer(submissions)
+    if not latest:
+        return None
+
+    hit = st_from_decision(latest.response.decision_type, confirmed=False)
+    if not hit:
+        return None
+    hit.reason = (
+        f"{latest.response.received_at:%Y-%m-%d} 에 받은 답을 "
+        f"'{latest.response.decision_type}' 로 기록하셨습니다 (통지서는 아직 자료함에 없습니다)"
+    )
+    return hit
+
+
 def _label_of(sub: Submission) -> str:
     """사람이 읽을 이름이 없으면 행동 키를 그대로 쓴다 — 문구를 지어내지 않는다."""
     return sub.action
@@ -50,9 +81,14 @@ def _label_of(sub: Submission) -> str:
 def apply(card: CaseCardOut, submissions: list[Submission], as_of: date) -> CaseCardOut:
     """낸 기록을 카드에 반영한다. 원본은 건드리지 않고 새 카드를 돌려준다.
 
-    1. 이미 낸 행동은 다음 행동에서 내린다. 참고사항에는 남겨 둔다 — 없앴다가는
-       무엇을 냈는지가 화면에서 사라진다. (기한이 지났더라도 마찬가지다.
+    1. **답을 기다리는 중인** 행동은 다음 행동에서 내린다. 참고사항에는 남겨 둔다 —
+       없앴다가는 무엇을 냈는지가 화면에서 사라진다. (기한이 지났더라도 마찬가지다.
        낸 뒤에 기한이 지난 것과 안 내고 기한이 지난 것은 다른 상황이다.)
+
+       답이 온 것은 내리지 않는다. 그 건은 끝났고, 답에 따라 새 기한이 생긴다.
+       불기소 통지를 받으면 항고 기한이, 항고가 기각되면 재정신청 기한이 열린다 —
+       셋 다 행동 키는 ACT-불복기한 하나다. 낸 적이 있다고 영영 내려 버리면
+       새로 열린 기한을 놓친다.
     2. 접수증 없는 제출은 INF-041 로 남긴다.
     3. 답을 기다리는 중이면 INF-042 로 기다린 날수를 남긴다.
     """
@@ -62,7 +98,7 @@ def apply(card: CaseCardOut, submissions: list[Submission], as_of: date) -> Case
     out = card.model_copy(deep=True)
     out.submissions = list(submissions)
 
-    done = {s.action for s in submissions}
+    done = {s.action for s in submissions if not s.response}
     if out.next_action and out.next_action.action in done:
         moved = out.next_action
         nxt = [a for a in out.also if a.action not in done]

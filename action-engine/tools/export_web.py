@@ -465,6 +465,48 @@ def _action(card, hit, result: dict[str, Any]) -> dict[str, Any] | None:
     }
 
 
+# 「회신 왔어요」에서 고를 수 있는 결정 내용.
+# mapping.DECISION_TABLE 이 읽을 수 있는 말만 둔다 — 표에 없는 말을 고르게 해 놓고
+# 아무 일도 일어나지 않으면 사용자는 기능이 고장 난 줄 안다.
+RESPONSE_CHOICES = ["불송치", "불기소", "항고 기각", "피의자중지", "참고인중지", "기소"]
+
+
+def _outcomes(case_id: str, result: dict[str, Any]) -> dict[str, Any]:
+    """결정 내용마다 사건이 어떻게 달라지는지 미리 계산해 둔다.
+
+    화면은 정적 파일이라 엔진을 부를 수 없다. 그래서 고를 수 있는 답마다 엔진을 한 번씩
+    돌려 결과를 실어 보낸다. 화면이 규칙을 흉내 내는 것이 아니라 엔진이 낸 답을 고르는 것이다.
+    """
+    from datetime import date as _date
+
+    from action_engine import Submission, SubmissionResponse
+
+    out: dict[str, Any] = {}
+    received = _date.fromisoformat(result["as_of"])   # 기준일에 받았다고 두고 계산한다
+    for choice in RESPONSE_CHOICES:
+        sub = Submission(
+            submission_id="preview", action="ACT-회신", submitted_at=received,
+            response=SubmissionResponse(received_at=received, decision_type=choice),
+        )
+        card = build_card(result, [sub])
+        live = [t for t in card.tim if t.due_date]
+        out[choice] = {
+            "st": card.st.label,
+            "next": ACTION_LABELS.get(card.next_action.action, card.next_action.action) if card.next_action else None,
+            # 화면이 actions 목록에서 이 행동을 찾아 그대로 그린다
+            "next_key": card.next_action.action if card.next_action else None,
+            # 날짜는 굳히지 않고 기간만 넘긴다 — 사용자가 고른 통지 수령일로 화면이 더한다.
+            # (엔진이 하는 계산과 같다: 기한 = 통지 수령일 + period_days)
+            "deadlines": [{
+                "label": t.label,
+                "period_days": t.period_days,
+                "statute": t.statute,
+                "submit_to": t.submit_to,
+            } for t in live],
+        }
+    return out
+
+
 def _actions(card, result: dict[str, Any]) -> list[dict[str, Any]]:
     """다음 행동 후보를 우선순위 순서로. 첫 줄이 지금의 다음 행동이다."""
     hits = ([card.next_action] if card.next_action else []) + list(card.also)
@@ -496,6 +538,9 @@ def build_view(case_id: str, title: str, result: dict[str, Any]) -> dict[str, An
         "next_action": _action(card, card.next_action, result),
         # 화면이 '냈어요'를 기록하면 이 목록에서 다음 순위를 꺼내 쓴다
         "actions": _actions(card, result),
+        # 「회신 왔어요」에서 답을 고르면 이 표에서 그 답의 결과를 꺼내 쓴다
+        "response_choices": RESPONSE_CHOICES,
+        "outcomes": _outcomes(case_id, result),
     }
 
 

@@ -629,6 +629,18 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .sub__undo { padding: 8px 6px; color: var(--text-tertiary); text-decoration: underline; text-underline-offset: 3px; }
 .sub__undo:hover { color: var(--text-secondary); }
 
+/* 받은 답이 사건을 어떻게 바꾸는지 — 낸 것 카드 안에 이어 붙인다 */
+.sub__answer { margin-top: 2px; color: var(--brand-primary); }
+.sub__outcome { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; padding: 12px 14px; border-radius: 10px; background: var(--bg-elevated); }
+.sub__outcome-head { color: var(--text-tertiary); }
+.sub__outcome-note { color: var(--text-tertiary); }
+.sub__due { display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border-radius: 8px; background: var(--bg-sunken); box-shadow: inset 3px 0 0 var(--bar, var(--border-strong)); }
+.sub__due .t-caption { color: var(--text-tertiary); }
+.sub__due.sev-expired { --bar: var(--status-conflict); background: var(--status-conflict-bg); }
+.sub__due.sev-critical { --bar: var(--status-conflict); background: var(--status-conflict-bg); }
+.sub__due.sev-soon { --bar: var(--status-unverified); background: var(--status-unverified-bg); }
+.sub__due.sev-ok { --bar: var(--status-verified); background: var(--status-verified-bg); }
+
 /* 「냈어요」 팝업 — 무엇을 내는지 먼저 보여 준다 */
 .sub__what { display: flex; flex-direction: column; gap: 4px; padding: 14px 16px; border-radius: 12px; background: var(--bg-sunken); }
 
