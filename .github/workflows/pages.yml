@@ -36,7 +36,12 @@ jobs:
       - name: 커밋된 화면 데이터가 있는지 확인
         run: test -f web/data/cases.js || (echo "web/data/cases.js 가 없습니다 — export_web.py 를 돌려 커밋하세요" && exit 1)
 
+      # 저장소 설정에서 Pages 를 아직 안 켰으면 여기서 켠다. 이 워크플로의 pages: write
+      # 권한으로 되는 일이라 사람이 설정 화면에 들어가지 않아도 된다. 조직 정책 때문에
+      # 막히면 그때만 Settings → Pages → Source 를 'GitHub Actions' 로 바꾸면 된다.
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: web
