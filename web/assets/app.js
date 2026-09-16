@@ -7,7 +7,27 @@
 (function () {
   "use strict";
 
-  var CASES = window.TARAE_CASES || [];
+  /* 누가 보고 있는가.
+   *
+   * 서버가 없어 진짜 로그인은 없다. 여기 있는 것은 '데모 계정으로 들어왔는지'
+   * 하나뿐이고, 비밀번호는 담지도 않는다(auth.js 참고).
+   *
+   * 새로 가입한 사람에게 데모 사건을 보여주면 남의 사건을 자기 것으로 읽는다.
+   * 그래서 가입해서 들어온 화면은 빈 서류함에서 시작한다.
+   */
+  var SESSION_KEY = "tarae.session";
+
+  function session() {
+    try { return JSON.parse(localStorage.getItem(SESSION_KEY)) || null; } catch (e) { return null; }
+  }
+
+  /** 데모 사건을 보여줄 것인가. 기록이 없으면 보여준다 — 화면만 열어 보는 경우다. */
+  function showsDemo() {
+    var me = session();
+    return !me || me.demo !== false;
+  }
+
+  var CASES = showsDemo() ? (window.TARAE_CASES || []) : [];
 
   function h(tag, attrs, children) {
     var node = document.createElement(tag);
@@ -136,12 +156,22 @@
       { label: "새 사건 등록", href: "new.html" },
     ]);
 
+    var me = session();
     var avatar = h("button", { type: "button", class: "nav__avatar", "aria-label": "내 정보" }, [
-      h("span", { class: "t-label c-brand", text: "나" }),
+      h("span", { class: "t-label c-brand", text: me && me.name ? me.name.slice(0, 1) : "나" }),
     ]);
+    var logout = { label: "로그아웃", danger: true, onClick: function () {
+      try { localStorage.removeItem(SESSION_KEY); } catch (e) { /* 지우지 못해도 나간다 */ }
+      location.href = "index.html";
+    } };
     var account = dropdown(avatar, [
-      { label: "내 정보", onClick: function () { openModal("내 정보", h("p", { class: "help__text", text: "계정 화면은 아직 준비 중이에요." })); } },
-      { label: "로그아웃", href: "index.html", danger: true },
+      { label: "내 정보", onClick: function () {
+        openModal("내 정보", h("div", { class: "help" }, [
+          h("p", { class: "help__text", text: me && me.name ? "아이디 · " + me.name : "데모 화면을 보고 있어요." }),
+          h("p", { class: "help__text", text: "지금은 화면만 있는 데모예요. 실제 계정이 만들어지지는 않습니다." }),
+        ]));
+      } },
+      logout,
     ]);
 
     var help = h("button", { type: "button", class: "nav__link t-body-m c-secondary", text: "도움말" });
@@ -223,7 +253,7 @@
   }
 
   function renderHome(root) {
-    var grid = h("div", { class: "folder-grid" });
+    var grid = h("div", { class: "folder-grid" + (CASES.length ? "" : " folder-grid--empty") });
     CASES.forEach(function (c) { grid.appendChild(folder(c, toneOf(c))); });
 
     grid.appendChild(h("a", { class: "folder folder--new", href: "new.html" }, [
@@ -240,7 +270,9 @@
       h("div", { class: "page-head" }, [
         h("div", { class: "page-head__title" }, [
           h("h1", { class: "t-display c-primary", text: "내 사건" }),
-          h("p", { class: "t-body-l c-secondary", text: "사건 카드를 선택하면 정리된 타임라인을 볼 수 있어요." }),
+          h("p", { class: "t-body-l c-secondary", text: CASES.length
+            ? "사건 카드를 선택하면 정리된 타임라인을 볼 수 있어요."
+            : "아직 등록한 사건이 없어요. 첫 사건을 등록하면 여기에 쌓입니다." }),
         ]),
       ]),
       grid,
@@ -463,13 +495,15 @@
   // ── 03 사건 상세 ────────────────────────────────────────
 
   /** 팝업. 자료 목록·행동 설명처럼 평소엔 접어 두는 것을 담는다. */
-  function openModal(title, body) {
+  function openModal(title, body, headAction) {
     // 닫힌 팝업이 남아 있으면 먼저 치운다 — close 이벤트가 늦게 오는 브라우저가 있다
     document.querySelectorAll("dialog.modal").forEach(function (old) { old.remove(); });
 
     var dialog = h("dialog", { class: "modal" }, [
       h("div", { class: "modal__head" }, [
         h("h2", { class: "t-heading c-primary", text: title }),
+        // 그 팝업에서 바로 할 수 있는 일이 있으면 닫기 옆에 둔다
+        headAction || null,
         h("button", { type: "button", class: "modal__close", "aria-label": "닫기", text: "✕" }),
       ]),
       h("div", { class: "modal__body" }, [body]),
@@ -1022,6 +1056,120 @@
     ]);
   }
 
+  // ── 서류 초안 ────────────────────────────────────────────────────────
+  //
+  // 엔진(action_engine.draft)이 조립한 것을 그대로 그린다. 화면에서 문장을 짓지 않는다.
+  // 초안 표시는 뗄 수 없다 — 사람이 읽고 고치기 전에는 제출용이 아니다.
+
+  var LEVEL_LABEL = { record: "기록", statement: "진술" };
+
+  /** 복사해 갈 글. 화면에 보이는 것과 같은 내용이어야 한다. */
+  function draftText(c, d) {
+    var nl = String.fromCharCode(10);
+    var lines = ["[초안] " + d.form_name, "사건 · " + c.title, ""];
+
+    lines.push("■ 적을 것");
+    d.fields.forEach(function (f) { lines.push("  " + f.label + ": " + f.value); });
+    if (d.unfilled.length) {
+      lines.push("");
+      lines.push("■ 직접 적어야 하는 것");
+      d.unfilled.forEach(function (f) { lines.push("  " + f.label + ": (" + f.reason + ")"); });
+    }
+
+    d.sections.forEach(function (sec) {
+      lines.push("");
+      lines.push("■ " + sec.heading);
+      if (sec.heading === "사건 경위" && d.prose) {
+        lines.push("  " + d.prose);
+        lines.push("");
+        lines.push("  (아래는 위 문장이 어느 자료에서 나왔는지입니다)");
+      }
+      if (!sec.lines.length && sec.note) lines.push("  (" + sec.note + ")");
+      sec.lines.forEach(function (ln) {
+        lines.push("  " + (ln.date ? ln.date + " " : "") + ln.text
+          + "  [" + (LEVEL_LABEL[ln.level] || ln.level) + " · " + ln.source + "]");
+      });
+    });
+
+    lines.push("");
+    lines.push("※ 타래가 자료에서 뽑아 만든 초안입니다. 그대로 내지 마시고 읽어 보고 고쳐 주세요.");
+    return lines.join(nl);
+  }
+
+  function draftModal(c, d) {
+    var body = h("div", { class: "draft" }, [
+      h("p", { class: "draft__badge t-label", text: "초안 · 그대로 내지 마세요" }),
+      h("div", { class: "draft__head" }, [
+        h("p", { class: "t-heading c-primary", text: d.form_name }),
+        d.form_source ? h("p", { class: "t-body-s c-secondary", text: d.form_source }) : null,
+        d.form_url
+          ? h("a", { class: "draft__link t-body-s", href: d.form_url, target: "_blank", rel: "noopener", text: "공식 서식 내려받기" })
+          : null,
+      ]),
+    ]);
+
+    // 채운 칸 — 어디서 왔는지를 같이 적는다
+    body.appendChild(h("p", { class: "draft__h t-label", text: "적을 것" }));
+    body.appendChild(h("div", { class: "draft__fields" }, d.fields.map(function (f) {
+      return h("div", { class: "draft__field" }, [
+        h("span", { class: "draft__key t-caption", text: f.label }),
+        h("span", { class: "draft__val t-body-s", text: f.value }),
+        h("span", { class: "draft__from t-caption", text: f["from"] === "knowledge_base" ? "법령·서식" : "내 자료" }),
+      ]);
+    })));
+
+    if (d.unfilled.length) {
+      body.appendChild(h("p", { class: "draft__h t-label", text: "직접 적어야 하는 것" }));
+      body.appendChild(h("div", { class: "draft__fields" }, d.unfilled.map(function (f) {
+        return h("div", { class: "draft__field draft__field--blank" }, [
+          h("span", { class: "draft__key t-caption", text: f.label }),
+          h("span", { class: "draft__val t-body-s", text: f.reason }),
+        ]);
+      })));
+    }
+
+    d.sections.forEach(function (sec) {
+      body.appendChild(h("p", { class: "draft__h t-label", text: sec.heading }));
+      // 문장으로 엮은 것이 있으면 먼저 보여주고, 아래 줄들이 그 출처가 된다.
+      // 없으면 줄만 나온다 — 그것만으로도 초안은 성립한다.
+      if (sec.heading === "사건 경위" && d.prose) {
+        body.appendChild(h("p", { class: "draft__prose t-body-m", text: d.prose }));
+        body.appendChild(h("p", { class: "draft__note t-caption", text: "위 문장은 아래 줄에서만 만들었어요. 자료에 없는 말은 들어가지 않습니다." }));
+      }
+      if (sec.note) body.appendChild(h("p", { class: "draft__note t-body-s", text: sec.note }));
+      if (!sec.lines.length) return;
+      body.appendChild(h("ol", { class: "draft__lines" }, sec.lines.map(function (ln) {
+        return h("li", { class: "draft__line draft__line--" + ln.level }, [
+          h("span", { class: "draft__date t-caption", text: ln.date || "날짜 모름" }),
+          h("span", { class: "draft__text t-body-s", text: ln.text }),
+          h("span", { class: "draft__src t-caption", text: (LEVEL_LABEL[ln.level] || ln.level) + " · " + ln.source }),
+        ]);
+      })));
+    });
+
+    if (d.dropped) {
+      body.appendChild(h("p", { class: "draft__note t-body-s", text: "출처를 달 수 없는 " + d.dropped + "건은 넣지 않았어요." }));
+    }
+
+    var text = draftText(c, d);
+    var copy = h("button", { type: "button", class: "modal__save", text: "복사하기" });
+    copy.addEventListener("click", function () {
+      function done() { copy.textContent = "복사했어요"; setTimeout(function () { copy.textContent = "복사하기"; }, 1600); }
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, function () {});
+    });
+    body.appendChild(copy);
+    body.appendChild(h("p", { class: "modal__note", text: "자료에 있는 날짜와 문구만 모았습니다. 사유처럼 판단이 들어가는 칸은 비워 두었어요 — 타래는 대신 쓰지 않습니다." }));
+
+    openModal("서류 초안", body);
+  }
+
+  function draftButton(c, next) {
+    if (!next || !next.draft) return null;
+    var button = h("button", { type: "button", class: "na__draft t-body-m-strong", text: "서류 초안 보기" });
+    button.addEventListener("click", function () { draftModal(c, next.draft); });
+    return button;
+  }
+
   function nextActionCard(c, refresh) {
     var next = activeAction(c);
     if (!next) return null;
@@ -1068,15 +1216,21 @@
       return body;
     }
 
-    var more = h("button", { type: "button", class: "na__more t-body-m-strong", text: "자세히 보기" });
-    more.addEventListener("click", function () { openModal(next.label, detailBody()); });
-
-    // 낼 것이 없는 단계에는 '냈어요'를 붙이지 않는다 — 엔진이 제출 절차가 아니라고 한 자리다
-    var did = null;
-    if (next.state !== "no_submission") {
-      did = h("button", { type: "button", class: "na__did t-body-m-strong", text: "냈어요" });
-      did.addEventListener("click", function () { openSubmitModal(c, next, refresh); });
+    // 낼 것이 없는 단계에는 제출 버튼을 붙이지 않는다 — 엔진이 제출 절차가 아니라고 한 자리다.
+    // 버튼은 무엇을·어디에가 적힌 팝업 안에 둔다. 카드만 보고 누르면 무엇을 냈는지 모른 채 누른다.
+    function submitButton() {
+      if (next.state === "no_submission") return null;
+      var did = h("button", { type: "button", class: "modal__act t-body-m-strong", text: "제출했어요" });
+      did.addEventListener("click", function () {
+        var dialog = document.querySelector("dialog.modal");
+        if (dialog) dialog.close();
+        openSubmitModal(c, next, refresh);
+      });
+      return did;
     }
+
+    var more = h("button", { type: "button", class: "na__more t-body-m-strong", text: "자세히 보기" });
+    more.addEventListener("click", function () { openModal(next.label, detailBody(), submitButton()); });
 
     return h("section", { class: "next-action", "aria-labelledby": "na-title" }, [
       h("div", { class: "next-action__head" }, [
@@ -1086,7 +1240,8 @@
           : next.unverified ? h("span", { class: "t-caption", text: "검수 전 안내" }) : null,
       ]),
       h("h2", { id: "na-title", class: "na__title", text: next.label }),
-      h("div", { class: "na__buttons" }, [more, did]),
+      h("div", { class: "na__buttons" }, [more]),
+      draftButton(c, next),
     ]);
   }
 

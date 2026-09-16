@@ -101,6 +101,7 @@ def build_checklist(
     return Checklist(
         action=action, items=items, done=done, total=len(items),
         form_name=entry.get("form_name"),
+        form_source=entry.get("form_source"),
         form_url=entry.get("form_url"),
         submit_to=entry.get("submit_to"),
         statute=entry.get("statute"),
