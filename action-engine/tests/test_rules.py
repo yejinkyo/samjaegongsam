@@ -4,7 +4,7 @@ from datetime import date
 
 import pytest
 
-from action_engine import INF, ST, CaseState, CodeHit, compute_deadlines, decide, run
+from action_engine import INF, ST, TIM, CaseState, CodeHit, Deadline, compute_deadlines, decide, run
 from action_engine.rules import load_deadlines, load_rules
 
 
@@ -20,10 +20,10 @@ def state(st: str = ST.SUSPENDED_SUSPECT, inf: list[str] | None = None, tim=None
 # ── 규칙표 자체 ─────────────────────────────────────────────────────────
 
 
-def test_규칙은_10줄이고_마지막은_기본행동이다():
+def test_규칙은_11줄이고_마지막은_기본행동이다():
     rules = load_rules()["rules"]
-    assert len(rules) == 10
-    assert [r["no"] for r in rules] == list(range(1, 11))
+    assert len(rules) == 11
+    assert [r["no"] for r in rules] == list(range(1, 12))
     assert rules[-1]["when"] == {}  # 아무것도 안 맞아도 빈손으로 두지 않는다
 
 
@@ -39,7 +39,7 @@ def test_단계_미확정이_정보_문제보다_먼저다():
     d = decide(state(st=ST.UNKNOWN, inf=[INF.RECORD_GAP, INF.SOURCE_MISSING]))
     assert d.main.rule_no == 4
     assert d.main.action == "ACT-단계확인"
-    assert [h.rule_no for h in d.also] == [8, 9]  # 나머지는 참고사항으로 남는다
+    assert [h.rule_no for h in d.also] == [9, 10]  # 나머지는 참고사항으로 남는다
 
 
 def test_신규정보가_모순보다_먼저다():
@@ -50,19 +50,41 @@ def test_신규정보가_모순보다_먼저다():
 
 def test_수사기록_미확인이_근거미비보다_먼저다():
     d = decide(state(inf=[INF.SOURCE_MISSING, INF.RECORD_UNCHECKED]))
-    assert d.main.rule_no == 7
+    assert d.main.rule_no == 8
     assert d.main.action == "ACT-기록열람"
 
 
 def test_아무것도_안_맞으면_상시행동이_남는다():
-    d = decide(state(st=ST.POLICE_NO_REFERRAL, inf=[]))
+    # 수사가 진행 중이고 정보 문제도 기한도 없는 상태 — 규칙 어느 것도 맞지 않는다
+    d = decide(state(st=ST.POLICE_INVESTIGATING, inf=[]))
     assert d.main.action == "ACT-상시"
     assert d.also == []
 
 
+def test_불복할_수_있는_결정은_기한이_급하지_않아도_안내한다():
+    """불송치 이의신청(형사소송법 제245조의7)은 법정 기한이 없다.
+
+    규칙 2는 기한이 급할 때만 발화하므로, 기한이 없는 경로는 영영 급해지지 않아
+    한 번도 안내되지 않았다 — 통지를 받고 가장 먼저 열리는 길인데도 그랬다.
+    """
+    for st in (ST.POLICE_NO_REFERRAL, ST.PROSECUTION_NO_CHARGE, ST.APPEAL_PENDING):
+        d = decide(state(st=st, inf=[]))
+        assert d.main.action == "ACT-불복기한", st
+
+    # 수사 중에는 불복할 결정이 아직 없다
+    assert decide(state(st=ST.POLICE_INVESTIGATING, inf=[])).main.action != "ACT-불복기한"
+
+
+def test_기한이_급하면_그_규칙이_먼저다():
+    """규칙 2(기한 임박)가 규칙 5(결정 받음)보다 앞이라는 것을 고정한다."""
+    tim = [Deadline(code=TIM.APPEAL_PROSECUTION, label="항고", severity="critical", days_left=3)]
+    d = decide(state(st=ST.PROSECUTION_NO_CHARGE, inf=[], tim=tim))
+    assert d.main.rule_no == 2
+
+
 def test_발화한_규칙번호와_근거코드가_결과에_실린다():
     d = decide(state(inf=[INF.RECORD_GAP]))
-    assert d.main.rule_no == 9
+    assert d.main.rule_no == 10
     assert d.main.codes == [INF.RECORD_GAP]
     assert d.main.why  # 화면이 그대로 인용한다
 
@@ -197,7 +219,7 @@ def test_이미_지난_기한은_다음_행동이_되지_않는다():
     assert t014.severity == "expired"  # 만료 사실은 남는다
 
     d = decide(s)
-    assert d.main.rule_no == 5  # 기한이 아니라 신규 정보가 1순위
+    assert d.main.rule_no == 6  # 기한이 아니라 신규 정보가 1순위
     assert d.main.action == "ACT-신규정보제출"
     assert not any("TIM-014" in h.codes for h in [d.main, *d.also])
 
@@ -253,7 +275,7 @@ def test_사기_사건도_끝까지_돈다(fraud):
     d = run(fraud)
     assert d.main is not None
     # 기록에 반영 안 된 자료가 없으므로 INF-01 은 켜지지 않고, 송금액 모순이 먼저 잡힌다
-    assert d.main.rule_no == 6
+    assert d.main.rule_no == 7
     assert d.main.action == "ACT-모순확인"
     assert d.main.codes == [INF.CONTRADICTION_ACROSS]
 

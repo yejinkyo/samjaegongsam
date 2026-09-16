@@ -29,7 +29,12 @@ from .temporal import TimeMatch
 
 S = ClaimSlot
 
-TRANSFER_CUE = re.compile(r"송금|이체|입금|보냈|보내드렸|부쳤")
+# 계좌로 보낸 것만이 아니라 현금을 직접 건넨 경우도 돈이 오간 주장이다.
+# 금액이 앞에 있을 때만 잡는다 — '서류를 건넸습니다'까지 끌어오면 안 된다.
+TRANSFER_CUE = re.compile(
+    r"송금|이체|입금|보냈|보내드렸|부쳤|"
+    r"원\s*(?:을|를)?\s*(?:건네|건넸|건네주|지급|전달|주었|줬)"
+)
 TRANSFER_AMOUNT_LABEL = re.compile(r"(이체|송금|입금|거래)\s*금액")
 TRANSFER_TIME_LABEL = re.compile(r"(이체|송금|거래)\s*(일시|일자|시각)")
 RECEIPT_TIME_LABEL = re.compile(r"(접수|신고)\s*(일시|일자|일)")

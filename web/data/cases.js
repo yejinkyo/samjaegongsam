@@ -521,7 +521,7 @@ window.TARAE_CASES = [
       }
     ],
     "next_action": {
-      "rule_no": 6,
+      "rule_no": 7,
       "action": "ACT-모순확인",
       "label": "자료끼리 어긋난 부분 확인 요청",
       "why": "송금 금액: 자료마다 다르게 적혀 있습니다 — ‘350,000원’(transfer_receipt · 6줄) / ‘300,000원’(statement · 3줄)",
@@ -534,13 +534,13 @@ window.TARAE_CASES = [
       "unverified": true,
       "also": [
         {
-          "rule_no": 7,
+          "rule_no": 8,
           "action": "ACT-기록열람",
           "label": "수사 기록 열람 신청",
           "why": "수사 기록 없이는 다른 판단이 불가능하다"
         },
         {
-          "rule_no": 8,
+          "rule_no": 9,
           "action": "ACT-근거보완",
           "label": "주장을 뒷받침할 근거 자료 보완",
           "why": "근거 없는 주장은 판단 대상이 되지 않는다"
@@ -552,7 +552,7 @@ window.TARAE_CASES = [
     },
     "actions": [
       {
-        "rule_no": 6,
+        "rule_no": 7,
         "action": "ACT-모순확인",
         "label": "자료끼리 어긋난 부분 확인 요청",
         "why": "송금 금액: 자료마다 다르게 적혀 있습니다 — ‘350,000원’(transfer_receipt · 6줄) / ‘300,000원’(statement · 3줄)",
@@ -565,13 +565,13 @@ window.TARAE_CASES = [
         "unverified": true,
         "also": [
           {
-            "rule_no": 7,
+            "rule_no": 8,
             "action": "ACT-기록열람",
             "label": "수사 기록 열람 신청",
             "why": "수사 기록 없이는 다른 판단이 불가능하다"
           },
           {
-            "rule_no": 8,
+            "rule_no": 9,
             "action": "ACT-근거보완",
             "label": "주장을 뒷받침할 근거 자료 보완",
             "why": "근거 없는 주장은 판단 대상이 되지 않는다"
@@ -582,7 +582,7 @@ window.TARAE_CASES = [
         "draft": null
       },
       {
-        "rule_no": 7,
+        "rule_no": 8,
         "action": "ACT-기록열람",
         "label": "수사 기록 열람 신청",
         "why": "‘사이버범죄 신고 접수증’(2026-06-03 09:12) 이후 기관의 진행 기록이 없습니다 (21일 경과)",
@@ -623,13 +623,13 @@ window.TARAE_CASES = [
         "unverified": true,
         "also": [
           {
-            "rule_no": 7,
+            "rule_no": 8,
             "action": "ACT-기록열람",
             "label": "수사 기록 열람 신청",
             "why": "수사 기록 없이는 다른 판단이 불가능하다"
           },
           {
-            "rule_no": 8,
+            "rule_no": 9,
             "action": "ACT-근거보완",
             "label": "주장을 뒷받침할 근거 자료 보완",
             "why": "근거 없는 주장은 판단 대상이 되지 않는다"
@@ -748,7 +748,7 @@ window.TARAE_CASES = [
         }
       },
       {
-        "rule_no": 8,
+        "rule_no": 9,
         "action": "ACT-근거보완",
         "label": "주장을 뒷받침할 근거 자료 보완",
         "why": "이체확인증.pdf에서 읽히지 않은 부분이 1곳 있습니다 (7줄). 사진을 보고 알려주세요",
@@ -761,13 +761,13 @@ window.TARAE_CASES = [
         "unverified": true,
         "also": [
           {
-            "rule_no": 7,
+            "rule_no": 8,
             "action": "ACT-기록열람",
             "label": "수사 기록 열람 신청",
             "why": "수사 기록 없이는 다른 판단이 불가능하다"
           },
           {
-            "rule_no": 8,
+            "rule_no": 9,
             "action": "ACT-근거보완",
             "label": "주장을 뒷받침할 근거 자료 보완",
             "why": "근거 없는 주장은 판단 대상이 되지 않는다"
@@ -789,14 +789,14 @@ window.TARAE_CASES = [
     "outcomes": {
       "불송치": {
         "st": "경찰 불송치",
-        "next": "자료끼리 어긋난 부분 확인 요청",
-        "next_key": "ACT-모순확인",
+        "next": "기한 안에 결정에 대한 불복 절차 진행",
+        "next_key": "ACT-불복기한",
         "deadlines": []
       },
       "불기소": {
         "st": "검찰 불기소",
-        "next": "자료끼리 어긋난 부분 확인 요청",
-        "next_key": "ACT-모순확인",
+        "next": "기한 안에 결정에 대한 불복 절차 진행",
+        "next_key": "ACT-불복기한",
         "deadlines": [
           {
             "label": "검찰 항고 기한",
@@ -808,8 +808,8 @@ window.TARAE_CASES = [
       },
       "항고 기각": {
         "st": "이의신청/항고 중",
-        "next": "자료끼리 어긋난 부분 확인 요청",
-        "next_key": "ACT-모순확인",
+        "next": "기한 안에 결정에 대한 불복 절차 진행",
+        "next_key": "ACT-불복기한",
         "deadlines": [
           {
             "label": "법원 재정신청 기한",
@@ -1417,7 +1417,7 @@ window.TARAE_CASES = [
       }
     ],
     "next_action": {
-      "rule_no": 5,
+      "rule_no": 6,
       "action": "ACT-신규정보제출",
       "label": "새로 확인된 정보를 수사기관에 제출",
       "why": "최영호_진술서.jpg 의 내용이 기록 자료에서 확인되지 않습니다",
@@ -1430,19 +1430,19 @@ window.TARAE_CASES = [
       "unverified": true,
       "also": [
         {
-          "rule_no": 7,
+          "rule_no": 8,
           "action": "ACT-기록열람",
           "label": "수사 기록 열람 신청",
           "why": "수사 기록 없이는 다른 판단이 불가능하다"
         },
         {
-          "rule_no": 8,
+          "rule_no": 9,
           "action": "ACT-근거보완",
           "label": "주장을 뒷받침할 근거 자료 보완",
           "why": "근거 없는 주장은 판단 대상이 되지 않는다"
         },
         {
-          "rule_no": 9,
+          "rule_no": 10,
           "action": "ACT-공백보완",
           "label": "기록이 빈 기간의 자료 확보",
           "why": "기록 공백은 반박 여지를 남긴다"
@@ -1454,7 +1454,7 @@ window.TARAE_CASES = [
     },
     "actions": [
       {
-        "rule_no": 5,
+        "rule_no": 6,
         "action": "ACT-신규정보제출",
         "label": "새로 확인된 정보를 수사기관에 제출",
         "why": "최영호_진술서.jpg 의 내용이 기록 자료에서 확인되지 않습니다",
@@ -1467,19 +1467,19 @@ window.TARAE_CASES = [
         "unverified": true,
         "also": [
           {
-            "rule_no": 7,
+            "rule_no": 8,
             "action": "ACT-기록열람",
             "label": "수사 기록 열람 신청",
             "why": "수사 기록 없이는 다른 판단이 불가능하다"
           },
           {
-            "rule_no": 8,
+            "rule_no": 9,
             "action": "ACT-근거보완",
             "label": "주장을 뒷받침할 근거 자료 보완",
             "why": "근거 없는 주장은 판단 대상이 되지 않는다"
           },
           {
-            "rule_no": 9,
+            "rule_no": 10,
             "action": "ACT-공백보완",
             "label": "기록이 빈 기간의 자료 확보",
             "why": "기록 공백은 반박 여지를 남긴다"
@@ -1490,7 +1490,7 @@ window.TARAE_CASES = [
         "draft": null
       },
       {
-        "rule_no": 7,
+        "rule_no": 8,
         "action": "ACT-기록열람",
         "label": "수사 기록 열람 신청",
         "why": "‘본인은 2019년 3월 초순 오후 ○○시장 입구에서 김민수로 보이는 남…’(2019-03-01~03-10, witness_statement_2019 · 3줄, petition_2023 · 6줄) — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다. ‘수사결과 통지서’(2022-03-15)보다 앞선 내용입니다. 수사 기록에 반영됐는지 확인이 필요합니다",
@@ -1531,19 +1531,19 @@ window.TARAE_CASES = [
         "unverified": true,
         "also": [
           {
-            "rule_no": 7,
+            "rule_no": 8,
             "action": "ACT-기록열람",
             "label": "수사 기록 열람 신청",
             "why": "수사 기록 없이는 다른 판단이 불가능하다"
           },
           {
-            "rule_no": 8,
+            "rule_no": 9,
             "action": "ACT-근거보완",
             "label": "주장을 뒷받침할 근거 자료 보완",
             "why": "근거 없는 주장은 판단 대상이 되지 않는다"
           },
           {
-            "rule_no": 9,
+            "rule_no": 10,
             "action": "ACT-공백보완",
             "label": "기록이 빈 기간의 자료 확보",
             "why": "기록 공백은 반박 여지를 남긴다"
@@ -1677,7 +1677,7 @@ window.TARAE_CASES = [
         }
       },
       {
-        "rule_no": 8,
+        "rule_no": 9,
         "action": "ACT-근거보완",
         "label": "주장을 뒷받침할 근거 자료 보완",
         "why": "실종신고_접수증_2015.jpg에서 읽히지 않은 부분이 1곳 있습니다 (8줄). 사진을 보고 알려주세요",
@@ -1690,19 +1690,19 @@ window.TARAE_CASES = [
         "unverified": true,
         "also": [
           {
-            "rule_no": 7,
+            "rule_no": 8,
             "action": "ACT-기록열람",
             "label": "수사 기록 열람 신청",
             "why": "수사 기록 없이는 다른 판단이 불가능하다"
           },
           {
-            "rule_no": 8,
+            "rule_no": 9,
             "action": "ACT-근거보완",
             "label": "주장을 뒷받침할 근거 자료 보완",
             "why": "근거 없는 주장은 판단 대상이 되지 않는다"
           },
           {
-            "rule_no": 9,
+            "rule_no": 10,
             "action": "ACT-공백보완",
             "label": "기록이 빈 기간의 자료 확보",
             "why": "기록 공백은 반박 여지를 남긴다"
@@ -1713,7 +1713,7 @@ window.TARAE_CASES = [
         "draft": null
       },
       {
-        "rule_no": 9,
+        "rule_no": 10,
         "action": "ACT-공백보완",
         "label": "기록이 빈 기간의 자료 확보",
         "why": "‘수사’ 단계에 해당하는 자료가 없습니다",
@@ -1726,19 +1726,19 @@ window.TARAE_CASES = [
         "unverified": true,
         "also": [
           {
-            "rule_no": 7,
+            "rule_no": 8,
             "action": "ACT-기록열람",
             "label": "수사 기록 열람 신청",
             "why": "수사 기록 없이는 다른 판단이 불가능하다"
           },
           {
-            "rule_no": 8,
+            "rule_no": 9,
             "action": "ACT-근거보완",
             "label": "주장을 뒷받침할 근거 자료 보완",
             "why": "근거 없는 주장은 판단 대상이 되지 않는다"
           },
           {
-            "rule_no": 9,
+            "rule_no": 10,
             "action": "ACT-공백보완",
             "label": "기록이 빈 기간의 자료 확보",
             "why": "기록 공백은 반박 여지를 남긴다"
@@ -1760,14 +1760,14 @@ window.TARAE_CASES = [
     "outcomes": {
       "불송치": {
         "st": "경찰 불송치",
-        "next": "새로 확인된 정보를 수사기관에 제출",
-        "next_key": "ACT-신규정보제출",
+        "next": "기한 안에 결정에 대한 불복 절차 진행",
+        "next_key": "ACT-불복기한",
         "deadlines": []
       },
       "불기소": {
         "st": "검찰 불기소",
-        "next": "새로 확인된 정보를 수사기관에 제출",
-        "next_key": "ACT-신규정보제출",
+        "next": "기한 안에 결정에 대한 불복 절차 진행",
+        "next_key": "ACT-불복기한",
         "deadlines": [
           {
             "label": "검찰 항고 기한",
@@ -1779,8 +1779,8 @@ window.TARAE_CASES = [
       },
       "항고 기각": {
         "st": "이의신청/항고 중",
-        "next": "새로 확인된 정보를 수사기관에 제출",
-        "next_key": "ACT-신규정보제출",
+        "next": "기한 안에 결정에 대한 불복 절차 진행",
+        "next_key": "ACT-불복기한",
         "deadlines": [
           {
             "label": "법원 재정신청 기한",
@@ -2244,25 +2244,25 @@ window.TARAE_CASES = [
       "unverified": true,
       "also": [
         {
-          "rule_no": 5,
+          "rule_no": 6,
           "action": "ACT-신규정보제출",
           "label": "새로 확인된 정보를 수사기관에 제출",
           "why": "새 정보는 중지·종결된 절차를 되살릴 수 있다"
         },
         {
-          "rule_no": 7,
+          "rule_no": 8,
           "action": "ACT-기록열람",
           "label": "수사 기록 열람 신청",
           "why": "수사 기록 없이는 다른 판단이 불가능하다"
         },
         {
-          "rule_no": 8,
+          "rule_no": 9,
           "action": "ACT-근거보완",
           "label": "주장을 뒷받침할 근거 자료 보완",
           "why": "근거 없는 주장은 판단 대상이 되지 않는다"
         },
         {
-          "rule_no": 9,
+          "rule_no": 10,
           "action": "ACT-공백보완",
           "label": "기록이 빈 기간의 자료 확보",
           "why": "기록 공백은 반박 여지를 남긴다"
@@ -2429,25 +2429,25 @@ window.TARAE_CASES = [
         "unverified": true,
         "also": [
           {
-            "rule_no": 5,
+            "rule_no": 6,
             "action": "ACT-신규정보제출",
             "label": "새로 확인된 정보를 수사기관에 제출",
             "why": "새 정보는 중지·종결된 절차를 되살릴 수 있다"
           },
           {
-            "rule_no": 7,
+            "rule_no": 8,
             "action": "ACT-기록열람",
             "label": "수사 기록 열람 신청",
             "why": "수사 기록 없이는 다른 판단이 불가능하다"
           },
           {
-            "rule_no": 8,
+            "rule_no": 9,
             "action": "ACT-근거보완",
             "label": "주장을 뒷받침할 근거 자료 보완",
             "why": "근거 없는 주장은 판단 대상이 되지 않는다"
           },
           {
-            "rule_no": 9,
+            "rule_no": 10,
             "action": "ACT-공백보완",
             "label": "기록이 빈 기간의 자료 확보",
             "why": "기록 공백은 반박 여지를 남긴다"
@@ -2564,7 +2564,7 @@ window.TARAE_CASES = [
         }
       },
       {
-        "rule_no": 5,
+        "rule_no": 6,
         "action": "ACT-신규정보제출",
         "label": "새로 확인된 정보를 수사기관에 제출",
         "why": "조미래_진술서.jpg 의 내용이 기록 자료에서 확인되지 않습니다",
@@ -2577,25 +2577,25 @@ window.TARAE_CASES = [
         "unverified": true,
         "also": [
           {
-            "rule_no": 5,
+            "rule_no": 6,
             "action": "ACT-신규정보제출",
             "label": "새로 확인된 정보를 수사기관에 제출",
             "why": "새 정보는 중지·종결된 절차를 되살릴 수 있다"
           },
           {
-            "rule_no": 7,
+            "rule_no": 8,
             "action": "ACT-기록열람",
             "label": "수사 기록 열람 신청",
             "why": "수사 기록 없이는 다른 판단이 불가능하다"
           },
           {
-            "rule_no": 8,
+            "rule_no": 9,
             "action": "ACT-근거보완",
             "label": "주장을 뒷받침할 근거 자료 보완",
             "why": "근거 없는 주장은 판단 대상이 되지 않는다"
           },
           {
-            "rule_no": 9,
+            "rule_no": 10,
             "action": "ACT-공백보완",
             "label": "기록이 빈 기간의 자료 확보",
             "why": "기록 공백은 반박 여지를 남긴다"
@@ -2606,7 +2606,7 @@ window.TARAE_CASES = [
         "draft": null
       },
       {
-        "rule_no": 7,
+        "rule_no": 8,
         "action": "ACT-기록열람",
         "label": "수사 기록 열람 신청",
         "why": "‘2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다.’(2025-06-03, witness_statement_2025 · 3줄) — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다. ‘수사결과 통지서’(2026-08-18)보다 앞선 내용입니다. 수사 기록에 반영됐는지 확인이 필요합니다",
@@ -2647,25 +2647,25 @@ window.TARAE_CASES = [
         "unverified": true,
         "also": [
           {
-            "rule_no": 5,
+            "rule_no": 6,
             "action": "ACT-신규정보제출",
             "label": "새로 확인된 정보를 수사기관에 제출",
             "why": "새 정보는 중지·종결된 절차를 되살릴 수 있다"
           },
           {
-            "rule_no": 7,
+            "rule_no": 8,
             "action": "ACT-기록열람",
             "label": "수사 기록 열람 신청",
             "why": "수사 기록 없이는 다른 판단이 불가능하다"
           },
           {
-            "rule_no": 8,
+            "rule_no": 9,
             "action": "ACT-근거보완",
             "label": "주장을 뒷받침할 근거 자료 보완",
             "why": "근거 없는 주장은 판단 대상이 되지 않는다"
           },
           {
-            "rule_no": 9,
+            "rule_no": 10,
             "action": "ACT-공백보완",
             "label": "기록이 빈 기간의 자료 확보",
             "why": "기록 공백은 반박 여지를 남긴다"
@@ -2782,7 +2782,7 @@ window.TARAE_CASES = [
         }
       },
       {
-        "rule_no": 8,
+        "rule_no": 9,
         "action": "ACT-근거보완",
         "label": "주장을 뒷받침할 근거 자료 보완",
         "why": "사건 발생 시점: 정하늘, 조미래의 말만 있고 이를 뒷받침하는 기록 자료가 없습니다 — ‘2021. 5. 18. 인테리어 공사대금 명목으로 1,800만원을 편취당하는 사기 피해를 입었습니다.’(complaint_2021 · 5줄) / ‘2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다.’(witness_statement_2025 · 3줄)",
@@ -2795,25 +2795,25 @@ window.TARAE_CASES = [
         "unverified": true,
         "also": [
           {
-            "rule_no": 5,
+            "rule_no": 6,
             "action": "ACT-신규정보제출",
             "label": "새로 확인된 정보를 수사기관에 제출",
             "why": "새 정보는 중지·종결된 절차를 되살릴 수 있다"
           },
           {
-            "rule_no": 7,
+            "rule_no": 8,
             "action": "ACT-기록열람",
             "label": "수사 기록 열람 신청",
             "why": "수사 기록 없이는 다른 판단이 불가능하다"
           },
           {
-            "rule_no": 8,
+            "rule_no": 9,
             "action": "ACT-근거보완",
             "label": "주장을 뒷받침할 근거 자료 보완",
             "why": "근거 없는 주장은 판단 대상이 되지 않는다"
           },
           {
-            "rule_no": 9,
+            "rule_no": 10,
             "action": "ACT-공백보완",
             "label": "기록이 빈 기간의 자료 확보",
             "why": "기록 공백은 반박 여지를 남긴다"
@@ -2824,7 +2824,7 @@ window.TARAE_CASES = [
         "draft": null
       },
       {
-        "rule_no": 9,
+        "rule_no": 10,
         "action": "ACT-공백보완",
         "label": "기록이 빈 기간의 자료 확보",
         "why": "‘수사’ 단계에 해당하는 자료가 없습니다",
@@ -2837,25 +2837,25 @@ window.TARAE_CASES = [
         "unverified": true,
         "also": [
           {
-            "rule_no": 5,
+            "rule_no": 6,
             "action": "ACT-신규정보제출",
             "label": "새로 확인된 정보를 수사기관에 제출",
             "why": "새 정보는 중지·종결된 절차를 되살릴 수 있다"
           },
           {
-            "rule_no": 7,
+            "rule_no": 8,
             "action": "ACT-기록열람",
             "label": "수사 기록 열람 신청",
             "why": "수사 기록 없이는 다른 판단이 불가능하다"
           },
           {
-            "rule_no": 8,
+            "rule_no": 9,
             "action": "ACT-근거보완",
             "label": "주장을 뒷받침할 근거 자료 보완",
             "why": "근거 없는 주장은 판단 대상이 되지 않는다"
           },
           {
-            "rule_no": 9,
+            "rule_no": 10,
             "action": "ACT-공백보완",
             "label": "기록이 빈 기간의 자료 확보",
             "why": "기록 공백은 반박 여지를 남긴다"
@@ -2877,14 +2877,14 @@ window.TARAE_CASES = [
     "outcomes": {
       "불송치": {
         "st": "경찰 불송치",
-        "next": "새로 확인된 정보를 수사기관에 제출",
-        "next_key": "ACT-신규정보제출",
+        "next": "기한 안에 결정에 대한 불복 절차 진행",
+        "next_key": "ACT-불복기한",
         "deadlines": []
       },
       "불기소": {
         "st": "검찰 불기소",
-        "next": "새로 확인된 정보를 수사기관에 제출",
-        "next_key": "ACT-신규정보제출",
+        "next": "기한 안에 결정에 대한 불복 절차 진행",
+        "next_key": "ACT-불복기한",
         "deadlines": [
           {
             "label": "검찰 항고 기한",
@@ -2896,8 +2896,8 @@ window.TARAE_CASES = [
       },
       "항고 기각": {
         "st": "이의신청/항고 중",
-        "next": "새로 확인된 정보를 수사기관에 제출",
-        "next_key": "ACT-신규정보제출",
+        "next": "기한 안에 결정에 대한 불복 절차 진행",
+        "next_key": "ACT-불복기한",
         "deadlines": [
           {
             "label": "법원 재정신청 기한",

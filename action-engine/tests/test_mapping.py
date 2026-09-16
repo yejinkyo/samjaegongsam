@@ -177,3 +177,18 @@ def test_사건상태로_옮긴다(missing):
     assert state.as_of.year == 2026
     assert state.st.code == ST.SUSPENDED_SUSPECT
     assert len(state.inf) >= 5
+
+
+def test_불송치_혐의없음은_경찰_불송치다():
+    """'혐의없음'은 불송치의 이유이지 검찰의 불기소 처분이 아니다.
+
+    통지서에 '불송치(혐의없음)' 으로 적혀 온다. 검찰 불기소로 보면 경찰에 낼 이의신청
+    대신 검찰 항고를 안내하게 되고, 실제로 열려 있는 불복 경로를 놓친다.
+    """
+    from action_engine.mapping import st_from_decision
+
+    assert st_from_decision("불송치(혐의없음)").code == ST.POLICE_NO_REFERRAL
+    assert st_from_decision("불송치").code == ST.POLICE_NO_REFERRAL
+    # 불송치가 아닌 '혐의없음'은 그대로 검찰 불기소다
+    assert st_from_decision("혐의없음").code == ST.PROSECUTION_NO_CHARGE
+    assert st_from_decision("불기소(혐의없음)").code == ST.PROSECUTION_NO_CHARGE

@@ -1,0 +1,1596 @@
+{
+  "case_id": "test-no-decision",
+  "case_type": "investigation_suspended",
+  "as_of": "2026-09-16",
+  "documents": [
+    {
+      "doc_id": "complaint_2025",
+      "file_name": "고소장_2025.jpg",
+      "doc_type": "complaint",
+      "doc_type_confidence": 0.9371,
+      "doc_type_scores": {
+        "judgment": 0.0023,
+        "complaint": 0.9371,
+        "statement": 0.0023,
+        "transcript": 0.0023,
+        "receipt": 0.0023,
+        "notice": 0.0023,
+        "messenger": 0.0023,
+        "news": 0.0023,
+        "memo": 0.0467
+      },
+      "evidence_level": "statement",
+      "captured_at": "2026-09-14T09:00:00",
+      "pages": [
+        {
+          "page_no": 1,
+          "width": 1080.0,
+          "height": 440.0,
+          "image_ref": null
+        }
+      ],
+      "lines": [
+        {
+          "doc_id": "complaint_2025",
+          "line_no": 1,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 150.0,
+            "y1": 84.0
+          },
+          "text": "고 소 장",
+          "ocr_confidence": 0.95,
+          "readability": 0.8612,
+          "readable": true,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "complaint_2025",
+          "line_no": 2,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 194.0,
+            "y1": 144.0
+          },
+          "text": "고소인 임도윤",
+          "ocr_confidence": 0.94,
+          "readability": 0.9047,
+          "readable": true,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "complaint_2025",
+          "line_no": 3,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 238.0,
+            "y1": 204.0
+          },
+          "text": "피고소인 성명불상",
+          "ocr_confidence": 0.93,
+          "readability": 0.898,
+          "readable": true,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "complaint_2025",
+          "line_no": 4,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 1184.0,
+            "y1": 264.0
+          },
+          "text": "2025. 11. 4. 인터넷 카페에서 자전거를 사기로 하고 1,200,000원을 보냈습니다.",
+          "ocr_confidence": 0.92,
+          "readability": 0.8909,
+          "readable": true,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "complaint_2025",
+          "line_no": 5,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 744.0,
+            "y1": 324.0
+          },
+          "text": "2025. 11. 6.부터 판매자와 연락이 되지 않습니다.",
+          "ocr_confidence": 0.92,
+          "readability": 0.8909,
+          "readable": true,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "complaint_2025",
+          "line_no": 6,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 340.0,
+            "x1": 722.0,
+            "y1": 384.0
+          },
+          "text": "2025. 11. 10. ○○경찰서에 고소장을 냈습니다.",
+          "ocr_confidence": 0.93,
+          "readability": 0.898,
+          "readable": true,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        }
+      ],
+      "unreadable": []
+    },
+    {
+      "doc_id": "receipt_2025",
+      "file_name": "접수증_2025.jpg",
+      "doc_type": "receipt",
+      "doc_type_confidence": 0.9701,
+      "doc_type_scores": {
+        "judgment": 0.0032,
+        "complaint": 0.0032,
+        "statement": 0.0032,
+        "transcript": 0.0032,
+        "receipt": 0.9701,
+        "notice": 0.0032,
+        "messenger": 0.0032,
+        "news": 0.0032,
+        "memo": 0.0072
+      },
+      "evidence_level": "record",
+      "captured_at": "2026-09-14T09:02:00",
+      "pages": [
+        {
+          "page_no": 1,
+          "width": 1080.0,
+          "height": 380.0,
+          "image_ref": null
+        }
+      ],
+      "lines": [
+        {
+          "doc_id": "receipt_2025",
+          "line_no": 1,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 150.0,
+            "y1": 84.0
+          },
+          "text": "접 수 증",
+          "ocr_confidence": 0.95,
+          "readability": 0.9025,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "receipt_2025",
+          "line_no": 2,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 392.0,
+            "y1": 144.0
+          },
+          "text": "접수번호 2025-044120",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "receipt_2025",
+          "line_no": 3,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 568.0,
+            "y1": 204.0
+          },
+          "text": "접수일시 2025. 11. 10. 16:40",
+          "ocr_confidence": 0.93,
+          "readability": 0.9292,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "receipt_2025",
+          "line_no": 4,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 150.0,
+            "y1": 264.0
+          },
+          "text": "죄명 사기",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "receipt_2025",
+          "line_no": 5,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 194.0,
+            "y1": 324.0
+          },
+          "text": "신고인 임도윤",
+          "ocr_confidence": 0.93,
+          "readability": 0.9292,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        }
+      ],
+      "unreadable": []
+    },
+    {
+      "doc_id": "note_lim",
+      "file_name": "직접 입력",
+      "doc_type": "user_note",
+      "doc_type_confidence": 1.0,
+      "doc_type_scores": {},
+      "evidence_level": "user",
+      "captured_at": "2026-09-14T09:10:00",
+      "pages": [
+        {
+          "page_no": 1,
+          "width": null,
+          "height": null,
+          "image_ref": null
+        }
+      ],
+      "lines": [
+        {
+          "doc_id": "note_lim",
+          "line_no": 1,
+          "page": 1,
+          "bbox": null,
+          "text": "작년에 고소하고 나서 아무 연락도 못 받았습니다. 지금 어떻게 되고 있는지 모르겠어요.",
+          "ocr_confidence": 1.0,
+          "readability": 1.0,
+          "readable": true,
+          "script": "unknown",
+          "low_confidence_spans": [],
+          "origin": "user_input"
+        }
+      ],
+      "unreadable": []
+    }
+  ],
+  "clarifications": [],
+  "extraction": {
+    "mentions": [
+      {
+        "mention_id": "complaint_2025:m1",
+        "doc_id": "complaint_2025",
+        "kind": "person",
+        "name": {
+          "source_doc_id": "complaint_2025",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 194.0,
+            "y1": 144.0
+          },
+          "char_start": 4,
+          "char_end": 7,
+          "quote": "임도윤",
+          "value": "임도윤",
+          "confidence": 0.7238
+        },
+        "normalized": "임도윤",
+        "role": "고소인"
+      },
+      {
+        "mention_id": "complaint_2025:m2",
+        "doc_id": "complaint_2025",
+        "kind": "organization",
+        "name": {
+          "source_doc_id": "complaint_2025",
+          "page": 1,
+          "source_line": 6,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 340.0,
+            "x1": 722.0,
+            "y1": 384.0
+          },
+          "char_start": 14,
+          "char_end": 19,
+          "quote": "○○경찰서",
+          "value": "○○경찰서",
+          "confidence": 0.6735
+        },
+        "normalized": "**경찰서",
+        "role": null
+      },
+      {
+        "mention_id": "receipt_2025:m1",
+        "doc_id": "receipt_2025",
+        "kind": "receipt_number",
+        "name": {
+          "source_doc_id": "receipt_2025",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 392.0,
+            "y1": 144.0
+          },
+          "char_start": 5,
+          "char_end": 16,
+          "quote": "2025-044120",
+          "value": "2025-044120",
+          "confidence": 0.7939
+        },
+        "normalized": "2025-044120",
+        "role": null
+      },
+      {
+        "mention_id": "receipt_2025:m2",
+        "doc_id": "receipt_2025",
+        "kind": "person",
+        "name": {
+          "source_doc_id": "receipt_2025",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 194.0,
+            "y1": 324.0
+          },
+          "char_start": 4,
+          "char_end": 7,
+          "quote": "임도윤",
+          "value": "임도윤",
+          "confidence": 0.7434
+        },
+        "normalized": "임도윤",
+        "role": "신고인"
+      }
+    ],
+    "events": [
+      {
+        "event_id": "complaint_2025:e3",
+        "doc_id": "complaint_2025",
+        "stage": "occurrence",
+        "action": {
+          "source_doc_id": "complaint_2025",
+          "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 1184.0,
+            "y1": 264.0
+          },
+          "char_start": 0,
+          "char_end": 52,
+          "quote": "2025. 11. 4. 인터넷 카페에서 자전거를 사기로 하고 1,200,000원을 보냈습니다.",
+          "value": "2025. 11. 4. 인터넷 카페에서 자전거를 사기로 하고 1,200,000원을 보냈습니다.",
+          "confidence": 0.7127
+        },
+        "time": {
+          "source_doc_id": "complaint_2025",
+          "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 1184.0,
+            "y1": 264.0
+          },
+          "char_start": 0,
+          "char_end": 12,
+          "quote": "2025. 11. 4.",
+          "value": {
+            "raw": "2025. 11. 4.",
+            "start": "2025-11-04T00:00:00",
+            "end": "2025-11-05T00:00:00",
+            "granularity": "day",
+            "kind": "absolute",
+            "approximate": false,
+            "anchor": null,
+            "anchor_source": null,
+            "candidates": [],
+            "needs_confirmation": false,
+            "note": null
+          },
+          "confidence": 0.8464
+        },
+        "amount": {
+          "source_doc_id": "complaint_2025",
+          "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 1184.0,
+            "y1": 264.0
+          },
+          "char_start": 34,
+          "char_end": 44,
+          "quote": "1,200,000원",
+          "value": 1200000,
+          "confidence": 0.8018
+        },
+        "participant_mention_ids": [],
+        "evidence_level": "statement",
+        "action_kind": "fraud"
+      },
+      {
+        "event_id": "receipt_2025:e5",
+        "doc_id": "receipt_2025",
+        "stage": "receipt",
+        "action": {
+          "source_doc_id": "receipt_2025",
+          "page": 1,
+          "source_line": 1,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 150.0,
+            "y1": 84.0
+          },
+          "char_start": null,
+          "char_end": null,
+          "quote": "접 수 증",
+          "value": "접 수 증",
+          "confidence": 0.8574
+        },
+        "time": {
+          "source_doc_id": "receipt_2025",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 568.0,
+            "y1": 204.0
+          },
+          "char_start": 5,
+          "char_end": 24,
+          "quote": "2025. 11. 10. 16:40",
+          "value": {
+            "raw": "2025. 11. 10. 16:40",
+            "start": "2025-11-10T16:40:00",
+            "end": "2025-11-10T16:41:00",
+            "granularity": "minute",
+            "kind": "absolute",
+            "approximate": false,
+            "anchor": null,
+            "anchor_source": null,
+            "candidates": [],
+            "needs_confirmation": false,
+            "note": null
+          },
+          "confidence": 0.8827
+        },
+        "amount": null,
+        "participant_mention_ids": [
+          "receipt_2025:m1",
+          "receipt_2025:m2"
+        ],
+        "evidence_level": "record",
+        "action_kind": null
+      }
+    ],
+    "claims": [
+      {
+        "claim_id": "complaint_2025:c4",
+        "doc_id": "complaint_2025",
+        "speaker": "임도윤",
+        "speaker_basis": "document_author",
+        "speaker_mention_id": "complaint_2025:m1",
+        "content": {
+          "source_doc_id": "complaint_2025",
+          "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 1184.0,
+            "y1": 264.0
+          },
+          "char_start": 0,
+          "char_end": 52,
+          "quote": "2025. 11. 4. 인터넷 카페에서 자전거를 사기로 하고 1,200,000원을 보냈습니다.",
+          "value": "2025. 11. 4. 인터넷 카페에서 자전거를 사기로 하고 1,200,000원을 보냈습니다.",
+          "confidence": 0.7573
+        },
+        "slot": "transfer_amount",
+        "slot_value": "1200000",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "statement"
+      },
+      {
+        "claim_id": "complaint_2025:c5",
+        "doc_id": "complaint_2025",
+        "speaker": "임도윤",
+        "speaker_basis": "document_author",
+        "speaker_mention_id": "complaint_2025:m1",
+        "content": {
+          "source_doc_id": "complaint_2025",
+          "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 1184.0,
+            "y1": 264.0
+          },
+          "char_start": 0,
+          "char_end": 52,
+          "quote": "2025. 11. 4. 인터넷 카페에서 자전거를 사기로 하고 1,200,000원을 보냈습니다.",
+          "value": "2025. 11. 4. 인터넷 카페에서 자전거를 사기로 하고 1,200,000원을 보냈습니다.",
+          "confidence": 0.7573
+        },
+        "slot": "transfer_time",
+        "slot_value": "2025-11-04",
+        "slot_time": {
+          "raw": "2025. 11. 4.",
+          "start": "2025-11-04T00:00:00",
+          "end": "2025-11-05T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "value_is_speaker_self": false,
+        "subject": "1200000",
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "statement"
+      },
+      {
+        "claim_id": "complaint_2025:c6",
+        "doc_id": "complaint_2025",
+        "speaker": "임도윤",
+        "speaker_basis": "document_author",
+        "speaker_mention_id": "complaint_2025:m1",
+        "content": {
+          "source_doc_id": "complaint_2025",
+          "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 1184.0,
+            "y1": 264.0
+          },
+          "char_start": 0,
+          "char_end": 52,
+          "quote": "2025. 11. 4. 인터넷 카페에서 자전거를 사기로 하고 1,200,000원을 보냈습니다.",
+          "value": "2025. 11. 4. 인터넷 카페에서 자전거를 사기로 하고 1,200,000원을 보냈습니다.",
+          "confidence": 0.7573
+        },
+        "slot": "incident_time",
+        "slot_value": "2025-11-04",
+        "slot_time": {
+          "raw": "2025. 11. 4.",
+          "start": "2025-11-04T00:00:00",
+          "end": "2025-11-05T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "statement"
+      },
+      {
+        "claim_id": "complaint_2025:c7",
+        "doc_id": "complaint_2025",
+        "speaker": "임도윤",
+        "speaker_basis": "document_author",
+        "speaker_mention_id": "complaint_2025:m1",
+        "content": {
+          "source_doc_id": "complaint_2025",
+          "page": 1,
+          "source_line": 6,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 340.0,
+            "x1": 722.0,
+            "y1": 384.0
+          },
+          "char_start": 0,
+          "char_end": 31,
+          "quote": "2025. 11. 10. ○○경찰서에 고소장을 냈습니다.",
+          "value": "2025. 11. 10. ○○경찰서에 고소장을 냈습니다.",
+          "confidence": 0.7633
+        },
+        "slot": null,
+        "slot_value": null,
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "statement"
+      },
+      {
+        "claim_id": "receipt_2025:c3",
+        "doc_id": "receipt_2025",
+        "speaker": "접수증_2025.jpg 발급처",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": null,
+        "content": {
+          "source_doc_id": "receipt_2025",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 392.0,
+            "y1": 144.0
+          },
+          "char_start": 0,
+          "char_end": 16,
+          "quote": "접수번호 2025-044120",
+          "value": "접수번호 2025-044120",
+          "confidence": 0.8406
+        },
+        "slot": "receipt_number",
+        "slot_value": "2025-044120",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "receipt_2025:c4",
+        "doc_id": "receipt_2025",
+        "speaker": "접수증_2025.jpg 발급처",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": null,
+        "content": {
+          "source_doc_id": "receipt_2025",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 568.0,
+            "y1": 204.0
+          },
+          "char_start": 0,
+          "char_end": 24,
+          "quote": "접수일시 2025. 11. 10. 16:40",
+          "value": "접수일시 2025. 11. 10. 16:40",
+          "confidence": 0.8363
+        },
+        "slot": "receipt_time",
+        "slot_value": "2025-11-10 16:40",
+        "slot_time": {
+          "raw": "2025. 11. 10. 16:40",
+          "start": "2025-11-10T16:40:00",
+          "end": "2025-11-10T16:41:00",
+          "granularity": "minute",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "note_lim:c1",
+        "doc_id": "note_lim",
+        "speaker": "나",
+        "speaker_basis": "document_author",
+        "speaker_mention_id": null,
+        "content": {
+          "source_doc_id": "note_lim",
+          "page": 1,
+          "source_line": 1,
+          "source_line_end": null,
+          "source_bbox": null,
+          "char_start": 0,
+          "char_end": 48,
+          "quote": "작년에 고소하고 나서 아무 연락도 못 받았습니다. 지금 어떻게 되고 있는지 모르겠어요.",
+          "value": "작년에 고소하고 나서 아무 연락도 못 받았습니다. 지금 어떻게 되고 있는지 모르겠어요.",
+          "confidence": 0.85
+        },
+        "slot": null,
+        "slot_value": null,
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "user"
+      }
+    ],
+    "times": [
+      {
+        "source_doc_id": "complaint_2025",
+        "page": 1,
+        "source_line": 4,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 220.0,
+          "x1": 1184.0,
+          "y1": 264.0
+        },
+        "char_start": 0,
+        "char_end": 12,
+        "quote": "2025. 11. 4.",
+        "value": {
+          "raw": "2025. 11. 4.",
+          "start": "2025-11-04T00:00:00",
+          "end": "2025-11-05T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8464
+      },
+      {
+        "source_doc_id": "complaint_2025",
+        "page": 1,
+        "source_line": 5,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 280.0,
+          "x1": 744.0,
+          "y1": 324.0
+        },
+        "char_start": 0,
+        "char_end": 12,
+        "quote": "2025. 11. 6.",
+        "value": {
+          "raw": "2025. 11. 6.",
+          "start": "2025-11-06T00:00:00",
+          "end": "2025-11-07T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8464
+      },
+      {
+        "source_doc_id": "complaint_2025",
+        "page": 1,
+        "source_line": 6,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 340.0,
+          "x1": 722.0,
+          "y1": 384.0
+        },
+        "char_start": 0,
+        "char_end": 13,
+        "quote": "2025. 11. 10.",
+        "value": {
+          "raw": "2025. 11. 10.",
+          "start": "2025-11-10T00:00:00",
+          "end": "2025-11-11T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8531
+      },
+      {
+        "source_doc_id": "receipt_2025",
+        "page": 1,
+        "source_line": 3,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 160.0,
+          "x1": 568.0,
+          "y1": 204.0
+        },
+        "char_start": 5,
+        "char_end": 24,
+        "quote": "2025. 11. 10. 16:40",
+        "value": {
+          "raw": "2025. 11. 10. 16:40",
+          "start": "2025-11-10T16:40:00",
+          "end": "2025-11-10T16:41:00",
+          "granularity": "minute",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8827
+      },
+      {
+        "source_doc_id": "note_lim",
+        "page": 1,
+        "source_line": 1,
+        "source_line_end": null,
+        "source_bbox": null,
+        "char_start": 0,
+        "char_end": 2,
+        "quote": "작년",
+        "value": {
+          "raw": "작년",
+          "start": "2025-01-01T00:00:00",
+          "end": "2026-01-01T00:00:00",
+          "granularity": "year",
+          "kind": "relative",
+          "approximate": false,
+          "anchor": "2026-09-14",
+          "anchor_source": "capture_date",
+          "candidates": [],
+          "needs_confirmation": true,
+          "note": null
+        },
+        "confidence": 0.51
+      }
+    ],
+    "document_dates": {
+      "complaint_2025": {
+        "source_doc_id": "complaint_2025",
+        "page": 1,
+        "source_line": 6,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 340.0,
+          "x1": 722.0,
+          "y1": 384.0
+        },
+        "char_start": 0,
+        "char_end": 13,
+        "quote": "2025. 11. 10.",
+        "value": {
+          "raw": "2025. 11. 10.",
+          "start": "2025-11-10T00:00:00",
+          "end": "2025-11-11T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8531
+      },
+      "receipt_2025": {
+        "source_doc_id": "receipt_2025",
+        "page": 1,
+        "source_line": 3,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 160.0,
+          "x1": 568.0,
+          "y1": 204.0
+        },
+        "char_start": 5,
+        "char_end": 24,
+        "quote": "2025. 11. 10. 16:40",
+        "value": {
+          "raw": "2025. 11. 10. 16:40",
+          "start": "2025-11-10T16:40:00",
+          "end": "2025-11-10T16:41:00",
+          "granularity": "minute",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8827
+      }
+    },
+    "clarifications": []
+  },
+  "timeline": {
+    "case_type": "investigation_suspended",
+    "events": [
+      {
+        "timeline_event_id": "tl2",
+        "stage": "occurrence",
+        "title": "1,200,000원 발생",
+        "time": {
+          "raw": "2025. 11. 4.",
+          "start": "2025-11-04T00:00:00",
+          "end": "2025-11-05T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "time_unknown": false,
+        "amount": 1200000,
+        "participant_entity_ids": [],
+        "event_ids": [
+          "complaint_2025:e3"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "complaint_2025",
+            "page": 1,
+            "source_line": 4,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 220.0,
+              "x1": 1184.0,
+              "y1": 264.0
+            },
+            "char_start": 0,
+            "char_end": 52,
+            "quote": "2025. 11. 4. 인터넷 카페에서 자전거를 사기로 하고 1,200,000원을 보냈습니다."
+          },
+          {
+            "source_doc_id": "complaint_2025",
+            "page": 1,
+            "source_line": 4,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 220.0,
+              "x1": 1184.0,
+              "y1": 264.0
+            },
+            "char_start": 34,
+            "char_end": 44,
+            "quote": "1,200,000원"
+          }
+        ],
+        "evidence_level": "statement",
+        "needs_confirmation": false,
+        "flags": [
+          "claim_only"
+        ]
+      },
+      {
+        "timeline_event_id": "tl1",
+        "stage": "receipt",
+        "title": "접 수 증",
+        "time": {
+          "raw": "2025. 11. 10. 16:40",
+          "start": "2025-11-10T16:40:00",
+          "end": "2025-11-10T16:41:00",
+          "granularity": "minute",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "time_unknown": false,
+        "amount": null,
+        "participant_entity_ids": [
+          "ent1",
+          "ent3"
+        ],
+        "event_ids": [
+          "receipt_2025:e5"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "receipt_2025",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 150.0,
+              "y1": 84.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": "접 수 증"
+          },
+          {
+            "source_doc_id": "receipt_2025",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 568.0,
+              "y1": 204.0
+            },
+            "char_start": 5,
+            "char_end": 24,
+            "quote": "2025. 11. 10. 16:40"
+          }
+        ],
+        "evidence_level": "record",
+        "needs_confirmation": false,
+        "flags": []
+      }
+    ],
+    "stages": [
+      {
+        "stage": "occurrence",
+        "label": "발생",
+        "state": "done",
+        "timeline_event_ids": [
+          "tl2"
+        ],
+        "evidence_level": "statement"
+      },
+      {
+        "stage": "report",
+        "label": "신고",
+        "state": "skipped",
+        "timeline_event_ids": [],
+        "evidence_level": null
+      },
+      {
+        "stage": "receipt",
+        "label": "접수",
+        "state": "current",
+        "timeline_event_ids": [
+          "tl1"
+        ],
+        "evidence_level": "record"
+      },
+      {
+        "stage": "investigation",
+        "label": "수사",
+        "state": "pending",
+        "timeline_event_ids": [],
+        "evidence_level": null
+      },
+      {
+        "stage": "outcome",
+        "label": "결과",
+        "state": "pending",
+        "timeline_event_ids": [],
+        "evidence_level": null
+      }
+    ],
+    "current_stage": "receipt",
+    "gaps": [],
+    "entities": [
+      {
+        "entity_id": "ent1",
+        "kind": "person",
+        "canonical_name": "임도윤",
+        "aliases": [
+          "임도윤"
+        ],
+        "roles": [
+          "고소인",
+          "신고인"
+        ],
+        "mention_ids": [
+          "complaint_2025:m1",
+          "receipt_2025:m2"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "complaint_2025",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 194.0,
+              "y1": 144.0
+            },
+            "char_start": 4,
+            "char_end": 7,
+            "quote": "임도윤"
+          },
+          {
+            "source_doc_id": "receipt_2025",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 194.0,
+              "y1": 324.0
+            },
+            "char_start": 4,
+            "char_end": 7,
+            "quote": "임도윤"
+          }
+        ],
+        "merge_confidence": 0.9,
+        "possible_same_as": []
+      },
+      {
+        "entity_id": "ent2",
+        "kind": "organization",
+        "canonical_name": "**경찰서",
+        "aliases": [
+          "○○경찰서"
+        ],
+        "roles": [],
+        "mention_ids": [
+          "complaint_2025:m2"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "complaint_2025",
+            "page": 1,
+            "source_line": 6,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 340.0,
+              "x1": 722.0,
+              "y1": 384.0
+            },
+            "char_start": 14,
+            "char_end": 19,
+            "quote": "○○경찰서"
+          }
+        ],
+        "merge_confidence": 1.0,
+        "possible_same_as": []
+      },
+      {
+        "entity_id": "ent3",
+        "kind": "receipt_number",
+        "canonical_name": "2025-044120",
+        "aliases": [
+          "2025-044120"
+        ],
+        "roles": [],
+        "mention_ids": [
+          "receipt_2025:m1"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "receipt_2025",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 392.0,
+              "y1": 144.0
+            },
+            "char_start": 5,
+            "char_end": 16,
+            "quote": "2025-044120"
+          }
+        ],
+        "merge_confidence": 1.0,
+        "possible_same_as": []
+      }
+    ],
+    "mention_to_entity": {
+      "complaint_2025:m1": "ent1",
+      "receipt_2025:m2": "ent1",
+      "complaint_2025:m2": "ent2",
+      "receipt_2025:m1": "ent3"
+    }
+  },
+  "analysis": {
+    "case_id": "test-no-decision",
+    "case_type": "investigation_suspended",
+    "as_of": "2026-09-16",
+    "issues": [
+      {
+        "issue_id": "iss1",
+        "category": "missing",
+        "condition": "missing",
+        "message": "사건번호: 올린 자료에서 찾지 못했습니다",
+        "stage": "investigation",
+        "slot": "case_number",
+        "sources": [],
+        "checked_doc_ids": [
+          "complaint_2025",
+          "receipt_2025",
+          "note_lim"
+        ],
+        "related_claim_ids": [],
+        "related_event_ids": [],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": null,
+        "trigger": {
+          "key": "investigation_suspended/investigation/case_number/missing",
+          "case_type": "investigation_suspended",
+          "condition": "missing",
+          "stage": "investigation",
+          "slot": "case_number",
+          "since": null,
+          "elapsed_days": null,
+          "evidence": []
+        },
+        "priority": 40
+      },
+      {
+        "issue_id": "iss2",
+        "category": "missing",
+        "condition": "stage_skipped",
+        "message": "‘신고’ 단계에 해당하는 자료가 없습니다",
+        "stage": "report",
+        "slot": null,
+        "sources": [],
+        "checked_doc_ids": [
+          "complaint_2025",
+          "receipt_2025",
+          "note_lim"
+        ],
+        "related_claim_ids": [],
+        "related_event_ids": [],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": null,
+        "trigger": {
+          "key": "investigation_suspended/report/stage/stage_skipped",
+          "case_type": "investigation_suspended",
+          "condition": "stage_skipped",
+          "stage": "report",
+          "slot": null,
+          "since": null,
+          "elapsed_days": null,
+          "evidence": []
+        },
+        "priority": 45
+      },
+      {
+        "issue_id": "iss3",
+        "category": "unverified",
+        "condition": "claimed_only",
+        "message": "사건 발생 시점: 임도윤의 말만 있고 이를 뒷받침하는 기록 자료가 없습니다 — ‘2025. 11. 4. 인터넷 카페에서 자전거를 사기로 하고 1,200,000원을 보냈습니다.’(complaint_2025 · 4줄)",
+        "stage": "occurrence",
+        "slot": "incident_time",
+        "sources": [
+          {
+            "source_doc_id": "complaint_2025",
+            "page": 1,
+            "source_line": 4,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 220.0,
+              "x1": 1184.0,
+              "y1": 264.0
+            },
+            "char_start": 0,
+            "char_end": 52,
+            "quote": "2025. 11. 4. 인터넷 카페에서 자전거를 사기로 하고 1,200,000원을 보냈습니다."
+          }
+        ],
+        "checked_doc_ids": [],
+        "related_claim_ids": [
+          "complaint_2025:c6"
+        ],
+        "related_event_ids": [],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": null,
+        "trigger": {
+          "key": "investigation_suspended/occurrence/incident_time/claimed_only",
+          "case_type": "investigation_suspended",
+          "condition": "claimed_only",
+          "stage": "occurrence",
+          "slot": "incident_time",
+          "since": null,
+          "elapsed_days": null,
+          "evidence": [
+            {
+              "source_doc_id": "complaint_2025",
+              "page": 1,
+              "source_line": 4,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 220.0,
+                "x1": 1184.0,
+                "y1": 264.0
+              },
+              "char_start": 0,
+              "char_end": 52,
+              "quote": "2025. 11. 4. 인터넷 카페에서 자전거를 사기로 하고 1,200,000원을 보냈습니다."
+            }
+          ]
+        },
+        "priority": 50
+      }
+    ],
+    "slot_statuses": [
+      {
+        "slot": "incident_time",
+        "label": "사건 발생 시점",
+        "stage": "occurrence",
+        "required": true,
+        "state": "claimed_only",
+        "value": null,
+        "claim_ids": [
+          "complaint_2025:c6"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "complaint_2025",
+            "page": 1,
+            "source_line": 4,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 220.0,
+              "x1": 1184.0,
+              "y1": 264.0
+            },
+            "char_start": 0,
+            "char_end": 52,
+            "quote": "2025. 11. 4. 인터넷 카페에서 자전거를 사기로 하고 1,200,000원을 보냈습니다."
+          }
+        ]
+      },
+      {
+        "slot": "receipt_number",
+        "label": "신고·진정 접수번호",
+        "stage": "receipt",
+        "required": false,
+        "state": "confirmed",
+        "value": "2025-044120",
+        "claim_ids": [
+          "receipt_2025:c3"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "receipt_2025",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 392.0,
+              "y1": 144.0
+            },
+            "char_start": 0,
+            "char_end": 16,
+            "quote": "접수번호 2025-044120"
+          }
+        ]
+      },
+      {
+        "slot": "case_number",
+        "label": "사건번호",
+        "stage": "investigation",
+        "required": true,
+        "state": "missing",
+        "value": null,
+        "claim_ids": [],
+        "sources": []
+      },
+      {
+        "slot": "investigator",
+        "label": "담당 수사관",
+        "stage": "investigation",
+        "required": false,
+        "state": "missing",
+        "value": null,
+        "claim_ids": [],
+        "sources": []
+      }
+    ],
+    "pair_decisions": [],
+    "action_triggers": [
+      {
+        "key": "investigation_suspended/investigation/case_number/missing",
+        "case_type": "investigation_suspended",
+        "condition": "missing",
+        "stage": "investigation",
+        "slot": "case_number",
+        "since": null,
+        "elapsed_days": null,
+        "evidence": []
+      },
+      {
+        "key": "investigation_suspended/report/stage/stage_skipped",
+        "case_type": "investigation_suspended",
+        "condition": "stage_skipped",
+        "stage": "report",
+        "slot": null,
+        "since": null,
+        "elapsed_days": null,
+        "evidence": []
+      },
+      {
+        "key": "investigation_suspended/occurrence/incident_time/claimed_only",
+        "case_type": "investigation_suspended",
+        "condition": "claimed_only",
+        "stage": "occurrence",
+        "slot": "incident_time",
+        "since": null,
+        "elapsed_days": null,
+        "evidence": [
+          {
+            "source_doc_id": "complaint_2025",
+            "page": 1,
+            "source_line": 4,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 220.0,
+              "x1": 1184.0,
+              "y1": 264.0
+            },
+            "char_start": 0,
+            "char_end": 52,
+            "quote": "2025. 11. 4. 인터넷 카페에서 자전거를 사기로 하고 1,200,000원을 보냈습니다."
+          }
+        ]
+      }
+    ],
+    "case_card": {
+      "case_type": "investigation_suspended",
+      "case_type_label": "수사중지 사건",
+      "requirements_status": "draft_unverified",
+      "stages": [
+        {
+          "stage": "occurrence",
+          "label": "발생",
+          "state": "done",
+          "timeline_event_ids": [
+            "tl2"
+          ],
+          "evidence_level": "statement"
+        },
+        {
+          "stage": "report",
+          "label": "신고",
+          "state": "skipped",
+          "timeline_event_ids": [],
+          "evidence_level": null
+        },
+        {
+          "stage": "receipt",
+          "label": "접수",
+          "state": "current",
+          "timeline_event_ids": [
+            "tl1"
+          ],
+          "evidence_level": "record"
+        },
+        {
+          "stage": "investigation",
+          "label": "수사",
+          "state": "pending",
+          "timeline_event_ids": [],
+          "evidence_level": null
+        },
+        {
+          "stage": "outcome",
+          "label": "결과",
+          "state": "pending",
+          "timeline_event_ids": [],
+          "evidence_level": null
+        }
+      ],
+      "current_stage": "receipt",
+      "evidence_doc_count": 2,
+      "needs_confirmation_count": 3,
+      "slots_done": 0,
+      "slots_total": 2,
+      "next_trigger": {
+        "key": "investigation_suspended/investigation/case_number/missing",
+        "case_type": "investigation_suspended",
+        "condition": "missing",
+        "stage": "investigation",
+        "slot": "case_number",
+        "since": null,
+        "elapsed_days": null,
+        "evidence": []
+      }
+    }
+  }
+}

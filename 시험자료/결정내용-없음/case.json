@@ -1,0 +1,16 @@
+{
+  "case_id": "test-no-decision",
+  "case_type": "investigation_suspended",
+  "as_of": "2026-09-16",
+  "documents": [
+    "complaint_2025.json",
+    "receipt_2025.json"
+  ],
+  "user_notes": [
+    {
+      "note_id": "note_lim",
+      "text": "작년에 고소하고 나서 아무 연락도 못 받았습니다. 지금 어떻게 되고 있는지 모르겠어요.",
+      "created_at": "2026-09-14T09:10:00"
+    }
+  ]
+}
