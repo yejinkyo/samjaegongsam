@@ -776,16 +776,26 @@
     if (!sources.length) {
       body.appendChild(h("p", { class: "tldetail__none", text: "직접 적은 내용이라 뒷받침하는 자료가 없어요." }));
     } else {
+      var openable = false;
       body.appendChild(h("ul", { class: "srclist" }, sources.map(function (s) {
-        return h("li", { class: "srclist__item" }, [
+        var parts = [
           h("span", { class: "srclist__kind t-caption", text: s.line + "줄" }),
           h("div", { class: "srclist__texts" }, [
             h("span", { class: "t-body-m c-primary", text: s.name }),
             s.quote ? h("span", { class: "srclist__quote", text: "“" + s.quote + "”" }) : null,
           ]),
-        ]);
+        ];
+        if (!s.href) return h("li", {}, [h("div", { class: "srclist__item" }, parts)]);
+
+        openable = true;
+        parts.push(h("span", { class: "srclist__open t-caption", text: "원본 보기" }));
+        var item = h("button", { type: "button", class: "srclist__item srclist__item--open" }, parts);
+        item.addEventListener("click", function () { originalModal(s); });
+        return h("li", {}, [item]);
       })));
-      body.appendChild(h("p", { class: "modal__note", text: "원본 사진을 띄우는 것은 아직 연결되지 않았어요. 지금은 어느 자료 몇 줄에서 왔는지까지 보여드려요." }));
+      body.appendChild(h("p", { class: "modal__note", text: openable
+        ? "출처를 누르면 올린 원본을 볼 수 있어요."
+        : "어느 자료 몇 줄에서 왔는지까지 보여드려요." }));
     }
     openModal(full, body);
   }
@@ -1501,18 +1511,66 @@
     return button;
   }
 
+  /* 올린 원본을 그대로 띄운다.
+   *
+   * 사진이면 사진을, OCR 결과 JSON 이면 읽은 글자를 보여준다. 정리된 화면만 보면
+   * '엔진이 뭘 보고 이렇게 말하는지'를 확인할 길이 없다.
+   *
+   * 예시 사건에는 올린 파일이 없다(href 가 없다). 그때는 누를 수 없게 그린다 —
+   * 눌러도 아무 일이 없는 것보다 낫다.
+   */
+  function originalModal(src) {
+    var body = h("div", { class: "orig" });
+    var loading = h("p", { class: "orig__note t-body-s c-tertiary", text: "여는 중…" });
+    body.appendChild(loading);
+
+    function fail(message) {
+      loading.textContent = message;
+      loading.className = "orig__note orig__note--warn t-body-s";
+    }
+
+    if (src.media === "application/json") {
+      // OCR 결과는 그림이 아니라 읽은 글자다. 줄 번호를 붙여 두면 '몇 줄' 이 바로 짚어진다.
+      api(src.href).then(function (doc) {
+        var lines = [];
+        (doc.pages || []).forEach(function (page) {
+          (page.lines || []).forEach(function (line) { lines.push(line.text); });
+        });
+        loading.remove();
+        if (!lines.length) return fail("읽은 글자가 없어요.");
+        body.appendChild(h("ol", { class: "orig__lines" }, lines.map(function (t) {
+          return h("li", { class: "orig__line t-body-s", text: t });
+        })));
+      }, function (err) { fail(errorText(err)); });
+    } else {
+      var img = h("img", { class: "orig__img", alt: src.name, src: src.href });
+      img.addEventListener("load", function () { loading.remove(); });
+      img.addEventListener("error", function () { fail("원본을 열지 못했어요."); });
+      body.appendChild(img);
+    }
+
+    body.appendChild(h("p", { class: "modal__note", text: "올릴 때 받은 그대로예요. 이 컴퓨터 밖으로 나가지 않습니다." }));
+    openModal(src.name, body);
+  }
+
   function sourceListModal(c) {
     openModal("첨부한 자료 " + c.sources.length + "개", h("div", {}, [
       h("ul", { class: "srclist" }, c.sources.map(function (s) {
-        return h("li", { class: "srclist__item" + (s.isNew ? " srclist__item--new" : "") }, [
+        var parts = [
           h("span", { class: "srclist__kind t-caption", text: s.kind }),
           h("span", { class: "t-body-m c-primary", text: s.name }),
           s.isNew ? h("span", { class: "srclist__new", text: "방금 추가" }) : null,
-        ]);
+        ];
+        if (!s.href) return h("li", { class: "srclist__item" + (s.isNew ? " srclist__item--new" : "") }, parts);
+
+        parts.push(h("span", { class: "srclist__open t-caption", text: "원본 보기" }));
+        var item = h("button", { type: "button", class: "srclist__item srclist__item--open" }, parts);
+        item.addEventListener("click", function () { originalModal(s); });
+        return h("li", {}, [item]);
       })),
       h("p", { class: "modal__note", text: isLocal(c)
-        ? "자료를 더하면 올린 자료 전체로 사건을 처음부터 다시 정리해요."
-        : "예시 사건이라 자료를 더할 수 없어요. 내 자료로 보려면 새 사건을 등록해 주세요." }),
+        ? "이름을 누르면 올린 원본을 볼 수 있어요. 자료를 더하면 올린 자료 전체로 사건을 처음부터 다시 정리해요."
+        : "예시 사건이라 올린 원본이 없어요. 내 자료로 보려면 새 사건을 등록해 주세요." }),
     ]));
   }
 

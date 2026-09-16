@@ -38,23 +38,28 @@ window.TARAE_CASES = [
     "sources": [
       {
         "kind": "IMG",
-        "name": "카톡_0601.png"
+        "name": "카톡_0601.png",
+        "doc_id": "kakao_0601"
       },
       {
         "kind": "PDF",
-        "name": "이체확인증.pdf"
+        "name": "이체확인증.pdf",
+        "doc_id": "transfer_receipt"
       },
       {
         "kind": "PDF",
-        "name": "ECRM_접수증.pdf"
+        "name": "ECRM_접수증.pdf",
+        "doc_id": "ecrm_receipt"
       },
       {
         "kind": "IMG",
-        "name": "메모.jpg"
+        "name": "메모.jpg",
+        "doc_id": "memo_handwritten"
       },
       {
         "kind": "IMG",
-        "name": "진술서.jpg"
+        "name": "진술서.jpg",
+        "doc_id": "statement"
       }
     ],
     "timeline": [
@@ -71,11 +76,13 @@ window.TARAE_CASES = [
         "sources": [
           {
             "name": "카톡_0601.png",
+            "doc_id": "kakao_0601",
             "line": 3,
             "quote": "네 판매 중입니다. 미개봉 새 상품이에요"
           },
           {
             "name": "카톡_0601.png",
+            "doc_id": "kakao_0601",
             "line": 3,
             "quote": "오전 10:22"
           }
@@ -94,16 +101,19 @@ window.TARAE_CASES = [
         "sources": [
           {
             "name": "진술서.jpg",
+            "doc_id": "statement",
             "line": 3,
             "quote": "위 진술인은 2026년 6월 1일 오후 2시경 판매자 계좌로 30만원을 송금하였습니다."
           },
           {
             "name": "진술서.jpg",
+            "doc_id": "statement",
             "line": 3,
             "quote": "2026년 6월 1일 오후 2시경"
           },
           {
             "name": "진술서.jpg",
+            "doc_id": "statement",
             "line": 3,
             "quote": "30만원"
           }
@@ -122,26 +132,31 @@ window.TARAE_CASES = [
         "sources": [
           {
             "name": "이체확인증.pdf",
+            "doc_id": "transfer_receipt",
             "line": 1,
             "quote": "이체확인증"
           },
           {
             "name": "이체확인증.pdf",
+            "doc_id": "transfer_receipt",
             "line": 2,
             "quote": "2026-06-01 14:05"
           },
           {
             "name": "이체확인증.pdf",
+            "doc_id": "transfer_receipt",
             "line": 6,
             "quote": "350,000원"
           },
           {
             "name": "카톡_0601.png",
+            "doc_id": "kakao_0601",
             "line": 6,
             "quote": "송금했습니다"
           },
           {
             "name": "카톡_0601.png",
+            "doc_id": "kakao_0601",
             "line": 6,
             "quote": "오후 2:05"
           }
@@ -160,11 +175,13 @@ window.TARAE_CASES = [
         "sources": [
           {
             "name": "메모.jpg",
+            "doc_id": "memo_handwritten",
             "line": 1,
             "quote": "6/2 저녁 전화 안받음"
           },
           {
             "name": "직접 입력",
+            "doc_id": "note_0602",
             "line": 1,
             "quote": "6월 2일 하루 종일 연락이 안 됐습니다."
           }
@@ -183,6 +200,7 @@ window.TARAE_CASES = [
         "sources": [
           {
             "name": "메모.jpg",
+            "doc_id": "memo_handwritten",
             "line": 2,
             "quote": "6/3 사이버수사대 신고함"
           }
@@ -201,11 +219,13 @@ window.TARAE_CASES = [
         "sources": [
           {
             "name": "ECRM_접수증.pdf",
+            "doc_id": "ecrm_receipt",
             "line": 1,
             "quote": "사이버범죄 신고 접수증"
           },
           {
             "name": "ECRM_접수증.pdf",
+            "doc_id": "ecrm_receipt",
             "line": 3,
             "quote": "2026.06.03 09:12"
           }
@@ -887,27 +907,33 @@ window.TARAE_CASES = [
     "sources": [
       {
         "kind": "IMG",
-        "name": "실종신고_접수증_2015.jpg"
+        "name": "실종신고_접수증_2015.jpg",
+        "doc_id": "missing_report_2015"
       },
       {
         "kind": "IMG",
-        "name": "기사캡처_2016.png"
+        "name": "기사캡처_2016.png",
+        "doc_id": "news_2016"
       },
       {
         "kind": "IMG",
-        "name": "최영호_진술서.jpg"
+        "name": "최영호_진술서.jpg",
+        "doc_id": "witness_statement_2019"
       },
       {
         "kind": "IMG",
-        "name": "수사중지_결정통지서.jpg"
+        "name": "수사중지_결정통지서.jpg",
+        "doc_id": "suspension_notice_2022"
       },
       {
         "kind": "IMG",
-        "name": "진정서_2023.jpg"
+        "name": "진정서_2023.jpg",
+        "doc_id": "petition_2023"
       },
       {
         "kind": "IMG",
-        "name": "엄마_메모.jpg"
+        "name": "엄마_메모.jpg",
+        "doc_id": "mother_memo"
       }
     ],
     "timeline": [
@@ -924,6 +950,7 @@ window.TARAE_CASES = [
         "sources": [
           {
             "name": "엄마_메모.jpg",
+            "doc_id": "mother_memo",
             "line": 2,
             "quote": "15년 10월 10일 밤 연락 끊김"
           }
@@ -942,21 +969,25 @@ window.TARAE_CASES = [
         "sources": [
           {
             "name": "기사캡처_2016.png",
+            "doc_id": "news_2016",
             "line": 3,
             "quote": "경찰은 김씨가 지난해 10월 10일 밤 11시쯤 ○○역 인근 CCTV에 마지막으로 찍혔다고 밝혔다."
           },
           {
             "name": "기사캡처_2016.png",
+            "doc_id": "news_2016",
             "line": 3,
             "quote": "10월 10일 밤 11시쯤"
           },
           {
             "name": "진정서_2023.jpg",
+            "doc_id": "petition_2023",
             "line": 5,
             "quote": "아들은 10월 10일 밤 11시경 ○○역 부근에서 마지막으로 목격되었습니다."
           },
           {
             "name": "진정서_2023.jpg",
+            "doc_id": "petition_2023",
             "line": 5,
             "quote": "10월 10일 밤 11시경"
           }
@@ -975,6 +1006,7 @@ window.TARAE_CASES = [
         "sources": [
           {
             "name": "엄마_메모.jpg",
+            "doc_id": "mother_memo",
             "line": 3,
             "quote": "10월 12일 경찰서 실종신고"
           }
@@ -993,11 +1025,13 @@ window.TARAE_CASES = [
         "sources": [
           {
             "name": "실종신고_접수증_2015.jpg",
+            "doc_id": "missing_report_2015",
             "line": 1,
             "quote": "실종신고 접수증"
           },
           {
             "name": "실종신고_접수증_2015.jpg",
+            "doc_id": "missing_report_2015",
             "line": 3,
             "quote": "2015. 10. 12. 21:30"
           }
@@ -1021,16 +1055,19 @@ window.TARAE_CASES = [
         "sources": [
           {
             "name": "최영호_진술서.jpg",
+            "doc_id": "witness_statement_2019",
             "line": 3,
             "quote": "본인은 2019년 3월 초순 오후 ○○시장 입구에서 김민수로 보이는 남성을 목격하였습니다."
           },
           {
             "name": "최영호_진술서.jpg",
+            "doc_id": "witness_statement_2019",
             "line": 3,
             "quote": "2019년 3월 초순"
           },
           {
             "name": "진정서_2023.jpg",
+            "doc_id": "petition_2023",
             "line": 6,
             "quote": "2019년 3월경 이웃 주민 최영호가 아들을 ○○시장 근처에서 보았다고 말했습니다."
           }
@@ -1054,11 +1091,13 @@ window.TARAE_CASES = [
         "sources": [
           {
             "name": "수사중지_결정통지서.jpg",
+            "doc_id": "suspension_notice_2022",
             "line": 1,
             "quote": "수사결과 통지서"
           },
           {
             "name": "수사중지_결정통지서.jpg",
+            "doc_id": "suspension_notice_2022",
             "line": 5,
             "quote": "2022. 3. 15."
           }
@@ -1082,11 +1121,13 @@ window.TARAE_CASES = [
         "sources": [
           {
             "name": "진정서_2023.jpg",
+            "doc_id": "petition_2023",
             "line": 4,
             "quote": "2015. 10. 10. 실종된 아들 김민수 사건(2016형제12345)의 재수사를 요청합니다."
           },
           {
             "name": "진정서_2023.jpg",
+            "doc_id": "petition_2023",
             "line": 8,
             "quote": "2023. 4. 2."
           }
@@ -1105,6 +1146,7 @@ window.TARAE_CASES = [
         "sources": [
           {
             "name": "기사캡처_2016.png",
+            "doc_id": "news_2016",
             "line": 1,
             "quote": "○○시 20대 남성 실종 넉 달째 행방 묘연"
           }
@@ -1858,19 +1900,23 @@ window.TARAE_CASES = [
     "sources": [
       {
         "kind": "IMG",
-        "name": "고소장_2021.jpg"
+        "name": "고소장_2021.jpg",
+        "doc_id": "complaint_2021"
       },
       {
         "kind": "IMG",
-        "name": "접수증_2021.jpg"
+        "name": "접수증_2021.jpg",
+        "doc_id": "receipt_2021"
       },
       {
         "kind": "IMG",
-        "name": "수사중지_결정통지서.jpg"
+        "name": "수사중지_결정통지서.jpg",
+        "doc_id": "suspension_notice_2026"
       },
       {
         "kind": "IMG",
-        "name": "조미래_진술서.jpg"
+        "name": "조미래_진술서.jpg",
+        "doc_id": "witness_statement_2025"
       }
     ],
     "timeline": [
@@ -1887,11 +1933,13 @@ window.TARAE_CASES = [
         "sources": [
           {
             "name": "고소장_2021.jpg",
+            "doc_id": "complaint_2021",
             "line": 5,
             "quote": "2021. 5. 18. 인테리어 공사대금 명목으로 1,800만원을 편취당하는 사기 피해를 입었습니다."
           },
           {
             "name": "고소장_2021.jpg",
+            "doc_id": "complaint_2021",
             "line": 5,
             "quote": "1,800만원"
           }
@@ -1910,6 +1958,7 @@ window.TARAE_CASES = [
         "sources": [
           {
             "name": "고소장_2021.jpg",
+            "doc_id": "complaint_2021",
             "line": 7,
             "quote": "2021. 5. 25. ○○경찰서에 고소하였습니다."
           }
@@ -1928,11 +1977,13 @@ window.TARAE_CASES = [
         "sources": [
           {
             "name": "접수증_2021.jpg",
+            "doc_id": "receipt_2021",
             "line": 1,
             "quote": "접 수 증"
           },
           {
             "name": "접수증_2021.jpg",
+            "doc_id": "receipt_2021",
             "line": 3,
             "quote": "2021. 5. 25. 14:20"
           }
@@ -1956,6 +2007,7 @@ window.TARAE_CASES = [
         "sources": [
           {
             "name": "조미래_진술서.jpg",
+            "doc_id": "witness_statement_2025",
             "line": 3,
             "quote": "2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다."
           }
@@ -1979,11 +2031,13 @@ window.TARAE_CASES = [
         "sources": [
           {
             "name": "수사중지_결정통지서.jpg",
+            "doc_id": "suspension_notice_2026",
             "line": 1,
             "quote": "수사결과 통지서"
           },
           {
             "name": "수사중지_결정통지서.jpg",
+            "doc_id": "suspension_notice_2026",
             "line": 6,
             "quote": "2026. 8. 18."
           }
@@ -2975,19 +3029,23 @@ window.TARAE_CASES = [
     "sources": [
       {
         "kind": "IMG",
-        "name": "고소장_2024.jpg"
+        "name": "고소장_2024.jpg",
+        "doc_id": "complaint_2024"
       },
       {
         "kind": "IMG",
-        "name": "접수증_2024.jpg"
+        "name": "접수증_2024.jpg",
+        "doc_id": "receipt_2024"
       },
       {
         "kind": "IMG",
-        "name": "불송치_결정통지서.jpg"
+        "name": "불송치_결정통지서.jpg",
+        "doc_id": "no_referral_notice_2026"
       },
       {
         "kind": "IMG",
-        "name": "계좌거래내역_2026.png"
+        "name": "계좌거래내역_2026.png",
+        "doc_id": "bank_2026"
       }
     ],
     "timeline": [
@@ -3004,16 +3062,19 @@ window.TARAE_CASES = [
         "sources": [
           {
             "name": "고소장_2024.jpg",
+            "doc_id": "complaint_2024",
             "line": 5,
             "quote": "2024. 3. 12. 중고 노트북 거래를 명목으로 8,500,000원을 송금하였습니다."
           },
           {
             "name": "고소장_2024.jpg",
+            "doc_id": "complaint_2024",
             "line": 5,
             "quote": "8,500,000원"
           },
           {
             "name": "계좌거래내역_2026.png",
+            "doc_id": "bank_2026",
             "line": 3,
             "quote": "2024. 3. 12. 같은 계좌에서 타인 3명에게 분산 이체됨"
           }
@@ -3032,11 +3093,13 @@ window.TARAE_CASES = [
         "sources": [
           {
             "name": "접수증_2024.jpg",
+            "doc_id": "receipt_2024",
             "line": 1,
             "quote": "접 수 증"
           },
           {
             "name": "접수증_2024.jpg",
+            "doc_id": "receipt_2024",
             "line": 3,
             "quote": "2024. 3. 20. 11:05"
           }
@@ -3060,11 +3123,13 @@ window.TARAE_CASES = [
         "sources": [
           {
             "name": "불송치_결정통지서.jpg",
+            "doc_id": "no_referral_notice_2026",
             "line": 1,
             "quote": "수사결과 통지서"
           },
           {
             "name": "불송치_결정통지서.jpg",
+            "doc_id": "no_referral_notice_2026",
             "line": 6,
             "quote": "2026. 8. 25."
           }
@@ -3083,6 +3148,7 @@ window.TARAE_CASES = [
         "sources": [
           {
             "name": "고소장_2024.jpg",
+            "doc_id": "complaint_2024",
             "line": 4,
             "quote": "죄명 사기"
           }
@@ -3768,15 +3834,18 @@ window.TARAE_CASES = [
     "sources": [
       {
         "kind": "IMG",
-        "name": "고소장_2022.jpg"
+        "name": "고소장_2022.jpg",
+        "doc_id": "complaint_2022"
       },
       {
         "kind": "IMG",
-        "name": "접수증_2022.jpg"
+        "name": "접수증_2022.jpg",
+        "doc_id": "receipt_2022"
       },
       {
         "kind": "IMG",
-        "name": "수사결과_통지서_흐림.jpg"
+        "name": "수사결과_통지서_흐림.jpg",
+        "doc_id": "blurred_notice_2024"
       }
     ],
     "timeline": [
@@ -3793,11 +3862,13 @@ window.TARAE_CASES = [
         "sources": [
           {
             "name": "고소장_2022.jpg",
+            "doc_id": "complaint_2022",
             "line": 4,
             "quote": "2022. 2. 14. 중고 카메라 대금으로 2,300,000원을 송금하였습니다."
           },
           {
             "name": "고소장_2022.jpg",
+            "doc_id": "complaint_2022",
             "line": 4,
             "quote": "2,300,000원"
           }
@@ -3816,6 +3887,7 @@ window.TARAE_CASES = [
         "sources": [
           {
             "name": "고소장_2022.jpg",
+            "doc_id": "complaint_2022",
             "line": 5,
             "quote": "2022. 3. 2. ○○경찰서에 고소하였습니다."
           }
@@ -3834,11 +3906,13 @@ window.TARAE_CASES = [
         "sources": [
           {
             "name": "접수증_2022.jpg",
+            "doc_id": "receipt_2022",
             "line": 1,
             "quote": "접 수 증"
           },
           {
             "name": "접수증_2022.jpg",
+            "doc_id": "receipt_2022",
             "line": 3,
             "quote": "2022. 3. 2. 09:40"
           }
@@ -3862,11 +3936,13 @@ window.TARAE_CASES = [
         "sources": [
           {
             "name": "수사결과_통지서_흐림.jpg",
+            "doc_id": "blurred_notice_2024",
             "line": 1,
             "quote": "수사결과 통지서"
           },
           {
             "name": "수사결과_통지서_흐림.jpg",
+            "doc_id": "blurred_notice_2024",
             "line": 5,
             "quote": "2024. 5. 30."
           }

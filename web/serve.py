@@ -128,12 +128,67 @@ def write_json(path: Path, data) -> None:
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
+# 원본을 내줄 때 브라우저에 알려 줄 형식. 목록에 없는 확장자는 내주지 않는다 —
+# 사건 폴더에 무엇이 들어오든 아무 파일이나 열어 주는 통로가 되면 안 된다.
+VIEWABLE_TYPES = {
+    ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png",
+    ".webp": "image/webp", ".gif": "image/gif", ".bmp": "image/bmp",
+    ".json": "application/json",
+}
+
+
+def upload_path(folder: Path, doc_id: str) -> tuple[Path, str]:
+    """사건 안의 doc_id 로 올린 원본을 찾는다. 경로를 밖에서 받지 않는 것이 핵심이다 —
+    파일 이름을 그대로 받으면 사건 폴더 밖을 가리킬 수 있다."""
+    meta = read_json(folder / "meta.json")
+    doc = next((d for d in meta.get("documents", []) if d.get("doc_id") == doc_id), None)
+    if not doc:
+        raise ApiError(HTTPStatus.NOT_FOUND, "그 자료를 찾지 못했어요.")
+
+    stored = Path(doc["stored"]).name          # 폴더 구분자가 섞여 와도 이름만 쓴다
+    media = VIEWABLE_TYPES.get(Path(stored).suffix.lower())
+    if not media:
+        raise ApiError(HTTPStatus.UNSUPPORTED_MEDIA_TYPE, "이 형식은 화면에서 열 수 없어요.")
+
+    path = (folder / "uploads" / stored).resolve()
+    if not path.is_file() or folder.resolve() not in path.parents:
+        raise ApiError(HTTPStatus.NOT_FOUND, "그 자료를 찾지 못했어요.")
+    return path, media
+
+
+def with_files(view: dict, folder: Path) -> dict:
+    """화면이 원본을 열 수 있게 자료마다 주소를 붙인다.
+
+    예시 사건(cases.js)에는 올린 파일이 없다. 그때는 주소를 붙이지 않고, 화면은
+    누를 수 없는 상태로 그린다 — 눌러도 아무 일이 없는 것보다 낫다.
+    """
+    meta = read_json(folder / "meta.json")
+    stored = {d["doc_id"]: d["stored"] for d in meta.get("documents", [])}
+    def mark(src: dict) -> None:
+        doc_id = src.get("doc_id")
+        media = VIEWABLE_TYPES.get(Path(stored.get(doc_id, "")).suffix.lower()) if doc_id in stored else None
+        if not media:
+            return
+        src["href"] = f"api/cases/{view['id']}/files/{doc_id}"
+        # 화면이 보는 이름은 자료 이름(사진)인데 올린 파일은 OCR 결과 JSON 일 수 있다.
+        # 무엇으로 열지는 저장된 형식이 정한다 — 이름으로 짐작하면 틀린다.
+        src["media"] = media
+
+    for src in view.get("sources") or []:
+        mark(src)
+    # 타임라인의 '자세히' 에서도 그 줄이 어느 원본에서 왔는지 바로 열 수 있어야 한다
+    for row in view.get("timeline") or []:
+        for src in row.get("sources") or []:
+            mark(src)
+    return view
+
+
 def load_view(folder: Path) -> dict:
     """화면 데이터 + 이 서버에서 만든 사건이라는 표시(local). 화면은 local 일 때만 자료 추가를 연다."""
     view = read_json(folder / "view.json")
     view["created_at"] = read_json(folder / "meta.json").get("created_at")
     view["local"] = True
-    return view
+    return with_files(view, folder)
 
 
 def list_views() -> list[dict]:
@@ -347,6 +402,9 @@ class Handler(SimpleHTTPRequestHandler):
                 if not (folder / "view.json").is_file():
                     raise ApiError(HTTPStatus.NOT_FOUND, "사건을 찾지 못했어요.")
                 return self.send_json(HTTPStatus.OK, load_view(folder))
+            f = re.fullmatch(r"/api/cases/([^/]+)/files/([^/]+)", path)
+            if method == "GET" and f:
+                return self.send_file(*upload_path(case_dir(f[1]), f[2]))
             if method == "POST" and (path == "/api/cases" or re.fullmatch(r"/api/cases/[^/]+/files", path)):
                 length = int(self.headers.get("Content-Length") or 0)
                 if length > MAX_UPLOAD_BYTES:
@@ -365,6 +423,18 @@ class Handler(SimpleHTTPRequestHandler):
         except Exception as err:  # noqa: BLE001 — 연결을 끊지 말고 화면이 이유를 보여 줄 수 있게 한다
             sys.stderr.write(f"{self.command} {self.path}: {err!r}\n")
             self.send_json(HTTPStatus.INTERNAL_SERVER_ERROR, {"error": "서버에서 처리하지 못했어요.", "detail": repr(err)})
+
+    def send_file(self, path: Path, media: str) -> None:
+        """올린 원본을 그대로 내보낸다. 브라우저가 화면에 띄우도록 inline 으로 준다."""
+        data = path.read_bytes()
+        self.send_response(HTTPStatus.OK)
+        self.send_header("Content-Type", media)
+        self.send_header("Content-Length", str(len(data)))
+        self.send_header("Content-Disposition", "inline")
+        # 사건 자료다. 어디에도 남기지 않는다.
+        self.send_header("Cache-Control", "no-store")
+        self.end_headers()
+        self.wfile.write(data)
 
     def do_GET(self) -> None:
         if self.path.startswith("/api/"):
