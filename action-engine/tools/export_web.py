@@ -399,8 +399,14 @@ def _period(result: dict[str, Any]) -> str:
     return f"{a:%Y.%m.%d} – {b:%m.%d}"
 
 
-def _next_action(card, result: dict[str, Any]) -> dict[str, Any] | None:
-    hit = card.next_action
+def _action(card, hit, result: dict[str, Any]) -> dict[str, Any] | None:
+    """행동 하나를 화면 dict 로. 준비물·제출처는 그 행동에 맞춰 다시 대조한다.
+
+    다음 행동 하나만이 아니라 후보 전부를 이렇게 만들어 둔다. 사용자가 '냈어요'를
+    누르면 화면이 다음 순위로 갈아 끼우는데, 그때도 무엇을·어디에가 비면 안 된다.
+    """
+    from action_engine.checklist import build_checklist
+
     if not hit:
         return None
     reasons = {i.code: i.reason for i in card.inf}
@@ -416,7 +422,7 @@ def _next_action(card, result: dict[str, Any]) -> dict[str, Any] | None:
         }
 
     rows: list[dict[str, str]] = []
-    c = card.checklist
+    c = build_checklist(hit.action, result.get("documents", []), card.tim, st=card.st.code)
     state = "unresolved"
     note = None
     prepare = None
@@ -451,8 +457,18 @@ def _next_action(card, result: dict[str, Any]) -> dict[str, Any] | None:
         "prepare": prepare,
         "note": note,
         "unverified": card.requirements_status == "draft_unverified",
-        "also": [{"rule_no": a.rule_no, "label": ACTION_LABELS.get(a.action, a.action), "why": a.why} for a in card.also],
+        "also": [{"rule_no": a.rule_no, "action": a.action, "label": ACTION_LABELS.get(a.action, a.action), "why": a.why}
+                 for a in card.also],
+        # 낸 것을 기록하는 자리. 제출처는 지식베이스 값이 있을 때만 채운다.
+        "submit_to": c.submit_to if c else None,
+        "form_name": c.form_name if c else None,
     }
+
+
+def _actions(card, result: dict[str, Any]) -> list[dict[str, Any]]:
+    """다음 행동 후보를 우선순위 순서로. 첫 줄이 지금의 다음 행동이다."""
+    hits = ([card.next_action] if card.next_action else []) + list(card.also)
+    return [a for a in (_action(card, hit, result) for hit in hits) if a]
 
 
 def build_view(case_id: str, title: str, result: dict[str, Any]) -> dict[str, Any]:
@@ -477,7 +493,9 @@ def build_view(case_id: str, title: str, result: dict[str, Any]) -> dict[str, An
         "people": _people(result, docs),
         "slots": _slots(result, docs),
         "issues": _issues(result, docs),
-        "next_action": _next_action(card, result),
+        "next_action": _action(card, card.next_action, result),
+        # 화면이 '냈어요'를 기록하면 이 목록에서 다음 순위를 꺼내 쓴다
+        "actions": _actions(card, result),
     }
 
 

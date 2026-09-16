@@ -18,7 +18,7 @@ from pathlib import Path
 from typing import Any
 
 from .codes import label
-from .schema import ActionDecision, CaseCardOut, CaseState, Deadline, RuleHit
+from .schema import ActionDecision, CaseCardOut, CaseState, Deadline, RuleHit, Submission
 
 DATA = Path(__file__).parent / "data"
 
@@ -202,13 +202,17 @@ def run(result: dict[str, Any]) -> ActionDecision:
     return decide(state)
 
 
-def build_card(result: dict[str, Any]) -> CaseCardOut:
+def build_card(result: dict[str, Any], submissions: list[Submission] | None = None) -> CaseCardOut:
     """화면이 읽을 카드 하나를 만든다.
 
     research-engine 의 ``CaseCard`` 를 통과시키고 기능 2가 판정한 값을 덧붙인다.
     화면은 이 함수의 결과만 읽으면 되고, research-engine 출력을 따로 뒤지지 않는다.
+
+    ``submissions`` 는 사용자가 '냈다'고 기록한 것이다. 주면 이미 낸 행동을 다음 행동에서
+    내리고 기다린 날수를 붙인다(:mod:`submissions`). 안 주면 지금까지와 똑같이 돈다.
     """
     from .checklist import build_checklist
+    from .submissions import apply as apply_submissions
 
     decision = run(result)
     card = result.get("analysis", {}).get("case_card", {}) or {}
@@ -218,7 +222,7 @@ def build_card(result: dict[str, Any]) -> CaseCardOut:
         decision.state.tim,
         st=decision.state.st.code,
     )
-    return CaseCardOut(
+    out = CaseCardOut(
         case_type=card.get("case_type", result.get("case_type", "")),
         case_type_label=card.get("case_type_label", ""),
         requirements_status=card.get("requirements_status", "unknown"),
@@ -236,3 +240,4 @@ def build_card(result: dict[str, Any]) -> CaseCardOut:
         also=decision.also,
         checklist=checklist,
     )
+    return apply_submissions(out, submissions or [], decision.state.as_of)

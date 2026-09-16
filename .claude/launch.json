@@ -1,0 +1,8 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    { "name": "타래 1안", "runtimeExecutable": "py", "runtimeArgs": ["web/serve.py", "8765"], "port": 8765 },
+    { "name": "타래 2안", "runtimeExecutable": "py", "runtimeArgs": ["web-2안/serve.py", "8766"], "port": 8766 },
+    { "name": "타래 3안", "runtimeExecutable": "py", "runtimeArgs": ["web-3안/serve.py", "8767"], "port": 8767 }
+  ]
+}

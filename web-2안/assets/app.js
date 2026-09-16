@@ -191,7 +191,7 @@
 
   /** 사건 하나 = 네모 카드 하나. 접어 두는 것 없이 한눈에 다 보이게 둔다. */
   function caseCard(c, tone) {
-    var next = c.next_action;
+    var next = activeAction(c);
     var due = next && next.due;
 
     return h("a", { class: "card case-card case-card--tone" + tone, href: caseHref(c.id) }, [
@@ -731,7 +731,205 @@
     return wrap;
   }
 
-  function nextActionCard(next) {
+  // ── 무엇을 언제 내고 어떤 답을 받았는가 ───────────────────────────────
+  //
+  // 서버가 없어서 낸 기록은 이 브라우저에만 남는다(localStorage).
+  // 판정 규칙은 action-engine 의 submissions.py 와 같다.
+  //   · 이미 낸 행동은 다음 행동에서 내리고 '낸 것'으로 옮긴다
+  //   · 접수증이 없으면 낸 사실이 본인 말뿐이라고 적는다
+  //   · 답을 기다린 날수를 센다 — 며칠이면 늦은 것인지는 판단하지 않는다.
+  //     회신 처리기한은 지식베이스에 없다. 없는 기한을 지어내지 않는다.
+
+  var SUB_KEY = "tarae.submissions.v1";
+
+  function allSubs() {
+    try { return JSON.parse(localStorage.getItem(SUB_KEY)) || {}; } catch (e) { return {}; }
+  }
+
+  function saveSubs(all) {
+    try { localStorage.setItem(SUB_KEY, JSON.stringify(all)); } catch (e) { /* 저장이 막혀도 화면은 돈다 */ }
+  }
+
+  function subsOf(caseId) {
+    var list = allSubs()[caseId];
+    return Array.isArray(list) ? list : [];
+  }
+
+  function putSub(caseId, sub) {
+    var all = allSubs();
+    all[caseId] = subsOf(caseId).filter(function (s) { return s.action !== sub.action; }).concat([sub]);
+    saveSubs(all);
+  }
+
+  function dropSub(caseId, action) {
+    var all = allSubs();
+    all[caseId] = subsOf(caseId).filter(function (s) { return s.action !== action; });
+    saveSubs(all);
+  }
+
+  /** 아직 내지 않은 것 중 가장 앞선 행동. 전부 냈으면 null. */
+  function activeAction(c) {
+    var done = {};
+    subsOf(c.id).forEach(function (s) { done[s.action] = true; });
+    var list = (c.actions && c.actions.length) ? c.actions : (c.next_action ? [c.next_action] : []);
+    var left = list.filter(function (a) { return !done[a.action]; });
+    return left.length ? left[0] : null;
+  }
+
+  function isoDay(d) {
+    return d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);
+  }
+
+  function dotDay(iso) { return String(iso || "").split("-").join("."); }
+
+  /** 낸 날부터 오늘까지 며칠. 답이 왔으면 세지 않는다(null). */
+  function waitingDays(sub) {
+    if (!sub || sub.response) return null;
+    // 문자열을 Date 에 그대로 먹이지 않는다 — 브라우저마다 현지시각으로 읽는지가 갈린다.
+    // 날짜 세 조각으로 직접 만들면 어디서나 같은 하루가 된다.
+    var p = String(sub.submitted_at).split("-");
+    if (p.length !== 3) return null;
+    var from = new Date(Number(p[0]), Number(p[1]) - 1, Number(p[2]));
+    if (isNaN(from.getTime())) return null;
+    var now = new Date();
+    var days = Math.floor((new Date(now.getFullYear(), now.getMonth(), now.getDate()) - from) / 86400000);
+    return days > 0 ? days : 0;
+  }
+
+  /** 낸 것 하나를 한 줄로. 화면 여러 곳에서 같은 문장을 쓴다. */
+  function waitingText(sub) {
+    if (sub.response) return dotDay(sub.response.received_at) + "에 회신 받음";
+    var days = waitingDays(sub);
+    if (days === null) return "회신 기다리는 중";
+    return days === 0 ? "오늘 냈어요 · 회신 기다리는 중" : "회신 기다리는 중 · " + days + "일째";
+  }
+
+  /** 「냈어요」 — 낸 날짜와 접수증을 받는다. 어디로도 보내지 않는다. */
+  function openSubmitModal(c, action, done) {
+    var maxDay = isoDay(new Date());
+    var day = h("input", { id: "sub-day", type: "date", class: "field__input", value: maxDay, max: maxDay });
+    var hint = h("p", { class: "field__hint", text: "낸 날짜를 골라 주세요. 접수증에 적힌 날짜가 있으면 그 날짜로." });
+
+    var receipt = null;
+    var picked = h("p", { class: "field__hint", text: "접수증이 없으면 낸 사실이 본인 말로만 남습니다." });
+    var pick = h("button", { type: "button", class: "sub__btn t-body-s", text: "접수증 고르기" });
+    pick.addEventListener("click", function () {
+      pickFiles(function (files) {
+        receipt = files[0].name;
+        picked.textContent = "접수증 · " + receipt;
+        picked.classList.remove("field__hint--warn");
+      });
+    });
+
+    var save = h("button", { type: "button", class: "modal__save", text: "냈다고 기록하기" });
+    save.addEventListener("click", function () {
+      if (!day.value) {
+        hint.textContent = "낸 날짜를 골라 주세요.";
+        hint.classList.add("field__hint--warn");
+        day.focus();
+        return;
+      }
+      putSub(c.id, {
+        action: action.action,
+        label: action.label,
+        submitted_at: day.value,
+        to: action.submit_to || null,
+        form_name: action.form_name || null,
+        receipt: receipt,
+        response: null,
+      });
+      var dialog = document.querySelector("dialog.modal");
+      if (dialog) dialog.close();
+      done();
+    });
+
+    var rows = [h("p", { class: "t-body-m c-primary", text: action.label })];
+    if (action.form_name) rows.push(h("p", { class: "t-body-s c-secondary", text: "무엇을 · " + action.form_name }));
+    if (action.submit_to) rows.push(h("p", { class: "t-body-s c-secondary", text: "어디에 · " + action.submit_to }));
+
+    openModal("냈어요", h("div", { class: "evform" }, [
+      h("div", { class: "sub__what" }, rows),
+      h("div", { class: "field" }, [h("label", { for: "sub-day", text: "언제 냈나요?" }), day, hint]),
+      h("div", { class: "field" }, [
+        h("span", { class: "t-body-s c-primary", text: "접수증 (선택)" }),
+        pick,
+        picked,
+      ]),
+      save,
+      h("p", { class: "modal__note", text: "기록은 이 브라우저에만 남고 어디로도 보내지 않습니다. 회신 기한을 대신 판단하지는 않아요." }),
+    ]));
+  }
+
+  /** 「회신 왔어요」 — 받은 날짜만 받는다. 어떤 결정인지는 통지서를 자료로 올려야 읽는다. */
+  function openResponseModal(c, sub, done) {
+    var maxDay = isoDay(new Date());
+    var day = h("input", { id: "res-day", type: "date", class: "field__input", value: maxDay, min: sub.submitted_at, max: maxDay });
+    var hint = h("p", { class: "field__hint", text: "통지서를 받은 날짜예요." });
+
+    var save = h("button", { type: "button", class: "modal__save", text: "회신 받았다고 기록하기" });
+    save.addEventListener("click", function () {
+      if (!day.value) {
+        hint.textContent = "받은 날짜를 골라 주세요.";
+        hint.classList.add("field__hint--warn");
+        day.focus();
+        return;
+      }
+      sub.response = { received_at: day.value };
+      putSub(c.id, sub);
+      var dialog = document.querySelector("dialog.modal");
+      if (dialog) dialog.close();
+      done();
+    });
+
+    openModal("회신 왔어요", h("div", { class: "evform" }, [
+      h("p", { class: "t-body-m c-primary", text: sub.label }),
+      h("p", { class: "t-body-s c-secondary", text: dotDay(sub.submitted_at) + "에 냈어요" }),
+      h("div", { class: "field" }, [h("label", { for: "res-day", text: "언제 받았나요?" }), day, hint]),
+      save,
+      h("p", { class: "modal__note", text: "어떤 결정이었는지는 통지서를 자료로 올려야 읽을 수 있어요. 여기서는 받았다는 사실과 날짜만 기록합니다." }),
+    ]));
+  }
+
+  /** 낸 것 목록. 하나도 없으면 아무것도 그리지 않는다. */
+  function submittedCard(c, refresh) {
+    var subs = subsOf(c.id);
+    if (!subs.length) return null;
+
+    var list = h("div", { class: "subs__list" }, subs.map(function (sub) {
+      var waiting = h("p", { class: "sub__state t-body-s" + (sub.response ? " sub__state--done" : ""), text: waitingText(sub) });
+
+      var actions = h("div", { class: "sub__buttons" });
+      if (!sub.response) {
+        var got = h("button", { type: "button", class: "sub__btn t-body-s", text: "회신 왔어요" });
+        got.addEventListener("click", function () { openResponseModal(c, sub, refresh); });
+        actions.appendChild(got);
+      }
+      var undo = h("button", { type: "button", class: "sub__undo t-body-s", text: "기록 지우기" });
+      undo.addEventListener("click", function () { dropSub(c.id, sub.action); refresh(); });
+      actions.appendChild(undo);
+
+      return h("div", { class: "sub" }, [
+        h("p", { class: "sub__label t-body-m-strong", text: sub.label }),
+        h("p", { class: "sub__when t-body-s", text: dotDay(sub.submitted_at) + "에 냄" + (sub.to ? " · " + sub.to : "") }),
+        waiting,
+        sub.receipt
+          ? h("p", { class: "sub__receipt t-body-s", text: "접수증 · " + sub.receipt })
+          : h("p", { class: "sub__receipt sub__receipt--none t-body-s", text: "낸 기록이 자료로 남아 있지 않아요 (접수증 없음)" }),
+        actions,
+      ]);
+    }));
+
+    return h("section", { class: "subs" }, [
+      h("div", { class: "subs__head" }, [
+        h("span", { class: "t-label", text: "낸 것" }),
+        h("span", { class: "subs__count t-label", text: String(subs.length) }),
+      ]),
+      list,
+    ]);
+  }
+
+  function nextActionCard(c, refresh) {
+    var next = activeAction(c);
     if (!next) return null;
     var details;
     if (next.state === "filled") {
@@ -779,6 +977,13 @@
     var more = h("button", { type: "button", class: "na__more t-body-m-strong", text: "자세히 보기" });
     more.addEventListener("click", function () { openModal(next.label, detailBody()); });
 
+    // 낼 것이 없는 단계에는 '냈어요'를 붙이지 않는다 — 엔진이 제출 절차가 아니라고 한 자리다
+    var did = null;
+    if (next.state !== "no_submission") {
+      did = h("button", { type: "button", class: "na__did t-body-m-strong", text: "냈어요" });
+      did.addEventListener("click", function () { openSubmitModal(c, next, refresh); });
+    }
+
     return h("section", { class: "next-action", "aria-labelledby": "na-title" }, [
       h("div", { class: "next-action__head" }, [
         h("span", { class: "t-label", text: "다음 행동" }),
@@ -787,7 +992,7 @@
           : next.unverified ? h("span", { class: "t-caption", text: "검수 전 안내" }) : null,
       ]),
       h("h2", { id: "na-title", class: "na__title", text: next.label }),
-      more,
+      h("div", { class: "na__buttons" }, [more, did]),
     ]);
   }
 
@@ -851,7 +1056,7 @@
       lines.push("");
     });
 
-    var next = c.next_action;
+    var next = activeAction(c);
     if (next) {
       lines.push("■ 다음 행동 — " + next.label);
       if (next.due) lines.push("  · 기한: " + next.due.text);
@@ -947,7 +1152,8 @@
       // 자료는 어느 탭에서나 같은 자리(맨 위)에 둔다
       rail.appendChild(sourcesBar(c, true));
       if (index === 0) {
-        rail.appendChild(nextActionCard(c.next_action));
+        rail.appendChild(nextActionCard(c, function () { fillSide(0); }));
+        rail.appendChild(submittedCard(c, function () { fillSide(0); }));
         rail.appendChild(issuesCard(c));
       } else {
         rail.appendChild(askButton(c));
@@ -982,8 +1188,8 @@
             h("span", { class: "tag t-label", text: c.type_label }),
             h("span", { class: "t-caption c-tertiary", text: "기준일 " + c.as_of }),
             // 기한은 목록 카드에서와 같이 항상 보이게 둔다
-            c.next_action && c.next_action.due
-              ? h("span", { class: "due-pill t-label", text: c.next_action.due.label })
+            activeAction(c) && activeAction(c).due
+              ? h("span", { class: "due-pill t-label", text: activeAction(c).due.label })
               : null,
           ]),
           h("h1", { class: "t-display c-primary", text: c.title }),
