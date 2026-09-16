@@ -85,6 +85,35 @@ class Checklist(BaseModel):
     advisory: str | None = Field(default=None, description="서류 외에 함께 알려줄 것")
 
 
+class SubmissionResponse(BaseModel):
+    """제출에 대해 받은 답."""
+
+    received_at: date
+    doc_id: str | None = Field(default=None, description="회신 통지서 문서 id. 없으면 받았다는 말뿐이다")
+    decision_type: str | None = Field(
+        default=None,
+        description="결정 내용. DECISION_TABLE 에 있는 말만 뜻이 있고, 없는 말은 판정에 쓰지 않는다",
+    )
+
+
+class Submission(BaseModel):
+    """무엇을 언제 어디에 냈고 어떤 답을 받았는가.
+
+    이걸 모르면 엔진은 이미 낸 절차를 계속 다음 행동으로 띄우고, '냈는데 답이 없다'는
+    사실을 셀 자리가 없다. 장기 미제 사건에서 그 사실 자체가 다음 행동의 근거다.
+
+    여기에 법적 판단은 없다 — 날짜와 '자료가 남아 있느냐'만 담는다.
+    """
+
+    submission_id: str
+    action: str = Field(description="어느 행동을 냈는지. RuleHit.action 과 같은 키")
+    submitted_at: date
+    planned_due: date | None = Field(default=None, description="낼 당시의 기한. 없으면 null")
+    submitted_to: str | None = Field(default=None, description="제출처. 지식베이스 값을 그대로 옮긴다")
+    evidence_doc_id: str | None = Field(default=None, description="접수증 문서 id. 없으면 낸 사실이 본인 말뿐이다")
+    response: SubmissionResponse | None = None
+
+
 class CaseState(BaseModel):
     """29개 코드로 본 사건의 현재 상태."""
 
@@ -150,4 +179,5 @@ class CaseCardOut(BaseModel):
     next_action: RuleHit | None = Field(default=None, description="우선순위 규칙이 고른 하나")
     also: list[RuleHit] = Field(default_factory=list, description="참고사항")
     checklist: Checklist | None = Field(default=None, description="5단계 대조 — 제출 준비물")
+    submissions: list[Submission] = Field(default_factory=list, description="사용자가 냈다고 기록한 것")
     procedure: None = Field(default=None, description="절차 문구 자리. 지식베이스가 붙기 전까지 항상 None")

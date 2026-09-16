@@ -93,6 +93,44 @@ def _parse_date(v: str | None) -> date | None:
         return None
 
 
+def st_from_decision(value: str, doc_ids: list[str] | None = None, *, confirmed: bool = True) -> CodeHit | None:
+    """결정 내용 한 줄 → ST 하나. 표에 없는 말이면 None (지어내지 않는다).
+
+    자료에서 읽은 결정과 사용자가 '이런 답을 받았다'고 적은 결정을 같은 표로 판정한다.
+    판정 근거가 두 벌이 되면 화면과 엔진이 다른 말을 하게 된다.
+    ``confirmed`` 가 False 면 확정으로 올리지 않는다 — 기록이 흔들리거나 사용자의 말일 때다.
+    """
+    value = (value or "").strip()
+    if not value:
+        return None
+    doc_ids = doc_ids or []
+
+    for needles, excludes, code, conf in DECISION_TABLE:
+        if any(x in value for x in excludes):
+            continue
+        if not any(n in value for n in needles):
+            continue
+        # 수사중지는 사유(피의자/참고인)까지 봐야 201·202 가 갈린다.
+        if code is ST.SUSPENDED_SUSPECT:
+            if "참고인" in value:
+                code = ST.SUSPENDED_WITNESS
+            elif "피의자" not in value:
+                return CodeHit(
+                    code=ST.SUSPENDED_SUSPECT, label=label(ST.SUSPENDED_SUSPECT),
+                    confidence=Confidence.PRESUMED,
+                    reason=f"결정 내용이 '{value}' 로 확인되었으나 피의자중지·참고인중지 구분이 없습니다",
+                    source_doc_ids=doc_ids,
+                    ambiguous_between=[ST.SUSPENDED_SUSPECT, ST.SUSPENDED_WITNESS],
+                )
+        return CodeHit(
+            code=code, label=label(code),
+            confidence=conf if confirmed else Confidence.PRESUMED,
+            reason=f"결정 내용이 '{value}' 로 확인되었습니다",
+            source_doc_ids=doc_ids,
+        )
+    return None
+
+
 def resolve_st(result: dict[str, Any]) -> CodeHit:
     """D1 — 절차 단계 판정. 상호배타이므로 하나만 돌려준다."""
     slots = _slot_map(result)
@@ -100,31 +138,9 @@ def resolve_st(result: dict[str, Any]) -> CodeHit:
     value = (decision.get("value") or "").strip()
     doc_ids = [s["source_doc_id"] for s in decision.get("sources", [])]
 
-    if value:
-        for needles, excludes, code, conf in DECISION_TABLE:
-            if any(x in value for x in excludes):
-                continue
-            if any(n in value for n in needles):
-                # 수사중지는 사유(피의자/참고인)까지 봐야 201·202 가 갈린다.
-                if code is ST.SUSPENDED_SUSPECT:
-                    if "참고인" in value:
-                        code = ST.SUSPENDED_WITNESS
-                    elif "피의자" not in value:
-                        return CodeHit(
-                            code=ST.SUSPENDED_SUSPECT, label=label(ST.SUSPENDED_SUSPECT),
-                            confidence=Confidence.PRESUMED,
-                            reason=f"결정 내용이 '{value}' 로 확인되었으나 피의자중지·참고인중지 구분이 없습니다",
-                            source_doc_ids=doc_ids,
-                            ambiguous_between=[ST.SUSPENDED_SUSPECT, ST.SUSPENDED_WITNESS],
-                        )
-                # 결정 내용 자체가 흔들리면(모순·미확인) 확정으로 올리지 않는다.
-                if decision.get("state") not in ("confirmed",):
-                    conf = Confidence.PRESUMED
-                return CodeHit(
-                    code=code, label=label(code), confidence=conf,
-                    reason=f"결정 내용이 '{value}' 로 확인되었습니다",
-                    source_doc_ids=doc_ids,
-                )
+    hit = st_from_decision(value, doc_ids, confirmed=decision.get("state") == "confirmed")
+    if hit:
+        return hit
 
     stage = result.get("timeline", {}).get("current_stage")
     fallback = STAGE_FALLBACK.get(stage, ST.UNKNOWN)

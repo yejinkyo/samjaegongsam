@@ -22,11 +22,15 @@ from .schema import (
     Confidence,
     Deadline,
     RuleHit,
+    Submission,
+    SubmissionResponse,
 )
+from .submissions import status_of, waiting_days
 
 __all__ = [
     "ST", "INF", "TIM", "LABELS", "EXCLUDED", "label",
     "CaseState", "CodeHit", "Confidence", "Deadline", "RuleHit", "ActionDecision", "CaseCardOut", "CheckItem", "Checklist",
+    "Submission", "SubmissionResponse", "status_of", "waiting_days",
     "to_case_state", "resolve_st", "resolve_inf", "inf_from_triggers", "basis_from_triggers",
     "compute_deadlines", "decide", "run", "build_card", "build_checklist", "load_documents",
     "compute_limitation", "find_offence", "load_offences",

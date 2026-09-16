@@ -18,7 +18,7 @@ from pathlib import Path
 from typing import Any
 
 from .codes import label
-from .schema import ActionDecision, CaseCardOut, CaseState, Deadline, RuleHit
+from .schema import ActionDecision, CaseCardOut, CaseState, CodeHit, Deadline, RuleHit, Submission
 
 DATA = Path(__file__).parent / "data"
 
@@ -183,11 +183,19 @@ def decide(state: CaseState) -> ActionDecision:
     return ActionDecision(main=hits[0] if hits else None, also=hits[1:], state=state)
 
 
-def run(result: dict[str, Any]) -> ActionDecision:
-    """research-engine 출력 dict → 다음 행동 판정. 이 패키지의 입구."""
+def run(result: dict[str, Any], st_override: CodeHit | None = None,
+        decision_time: date | None = None) -> ActionDecision:
+    """research-engine 출력 dict → 다음 행동 판정. 이 패키지의 입구.
+
+    ``st_override`` · ``decision_time`` 은 사용자가 '이런 답을 받았다'고 기록했을 때 쓴다.
+    기한표는 단계(``applies_to_st``)와 통지 수령일로 갈리므로, 단계만 바꾸고 기한을 그대로
+    두면 새 단계에 없는 기한이 남는다. 둘을 같이 갈아 끼우고 규칙을 다시 돌린다.
+    """
     from .mapping import _parse_date, _slot_map, basis_from_triggers, to_case_state
 
     state = to_case_state(result)
+    if st_override:
+        state.st = st_override
     slots = _slot_map(result)
     # 슬롯에서 먼저 찾고, 없으면 트리거의 since 로 메운다
     basis: dict[str, date | None] = {
@@ -196,21 +204,37 @@ def run(result: dict[str, Any]) -> ActionDecision:
     basis.setdefault("decision_time", _parse_date((slots.get("decision_time") or {}).get("value")))
     basis.setdefault("incident_end", _parse_date((slots.get("last_seen_time") or {}).get("value")))
     basis.setdefault("document_created", None)
+    if decision_time:
+        basis["decision_time"] = decision_time
     # 죄명은 research-engine 이 아직 뽑지 않는다. 슬롯에 생기면 여기서 넘어간다.
     offence = (slots.get("offence") or {}).get("value")
     state.tim = compute_deadlines(state, basis, offence=offence)
     return decide(state)
 
 
-def build_card(result: dict[str, Any]) -> CaseCardOut:
+def build_card(result: dict[str, Any], submissions: list[Submission] | None = None) -> CaseCardOut:
     """화면이 읽을 카드 하나를 만든다.
 
     research-engine 의 ``CaseCard`` 를 통과시키고 기능 2가 판정한 값을 덧붙인다.
     화면은 이 함수의 결과만 읽으면 되고, research-engine 출력을 따로 뒤지지 않는다.
+
+    ``submissions`` 는 사용자가 '냈다'고 기록한 것이다. 주면 이미 낸 행동을 다음 행동에서
+    내리고 기다린 날수를 붙인다(:mod:`submissions`). 안 주면 지금까지와 똑같이 돈다.
     """
     from .checklist import build_checklist
+    from .submissions import apply as apply_submissions
+    from .submissions import st_from_responses
 
     decision = run(result)
+
+    # 받은 답을 기록했으면 사건 단계를 그 답으로 다시 보고 규칙을 다시 돌린다.
+    # 이게 이 기능의 핵심이다 — 답이 무엇이었느냐에 따라 다음에 할 일이 달라진다.
+    from .submissions import latest_answer
+
+    answered_st = st_from_responses(submissions or [])
+    answered = latest_answer(submissions or [])
+    if answered_st and answered and answered_st.code != decision.state.st.code:
+        decision = run(result, st_override=answered_st, decision_time=answered.response.received_at)
     card = result.get("analysis", {}).get("case_card", {}) or {}
     checklist = build_checklist(
         decision.main.action if decision.main else None,
@@ -218,7 +242,7 @@ def build_card(result: dict[str, Any]) -> CaseCardOut:
         decision.state.tim,
         st=decision.state.st.code,
     )
-    return CaseCardOut(
+    out = CaseCardOut(
         case_type=card.get("case_type", result.get("case_type", "")),
         case_type_label=card.get("case_type_label", ""),
         requirements_status=card.get("requirements_status", "unknown"),
@@ -236,3 +260,4 @@ def build_card(result: dict[str, Any]) -> CaseCardOut:
         also=decision.also,
         checklist=checklist,
     )
+    return apply_submissions(out, submissions or [], decision.state.as_of)

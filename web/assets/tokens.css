@@ -25,6 +25,8 @@
   /* Shadow/Card */
   --shadow-card: 0 1px 2px 0 rgba(24, 24, 24, 0.04), 0 12px 32px -12px rgba(46, 27, 97, 0.1);
 
+  /* 이름(타래)에만 쓰는 글꼴 — 본문은 아래 --font 를 그대로 쓴다 */
+  --font-brand: "Gugi", "IBM Plex Sans KR", sans-serif;
   --font: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
 }
 

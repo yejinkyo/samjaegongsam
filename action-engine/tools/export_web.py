@@ -14,6 +14,7 @@ JSON 이 아니라 전역 변수에 담는다.
 from __future__ import annotations
 
 import json
+import re
 from datetime import date, datetime
 from pathlib import Path
 from typing import Any
@@ -52,7 +53,94 @@ ISSUE_GROUPS = [
     ("unreadable", "읽히지 않은 부분", "gap"),
 ]
 
+ENTITY_GROUPS = [
+    ("person", "사람"),
+    ("organization", "기관"),
+    ("account", "계좌"),
+    ("case_number", "사건번호"),
+    ("receipt_number", "접수번호"),
+    ("phone", "연락처"),
+]
+
+# 항목 키의 화면 이름. 엔진이 비교할 수 있게 구조화한 슬롯을 사람 말로 바꾼다.
+SLOT_LABELS = {
+    "incident_time": "사건 발생 시점",
+    "last_seen_time": "마지막 목격 시점",
+    "last_contact_time": "마지막 연락 시점",
+    "transfer_amount": "송금 금액",
+    "transfer_time": "송금 시점",
+    "account_number": "계좌번호",
+    "account_holder": "예금주",
+    "shipment_sent": "발송 여부",
+    "tracking_number": "송장번호",
+    "report_time": "신고 시점",
+    "receipt_number": "접수번호",
+    "receipt_time": "접수일시",
+    "case_number": "사건번호",
+    "investigator": "담당 수사관",
+    "decision_type": "결정 내용",
+    "decision_time": "결정일",
+}
+
+# 항목 상태 — '확인됨'과 '말만 있음'을 섞지 않는다
+SLOT_STATES = {
+    "confirmed": ("기록으로 확인", "verified"),
+    "claimed_only": ("말만 있고 기록 없음", "unverified"),
+    "conflicting": ("자료마다 다름", "conflict"),
+    "low_confidence": ("판독 신뢰도 낮음", "unverified"),
+    "outdated": ("낡았을 수 있음", "unverified"),
+    "missing": ("자료에 없음", "unverified"),
+    "suspected_conflict": ("차이 의심", "conflict"),
+}
+
 CIRCLED = "".join(chr(0x2460 + i) for i in range(20))  # ①~⑳
+
+
+# 사건 유형별 진행 단계 — 화면에 보이는 이름이다.
+#
+# 엔진의 Stage 는 여섯 가지(발생·송금·신고·접수·수사·결과)로 사건 유형을 가리지 않는다.
+# 화면에서는 그 사건이 실제로 밟는 절차 이름으로 보여야 한다. 수사중지 사건에서 마지막이
+# '결과'로 끝나면 사용자는 사건이 끝난 줄 안다 — 실제로는 '중지'이고 그 뒤에 되살릴 길이 남아 있다.
+# 엔진 코드는 그대로 두고 여기서 묶어서 이름만 바꾼다.
+STAGE_TRACKS = {
+    "missing_person_suspended": [
+        ("발생", ["occurrence"]),
+        ("신고", ["report", "receipt"]),
+        ("수사", ["investigation"]),
+        ("중지", ["outcome"]),
+        ("재수사", []),      # 아직 오지 않은 단계 — 이의제기·새 자료로 열린다
+    ],
+    "investigation_suspended": [
+        ("고소", ["occurrence", "report"]),
+        ("접수", ["receipt"]),
+        ("수사", ["investigation"]),
+        ("중지", ["outcome"]),
+        ("재개", []),
+    ],
+}
+
+
+def _stages(card) -> list[dict[str, str]]:
+    engine = {s["stage"]: s["state"] for s in card.stages}
+    track = STAGE_TRACKS.get(card.case_type)
+    if not track:
+        # 유형별 이름을 정하지 않은 사건은 엔진 단계를 그대로 쓴다
+        return [{"label": s["label"], "state": {"done": "done", "current": "current"}.get(s["state"], "todo")}
+                for s in card.stages]
+
+    rows = []
+    for label, codes in track:
+        states = [engine[c] for c in codes if c in engine]
+        if "current" in states:
+            state = "current"
+        elif states and all(st == "done" for st in states):
+            state = "done"
+        elif "done" in states:
+            state = "done"
+        else:
+            state = "todo"   # 자료가 없거나(skipped) 아직 오지 않은 단계
+        rows.append({"label": label, "state": state})
+    return rows
 
 
 def _dt(value: str | None) -> datetime | None:
@@ -89,6 +177,46 @@ def _event_time(t: dict[str, Any], multi_year: bool) -> str:
     if gran == "year":
         day = start.strftime("%Y")
     return f"{day}\n{clock}" if multi_year and clock else f"{day} {clock}".strip()
+
+
+# 타임라인 줄에 쓰는 짧은 이름.
+#
+# 없는 말을 지어내지 않는다 — 원문에서 덜어내기만 한다. 왼쪽 칸에 이미 날짜가 있으니
+# 앞머리 날짜를 떼고, 여러 문장이면 첫 문장만 남긴다. 전문은 '자세히'에서 보여준다.
+_LEAD_DATE = re.compile(
+    r"^(?:\d{2,4}\s*[.년]\s*)?\d{1,2}\s*[./월]\s*\d{1,2}\s*[.일]?\s*"
+    r"(?:\d{1,2}\s*시(?:\s*\d{1,2}\s*분)?(?:경|쯤)?\s*)?"
+    r"(?:새벽|아침|낮|저녁|밤|오전|오후)?\s*"
+)
+
+
+def _short_title(title: str) -> str:
+    text = _LEAD_DATE.sub("", title.strip(), count=1).strip()
+    if len(text) < 2:
+        text = title.strip()
+    first = re.split(r"(?<=[.!?])\s+", text)[0].strip()
+    if len(first) >= 2:
+        text = first
+    text = text.rstrip(" .")
+    return text if len(text) <= 24 else text[:23].rstrip() + "…"
+
+
+def _full_text(event: dict[str, Any]) -> str:
+    """'자세히'에 보여줄 원문.
+
+    엔진이 만든 제목은 긴 문장을 '…' 로 줄여 놓는다. 줄인 제목이면 같은 문장을
+    담고 있는 출처 인용으로 되살린다 — 자세히를 눌렀는데 또 잘려 있으면 안 된다.
+    """
+    title = event["title"]
+    quotes = [s["quote"] for s in event["sources"] if s.get("quote")]
+    if not title.endswith("…"):
+        return title
+    stem = title[:-1].strip()[:12]
+    candidates = [q for q in quotes if stem and q.startswith(stem)] or quotes
+    if not candidates:
+        return title
+    longest = max(candidates, key=len)
+    return longest if len(longest) > len(title) else title
 
 
 def _source_line(sources: list[dict[str, Any]], doc_index: dict[str, int], docs: dict[str, dict]) -> str:
@@ -134,12 +262,21 @@ def _timeline(result: dict[str, Any], docs: dict[str, dict], doc_index: dict[str
         rows.append((start, {
             "type": "event",
             "time": "시각 미상" if e.get("time_unknown") or not time else _event_time(time, multi_year),
-            "title": e["title"],
+            "title": _short_title(e["title"]),
+            "full": _full_text(e),
             "kind": kind,
             "badge": badge,
             "conflict": conflict,
             "needs_date": bool(time.get("needs_confirmation")),
             "source": _source_line(e["sources"], doc_index, docs),
+            "sources": [
+                {
+                    "name": docs.get(s["source_doc_id"], {}).get("file_name", s["source_doc_id"]),
+                    "line": s["source_line"],
+                    "quote": s.get("quote"),
+                }
+                for s in e["sources"]
+            ],
         }))
 
     for g in tl.get("gaps") or []:
@@ -176,6 +313,82 @@ def _issues(result: dict[str, Any], docs: dict[str, dict]) -> list[dict[str, Any
     return groups
 
 
+def _slot_value(value: Any) -> str:
+    """엔진 값을 사람이 읽는 꼴로. 단위를 붙이거나 뜻을 바꾸지는 않는다."""
+    text = str(value)
+    if text in {"True", "true"}:
+        return "예"
+    if text in {"False", "false"}:
+        return "아니오"
+    if text.isdigit() and len(text) > 3:
+        return f"{int(text):,}"
+    return text
+
+
+def _people(result: dict[str, Any], docs: dict[str, dict]) -> list[dict[str, Any]]:
+    """인물 · 관계 탭. 엔진이 합치지 못하고 남긴 '같은 사람일 수 있음'까지 그대로 보여준다."""
+    entities = result["timeline"]["entities"]
+    by_id = {e["entity_id"]: e for e in entities}
+
+    # 어느 자료에 나온 이름인지 — claim 의 화자와 timeline 이벤트 참가자에서 모은다
+    seen: dict[str, set[str]] = {}
+    for event in result["timeline"]["events"]:
+        for entity_id in event.get("participant_entity_ids", []):
+            for s in event.get("sources", []):
+                seen.setdefault(entity_id, set()).add(s["source_doc_id"])
+
+    groups = []
+    for kind, label in ENTITY_GROUPS:
+        members = []
+        for e in entities:
+            if e["kind"] != kind:
+                continue
+            links = [
+                {
+                    "name": by_id.get(link["other_entity_id"], {}).get("canonical_name", link["other_entity_id"]),
+                    "reason": link["reason"],
+                }
+                for link in e.get("possible_same_as", [])
+            ]
+            members.append({
+                "name": e["canonical_name"],
+                "roles": e.get("roles", []),
+                "docs": sorted(docs.get(d, {}).get("file_name", d) for d in seen.get(e["entity_id"], set())),
+                "same_as": links,
+            })
+        if members:
+            groups.append({"label": label, "items": members})
+    return groups
+
+
+def _slots(result: dict[str, Any], docs: dict[str, dict]) -> list[dict[str, Any]]:
+    """주장 대조 탭. 한 항목을 자료마다 뭐라고 적었는지 나란히 놓는다."""
+    claims = result["extraction"]["claims"]
+    rows = []
+    for status in result["analysis"]["slot_statuses"]:
+        slot = status["slot"]
+        state_label, severity = SLOT_STATES.get(status["state"], (status["state"], "unknown"))
+        said = []
+        for c in claims:
+            if c.get("slot") != slot or c.get("slot_value") is None:
+                continue
+            doc = docs.get(c["doc_id"], {})
+            said.append({
+                "value": _slot_value(c["slot_value"]),
+                "doc": doc.get("file_name", c["doc_id"]),
+                "speaker": c.get("speaker") or "",
+                "record": c.get("evidence_level") == "record",
+            })
+        rows.append({
+            "slot": SLOT_LABELS.get(slot, slot),
+            "value": status.get("value"),
+            "state": state_label,
+            "severity": severity,
+            "said": said,
+        })
+    return rows
+
+
 def _period(result: dict[str, Any]) -> str:
     starts = sorted(d for e in result["timeline"]["events"] if (d := _dt((e.get("time") or {}).get("start"))))
     if not starts:
@@ -186,8 +399,14 @@ def _period(result: dict[str, Any]) -> str:
     return f"{a:%Y.%m.%d} – {b:%m.%d}"
 
 
-def _next_action(card, result: dict[str, Any]) -> dict[str, Any] | None:
-    hit = card.next_action
+def _action(card, hit, result: dict[str, Any]) -> dict[str, Any] | None:
+    """행동 하나를 화면 dict 로. 준비물·제출처는 그 행동에 맞춰 다시 대조한다.
+
+    다음 행동 하나만이 아니라 후보 전부를 이렇게 만들어 둔다. 사용자가 '냈어요'를
+    누르면 화면이 다음 순위로 갈아 끼우는데, 그때도 무엇을·어디에가 비면 안 된다.
+    """
+    from action_engine.checklist import build_checklist
+
     if not hit:
         return None
     reasons = {i.code: i.reason for i in card.inf}
@@ -203,7 +422,7 @@ def _next_action(card, result: dict[str, Any]) -> dict[str, Any] | None:
         }
 
     rows: list[dict[str, str]] = []
-    c = card.checklist
+    c = build_checklist(hit.action, result.get("documents", []), card.tim, st=card.st.code)
     state = "unresolved"
     note = None
     prepare = None
@@ -238,8 +457,60 @@ def _next_action(card, result: dict[str, Any]) -> dict[str, Any] | None:
         "prepare": prepare,
         "note": note,
         "unverified": card.requirements_status == "draft_unverified",
-        "also": [{"rule_no": a.rule_no, "label": ACTION_LABELS.get(a.action, a.action), "why": a.why} for a in card.also],
+        "also": [{"rule_no": a.rule_no, "action": a.action, "label": ACTION_LABELS.get(a.action, a.action), "why": a.why}
+                 for a in card.also],
+        # 낸 것을 기록하는 자리. 제출처는 지식베이스 값이 있을 때만 채운다.
+        "submit_to": c.submit_to if c else None,
+        "form_name": c.form_name if c else None,
     }
+
+
+# 「회신 왔어요」에서 고를 수 있는 결정 내용.
+# mapping.DECISION_TABLE 이 읽을 수 있는 말만 둔다 — 표에 없는 말을 고르게 해 놓고
+# 아무 일도 일어나지 않으면 사용자는 기능이 고장 난 줄 안다.
+RESPONSE_CHOICES = ["불송치", "불기소", "항고 기각", "피의자중지", "참고인중지", "기소"]
+
+
+def _outcomes(case_id: str, result: dict[str, Any]) -> dict[str, Any]:
+    """결정 내용마다 사건이 어떻게 달라지는지 미리 계산해 둔다.
+
+    화면은 정적 파일이라 엔진을 부를 수 없다. 그래서 고를 수 있는 답마다 엔진을 한 번씩
+    돌려 결과를 실어 보낸다. 화면이 규칙을 흉내 내는 것이 아니라 엔진이 낸 답을 고르는 것이다.
+    """
+    from datetime import date as _date
+
+    from action_engine import Submission, SubmissionResponse
+
+    out: dict[str, Any] = {}
+    received = _date.fromisoformat(result["as_of"])   # 기준일에 받았다고 두고 계산한다
+    for choice in RESPONSE_CHOICES:
+        sub = Submission(
+            submission_id="preview", action="ACT-회신", submitted_at=received,
+            response=SubmissionResponse(received_at=received, decision_type=choice),
+        )
+        card = build_card(result, [sub])
+        live = [t for t in card.tim if t.due_date]
+        out[choice] = {
+            "st": card.st.label,
+            "next": ACTION_LABELS.get(card.next_action.action, card.next_action.action) if card.next_action else None,
+            # 화면이 actions 목록에서 이 행동을 찾아 그대로 그린다
+            "next_key": card.next_action.action if card.next_action else None,
+            # 날짜는 굳히지 않고 기간만 넘긴다 — 사용자가 고른 통지 수령일로 화면이 더한다.
+            # (엔진이 하는 계산과 같다: 기한 = 통지 수령일 + period_days)
+            "deadlines": [{
+                "label": t.label,
+                "period_days": t.period_days,
+                "statute": t.statute,
+                "submit_to": t.submit_to,
+            } for t in live],
+        }
+    return out
+
+
+def _actions(card, result: dict[str, Any]) -> list[dict[str, Any]]:
+    """다음 행동 후보를 우선순위 순서로. 첫 줄이 지금의 다음 행동이다."""
+    hits = ([card.next_action] if card.next_action else []) + list(card.also)
+    return [a for a in (_action(card, hit, result) for hit in hits) if a]
 
 
 def build_view(case_id: str, title: str, result: dict[str, Any]) -> dict[str, Any]:
@@ -248,20 +519,28 @@ def build_view(case_id: str, title: str, result: dict[str, Any]) -> dict[str, An
     evidence = [d for d in result["documents"] if d["doc_type"] != "user_note"]
     doc_index = {d["doc_id"]: i for i, d in enumerate(evidence)}
     as_of = date.fromisoformat(result["as_of"])
-    stage_state = {"done": "done", "current": "current"}
     return {
         "id": case_id,
         "title": title,
+        # 화면이 사건 유형별로 카드 색을 묶는 데 쓴다 — 사람이 읽는 이름과 따로 내보낸다
+        "type": card.case_type,
         "type_label": card.case_type_label,
         "as_of": f"{as_of:%Y.%m.%d}",
         "period": _period(result),
         "doc_count": card.evidence_doc_count,
         "need_count": card.needs_confirmation_count,
-        "stages": [{"label": s["label"], "state": stage_state.get(s["state"], "todo")} for s in card.stages],
+        "stages": _stages(card),
         "sources": [{"kind": _kind(d["file_name"], d["doc_type"]), "name": d["file_name"]} for d in evidence],
         "timeline": _timeline(result, docs, doc_index),
+        "people": _people(result, docs),
+        "slots": _slots(result, docs),
         "issues": _issues(result, docs),
-        "next_action": _next_action(card, result),
+        "next_action": _action(card, card.next_action, result),
+        # 화면이 '냈어요'를 기록하면 이 목록에서 다음 순위를 꺼내 쓴다
+        "actions": _actions(card, result),
+        # 「회신 왔어요」에서 답을 고르면 이 표에서 그 답의 결과를 꺼내 쓴다
+        "response_choices": RESPONSE_CHOICES,
+        "outcomes": _outcomes(case_id, result),
     }
 
 
