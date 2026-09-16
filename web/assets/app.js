@@ -1242,15 +1242,21 @@
     // 다음 행동·확인이 필요해요는 타임라인에서만 본다. 인물·주장 탭에서는
     // 그 화면에서 실제로 쓰는 것(자료 · 전문가 질문)만 옆에 둔다.
     function fillSide(index) {
+      // 그릴 것이 없으면 null 을 돌려주는 카드가 있다(낸 것 · 다음 행동).
+      // appendChild 는 null 을 받으면 예외를 던지고 화면 전체가 비어 버린다.
+      function put(node) {
+        if (node) rail.appendChild(node);
+      }
+
       rail.textContent = "";
       // 자료는 어느 탭에서나 같은 자리(맨 위)에 둔다
-      rail.appendChild(sourcesBar(c, true));
+      put(sourcesBar(c, true));
       if (index === 0) {
-        rail.appendChild(nextActionCard(c, function () { fillSide(0); }));
-        rail.appendChild(submittedCard(c, function () { fillSide(0); }));
-        rail.appendChild(issuesCard(c));
+        put(nextActionCard(c, function () { fillSide(0); }));
+        put(submittedCard(c, function () { fillSide(0); }));
+        put(issuesCard(c));
       } else {
-        rail.appendChild(askButton(c));
+        put(askButton(c));
       }
     }
 
