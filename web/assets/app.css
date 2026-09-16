@@ -175,6 +175,9 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 /* 사건 하나 = 서류철 하나. 탭이 달린 폴더 모양으로 그린다. */
 .folder-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 40px; }
+/* 사건이 하나도 없으면 점선 서류철 하나만 남는다. 두 칸을 그대로 두면 빈 오른쪽이
+   '뭔가 빠졌다'처럼 보여서, 한 칸으로 좁히고 가운데에 둔다 */
+.folder-grid--empty { grid-template-columns: minmax(0, 420px); justify-content: center; }
 
 .folder { position: relative; display: block; padding-top: 26px; }
 .folder__tab {

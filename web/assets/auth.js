@@ -1,14 +1,28 @@
 /* 로그인 · 회원가입 폼.
  *
- * 서버가 없다. 그래서 입력값을 어디로도 보내지 않고 저장하지도 않는다 —
- * 비밀번호를 다루는 화면이라 '되는 척'을 만들지 않는 편이 안전하다.
- * 지금 하는 일은 빈칸·길이 확인과, 통과하면 사건 목록으로 보내는 것뿐이다.
+ * 서버가 없다. 그래서 입력값을 어디로도 보내지 않는다 — 비밀번호를 다루는 화면이라
+ * '되는 척'을 만들지 않는 편이 안전하다. **비밀번호는 저장하지 않는다.**
+ *
+ * 이 브라우저에 남기는 것은 아이디와 '데모 계정인가' 하나뿐이다. 그게 없으면
+ * 새로 가입한 사람에게도 데모 사건이 보이고, 남의 사건을 자기 것으로 읽게 된다.
  */
 (function () {
   "use strict";
 
   // 서버가 없어 진짜 인증은 없다. 발표·시연에서 쓸 계정 하나만 화면 안에서 맞춰 본다.
   var DEMO = { username: "삼재공삼", password: "삼재공삼" };
+
+  /* 다음 화면이 누구를 보여줄지만 남긴다. 비밀번호는 담지 않는다.
+   *
+   * 가입한 사람에게 데모 사건을 보여주면 남의 사건을 자기 것으로 읽는다.
+   * demo:false 면 사건 목록이 빈 서류함에서 시작한다(app.js 의 showsDemo). */
+  var SESSION_KEY = "tarae.session";
+
+  function remember(name, isDemo) {
+    try {
+      localStorage.setItem(SESSION_KEY, JSON.stringify({ name: name, demo: isDemo }));
+    } catch (e) { /* 저장이 막혀도 화면은 넘어간다 */ }
+  }
 
   var RULES = {
     username: function (v) {
@@ -75,17 +89,22 @@
         return;
       }
 
+      var name = (form.querySelector("#username") || {}).value;
+      name = (name || "").trim();
+
       if (page === "login") {
-        var id = form.querySelector("#username").value.trim();
         var pw = form.querySelector("#password").value;
-        if (id !== DEMO.username || pw !== DEMO.password) {
+        if (name !== DEMO.username || pw !== DEMO.password) {
           show("password", "아이디나 비밀번호가 달라요. 데모 계정은 삼재공삼 / 삼재공삼 이에요.", defaults.password);
           form.querySelector("#password").focus();
           return;
         }
+        remember(DEMO.username, true);          // 데모 사건이 들어 있는 화면
+      } else {
+        remember(name, false);                  // 막 만든 계정 — 빈 서류함에서 시작한다
       }
 
-      // 입력값은 들고 가지 않는다 — 데모 사건 목록으로만 이동한다
+      // 비밀번호는 어디에도 남기지 않는다
       form.reset();
       location.href = "cases.html";
     });

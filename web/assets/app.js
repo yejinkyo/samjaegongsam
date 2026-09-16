@@ -7,7 +7,27 @@
 (function () {
   "use strict";
 
-  var CASES = window.TARAE_CASES || [];
+  /* 누가 보고 있는가.
+   *
+   * 서버가 없어 진짜 로그인은 없다. 여기 있는 것은 '데모 계정으로 들어왔는지'
+   * 하나뿐이고, 비밀번호는 담지도 않는다(auth.js 참고).
+   *
+   * 새로 가입한 사람에게 데모 사건을 보여주면 남의 사건을 자기 것으로 읽는다.
+   * 그래서 가입해서 들어온 화면은 빈 서류함에서 시작한다.
+   */
+  var SESSION_KEY = "tarae.session";
+
+  function session() {
+    try { return JSON.parse(localStorage.getItem(SESSION_KEY)) || null; } catch (e) { return null; }
+  }
+
+  /** 데모 사건을 보여줄 것인가. 기록이 없으면 보여준다 — 화면만 열어 보는 경우다. */
+  function showsDemo() {
+    var me = session();
+    return !me || me.demo !== false;
+  }
+
+  var CASES = showsDemo() ? (window.TARAE_CASES || []) : [];
 
   function h(tag, attrs, children) {
     var node = document.createElement(tag);
@@ -136,12 +156,22 @@
       { label: "새 사건 등록", href: "new.html" },
     ]);
 
+    var me = session();
     var avatar = h("button", { type: "button", class: "nav__avatar", "aria-label": "내 정보" }, [
-      h("span", { class: "t-label c-brand", text: "나" }),
+      h("span", { class: "t-label c-brand", text: me && me.name ? me.name.slice(0, 1) : "나" }),
     ]);
+    var logout = { label: "로그아웃", danger: true, onClick: function () {
+      try { localStorage.removeItem(SESSION_KEY); } catch (e) { /* 지우지 못해도 나간다 */ }
+      location.href = "index.html";
+    } };
     var account = dropdown(avatar, [
-      { label: "내 정보", onClick: function () { openModal("내 정보", h("p", { class: "help__text", text: "계정 화면은 아직 준비 중이에요." })); } },
-      { label: "로그아웃", href: "index.html", danger: true },
+      { label: "내 정보", onClick: function () {
+        openModal("내 정보", h("div", { class: "help" }, [
+          h("p", { class: "help__text", text: me && me.name ? "아이디 · " + me.name : "데모 화면을 보고 있어요." }),
+          h("p", { class: "help__text", text: "지금은 화면만 있는 데모예요. 실제 계정이 만들어지지는 않습니다." }),
+        ]));
+      } },
+      logout,
     ]);
 
     var help = h("button", { type: "button", class: "nav__link t-body-m c-secondary", text: "도움말" });
@@ -223,7 +253,7 @@
   }
 
   function renderHome(root) {
-    var grid = h("div", { class: "folder-grid" });
+    var grid = h("div", { class: "folder-grid" + (CASES.length ? "" : " folder-grid--empty") });
     CASES.forEach(function (c) { grid.appendChild(folder(c, toneOf(c))); });
 
     grid.appendChild(h("a", { class: "folder folder--new", href: "new.html" }, [
@@ -240,7 +270,9 @@
       h("div", { class: "page-head" }, [
         h("div", { class: "page-head__title" }, [
           h("h1", { class: "t-display c-primary", text: "내 사건" }),
-          h("p", { class: "t-body-l c-secondary", text: "사건 카드를 선택하면 정리된 타임라인을 볼 수 있어요." }),
+          h("p", { class: "t-body-l c-secondary", text: CASES.length
+            ? "사건 카드를 선택하면 정리된 타임라인을 볼 수 있어요."
+            : "아직 등록한 사건이 없어요. 첫 사건을 등록하면 여기에 쌓입니다." }),
         ]),
       ]),
       grid,
