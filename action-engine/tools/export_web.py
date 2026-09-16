@@ -32,6 +32,15 @@ CASES = [
     ("suspension_recent", "고소 사건 (수사중지)"),
 ]
 
+# 직접 만든 사건을 화면에서도 보려고 여기에 적는다. 파일이 없으면 위의 세 건만 올라간다.
+#
+#   [{"id": "missing_2006", "title": "2006년 실종 사건",
+#     "result": "시험자료/장기미제-재수사/out.json"}]
+#
+# 목록을 명령줄이 아니라 파일로 두는 이유: cases.js 는 늘 이 스크립트의 출력과 같아야 한다
+# (test_커밋된_화면_데이터가_엔진_출력과_같다). 명령줄로만 끼워 넣으면 그 약속이 깨진다.
+EXTRA_CASES = ROOT / "시험자료" / "사이트에-올릴-사건.json"
+
 # 규칙이 고른 액션 키의 화면 이름. 절차 문구가 아니라 '무엇에 관한 행동인가'만 적는다.
 ACTION_LABELS = {
     "ACT-공소시효": "공소시효가 끝나기 전에 할 수 있는 절차 확인",
@@ -584,11 +593,29 @@ def build_view(case_id: str, title: str, result: dict[str, Any]) -> dict[str, An
     }
 
 
+def _extra() -> list[tuple[str, str, Path]]:
+    """직접 만든 사건 목록. 파일이 없으면 빈 목록 — 지금까지와 똑같이 돈다."""
+    if not EXTRA_CASES.exists():
+        return []
+    rows = json.loads(EXTRA_CASES.read_text(encoding="utf-8"))
+    out = []
+    for row in rows:
+        path = Path(row["result"])
+        if not path.is_absolute():
+            path = ROOT / path
+        if not path.exists():
+            raise SystemExit(f"{EXTRA_CASES.name}: {row['result']} 를 찾지 못했습니다 — 엔진을 먼저 돌리세요")
+        out.append((row["id"], row["title"], path))
+    return out
+
+
 def build_all() -> list[dict[str, Any]]:
     views = []
     for case_id, title in CASES:
         result = json.loads((FIXTURES / f"{case_id}.json").read_text(encoding="utf-8"))
         views.append(build_view(case_id, title, result))
+    for case_id, title, path in _extra():
+        views.append(build_view(case_id, title, json.loads(path.read_text(encoding="utf-8"))))
     return views
 
 
