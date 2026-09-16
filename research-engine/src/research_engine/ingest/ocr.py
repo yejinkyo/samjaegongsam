@@ -60,14 +60,19 @@ def load_ocr_document(path: str | Path) -> OcrDocument:
 class TesseractOcrEngine:
     """pytesseract 기반 OCR. 이 저장소 CI에서는 실행 검증하지 않는다 (바이너리 의존)."""
 
-    def __init__(self, lang: str = "kor+eng", psm: int = 6, preprocess: bool = True):
+    def __init__(self, lang: str = "kor+eng", psm: int = 6, preprocess: bool = True, cmd: str | None = None):
         self.lang = lang
         self.psm = psm
         self.preprocess = preprocess
+        # 윈도우 설치본은 PATH 에 잡히지 않는 경우가 많아 실행 파일 경로를 따로 받는다
+        self.cmd = cmd
 
     def recognize(self, image_path: Path, page_no: int = 1) -> OcrPage:
         import pytesseract
         from PIL import Image, ImageOps
+
+        if self.cmd:
+            pytesseract.pytesseract.tesseract_cmd = self.cmd
 
         img = ImageOps.exif_transpose(Image.open(image_path))
         if self.preprocess:
@@ -92,7 +97,7 @@ class TesseractOcrEngine:
                 box = box.union(w.bbox)
             lines.append(
                 OcrLine(
-                    text=" ".join(w.text for w in words),
+                    text=join_words(words),
                     bbox=box,
                     confidence=sum(w.confidence for w in words) / len(words),
                     words=words,
@@ -101,6 +106,25 @@ class TesseractOcrEngine:
         return OcrPage(
             page_no=page_no, width=img.width, height=img.height, image_ref=str(image_path), lines=lines
         )
+
+
+def join_words(words: list[OcrWord], space_ratio: float = 0.5) -> str:
+    """단어 상자들을 한 줄 문자열로. 띄어쓰기는 상자 사이 간격으로 정한다.
+
+    Tesseract 한국어 모델은 음절 하나하나를 단어로 돌려준다. 공백으로 이어 붙이면
+    '사 건 번 호'가 되어 '사건번호' 같은 서식 이름을 찾지 못한다. 간격이 글자 높이의
+    ``space_ratio`` 배보다 좁으면 같은 낱말로 붙인다.
+    """
+    ordered = sorted(words, key=lambda w: w.bbox.x0)
+    if not ordered:
+        return ""
+    heights = sorted(w.bbox.y1 - w.bbox.y0 for w in ordered)
+    height = heights[len(heights) // 2] or 1
+    out = ordered[0].text
+    for prev, cur in zip(ordered, ordered[1:], strict=False):
+        gap = cur.bbox.x0 - prev.bbox.x1
+        out += ("" if gap < height * space_ratio else " ") + cur.text
+    return out
 
 
 def preprocess_image(img):  # PIL.Image -> PIL.Image

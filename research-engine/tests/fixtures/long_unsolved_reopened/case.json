@@ -1,0 +1,29 @@
+{
+  "case_id": "demo-long-unsolved-reopened",
+  "case_type": "missing_person_suspended",
+  "as_of": "2026-09-16",
+  "documents": [
+    "missing_report_2006.json",
+    "witness_hwang_2006.json",
+    "suspension_notice_2008.json",
+    "news_2016.json",
+    "progress_notice_2019.json",
+    "tip_statement_2021.json",
+    "suspension_notice_2022.json",
+    "petition_2023.json",
+    "dna_receipt_2025.json",
+    "family_memo.json"
+  ],
+  "user_notes": [
+    {
+      "note_id": "note_no_contact",
+      "text": "2022년 통지서를 받은 뒤로 경찰에서 따로 연락 온 적이 없습니다.",
+      "created_at": "2026-09-14T10:00:00"
+    },
+    {
+      "note_id": "note_tip_handover",
+      "text": "차은식씨 진술서는 2021년에 담당 형사에게 직접 전달했는데 접수증은 받지 못했습니다.",
+      "created_at": "2026-09-14T10:02:00"
+    }
+  ]
+}

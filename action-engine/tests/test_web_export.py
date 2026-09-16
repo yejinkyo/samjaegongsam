@@ -5,6 +5,7 @@
 """
 
 import importlib.util
+import json
 from pathlib import Path
 
 import pytest
@@ -37,6 +38,19 @@ def test_직접_만든_사건이_없으면_세_건만_나온다(export, views, m
     """목록 파일이 없을 때 지금까지와 똑같이 도는지 — 있던 동작을 바꾸지 않는다."""
     monkeypatch.setattr(export, "EXTRA_CASES", export.ROOT / "없는파일.json")
     assert {v["id"] for v in export.build_all()} == {case_id for case_id, _ in export.CASES}
+
+
+def test_사건_하나만_화면_데이터로_바꾼다(export, monkeypatch, tmp_path):
+    """화면에서 등록한 사건은 서버가 --result 로 하나씩 넘긴다. cases.js 는 건드리지 않는다."""
+    out = tmp_path / "view.json"
+    monkeypatch.setattr(export, "OUT", tmp_path / "cases.js")
+    monkeypatch.setattr("sys.argv", ["export_web.py", "--result", str(export.FIXTURES / "long_unsolved_missing.json"),
+                                     "--id", "u1", "--title", "내가 올린 사건", "--out", str(out)])
+    export.main()
+    view = json.loads(out.read_text(encoding="utf-8"))
+    assert view["id"] == "u1" and view["title"] == "내가 올린 사건"
+    assert view["type"] == "missing_person_suspended" and view["timeline"]
+    assert not (tmp_path / "cases.js").exists()
 
 
 def test_절차가_확인되지_않았으면_칸을_채우지_않는다(views):

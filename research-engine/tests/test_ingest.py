@@ -119,3 +119,17 @@ def test_user_note_becomes_user_level_document():
 def test_keyword_classifier_notice():
     lines = ["수사중지 결정 통지서", "사건번호 2016형제12345", "결정일자 2022. 3. 15.", "○○경찰서장"]
     assert KeywordDocClassifier().predict(lines).doc_type is DocumentType.NOTICE
+
+
+def test_tesseract_syllables_are_joined_by_gap_not_by_space():
+    """Tesseract 한국어 모델은 음절마다 단어 상자를 준다. 간격이 좁으면 한 낱말로 붙인다."""
+    from research_engine.ingest.ocr import join_words
+
+    def word(text, x0, x1):
+        return OcrWord(text=text, bbox=BBox(x0=x0, y0=0, x1=x1, y1=32), confidence=0.9)
+
+    # '사건번호' 는 글자 사이가 좁고, 값 앞은 넓게 띄어져 있다
+    words = [word("사", 0, 30), word("건", 40, 70), word("번", 72, 102), word("호", 112, 142), word("2019형제20447", 250, 420)]
+    assert join_words(words) == "사건번호 2019형제20447"
+    assert join_words(list(reversed(words))) == "사건번호 2019형제20447"  # 상자 순서가 섞여 와도 왼쪽부터
+    assert join_words([]) == ""
