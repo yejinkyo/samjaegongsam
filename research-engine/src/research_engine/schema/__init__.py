@@ -41,6 +41,7 @@ from .extraction import (
     TimeGranularity,
     TimeKind,
     TimeValue,
+    SLOT_DEFAULT_LABELS,
 )
 from .provenance import BBox, Sourced, SourceRef
 from .timeline import (

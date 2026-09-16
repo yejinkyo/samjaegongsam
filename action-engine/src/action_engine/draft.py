@@ -131,6 +131,11 @@ def build_draft(result: dict[str, Any], card: CaseCardOut, action: str | None = 
     if not check.form_name:
         # 낼 서류가 사전에 없다. 서식 이름을 지어내면 그대로 잘못된 서류를 쓰게 된다.
         return None
+    if not any(item.state == "생성가능" for item in check.items):
+        # 서식 이름이 있어도 우리가 써 줄 수 있는 서류가 아닌 경우가 있다.
+        # '형사사법포털 사건조회'는 접속해서 조회하는 절차이지 적어 내는 서류가 아니다 —
+        # 거기에 사건 경위 초안을 내놓으면 사용자는 없는 서류를 쓰려고 앉는다.
+        return None
 
     docs = {d["doc_id"]: d for d in result.get("documents", [])}
     slots = _slot_values(result)

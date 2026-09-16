@@ -182,3 +182,16 @@ def test_서로_다른_값이면_순서를_바꾸지_않는다():
         claim(ClaimSlot.DECISION_TYPE, "수사중지", "notice_b"),
     ]
     assert most_specific_first(claims) == claims
+
+
+def test_유형이_요구하지_않는_항목도_한글_이름으로_나온다():
+    """사건 유형 정의에 없는 항목이면 영어 키가 그대로 화면에 샜다.
+
+    수사중지 사건 정의에는 transfer_time 이 없지만, 그 항목에서 모순이 잡히면
+    사용자에게는 '돈이 오간 시점' 으로 보여야 한다.
+    """
+    from research_engine.schema import SLOT_DEFAULT_LABELS, ClaimSlot
+
+    assert SLOT_DEFAULT_LABELS[ClaimSlot.TRANSFER_TIME] == "돈이 오간 시점"
+    # 모든 항목에 이름이 있어야 한다 — 하나라도 빠지면 그 항목만 영어로 샌다
+    assert set(SLOT_DEFAULT_LABELS) == set(ClaimSlot)

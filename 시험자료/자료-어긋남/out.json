@@ -879,6 +879,77 @@
       {
         "event_id": "complaint_2023:e3",
         "doc_id": "complaint_2023",
+        "stage": "transfer",
+        "action": {
+          "source_doc_id": "complaint_2023",
+          "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 1074.0,
+            "y1": 264.0
+          },
+          "char_start": 0,
+          "char_end": 47,
+          "quote": "2023. 7. 9. 오후 3시경 ○○카페에서 현금 4,000,000원을 건넸습니다.",
+          "value": "2023. 7. 9. 오후 3시경 ○○카페에서 현금 4,000,000원을 건넸습니다.",
+          "confidence": 0.7184
+        },
+        "time": {
+          "source_doc_id": "complaint_2023",
+          "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 1074.0,
+            "y1": 264.0
+          },
+          "char_start": 0,
+          "char_end": 18,
+          "quote": "2023. 7. 9. 오후 3시경",
+          "value": {
+            "raw": "2023. 7. 9. 오후 3시경",
+            "start": "2023-07-09T14:00:00",
+            "end": "2023-07-09T17:00:00",
+            "granularity": "hour",
+            "kind": "absolute",
+            "approximate": true,
+            "anchor": null,
+            "anchor_source": null,
+            "candidates": [],
+            "needs_confirmation": false,
+            "note": null
+          },
+          "confidence": 0.8531
+        },
+        "amount": {
+          "source_doc_id": "complaint_2023",
+          "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 1074.0,
+            "y1": 264.0
+          },
+          "char_start": 27,
+          "char_end": 39,
+          "quote": "금 4,000,000원",
+          "value": 4000000,
+          "confidence": 0.8082
+        },
+        "participant_mention_ids": [],
+        "evidence_level": "statement",
+        "action_kind": null
+      },
+      {
+        "event_id": "complaint_2023:e6",
+        "doc_id": "complaint_2023",
         "stage": "report",
         "action": {
           "source_doc_id": "complaint_2023",
@@ -930,6 +1001,77 @@
         "participant_mention_ids": [
           "complaint_2023:m2"
         ],
+        "evidence_level": "statement",
+        "action_kind": null
+      },
+      {
+        "event_id": "statement_2023:e2",
+        "doc_id": "statement_2023",
+        "stage": "transfer",
+        "action": {
+          "source_doc_id": "statement_2023",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 1096.0,
+            "y1": 204.0
+          },
+          "char_start": 0,
+          "char_end": 48,
+          "quote": "2023. 7. 11. 오후 3시경 ○○카페에서 현금 4,000,000원을 건넸습니다.",
+          "value": "2023. 7. 11. 오후 3시경 ○○카페에서 현금 4,000,000원을 건넸습니다.",
+          "confidence": 0.7127
+        },
+        "time": {
+          "source_doc_id": "statement_2023",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 1096.0,
+            "y1": 204.0
+          },
+          "char_start": 0,
+          "char_end": 19,
+          "quote": "2023. 7. 11. 오후 3시경",
+          "value": {
+            "raw": "2023. 7. 11. 오후 3시경",
+            "start": "2023-07-11T14:00:00",
+            "end": "2023-07-11T17:00:00",
+            "granularity": "hour",
+            "kind": "absolute",
+            "approximate": true,
+            "anchor": null,
+            "anchor_source": null,
+            "candidates": [],
+            "needs_confirmation": false,
+            "note": null
+          },
+          "confidence": 0.8464
+        },
+        "amount": {
+          "source_doc_id": "statement_2023",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 1096.0,
+            "y1": 204.0
+          },
+          "char_start": 28,
+          "char_end": 40,
+          "quote": "금 4,000,000원",
+          "value": 4000000,
+          "confidence": 0.8018
+        },
+        "participant_mention_ids": [],
         "evidence_level": "statement",
         "action_kind": null
       },
@@ -1069,6 +1211,82 @@
         "content": {
           "source_doc_id": "complaint_2023",
           "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 1074.0,
+            "y1": 264.0
+          },
+          "char_start": 0,
+          "char_end": 47,
+          "quote": "2023. 7. 9. 오후 3시경 ○○카페에서 현금 4,000,000원을 건넸습니다.",
+          "value": "2023. 7. 9. 오후 3시경 ○○카페에서 현금 4,000,000원을 건넸습니다.",
+          "confidence": 0.7633
+        },
+        "slot": "transfer_amount",
+        "slot_value": "4000000",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "statement"
+      },
+      {
+        "claim_id": "complaint_2023:c5",
+        "doc_id": "complaint_2023",
+        "speaker": "배소율",
+        "speaker_basis": "document_author",
+        "speaker_mention_id": "complaint_2023:m1",
+        "content": {
+          "source_doc_id": "complaint_2023",
+          "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 1074.0,
+            "y1": 264.0
+          },
+          "char_start": 0,
+          "char_end": 47,
+          "quote": "2023. 7. 9. 오후 3시경 ○○카페에서 현금 4,000,000원을 건넸습니다.",
+          "value": "2023. 7. 9. 오후 3시경 ○○카페에서 현금 4,000,000원을 건넸습니다.",
+          "confidence": 0.7633
+        },
+        "slot": "transfer_time",
+        "slot_value": "2023-07-09 14~17시",
+        "slot_time": {
+          "raw": "2023. 7. 9. 오후 3시경",
+          "start": "2023-07-09T14:00:00",
+          "end": "2023-07-09T17:00:00",
+          "granularity": "hour",
+          "kind": "absolute",
+          "approximate": true,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "value_is_speaker_self": false,
+        "subject": "4000000",
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "statement"
+      },
+      {
+        "claim_id": "complaint_2023:c7",
+        "doc_id": "complaint_2023",
+        "speaker": "배소율",
+        "speaker_basis": "document_author",
+        "speaker_mention_id": "complaint_2023:m1",
+        "content": {
+          "source_doc_id": "complaint_2023",
+          "page": 1,
           "source_line": 5,
           "source_line_end": null,
           "source_bbox": {
@@ -1088,6 +1306,82 @@
         "slot_time": null,
         "value_is_speaker_self": false,
         "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "statement"
+      },
+      {
+        "claim_id": "statement_2023:c3",
+        "doc_id": "statement_2023",
+        "speaker": "배소율",
+        "speaker_basis": "document_author",
+        "speaker_mention_id": "statement_2023:m1",
+        "content": {
+          "source_doc_id": "statement_2023",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 1096.0,
+            "y1": 204.0
+          },
+          "char_start": 0,
+          "char_end": 48,
+          "quote": "2023. 7. 11. 오후 3시경 ○○카페에서 현금 4,000,000원을 건넸습니다.",
+          "value": "2023. 7. 11. 오후 3시경 ○○카페에서 현금 4,000,000원을 건넸습니다.",
+          "confidence": 0.7573
+        },
+        "slot": "transfer_amount",
+        "slot_value": "4000000",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "statement"
+      },
+      {
+        "claim_id": "statement_2023:c4",
+        "doc_id": "statement_2023",
+        "speaker": "배소율",
+        "speaker_basis": "document_author",
+        "speaker_mention_id": "statement_2023:m1",
+        "content": {
+          "source_doc_id": "statement_2023",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 1096.0,
+            "y1": 204.0
+          },
+          "char_start": 0,
+          "char_end": 48,
+          "quote": "2023. 7. 11. 오후 3시경 ○○카페에서 현금 4,000,000원을 건넸습니다.",
+          "value": "2023. 7. 11. 오후 3시경 ○○카페에서 현금 4,000,000원을 건넸습니다.",
+          "confidence": 0.7573
+        },
+        "slot": "transfer_time",
+        "slot_value": "2023-07-11 14~17시",
+        "slot_time": {
+          "raw": "2023. 7. 11. 오후 3시경",
+          "start": "2023-07-11T14:00:00",
+          "end": "2023-07-11T17:00:00",
+          "granularity": "hour",
+          "kind": "absolute",
+          "approximate": true,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "value_is_speaker_self": false,
+        "subject": "4000000",
         "polarity": "affirm",
         "said_at": null,
         "evidence_level": "statement"
@@ -1599,6 +1893,128 @@
     "events": [
       {
         "timeline_event_id": "tl3",
+        "stage": "transfer",
+        "title": "4,000,000원 송금",
+        "time": {
+          "raw": "2023. 7. 9. 오후 3시경",
+          "start": "2023-07-09T14:00:00",
+          "end": "2023-07-09T17:00:00",
+          "granularity": "hour",
+          "kind": "absolute",
+          "approximate": true,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "time_unknown": false,
+        "amount": 4000000,
+        "participant_entity_ids": [],
+        "event_ids": [
+          "complaint_2023:e3"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "complaint_2023",
+            "page": 1,
+            "source_line": 4,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 220.0,
+              "x1": 1074.0,
+              "y1": 264.0
+            },
+            "char_start": 0,
+            "char_end": 47,
+            "quote": "2023. 7. 9. 오후 3시경 ○○카페에서 현금 4,000,000원을 건넸습니다."
+          },
+          {
+            "source_doc_id": "complaint_2023",
+            "page": 1,
+            "source_line": 4,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 220.0,
+              "x1": 1074.0,
+              "y1": 264.0
+            },
+            "char_start": 27,
+            "char_end": 39,
+            "quote": "금 4,000,000원"
+          }
+        ],
+        "evidence_level": "statement",
+        "needs_confirmation": false,
+        "flags": [
+          "claim_only"
+        ]
+      },
+      {
+        "timeline_event_id": "tl4",
+        "stage": "transfer",
+        "title": "4,000,000원 송금",
+        "time": {
+          "raw": "2023. 7. 11. 오후 3시경",
+          "start": "2023-07-11T14:00:00",
+          "end": "2023-07-11T17:00:00",
+          "granularity": "hour",
+          "kind": "absolute",
+          "approximate": true,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "time_unknown": false,
+        "amount": 4000000,
+        "participant_entity_ids": [],
+        "event_ids": [
+          "statement_2023:e2"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "statement_2023",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 1096.0,
+              "y1": 204.0
+            },
+            "char_start": 0,
+            "char_end": 48,
+            "quote": "2023. 7. 11. 오후 3시경 ○○카페에서 현금 4,000,000원을 건넸습니다."
+          },
+          {
+            "source_doc_id": "statement_2023",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 1096.0,
+              "y1": 204.0
+            },
+            "char_start": 28,
+            "char_end": 40,
+            "quote": "금 4,000,000원"
+          }
+        ],
+        "evidence_level": "statement",
+        "needs_confirmation": false,
+        "flags": [
+          "claim_only"
+        ]
+      },
+      {
+        "timeline_event_id": "tl5",
         "stage": "report",
         "title": "2023. 7. 20. ○○경찰서에 고소하였습니다.",
         "time": {
@@ -1620,7 +2036,7 @@
           "ent2"
         ],
         "event_ids": [
-          "complaint_2023:e3"
+          "complaint_2023:e6"
         ],
         "sources": [
           {
@@ -1792,7 +2208,7 @@
         "label": "신고",
         "state": "done",
         "timeline_event_ids": [
-          "tl3"
+          "tl5"
         ],
         "evidence_level": "statement"
       },
@@ -1828,7 +2244,7 @@
         "start": "2023-07-21T00:00:00",
         "end": "2025-04-02T00:00:00",
         "hours": 14904.0,
-        "before_event_id": "tl3",
+        "before_event_id": "tl5",
         "after_event_id": "tl2"
       }
     ],
@@ -2334,6 +2750,115 @@
       },
       {
         "issue_id": "iss6",
+        "category": "unverified",
+        "condition": "suspected_conflict",
+        "message": "돈이 오간 시점: 자료 사이에 차이가 있어 보이지만 판단 근거가 부족합니다 — ‘2023-07-09 14~17시’(complaint_2023 · 4줄) / ‘2023-07-11 14~17시’(statement_2023 · 3줄) (모순 점수 0.68 < 기준 0.70; 다른 해석과의 차이 0.38 < 기준 0.40)",
+        "stage": null,
+        "slot": "transfer_time",
+        "sources": [
+          {
+            "source_doc_id": "complaint_2023",
+            "page": 1,
+            "source_line": 4,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 220.0,
+              "x1": 1074.0,
+              "y1": 264.0
+            },
+            "char_start": 0,
+            "char_end": 47,
+            "quote": "2023. 7. 9. 오후 3시경 ○○카페에서 현금 4,000,000원을 건넸습니다."
+          },
+          {
+            "source_doc_id": "statement_2023",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 1096.0,
+              "y1": 204.0
+            },
+            "char_start": 0,
+            "char_end": 48,
+            "quote": "2023. 7. 11. 오후 3시경 ○○카페에서 현금 4,000,000원을 건넸습니다."
+          }
+        ],
+        "checked_doc_ids": [],
+        "related_claim_ids": [
+          "complaint_2023:c5",
+          "statement_2023:c4"
+        ],
+        "related_event_ids": [],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": {
+          "pair_id": "pair1",
+          "claim_a_id": "complaint_2023:c5",
+          "claim_b_id": "statement_2023:c4",
+          "slot": "transfer_time",
+          "scores": {
+            "entailment": 0.0151,
+            "contradiction": 0.6816,
+            "neutral": 0.3033
+          },
+          "model_label": "contradiction",
+          "label": "neutral",
+          "downgraded": true,
+          "reasons": [
+            "모순 점수 0.68 < 기준 0.70",
+            "다른 해석과의 차이 0.38 < 기준 0.40"
+          ],
+          "model_name": "slot-rule-v1"
+        },
+        "trigger": {
+          "key": "investigation_suspended/-/transfer_time/suspected_conflict",
+          "case_type": "investigation_suspended",
+          "condition": "suspected_conflict",
+          "stage": null,
+          "slot": "transfer_time",
+          "since": null,
+          "elapsed_days": null,
+          "evidence": [
+            {
+              "source_doc_id": "complaint_2023",
+              "page": 1,
+              "source_line": 4,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 220.0,
+                "x1": 1074.0,
+                "y1": 264.0
+              },
+              "char_start": 0,
+              "char_end": 47,
+              "quote": "2023. 7. 9. 오후 3시경 ○○카페에서 현금 4,000,000원을 건넸습니다."
+            },
+            {
+              "source_doc_id": "statement_2023",
+              "page": 1,
+              "source_line": 3,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 160.0,
+                "x1": 1096.0,
+                "y1": 204.0
+              },
+              "char_start": 0,
+              "char_end": 48,
+              "quote": "2023. 7. 11. 오후 3시경 ○○카페에서 현금 4,000,000원을 건넸습니다."
+            }
+          ]
+        },
+        "priority": 50
+      },
+      {
+        "issue_id": "iss7",
         "category": "missing",
         "condition": "time_gap",
         "message": "2023-07-21 ~ 2025-04-02 사이의 기록이 없습니다 (약 1.7년)",
@@ -2380,7 +2905,7 @@
         ],
         "related_claim_ids": [],
         "related_event_ids": [
-          "tl3",
+          "tl5",
           "tl2"
         ],
         "related_entity_ids": [],
@@ -2582,7 +3107,27 @@
         ]
       }
     ],
-    "pair_decisions": [],
+    "pair_decisions": [
+      {
+        "pair_id": "pair1",
+        "claim_a_id": "complaint_2023:c5",
+        "claim_b_id": "statement_2023:c4",
+        "slot": "transfer_time",
+        "scores": {
+          "entailment": 0.0151,
+          "contradiction": 0.6816,
+          "neutral": 0.3033
+        },
+        "model_label": "contradiction",
+        "label": "neutral",
+        "downgraded": true,
+        "reasons": [
+          "모순 점수 0.68 < 기준 0.70",
+          "다른 해석과의 차이 0.38 < 기준 0.40"
+        ],
+        "model_name": "slot-rule-v1"
+      }
+    ],
     "action_triggers": [
       {
         "key": "investigation_suspended/-/document:complaint/unreadable",
@@ -2667,6 +3212,47 @@
         "evidence": []
       },
       {
+        "key": "investigation_suspended/-/transfer_time/suspected_conflict",
+        "case_type": "investigation_suspended",
+        "condition": "suspected_conflict",
+        "stage": null,
+        "slot": "transfer_time",
+        "since": null,
+        "elapsed_days": null,
+        "evidence": [
+          {
+            "source_doc_id": "complaint_2023",
+            "page": 1,
+            "source_line": 4,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 220.0,
+              "x1": 1074.0,
+              "y1": 264.0
+            },
+            "char_start": 0,
+            "char_end": 47,
+            "quote": "2023. 7. 9. 오후 3시경 ○○카페에서 현금 4,000,000원을 건넸습니다."
+          },
+          {
+            "source_doc_id": "statement_2023",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 1096.0,
+              "y1": 204.0
+            },
+            "char_start": 0,
+            "char_end": 48,
+            "quote": "2023. 7. 11. 오후 3시경 ○○카페에서 현금 4,000,000원을 건넸습니다."
+          }
+        ]
+      },
+      {
         "key": "investigation_suspended/-/timeline/time_gap",
         "case_type": "investigation_suspended",
         "condition": "time_gap",
@@ -2725,7 +3311,7 @@
           "label": "신고",
           "state": "done",
           "timeline_event_ids": [
-            "tl3"
+            "tl5"
           ],
           "evidence_level": "statement"
         },
@@ -2757,7 +3343,7 @@
       ],
       "current_stage": "outcome",
       "evidence_doc_count": 4,
-      "needs_confirmation_count": 6,
+      "needs_confirmation_count": 7,
       "slots_done": 3,
       "slots_total": 4,
       "next_trigger": {

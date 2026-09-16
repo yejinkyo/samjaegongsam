@@ -152,3 +152,25 @@ def test_investigator_change_and_new_investigator_claims():
 
 def _doc_claims(text):
     return Extractor().extract([_doc("x", [text], DocumentType.MEMO)], date(2026, 9, 11)).claims
+
+
+def test_현금을_직접_건넨_것도_돈이_오간_일이다():
+    """계좌 이체만 잡으면 현금 거래 사건은 통째로 사라진다.
+
+    피해자가 '현금 400만원을 건넸습니다' 라고 적으면 그게 사건의 핵심인데,
+    송금·이체·입금만 보던 때는 이벤트도 주장도 만들어지지 않았다.
+    """
+    doc = _doc("complaint", ["2023. 7. 9. ○○카페에서 현금 4,000,000원을 건넸습니다."], DocumentType.COMPLAINT)
+    res = Extractor().extract([doc], date(2026, 9, 16))
+
+    event = next(e for e in res.events if e.stage is Stage.TRANSFER)
+    assert event.amount.value == 4_000_000
+    assert event.time.value.start.date() == date(2023, 7, 9)
+    assert any(c.slot is ClaimSlot.TRANSFER_TIME for c in res.claims)
+
+
+def test_돈이_아닌_것을_건넨_것은_금전_이동이_아니다():
+    """금액이 앞에 있을 때만 잡는다 — '서류를 건넸습니다'까지 끌어오면 안 된다."""
+    doc = _doc("statement", ["2023. 7. 9. 담당 수사관에게 서류를 건넸습니다."], DocumentType.STATEMENT)
+    res = Extractor().extract([doc], date(2026, 9, 16))
+    assert not any(e.stage is Stage.TRANSFER for e in res.events)

@@ -28,6 +28,7 @@ from ..schema import (
     NliLabel,
     PairDecision,
     ProcessedDocument,
+    SLOT_DEFAULT_LABELS,
     SlotState,
     SourceRef,
     Stage,
@@ -140,7 +141,9 @@ class CaseAnalyzer:
             )
 
         slot_stage = {s.slot: s.stage for s in requirements.slots}
-        slot_label = {s.slot: s.label for s in requirements.slots}
+        # 유형이 요구하지 않는 항목도 화면에는 한글로 나와야 한다 — 기본 이름을 깔고 덮어쓴다
+        slot_label: dict = dict(SLOT_DEFAULT_LABELS)
+        slot_label.update({s.slot: s.label for s in requirements.slots})
         checked_docs = [d.doc_id for d in docs]
 
         q_by_line = {(q.doc_id, q.line_no): q.request_id for q in clarifications

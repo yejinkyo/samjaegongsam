@@ -120,3 +120,15 @@ def test_이의_사유는_비워_둔다(draft):
 
 def test_초안_표시는_떼지_않는다(draft):
     assert draft.is_draft is True
+
+
+def test_적어_내는_서류가_아니면_초안을_만들지_않는다(recent):
+    """서식 이름이 있어도 우리가 써 줄 수 있는 서류가 아닌 경우가 있다.
+
+    ACT-단계확인의 '형사사법포털 사건조회'는 접속해서 조회하는 절차이지 적어 내는
+    서류가 아니다. 거기에 사건 경위 초안을 내놓으면 없는 서류를 쓰려고 앉게 된다.
+    """
+    card = build_card(recent)
+    assert build_draft(recent, card, action="ACT-단계확인") is None
+    # 지식베이스에 '생성가능' 으로 적힌 서류에는 그대로 만들어진다
+    assert build_draft(recent, card, action="ACT-이의제기-수사중지") is not None

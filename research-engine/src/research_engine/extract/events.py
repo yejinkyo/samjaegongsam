@@ -43,7 +43,11 @@ STAGE_TRIGGERS: list[tuple[Stage, re.Pattern[str]]] = [
     (Stage.INVESTIGATION, re.compile(
         r"(?<!재)수사(?!\s*중지|관|팀|대|과|기관|\s*기록|\s*자료)|조사(?!관)|출석|소환|압수|수색|입건|송치|피의자\s*신문")),
     (Stage.REPORT, re.compile(r"신고(?!인|번호)|고소(?!인|장|\s*취지)|고발(?!인)|진정(?!인|서|\s*취지)|112에")),
-    (Stage.TRANSFER, re.compile(r"송금|이체(?!\s*금액|\s*일시|\s*확인증)|입금(?!\s*계좌|\s*은행)")),
+    # 계좌로 보낸 것만이 아니라 현금을 직접 건넨 경우도 돈이 오간 일이다.
+    # 금액이 앞에 있을 때만 잡는다 — '서류를 건넸습니다'까지 끌어오면 안 된다.
+    (Stage.TRANSFER, re.compile(
+        r"송금|이체(?!\s*금액|\s*일시|\s*확인증)|입금(?!\s*계좌|\s*은행)|"
+        r"원\s*(?:을|를)?\s*(?:건네|건넸|건네주|지급|전달|주었|줬)")),
     (Stage.OCCURRENCE, re.compile("|".join(f"(?:{p.pattern})" for _, p in OCCURRENCE_KINDS))),
 ]
 # 문서 자체가 하는 요청 ("재수사를 요청합니다") — 시각은 본문 속 과거 날짜가 아니라 문서 작성일

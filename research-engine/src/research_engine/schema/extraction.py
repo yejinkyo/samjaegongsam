@@ -203,6 +203,29 @@ class ClaimSlot(StrEnum):
     DECISION_TYPE = "decision_type"
 
 
+# 항목의 기본 이름. 사건 유형이 그 항목을 요구하지 않아도 화면에는 한글로 나와야 한다.
+# (유형 정의에 label 이 있으면 그쪽이 이긴다 — 유형마다 부르는 이름이 다를 수 있다.)
+SLOT_DEFAULT_LABELS: dict[ClaimSlot, str] = {
+    ClaimSlot.INCIDENT_TIME: "사건 발생 시점",
+    ClaimSlot.LAST_SEEN_TIME: "마지막 목격 시점",
+    ClaimSlot.LAST_CONTACT_TIME: "마지막 연락 시점",
+    ClaimSlot.TRANSFER_AMOUNT: "보낸 금액",
+    ClaimSlot.TRANSFER_TIME: "돈이 오간 시점",
+    ClaimSlot.ACCOUNT_NUMBER: "계좌번호",
+    ClaimSlot.ACCOUNT_HOLDER: "예금주",
+    ClaimSlot.SHIPMENT_SENT: "발송 여부",
+    ClaimSlot.ITEM_RECEIVED: "수령 여부",
+    ClaimSlot.TRACKING_NUMBER: "송장번호",
+    ClaimSlot.RECEIPT_NUMBER: "접수번호",
+    ClaimSlot.RECEIPT_TIME: "접수 일시",
+    ClaimSlot.INVESTIGATOR: "담당 수사관",
+    ClaimSlot.INVESTIGATOR_CHANGE: "담당 수사관 변경",
+    ClaimSlot.CASE_NUMBER: "사건번호",
+    ClaimSlot.DECISION_TIME: "결정 일자",
+    ClaimSlot.DECISION_TYPE: "결정 내용",
+}
+
+
 class Polarity(StrEnum):
     AFFIRM = "affirm"
     DENY = "deny"
