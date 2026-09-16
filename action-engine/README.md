@@ -145,4 +145,6 @@ uv run research-engine run tests/fixtures/used_goods_fraud/case.json \
     --out ../action-engine/tests/fixtures/used_goods_fraud.json
 uv run research-engine run tests/fixtures/investigation_suspended/case.json \
     --out ../action-engine/tests/fixtures/investigation_suspended.json
+uv run research-engine run tests/fixtures/suspension_recent/case.json \
+    --out ../action-engine/tests/fixtures/suspension_recent.json
 ```

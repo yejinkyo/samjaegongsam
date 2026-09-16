@@ -334,20 +334,20 @@
       "unreadable": []
     },
     {
-      "doc_id": "suspension_notice_2023",
+      "doc_id": "suspension_notice_2026",
       "file_name": "수사중지_결정통지서.jpg",
       "doc_type": "notice",
-      "doc_type_confidence": 0.9318,
+      "doc_type_confidence": 0.9614,
       "doc_type_scores": {
-        "judgment": 0.0051,
-        "complaint": 0.0464,
-        "statement": 0.0023,
-        "transcript": 0.0023,
-        "receipt": 0.0023,
-        "notice": 0.9318,
-        "messenger": 0.0023,
-        "news": 0.0023,
-        "memo": 0.0051
+        "judgment": 0.0029,
+        "complaint": 0.0263,
+        "statement": 0.0013,
+        "transcript": 0.0013,
+        "receipt": 0.0013,
+        "notice": 0.9614,
+        "messenger": 0.0013,
+        "news": 0.0013,
+        "memo": 0.0029
       },
       "evidence_level": "record",
       "captured_at": "2026-09-05T09:10:00",
@@ -355,22 +355,22 @@
         {
           "page_no": 1,
           "width": 1080.0,
-          "height": 640.0,
+          "height": 720.0,
           "image_ref": null
         }
       ],
       "lines": [
         {
-          "doc_id": "suspension_notice_2023",
+          "doc_id": "suspension_notice_2026",
           "line_no": 1,
           "page": 1,
           "bbox": {
             "x0": 40.0,
             "y0": 40.0,
-            "x1": 282.0,
+            "x1": 238.0,
             "y1": 84.0
           },
-          "text": "수사중지 결정 통지서",
+          "text": "수사결과 통지서",
           "ocr_confidence": 0.97,
           "readability": 0.9636,
           "readable": true,
@@ -379,7 +379,7 @@
           "origin": "ocr"
         },
         {
-          "doc_id": "suspension_notice_2023",
+          "doc_id": "suspension_notice_2026",
           "line_no": 2,
           "page": 1,
           "bbox": {
@@ -397,7 +397,7 @@
           "origin": "ocr"
         },
         {
-          "doc_id": "suspension_notice_2023",
+          "doc_id": "suspension_notice_2026",
           "line_no": 3,
           "page": 1,
           "bbox": {
@@ -415,7 +415,7 @@
           "origin": "ocr"
         },
         {
-          "doc_id": "suspension_notice_2023",
+          "doc_id": "suspension_notice_2026",
           "line_no": 4,
           "page": 1,
           "bbox": {
@@ -433,7 +433,7 @@
           "origin": "ocr"
         },
         {
-          "doc_id": "suspension_notice_2023",
+          "doc_id": "suspension_notice_2026",
           "line_no": 5,
           "page": 1,
           "bbox": {
@@ -451,7 +451,7 @@
           "origin": "ocr"
         },
         {
-          "doc_id": "suspension_notice_2023",
+          "doc_id": "suspension_notice_2026",
           "line_no": 6,
           "page": 1,
           "bbox": {
@@ -460,7 +460,7 @@
             "x1": 392.0,
             "y1": 384.0
           },
-          "text": "결정일자 2023. 2. 9.",
+          "text": "결정일자 2026. 8. 18.",
           "ocr_confidence": 0.95,
           "readability": 0.9579,
           "readable": true,
@@ -469,7 +469,7 @@
           "origin": "ocr"
         },
         {
-          "doc_id": "suspension_notice_2023",
+          "doc_id": "suspension_notice_2026",
           "line_no": 7,
           "page": 1,
           "bbox": {
@@ -478,7 +478,7 @@
             "x1": 392.0,
             "y1": 444.0
           },
-          "text": "결정내용 수사중지(참고인중지)",
+          "text": "결정내용 수사중지(피의자중지)",
           "ocr_confidence": 0.95,
           "readability": 0.9579,
           "readable": true,
@@ -487,16 +487,16 @@
           "origin": "ocr"
         },
         {
-          "doc_id": "suspension_notice_2023",
+          "doc_id": "suspension_notice_2026",
           "line_no": 8,
           "page": 1,
           "bbox": {
             "x0": 40.0,
             "y0": 460.0,
-            "x1": 700.0,
+            "x1": 568.0,
             "y1": 504.0
           },
-          "text": "이유 참고인 소재불명으로 수사를 계속할 수 없어 중지함",
+          "text": "이유 피의자를 특정할 수 없어 수사를 중지함",
           "ocr_confidence": 0.94,
           "readability": 0.9548,
           "readable": true,
@@ -505,7 +505,7 @@
           "origin": "ocr"
         },
         {
-          "doc_id": "suspension_notice_2023",
+          "doc_id": "suspension_notice_2026",
           "line_no": 9,
           "page": 1,
           "bbox": {
@@ -523,7 +523,7 @@
           "origin": "ocr"
         },
         {
-          "doc_id": "suspension_notice_2023",
+          "doc_id": "suspension_notice_2026",
           "line_no": 10,
           "page": 1,
           "bbox": {
@@ -535,6 +535,24 @@
           "text": "○○경찰서장",
           "ocr_confidence": 0.95,
           "readability": 0.9579,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "suspension_notice_2026",
+          "line_no": 11,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 640.0,
+            "x1": 1040.0,
+            "y1": 684.0
+          },
+          "text": "※ 이 결정이 법령위반, 인권침해 또는 현저한 수사권 남용이라고 의심되는 경우 검사에게 신고할 수 있습니다.",
+          "ocr_confidence": 0.93,
+          "readability": 0.9514,
           "readable": true,
           "script": "printed",
           "low_confidence_spans": [],
@@ -881,11 +899,11 @@
         "role": null
       },
       {
-        "mention_id": "suspension_notice_2023:m1",
-        "doc_id": "suspension_notice_2023",
+        "mention_id": "suspension_notice_2026:m1",
+        "doc_id": "suspension_notice_2026",
         "kind": "case_number",
         "name": {
-          "source_doc_id": "suspension_notice_2023",
+          "source_doc_id": "suspension_notice_2026",
           "page": 1,
           "source_line": 2,
           "source_line_end": null,
@@ -905,11 +923,11 @@
         "role": null
       },
       {
-        "mention_id": "suspension_notice_2023:m2",
-        "doc_id": "suspension_notice_2023",
+        "mention_id": "suspension_notice_2026:m2",
+        "doc_id": "suspension_notice_2026",
         "kind": "person",
         "name": {
-          "source_doc_id": "suspension_notice_2023",
+          "source_doc_id": "suspension_notice_2026",
           "page": 1,
           "source_line": 3,
           "source_line_end": null,
@@ -929,11 +947,11 @@
         "role": "고소인"
       },
       {
-        "mention_id": "suspension_notice_2023:m3",
-        "doc_id": "suspension_notice_2023",
+        "mention_id": "suspension_notice_2026:m3",
+        "doc_id": "suspension_notice_2026",
         "kind": "person",
         "name": {
-          "source_doc_id": "suspension_notice_2023",
+          "source_doc_id": "suspension_notice_2026",
           "page": 1,
           "source_line": 9,
           "source_line_end": null,
@@ -953,11 +971,11 @@
         "role": "담당수사관"
       },
       {
-        "mention_id": "suspension_notice_2023:m4",
-        "doc_id": "suspension_notice_2023",
+        "mention_id": "suspension_notice_2026:m4",
+        "doc_id": "suspension_notice_2026",
         "kind": "organization",
         "name": {
-          "source_doc_id": "suspension_notice_2023",
+          "source_doc_id": "suspension_notice_2026",
           "page": 1,
           "source_line": 10,
           "source_line_end": null,
@@ -1214,28 +1232,28 @@
         "action_kind": null
       },
       {
-        "event_id": "suspension_notice_2023:e10",
-        "doc_id": "suspension_notice_2023",
+        "event_id": "suspension_notice_2026:e9",
+        "doc_id": "suspension_notice_2026",
         "stage": "outcome",
         "action": {
-          "source_doc_id": "suspension_notice_2023",
+          "source_doc_id": "suspension_notice_2026",
           "page": 1,
           "source_line": 1,
           "source_line_end": null,
           "source_bbox": {
             "x0": 40.0,
             "y0": 40.0,
-            "x1": 282.0,
+            "x1": 238.0,
             "y1": 84.0
           },
           "char_start": null,
           "char_end": null,
-          "quote": "수사중지 결정 통지서",
-          "value": "수사중지 결정 통지서",
+          "quote": "수사결과 통지서",
+          "value": "수사결과 통지서",
           "confidence": 0.9154
         },
         "time": {
-          "source_doc_id": "suspension_notice_2023",
+          "source_doc_id": "suspension_notice_2026",
           "page": 1,
           "source_line": 6,
           "source_line_end": null,
@@ -1246,12 +1264,12 @@
             "y1": 384.0
           },
           "char_start": 5,
-          "char_end": 16,
-          "quote": "2023. 2. 9.",
+          "char_end": 17,
+          "quote": "2026. 8. 18.",
           "value": {
-            "raw": "2023. 2. 9.",
-            "start": "2023-02-09T00:00:00",
-            "end": "2023-02-10T00:00:00",
+            "raw": "2026. 8. 18.",
+            "start": "2026-08-18T00:00:00",
+            "end": "2026-08-19T00:00:00",
             "granularity": "day",
             "kind": "absolute",
             "approximate": false,
@@ -1265,10 +1283,10 @@
         },
         "amount": null,
         "participant_mention_ids": [
-          "suspension_notice_2023:m1",
-          "suspension_notice_2023:m2",
-          "suspension_notice_2023:m3",
-          "suspension_notice_2023:m4"
+          "suspension_notice_2026:m1",
+          "suspension_notice_2026:m2",
+          "suspension_notice_2026:m3",
+          "suspension_notice_2026:m4"
         ],
         "evidence_level": "record",
         "action_kind": null
@@ -1483,45 +1501,13 @@
         "evidence_level": "record"
       },
       {
-        "claim_id": "suspension_notice_2023:c5",
-        "doc_id": "suspension_notice_2023",
+        "claim_id": "suspension_notice_2026:c5",
+        "doc_id": "suspension_notice_2026",
         "speaker": "**경찰서",
         "speaker_basis": "document_issuer",
-        "speaker_mention_id": "suspension_notice_2023:m4",
+        "speaker_mention_id": "suspension_notice_2026:m4",
         "content": {
-          "source_doc_id": "suspension_notice_2023",
-          "page": 1,
-          "source_line": 1,
-          "source_line_end": null,
-          "source_bbox": {
-            "x0": 40.0,
-            "y0": 40.0,
-            "x1": 282.0,
-            "y1": 84.0
-          },
-          "char_start": 0,
-          "char_end": 11,
-          "quote": "수사중지 결정 통지서",
-          "value": "수사중지 결정 통지서",
-          "confidence": 0.8672
-        },
-        "slot": "decision_type",
-        "slot_value": "수사중지",
-        "slot_time": null,
-        "value_is_speaker_self": false,
-        "subject": null,
-        "polarity": "affirm",
-        "said_at": null,
-        "evidence_level": "record"
-      },
-      {
-        "claim_id": "suspension_notice_2023:c6",
-        "doc_id": "suspension_notice_2023",
-        "speaker": "**경찰서",
-        "speaker_basis": "document_issuer",
-        "speaker_mention_id": "suspension_notice_2023:m4",
-        "content": {
-          "source_doc_id": "suspension_notice_2023",
+          "source_doc_id": "suspension_notice_2026",
           "page": 1,
           "source_line": 2,
           "source_line_end": null,
@@ -1547,13 +1533,13 @@
         "evidence_level": "record"
       },
       {
-        "claim_id": "suspension_notice_2023:c7",
-        "doc_id": "suspension_notice_2023",
+        "claim_id": "suspension_notice_2026:c6",
+        "doc_id": "suspension_notice_2026",
         "speaker": "**경찰서",
         "speaker_basis": "document_issuer",
-        "speaker_mention_id": "suspension_notice_2023:m4",
+        "speaker_mention_id": "suspension_notice_2026:m4",
         "content": {
-          "source_doc_id": "suspension_notice_2023",
+          "source_doc_id": "suspension_notice_2026",
           "page": 1,
           "source_line": 6,
           "source_line_end": null,
@@ -1564,17 +1550,17 @@
             "y1": 384.0
           },
           "char_start": 0,
-          "char_end": 16,
-          "quote": "결정일자 2023. 2. 9.",
-          "value": "결정일자 2023. 2. 9.",
+          "char_end": 17,
+          "quote": "결정일자 2026. 8. 18.",
+          "value": "결정일자 2026. 8. 18.",
           "confidence": 0.8621
         },
         "slot": "decision_time",
-        "slot_value": "2023-02-09",
+        "slot_value": "2026-08-18",
         "slot_time": {
-          "raw": "2023. 2. 9.",
-          "start": "2023-02-09T00:00:00",
-          "end": "2023-02-10T00:00:00",
+          "raw": "2026. 8. 18.",
+          "start": "2026-08-18T00:00:00",
+          "end": "2026-08-19T00:00:00",
           "granularity": "day",
           "kind": "absolute",
           "approximate": false,
@@ -1591,13 +1577,13 @@
         "evidence_level": "record"
       },
       {
-        "claim_id": "suspension_notice_2023:c8",
-        "doc_id": "suspension_notice_2023",
+        "claim_id": "suspension_notice_2026:c7",
+        "doc_id": "suspension_notice_2026",
         "speaker": "**경찰서",
         "speaker_basis": "document_issuer",
-        "speaker_mention_id": "suspension_notice_2023:m4",
+        "speaker_mention_id": "suspension_notice_2026:m4",
         "content": {
-          "source_doc_id": "suspension_notice_2023",
+          "source_doc_id": "suspension_notice_2026",
           "page": 1,
           "source_line": 7,
           "source_line_end": null,
@@ -1609,12 +1595,12 @@
           },
           "char_start": 0,
           "char_end": 16,
-          "quote": "결정내용 수사중지(참고인중지)",
-          "value": "결정내용 수사중지(참고인중지)",
+          "quote": "결정내용 수사중지(피의자중지)",
+          "value": "결정내용 수사중지(피의자중지)",
           "confidence": 0.8621
         },
         "slot": "decision_type",
-        "slot_value": "수사중지(참고인중지)",
+        "slot_value": "수사중지(피의자중지)",
         "slot_time": null,
         "value_is_speaker_self": false,
         "subject": null,
@@ -1623,13 +1609,13 @@
         "evidence_level": "record"
       },
       {
-        "claim_id": "suspension_notice_2023:c9",
-        "doc_id": "suspension_notice_2023",
+        "claim_id": "suspension_notice_2026:c8",
+        "doc_id": "suspension_notice_2026",
         "speaker": "**경찰서",
         "speaker_basis": "document_issuer",
-        "speaker_mention_id": "suspension_notice_2023:m4",
+        "speaker_mention_id": "suspension_notice_2026:m4",
         "content": {
-          "source_doc_id": "suspension_notice_2023",
+          "source_doc_id": "suspension_notice_2026",
           "page": 1,
           "source_line": 9,
           "source_line_end": null,
@@ -1817,7 +1803,7 @@
         "confidence": 0.8779
       },
       {
-        "source_doc_id": "suspension_notice_2023",
+        "source_doc_id": "suspension_notice_2026",
         "page": 1,
         "source_line": 6,
         "source_line_end": null,
@@ -1828,12 +1814,12 @@
           "y1": 384.0
         },
         "char_start": 5,
-        "char_end": 16,
-        "quote": "2023. 2. 9.",
+        "char_end": 17,
+        "quote": "2026. 8. 18.",
         "value": {
-          "raw": "2023. 2. 9.",
-          "start": "2023-02-09T00:00:00",
-          "end": "2023-02-10T00:00:00",
+          "raw": "2026. 8. 18.",
+          "start": "2026-08-18T00:00:00",
+          "end": "2026-08-19T00:00:00",
           "granularity": "day",
           "kind": "absolute",
           "approximate": false,
@@ -1963,8 +1949,8 @@
         },
         "confidence": 0.8779
       },
-      "suspension_notice_2023": {
-        "source_doc_id": "suspension_notice_2023",
+      "suspension_notice_2026": {
+        "source_doc_id": "suspension_notice_2026",
         "page": 1,
         "source_line": 6,
         "source_line_end": null,
@@ -1975,12 +1961,12 @@
           "y1": 384.0
         },
         "char_start": 5,
-        "char_end": 16,
-        "quote": "2023. 2. 9.",
+        "char_end": 17,
+        "quote": "2026. 8. 18.",
         "value": {
-          "raw": "2023. 2. 9.",
-          "start": "2023-02-09T00:00:00",
-          "end": "2023-02-10T00:00:00",
+          "raw": "2026. 8. 18.",
+          "start": "2026-08-18T00:00:00",
+          "end": "2026-08-19T00:00:00",
           "granularity": "day",
           "kind": "absolute",
           "approximate": false,
@@ -2200,70 +2186,6 @@
         "flags": []
       },
       {
-        "timeline_event_id": "tl2",
-        "stage": "outcome",
-        "title": "수사중지 결정 통지서",
-        "time": {
-          "raw": "2023. 2. 9.",
-          "start": "2023-02-09T00:00:00",
-          "end": "2023-02-10T00:00:00",
-          "granularity": "day",
-          "kind": "absolute",
-          "approximate": false,
-          "anchor": null,
-          "anchor_source": null,
-          "candidates": [],
-          "needs_confirmation": false,
-          "note": null
-        },
-        "time_unknown": false,
-        "amount": null,
-        "participant_entity_ids": [
-          "ent1",
-          "ent2",
-          "ent4",
-          "ent5"
-        ],
-        "event_ids": [
-          "suspension_notice_2023:e10"
-        ],
-        "sources": [
-          {
-            "source_doc_id": "suspension_notice_2023",
-            "page": 1,
-            "source_line": 1,
-            "source_line_end": null,
-            "source_bbox": {
-              "x0": 40.0,
-              "y0": 40.0,
-              "x1": 282.0,
-              "y1": 84.0
-            },
-            "char_start": null,
-            "char_end": null,
-            "quote": "수사중지 결정 통지서"
-          },
-          {
-            "source_doc_id": "suspension_notice_2023",
-            "page": 1,
-            "source_line": 6,
-            "source_line_end": null,
-            "source_bbox": {
-              "x0": 40.0,
-              "y0": 340.0,
-              "x1": 392.0,
-              "y1": 384.0
-            },
-            "char_start": 5,
-            "char_end": 16,
-            "quote": "2023. 2. 9."
-          }
-        ],
-        "evidence_level": "record",
-        "needs_confirmation": false,
-        "flags": []
-      },
-      {
         "timeline_event_id": "tl5",
         "stage": "occurrence",
         "title": "2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다.",
@@ -2308,6 +2230,70 @@
         "flags": [
           "claim_only"
         ]
+      },
+      {
+        "timeline_event_id": "tl2",
+        "stage": "outcome",
+        "title": "수사결과 통지서",
+        "time": {
+          "raw": "2026. 8. 18.",
+          "start": "2026-08-18T00:00:00",
+          "end": "2026-08-19T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "time_unknown": false,
+        "amount": null,
+        "participant_entity_ids": [
+          "ent1",
+          "ent2",
+          "ent4",
+          "ent5"
+        ],
+        "event_ids": [
+          "suspension_notice_2026:e9"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "suspension_notice_2026",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 238.0,
+              "y1": 84.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": "수사결과 통지서"
+          },
+          {
+            "source_doc_id": "suspension_notice_2026",
+            "page": 1,
+            "source_line": 6,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 340.0,
+              "x1": 392.0,
+              "y1": 384.0
+            },
+            "char_start": 5,
+            "char_end": 17,
+            "quote": "2026. 8. 18."
+          }
+        ],
+        "evidence_level": "record",
+        "needs_confirmation": false,
+        "flags": []
       }
     ],
     "stages": [
@@ -2360,17 +2346,17 @@
     "gaps": [
       {
         "start": "2021-05-26T00:00:00",
-        "end": "2023-02-09T00:00:00",
-        "hours": 14976.0,
+        "end": "2025-06-03T00:00:00",
+        "hours": 35256.0,
         "before_event_id": "tl4",
-        "after_event_id": "tl2"
+        "after_event_id": "tl5"
       },
       {
-        "start": "2023-02-10T00:00:00",
-        "end": "2025-06-03T00:00:00",
-        "hours": 20256.0,
-        "before_event_id": "tl2",
-        "after_event_id": "tl5"
+        "start": "2025-06-11T00:00:00",
+        "end": "2026-08-18T00:00:00",
+        "hours": 10392.0,
+        "before_event_id": "doc:witness_statement_2025",
+        "after_event_id": "tl2"
       }
     ],
     "entities": [
@@ -2389,7 +2375,7 @@
           "complaint_2021:m1",
           "complaint_2021:m3",
           "receipt_2021:m2",
-          "suspension_notice_2023:m2"
+          "suspension_notice_2026:m2"
         ],
         "sources": [
           {
@@ -2438,7 +2424,7 @@
             "quote": "정하늘"
           },
           {
-            "source_doc_id": "suspension_notice_2023",
+            "source_doc_id": "suspension_notice_2026",
             "page": 1,
             "source_line": 3,
             "source_line_end": null,
@@ -2459,7 +2445,7 @@
       {
         "entity_id": "ent2",
         "kind": "organization",
-        "canonical_name": "대구성서경찰서",
+        "canonical_name": "**경찰서",
         "aliases": [
           "○○경찰서"
         ],
@@ -2467,7 +2453,7 @@
         "mention_ids": [
           "complaint_2021:m2",
           "receipt_2021:m3",
-          "suspension_notice_2023:m4"
+          "suspension_notice_2026:m4"
         ],
         "sources": [
           {
@@ -2501,7 +2487,7 @@
             "quote": "○○경찰서"
           },
           {
-            "source_doc_id": "suspension_notice_2023",
+            "source_doc_id": "suspension_notice_2026",
             "page": 1,
             "source_line": 10,
             "source_line_end": null,
@@ -2559,11 +2545,11 @@
         ],
         "roles": [],
         "mention_ids": [
-          "suspension_notice_2023:m1"
+          "suspension_notice_2026:m1"
         ],
         "sources": [
           {
-            "source_doc_id": "suspension_notice_2023",
+            "source_doc_id": "suspension_notice_2026",
             "page": 1,
             "source_line": 2,
             "source_line_end": null,
@@ -2592,11 +2578,11 @@
           "담당수사관"
         ],
         "mention_ids": [
-          "suspension_notice_2023:m3"
+          "suspension_notice_2026:m3"
         ],
         "sources": [
           {
-            "source_doc_id": "suspension_notice_2023",
+            "source_doc_id": "suspension_notice_2026",
             "page": 1,
             "source_line": 9,
             "source_line_end": null,
@@ -2668,13 +2654,13 @@
       "complaint_2021:m1": "ent1",
       "complaint_2021:m3": "ent1",
       "receipt_2021:m2": "ent1",
-      "suspension_notice_2023:m2": "ent1",
+      "suspension_notice_2026:m2": "ent1",
       "complaint_2021:m2": "ent2",
       "receipt_2021:m3": "ent2",
-      "suspension_notice_2023:m4": "ent2",
+      "suspension_notice_2026:m4": "ent2",
       "receipt_2021:m1": "ent3",
-      "suspension_notice_2023:m1": "ent4",
-      "suspension_notice_2023:m3": "ent5",
+      "suspension_notice_2026:m1": "ent4",
+      "suspension_notice_2026:m3": "ent5",
       "witness_statement_2025:m1": "ent6",
       "witness_statement_2025:m2": "ent6"
     }
@@ -2688,7 +2674,7 @@
         "issue_id": "iss1",
         "category": "unverified",
         "condition": "unrecorded_fact",
-        "message": "‘2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다.’(2025-06-03, witness_statement_2025 · 3줄) — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다. ‘수사중지 결정 통지서’(2023-02-09) 이후에 나온 내용입니다. 수사 기록에 반영됐는지 확인이 필요합니다",
+        "message": "‘2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다.’(2025-06-03, witness_statement_2025 · 3줄) — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다. ‘수사결과 통지서’(2026-08-18)보다 앞선 내용입니다. 수사 기록에 반영됐는지 확인이 필요합니다",
         "stage": "occurrence",
         "slot": null,
         "sources": [
@@ -2711,7 +2697,7 @@
         "checked_doc_ids": [
           "complaint_2021",
           "receipt_2021",
-          "suspension_notice_2023",
+          "suspension_notice_2026",
           "witness_statement_2025",
           "note_victim"
         ],
@@ -2753,72 +2739,6 @@
       {
         "issue_id": "iss2",
         "category": "missing",
-        "condition": "stage_stalled",
-        "message": "‘수사중지 결정 통지서’(2023-02-09) 이후 기관의 진행 기록이 없습니다 (1311일 경과)",
-        "stage": "outcome",
-        "slot": null,
-        "sources": [
-          {
-            "source_doc_id": "suspension_notice_2023",
-            "page": 1,
-            "source_line": 1,
-            "source_line_end": null,
-            "source_bbox": {
-              "x0": 40.0,
-              "y0": 40.0,
-              "x1": 282.0,
-              "y1": 84.0
-            },
-            "char_start": null,
-            "char_end": null,
-            "quote": "수사중지 결정 통지서"
-          }
-        ],
-        "checked_doc_ids": [
-          "complaint_2021",
-          "receipt_2021",
-          "suspension_notice_2023",
-          "witness_statement_2025",
-          "note_victim"
-        ],
-        "related_claim_ids": [],
-        "related_event_ids": [
-          "tl2"
-        ],
-        "related_entity_ids": [],
-        "clarification_request_ids": [],
-        "decision": null,
-        "trigger": {
-          "key": "investigation_suspended/outcome/stage/stage_stalled",
-          "case_type": "investigation_suspended",
-          "condition": "stage_stalled",
-          "stage": "outcome",
-          "slot": null,
-          "since": "2023-02-09T00:00:00",
-          "elapsed_days": 1311,
-          "evidence": [
-            {
-              "source_doc_id": "suspension_notice_2023",
-              "page": 1,
-              "source_line": 1,
-              "source_line_end": null,
-              "source_bbox": {
-                "x0": 40.0,
-                "y0": 40.0,
-                "x1": 282.0,
-                "y1": 84.0
-              },
-              "char_start": null,
-              "char_end": null,
-              "quote": "수사중지 결정 통지서"
-            }
-          ]
-        },
-        "priority": 35
-      },
-      {
-        "issue_id": "iss3",
-        "category": "missing",
         "condition": "stage_skipped",
         "message": "‘수사’ 단계에 해당하는 자료가 없습니다",
         "stage": "investigation",
@@ -2827,7 +2747,7 @@
         "checked_doc_ids": [
           "complaint_2021",
           "receipt_2021",
-          "suspension_notice_2023",
+          "suspension_notice_2026",
           "witness_statement_2025",
           "note_victim"
         ],
@@ -2849,7 +2769,7 @@
         "priority": 45
       },
       {
-        "issue_id": "iss4",
+        "issue_id": "iss3",
         "category": "unverified",
         "condition": "claimed_only",
         "message": "사건 발생 시점: 정하늘, 조미래의 말만 있고 이를 뒷받침하는 기록 자료가 없습니다 — ‘2021. 5. 18. 인테리어 공사대금 명목으로 1,800만원을 편취당하는 사기 피해를 입었습니다.’(complaint_2021 · 5줄) / ‘2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다.’(witness_statement_2025 · 3줄)",
@@ -2940,10 +2860,10 @@
         "priority": 50
       },
       {
-        "issue_id": "iss5",
+        "issue_id": "iss4",
         "category": "missing",
         "condition": "time_gap",
-        "message": "2021-05-26 ~ 2023-02-09 사이의 기록이 없습니다 (약 1.7년)",
+        "message": "2021-05-26 ~ 2025-06-03 사이의 기록이 없습니다 (약 4.0년)",
         "stage": null,
         "slot": null,
         "sources": [
@@ -2963,32 +2883,32 @@
             "quote": "2021. 5. 25. ○○경찰서에 고소하였습니다."
           },
           {
-            "source_doc_id": "suspension_notice_2023",
+            "source_doc_id": "witness_statement_2025",
             "page": 1,
-            "source_line": 1,
+            "source_line": 3,
             "source_line_end": null,
             "source_bbox": {
               "x0": 40.0,
-              "y0": 40.0,
-              "x1": 282.0,
-              "y1": 84.0
+              "y0": 160.0,
+              "x1": 876.0,
+              "y1": 204.0
             },
-            "char_start": null,
-            "char_end": null,
-            "quote": "수사중지 결정 통지서"
+            "char_start": 0,
+            "char_end": 38,
+            "quote": "2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다."
           }
         ],
         "checked_doc_ids": [
           "complaint_2021",
           "receipt_2021",
-          "suspension_notice_2023",
+          "suspension_notice_2026",
           "witness_statement_2025",
           "note_victim"
         ],
         "related_claim_ids": [],
         "related_event_ids": [
           "tl4",
-          "tl2"
+          "tl5"
         ],
         "related_entity_ids": [],
         "clarification_request_ids": [],
@@ -3018,74 +2938,73 @@
               "quote": "2021. 5. 25. ○○경찰서에 고소하였습니다."
             },
             {
-              "source_doc_id": "suspension_notice_2023",
+              "source_doc_id": "witness_statement_2025",
               "page": 1,
-              "source_line": 1,
+              "source_line": 3,
               "source_line_end": null,
               "source_bbox": {
                 "x0": 40.0,
-                "y0": 40.0,
-                "x1": 282.0,
-                "y1": 84.0
+                "y0": 160.0,
+                "x1": 876.0,
+                "y1": 204.0
               },
-              "char_start": null,
-              "char_end": null,
-              "quote": "수사중지 결정 통지서"
+              "char_start": 0,
+              "char_end": 38,
+              "quote": "2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다."
             }
           ]
         },
         "priority": 70
       },
       {
-        "issue_id": "iss6",
+        "issue_id": "iss5",
         "category": "missing",
         "condition": "time_gap",
-        "message": "2023-02-10 ~ 2025-06-03 사이의 기록이 없습니다 (약 2.3년)",
+        "message": "2025-06-11 ~ 2026-08-18 사이의 기록이 없습니다 (약 1.2년)",
         "stage": null,
         "slot": null,
         "sources": [
           {
-            "source_doc_id": "suspension_notice_2023",
+            "source_doc_id": "witness_statement_2025",
+            "page": 1,
+            "source_line": 6,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 340.0,
+              "x1": 304.0,
+              "y1": 384.0
+            },
+            "char_start": 0,
+            "char_end": 12,
+            "quote": "2025. 6. 10."
+          },
+          {
+            "source_doc_id": "suspension_notice_2026",
             "page": 1,
             "source_line": 1,
             "source_line_end": null,
             "source_bbox": {
               "x0": 40.0,
               "y0": 40.0,
-              "x1": 282.0,
+              "x1": 238.0,
               "y1": 84.0
             },
             "char_start": null,
             "char_end": null,
-            "quote": "수사중지 결정 통지서"
-          },
-          {
-            "source_doc_id": "witness_statement_2025",
-            "page": 1,
-            "source_line": 3,
-            "source_line_end": null,
-            "source_bbox": {
-              "x0": 40.0,
-              "y0": 160.0,
-              "x1": 876.0,
-              "y1": 204.0
-            },
-            "char_start": 0,
-            "char_end": 38,
-            "quote": "2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다."
+            "quote": "수사결과 통지서"
           }
         ],
         "checked_doc_ids": [
           "complaint_2021",
           "receipt_2021",
-          "suspension_notice_2023",
+          "suspension_notice_2026",
           "witness_statement_2025",
           "note_victim"
         ],
         "related_claim_ids": [],
         "related_event_ids": [
-          "tl2",
-          "tl5"
+          "tl2"
         ],
         "related_entity_ids": [],
         "clarification_request_ids": [],
@@ -3100,34 +3019,34 @@
           "elapsed_days": null,
           "evidence": [
             {
-              "source_doc_id": "suspension_notice_2023",
+              "source_doc_id": "witness_statement_2025",
+              "page": 1,
+              "source_line": 6,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 340.0,
+                "x1": 304.0,
+                "y1": 384.0
+              },
+              "char_start": 0,
+              "char_end": 12,
+              "quote": "2025. 6. 10."
+            },
+            {
+              "source_doc_id": "suspension_notice_2026",
               "page": 1,
               "source_line": 1,
               "source_line_end": null,
               "source_bbox": {
                 "x0": 40.0,
                 "y0": 40.0,
-                "x1": 282.0,
+                "x1": 238.0,
                 "y1": 84.0
               },
               "char_start": null,
               "char_end": null,
-              "quote": "수사중지 결정 통지서"
-            },
-            {
-              "source_doc_id": "witness_statement_2025",
-              "page": 1,
-              "source_line": 3,
-              "source_line_end": null,
-              "source_bbox": {
-                "x0": 40.0,
-                "y0": 160.0,
-                "x1": 876.0,
-                "y1": 204.0
-              },
-              "char_start": 0,
-              "char_end": 38,
-              "quote": "2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다."
+              "quote": "수사결과 통지서"
             }
           ]
         },
@@ -3215,11 +3134,11 @@
         "state": "confirmed",
         "value": "2021형제45678",
         "claim_ids": [
-          "suspension_notice_2023:c6"
+          "suspension_notice_2026:c5"
         ],
         "sources": [
           {
-            "source_doc_id": "suspension_notice_2023",
+            "source_doc_id": "suspension_notice_2026",
             "page": 1,
             "source_line": 2,
             "source_line_end": null,
@@ -3243,11 +3162,11 @@
         "state": "confirmed",
         "value": "한지훈",
         "claim_ids": [
-          "suspension_notice_2023:c9"
+          "suspension_notice_2026:c8"
         ],
         "sources": [
           {
-            "source_doc_id": "suspension_notice_2023",
+            "source_doc_id": "suspension_notice_2026",
             "page": 1,
             "source_line": 9,
             "source_line_end": null,
@@ -3271,12 +3190,11 @@
         "state": "confirmed",
         "value": "수사중지(피의자중지)",
         "claim_ids": [
-          "suspension_notice_2023:c8",
-          "suspension_notice_2023:c5"
+          "suspension_notice_2026:c7"
         ],
         "sources": [
           {
-            "source_doc_id": "suspension_notice_2023",
+            "source_doc_id": "suspension_notice_2026",
             "page": 1,
             "source_line": 7,
             "source_line_end": null,
@@ -3288,22 +3206,7 @@
             },
             "char_start": 0,
             "char_end": 16,
-            "quote": "결정내용 수사중지(참고인중지)"
-          },
-          {
-            "source_doc_id": "suspension_notice_2023",
-            "page": 1,
-            "source_line": 1,
-            "source_line_end": null,
-            "source_bbox": {
-              "x0": 40.0,
-              "y0": 40.0,
-              "x1": 282.0,
-              "y1": 84.0
-            },
-            "char_start": 0,
-            "char_end": 11,
-            "quote": "수사중지 결정 통지서"
+            "quote": "결정내용 수사중지(피의자중지)"
           }
         ]
       },
@@ -3315,11 +3218,11 @@
         "state": "confirmed",
         "value": "2026-08-18",
         "claim_ids": [
-          "suspension_notice_2023:c7"
+          "suspension_notice_2026:c6"
         ],
         "sources": [
           {
-            "source_doc_id": "suspension_notice_2023",
+            "source_doc_id": "suspension_notice_2026",
             "page": 1,
             "source_line": 6,
             "source_line_end": null,
@@ -3330,8 +3233,8 @@
               "y1": 384.0
             },
             "char_start": 0,
-            "char_end": 16,
-            "quote": "결정일자 2023. 2. 9."
+            "char_end": 17,
+            "quote": "결정일자 2026. 8. 18."
           }
         ]
       }
@@ -3361,32 +3264,6 @@
             "char_start": 0,
             "char_end": 38,
             "quote": "2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다."
-          }
-        ]
-      },
-      {
-        "key": "investigation_suspended/outcome/stage/stage_stalled",
-        "case_type": "investigation_suspended",
-        "condition": "stage_stalled",
-        "stage": "outcome",
-        "slot": null,
-        "since": "2026-08-18T00:00:00",
-        "elapsed_days": 25,
-        "evidence": [
-          {
-            "source_doc_id": "suspension_notice_2023",
-            "page": 1,
-            "source_line": 1,
-            "source_line_end": null,
-            "source_bbox": {
-              "x0": 40.0,
-              "y0": 40.0,
-              "x1": 282.0,
-              "y1": 84.0
-            },
-            "char_start": null,
-            "char_end": null,
-            "quote": "수사중지 결정 통지서"
           }
         ]
       },
@@ -3466,19 +3343,19 @@
             "quote": "2021. 5. 25. ○○경찰서에 고소하였습니다."
           },
           {
-            "source_doc_id": "suspension_notice_2023",
+            "source_doc_id": "witness_statement_2025",
             "page": 1,
-            "source_line": 1,
+            "source_line": 3,
             "source_line_end": null,
             "source_bbox": {
               "x0": 40.0,
-              "y0": 40.0,
-              "x1": 282.0,
-              "y1": 84.0
+              "y0": 160.0,
+              "x1": 876.0,
+              "y1": 204.0
             },
-            "char_start": null,
-            "char_end": null,
-            "quote": "수사중지 결정 통지서"
+            "char_start": 0,
+            "char_end": 38,
+            "quote": "2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다."
           }
         ]
       }
@@ -3535,7 +3412,7 @@
       ],
       "current_stage": "outcome",
       "evidence_doc_count": 4,
-      "needs_confirmation_count": 6,
+      "needs_confirmation_count": 5,
       "slots_done": 3,
       "slots_total": 4,
       "next_trigger": {

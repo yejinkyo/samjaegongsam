@@ -355,7 +355,7 @@
         {
           "page_no": 1,
           "width": 1080.0,
-          "height": 640.0,
+          "height": 720.0,
           "image_ref": null
         }
       ],
@@ -367,10 +367,10 @@
           "bbox": {
             "x0": 40.0,
             "y0": 40.0,
-            "x1": 282.0,
+            "x1": 238.0,
             "y1": 84.0
           },
-          "text": "수사중지 결정 통지서",
+          "text": "수사결과 통지서",
           "ocr_confidence": 0.97,
           "readability": 0.9636,
           "readable": true,
@@ -535,6 +535,24 @@
           "text": "○○경찰서장",
           "ocr_confidence": 0.95,
           "readability": 0.9579,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "suspension_notice_2023",
+          "line_no": 11,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 640.0,
+            "x1": 1040.0,
+            "y1": 684.0
+          },
+          "text": "※ 이 결정이 법령위반, 인권침해 또는 현저한 수사권 남용이라고 의심되는 경우 검사에게 신고할 수 있습니다.",
+          "ocr_confidence": 0.93,
+          "readability": 0.9514,
           "readable": true,
           "script": "printed",
           "low_confidence_spans": [],
@@ -1214,7 +1232,7 @@
         "action_kind": null
       },
       {
-        "event_id": "suspension_notice_2023:e10",
+        "event_id": "suspension_notice_2023:e9",
         "doc_id": "suspension_notice_2023",
         "stage": "outcome",
         "action": {
@@ -1225,13 +1243,13 @@
           "source_bbox": {
             "x0": 40.0,
             "y0": 40.0,
-            "x1": 282.0,
+            "x1": 238.0,
             "y1": 84.0
           },
           "char_start": null,
           "char_end": null,
-          "quote": "수사중지 결정 통지서",
-          "value": "수사중지 결정 통지서",
+          "quote": "수사결과 통지서",
+          "value": "수사결과 통지서",
           "confidence": 0.9154
         },
         "time": {
@@ -1491,38 +1509,6 @@
         "content": {
           "source_doc_id": "suspension_notice_2023",
           "page": 1,
-          "source_line": 1,
-          "source_line_end": null,
-          "source_bbox": {
-            "x0": 40.0,
-            "y0": 40.0,
-            "x1": 282.0,
-            "y1": 84.0
-          },
-          "char_start": 0,
-          "char_end": 11,
-          "quote": "수사중지 결정 통지서",
-          "value": "수사중지 결정 통지서",
-          "confidence": 0.8672
-        },
-        "slot": "decision_type",
-        "slot_value": "수사중지",
-        "slot_time": null,
-        "value_is_speaker_self": false,
-        "subject": null,
-        "polarity": "affirm",
-        "said_at": null,
-        "evidence_level": "record"
-      },
-      {
-        "claim_id": "suspension_notice_2023:c6",
-        "doc_id": "suspension_notice_2023",
-        "speaker": "**경찰서",
-        "speaker_basis": "document_issuer",
-        "speaker_mention_id": "suspension_notice_2023:m4",
-        "content": {
-          "source_doc_id": "suspension_notice_2023",
-          "page": 1,
           "source_line": 2,
           "source_line_end": null,
           "source_bbox": {
@@ -1547,7 +1533,7 @@
         "evidence_level": "record"
       },
       {
-        "claim_id": "suspension_notice_2023:c7",
+        "claim_id": "suspension_notice_2023:c6",
         "doc_id": "suspension_notice_2023",
         "speaker": "**경찰서",
         "speaker_basis": "document_issuer",
@@ -1591,7 +1577,7 @@
         "evidence_level": "record"
       },
       {
-        "claim_id": "suspension_notice_2023:c8",
+        "claim_id": "suspension_notice_2023:c7",
         "doc_id": "suspension_notice_2023",
         "speaker": "**경찰서",
         "speaker_basis": "document_issuer",
@@ -1623,7 +1609,7 @@
         "evidence_level": "record"
       },
       {
-        "claim_id": "suspension_notice_2023:c9",
+        "claim_id": "suspension_notice_2023:c8",
         "doc_id": "suspension_notice_2023",
         "speaker": "**경찰서",
         "speaker_basis": "document_issuer",
@@ -2202,7 +2188,7 @@
       {
         "timeline_event_id": "tl2",
         "stage": "outcome",
-        "title": "수사중지 결정 통지서",
+        "title": "수사결과 통지서",
         "time": {
           "raw": "2023. 2. 9.",
           "start": "2023-02-09T00:00:00",
@@ -2225,7 +2211,7 @@
           "ent5"
         ],
         "event_ids": [
-          "suspension_notice_2023:e10"
+          "suspension_notice_2023:e9"
         ],
         "sources": [
           {
@@ -2236,12 +2222,12 @@
             "source_bbox": {
               "x0": 40.0,
               "y0": 40.0,
-              "x1": 282.0,
+              "x1": 238.0,
               "y1": 84.0
             },
             "char_start": null,
             "char_end": null,
-            "quote": "수사중지 결정 통지서"
+            "quote": "수사결과 통지서"
           },
           {
             "source_doc_id": "suspension_notice_2023",
@@ -2688,7 +2674,7 @@
         "issue_id": "iss1",
         "category": "unverified",
         "condition": "unrecorded_fact",
-        "message": "‘2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다.’(2025-06-03, witness_statement_2025 · 3줄) — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다. ‘수사중지 결정 통지서’(2023-02-09) 이후에 나온 내용입니다. 수사 기록에 반영됐는지 확인이 필요합니다",
+        "message": "‘2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다.’(2025-06-03, witness_statement_2025 · 3줄) — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다. ‘수사결과 통지서’(2023-02-09) 이후에 나온 내용입니다. 수사 기록에 반영됐는지 확인이 필요합니다",
         "stage": "occurrence",
         "slot": null,
         "sources": [
@@ -2754,7 +2740,7 @@
         "issue_id": "iss2",
         "category": "missing",
         "condition": "stage_stalled",
-        "message": "‘수사중지 결정 통지서’(2023-02-09) 이후 기관의 진행 기록이 없습니다 (1311일 경과)",
+        "message": "‘수사결과 통지서’(2023-02-09) 이후 기관의 진행 기록이 없습니다 (1311일 경과)",
         "stage": "outcome",
         "slot": null,
         "sources": [
@@ -2766,12 +2752,12 @@
             "source_bbox": {
               "x0": 40.0,
               "y0": 40.0,
-              "x1": 282.0,
+              "x1": 238.0,
               "y1": 84.0
             },
             "char_start": null,
             "char_end": null,
-            "quote": "수사중지 결정 통지서"
+            "quote": "수사결과 통지서"
           }
         ],
         "checked_doc_ids": [
@@ -2805,12 +2791,12 @@
               "source_bbox": {
                 "x0": 40.0,
                 "y0": 40.0,
-                "x1": 282.0,
+                "x1": 238.0,
                 "y1": 84.0
               },
               "char_start": null,
               "char_end": null,
-              "quote": "수사중지 결정 통지서"
+              "quote": "수사결과 통지서"
             }
           ]
         },
@@ -2970,12 +2956,12 @@
             "source_bbox": {
               "x0": 40.0,
               "y0": 40.0,
-              "x1": 282.0,
+              "x1": 238.0,
               "y1": 84.0
             },
             "char_start": null,
             "char_end": null,
-            "quote": "수사중지 결정 통지서"
+            "quote": "수사결과 통지서"
           }
         ],
         "checked_doc_ids": [
@@ -3025,12 +3011,12 @@
               "source_bbox": {
                 "x0": 40.0,
                 "y0": 40.0,
-                "x1": 282.0,
+                "x1": 238.0,
                 "y1": 84.0
               },
               "char_start": null,
               "char_end": null,
-              "quote": "수사중지 결정 통지서"
+              "quote": "수사결과 통지서"
             }
           ]
         },
@@ -3052,12 +3038,12 @@
             "source_bbox": {
               "x0": 40.0,
               "y0": 40.0,
-              "x1": 282.0,
+              "x1": 238.0,
               "y1": 84.0
             },
             "char_start": null,
             "char_end": null,
-            "quote": "수사중지 결정 통지서"
+            "quote": "수사결과 통지서"
           },
           {
             "source_doc_id": "witness_statement_2025",
@@ -3107,12 +3093,12 @@
               "source_bbox": {
                 "x0": 40.0,
                 "y0": 40.0,
-                "x1": 282.0,
+                "x1": 238.0,
                 "y1": 84.0
               },
               "char_start": null,
               "char_end": null,
-              "quote": "수사중지 결정 통지서"
+              "quote": "수사결과 통지서"
             },
             {
               "source_doc_id": "witness_statement_2025",
@@ -3215,7 +3201,7 @@
         "state": "confirmed",
         "value": "2021형제45678",
         "claim_ids": [
-          "suspension_notice_2023:c6"
+          "suspension_notice_2023:c5"
         ],
         "sources": [
           {
@@ -3243,7 +3229,7 @@
         "state": "confirmed",
         "value": "한지훈",
         "claim_ids": [
-          "suspension_notice_2023:c9"
+          "suspension_notice_2023:c8"
         ],
         "sources": [
           {
@@ -3271,8 +3257,7 @@
         "state": "confirmed",
         "value": "수사중지(참고인중지)",
         "claim_ids": [
-          "suspension_notice_2023:c8",
-          "suspension_notice_2023:c5"
+          "suspension_notice_2023:c7"
         ],
         "sources": [
           {
@@ -3289,21 +3274,6 @@
             "char_start": 0,
             "char_end": 16,
             "quote": "결정내용 수사중지(참고인중지)"
-          },
-          {
-            "source_doc_id": "suspension_notice_2023",
-            "page": 1,
-            "source_line": 1,
-            "source_line_end": null,
-            "source_bbox": {
-              "x0": 40.0,
-              "y0": 40.0,
-              "x1": 282.0,
-              "y1": 84.0
-            },
-            "char_start": 0,
-            "char_end": 11,
-            "quote": "수사중지 결정 통지서"
           }
         ]
       },
@@ -3315,7 +3285,7 @@
         "state": "confirmed",
         "value": "2023-02-09",
         "claim_ids": [
-          "suspension_notice_2023:c7"
+          "suspension_notice_2023:c6"
         ],
         "sources": [
           {
@@ -3381,12 +3351,12 @@
             "source_bbox": {
               "x0": 40.0,
               "y0": 40.0,
-              "x1": 282.0,
+              "x1": 238.0,
               "y1": 84.0
             },
             "char_start": null,
             "char_end": null,
-            "quote": "수사중지 결정 통지서"
+            "quote": "수사결과 통지서"
           }
         ]
       },
@@ -3473,12 +3443,12 @@
             "source_bbox": {
               "x0": 40.0,
               "y0": 40.0,
-              "x1": 282.0,
+              "x1": 238.0,
               "y1": 84.0
             },
             "char_start": null,
             "char_end": null,
-            "quote": "수사중지 결정 통지서"
+            "quote": "수사결과 통지서"
           }
         ]
       }

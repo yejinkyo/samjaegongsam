@@ -55,7 +55,7 @@ def test_ST로_갈라_수사중지_이의제기_서류를_찾는다(card):
 
 def test_이미_가진_통지서는_보유로_대조된다(card):
     states = {i.label: i.state for i in card.checklist.items}
-    assert states["수사중지 결정 통지서"] == "보유"
+    assert states["수사결과 통지서 (수사중지 결정)"] == "보유"
     assert states["수사중지 결정 이의제기서"] == "생성가능"
 
 
