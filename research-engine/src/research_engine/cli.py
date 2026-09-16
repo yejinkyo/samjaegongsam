@@ -27,7 +27,7 @@ def _print(obj) -> None:
 
 def cmd_run(args: argparse.Namespace) -> int:
     from .analysis import CaseAnalyzer, ConservativePolicy
-    from .ingest import DocumentIngestor, EnsembleDocClassifier, KeywordDocClassifier, NaiveBayesDocClassifier
+    from .ingest import DocumentIngestor, EnsembleDocClassifier, KeywordDocClassifier, NaiveBayesDocClassifier, TesseractOcrEngine
     from .ingest.confidence import ReadabilityScorer
     from .pipeline import ResearchPipeline, load_case
     from .requirements import load_requirements
@@ -40,8 +40,10 @@ def cmd_run(args: argparse.Namespace) -> int:
         )
     scorer = ReadabilityScorer.from_json(args.scorer) if args.scorer else None
     policy = ConservativePolicy.from_json(args.policy) if args.policy else None
+    # 사진 입력(case.json 의 images)은 OCR 엔진이 있어야 읽는다. 없으면 파이프라인이 이유를 말하고 멈춘다.
+    ocr = TesseractOcrEngine(cmd=args.tesseract_cmd) if args.ocr == "tesseract" else None
     pipeline = ResearchPipeline(
-        ingestor=DocumentIngestor(classifier=classifier, scorer=scorer),
+        ingestor=DocumentIngestor(classifier=classifier, scorer=scorer, ocr_engine=ocr),
         analyzer=CaseAnalyzer(policy=policy),
         requirements=load_requirements(case.case_type, args.requirements) if args.requirements else None,
     )
@@ -199,6 +201,8 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("--policy", help="eval-nli가 만든 판정 정책 JSON")
     run.add_argument("--scorer", help="train-readability가 만든 신뢰도 스코어러 JSON")
     run.add_argument("--doc-classifier", help="train-doc-classifier가 만든 모델 JSON")
+    run.add_argument("--ocr", choices=["tesseract"], help="사진 입력을 읽을 OCR 엔진 (uv sync --extra ocr + Tesseract 설치 필요)")
+    run.add_argument("--tesseract-cmd", help="tesseract 실행 파일 경로 (PATH 에 없을 때)")
     run.set_defaults(func=cmd_run)
 
     schema = sub.add_parser("schema", help="출력 JSON Schema 내보내기 (기능2·행동 강령 엔진 연동용)")
