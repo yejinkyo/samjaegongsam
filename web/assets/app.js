@@ -1,6 +1,7 @@
 /* 타래 화면 렌더링.
  *
- * 데이터는 data/cases.js 의 window.TARAE_CASES 에서만 읽는다(action-engine/tools/export_web.py 가 만든다).
+ * 예시 사건은 data/cases.js 의 window.TARAE_CASES 에서 읽는다(action-engine/tools/export_web.py 가 만든다).
+ * 화면에서 등록한 사건은 정리 서버(web/serve.py)의 /api 에서 읽는다 — 서버가 올린 자료를 두 엔진에 넣어 만든다.
  * 화면 문장을 여기서 지어내지 않는다 — 비어 있는 값은 비어 있다고 보여준다.
  * 사용자·엔진 문자열이 섞이므로 innerHTML 을 쓰지 않고 textContent 로만 넣는다.
  */
@@ -56,6 +57,55 @@
 
   function caseHref(id) { return "case.html?id=" + encodeURIComponent(id); }
 
+  /* 정리 서버(web/serve.py) API.
+     GitHub Pages 처럼 서버가 없으면 요청이 실패한다. 그때 화면은 등록을 막고 이유를 보여준다 —
+     올린 것처럼 꾸미지 않는다. 주소는 상대 경로라 하위 경로에 올려도 같은 규칙으로 돈다. */
+  function api(path, options) {
+    return fetch(path, options).then(function (res) {
+      return res.json().catch(function () { return {}; }).then(function (body) {
+        if (!res.ok) {
+          var err = new Error(body.error || "정리 서버에 연결하지 못했어요.");
+          err.detail = body.detail || null;
+          throw err;
+        }
+        return body;
+      });
+    });
+  }
+
+  /** 서버가 있으면 {ocr, case_types}, 없으면 null. */
+  function serverStatus() {
+    return api("api/status").catch(function () { return null; });
+  }
+
+  /** 이 서버에서 등록한 사건인가. 예시 사건(cases.js)은 자료를 더할 수 없다. */
+  function isLocal(c) { return !!(c && c.local); }
+
+  /** 자료를 서버에 보낸다. 엔진이 다시 정리한 사건 화면 데이터가 돌아온다. */
+  function uploadForm(url, fields, items) {
+    var form = new FormData();
+    Object.keys(fields).forEach(function (key) { if (fields[key]) form.append(key, fields[key]); });
+    items.forEach(function (it) {
+      if (it.file) {
+        form.append("file", it.file, it.name);
+        form.append("modified", it.modified || "");   // 사진을 찍은(파일이 만들어진) 때 — 날짜 없는 자료의 기준일
+      } else if (it.note) {
+        form.append("note", it.note);
+      }
+    });
+    return api(url, { method: "POST", body: form });
+  }
+
+  function errorText(err) {
+    return err.message + (err.detail ? " (" + err.detail + ")" : "");
+  }
+
+  /** 파일 수정 시각 → 시간대 없는 로컬 ISO. 엔진은 한국 시간 기준 naive datetime 을 쓴다. */
+  function isoLocal(ms) {
+    var d = new Date(ms || Date.now());
+    return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()) + "T" + pad(d.getHours()) + ":" + pad(d.getMinutes()) + ":" + pad(d.getSeconds());
+  }
+
   // ── 공통 ────────────────────────────────────────────────
 
   // 사건 화면이 켜져 있으면 자료 추가를 그 화면이 맡는다. 없으면 새 사건 등록으로 보낸다.
@@ -93,12 +143,12 @@
     return wrap;
   }
 
-  /** 자료 고르기 — 서버가 없어 파일을 보내지는 않는다. 고른 것을 화면에만 더한다. */
-  function pickFiles(onPicked) {
-    var input = h("input", { type: "file", multiple: true, accept: "image/*,application/pdf,audio/*", hidden: true });
+  /** 자료 고르기. 고른 파일을 그대로 돌려준다 — 보낼지는 부르는 쪽이 정한다. */
+  function pickFiles(onPicked, accept) {
+    var input = h("input", { type: "file", multiple: true, accept: accept || ACCEPT, hidden: true });
     input.addEventListener("change", function () {
       var picked = Array.prototype.map.call(input.files, function (f) {
-        return { kind: fileKind(f.name), name: f.name, isNew: true };
+        return { kind: fileKind(f.name), name: f.name, file: f, modified: isoLocal(f.lastModified) };
       });
       input.remove();
       if (picked.length) onPicked(picked);
@@ -253,26 +303,36 @@
   }
 
   function renderHome(root) {
-    var grid = h("div", { class: "folder-grid" + (CASES.length ? "" : " folder-grid--empty") });
-    CASES.forEach(function (c) { grid.appendChild(folder(c, toneOf(c))); });
+    var grid = h("div", { class: "folder-grid" });
+    var lead = h("p", { class: "t-body-l c-secondary" });
 
-    grid.appendChild(h("a", { class: "folder folder--new", href: "new.html" }, [
-      h("span", { class: "folder__tab", "aria-hidden": "true" }),
-      h("div", { class: "folder__body" }, [
-        h("span", { class: "circle-56" }, [icon("plus")]),
-        h("p", { class: "t-heading c-secondary", text: "사건 등록" }),
-        h("p", { class: "t-body-s c-tertiary", text: "유형을 고르고 자료를 올리면 정리가 시작돼요" }),
-      ]),
-    ]));
+    // 내가 등록한 사건을 앞에, 예시 사건을 뒤에 둔다. 서버가 없으면 예시만 보인다.
+    function draw(mine) {
+      var all = mine.concat(CASES);
+      grid.textContent = "";
+      grid.className = "folder-grid" + (all.length ? "" : " folder-grid--empty");
+      all.forEach(function (c) { grid.appendChild(folder(c, toneOf(c))); });
+      grid.appendChild(h("a", { class: "folder folder--new", href: "new.html" }, [
+        h("span", { class: "folder__tab", "aria-hidden": "true" }),
+        h("div", { class: "folder__body" }, [
+          h("span", { class: "circle-56" }, [icon("plus")]),
+          h("p", { class: "t-heading c-secondary", text: "사건 등록" }),
+          h("p", { class: "t-body-s c-tertiary", text: "유형을 고르고 자료를 올리면 정리가 시작돼요" }),
+        ]),
+      ]));
+      lead.textContent = all.length
+        ? "사건 카드를 선택하면 정리된 타임라인을 볼 수 있어요."
+        : "아직 등록한 사건이 없어요. 첫 사건을 등록하면 여기에 쌓입니다.";
+    }
+    draw([]);
+    api("api/cases").then(draw, function () { /* 서버가 없으면 예시만 둔다 */ });
 
     root.appendChild(h("main", { class: "page page--home" }, [
       // 새 사건 등록은 그리드 끝의 점선 폴더가 맡는다 — 머리말에 같은 버튼을 두지 않는다
       h("div", { class: "page-head" }, [
         h("div", { class: "page-head__title" }, [
           h("h1", { class: "t-display c-primary", text: "내 사건" }),
-          h("p", { class: "t-body-l c-secondary", text: CASES.length
-            ? "사건 카드를 선택하면 정리된 타임라인을 볼 수 있어요."
-            : "아직 등록한 사건이 없어요. 첫 사건을 등록하면 여기에 쌓입니다." }),
+          lead,
         ]),
       ]),
       grid,
@@ -280,14 +340,25 @@
   }
 
   // ── 02 새 사건 등록 ─────────────────────────────────────
-  var CATEGORIES = ["중고거래 사기", "온라인 괴롭힘", "폭행 · 상해", "금전 피해", "실종 · 미제", "수사중지"];
+  // 사건 유형은 화면에 적어 두지 않는다. 엔진이 다루는 유형(research-engine requirements)을 서버가 읽어 준다.
+
+  // 엔진이 읽을 수 있는 자료만 받는다: 사진은 OCR 로 읽고, OCR 결과 JSON 은 그대로 넣는다.
+  // PDF·음성은 아직 읽는 경로가 없다 — 받아 놓고 정리하지 않으면 올린 사람이 속는다.
+  var ACCEPT = "image/*,.json,application/json";
+  var IMAGE_EXTS = ["png", "jpg", "jpeg", "webp", "gif", "bmp", "tif", "tiff"];
 
   function fileKind(name) {
     var ext = (name.split(".").pop() || "").toLowerCase();
+    if (ext === "json") return "OCR";
+    if (IMAGE_EXTS.indexOf(ext) >= 0) return "IMG";
     if (ext === "pdf") return "PDF";
-    if (["png", "jpg", "jpeg", "heic", "webp", "gif"].indexOf(ext) >= 0) return "IMG";
     if (["m4a", "mp3", "wav", "aac"].indexOf(ext) >= 0) return "음성";
     return "문서";
+  }
+
+  function canRead(name) {
+    var kind = fileKind(name);
+    return kind === "IMG" || kind === "OCR";
   }
 
   /** 카메라를 연다. 노트북에서는 웹캠 미리보기를, 휴대폰에서는 기본 카메라를 쓴다. */
@@ -298,7 +369,7 @@
     }
     var video = h("video", { class: "cam__view", autoplay: true, playsinline: true, muted: true });
     var shoot = h("button", { type: "button", class: "modal__save", text: "찍기" });
-    var note = h("p", { class: "modal__note", text: "찍은 사진은 이 화면의 자료 목록에만 더해집니다. 아직 어디로도 보내지 않아요." });
+    var note = h("p", { class: "modal__note", text: "찍은 사진은 자료 목록에 더해지고, 정리를 시작하면 이 컴퓨터의 정리 서버로만 보냅니다." });
     var stream = null;
 
     function stop() {
@@ -314,10 +385,15 @@
       canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.height);
       var now = new Date();
       var stamp = now.getFullYear() + pad(now.getMonth() + 1) + pad(now.getDate()) + "_" + pad(now.getHours()) + pad(now.getMinutes()) + pad(now.getSeconds());
-      onShot({ kind: "IMG", name: "사진_" + stamp + ".jpg", meta: "방금 찍음 · 정리를 시작하면 날짜를 읽어요" });
+      var name = "사진_" + stamp + ".jpg";
       stop();
       var dialog = document.querySelector("dialog.modal");
       if (dialog) dialog.close();
+      canvas.toBlob(function (blob) {
+        if (!blob) return;
+        onShot({ kind: "IMG", name: name, file: new File([blob], name, { type: "image/jpeg", lastModified: now.getTime() }),
+                 modified: isoLocal(now.getTime()), meta: "방금 찍음 · 정리를 시작하면 글자를 읽어요" });
+      }, "image/jpeg", 0.92);
     });
 
     openModal("사진 찍기", h("div", { class: "cam" }, [video, shoot, note]));
@@ -369,59 +445,86 @@
   }
 
   function renderNew(root) {
-    var files = [];
+    var items = [];          // 올릴 자료: {kind, name, meta, file?, modified?, note?}
+    var pickedType = null;
+    var status;              // undefined = 확인 중, null = 서버 없음
     var list = h("div", { class: "file-list" });
     var count = h("span", { class: "t-label c-brand", text: "0" });
+    var chips = h("div", { class: "chips", role: "group", "aria-label": "사건 유형" }, [
+      h("p", { class: "t-body-s c-tertiary", text: "고를 수 있는 유형을 불러오는 중이에요…" }),
+    ]);
+    var notice = h("p", { class: "field__hint", role: "status", hidden: true });
 
-    function chip(label, unsure) {
-      var node = h("button", { type: "button", class: "chip" + (unsure ? " chip--unsure" : ""), "aria-pressed": "false", text: label });
-      node.addEventListener("click", function () {
-        chips.querySelectorAll(".chip").forEach(function (c) { c.setAttribute("aria-pressed", "false"); });
-        node.setAttribute("aria-pressed", "true");
-      });
-      return node;
+    function say(text, warn) {
+      notice.hidden = !text;
+      notice.textContent = text || "";
+      notice.classList.toggle("field__hint--warn", !!warn);
     }
-    var chips = h("div", { class: "chips", role: "group", "aria-label": "사건 유형" },
-      CATEGORIES.map(function (c) { return chip(c, false); }).concat([chip("잘 모르겠어요", true)]));
-    chips.firstChild.setAttribute("aria-pressed", "true");
+
+    function drawChips() {
+      chips.textContent = "";
+      if (!status) {
+        chips.appendChild(h("p", { class: "t-body-s c-tertiary", text: "정리 서버에 연결되지 않아 유형을 불러오지 못했어요." }));
+        return;
+      }
+      status.case_types.forEach(function (t) {
+        var node = h("button", { type: "button", class: "chip", "aria-pressed": pickedType === t.type ? "true" : "false", text: t.label });
+        node.addEventListener("click", function () {
+          pickedType = t.type;
+          chips.querySelectorAll(".chip").forEach(function (c) { c.setAttribute("aria-pressed", "false"); });
+          node.setAttribute("aria-pressed", "true");
+          say("");
+        });
+        chips.appendChild(node);
+      });
+    }
 
     function drawList() {
       list.textContent = "";
-      count.textContent = String(files.length);
-      if (!files.length) {
+      count.textContent = String(items.length);
+      if (!items.length) {
         list.appendChild(h("p", { class: "empty-files t-body-s c-tertiary", text: "아직 올린 자료가 없어요. 사진 한 장부터 시작해도 괜찮아요." }));
         return;
       }
-      files.forEach(function (f) {
+      items.forEach(function (it, i) {
+        var remove = h("button", { type: "button", class: "file-row__remove t-body-s", "aria-label": it.name + " 빼기", text: "빼기" });
+        remove.addEventListener("click", function () { items.splice(i, 1); drawList(); });
         list.appendChild(h("div", { class: "file-row" }, [
-          h("span", { class: "file-row__kind t-caption", text: f.kind }),
+          h("span", { class: "file-row__kind t-caption", text: it.kind }),
           h("div", { class: "file-row__texts" }, [
-            h("p", { class: "t-body-m-strong c-primary", text: f.name, title: f.name }),
-            h("p", { class: "t-body-s c-tertiary", text: f.meta }),
+            h("p", { class: "t-body-m-strong c-primary", text: it.name, title: it.name }),
+            h("p", { class: "t-body-s c-tertiary", text: it.meta }),
           ]),
-          f.link ? badge("unverified", "언제인가요?") : badge("unverified", "날짜 읽기 전"),
+          badge("unverified", "정리 전"),
+          remove,
         ]));
       });
     }
 
-    var picker = h("input", { type: "file", multiple: true, accept: "image/*,application/pdf,audio/*", hidden: true });
-    var camera = h("input", { type: "file", accept: "image/*", capture: "environment", hidden: true });
     function addFiles(fileList) {
+      var skipped = [];
       Array.prototype.forEach.call(fileList, function (f) {
-        files.push({ kind: fileKind(f.name), name: f.name, meta: "방금 추가 · 정리를 시작하면 날짜를 읽어요" });
+        if (!canRead(f.name)) { skipped.push(f.name); return; }
+        var ocr = fileKind(f.name) === "OCR";
+        items.push({ kind: fileKind(f.name), name: f.name, file: f, modified: isoLocal(f.lastModified),
+                     meta: ocr ? "OCR 결과 · 읽은 글자를 그대로 정리에 넣어요" : "사진 · 정리를 시작하면 글자를 읽어요" });
       });
       drawList();
+      if (skipped.length) say("아직 읽을 수 없는 형식이라 빼 두었어요: " + skipped.join(", ") + " — 사진이나 OCR 결과 JSON 을 올려 주세요.", true);
     }
+
+    var picker = h("input", { type: "file", multiple: true, accept: ACCEPT, hidden: true });
+    var camera = h("input", { type: "file", accept: "image/*", capture: "environment", hidden: true });
     picker.addEventListener("change", function () { addFiles(picker.files); picker.value = ""; });
     camera.addEventListener("change", function () { addFiles(camera.files); camera.value = ""; });
 
     var dropzone = h("div", { class: "dropzone" }, [
       h("span", { class: "circle-56" }, [icon("upload")]),
       h("p", { class: "t-heading c-primary", text: "여기에 끌어다 놓거나, 휴대폰으로 찍어 올려주세요" }),
-      h("p", { class: "dropzone__hint t-body-s c-tertiary", text: "이미지 · PDF · 음성 · 문서  |  여러 장을 한 번에 올릴 수 있어요" }),
+      h("p", { class: "dropzone__hint t-body-s c-tertiary", text: "사진(이미지) · OCR 결과 JSON  |  여러 장을 한 번에 올릴 수 있어요" }),
       h("div", { class: "dropzone__actions" }, [
         h("button", { type: "button", class: "btn btn--primary t-body-m-strong", text: "파일 선택", onclick: function () { picker.click(); } }),
-        h("button", { type: "button", class: "btn btn--secondary t-body-m-strong", text: "사진 찍기", onclick: function () { openCamera(function (shot) { files.push(shot); drawList(); }, camera); } }),
+        h("button", { type: "button", class: "btn btn--secondary t-body-m-strong", text: "사진 찍기", onclick: function () { openCamera(function (shot) { items.push(shot); drawList(); }, camera); } }),
       ]),
       picker, camera,
     ]);
@@ -433,11 +536,12 @@
     });
     dropzone.addEventListener("drop", function (e) { e.preventDefault(); addFiles(e.dataTransfer.files); });
 
-    var url = h("input", { type: "url", placeholder: "글 주소 붙여넣기 (삭제된 글도 찾아봅니다)", "aria-label": "글 주소" });
+    // 글을 대신 가져오지는 못한다. 주소를 본인이 적은 메모로 사건에 남긴다.
+    var url = h("input", { type: "url", placeholder: "글 주소 붙여넣기 (메모로 함께 남겨요)", "aria-label": "글 주소" });
     function addUrl() {
       var value = url.value.trim();
       if (!value) return;
-      files.push({ kind: "LINK", name: value, meta: "글 주소 · 올린 날짜를 알려주세요", link: true });
+      items.push({ kind: "LINK", name: value, note: "글 주소: " + value, meta: "글 주소 · 본인이 적은 메모로 정리에 넣어요" });
       url.value = "";
       drawList();
     }
@@ -445,7 +549,37 @@
 
     var memoButton = h("button", { type: "button", class: "add-event t-body-m-strong c-brand", text: "+  기억나는 내용을 직접 적기 (선택)", style: "padding:0" });
     memoButton.addEventListener("click", function () {
-      openMemoModal(function (memo) { files.push(memo); drawList(); });
+      openMemoModal(function (memo) { memo.note = memo.text; items.push(memo); drawList(); });
+    });
+
+    var title = h("input", { id: "case-title", type: "text", class: "field__input", maxlength: "60", placeholder: "비워 두면 유형과 등록한 날짜로 이름을 붙여요" });
+
+    var start = h("button", { type: "button", class: "btn btn--primary t-body-m-strong", text: "정리 시작하기" });
+    start.addEventListener("click", function () {
+      if (status === undefined) return say("정리 서버를 확인하는 중이에요. 잠시 뒤 다시 눌러 주세요.");
+      if (!status) return say("정리 서버에 연결되지 않아 자료를 정리할 수 없어요. 저장소에서 py web/serve.py 로 화면을 열어 주세요.", true);
+      if (!pickedType) return say("어떤 일에 가까운지 유형을 골라 주세요.", true);
+      if (!items.length) return say("정리할 자료가 없어요. 사진이나 메모를 하나 이상 더해 주세요.", true);
+      if (!status.ocr.ready && items.some(function (it) { return it.kind === "IMG"; })) {
+        return say(status.ocr.reason + " 사진을 빼고 OCR 결과 JSON 이나 메모로 정리할 수 있어요.", true);
+      }
+      start.disabled = true;
+      start.textContent = "정리하는 중…";
+      say("자료를 읽고 정리하고 있어요. 사진이 많으면 조금 걸려요.");
+      uploadForm("api/cases", { case_type: pickedType, title: title.value.trim() }, items).then(function (view) {
+        location.href = caseHref(view.id);
+      }, function (err) {
+        start.disabled = false;
+        start.textContent = "정리 시작하기";
+        say(errorText(err), true);
+      });
+    });
+
+    serverStatus().then(function (s) {
+      status = s;
+      drawChips();
+      if (!s) say("정리 서버에 연결되지 않았어요. 이 화면에서는 자료를 정리할 수 없어요 — 저장소에서 py web/serve.py 로 열어 주세요.", true);
+      else if (!s.ocr.ready) say(s.ocr.reason + " OCR 결과 JSON 과 메모는 정리할 수 있어요.");
     });
 
     drawList();
@@ -458,13 +592,16 @@
       h("section", { class: "card section", "aria-labelledby": "s1" }, [
         h("div", { class: "section__head" }, [h("span", { class: "section__num t-label", text: "1" }), h("h2", { id: "s1", class: "t-heading c-primary", text: "어떤 일에 가까운가요?" })]),
         chips,
-        h("p", { class: "t-body-s c-tertiary", text: "유형에 따라 확인할 항목과 다음 행동이 달라져요. 잘 모르겠다면 자료를 보고 제안해 드려요." }),
+        h("p", { class: "t-body-s c-tertiary", text: "유형에 따라 확인할 항목과 다음 행동이 달라져요." }),
+        h("div", { class: "evform" }, [
+          h("div", { class: "field" }, [h("label", { for: "case-title", text: "사건 이름 (선택)" }), title]),
+        ]),
       ]),
       h("section", { class: "card section", "aria-labelledby": "s2" }, [
         h("div", { class: "section__head" }, [
           h("span", { class: "section__num t-label", text: "2" }),
           h("h2", { id: "s2", class: "t-heading c-primary", text: "가진 자료를 올려주세요" }),
-          h("span", { class: "t-body-s c-tertiary", text: "캡처 · 사진 · 접수증 무엇이든" }),
+          h("span", { class: "t-body-s c-tertiary", text: "통지서 · 접수증 · 진술서 사진" }),
         ]),
         dropzone,
         h("div", { class: "url-row" }, [
@@ -473,14 +610,14 @@
         ]),
         h("div", { class: "list-head" }, [h("span", { class: "t-label c-secondary", text: "올린 자료" }), count]),
         list,
-        h("p", { class: "note t-body-s c-secondary", text: "날짜가 정리의 뼈대가 됩니다. 날짜를 모르는 자료는 “언제인가요?”를 눌러 알려주세요." }),
+        h("p", { class: "note t-body-s c-secondary", text: "날짜가 정리의 뼈대가 됩니다. 서류에 날짜가 없으면 사진을 찍은 날을 기준으로 삼아요." }),
         memoButton,
       ]),
       h("div", { class: "cta" }, [
-        // 서버가 없어 올린 파일을 실제로 정리하지 않는다. 예시 사건의 결과 화면으로 이동한다.
-        h("a", { class: "btn btn--primary t-body-m-strong", href: CASES.length ? caseHref(CASES[0].id) : "cases.html", text: "정리 시작하기" }),
-        h("a", { class: "btn btn--secondary t-body-m-strong", href: "cases.html", text: "자료는 나중에 더 추가할게요" }),
+        start,
+        h("a", { class: "btn btn--secondary t-body-m-strong", href: "cases.html", text: "나중에 등록할게요" }),
       ]),
+      notice,
     ]);
 
     root.appendChild(h("main", { class: "page page--new" }, [
@@ -554,13 +691,30 @@
     var what = h("textarea", { id: "ev-what", class: "field__input field__input--area", rows: "3", placeholder: "예) 담당 수사관에게 전화했지만 연결되지 않았습니다" });
     var hint = h("p", { class: "field__hint", text: "날짜를 모르면 비워 두세요. '시점 미상'으로 들어갑니다." });
 
-    var save = h("button", { type: "button", class: "modal__save", text: "타임라인에 추가" });
+    // 등록한 사건은 엔진이 다시 정리하므로 타임라인에 오를지는 엔진이 정한다 — '타임라인에 추가'라고 약속하지 않는다
+    var save = h("button", { type: "button", class: "modal__save", text: isLocal(c) ? "사건에 더하고 다시 정리" : "타임라인에 추가" });
     save.addEventListener("click", function () {
       var text = what.value.trim();
       if (!text) {
         hint.textContent = "무슨 일이 있었는지 적어 주세요.";
         hint.classList.add("field__hint--warn");
         what.focus();
+        return;
+      }
+      if (isLocal(c)) {
+        // 등록한 사건이면 메모로 서버에 보내 엔진이 다시 정리하게 한다. 날짜는 엔진이 읽는 모양으로 앞에 붙인다.
+        var day = when.value ? when.value.split("-").map(Number) : null;
+        var note = (day ? day[0] + ". " + day[1] + ". " + day[2] + ". " : "") + text;
+        save.disabled = true;
+        hint.classList.remove("field__hint--warn");
+        hint.textContent = "사건을 다시 정리하고 있어요…";
+        uploadForm("api/cases/" + encodeURIComponent(c.id) + "/files", {}, [{ note: note }]).then(function () {
+          location.reload();
+        }, function (err) {
+          save.disabled = false;
+          hint.textContent = errorText(err);
+          hint.classList.add("field__hint--warn");
+        });
         return;
       }
       insertEvent(c, {
@@ -584,7 +738,9 @@
       h("div", { class: "field" }, [h("label", { for: "ev-when", text: "언제 있었나요?" }), when]),
       h("div", { class: "field" }, [h("label", { for: "ev-what", text: "무슨 일이 있었나요?" }), what, hint]),
       save,
-      h("p", { class: "modal__note", text: "직접 적은 내용은 기록 자료가 아니라 '내가 적음'으로 표시됩니다. 지금은 이 화면에만 남습니다." }),
+      h("p", { class: "modal__note", text: isLocal(c)
+        ? "직접 적은 내용은 기록 자료가 아니라 본인 메모로 사건에 더해지고, 사건 전체를 다시 정리합니다. 날짜나 절차가 드러나지 않는 내용은 타임라인 대신 '확인이 필요해요'에만 반영될 수 있어요."
+        : "직접 적은 내용은 기록 자료가 아니라 '내가 적음'으로 표시됩니다. 예시 사건이라 이 화면에만 남습니다." }),
     ]));
   }
 
@@ -908,7 +1064,7 @@
         receipt = files[0].name;
         picked.textContent = "접수증 · " + receipt;
         picked.classList.remove("field__hint--warn");
-      });
+      }, "image/*,application/pdf");
     });
 
     var save = h("button", { type: "button", class: "modal__save", text: "냈다고 기록하기" });
@@ -1355,7 +1511,9 @@
           s.isNew ? h("span", { class: "srclist__new", text: "방금 추가" }) : null,
         ]);
       })),
-      h("p", { class: "modal__note", text: "방금 올린 자료는 이 화면에만 더해집니다. 정리 엔진에 넣는 것은 아직 연결되지 않았어요." }),
+      h("p", { class: "modal__note", text: isLocal(c)
+        ? "자료를 더하면 올린 자료 전체로 사건을 처음부터 다시 정리해요."
+        : "예시 사건이라 자료를 더할 수 없어요. 내 자료로 보려면 새 사건을 등록해 주세요." }),
     ]));
   }
 
@@ -1370,12 +1528,37 @@
     open.addEventListener("click", function () { sourceListModal(c); });
 
     var add = h("button", { type: "button", class: "srcbar__btn srcbar__btn--add" }, [h("span", { text: "+  자료 추가하기" })]);
-    add.addEventListener("click", function () { pickFiles(addFiles); });
+    add.addEventListener("click", function () {
+      if (!isLocal(c)) {
+        openModal("자료 추가하기", h("div", { class: "help" }, [
+          h("p", { class: "help__text", text: "예시 사건이라 자료를 더할 수 없어요. 내 자료로 정리해 보려면 새 사건을 등록해 주세요." }),
+          h("a", { class: "btn btn--primary t-body-m-strong", href: "new.html", text: "새 사건 등록" }),
+        ]));
+        return;
+      }
+      pickFiles(addFiles);
+    });
 
+    /** 고른 자료를 서버에 보내 사건 전체를 다시 정리하고, 끝나면 새 결과로 화면을 다시 그린다. */
     function addFiles(picked) {
-      c.sources = c.sources.concat(picked);
-      count.textContent = String(c.sources.length);
-      sourceListModal(c);
+      var skipped = picked.filter(function (f) { return !canRead(f.name); }).map(function (f) { return f.name; });
+      var readable = picked.filter(function (f) { return canRead(f.name); });
+      var message = h("p", { class: "help__text", role: "status" });
+      openModal("자료 추가하기", h("div", { class: "help" }, [
+        message,
+        skipped.length ? h("p", { class: "help__text field__hint--warn", text: "읽을 수 없는 형식이라 뺐어요: " + skipped.join(", ") }) : null,
+      ]));
+      if (!readable.length) {
+        message.textContent = "더할 자료가 없어요. 사진이나 OCR 결과 JSON 을 골라 주세요.";
+        return;
+      }
+      message.textContent = readable.length + "개 자료를 읽고 사건을 다시 정리하고 있어요…";
+      uploadForm("api/cases/" + encodeURIComponent(c.id) + "/files", {}, readable).then(function () {
+        location.reload();
+      }, function (err) {
+        message.textContent = errorText(err);
+        message.classList.add("field__hint--warn");
+      });
     }
     addFilesHandler = addFiles;   // 상단 메뉴의 '자료 추가하기'도 같은 일을 한다
 
@@ -1384,11 +1567,17 @@
 
   function renderCase(root) {
     var id = new URLSearchParams(location.search).get("id");
-    var c = CASES.filter(function (x) { return x.id === id; })[0] || CASES[0];
-    if (!c) {
+    function notFound() {
       root.appendChild(h("main", { class: "page page--case" }, [backLink(), h("p", { class: "t-body-l", text: "사건을 찾지 못했어요." })]));
-      return;
     }
+    // 예전에는 id 가 맞지 않으면 첫 예시 사건을 대신 보여줬다 — 남의 사건을 내 사건으로 읽게 된다
+    var demo = CASES.filter(function (x) { return x.id === id; })[0];
+    if (demo) return drawCase(root, demo);
+    if (!id) return notFound();
+    api("api/cases/" + encodeURIComponent(id)).then(function (view) { drawCase(root, view); }, notFound);
+  }
+
+  function drawCase(root, c) {
     document.title = c.title + " · 타래";
 
     var panel = h("div", { role: "tabpanel", id: "panel" }, [timelineCard(c)]);

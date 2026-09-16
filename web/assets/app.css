@@ -126,6 +126,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .btn--secondary { background: var(--bg-surface); color: var(--text-primary); box-shadow: inset 0 0 0 1.5px var(--border-strong); }
 .btn--block { width: 100%; }
 .btn:hover { filter: brightness(0.97); }
+.btn:disabled { opacity: 0.6; cursor: progress; filter: none; }
 
 .card {
   background: var(--bg-surface);
@@ -307,6 +308,8 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .file-row__kind { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 48px; height: 28px; border-radius: 6px; background: var(--bg-sunken); color: var(--text-secondary); }
 .file-row__texts { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
 .file-row__texts p { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.file-row__remove { flex-shrink: 0; padding: 4px 8px; border-radius: 8px; color: var(--text-tertiary); }
+.file-row__remove:hover { background: var(--bg-sunken); color: var(--text-primary); }
 .empty-files { padding: 16px; border-radius: 12px; background: var(--bg-canvas); text-align: center; }
 
 .note { display: flex; gap: 12px; }
