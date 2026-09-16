@@ -206,8 +206,6 @@
       h("div", { class: "folder__body" }, [
         // 기한은 놓치면 되돌릴 수 없어서 맨 위에 둔다
         due ? h("span", { class: "folder__due t-label", text: due.label }) : null,
-        // 카드 색이 사건 유형을 뜻하므로 그 유형을 적어 둔다
-        h("span", { class: "folder__type t-label", text: c.type_label }),
         h("p", { class: "folder__title t-title", text: c.title }),
         h("p", { class: "folder__status t-body-l", text: caseStatus(c) }),
         h("div", { class: "folder__peek" }, [

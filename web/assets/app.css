@@ -178,28 +178,21 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 .folder { position: relative; display: block; padding-top: 26px; }
 .folder__tab {
-  position: absolute; left: 0; top: 0;
-  display: flex; align-items: center;
-  min-width: 46%; max-width: 80%; height: 34px; padding: 0 16px 8px;
+  position: absolute; left: 0; top: 0; width: 46%; height: 34px;
   border-radius: 14px 14px 0 0; background: var(--fold-tab);
-  transition: transform 0.18s ease; z-index: 1;
-}
-/* 탭에 적는 사건 유형 — 카드 색이 뜻하는 것을 글자로도 남긴다 */
-.folder__type {
-  color: var(--fold-text);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  transition: transform 0.18s ease;
 }
 /* 폴더 안에 든 종이 한 장이 살짝 비어져 나온 느낌 */
 .folder__sheet {
   position: absolute; left: 18px; right: 18px; top: 20px; height: 26px;
   border-radius: 8px 8px 0 0; background: var(--fold-sheet);
-  transition: transform 0.18s ease; z-index: 0;
+  transition: transform 0.18s ease;
 }
 .folder__body {
   position: relative; display: flex; flex-direction: column; gap: 8px;
   min-height: 218px; padding: 26px 26px 22px;
   border-radius: 0 16px 16px 16px; background: var(--fold-bg); color: var(--fold-text);
-  box-shadow: var(--shadow-card); z-index: 2;
+  box-shadow: var(--shadow-card);
   transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 .folder__title { color: inherit; }
@@ -239,7 +232,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .folder--tone2 { --fold-bg: #7b3fc4; --fold-tab: #6a32ae; --fold-sheet: #9b6ad6; --fold-text: #ffffff; --fold-more-bg: rgba(255,255,255,0.2); --fold-more-text: #ffffff; --fold-more-icon: invert(1); }
 .folder--tone3 { --fold-bg: #c9b3ec; --fold-tab: #b59de0; --fold-sheet: #ddcdf6; --fold-text: #24184a; --fold-more-bg: rgba(36,24,74,0.12); --fold-more-text: #24184a; --fold-more-icon: none; }
 
-.folder--new .folder__tab { min-width: 34%; max-width: 34%; background: none; border: 1.5px dashed var(--border-strong); border-bottom: none; }
+.folder--new .folder__tab { width: 34%; background: none; border: 1.5px dashed var(--border-strong); border-bottom: none; }
 .folder--new .folder__body {
   align-items: center; justify-content: center; gap: 12px; text-align: center;
   background: none; border: 1.5px dashed var(--border-strong); box-shadow: none;

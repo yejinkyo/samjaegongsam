@@ -197,7 +197,6 @@
     return h("a", { class: "card case-card case-card--tone" + tone, href: caseHref(c.id) }, [
       h("span", { class: "case-card__band", "aria-hidden": "true" }),
       h("div", { class: "case-card__top" }, [
-        h("span", { class: "tag t-label", text: c.type_label }),
         h("div", { class: "case-card__top-right" }, [
           h("span", { class: "t-caption c-tertiary", text: "기준일 " + c.as_of }),
           // 기한은 놓치면 되돌릴 수 없어서 맨 위에 그대로 둔다

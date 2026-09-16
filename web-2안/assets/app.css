@@ -184,7 +184,8 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 /* 목록에서 쓴 색을 상세 화면이 물려받아 '그 카드를 열었다'가 보이게 한다 */
 .case-card__band { position: absolute; left: 0; right: 0; top: 0; height: 6px; background: var(--tone); }
-.case-card__top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+/* 유형 딱지를 뺀 뒤로 기준일·기한만 남는다 — 오른쪽에 붙인다 */
+.case-card__top { display: flex; align-items: center; justify-content: flex-end; gap: 12px; }
 .case-card__top-right { display: flex; align-items: center; gap: 10px; }
 .case-card__titles { display: flex; flex-direction: column; gap: 6px; }
 

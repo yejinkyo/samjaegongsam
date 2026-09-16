@@ -203,7 +203,7 @@
     var due = next && next.due;
 
     return h("a", { class: "folder folder--tone" + tone, href: caseHref(c.id) }, [
-      h("span", { class: "folder__tab" }, [h("span", { class: "folder__type t-label", text: c.type_label })]),
+      h("span", { class: "folder__tab", "aria-hidden": "true" }),
       h("span", { class: "folder__sheet", "aria-hidden": "true" }),
       h("div", { class: "folder__body" }, [
         // 기한은 놓치면 되돌릴 수 없어서 마우스를 올리기 전에도 보이게 둔다
