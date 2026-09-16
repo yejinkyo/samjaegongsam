@@ -464,6 +464,8 @@ def build_view(case_id: str, title: str, result: dict[str, Any]) -> dict[str, An
     return {
         "id": case_id,
         "title": title,
+        # 화면이 사건 유형별로 카드 색을 묶는 데 쓴다 — 사람이 읽는 이름과 따로 내보낸다
+        "type": card.case_type,
         "type_label": card.case_type_label,
         "as_of": f"{as_of:%Y.%m.%d}",
         "period": _period(result),

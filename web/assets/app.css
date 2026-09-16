@@ -178,21 +178,28 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 .folder { position: relative; display: block; padding-top: 26px; }
 .folder__tab {
-  position: absolute; left: 0; top: 0; width: 46%; height: 34px;
+  position: absolute; left: 0; top: 0;
+  display: flex; align-items: center;
+  min-width: 46%; max-width: 80%; height: 34px; padding: 0 16px 8px;
   border-radius: 14px 14px 0 0; background: var(--fold-tab);
-  transition: transform 0.18s ease;
+  transition: transform 0.18s ease; z-index: 1;
+}
+/* 탭에 적는 사건 유형 — 카드 색이 뜻하는 것을 글자로도 남긴다 */
+.folder__type {
+  color: var(--fold-text);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 /* 폴더 안에 든 종이 한 장이 살짝 비어져 나온 느낌 */
 .folder__sheet {
   position: absolute; left: 18px; right: 18px; top: 20px; height: 26px;
   border-radius: 8px 8px 0 0; background: var(--fold-sheet);
-  transition: transform 0.18s ease;
+  transition: transform 0.18s ease; z-index: 0;
 }
 .folder__body {
   position: relative; display: flex; flex-direction: column; gap: 8px;
   min-height: 218px; padding: 26px 26px 22px;
   border-radius: 0 16px 16px 16px; background: var(--fold-bg); color: var(--fold-text);
-  box-shadow: var(--shadow-card);
+  box-shadow: var(--shadow-card); z-index: 2;
   transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 .folder__title { color: inherit; }
@@ -203,12 +210,10 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   background: var(--status-conflict-bg); color: var(--status-conflict);
 }
 
-/* 마우스를 올리거나 키보드 포커스가 오면 열리는 부분 */
+/* 접지 않고 늘 보여주는 부분 — 손가락으로 쓰는 화면에는 마우스 올림이 없다 */
 .folder__peek {
   display: flex; flex-direction: column; gap: 4px;
   margin-top: auto; padding-top: 12px;
-  opacity: 0; transform: translateY(6px);
-  transition: opacity 0.18s ease, transform 0.18s ease;
 }
 .folder__meta { color: inherit; opacity: 0.62; }
 .folder__next { color: inherit; opacity: 0.92; }
@@ -225,17 +230,16 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .folder:focus-visible .folder__tab { transform: translateY(-6px); }
 .folder:hover .folder__sheet,
 .folder:focus-visible .folder__sheet { transform: translateY(-9px); }
-.folder:hover .folder__peek,
-.folder:focus-visible .folder__peek { opacity: 1; transform: none; }
 .folder:focus-visible { outline: none; }
 .folder:focus-visible .folder__body { box-shadow: 0 0 0 3px var(--brand-primary), 0 18px 40px -16px rgba(46, 27, 97, 0.45); }
 
-/* 세 가지 색을 돌려 쓴다 — 짙은 쪽은 흰 글씨, 옅은 쪽은 검은 글씨로 대비를 지킨다 */
+/* 사건 유형마다 한 색 — 실종은 1, 고소·수사중지는 2, 재산범죄는 3 (app.js 의 TONES).
+   짙은 쪽은 흰 글씨, 옅은 쪽은 검은 글씨로 대비를 지킨다 */
 .folder--tone1 { --fold-bg: #2e1b69; --fold-tab: #241553; --fold-sheet: #4a2ea0; --fold-text: #ffffff; --fold-more-bg: rgba(255,255,255,0.16); --fold-more-text: #ffffff; --fold-more-icon: invert(1); }
 .folder--tone2 { --fold-bg: #7b3fc4; --fold-tab: #6a32ae; --fold-sheet: #9b6ad6; --fold-text: #ffffff; --fold-more-bg: rgba(255,255,255,0.2); --fold-more-text: #ffffff; --fold-more-icon: invert(1); }
 .folder--tone3 { --fold-bg: #c9b3ec; --fold-tab: #b59de0; --fold-sheet: #ddcdf6; --fold-text: #24184a; --fold-more-bg: rgba(36,24,74,0.12); --fold-more-text: #24184a; --fold-more-icon: none; }
 
-.folder--new .folder__tab { width: 34%; background: none; border: 1.5px dashed var(--border-strong); border-bottom: none; }
+.folder--new .folder__tab { min-width: 34%; max-width: 34%; background: none; border: 1.5px dashed var(--border-strong); border-bottom: none; }
 .folder--new .folder__body {
   align-items: center; justify-content: center; gap: 12px; text-align: center;
   background: none; border: 1.5px dashed var(--border-strong); box-shadow: none;
@@ -245,7 +249,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .folder--new:hover .folder__tab { border-color: var(--brand-primary); }
 
 @media (prefers-reduced-motion: reduce) {
-  .folder__body, .folder__tab, .folder__sheet, .folder__peek { transition: none; }
+  .folder__body, .folder__tab, .folder__sheet { transition: none; }
   .folder:hover .folder__body, .folder:hover .folder__tab, .folder:hover .folder__sheet { transform: none; }
 }
 .stats { display: flex; gap: 10px; }

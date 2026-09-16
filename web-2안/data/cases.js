@@ -3,6 +3,7 @@ window.TARAE_CASES = [
   {
     "id": "used_goods_fraud",
     "title": "중고거래 사기 피해",
+    "type": "used_goods_fraud",
     "type_label": "중고거래 사기",
     "as_of": "2026.06.24",
     "period": "2026.06.01 – 06.03",
@@ -548,6 +549,7 @@ window.TARAE_CASES = [
   {
     "id": "long_unsolved_missing",
     "title": "2015년 실종 사건",
+    "type": "missing_person_suspended",
     "type_label": "실종 사건 · 수사중지",
     "as_of": "2026.09.11",
     "period": "2015.10 – 2023.04",
@@ -1147,6 +1149,7 @@ window.TARAE_CASES = [
   {
     "id": "suspension_recent",
     "title": "고소 사건 (수사중지)",
+    "type": "investigation_suspended",
     "type_label": "수사중지 사건",
     "as_of": "2026.09.12",
     "period": "2021.05 – 2025.06",

@@ -185,6 +185,12 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   box-shadow: var(--shadow-card);
   transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
+/* 카드 색이 뜻하는 사건 유형을 글자로도 남긴다 */
+.folder__type {
+  align-self: flex-start; margin-bottom: 2px;
+  padding: 4px 11px; border-radius: 999px;
+  background: var(--fold-tab); color: var(--fold-text);
+}
 .folder__title { color: inherit; }
 .folder__status { color: inherit; opacity: 0.78; }
 .folder__due {
@@ -212,7 +218,8 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .folder:focus-visible { outline: none; }
 .folder:focus-visible .folder__body { box-shadow: 0 0 0 3px var(--brand-primary), 0 18px 40px -16px rgba(46, 27, 97, 0.45); }
 
-/* 세 가지 색을 돌려 쓴다 — 짙은 쪽은 흰 글씨, 옅은 쪽은 검은 글씨로 대비를 지킨다 */
+/* 사건 유형마다 한 색 — 실종은 1, 고소·수사중지는 2, 재산범죄는 3 (app.js 의 TONES).
+   짙은 쪽은 흰 글씨, 옅은 쪽은 검은 글씨로 대비를 지킨다 */
 .folder--tone1 { --fold-bg: #2e1b69; --fold-tab: #241553; --fold-text: #ffffff; --fold-more-bg: rgba(255,255,255,0.16); --fold-more-text: #ffffff; --fold-more-icon: invert(1); }
 .folder--tone2 { --fold-bg: #7b3fc4; --fold-tab: #6a32ae; --fold-text: #ffffff; --fold-more-bg: rgba(255,255,255,0.2); --fold-more-text: #ffffff; --fold-more-icon: invert(1); }
 .folder--tone3 { --fold-bg: #c9b3ec; --fold-tab: #b59de0; --fold-text: #24184a; --fold-more-bg: rgba(36,24,74,0.12); --fold-more-text: #24184a; --fold-more-icon: none; }

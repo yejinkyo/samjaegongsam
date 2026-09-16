@@ -186,10 +186,16 @@
     return current.label + " 단계";
   }
 
-  /** 목록에서 그 사건이 가졌던 폴더 색. 상세 화면도 같은 색을 써서 '그 폴더를 열었다'가 보이게 한다. */
+  /* 카드 색은 사건 유형이 정한다 — 목록에 사건이 늘어도 같은 유형이면 같은 색이다.
+     (순서대로 색을 돌려 쓰면 사건 하나가 추가될 때마다 색이 통째로 밀려서 기억이 깨진다.) */
+  var TONES = {
+    missing_person_suspended: 1,   // 실종
+    investigation_suspended: 2,    // 고소 · 수사중지
+    used_goods_fraud: 3,           // 재산범죄
+  };
+
   function toneOf(c) {
-    var i = CASES.indexOf(c);
-    return ((i < 0 ? 0 : i) % 3) + 1;
+    return TONES[c.type] || 3;   // 아직 색을 정하지 않은 유형은 가장 옅은 색으로 둔다
   }
 
   function folder(c, tone) {
@@ -197,7 +203,7 @@
     var due = next && next.due;
 
     return h("a", { class: "folder folder--tone" + tone, href: caseHref(c.id) }, [
-      h("span", { class: "folder__tab", "aria-hidden": "true" }),
+      h("span", { class: "folder__tab" }, [h("span", { class: "folder__type t-label", text: c.type_label })]),
       h("span", { class: "folder__sheet", "aria-hidden": "true" }),
       h("div", { class: "folder__body" }, [
         // 기한은 놓치면 되돌릴 수 없어서 마우스를 올리기 전에도 보이게 둔다
