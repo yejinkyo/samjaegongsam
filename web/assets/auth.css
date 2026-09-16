@@ -64,6 +64,9 @@
 .social__label::before, .social__label::after {
   content: ""; flex: 1 0 0; height: 1px; background: var(--border-default);
 }
+/* 아직 되지 않는다는 것을 아이콘 위에 미리 적는다 */
+.social__note { font: 400 12px/1.6 var(--font); color: var(--lp-ink-dim); text-align: center; }
+.social__note--warn { color: #c24a38; font-weight: 500; }
 .social__buttons { display: flex; justify-content: center; gap: 16px; }
 .social__btn {
   display: flex; align-items: center; justify-content: center;

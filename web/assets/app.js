@@ -495,13 +495,15 @@
   // ── 03 사건 상세 ────────────────────────────────────────
 
   /** 팝업. 자료 목록·행동 설명처럼 평소엔 접어 두는 것을 담는다. */
-  function openModal(title, body) {
+  function openModal(title, body, headAction) {
     // 닫힌 팝업이 남아 있으면 먼저 치운다 — close 이벤트가 늦게 오는 브라우저가 있다
     document.querySelectorAll("dialog.modal").forEach(function (old) { old.remove(); });
 
     var dialog = h("dialog", { class: "modal" }, [
       h("div", { class: "modal__head" }, [
         h("h2", { class: "t-heading c-primary", text: title }),
+        // 그 팝업에서 바로 할 수 있는 일이 있으면 닫기 옆에 둔다
+        headAction || null,
         h("button", { type: "button", class: "modal__close", "aria-label": "닫기", text: "✕" }),
       ]),
       h("div", { class: "modal__body" }, [body]),
@@ -1214,15 +1216,21 @@
       return body;
     }
 
-    var more = h("button", { type: "button", class: "na__more t-body-m-strong", text: "자세히 보기" });
-    more.addEventListener("click", function () { openModal(next.label, detailBody()); });
-
-    // 낼 것이 없는 단계에는 '냈어요'를 붙이지 않는다 — 엔진이 제출 절차가 아니라고 한 자리다
-    var did = null;
-    if (next.state !== "no_submission") {
-      did = h("button", { type: "button", class: "na__did t-body-m-strong", text: "냈어요" });
-      did.addEventListener("click", function () { openSubmitModal(c, next, refresh); });
+    // 낼 것이 없는 단계에는 제출 버튼을 붙이지 않는다 — 엔진이 제출 절차가 아니라고 한 자리다.
+    // 버튼은 무엇을·어디에가 적힌 팝업 안에 둔다. 카드만 보고 누르면 무엇을 냈는지 모른 채 누른다.
+    function submitButton() {
+      if (next.state === "no_submission") return null;
+      var did = h("button", { type: "button", class: "modal__act t-body-m-strong", text: "제출했어요" });
+      did.addEventListener("click", function () {
+        var dialog = document.querySelector("dialog.modal");
+        if (dialog) dialog.close();
+        openSubmitModal(c, next, refresh);
+      });
+      return did;
     }
+
+    var more = h("button", { type: "button", class: "na__more t-body-m-strong", text: "자세히 보기" });
+    more.addEventListener("click", function () { openModal(next.label, detailBody(), submitButton()); });
 
     return h("section", { class: "next-action", "aria-labelledby": "na-title" }, [
       h("div", { class: "next-action__head" }, [
@@ -1232,7 +1240,7 @@
           : next.unverified ? h("span", { class: "t-caption", text: "검수 전 안내" }) : null,
       ]),
       h("h2", { id: "na-title", class: "na__title", text: next.label }),
-      h("div", { class: "na__buttons" }, [more, did]),
+      h("div", { class: "na__buttons" }, [more]),
       draftButton(c, next),
     ]);
   }
