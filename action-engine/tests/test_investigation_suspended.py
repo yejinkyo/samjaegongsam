@@ -37,7 +37,7 @@ def test_중지_이후의_새_진술을_신규_인적_진술로_받는다(suspen
 
 def test_다음_행동은_신규_정보_제출이다(suspended):
     card = build_card(suspended)
-    assert card.next_action.rule_no == 5
+    assert card.next_action.rule_no == 6
     assert card.next_action.action == "ACT-신규정보제출"
     assert card.next_action.codes == [INF.NEW_STATEMENT]
     assert card.procedure is None  # 절차는 지식베이스의 몫

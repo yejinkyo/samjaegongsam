@@ -26,6 +26,9 @@ from .schema import CaseState, CodeHit, Confidence
 #
 # excludes 가 필요한 이유: '불기소' 안에 '기소'가 들어 있다. 부분 문자열만 보면
 # 불기소(ST-302)를 재판 진행 중(ST-401)으로 판정한다 — 정반대 결론이다.
+# 같은 이유로 '불송치(혐의없음)' 도 걸러야 한다. 혐의없음은 불송치의 '이유'이지
+# 검찰의 불기소 처분이 아니다 — 통지서에 그렇게 적혀 온다. 잘못 보면 경찰에 낼
+# 이의신청 대신 검찰 항고를 안내하게 되고, 실제로 열려 있는 불복 경로를 놓친다.
 # 표 자체가 판정 근거이므로 조건을 코드가 아니라 데이터로 적는다.
 DECISION_TABLE: list[tuple[tuple[str, ...], tuple[str, ...], ST, Confidence]] = [
     (("재심",), (), ST.RETRIAL_PREP, Confidence.CONFIRMED),
@@ -33,7 +36,7 @@ DECISION_TABLE: list[tuple[tuple[str, ...], tuple[str, ...], ST, Confidence]] = 
     (("공소제기", "구공판", "구약식", "기소"), ("불기소",), ST.TRIAL_ONGOING, Confidence.CONFIRMED),
     (("재정신청",), (), ST.ADJUDICATION_REQUEST, Confidence.CONFIRMED),
     (("항고", "이의신청"), (), ST.APPEAL_PENDING, Confidence.CONFIRMED),
-    (("불기소", "혐의없음", "공소권없음", "죄가안됨"), (), ST.PROSECUTION_NO_CHARGE, Confidence.CONFIRMED),
+    (("불기소", "혐의없음", "공소권없음", "죄가안됨"), ("불송치",), ST.PROSECUTION_NO_CHARGE, Confidence.CONFIRMED),
     (("불송치",), (), ST.POLICE_NO_REFERRAL, Confidence.CONFIRMED),
     # 통지서에 "수사중지"로만 적히기도 하고 사유를 붙여 "참고인중지"로 적히기도 한다.
     # 사유(피의자·참고인)는 아래에서 다시 갈라 ST-201 / ST-202 를 정한다.
