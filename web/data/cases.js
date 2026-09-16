@@ -2940,5 +2940,1534 @@ window.TARAE_CASES = [
         "deadlines": []
       }
     }
+  },
+  {
+    "id": "no_referral_test",
+    "title": "불송치 사건 (시험)",
+    "type": "investigation_suspended",
+    "type_label": "수사중지 사건",
+    "as_of": "2026.09.16",
+    "period": "2024.03 – 2026.08",
+    "doc_count": 4,
+    "need_count": 4,
+    "stages": [
+      {
+        "label": "고소",
+        "state": "done"
+      },
+      {
+        "label": "접수",
+        "state": "done"
+      },
+      {
+        "label": "수사",
+        "state": "todo"
+      },
+      {
+        "label": "중지",
+        "state": "current"
+      },
+      {
+        "label": "재개",
+        "state": "todo"
+      }
+    ],
+    "sources": [
+      {
+        "kind": "IMG",
+        "name": "고소장_2024.jpg"
+      },
+      {
+        "kind": "IMG",
+        "name": "접수증_2024.jpg"
+      },
+      {
+        "kind": "IMG",
+        "name": "불송치_결정통지서.jpg"
+      },
+      {
+        "kind": "IMG",
+        "name": "계좌거래내역_2026.png"
+      }
+    ],
+    "timeline": [
+      {
+        "type": "event",
+        "time": "2024.03.12",
+        "title": "8,500,000원 송금",
+        "full": "8,500,000원 송금",
+        "kind": "claim",
+        "badge": "주장 · 미확인",
+        "conflict": false,
+        "needs_date": false,
+        "source": "출처 ①  고소장_2024.jpg · 5줄 외 2곳",
+        "sources": [
+          {
+            "name": "고소장_2024.jpg",
+            "line": 5,
+            "quote": "2024. 3. 12. 중고 노트북 거래를 명목으로 8,500,000원을 송금하였습니다."
+          },
+          {
+            "name": "고소장_2024.jpg",
+            "line": 5,
+            "quote": "8,500,000원"
+          },
+          {
+            "name": "계좌거래내역_2026.png",
+            "line": 3,
+            "quote": "2024. 3. 12. 같은 계좌에서 타인 3명에게 분산 이체됨"
+          }
+        ]
+      },
+      {
+        "type": "event",
+        "time": "2024.03.20\n11:05",
+        "title": "접 수 증",
+        "full": "접 수 증",
+        "kind": "verified",
+        "badge": "확인됨",
+        "conflict": false,
+        "needs_date": false,
+        "source": "출처 ②  접수증_2024.jpg · 1줄 외 1곳",
+        "sources": [
+          {
+            "name": "접수증_2024.jpg",
+            "line": 1,
+            "quote": "접 수 증"
+          },
+          {
+            "name": "접수증_2024.jpg",
+            "line": 3,
+            "quote": "2024. 3. 20. 11:05"
+          }
+        ]
+      },
+      {
+        "type": "gap",
+        "range": "2024.03.20 – 2026.08.25",
+        "text": "이 기간의 기록이 없어요 (약 2.4년)"
+      },
+      {
+        "type": "event",
+        "time": "2026.08.25",
+        "title": "수사결과 통지서",
+        "full": "수사결과 통지서",
+        "kind": "verified",
+        "badge": "확인됨",
+        "conflict": false,
+        "needs_date": false,
+        "source": "출처 ③  불송치_결정통지서.jpg · 1줄 외 1곳",
+        "sources": [
+          {
+            "name": "불송치_결정통지서.jpg",
+            "line": 1,
+            "quote": "수사결과 통지서"
+          },
+          {
+            "name": "불송치_결정통지서.jpg",
+            "line": 6,
+            "quote": "2026. 8. 25."
+          }
+        ]
+      },
+      {
+        "type": "event",
+        "time": "시각 미상",
+        "title": "죄명 사기",
+        "full": "죄명 사기",
+        "kind": "claim",
+        "badge": "주장 · 미확인",
+        "conflict": false,
+        "needs_date": false,
+        "source": "출처 ①  고소장_2024.jpg · 4줄",
+        "sources": [
+          {
+            "name": "고소장_2024.jpg",
+            "line": 4,
+            "quote": "죄명 사기"
+          }
+        ]
+      }
+    ],
+    "people": [
+      {
+        "label": "사람",
+        "items": [
+          {
+            "name": "윤서진",
+            "roles": [
+              "고소인",
+              "신고인"
+            ],
+            "docs": [
+              "불송치_결정통지서.jpg",
+              "접수증_2024.jpg"
+            ],
+            "same_as": []
+          },
+          {
+            "name": "박성우",
+            "roles": [
+              "피고소인"
+            ],
+            "docs": [
+              "불송치_결정통지서.jpg"
+            ],
+            "same_as": []
+          },
+          {
+            "name": "김도현",
+            "roles": [
+              "담당수사관"
+            ],
+            "docs": [
+              "불송치_결정통지서.jpg"
+            ],
+            "same_as": []
+          }
+        ]
+      },
+      {
+        "label": "기관",
+        "items": [
+          {
+            "name": "**경찰서",
+            "roles": [],
+            "docs": [
+              "불송치_결정통지서.jpg",
+              "접수증_2024.jpg"
+            ],
+            "same_as": []
+          }
+        ]
+      },
+      {
+        "label": "사건번호",
+        "items": [
+          {
+            "name": "2024형제33210",
+            "roles": [],
+            "docs": [
+              "불송치_결정통지서.jpg"
+            ],
+            "same_as": []
+          }
+        ]
+      },
+      {
+        "label": "접수번호",
+        "items": [
+          {
+            "name": "2024-011234",
+            "roles": [],
+            "docs": [
+              "접수증_2024.jpg"
+            ],
+            "same_as": []
+          }
+        ]
+      }
+    ],
+    "slots": [
+      {
+        "slot": "사건 발생 시점",
+        "value": null,
+        "state": "자료에 없음",
+        "severity": "unverified",
+        "said": []
+      },
+      {
+        "slot": "접수번호",
+        "value": "2024-011234",
+        "state": "기록으로 확인",
+        "severity": "verified",
+        "said": [
+          {
+            "value": "2024-011234",
+            "doc": "접수증_2024.jpg",
+            "speaker": "**경찰서",
+            "record": true
+          }
+        ]
+      },
+      {
+        "slot": "사건번호",
+        "value": "2024형제33210",
+        "state": "기록으로 확인",
+        "severity": "verified",
+        "said": [
+          {
+            "value": "2024형제33210",
+            "doc": "불송치_결정통지서.jpg",
+            "speaker": "**경찰서",
+            "record": true
+          }
+        ]
+      },
+      {
+        "slot": "담당 수사관",
+        "value": "김도현",
+        "state": "기록으로 확인",
+        "severity": "verified",
+        "said": [
+          {
+            "value": "김도현",
+            "doc": "불송치_결정통지서.jpg",
+            "speaker": "**경찰서",
+            "record": true
+          }
+        ]
+      },
+      {
+        "slot": "결정 내용",
+        "value": "불송치(혐의없음)",
+        "state": "기록으로 확인",
+        "severity": "verified",
+        "said": [
+          {
+            "value": "불송치(혐의없음)",
+            "doc": "불송치_결정통지서.jpg",
+            "speaker": "**경찰서",
+            "record": true
+          }
+        ]
+      },
+      {
+        "slot": "결정일",
+        "value": "2026-08-25",
+        "state": "기록으로 확인",
+        "severity": "verified",
+        "said": [
+          {
+            "value": "2026-08-25",
+            "doc": "불송치_결정통지서.jpg",
+            "speaker": "**경찰서",
+            "record": true
+          }
+        ]
+      }
+    ],
+    "issues": [
+      {
+        "label": "빠진 정보",
+        "severity": "gap",
+        "items": [
+          {
+            "text": "사건 발생 시점: 올린 자료에서 찾지 못했습니다",
+            "how": "확인한 자료 5개에서 찾지 못함"
+          },
+          {
+            "text": "‘신고’ 단계에 해당하는 자료가 없습니다",
+            "how": "확인한 자료 5개에서 찾지 못함"
+          },
+          {
+            "text": "‘수사’ 단계에 해당하는 자료가 없습니다",
+            "how": "확인한 자료 5개에서 찾지 못함"
+          },
+          {
+            "text": "2024-03-20 ~ 2026-08-25 사이의 기록이 없습니다 (약 2.4년)",
+            "how": "근거 · 접수증_2024.jpg 1줄"
+          }
+        ]
+      }
+    ],
+    "next_action": {
+      "rule_no": 5,
+      "action": "ACT-불복기한",
+      "label": "기한 안에 결정에 대한 불복 절차 진행",
+      "why": "불복할 수 있는 결정을 받은 상태다. 기한이 급하지 않아도 이 경로를 먼저 알려야 한다",
+      "rule_why": "불복할 수 있는 결정을 받은 상태다. 기한이 급하지 않아도 이 경로를 먼저 알려야 한다",
+      "due": null,
+      "state": "filled",
+      "rows": [
+        {
+          "k": "무엇을",
+          "v": "불송치 결정 이의신청서"
+        },
+        {
+          "k": "어디에",
+          "v": "불송치 결정을 한 사법경찰관의 소속 관서의 장"
+        },
+        {
+          "k": "근거",
+          "v": "형사소송법 제245조의7"
+        }
+      ],
+      "prepare": {
+        "done": 2,
+        "total": 3,
+        "items": [
+          {
+            "label": "불송치 결정 이의신청서",
+            "state": "생성가능",
+            "required": true
+          },
+          {
+            "label": "수사결과 통지서 (불송치 결정)",
+            "state": "보유",
+            "required": false
+          },
+          {
+            "label": "이의신청 사유를 뒷받침하는 증거자료",
+            "state": "보유",
+            "required": false
+          }
+        ]
+      },
+      "note": null,
+      "unverified": true,
+      "also": [
+        {
+          "rule_no": 9,
+          "action": "ACT-근거보완",
+          "label": "주장을 뒷받침할 근거 자료 보완",
+          "why": "근거 없는 주장은 판단 대상이 되지 않는다"
+        },
+        {
+          "rule_no": 10,
+          "action": "ACT-공백보완",
+          "label": "기록이 빈 기간의 자료 확보",
+          "why": "기록 공백은 반박 여지를 남긴다"
+        }
+      ],
+      "submit_to": "불송치 결정을 한 사법경찰관의 소속 관서의 장",
+      "form_name": "불송치 결정 이의신청서",
+      "draft": {
+        "is_draft": true,
+        "prose": null,
+        "form_name": "불송치 결정 이의신청서",
+        "form_source": "경찰수사규칙 별지 제125호 서식",
+        "form_url": "https://www.law.go.kr/LSW//flDownload.do?flSeq=111544157&bylClsCd=110202",
+        "fields": [
+          {
+            "label": "사건번호",
+            "value": "2024형제33210",
+            "from": "case_record"
+          },
+          {
+            "label": "접수번호",
+            "value": "2024-011234",
+            "from": "case_record"
+          },
+          {
+            "label": "담당 수사관",
+            "value": "김도현",
+            "from": "case_record"
+          },
+          {
+            "label": "결정 내용",
+            "value": "불송치(혐의없음)",
+            "from": "case_record"
+          },
+          {
+            "label": "결정일",
+            "value": "2026-08-25",
+            "from": "case_record"
+          },
+          {
+            "label": "서식",
+            "value": "불송치 결정 이의신청서",
+            "from": "knowledge_base"
+          },
+          {
+            "label": "제출처",
+            "value": "불송치 결정을 한 사법경찰관의 소속 관서의 장",
+            "from": "knowledge_base"
+          },
+          {
+            "label": "근거 법령",
+            "value": "형사소송법 제245조의7",
+            "from": "knowledge_base"
+          }
+        ],
+        "unfilled": [
+          {
+            "label": "신청인 성명",
+            "reason": "자료에 있을 수 없는 항목입니다. 직접 적어 주세요."
+          },
+          {
+            "label": "신청인 연락처",
+            "reason": "자료에 있을 수 없는 항목입니다. 직접 적어 주세요."
+          },
+          {
+            "label": "신청인 주소",
+            "reason": "자료에 있을 수 없는 항목입니다. 직접 적어 주세요."
+          }
+        ],
+        "sections": [
+          {
+            "heading": "사건 경위",
+            "note": "자료에 적힌 날짜와 문구를 시간순으로 옮긴 것입니다. 문장을 다듬어 쓰세요.",
+            "lines": [
+              {
+                "date": "2024. 3. 12.",
+                "text": "8,500,000원 송금",
+                "level": "statement",
+                "source": "고소장_2024.jpg 5줄"
+              },
+              {
+                "date": "2024. 3. 20.",
+                "text": "접 수 증",
+                "level": "record",
+                "source": "접수증_2024.jpg 1줄"
+              },
+              {
+                "date": "2026. 8. 25.",
+                "text": "수사결과 통지서",
+                "level": "record",
+                "source": "불송치_결정통지서.jpg 1줄"
+              },
+              {
+                "date": null,
+                "text": "죄명 사기",
+                "level": "statement",
+                "source": "고소장_2024.jpg 4줄"
+              }
+            ]
+          },
+          {
+            "heading": "이의 사유",
+            "note": "타래는 이 칸을 대신 쓰지 않습니다. 왜 결정에 동의할 수 없는지는 직접 적어 주세요.",
+            "lines": []
+          }
+        ],
+        "dropped": 0
+      }
+    },
+    "actions": [
+      {
+        "rule_no": 5,
+        "action": "ACT-불복기한",
+        "label": "기한 안에 결정에 대한 불복 절차 진행",
+        "why": "불복할 수 있는 결정을 받은 상태다. 기한이 급하지 않아도 이 경로를 먼저 알려야 한다",
+        "rule_why": "불복할 수 있는 결정을 받은 상태다. 기한이 급하지 않아도 이 경로를 먼저 알려야 한다",
+        "due": null,
+        "state": "filled",
+        "rows": [
+          {
+            "k": "무엇을",
+            "v": "불송치 결정 이의신청서"
+          },
+          {
+            "k": "어디에",
+            "v": "불송치 결정을 한 사법경찰관의 소속 관서의 장"
+          },
+          {
+            "k": "근거",
+            "v": "형사소송법 제245조의7"
+          }
+        ],
+        "prepare": {
+          "done": 2,
+          "total": 3,
+          "items": [
+            {
+              "label": "불송치 결정 이의신청서",
+              "state": "생성가능",
+              "required": true
+            },
+            {
+              "label": "수사결과 통지서 (불송치 결정)",
+              "state": "보유",
+              "required": false
+            },
+            {
+              "label": "이의신청 사유를 뒷받침하는 증거자료",
+              "state": "보유",
+              "required": false
+            }
+          ]
+        },
+        "note": null,
+        "unverified": true,
+        "also": [
+          {
+            "rule_no": 9,
+            "action": "ACT-근거보완",
+            "label": "주장을 뒷받침할 근거 자료 보완",
+            "why": "근거 없는 주장은 판단 대상이 되지 않는다"
+          },
+          {
+            "rule_no": 10,
+            "action": "ACT-공백보완",
+            "label": "기록이 빈 기간의 자료 확보",
+            "why": "기록 공백은 반박 여지를 남긴다"
+          }
+        ],
+        "submit_to": "불송치 결정을 한 사법경찰관의 소속 관서의 장",
+        "form_name": "불송치 결정 이의신청서",
+        "draft": {
+          "is_draft": true,
+          "prose": null,
+          "form_name": "불송치 결정 이의신청서",
+          "form_source": "경찰수사규칙 별지 제125호 서식",
+          "form_url": "https://www.law.go.kr/LSW//flDownload.do?flSeq=111544157&bylClsCd=110202",
+          "fields": [
+            {
+              "label": "사건번호",
+              "value": "2024형제33210",
+              "from": "case_record"
+            },
+            {
+              "label": "접수번호",
+              "value": "2024-011234",
+              "from": "case_record"
+            },
+            {
+              "label": "담당 수사관",
+              "value": "김도현",
+              "from": "case_record"
+            },
+            {
+              "label": "결정 내용",
+              "value": "불송치(혐의없음)",
+              "from": "case_record"
+            },
+            {
+              "label": "결정일",
+              "value": "2026-08-25",
+              "from": "case_record"
+            },
+            {
+              "label": "서식",
+              "value": "불송치 결정 이의신청서",
+              "from": "knowledge_base"
+            },
+            {
+              "label": "제출처",
+              "value": "불송치 결정을 한 사법경찰관의 소속 관서의 장",
+              "from": "knowledge_base"
+            },
+            {
+              "label": "근거 법령",
+              "value": "형사소송법 제245조의7",
+              "from": "knowledge_base"
+            }
+          ],
+          "unfilled": [
+            {
+              "label": "신청인 성명",
+              "reason": "자료에 있을 수 없는 항목입니다. 직접 적어 주세요."
+            },
+            {
+              "label": "신청인 연락처",
+              "reason": "자료에 있을 수 없는 항목입니다. 직접 적어 주세요."
+            },
+            {
+              "label": "신청인 주소",
+              "reason": "자료에 있을 수 없는 항목입니다. 직접 적어 주세요."
+            }
+          ],
+          "sections": [
+            {
+              "heading": "사건 경위",
+              "note": "자료에 적힌 날짜와 문구를 시간순으로 옮긴 것입니다. 문장을 다듬어 쓰세요.",
+              "lines": [
+                {
+                  "date": "2024. 3. 12.",
+                  "text": "8,500,000원 송금",
+                  "level": "statement",
+                  "source": "고소장_2024.jpg 5줄"
+                },
+                {
+                  "date": "2024. 3. 20.",
+                  "text": "접 수 증",
+                  "level": "record",
+                  "source": "접수증_2024.jpg 1줄"
+                },
+                {
+                  "date": "2026. 8. 25.",
+                  "text": "수사결과 통지서",
+                  "level": "record",
+                  "source": "불송치_결정통지서.jpg 1줄"
+                },
+                {
+                  "date": null,
+                  "text": "죄명 사기",
+                  "level": "statement",
+                  "source": "고소장_2024.jpg 4줄"
+                }
+              ]
+            },
+            {
+              "heading": "이의 사유",
+              "note": "타래는 이 칸을 대신 쓰지 않습니다. 왜 결정에 동의할 수 없는지는 직접 적어 주세요.",
+              "lines": []
+            }
+          ],
+          "dropped": 0
+        }
+      },
+      {
+        "rule_no": 9,
+        "action": "ACT-근거보완",
+        "label": "주장을 뒷받침할 근거 자료 보완",
+        "why": "사건 발생 시점: 올린 자료에서 찾지 못했습니다",
+        "rule_why": "근거 없는 주장은 판단 대상이 되지 않는다",
+        "due": null,
+        "state": "no_submission",
+        "rows": [],
+        "prepare": null,
+        "note": "원본 출처나 감정 결과를 확보하는 단계라 수사기관에 낼 서류가 아직 없다. 자료를 확보한 뒤에는 새 정보 제출(ACT-신규정보제출) 경로를 쓴다",
+        "unverified": true,
+        "also": [
+          {
+            "rule_no": 9,
+            "action": "ACT-근거보완",
+            "label": "주장을 뒷받침할 근거 자료 보완",
+            "why": "근거 없는 주장은 판단 대상이 되지 않는다"
+          },
+          {
+            "rule_no": 10,
+            "action": "ACT-공백보완",
+            "label": "기록이 빈 기간의 자료 확보",
+            "why": "기록 공백은 반박 여지를 남긴다"
+          }
+        ],
+        "submit_to": null,
+        "form_name": null,
+        "draft": null
+      },
+      {
+        "rule_no": 10,
+        "action": "ACT-공백보완",
+        "label": "기록이 빈 기간의 자료 확보",
+        "why": "‘신고’ 단계에 해당하는 자료가 없습니다",
+        "rule_why": "기록 공백은 반박 여지를 남긴다",
+        "due": null,
+        "state": "no_submission",
+        "rows": [],
+        "prepare": null,
+        "note": "기록이 비어 있는 기간의 자료를 모으는 단계라 수사기관에 낼 서류가 아직 없다. 자료를 확보한 뒤에는 새 정보 제출(ACT-신규정보제출) 경로를 쓴다",
+        "unverified": true,
+        "also": [
+          {
+            "rule_no": 9,
+            "action": "ACT-근거보완",
+            "label": "주장을 뒷받침할 근거 자료 보완",
+            "why": "근거 없는 주장은 판단 대상이 되지 않는다"
+          },
+          {
+            "rule_no": 10,
+            "action": "ACT-공백보완",
+            "label": "기록이 빈 기간의 자료 확보",
+            "why": "기록 공백은 반박 여지를 남긴다"
+          }
+        ],
+        "submit_to": null,
+        "form_name": null,
+        "draft": null
+      }
+    ],
+    "response_choices": [
+      "불송치",
+      "불기소",
+      "항고 기각",
+      "피의자중지",
+      "참고인중지",
+      "기소"
+    ],
+    "outcomes": {
+      "불송치": {
+        "st": "경찰 불송치",
+        "next": "기한 안에 결정에 대한 불복 절차 진행",
+        "next_key": "ACT-불복기한",
+        "deadlines": []
+      },
+      "불기소": {
+        "st": "검찰 불기소",
+        "next": "기한 안에 결정에 대한 불복 절차 진행",
+        "next_key": "ACT-불복기한",
+        "deadlines": [
+          {
+            "label": "검찰 항고 기한",
+            "period_days": 30,
+            "statute": "검찰청법 제10조",
+            "submit_to": "불기소 처분을 한 검사가 속한 지방검찰청 또는 지청을 거쳐 관할 고등검찰청 검사장"
+          }
+        ]
+      },
+      "항고 기각": {
+        "st": "이의신청/항고 중",
+        "next": "기한 안에 결정에 대한 불복 절차 진행",
+        "next_key": "ACT-불복기한",
+        "deadlines": [
+          {
+            "label": "법원 재정신청 기한",
+            "period_days": 10,
+            "statute": "형사소송법 제260조 제3항",
+            "submit_to": "지방검찰청 검사장 또는 지청장"
+          }
+        ]
+      },
+      "피의자중지": {
+        "st": "피의자 중지",
+        "next": "주장을 뒷받침할 근거 자료 보완",
+        "next_key": "ACT-근거보완",
+        "deadlines": [
+          {
+            "label": "수사중지 이의제기 기한",
+            "period_days": 30,
+            "statute": "경찰수사규칙 제101조 (검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정 제54조 제1항)",
+            "submit_to": "해당 사법경찰관이 소속된 바로 위 상급경찰관서의 장 (소속 경찰관서에 제출하면 상급관서로 송부된다)"
+          }
+        ]
+      },
+      "참고인중지": {
+        "st": "참고인 중지",
+        "next": "주장을 뒷받침할 근거 자료 보완",
+        "next_key": "ACT-근거보완",
+        "deadlines": [
+          {
+            "label": "수사중지 이의제기 기한",
+            "period_days": 30,
+            "statute": "경찰수사규칙 제101조 (검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정 제54조 제1항)",
+            "submit_to": "해당 사법경찰관이 소속된 바로 위 상급경찰관서의 장 (소속 경찰관서에 제출하면 상급관서로 송부된다)"
+          }
+        ]
+      },
+      "기소": {
+        "st": "재판 진행 중",
+        "next": "주장을 뒷받침할 근거 자료 보완",
+        "next_key": "ACT-근거보완",
+        "deadlines": []
+      }
+    }
+  },
+  {
+    "id": "blurred_test",
+    "title": "흐린 통지서 (시험)",
+    "type": "investigation_suspended",
+    "type_label": "수사중지 사건",
+    "as_of": "2026.09.16",
+    "period": "2022.02 – 2024.05",
+    "doc_count": 3,
+    "need_count": 7,
+    "stages": [
+      {
+        "label": "고소",
+        "state": "done"
+      },
+      {
+        "label": "접수",
+        "state": "done"
+      },
+      {
+        "label": "수사",
+        "state": "todo"
+      },
+      {
+        "label": "중지",
+        "state": "current"
+      },
+      {
+        "label": "재개",
+        "state": "todo"
+      }
+    ],
+    "sources": [
+      {
+        "kind": "IMG",
+        "name": "고소장_2022.jpg"
+      },
+      {
+        "kind": "IMG",
+        "name": "접수증_2022.jpg"
+      },
+      {
+        "kind": "IMG",
+        "name": "수사결과_통지서_흐림.jpg"
+      }
+    ],
+    "timeline": [
+      {
+        "type": "event",
+        "time": "2022.02.14",
+        "title": "2,300,000원 송금",
+        "full": "2,300,000원 송금",
+        "kind": "claim",
+        "badge": "주장 · 미확인",
+        "conflict": false,
+        "needs_date": false,
+        "source": "출처 ①  고소장_2022.jpg · 4줄 외 1곳",
+        "sources": [
+          {
+            "name": "고소장_2022.jpg",
+            "line": 4,
+            "quote": "2022. 2. 14. 중고 카메라 대금으로 2,300,000원을 송금하였습니다."
+          },
+          {
+            "name": "고소장_2022.jpg",
+            "line": 4,
+            "quote": "2,300,000원"
+          }
+        ]
+      },
+      {
+        "type": "event",
+        "time": "2022.03.02",
+        "title": "○○경찰서에 고소하였습니다",
+        "full": "2022. 3. 2. ○○경찰서에 고소하였습니다.",
+        "kind": "claim",
+        "badge": "주장 · 미확인",
+        "conflict": false,
+        "needs_date": false,
+        "source": "출처 ①  고소장_2022.jpg · 5줄",
+        "sources": [
+          {
+            "name": "고소장_2022.jpg",
+            "line": 5,
+            "quote": "2022. 3. 2. ○○경찰서에 고소하였습니다."
+          }
+        ]
+      },
+      {
+        "type": "event",
+        "time": "2022.03.02\n09:40",
+        "title": "접 수 증",
+        "full": "접 수 증",
+        "kind": "verified",
+        "badge": "확인됨",
+        "conflict": false,
+        "needs_date": false,
+        "source": "출처 ②  접수증_2022.jpg · 1줄 외 1곳",
+        "sources": [
+          {
+            "name": "접수증_2022.jpg",
+            "line": 1,
+            "quote": "접 수 증"
+          },
+          {
+            "name": "접수증_2022.jpg",
+            "line": 3,
+            "quote": "2022. 3. 2. 09:40"
+          }
+        ]
+      },
+      {
+        "type": "gap",
+        "range": "2022.03.03 – 2024.05.30",
+        "text": "이 기간의 기록이 없어요 (약 2.2년)"
+      },
+      {
+        "type": "event",
+        "time": "2024.05.30",
+        "title": "수사결과 통지서",
+        "full": "수사결과 통지서",
+        "kind": "verified",
+        "badge": "확인됨",
+        "conflict": false,
+        "needs_date": false,
+        "source": "출처 ③  수사결과_통지서_흐림.jpg · 1줄 외 1곳",
+        "sources": [
+          {
+            "name": "수사결과_통지서_흐림.jpg",
+            "line": 1,
+            "quote": "수사결과 통지서"
+          },
+          {
+            "name": "수사결과_통지서_흐림.jpg",
+            "line": 5,
+            "quote": "2024. 5. 30."
+          }
+        ]
+      }
+    ],
+    "people": [
+      {
+        "label": "사람",
+        "items": [
+          {
+            "name": "강태오",
+            "roles": [
+              "고소인",
+              "신고인"
+            ],
+            "docs": [
+              "수사결과_통지서_흐림.jpg",
+              "접수증_2022.jpg"
+            ],
+            "same_as": []
+          }
+        ]
+      },
+      {
+        "label": "기관",
+        "items": [
+          {
+            "name": "**경찰서",
+            "roles": [],
+            "docs": [
+              "고소장_2022.jpg",
+              "수사결과_통지서_흐림.jpg"
+            ],
+            "same_as": []
+          }
+        ]
+      },
+      {
+        "label": "사건번호",
+        "items": [
+          {
+            "name": "2022형제1077",
+            "roles": [],
+            "docs": [
+              "수사결과_통지서_흐림.jpg"
+            ],
+            "same_as": []
+          }
+        ]
+      },
+      {
+        "label": "접수번호",
+        "items": [
+          {
+            "name": "2022-003318",
+            "roles": [],
+            "docs": [
+              "접수증_2022.jpg"
+            ],
+            "same_as": []
+          }
+        ]
+      }
+    ],
+    "slots": [
+      {
+        "slot": "사건 발생 시점",
+        "value": null,
+        "state": "자료에 없음",
+        "severity": "unverified",
+        "said": []
+      },
+      {
+        "slot": "접수번호",
+        "value": "2022-003318",
+        "state": "기록으로 확인",
+        "severity": "verified",
+        "said": [
+          {
+            "value": "2022-003318",
+            "doc": "접수증_2022.jpg",
+            "speaker": "접수증_2022.jpg 발급처",
+            "record": true
+          }
+        ]
+      },
+      {
+        "slot": "사건번호",
+        "value": "2022형제1077",
+        "state": "기록으로 확인",
+        "severity": "verified",
+        "said": [
+          {
+            "value": "2022형제1077",
+            "doc": "수사결과_통지서_흐림.jpg",
+            "speaker": "**경찰서",
+            "record": true
+          }
+        ]
+      },
+      {
+        "slot": "담당 수사관",
+        "value": null,
+        "state": "자료에 없음",
+        "severity": "unverified",
+        "said": []
+      },
+      {
+        "slot": "결정 내용",
+        "value": null,
+        "state": "unreadable",
+        "severity": "unknown",
+        "said": []
+      },
+      {
+        "slot": "결정일",
+        "value": "2024-05-30",
+        "state": "기록으로 확인",
+        "severity": "verified",
+        "said": [
+          {
+            "value": "2024-05-30",
+            "doc": "수사결과_통지서_흐림.jpg",
+            "speaker": "**경찰서",
+            "record": true
+          }
+        ]
+      }
+    ],
+    "issues": [
+      {
+        "label": "빠진 정보",
+        "severity": "gap",
+        "items": [
+          {
+            "text": "사건 발생 시점: 올린 자료에서 찾지 못했습니다",
+            "how": "확인한 자료 4개에서 찾지 못함"
+          },
+          {
+            "text": "‘수사결과 통지서’(2024-05-30) 이후 기관의 진행 기록이 없습니다 (839일 경과)",
+            "how": "근거 · 수사결과_통지서_흐림.jpg 1줄"
+          },
+          {
+            "text": "‘발생’ 단계에 해당하는 자료가 없습니다",
+            "how": "확인한 자료 4개에서 찾지 못함"
+          },
+          {
+            "text": "‘수사’ 단계에 해당하는 자료가 없습니다",
+            "how": "확인한 자료 4개에서 찾지 못함"
+          },
+          {
+            "text": "2022-03-03 ~ 2024-05-30 사이의 기록이 없습니다 (약 2.2년)",
+            "how": "근거 · 고소장_2022.jpg 5줄"
+          }
+        ]
+      },
+      {
+        "label": "읽히지 않은 부분",
+        "severity": "gap",
+        "items": [
+          {
+            "text": "결정 내용: 올린 자료에서 찾지 못했고, 해당 내용이 있을 수 있는 부분이 읽히지 않았습니다",
+            "how": "근거 · 수사결과_통지서_흐림.jpg 6줄"
+          },
+          {
+            "text": "수사결과_통지서_흐림.jpg에서 읽히지 않은 부분이 2곳 있습니다 (6, 7줄). 사진을 보고 알려주세요",
+            "how": "근거 · 수사결과_통지서_흐림.jpg 6줄"
+          }
+        ]
+      }
+    ],
+    "next_action": {
+      "rule_no": 4,
+      "action": "ACT-단계확인",
+      "label": "지금 사건이 어느 단계인지 확인",
+      "why": "단계를 모르면 나머지 판단이 전부 무의미하다",
+      "rule_why": "단계를 모르면 나머지 판단이 전부 무의미하다",
+      "due": null,
+      "state": "filled",
+      "rows": [
+        {
+          "k": "무엇을",
+          "v": "형사사법포털 사건조회 (온라인)"
+        },
+        {
+          "k": "어디에",
+          "v": "형사사법포털 www.kics.go.kr — 형사사법공통시스템운영단 1588-4771"
+        }
+      ],
+      "prepare": {
+        "done": 1,
+        "total": 2,
+        "items": [
+          {
+            "label": "인증서 (형사사법포털 로그인용)",
+            "state": "미보유",
+            "required": true
+          },
+          {
+            "label": "사건 접수증 또는 통지서",
+            "state": "보유",
+            "required": false
+          }
+        ]
+      },
+      "note": "고소사건은 고소인·피고소인·피해자, 고발사건은 고발인·피고발인·피해자, 인지사건은 피의자·피해자가 조회할 수 있다. 회원가입 후 인증서로 로그인해야 한다",
+      "unverified": true,
+      "also": [
+        {
+          "rule_no": 8,
+          "action": "ACT-기록열람",
+          "label": "수사 기록 열람 신청",
+          "why": "수사 기록 없이는 다른 판단이 불가능하다"
+        },
+        {
+          "rule_no": 9,
+          "action": "ACT-근거보완",
+          "label": "주장을 뒷받침할 근거 자료 보완",
+          "why": "근거 없는 주장은 판단 대상이 되지 않는다"
+        },
+        {
+          "rule_no": 10,
+          "action": "ACT-공백보완",
+          "label": "기록이 빈 기간의 자료 확보",
+          "why": "기록 공백은 반박 여지를 남긴다"
+        }
+      ],
+      "submit_to": "형사사법포털 www.kics.go.kr — 형사사법공통시스템운영단 1588-4771",
+      "form_name": "형사사법포털 사건조회 (온라인)",
+      "draft": null
+    },
+    "actions": [
+      {
+        "rule_no": 4,
+        "action": "ACT-단계확인",
+        "label": "지금 사건이 어느 단계인지 확인",
+        "why": "단계를 모르면 나머지 판단이 전부 무의미하다",
+        "rule_why": "단계를 모르면 나머지 판단이 전부 무의미하다",
+        "due": null,
+        "state": "filled",
+        "rows": [
+          {
+            "k": "무엇을",
+            "v": "형사사법포털 사건조회 (온라인)"
+          },
+          {
+            "k": "어디에",
+            "v": "형사사법포털 www.kics.go.kr — 형사사법공통시스템운영단 1588-4771"
+          }
+        ],
+        "prepare": {
+          "done": 1,
+          "total": 2,
+          "items": [
+            {
+              "label": "인증서 (형사사법포털 로그인용)",
+              "state": "미보유",
+              "required": true
+            },
+            {
+              "label": "사건 접수증 또는 통지서",
+              "state": "보유",
+              "required": false
+            }
+          ]
+        },
+        "note": "고소사건은 고소인·피고소인·피해자, 고발사건은 고발인·피고발인·피해자, 인지사건은 피의자·피해자가 조회할 수 있다. 회원가입 후 인증서로 로그인해야 한다",
+        "unverified": true,
+        "also": [
+          {
+            "rule_no": 8,
+            "action": "ACT-기록열람",
+            "label": "수사 기록 열람 신청",
+            "why": "수사 기록 없이는 다른 판단이 불가능하다"
+          },
+          {
+            "rule_no": 9,
+            "action": "ACT-근거보완",
+            "label": "주장을 뒷받침할 근거 자료 보완",
+            "why": "근거 없는 주장은 판단 대상이 되지 않는다"
+          },
+          {
+            "rule_no": 10,
+            "action": "ACT-공백보완",
+            "label": "기록이 빈 기간의 자료 확보",
+            "why": "기록 공백은 반박 여지를 남긴다"
+          }
+        ],
+        "submit_to": "형사사법포털 www.kics.go.kr — 형사사법공통시스템운영단 1588-4771",
+        "form_name": "형사사법포털 사건조회 (온라인)",
+        "draft": null
+      },
+      {
+        "rule_no": 8,
+        "action": "ACT-기록열람",
+        "label": "수사 기록 열람 신청",
+        "why": "‘수사결과 통지서’(2024-05-30) 이후 기관의 진행 기록이 없습니다 (839일 경과)",
+        "rule_why": "수사 기록 없이는 다른 판단이 불가능하다",
+        "due": null,
+        "state": "filled",
+        "rows": [
+          {
+            "k": "무엇을",
+            "v": "수사기록 열람·등사 신청서"
+          },
+          {
+            "k": "어디에",
+            "v": "사건을 수사한 경찰관서 또는 검찰청"
+          },
+          {
+            "k": "근거",
+            "v": "검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정 제69조 · 사건기록 열람·등사에 관한 업무처리 지침"
+          }
+        ],
+        "prepare": {
+          "done": 0,
+          "total": 2,
+          "items": [
+            {
+              "label": "수사기록 열람·등사 신청서",
+              "state": "생성가능",
+              "required": true
+            },
+            {
+              "label": "신청인 신분 확인 서류",
+              "state": "미보유",
+              "required": true
+            }
+          ]
+        },
+        "note": "불송치·불기소로 끝난 사건은 정보공개청구가 거부되는 일이 잦다. 거부를 전제로 다음 경로(이의신청·행정소송)까지 함께 안내해야 한다.",
+        "unverified": true,
+        "also": [
+          {
+            "rule_no": 8,
+            "action": "ACT-기록열람",
+            "label": "수사 기록 열람 신청",
+            "why": "수사 기록 없이는 다른 판단이 불가능하다"
+          },
+          {
+            "rule_no": 9,
+            "action": "ACT-근거보완",
+            "label": "주장을 뒷받침할 근거 자료 보완",
+            "why": "근거 없는 주장은 판단 대상이 되지 않는다"
+          },
+          {
+            "rule_no": 10,
+            "action": "ACT-공백보완",
+            "label": "기록이 빈 기간의 자료 확보",
+            "why": "기록 공백은 반박 여지를 남긴다"
+          }
+        ],
+        "submit_to": "사건을 수사한 경찰관서 또는 검찰청",
+        "form_name": "수사기록 열람·등사 신청서",
+        "draft": {
+          "is_draft": true,
+          "prose": null,
+          "form_name": "수사기록 열람·등사 신청서",
+          "form_source": "검찰보존사무규칙 별지 제5호서식 「사건기록 열람·등사 신청서」 (개정 2021. 1. 1.)",
+          "form_url": "https://law.go.kr/flDownload.do?gubun=&flSeq=132313759",
+          "fields": [
+            {
+              "label": "사건번호",
+              "value": "2022형제1077",
+              "from": "case_record"
+            },
+            {
+              "label": "접수번호",
+              "value": "2022-003318",
+              "from": "case_record"
+            },
+            {
+              "label": "결정일",
+              "value": "2024-05-30",
+              "from": "case_record"
+            },
+            {
+              "label": "서식",
+              "value": "수사기록 열람·등사 신청서",
+              "from": "knowledge_base"
+            },
+            {
+              "label": "제출처",
+              "value": "사건을 수사한 경찰관서 또는 검찰청",
+              "from": "knowledge_base"
+            },
+            {
+              "label": "근거 법령",
+              "value": "검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정 제69조 · 사건기록 열람·등사에 관한 업무처리 지침",
+              "from": "knowledge_base"
+            }
+          ],
+          "unfilled": [
+            {
+              "label": "담당 수사관",
+              "reason": "자료에서 찾지 못했습니다."
+            },
+            {
+              "label": "결정 내용",
+              "reason": "자료에서 찾지 못했습니다."
+            },
+            {
+              "label": "신청인 성명",
+              "reason": "자료에 있을 수 없는 항목입니다. 직접 적어 주세요."
+            },
+            {
+              "label": "신청인 연락처",
+              "reason": "자료에 있을 수 없는 항목입니다. 직접 적어 주세요."
+            },
+            {
+              "label": "신청인 주소",
+              "reason": "자료에 있을 수 없는 항목입니다. 직접 적어 주세요."
+            }
+          ],
+          "sections": [
+            {
+              "heading": "사건 경위",
+              "note": "자료에 적힌 날짜와 문구를 시간순으로 옮긴 것입니다. 문장을 다듬어 쓰세요.",
+              "lines": [
+                {
+                  "date": "2022. 2. 14.",
+                  "text": "2,300,000원 송금",
+                  "level": "statement",
+                  "source": "고소장_2022.jpg 4줄"
+                },
+                {
+                  "date": "2022. 3. 2.",
+                  "text": "2022. 3. 2. ○○경찰서에 고소하였습니다.",
+                  "level": "statement",
+                  "source": "고소장_2022.jpg 5줄"
+                },
+                {
+                  "date": "2022. 3. 2.",
+                  "text": "접 수 증",
+                  "level": "record",
+                  "source": "접수증_2022.jpg 1줄"
+                },
+                {
+                  "date": "2024. 5. 30.",
+                  "text": "수사결과 통지서",
+                  "level": "record",
+                  "source": "수사결과_통지서_흐림.jpg 1줄"
+                }
+              ]
+            },
+            {
+              "heading": "이의 사유",
+              "note": "타래는 이 칸을 대신 쓰지 않습니다. 왜 결정에 동의할 수 없는지는 직접 적어 주세요.",
+              "lines": []
+            }
+          ],
+          "dropped": 0
+        }
+      },
+      {
+        "rule_no": 9,
+        "action": "ACT-근거보완",
+        "label": "주장을 뒷받침할 근거 자료 보완",
+        "why": "결정 내용: 올린 자료에서 찾지 못했고, 해당 내용이 있을 수 있는 부분이 읽히지 않았습니다",
+        "rule_why": "근거 없는 주장은 판단 대상이 되지 않는다",
+        "due": null,
+        "state": "no_submission",
+        "rows": [],
+        "prepare": null,
+        "note": "원본 출처나 감정 결과를 확보하는 단계라 수사기관에 낼 서류가 아직 없다. 자료를 확보한 뒤에는 새 정보 제출(ACT-신규정보제출) 경로를 쓴다",
+        "unverified": true,
+        "also": [
+          {
+            "rule_no": 8,
+            "action": "ACT-기록열람",
+            "label": "수사 기록 열람 신청",
+            "why": "수사 기록 없이는 다른 판단이 불가능하다"
+          },
+          {
+            "rule_no": 9,
+            "action": "ACT-근거보완",
+            "label": "주장을 뒷받침할 근거 자료 보완",
+            "why": "근거 없는 주장은 판단 대상이 되지 않는다"
+          },
+          {
+            "rule_no": 10,
+            "action": "ACT-공백보완",
+            "label": "기록이 빈 기간의 자료 확보",
+            "why": "기록 공백은 반박 여지를 남긴다"
+          }
+        ],
+        "submit_to": null,
+        "form_name": null,
+        "draft": null
+      },
+      {
+        "rule_no": 10,
+        "action": "ACT-공백보완",
+        "label": "기록이 빈 기간의 자료 확보",
+        "why": "‘발생’ 단계에 해당하는 자료가 없습니다",
+        "rule_why": "기록 공백은 반박 여지를 남긴다",
+        "due": null,
+        "state": "no_submission",
+        "rows": [],
+        "prepare": null,
+        "note": "기록이 비어 있는 기간의 자료를 모으는 단계라 수사기관에 낼 서류가 아직 없다. 자료를 확보한 뒤에는 새 정보 제출(ACT-신규정보제출) 경로를 쓴다",
+        "unverified": true,
+        "also": [
+          {
+            "rule_no": 8,
+            "action": "ACT-기록열람",
+            "label": "수사 기록 열람 신청",
+            "why": "수사 기록 없이는 다른 판단이 불가능하다"
+          },
+          {
+            "rule_no": 9,
+            "action": "ACT-근거보완",
+            "label": "주장을 뒷받침할 근거 자료 보완",
+            "why": "근거 없는 주장은 판단 대상이 되지 않는다"
+          },
+          {
+            "rule_no": 10,
+            "action": "ACT-공백보완",
+            "label": "기록이 빈 기간의 자료 확보",
+            "why": "기록 공백은 반박 여지를 남긴다"
+          }
+        ],
+        "submit_to": null,
+        "form_name": null,
+        "draft": null
+      }
+    ],
+    "response_choices": [
+      "불송치",
+      "불기소",
+      "항고 기각",
+      "피의자중지",
+      "참고인중지",
+      "기소"
+    ],
+    "outcomes": {
+      "불송치": {
+        "st": "경찰 불송치",
+        "next": "기한 안에 결정에 대한 불복 절차 진행",
+        "next_key": "ACT-불복기한",
+        "deadlines": []
+      },
+      "불기소": {
+        "st": "검찰 불기소",
+        "next": "기한 안에 결정에 대한 불복 절차 진행",
+        "next_key": "ACT-불복기한",
+        "deadlines": [
+          {
+            "label": "검찰 항고 기한",
+            "period_days": 30,
+            "statute": "검찰청법 제10조",
+            "submit_to": "불기소 처분을 한 검사가 속한 지방검찰청 또는 지청을 거쳐 관할 고등검찰청 검사장"
+          }
+        ]
+      },
+      "항고 기각": {
+        "st": "이의신청/항고 중",
+        "next": "기한 안에 결정에 대한 불복 절차 진행",
+        "next_key": "ACT-불복기한",
+        "deadlines": [
+          {
+            "label": "법원 재정신청 기한",
+            "period_days": 10,
+            "statute": "형사소송법 제260조 제3항",
+            "submit_to": "지방검찰청 검사장 또는 지청장"
+          }
+        ]
+      },
+      "피의자중지": {
+        "st": "피의자 중지",
+        "next": "수사 기록 열람 신청",
+        "next_key": "ACT-기록열람",
+        "deadlines": [
+          {
+            "label": "수사중지 이의제기 기한",
+            "period_days": 30,
+            "statute": "경찰수사규칙 제101조 (검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정 제54조 제1항)",
+            "submit_to": "해당 사법경찰관이 소속된 바로 위 상급경찰관서의 장 (소속 경찰관서에 제출하면 상급관서로 송부된다)"
+          }
+        ]
+      },
+      "참고인중지": {
+        "st": "참고인 중지",
+        "next": "수사 기록 열람 신청",
+        "next_key": "ACT-기록열람",
+        "deadlines": [
+          {
+            "label": "수사중지 이의제기 기한",
+            "period_days": 30,
+            "statute": "경찰수사규칙 제101조 (검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정 제54조 제1항)",
+            "submit_to": "해당 사법경찰관이 소속된 바로 위 상급경찰관서의 장 (소속 경찰관서에 제출하면 상급관서로 송부된다)"
+          }
+        ]
+      },
+      "기소": {
+        "st": "재판 진행 중",
+        "next": "수사 기록 열람 신청",
+        "next_key": "ACT-기록열람",
+        "deadlines": []
+      }
+    }
   }
 ];

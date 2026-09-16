@@ -26,10 +26,17 @@ def views(export):
 
 
 def test_예시_사건을_모두_내보낸다(export, views):
-    assert set(views) == {case_id for case_id, _ in export.CASES}
+    """세 건은 반드시 있다. 직접 만든 사건을 얹었으면 더 있을 수 있다(EXTRA_CASES)."""
+    assert {case_id for case_id, _ in export.CASES} <= set(views)
     for v in views.values():
         assert v["stages"] and v["timeline"] and v["issues"]
         assert v["next_action"] is not None
+
+
+def test_직접_만든_사건이_없으면_세_건만_나온다(export, views, monkeypatch):
+    """목록 파일이 없을 때 지금까지와 똑같이 도는지 — 있던 동작을 바꾸지 않는다."""
+    monkeypatch.setattr(export, "EXTRA_CASES", export.ROOT / "없는파일.json")
+    assert {v["id"] for v in export.build_all()} == {case_id for case_id, _ in export.CASES}
 
 
 def test_절차가_확인되지_않았으면_칸을_채우지_않는다(views):
