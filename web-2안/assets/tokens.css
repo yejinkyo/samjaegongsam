@@ -1,0 +1,43 @@
+/* 피그마 '타래' 파일의 변수·텍스트 스타일·효과 스타일을 그대로 옮긴 토큰.
+   이름은 피그마 변수 이름(bg/canvas → --bg-canvas)과 1:1로 맞춘다. */
+
+:root {
+  --bg-canvas: #faf9fe;
+  --bg-surface: #ffffff;
+  --bg-sunken: #f1effc;
+  --bg-brand-soft: #efeafb;
+  --text-primary: #181818;
+  --text-secondary: #4e4e5a;
+  --text-tertiary: #8b8b98;
+  --text-on-brand: #ffffff;
+  --border-default: #ebeaf2;
+  --border-strong: #dad6ee;
+  --brand-primary: #5e3dbb;
+  --brand-strong: #4a2ea0;
+  --status-verified: #2c7a8c;
+  --status-verified-bg: #e3f3f6;
+  --status-unverified: #96690f;
+  --status-unverified-bg: #fcf2dd;
+  --status-conflict: #c24a38;
+  --status-conflict-bg: #fdece7;
+  --status-mine: #7b7590;
+
+  /* Shadow/Card */
+  --shadow-card: 0 1px 2px 0 rgba(24, 24, 24, 0.04), 0 12px 32px -12px rgba(46, 27, 97, 0.1);
+
+  /* 이름(타래)에만 쓰는 글꼴 — 본문은 아래 --font 를 그대로 쓴다 */
+  --font-brand: "Gugi", "IBM Plex Sans KR", sans-serif;
+  --font: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+}
+
+/* 텍스트 스타일 — 피그마 이름: Display/32, Title/24 … */
+.t-display { font: 700 32px/1.3 var(--font); letter-spacing: -0.48px; }
+.t-title { font: 600 24px/1.35 var(--font); letter-spacing: -0.24px; }
+.t-heading { font: 600 19px/1.4 var(--font); letter-spacing: -0.095px; }
+.t-body-l { font: 400 17px/1.55 var(--font); }
+.t-body-l-strong { font: 500 17px/1.5 var(--font); letter-spacing: -0.051px; }
+.t-body-m { font: 400 15px/1.55 var(--font); }
+.t-body-m-strong { font: 500 15px/1.55 var(--font); }
+.t-body-s { font: 400 13px/1.5 var(--font); }
+.t-label { font: 600 13px/1.4 var(--font); }
+.t-caption { font: 500 12px/1.4 var(--font); }
