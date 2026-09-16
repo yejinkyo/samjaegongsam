@@ -513,11 +513,21 @@ def _draft(card, result: dict[str, Any], action: str | None) -> dict[str, Any] |
     """낼 서류의 초안. 만들 서류가 정해져 있지 않으면 화면도 아무것도 그리지 않는다."""
     from action_engine.draft import build_draft
 
+    from action_engine.polish import polish
+
     d = build_draft(result, card, action=action)
     if not d:
         return None
+
+    # 문장으로 엮는 것은 선택이다. 키가 없거나 검사에 걸리면 골격만 싣는다 —
+    # 화면은 둘 다 그릴 줄 알아야 하고, 없다고 비지 않는다.
+    prose = polish(d)
+    if prose.rejected:
+        print(f"  {action}: 문장 다듬기를 건너뜁니다 — {prose.rejected}")
+
     return {
         "is_draft": d.is_draft,
+        "prose": prose.text,
         "form_name": d.form_name,
         "form_source": d.form_source,
         "form_url": d.form_url,

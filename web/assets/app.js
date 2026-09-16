@@ -1045,6 +1045,11 @@
     d.sections.forEach(function (sec) {
       lines.push("");
       lines.push("■ " + sec.heading);
+      if (sec.heading === "사건 경위" && d.prose) {
+        lines.push("  " + d.prose);
+        lines.push("");
+        lines.push("  (아래는 위 문장이 어느 자료에서 나왔는지입니다)");
+      }
       if (!sec.lines.length && sec.note) lines.push("  (" + sec.note + ")");
       sec.lines.forEach(function (ln) {
         lines.push("  " + (ln.date ? ln.date + " " : "") + ln.text
@@ -1091,6 +1096,12 @@
 
     d.sections.forEach(function (sec) {
       body.appendChild(h("p", { class: "draft__h t-label", text: sec.heading }));
+      // 문장으로 엮은 것이 있으면 먼저 보여주고, 아래 줄들이 그 출처가 된다.
+      // 없으면 줄만 나온다 — 그것만으로도 초안은 성립한다.
+      if (sec.heading === "사건 경위" && d.prose) {
+        body.appendChild(h("p", { class: "draft__prose t-body-m", text: d.prose }));
+        body.appendChild(h("p", { class: "draft__note t-caption", text: "위 문장은 아래 줄에서만 만들었어요. 자료에 없는 말은 들어가지 않습니다." }));
+      }
       if (sec.note) body.appendChild(h("p", { class: "draft__note t-body-s", text: sec.note }));
       if (!sec.lines.length) return;
       body.appendChild(h("ol", { class: "draft__lines" }, sec.lines.map(function (ln) {

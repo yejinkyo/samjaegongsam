@@ -614,6 +614,12 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .draft__h { margin-top: 6px; color: var(--text-tertiary); }
 .draft__note { color: var(--text-secondary); }
 
+/* 문장으로 엮은 경위. 아래 줄들이 그 출처라 한 덩어리로 묶어 둔다 */
+.draft__prose {
+  padding: 14px 16px; border-radius: 10px;
+  background: var(--bg-brand-soft); color: var(--text-primary);
+  line-height: 1.75;
+}
 .draft__fields { display: flex; flex-direction: column; gap: 6px; }
 .draft__field {
   display: flex; align-items: flex-start; gap: 12px;

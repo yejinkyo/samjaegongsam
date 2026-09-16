@@ -639,6 +639,7 @@ window.TARAE_CASES = [
         "form_name": "수사기록 열람·등사 신청서",
         "draft": {
           "is_draft": true,
+          "prose": null,
           "form_name": "수사기록 열람·등사 신청서",
           "form_source": "검찰보존사무규칙 별지 제5호서식 「사건기록 열람·등사 신청서」 (개정 2021. 1. 1.)",
           "form_url": "https://law.go.kr/flDownload.do?gubun=&flSeq=132313759",
@@ -1552,6 +1553,7 @@ window.TARAE_CASES = [
         "form_name": "수사기록 열람·등사 신청서",
         "draft": {
           "is_draft": true,
+          "prose": null,
           "form_name": "수사기록 열람·등사 신청서",
           "form_source": "검찰보존사무규칙 별지 제5호서식 「사건기록 열람·등사 신청서」 (개정 2021. 1. 1.)",
           "form_url": "https://law.go.kr/flDownload.do?gubun=&flSeq=132313759",
@@ -2270,6 +2272,7 @@ window.TARAE_CASES = [
       "form_name": "수사중지 결정 이의제기서",
       "draft": {
         "is_draft": true,
+        "prose": null,
         "form_name": "수사중지 결정 이의제기서",
         "form_source": "경찰수사규칙 별지 제110호서식",
         "form_url": "https://law.go.kr/flDownload.do?gubun=&flSeq=111544061&bylClsCd=110202",
@@ -2454,6 +2457,7 @@ window.TARAE_CASES = [
         "form_name": "수사중지 결정 이의제기서",
         "draft": {
           "is_draft": true,
+          "prose": null,
           "form_name": "수사중지 결정 이의제기서",
           "form_source": "경찰수사규칙 별지 제110호서식",
           "form_url": "https://law.go.kr/flDownload.do?gubun=&flSeq=111544061&bylClsCd=110202",
@@ -2671,6 +2675,7 @@ window.TARAE_CASES = [
         "form_name": "수사기록 열람·등사 신청서",
         "draft": {
           "is_draft": true,
+          "prose": null,
           "form_name": "수사기록 열람·등사 신청서",
           "form_source": "검찰보존사무규칙 별지 제5호서식 「사건기록 열람·등사 신청서」 (개정 2021. 1. 1.)",
           "form_url": "https://law.go.kr/flDownload.do?gubun=&flSeq=132313759",
