@@ -9,6 +9,7 @@ research-engine(기능 1) 이 "무엇이 비어 있는가"까지 하고 멈춘�
 from .agencies import describe_submit_to, find_agency, find_parent, load_agencies
 from .checklist import build_checklist, load_documents
 from .codes import EXCLUDED, INF, LABELS, ST, TIM, label
+from .draft import build_draft
 from .limitation import compute_limitation, find_offence, load_offences
 from .mapping import basis_from_triggers, inf_from_triggers, resolve_inf, resolve_st, to_case_state
 from .rules import build_card, compute_deadlines, decide, run
@@ -18,9 +19,14 @@ from .schema import (
     CaseState,
     CheckItem,
     Checklist,
+    Citation,
     CodeHit,
     Confidence,
     Deadline,
+    DraftDocument,
+    DraftField,
+    DraftLine,
+    DraftSection,
     RuleHit,
     Submission,
     SubmissionResponse,
@@ -33,6 +39,7 @@ __all__ = [
     "Submission", "SubmissionResponse", "status_of", "waiting_days",
     "to_case_state", "resolve_st", "resolve_inf", "inf_from_triggers", "basis_from_triggers",
     "compute_deadlines", "decide", "run", "build_card", "build_checklist", "load_documents",
+    "build_draft", "DraftDocument", "DraftSection", "DraftLine", "DraftField", "Citation",
     "compute_limitation", "find_offence", "load_offences",
     "find_agency", "find_parent", "describe_submit_to", "load_agencies",
 ]

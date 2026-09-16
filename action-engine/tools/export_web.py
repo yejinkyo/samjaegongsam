@@ -462,6 +462,8 @@ def _action(card, hit, result: dict[str, Any]) -> dict[str, Any] | None:
         # 낸 것을 기록하는 자리. 제출처는 지식베이스 값이 있을 때만 채운다.
         "submit_to": c.submit_to if c else None,
         "form_name": c.form_name if c else None,
+        # 낼 서류가 정해진 행동에만 초안이 붙는다
+        "draft": _draft(card, result, hit.action),
     }
 
 
@@ -505,6 +507,34 @@ def _outcomes(case_id: str, result: dict[str, Any]) -> dict[str, Any]:
             } for t in live],
         }
     return out
+
+
+def _draft(card, result: dict[str, Any], action: str | None) -> dict[str, Any] | None:
+    """낼 서류의 초안. 만들 서류가 정해져 있지 않으면 화면도 아무것도 그리지 않는다."""
+    from action_engine.draft import build_draft
+
+    d = build_draft(result, card, action=action)
+    if not d:
+        return None
+    return {
+        "is_draft": d.is_draft,
+        "form_name": d.form_name,
+        "form_source": d.form_source,
+        "form_url": d.form_url,
+        "fields": [{"label": f.label, "value": f.value, "from": f.filled_from} for f in d.fields],
+        "unfilled": [{"label": f.label, "reason": f.reason} for f in d.unfilled],
+        "sections": [{
+            "heading": sec.heading,
+            "note": sec.note,
+            "lines": [{
+                "date": ln.date,
+                "text": ln.text,
+                "level": ln.evidence_level,
+                "source": (lambda c: (c.file_name or c.doc_id) + (f" {c.line}줄" if c.line else ""))(ln.citations[0]),
+            } for ln in sec.lines],
+        } for sec in d.sections],
+        "dropped": d.dropped,
+    }
 
 
 def _actions(card, result: dict[str, Any]) -> list[dict[str, Any]]:

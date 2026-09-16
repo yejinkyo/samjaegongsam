@@ -547,7 +547,8 @@ window.TARAE_CASES = [
         }
       ],
       "submit_to": null,
-      "form_name": null
+      "form_name": null,
+      "draft": null
     },
     "actions": [
       {
@@ -577,7 +578,8 @@ window.TARAE_CASES = [
           }
         ],
         "submit_to": null,
-        "form_name": null
+        "form_name": null,
+        "draft": null
       },
       {
         "rule_no": 7,
@@ -634,7 +636,115 @@ window.TARAE_CASES = [
           }
         ],
         "submit_to": "사건을 수사한 경찰관서 또는 검찰청",
-        "form_name": "수사기록 열람·등사 신청서"
+        "form_name": "수사기록 열람·등사 신청서",
+        "draft": {
+          "is_draft": true,
+          "form_name": "수사기록 열람·등사 신청서",
+          "form_source": "검찰보존사무규칙 별지 제5호서식 「사건기록 열람·등사 신청서」 (개정 2021. 1. 1.)",
+          "form_url": "https://law.go.kr/flDownload.do?gubun=&flSeq=132313759",
+          "fields": [
+            {
+              "label": "접수번호",
+              "value": "2026-0603-***",
+              "from": "case_record"
+            },
+            {
+              "label": "서식",
+              "value": "수사기록 열람·등사 신청서",
+              "from": "knowledge_base"
+            },
+            {
+              "label": "제출처",
+              "value": "사건을 수사한 경찰관서 또는 검찰청",
+              "from": "knowledge_base"
+            },
+            {
+              "label": "근거 법령",
+              "value": "검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정 제69조 · 사건기록 열람·등사에 관한 업무처리 지침",
+              "from": "knowledge_base"
+            }
+          ],
+          "unfilled": [
+            {
+              "label": "사건번호",
+              "reason": "자료에서 찾지 못했습니다."
+            },
+            {
+              "label": "담당 수사관",
+              "reason": "자료에서 찾지 못했습니다."
+            },
+            {
+              "label": "결정 내용",
+              "reason": "자료에서 찾지 못했습니다."
+            },
+            {
+              "label": "결정일",
+              "reason": "자료에서 찾지 못했습니다."
+            },
+            {
+              "label": "신청인 성명",
+              "reason": "자료에 있을 수 없는 항목입니다. 직접 적어 주세요."
+            },
+            {
+              "label": "신청인 연락처",
+              "reason": "자료에 있을 수 없는 항목입니다. 직접 적어 주세요."
+            },
+            {
+              "label": "신청인 주소",
+              "reason": "자료에 있을 수 없는 항목입니다. 직접 적어 주세요."
+            }
+          ],
+          "sections": [
+            {
+              "heading": "사건 경위",
+              "note": "자료에 적힌 날짜와 문구를 시간순으로 옮긴 것입니다. 문장을 다듬어 쓰세요.",
+              "lines": [
+                {
+                  "date": "2026. 6. 1.",
+                  "text": "네 판매 중입니다. 미개봉 새 상품이에요",
+                  "level": "statement",
+                  "source": "카톡_0601.png 3줄"
+                },
+                {
+                  "date": "2026. 6. 1.",
+                  "text": "300,000원 송금",
+                  "level": "statement",
+                  "source": "진술서.jpg 3줄"
+                },
+                {
+                  "date": "2026. 6. 1.",
+                  "text": "350,000원 송금",
+                  "level": "record",
+                  "source": "이체확인증.pdf 1줄"
+                },
+                {
+                  "date": "2026. 6. 2.",
+                  "text": "6/2 저녁 전화 안받음",
+                  "level": "statement",
+                  "source": "메모.jpg 1줄"
+                },
+                {
+                  "date": "2026. 6. 3.",
+                  "text": "6/3 사이버수사대 신고함",
+                  "level": "statement",
+                  "source": "메모.jpg 2줄"
+                },
+                {
+                  "date": "2026. 6. 3.",
+                  "text": "사이버범죄 신고 접수증",
+                  "level": "record",
+                  "source": "ECRM_접수증.pdf 1줄"
+                }
+              ]
+            },
+            {
+              "heading": "이의 사유",
+              "note": "타래는 이 칸을 대신 쓰지 않습니다. 왜 결정에 동의할 수 없는지는 직접 적어 주세요.",
+              "lines": []
+            }
+          ],
+          "dropped": 0
+        }
       },
       {
         "rule_no": 8,
@@ -663,7 +773,8 @@ window.TARAE_CASES = [
           }
         ],
         "submit_to": null,
-        "form_name": null
+        "form_name": null,
+        "draft": null
       }
     ],
     "response_choices": [
@@ -1337,7 +1448,8 @@ window.TARAE_CASES = [
         }
       ],
       "submit_to": null,
-      "form_name": null
+      "form_name": null,
+      "draft": null
     },
     "actions": [
       {
@@ -1373,7 +1485,8 @@ window.TARAE_CASES = [
           }
         ],
         "submit_to": null,
-        "form_name": null
+        "form_name": null,
+        "draft": null
       },
       {
         "rule_no": 7,
@@ -1436,7 +1549,130 @@ window.TARAE_CASES = [
           }
         ],
         "submit_to": "사건을 수사한 경찰관서 또는 검찰청",
-        "form_name": "수사기록 열람·등사 신청서"
+        "form_name": "수사기록 열람·등사 신청서",
+        "draft": {
+          "is_draft": true,
+          "form_name": "수사기록 열람·등사 신청서",
+          "form_source": "검찰보존사무규칙 별지 제5호서식 「사건기록 열람·등사 신청서」 (개정 2021. 1. 1.)",
+          "form_url": "https://law.go.kr/flDownload.do?gubun=&flSeq=132313759",
+          "fields": [
+            {
+              "label": "사건번호",
+              "value": "2016형제12345",
+              "from": "case_record"
+            },
+            {
+              "label": "접수번호",
+              "value": "2015-00123",
+              "from": "case_record"
+            },
+            {
+              "label": "결정 내용",
+              "value": "수사중지(피의자중지)",
+              "from": "case_record"
+            },
+            {
+              "label": "결정일",
+              "value": "2022-03-15",
+              "from": "case_record"
+            },
+            {
+              "label": "서식",
+              "value": "수사기록 열람·등사 신청서",
+              "from": "knowledge_base"
+            },
+            {
+              "label": "제출처",
+              "value": "사건을 수사한 경찰관서 또는 검찰청",
+              "from": "knowledge_base"
+            },
+            {
+              "label": "근거 법령",
+              "value": "검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정 제69조 · 사건기록 열람·등사에 관한 업무처리 지침",
+              "from": "knowledge_base"
+            }
+          ],
+          "unfilled": [
+            {
+              "label": "담당 수사관",
+              "reason": "자료에 '박정호' 로 적혀 있지만 기록으로 확인되지 않았습니다. 확인 후 적어 주세요."
+            },
+            {
+              "label": "신청인 성명",
+              "reason": "자료에 있을 수 없는 항목입니다. 직접 적어 주세요."
+            },
+            {
+              "label": "신청인 연락처",
+              "reason": "자료에 있을 수 없는 항목입니다. 직접 적어 주세요."
+            },
+            {
+              "label": "신청인 주소",
+              "reason": "자료에 있을 수 없는 항목입니다. 직접 적어 주세요."
+            }
+          ],
+          "sections": [
+            {
+              "heading": "사건 경위",
+              "note": "자료에 적힌 날짜와 문구를 시간순으로 옮긴 것입니다. 문장을 다듬어 쓰세요.",
+              "lines": [
+                {
+                  "date": "2015. 10. 10.",
+                  "text": "15년 10월 10일 밤 연락 끊김",
+                  "level": "statement",
+                  "source": "엄마_메모.jpg 2줄"
+                },
+                {
+                  "date": "2015. 10. 10.",
+                  "text": "경찰은 김씨가 지난해 10월 10일 밤 11시쯤 ○○역 인근 CCTV에…",
+                  "level": "statement",
+                  "source": "기사캡처_2016.png 3줄"
+                },
+                {
+                  "date": "2015. 10. 12.",
+                  "text": "10월 12일 경찰서 실종신고",
+                  "level": "statement",
+                  "source": "엄마_메모.jpg 3줄"
+                },
+                {
+                  "date": "2015. 10. 12.",
+                  "text": "실종신고 접수증",
+                  "level": "record",
+                  "source": "실종신고_접수증_2015.jpg 1줄"
+                },
+                {
+                  "date": "2019. 3.",
+                  "text": "본인은 2019년 3월 초순 오후 ○○시장 입구에서 김민수로 보이는 남…",
+                  "level": "statement",
+                  "source": "최영호_진술서.jpg 3줄"
+                },
+                {
+                  "date": "2022. 3. 15.",
+                  "text": "수사결과 통지서",
+                  "level": "record",
+                  "source": "수사중지_결정통지서.jpg 1줄"
+                },
+                {
+                  "date": "2023. 4. 2.",
+                  "text": "2015. 10. 10. 실종된 아들 김민수 사건(2016형제12345…",
+                  "level": "statement",
+                  "source": "진정서_2023.jpg 4줄"
+                },
+                {
+                  "date": null,
+                  "text": "○○시 20대 남성 실종 넉 달째 행방 묘연",
+                  "level": "statement",
+                  "source": "기사캡처_2016.png 1줄"
+                }
+              ]
+            },
+            {
+              "heading": "이의 사유",
+              "note": "타래는 이 칸을 대신 쓰지 않습니다. 왜 결정에 동의할 수 없는지는 직접 적어 주세요.",
+              "lines": []
+            }
+          ],
+          "dropped": 0
+        }
       },
       {
         "rule_no": 8,
@@ -1471,7 +1707,8 @@ window.TARAE_CASES = [
           }
         ],
         "submit_to": null,
-        "form_name": null
+        "form_name": null,
+        "draft": null
       },
       {
         "rule_no": 9,
@@ -1506,7 +1743,8 @@ window.TARAE_CASES = [
           }
         ],
         "submit_to": null,
-        "form_name": null
+        "form_name": null,
+        "draft": null
       }
     ],
     "response_choices": [
@@ -2029,7 +2267,113 @@ window.TARAE_CASES = [
         }
       ],
       "submit_to": "해당 사법경찰관이 소속된 바로 위 상급경찰관서의 장 (소속 경찰관서에 제출하면 송부된다)",
-      "form_name": "수사중지 결정 이의제기서"
+      "form_name": "수사중지 결정 이의제기서",
+      "draft": {
+        "is_draft": true,
+        "form_name": "수사중지 결정 이의제기서",
+        "form_source": "경찰수사규칙 별지 제110호서식",
+        "form_url": "https://law.go.kr/flDownload.do?gubun=&flSeq=111544061&bylClsCd=110202",
+        "fields": [
+          {
+            "label": "사건번호",
+            "value": "2021형제45678",
+            "from": "case_record"
+          },
+          {
+            "label": "접수번호",
+            "value": "2021-005821",
+            "from": "case_record"
+          },
+          {
+            "label": "담당 수사관",
+            "value": "한지훈",
+            "from": "case_record"
+          },
+          {
+            "label": "결정 내용",
+            "value": "수사중지(피의자중지)",
+            "from": "case_record"
+          },
+          {
+            "label": "결정일",
+            "value": "2026-08-18",
+            "from": "case_record"
+          },
+          {
+            "label": "서식",
+            "value": "수사중지 결정 이의제기서",
+            "from": "knowledge_base"
+          },
+          {
+            "label": "제출처",
+            "value": "해당 사법경찰관이 소속된 바로 위 상급경찰관서의 장 (소속 경찰관서에 제출하면 송부된다)",
+            "from": "knowledge_base"
+          },
+          {
+            "label": "근거 법령",
+            "value": "경찰수사규칙 제101조",
+            "from": "knowledge_base"
+          }
+        ],
+        "unfilled": [
+          {
+            "label": "신청인 성명",
+            "reason": "자료에 있을 수 없는 항목입니다. 직접 적어 주세요."
+          },
+          {
+            "label": "신청인 연락처",
+            "reason": "자료에 있을 수 없는 항목입니다. 직접 적어 주세요."
+          },
+          {
+            "label": "신청인 주소",
+            "reason": "자료에 있을 수 없는 항목입니다. 직접 적어 주세요."
+          }
+        ],
+        "sections": [
+          {
+            "heading": "사건 경위",
+            "note": "자료에 적힌 날짜와 문구를 시간순으로 옮긴 것입니다. 문장을 다듬어 쓰세요.",
+            "lines": [
+              {
+                "date": "2021. 5. 18.",
+                "text": "18,000,000원 발생",
+                "level": "statement",
+                "source": "고소장_2021.jpg 5줄"
+              },
+              {
+                "date": "2021. 5. 25.",
+                "text": "2021. 5. 25. ○○경찰서에 고소하였습니다.",
+                "level": "statement",
+                "source": "고소장_2021.jpg 7줄"
+              },
+              {
+                "date": "2021. 5. 25.",
+                "text": "접 수 증",
+                "level": "record",
+                "source": "접수증_2021.jpg 1줄"
+              },
+              {
+                "date": "2025. 6. 3.",
+                "text": "2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다.",
+                "level": "statement",
+                "source": "조미래_진술서.jpg 3줄"
+              },
+              {
+                "date": "2026. 8. 18.",
+                "text": "수사결과 통지서",
+                "level": "record",
+                "source": "수사중지_결정통지서.jpg 1줄"
+              }
+            ]
+          },
+          {
+            "heading": "이의 사유",
+            "note": "타래는 이 칸을 대신 쓰지 않습니다. 왜 결정에 동의할 수 없는지는 직접 적어 주세요.",
+            "lines": []
+          }
+        ],
+        "dropped": 0
+      }
     },
     "actions": [
       {
@@ -2107,7 +2451,113 @@ window.TARAE_CASES = [
           }
         ],
         "submit_to": "해당 사법경찰관이 소속된 바로 위 상급경찰관서의 장 (소속 경찰관서에 제출하면 송부된다)",
-        "form_name": "수사중지 결정 이의제기서"
+        "form_name": "수사중지 결정 이의제기서",
+        "draft": {
+          "is_draft": true,
+          "form_name": "수사중지 결정 이의제기서",
+          "form_source": "경찰수사규칙 별지 제110호서식",
+          "form_url": "https://law.go.kr/flDownload.do?gubun=&flSeq=111544061&bylClsCd=110202",
+          "fields": [
+            {
+              "label": "사건번호",
+              "value": "2021형제45678",
+              "from": "case_record"
+            },
+            {
+              "label": "접수번호",
+              "value": "2021-005821",
+              "from": "case_record"
+            },
+            {
+              "label": "담당 수사관",
+              "value": "한지훈",
+              "from": "case_record"
+            },
+            {
+              "label": "결정 내용",
+              "value": "수사중지(피의자중지)",
+              "from": "case_record"
+            },
+            {
+              "label": "결정일",
+              "value": "2026-08-18",
+              "from": "case_record"
+            },
+            {
+              "label": "서식",
+              "value": "수사중지 결정 이의제기서",
+              "from": "knowledge_base"
+            },
+            {
+              "label": "제출처",
+              "value": "해당 사법경찰관이 소속된 바로 위 상급경찰관서의 장 (소속 경찰관서에 제출하면 송부된다)",
+              "from": "knowledge_base"
+            },
+            {
+              "label": "근거 법령",
+              "value": "경찰수사규칙 제101조",
+              "from": "knowledge_base"
+            }
+          ],
+          "unfilled": [
+            {
+              "label": "신청인 성명",
+              "reason": "자료에 있을 수 없는 항목입니다. 직접 적어 주세요."
+            },
+            {
+              "label": "신청인 연락처",
+              "reason": "자료에 있을 수 없는 항목입니다. 직접 적어 주세요."
+            },
+            {
+              "label": "신청인 주소",
+              "reason": "자료에 있을 수 없는 항목입니다. 직접 적어 주세요."
+            }
+          ],
+          "sections": [
+            {
+              "heading": "사건 경위",
+              "note": "자료에 적힌 날짜와 문구를 시간순으로 옮긴 것입니다. 문장을 다듬어 쓰세요.",
+              "lines": [
+                {
+                  "date": "2021. 5. 18.",
+                  "text": "18,000,000원 발생",
+                  "level": "statement",
+                  "source": "고소장_2021.jpg 5줄"
+                },
+                {
+                  "date": "2021. 5. 25.",
+                  "text": "2021. 5. 25. ○○경찰서에 고소하였습니다.",
+                  "level": "statement",
+                  "source": "고소장_2021.jpg 7줄"
+                },
+                {
+                  "date": "2021. 5. 25.",
+                  "text": "접 수 증",
+                  "level": "record",
+                  "source": "접수증_2021.jpg 1줄"
+                },
+                {
+                  "date": "2025. 6. 3.",
+                  "text": "2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다.",
+                  "level": "statement",
+                  "source": "조미래_진술서.jpg 3줄"
+                },
+                {
+                  "date": "2026. 8. 18.",
+                  "text": "수사결과 통지서",
+                  "level": "record",
+                  "source": "수사중지_결정통지서.jpg 1줄"
+                }
+              ]
+            },
+            {
+              "heading": "이의 사유",
+              "note": "타래는 이 칸을 대신 쓰지 않습니다. 왜 결정에 동의할 수 없는지는 직접 적어 주세요.",
+              "lines": []
+            }
+          ],
+          "dropped": 0
+        }
       },
       {
         "rule_no": 5,
@@ -2148,7 +2598,8 @@ window.TARAE_CASES = [
           }
         ],
         "submit_to": null,
-        "form_name": null
+        "form_name": null,
+        "draft": null
       },
       {
         "rule_no": 7,
@@ -2217,7 +2668,113 @@ window.TARAE_CASES = [
           }
         ],
         "submit_to": "사건을 수사한 경찰관서 또는 검찰청",
-        "form_name": "수사기록 열람·등사 신청서"
+        "form_name": "수사기록 열람·등사 신청서",
+        "draft": {
+          "is_draft": true,
+          "form_name": "수사기록 열람·등사 신청서",
+          "form_source": "검찰보존사무규칙 별지 제5호서식 「사건기록 열람·등사 신청서」 (개정 2021. 1. 1.)",
+          "form_url": "https://law.go.kr/flDownload.do?gubun=&flSeq=132313759",
+          "fields": [
+            {
+              "label": "사건번호",
+              "value": "2021형제45678",
+              "from": "case_record"
+            },
+            {
+              "label": "접수번호",
+              "value": "2021-005821",
+              "from": "case_record"
+            },
+            {
+              "label": "담당 수사관",
+              "value": "한지훈",
+              "from": "case_record"
+            },
+            {
+              "label": "결정 내용",
+              "value": "수사중지(피의자중지)",
+              "from": "case_record"
+            },
+            {
+              "label": "결정일",
+              "value": "2026-08-18",
+              "from": "case_record"
+            },
+            {
+              "label": "서식",
+              "value": "수사기록 열람·등사 신청서",
+              "from": "knowledge_base"
+            },
+            {
+              "label": "제출처",
+              "value": "사건을 수사한 경찰관서 또는 검찰청",
+              "from": "knowledge_base"
+            },
+            {
+              "label": "근거 법령",
+              "value": "검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정 제69조 · 사건기록 열람·등사에 관한 업무처리 지침",
+              "from": "knowledge_base"
+            }
+          ],
+          "unfilled": [
+            {
+              "label": "신청인 성명",
+              "reason": "자료에 있을 수 없는 항목입니다. 직접 적어 주세요."
+            },
+            {
+              "label": "신청인 연락처",
+              "reason": "자료에 있을 수 없는 항목입니다. 직접 적어 주세요."
+            },
+            {
+              "label": "신청인 주소",
+              "reason": "자료에 있을 수 없는 항목입니다. 직접 적어 주세요."
+            }
+          ],
+          "sections": [
+            {
+              "heading": "사건 경위",
+              "note": "자료에 적힌 날짜와 문구를 시간순으로 옮긴 것입니다. 문장을 다듬어 쓰세요.",
+              "lines": [
+                {
+                  "date": "2021. 5. 18.",
+                  "text": "18,000,000원 발생",
+                  "level": "statement",
+                  "source": "고소장_2021.jpg 5줄"
+                },
+                {
+                  "date": "2021. 5. 25.",
+                  "text": "2021. 5. 25. ○○경찰서에 고소하였습니다.",
+                  "level": "statement",
+                  "source": "고소장_2021.jpg 7줄"
+                },
+                {
+                  "date": "2021. 5. 25.",
+                  "text": "접 수 증",
+                  "level": "record",
+                  "source": "접수증_2021.jpg 1줄"
+                },
+                {
+                  "date": "2025. 6. 3.",
+                  "text": "2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다.",
+                  "level": "statement",
+                  "source": "조미래_진술서.jpg 3줄"
+                },
+                {
+                  "date": "2026. 8. 18.",
+                  "text": "수사결과 통지서",
+                  "level": "record",
+                  "source": "수사중지_결정통지서.jpg 1줄"
+                }
+              ]
+            },
+            {
+              "heading": "이의 사유",
+              "note": "타래는 이 칸을 대신 쓰지 않습니다. 왜 결정에 동의할 수 없는지는 직접 적어 주세요.",
+              "lines": []
+            }
+          ],
+          "dropped": 0
+        }
       },
       {
         "rule_no": 8,
@@ -2258,7 +2815,8 @@ window.TARAE_CASES = [
           }
         ],
         "submit_to": null,
-        "form_name": null
+        "form_name": null,
+        "draft": null
       },
       {
         "rule_no": 9,
@@ -2299,7 +2857,8 @@ window.TARAE_CASES = [
           }
         ],
         "submit_to": null,
-        "form_name": null
+        "form_name": null,
+        "draft": null
       }
     ],
     "response_choices": [

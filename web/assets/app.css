@@ -597,6 +597,51 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 .na__more:hover { background: rgba(255, 255, 255, 0.28); }
 
+/* 서류 초안 — 다음 행동 카드에서 연다 */
+.na__draft {
+  padding: 12px; border-radius: 999px;
+  background: #fff; color: var(--brand-primary);
+}
+.na__draft:hover { filter: brightness(0.96); }
+
+.draft { display: flex; flex-direction: column; gap: 14px; }
+.draft__badge {
+  align-self: flex-start; padding: 5px 12px; border-radius: 999px;
+  background: var(--status-unverified-bg); color: var(--status-unverified);
+}
+.draft__head { display: flex; flex-direction: column; gap: 4px; }
+.draft__link { color: var(--brand-primary); text-decoration: underline; text-underline-offset: 3px; }
+.draft__h { margin-top: 6px; color: var(--text-tertiary); }
+.draft__note { color: var(--text-secondary); }
+
+.draft__fields { display: flex; flex-direction: column; gap: 6px; }
+.draft__field {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 10px 12px; border-radius: 10px; background: var(--bg-sunken);
+}
+.draft__field--blank { background: var(--status-unverified-bg); }
+.draft__key { flex: 0 0 96px; color: var(--text-tertiary); }
+.draft__val { flex: 1 0 0; min-width: 0; color: var(--text-primary); }
+.draft__field--blank .draft__val { color: var(--status-unverified); }
+.draft__from { flex: 0 0 auto; color: var(--text-tertiary); }
+
+.draft__lines { display: flex; flex-direction: column; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.draft__line {
+  display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+  padding: 10px 12px; border-radius: 10px; background: var(--bg-sunken);
+  box-shadow: inset 3px 0 0 var(--border-strong);
+}
+/* 기록에서 온 줄과 사람의 말에서 온 줄은 섞이면 안 된다 */
+.draft__line--statement { box-shadow: inset 3px 0 0 var(--status-unverified); }
+.draft__date { flex: 0 0 86px; color: var(--text-tertiary); }
+.draft__text { flex: 1 1 200px; min-width: 0; color: var(--text-primary); }
+.draft__src { flex: 0 0 auto; color: var(--text-tertiary); }
+
+@media (max-width: 560px) {
+  .draft__field, .draft__line { flex-direction: column; gap: 4px; }
+  .draft__key, .draft__date { flex-basis: auto; }
+}
+
 /* 「냈어요」 — 다음 행동 카드 안, 자세히 보기와 나란히 둔다 */
 .na__buttons { display: flex; gap: 8px; }
 .na__buttons .na__more { flex: 1 0 0; align-self: auto; }

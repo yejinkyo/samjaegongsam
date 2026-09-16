@@ -77,6 +77,7 @@ class Checklist(BaseModel):
     no_submission: str | None = Field(default=None, description="제출 절차가 아닌 단계일 때 그 이유")
     # 아래는 전부 지식베이스에서만 온다. 없으면 화면은 빈칸으로 둔다.
     form_name: str | None = Field(default=None, description="제출할 서류의 정식 명칭")
+    form_source: str | None = Field(default=None, description="서식의 근거 (예: 경찰수사규칙 별지 제125호 서식)")
     form_url: str | None = Field(default=None, description="공식 서식 내려받기 주소")
     submit_to: str | None = Field(default=None, description="제출처")
     statute: str | None = Field(default=None, description="근거 법령")
@@ -112,6 +113,64 @@ class Submission(BaseModel):
     submitted_to: str | None = Field(default=None, description="제출처. 지식베이스 값을 그대로 옮긴다")
     evidence_doc_id: str | None = Field(default=None, description="접수증 문서 id. 없으면 낸 사실이 본인 말뿐이다")
     response: SubmissionResponse | None = None
+
+
+class Citation(BaseModel):
+    """문장 하나가 어느 자료 몇 줄에서 왔는지. 이게 없는 문장은 초안에 넣지 않는다."""
+
+    doc_id: str
+    file_name: str | None = None
+    page: int | None = None
+    line: int | None = None
+    quote: str | None = None
+
+
+class DraftLine(BaseModel):
+    """사건 경위 한 줄.
+
+    문장을 새로 짓지 않는다. 자료에 있는 날짜와 문구를 그대로 옮기고 출처를 단다.
+    ``evidence_level`` 은 섞으면 안 되는 두 가지다 — 기록에서 온 것과 사람의 말에서 온 것.
+    """
+
+    date: str | None = None
+    text: str
+    evidence_level: str = "record"   # record / statement
+    citations: list[Citation] = Field(default_factory=list)
+
+
+class DraftField(BaseModel):
+    """서식의 빈칸 하나. 채웠으면 어디서 왔는지, 못 채웠으면 왜인지 남긴다."""
+
+    key: str
+    label: str
+    value: str | None = None
+    filled_from: str | None = Field(default=None, description="knowledge_base / case_record")
+    reason: str | None = Field(default=None, description="못 채운 이유. 값이 없을 때만 찬다")
+
+
+class DraftSection(BaseModel):
+    heading: str
+    lines: list[DraftLine] = Field(default_factory=list)
+    note: str | None = None
+
+
+class DraftDocument(BaseModel):
+    """낼 서류의 초안.
+
+    ``is_draft`` 는 끄지 않는다. 사람이 읽고 고치기 전에는 제출용이 아니다.
+    """
+
+    action: str
+    is_draft: bool = True
+    form_name: str | None = None
+    form_source: str | None = None
+    form_url: str | None = None
+    submit_to: str | None = None
+    statute: str | None = None
+    fields: list[DraftField] = Field(default_factory=list)
+    unfilled: list[DraftField] = Field(default_factory=list)
+    sections: list[DraftSection] = Field(default_factory=list)
+    dropped: int = Field(default=0, description="출처가 없어 넣지 않은 사건 수")
 
 
 class CaseState(BaseModel):
