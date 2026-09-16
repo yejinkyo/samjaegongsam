@@ -9,10 +9,15 @@ JSON 이 아니라 전역 변수에 담는다.
 
     cd action-engine
     uv run python tools/export_web.py
+
+화면에서 새로 등록한 사건은 web/serve.py 가 사건 하나씩 이 스크립트로 넘긴다.
+
+    uv run python tools/export_web.py --result out.json --id <사건 id> --title <사건 이름> --out view.json
 """
 
 from __future__ import annotations
 
+import argparse
 import json
 import re
 from datetime import date, datetime
@@ -628,6 +633,19 @@ def render(views: list[dict[str, Any]]) -> str:
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description="화면 데이터 만들기")
+    parser.add_argument("--result", help="research-engine 출력 하나 — 주면 그 사건 하나만 --out 에 쓴다")
+    parser.add_argument("--id")
+    parser.add_argument("--title")
+    parser.add_argument("--out")
+    args = parser.parse_args()
+    if args.result:
+        if not (args.id and args.title and args.out):
+            parser.error("--result 에는 --id · --title · --out 이 함께 필요합니다")
+        view = build_view(args.id, args.title, json.loads(Path(args.result).read_text(encoding="utf-8")))
+        Path(args.out).write_text(json.dumps(view, ensure_ascii=False), encoding="utf-8")
+        return
+
     views = build_all()
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(render(views), encoding="utf-8")
