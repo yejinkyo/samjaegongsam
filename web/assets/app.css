@@ -559,6 +559,24 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 .srclist { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
 .srclist__item { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 12px; background: var(--bg-sunken); }
+/* 누를 수 있는 자료 — 원본이 있는 것만 버튼이 된다 */
+.srclist__item--open { width: 100%; text-align: left; cursor: pointer; }
+.srclist__item--open:hover { background: var(--bg-brand-soft); }
+.srclist__open { margin-left: auto; flex-shrink: 0; color: var(--brand-primary); font-weight: 600; }
+
+/* 올린 원본 — 사진이면 사진, OCR 결과면 읽은 글자 */
+.orig { display: flex; flex-direction: column; gap: 12px; }
+.orig__img { width: 100%; height: auto; border-radius: 10px; background: var(--bg-sunken); }
+.orig__note { align-self: center; padding: 20px 0; }
+.orig__note--warn { color: var(--status-conflict); }
+.orig__lines {
+  display: flex; flex-direction: column; gap: 2px;
+  margin: 0; padding: 14px 16px 14px 34px;
+  border-radius: 10px; background: var(--bg-sunken);
+  max-height: 52vh; overflow-y: auto;
+}
+.orig__line { color: var(--text-primary); }
+.orig__line::marker { color: var(--text-tertiary); font-variant-numeric: tabular-nums; }
 .srclist__kind { flex-shrink: 0; padding: 3px 8px; border-radius: 6px; background: var(--bg-surface); color: var(--text-tertiary); }
 
 

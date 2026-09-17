@@ -286,6 +286,8 @@ def _timeline(result: dict[str, Any], docs: dict[str, dict], doc_index: dict[str
             "sources": [
                 {
                     "name": docs.get(s["source_doc_id"], {}).get("file_name", s["source_doc_id"]),
+                    # 화면 서버가 이것으로 올린 원본을 찾아 준다
+                    "doc_id": s["source_doc_id"],
                     "line": s["source_line"],
                     "quote": s.get("quote"),
                 }
@@ -584,7 +586,10 @@ def build_view(case_id: str, title: str, result: dict[str, Any]) -> dict[str, An
         "doc_count": card.evidence_doc_count,
         "need_count": card.needs_confirmation_count,
         "stages": _stages(card),
-        "sources": [{"kind": _kind(d["file_name"], d["doc_type"]), "name": d["file_name"]} for d in evidence],
+        # doc_id 를 같이 싣는다 — 화면 서버가 이것으로 올린 원본 파일을 찾아 준다.
+        # 파일 이름은 겹칠 수 있어 이름으로 찾으면 엉뚱한 자료를 열어 준다.
+        "sources": [{"kind": _kind(d["file_name"], d["doc_type"]), "name": d["file_name"], "doc_id": d["doc_id"]}
+                    for d in evidence],
         "timeline": _timeline(result, docs, doc_index),
         "people": _people(result, docs),
         "slots": _slots(result, docs),
