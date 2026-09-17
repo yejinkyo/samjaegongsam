@@ -136,37 +136,26 @@ body[data-page="landing"] .lp-title { animation: lp-title-glow 3.6s ease-in-out 
 .lp-net .thread { animation: lp-pulse 7s ease-in-out infinite; }
 
 /* ── 스크롤 안내 ────────────────────────────────────────── */
-.lp-scroll {
-  position: absolute; left: 64px; bottom: 40px;
-  display: flex; align-items: center; gap: 10px;
-  color: var(--lp-dim); font: 500 13px/1 var(--font);
-}
-.lp-scroll__arrow {
-  width: 10px; height: 10px;
-  border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
-  transform: rotate(45deg);
-  animation: lp-bob 2s ease-in-out infinite;
-}
-@keyframes lp-bob {
-  0%, 100% { transform: rotate(45deg) translate(0, 0); }
-  50% { transform: rotate(45deg) translate(3px, 3px); }
-}
-.lp-scroll:hover { color: var(--lp-text); }
+/* 첫 화면에서 바로 들어갈 수 있게 둔다.
+   아래 구역에도 같은 버튼이 있지만, 스크롤을 내려야 보이는 것은 없는 것과 같다 —
+   '아래로' 안내를 못 보고 그냥 나가는 사람이 생긴다.
 
-/* ── 버튼 화면 ──────────────────────────────────────────── */
-/* 아래쪽은 흰 바탕이라 글자를 어두운 색으로 뒤집는다.
-   화면 높이에 따라 문서 그라데이션이 어디까지 밝아졌는지가 달라지므로,
-   버튼이 놓이는 자리는 이 구역이 직접 흰색으로 덮어 글자 대비를 보장한다. */
-.lp-cta {
-  min-height: 62vh;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px;
-  padding: 80px 24px 96px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #fff 38%, #fff 100%);
-  color: var(--lp-ink);
-  text-align: center;
+   이름과 문장이 읽힌 뒤에 떠오르도록 조금 늦춘다. 늦추는 것은 0.6초뿐이다.
+   더 늦추면 바로 들어가려는 사람이 빈 자리를 본다. */
+.lp-hero__cta {
+  display: flex; gap: 12px; margin-top: 10px; width: min(380px, 100%);
+  opacity: 0; transform: translateY(10px);
+  animation: lp-rise 0.5s ease 0.6s forwards;
 }
-.lp-cta__lead { font: 500 20px/1.5 var(--font); letter-spacing: -0.02em; }
-.lp-cta__buttons { display: flex; flex-direction: column; gap: 12px; width: min(320px, 100%); }
+.lp-hero__cta .lp-btn { flex: 1 1 0; height: 52px; font-size: 15px; }
+/* 어두운 바탕이라 테두리 버튼의 색을 뒤집는다 */
+.lp-hero__cta .lp-btn--ghost {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.45);
+  color: var(--lp-text);
+}
+.lp-hero__cta .lp-btn--ghost:hover { background: rgba(255, 255, 255, 0.18); border-color: #fff; }
+@keyframes lp-rise { to { opacity: 1; transform: none; } }
 
 .lp-btn {
   display: flex; align-items: center; justify-content: center;
@@ -179,20 +168,18 @@ body[data-page="landing"] .lp-title { animation: lp-title-glow 3.6s ease-in-out 
 .lp-btn--ghost { border: 1.5px solid rgba(94, 61, 187, 0.4); color: var(--brand-primary); background: rgba(255, 255, 255, 0.6); }
 .lp-btn--ghost:hover { border-color: var(--brand-primary); background: #fff; transform: translateY(-2px); }
 
-.lp-note { font: 400 12.5px/1.6 var(--font); color: var(--lp-ink-dim); }
-
 /* ── 좁은 화면 ──────────────────────────────────────────── */
 @media (max-width: 900px) {
   .lp-hero { grid-template-columns: 1fr; padding: 72px 28px 96px; gap: 24px; }
   .lp-hero__text { max-width: none; }
   .lp-title { font-size: 64px; }
   .lp-net { height: 46vh; order: 2; }
-  .lp-scroll { left: 28px; bottom: 28px; }
 }
 
 /* 움직임을 줄여 달라고 한 사용자에게는 반짝임을 끈다 */
 @media (prefers-reduced-motion: reduce) {
-  .lp-net .node, .lp-net .thread, .lp-scroll__arrow, .lp-mark, .lp-title { animation: none; }
+  .lp-hero__cta { animation: none; opacity: 1; transform: none; }
+  .lp-net .node, .lp-net .thread, .lp-mark, .lp-title { animation: none; }
   .lp-net .node { opacity: 0.85; }
   .lp-net .thread { opacity: 0.35; }
   html { scroll-behavior: auto; }

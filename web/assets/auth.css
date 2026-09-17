@@ -31,7 +31,7 @@
 .sheet__title { font: 600 22px/1.35 var(--font); letter-spacing: -0.02em; }
 .sheet__desc { font: 400 13.5px/1.6 var(--font); color: var(--lp-ink-dim); }
 .sheet__demo {
-  margin-top: 8px; padding: 9px 12px; border-radius: 10px;
+  padding: 9px 12px; border-radius: 10px;
   background: var(--bg-brand-soft); color: var(--brand-primary);
   font: 500 12.5px/1.5 var(--font);
 }

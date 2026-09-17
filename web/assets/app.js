@@ -521,7 +521,6 @@
     var dropzone = h("div", { class: "dropzone" }, [
       h("span", { class: "circle-56" }, [icon("upload")]),
       h("p", { class: "t-heading c-primary", text: "여기에 끌어다 놓거나, 휴대폰으로 찍어 올려주세요" }),
-      h("p", { class: "dropzone__hint t-body-s c-tertiary", text: "사진(이미지) · OCR 결과 JSON  |  여러 장을 한 번에 올릴 수 있어요" }),
       h("div", { class: "dropzone__actions" }, [
         h("button", { type: "button", class: "btn btn--primary t-body-m-strong", text: "파일 선택", onclick: function () { picker.click(); } }),
         h("button", { type: "button", class: "btn btn--secondary t-body-m-strong", text: "사진 찍기", onclick: function () { openCamera(function (shot) { items.push(shot); drawList(); }, camera); } }),
@@ -537,7 +536,7 @@
     dropzone.addEventListener("drop", function (e) { e.preventDefault(); addFiles(e.dataTransfer.files); });
 
     // 글을 대신 가져오지는 못한다. 주소를 본인이 적은 메모로 사건에 남긴다.
-    var url = h("input", { type: "url", placeholder: "글 주소 붙여넣기 (메모로 함께 남겨요)", "aria-label": "글 주소" });
+    var url = h("input", { type: "url", placeholder: "URL 붙여넣기", "aria-label": "글 주소" });
     function addUrl() {
       var value = url.value.trim();
       if (!value) return;
@@ -623,7 +622,7 @@
     root.appendChild(h("main", { class: "page page--new" }, [
       backLink(),
       h("div", { class: "new-folder" }, [
-        h("span", { class: "new-folder__tab" }, [h("span", { class: "t-label c-tertiary", text: "새 서류철" })]),
+        h("span", { class: "new-folder__tab" }, [h("span", { class: "t-label c-tertiary", text: "새 사건" })]),
         folderBody,
       ]),
     ]));
