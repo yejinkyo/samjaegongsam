@@ -535,16 +535,14 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 .tl__more:hover { background: var(--bg-brand-soft); color: var(--brand-primary); }
 
-/* 직접 적은 줄에만 붙는 지우기. 눈에 띄지 않게 두고, 마우스를 올리면 드러난다 —
-   자주 누를 것이 아니라 잘못 적었을 때만 쓰는 것이다 */
-.tl__remove {
-  flex-shrink: 0; align-self: center;
-  width: 26px; height: 26px; border-radius: 999px;
-  color: var(--text-tertiary); font: 400 13px/1 var(--font);
-  opacity: 0; transition: opacity 0.12s ease, background 0.12s ease;
+/* 자세히 팝업 맨 아래의 지우기. 직접 적은 줄에만 나온다 —
+   자주 누를 것이 아니라 잘못 적었을 때만 쓰는 것이라 조용히 둔다 */
+.tldetail__foot { display: flex; justify-content: flex-end; padding-top: 14px; border-top: 1px solid var(--border-default); }
+.tldetail__remove {
+  padding: 9px 16px; border-radius: 999px;
+  background: none; color: var(--text-tertiary);
 }
-.tl__row:hover .tl__remove, .tl__remove:focus-visible { opacity: 1; }
-.tl__remove:hover { background: var(--status-conflict-bg); color: var(--status-conflict); }
+.tldetail__remove:hover { background: var(--status-conflict-bg); color: var(--status-conflict); }
 
 /* 지울지 묻는 팝업 */
 .confirm { display: flex; flex-direction: column; gap: 10px; }

@@ -763,7 +763,7 @@
   }
 
   /** 줄을 누르면 열리는 자세히 — 원문과 출처를 그대로 보여준다. */
-  function timelineDetail(row) {
+  function timelineDetail(row, c, onRemoved) {
     // 제목에 원문을 그대로 쓴다 — 자세히를 눌렀는데 또 잘려 있으면 안 된다
     var full = row.full || row.title;
     var body = h("div", { class: "tldetail" }, [
@@ -796,6 +796,16 @@
       body.appendChild(h("p", { class: "modal__note", text: openable
         ? "출처를 누르면 올린 원본을 볼 수 있어요."
         : "어느 자료 몇 줄에서 왔는지까지 보여드려요." }));
+    }
+    // 직접 적은 줄에만 둔다. 서류에서 읽어 낸 줄에는 만들지 않는다.
+    if (row.kind === "mine" && c) {
+      var remove = h("button", { type: "button", class: "tldetail__remove t-body-m-strong", text: "이 줄 지우기" });
+      remove.addEventListener("click", function () {
+        var dialog = document.querySelector("dialog.modal");
+        if (dialog) dialog.close();
+        confirmRemoveRow(c, row, onRemoved || function () {});
+      });
+      body.appendChild(h("div", { class: "tldetail__foot" }, [remove]));
     }
     openModal(full, body);
   }
@@ -891,20 +901,14 @@
       lastDay = t.day;
 
       var more = h("button", { type: "button", class: "tl__more", text: "자세히" });
-      more.addEventListener("click", function () { timelineDetail(row); });
-
-      // 직접 적은 줄에만 붙는다. 서류에서 읽어 낸 줄에는 아예 만들지 않는다.
-      var remove = null;
-      if (row.kind === "mine") {
-        remove = h("button", { type: "button", class: "tl__remove", "aria-label": "이 줄 지우기", text: "✕" });
-        remove.addEventListener("click", function () {
-          confirmRemoveRow(c, row, function () {
-            var panel = document.getElementById("panel");
-            panel.textContent = "";
-            panel.appendChild(timelineCard(c));
-          });
+      more.addEventListener("click", function () {
+        timelineDetail(row, c, function () {
+          var panel = document.getElementById("panel");
+          panel.textContent = "";
+          panel.appendChild(timelineCard(c));
         });
-      }
+      });
+
 
       wrap.appendChild(h("div", { class: "tl__row" + (i === lastEvent ? " tl__row--last" : "") }, [
         h("div", { class: "tl__when" }, [
@@ -918,7 +922,6 @@
         // 줄여 적은 제목은 마우스를 올리면 끝까지 보인다 (자세히에도 원문이 있다)
         h("p", { class: "tl__title", text: row.title, title: row.full && row.full !== row.title ? row.full : null }),
         more,
-        remove,
       ]));
     });
 
