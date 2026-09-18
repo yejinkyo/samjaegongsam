@@ -19,7 +19,11 @@ def result():
 
 
 def test_late_tip_is_flagged_as_unrecorded_fact(result):
-    [issue] = [i for i in result.analysis.issues if i.condition is GapCondition.UNRECORDED_FACT]
+    # 직접 적은 메모도 타임라인에 오르게 되면서(note_no_contact) 이 조건이 둘이 되었다.
+    # 여기서 보는 것은 제보 진술 쪽 하나다.
+    [issue] = [i for i in result.analysis.issues
+               if i.condition is GapCondition.UNRECORDED_FACT
+               and {s.source_doc_id for s in i.sources} == {"tip_statement_2021"}]
     assert issue.category is IssueCategory.UNVERIFIED
     assert issue.trigger.key == "missing_person_suspended/occurrence/new_fact/unrecorded_fact"
     assert {s.source_doc_id for s in issue.sources} == {"tip_statement_2021"}

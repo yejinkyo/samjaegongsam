@@ -800,6 +800,63 @@
     openModal(full, body);
   }
 
+  /* 직접 적은 줄만 지운다.
+   *
+   * 올린 서류에서 읽어 낸 줄은 지우지 않는다 — 그건 자료에 그렇게 적혀 있다는
+   * 사실이고, 마음에 들지 않는다고 지우면 화면이 자료와 다른 말을 하게 된다.
+   * 서류를 빼려면 자료 자체를 지워야 한다.
+   */
+  function myNoteId(row) {
+    if (row.kind !== "mine") return null;
+    var src = (row.sources || [])[0];
+    return src && /^note/.test(src.doc_id || "") ? src.doc_id : null;
+  }
+
+  /** 지울지 한 번 더 묻는다. 지우면 사건을 처음부터 다시 정리한다. */
+  function confirmRemoveRow(c, row, done) {
+    var noteId = myNoteId(row);
+    var body = h("div", { class: "confirm" }, [
+      h("p", { class: "confirm__q t-body-l c-primary", text: "이 줄을 지울까요?" }),
+      h("p", { class: "confirm__quote t-body-s", text: row.full || row.title }),
+      h("p", { class: "confirm__note t-body-s c-secondary", text: isLocal(c) && noteId
+        ? "직접 적은 내용이라 지울 수 있어요. 지우면 남은 자료로 사건을 다시 정리해요."
+        : "직접 적은 내용이라 이 화면에서 지웁니다." }),
+    ]);
+
+    var cancel = h("button", { type: "button", class: "confirm__cancel t-body-m-strong", text: "취소" });
+    var ok = h("button", { type: "button", class: "confirm__ok t-body-m-strong", text: "지우기" });
+    var fail = h("p", { class: "confirm__fail t-body-s", hidden: true });
+
+    function close() {
+      var dialog = document.querySelector("dialog.modal");
+      if (dialog) dialog.close();
+    }
+    cancel.addEventListener("click", close);
+    ok.addEventListener("click", function () {
+      if (!(isLocal(c) && noteId)) {          // 예시 사건은 화면에만 있다
+        c.timeline = c.timeline.filter(function (r) { return r !== row; });
+        close();
+        return done();
+      }
+      ok.disabled = true;
+      ok.textContent = "지우는 중…";
+      api("api/cases/" + encodeURIComponent(c.id) + "/notes/" + encodeURIComponent(noteId),
+          { method: "DELETE" }).then(function () {
+        close();
+        location.reload();          // 엔진이 다시 정리했으므로 화면 전체를 새로 받는다
+      }, function (err) {
+        ok.disabled = false;
+        ok.textContent = "지우기";
+        fail.hidden = false;
+        fail.textContent = errorText(err);
+      });
+    });
+
+    body.appendChild(h("div", { class: "confirm__buttons" }, [cancel, ok]));
+    body.appendChild(fail);
+    openModal("직접 적은 줄 지우기", body);
+  }
+
   function timelineCard(c) {
     var wrap = h("div", { class: "card tl" });
     var rows = c.timeline;
@@ -836,6 +893,19 @@
       var more = h("button", { type: "button", class: "tl__more", text: "자세히" });
       more.addEventListener("click", function () { timelineDetail(row); });
 
+      // 직접 적은 줄에만 붙는다. 서류에서 읽어 낸 줄에는 아예 만들지 않는다.
+      var remove = null;
+      if (row.kind === "mine") {
+        remove = h("button", { type: "button", class: "tl__remove", "aria-label": "이 줄 지우기", text: "✕" });
+        remove.addEventListener("click", function () {
+          confirmRemoveRow(c, row, function () {
+            var panel = document.getElementById("panel");
+            panel.textContent = "";
+            panel.appendChild(timelineCard(c));
+          });
+        });
+      }
+
       wrap.appendChild(h("div", { class: "tl__row" + (i === lastEvent ? " tl__row--last" : "") }, [
         h("div", { class: "tl__when" }, [
           h("span", { class: "tl__day t-label" + (sameDay ? " tl__day--same" : ""), text: sameDay ? "" : t.day }),
@@ -848,6 +918,7 @@
         // 줄여 적은 제목은 마우스를 올리면 끝까지 보인다 (자세히에도 원문이 있다)
         h("p", { class: "tl__title", text: row.title, title: row.full && row.full !== row.title ? row.full : null }),
         more,
+        remove,
       ]));
     });
 

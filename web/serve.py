@@ -324,6 +324,31 @@ def create_case(form: dict) -> dict:
         raise
 
 
+def delete_note(case_id: str, note_id: str) -> dict:
+    """직접 적은 메모 하나를 지우고 사건을 다시 정리한다.
+
+    지울 수 있는 것은 **사용자가 적은 메모뿐**이다. 올린 서류에서 읽어 낸 줄은 지우지
+    않는다 — 그건 자료에 그렇게 적혀 있다는 사실이고, 마음에 들지 않는다고 지우면
+    화면이 자료와 다른 말을 하게 된다. 서류 자체를 빼려면 자료를 지워야 한다.
+    """
+    folder = case_dir(case_id)
+    with case_lock(case_id):
+        meta = read_json(folder / "meta.json")
+        notes = [n for n in meta.get("notes", []) if n.get("note_id") != note_id]
+        if len(notes) == len(meta.get("notes", [])):
+            raise ApiError(HTTPStatus.NOT_FOUND, "그 메모를 찾지 못했어요.")
+        if not meta["documents"] and not notes:
+            raise ApiError(HTTPStatus.UNPROCESSABLE_ENTITY,
+                           "마지막 남은 자료예요. 이걸 지우면 정리할 것이 없어요.")
+        before = json.dumps(meta)
+        meta["notes"] = notes
+        try:
+            return analyze(folder, meta)
+        except ApiError:
+            write_json(folder / "meta.json", json.loads(before))   # 정리에 실패하면 되돌린다
+            raise
+
+
 def add_to_case(case_id: str, form: dict) -> dict:
     folder = case_dir(case_id)
     with case_lock(case_id):
@@ -405,6 +430,9 @@ class Handler(SimpleHTTPRequestHandler):
             f = re.fullmatch(r"/api/cases/([^/]+)/files/([^/]+)", path)
             if method == "GET" and f:
                 return self.send_file(*upload_path(case_dir(f[1]), f[2]))
+            n = re.fullmatch(r"/api/cases/([^/]+)/notes/([^/]+)", path)
+            if method == "DELETE" and n:
+                return self.send_json(HTTPStatus.OK, delete_note(n[1], n[2]))
             if method == "POST" and (path == "/api/cases" or re.fullmatch(r"/api/cases/[^/]+/files", path)):
                 length = int(self.headers.get("Content-Length") or 0)
                 if length > MAX_UPLOAD_BYTES:
@@ -423,6 +451,9 @@ class Handler(SimpleHTTPRequestHandler):
         except Exception as err:  # noqa: BLE001 — 연결을 끊지 말고 화면이 이유를 보여 줄 수 있게 한다
             sys.stderr.write(f"{self.command} {self.path}: {err!r}\n")
             self.send_json(HTTPStatus.INTERNAL_SERVER_ERROR, {"error": "서버에서 처리하지 못했어요.", "detail": repr(err)})
+
+    def do_DELETE(self) -> None:
+        return self.handle_api("DELETE")
 
     def send_file(self, path: Path, media: str) -> None:
         """올린 원본을 그대로 내보낸다. 브라우저가 화면에 띄우도록 inline 으로 준다."""

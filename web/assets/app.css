@@ -535,6 +535,33 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 .tl__more:hover { background: var(--bg-brand-soft); color: var(--brand-primary); }
 
+/* 직접 적은 줄에만 붙는 지우기. 눈에 띄지 않게 두고, 마우스를 올리면 드러난다 —
+   자주 누를 것이 아니라 잘못 적었을 때만 쓰는 것이다 */
+.tl__remove {
+  flex-shrink: 0; align-self: center;
+  width: 26px; height: 26px; border-radius: 999px;
+  color: var(--text-tertiary); font: 400 13px/1 var(--font);
+  opacity: 0; transition: opacity 0.12s ease, background 0.12s ease;
+}
+.tl__row:hover .tl__remove, .tl__remove:focus-visible { opacity: 1; }
+.tl__remove:hover { background: var(--status-conflict-bg); color: var(--status-conflict); }
+
+/* 지울지 묻는 팝업 */
+.confirm { display: flex; flex-direction: column; gap: 10px; }
+.confirm__q { font-weight: 600; }
+.confirm__quote {
+  padding: 12px 14px; border-radius: 10px;
+  background: var(--bg-sunken); color: var(--text-primary);
+  box-shadow: inset 3px 0 0 var(--status-mine);
+}
+.confirm__buttons { display: flex; justify-content: flex-end; gap: 8px; margin-top: 8px; }
+.confirm__cancel { padding: 11px 20px; border-radius: 999px; background: var(--bg-sunken); color: var(--text-secondary); }
+.confirm__cancel:hover { background: var(--border-default); color: var(--text-primary); }
+.confirm__ok { padding: 11px 20px; border-radius: 999px; background: var(--status-conflict); color: #fff; }
+.confirm__ok:hover { filter: brightness(1.06); }
+.confirm__ok:disabled { opacity: 0.6; }
+.confirm__fail { color: var(--status-conflict); }
+
 .tl__gap {
   display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
   margin: 6px 0 6px 106px; padding: 8px 12px;
