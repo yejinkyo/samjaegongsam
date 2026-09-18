@@ -879,9 +879,8 @@
       used[row.conflict ? "conflict" : row.kind] = true;
     });
     wrap.appendChild(h("div", { class: "tl__legend" }, KIND_LEGEND.filter(function (k) { return used[k[0]]; }).map(function (k) {
-      return h("span", { class: "tl__legend-item" }, [
-        h("span", { class: "tl__dot tl__dot--" + k[0], "aria-hidden": "true" }),
-        h("span", { text: k[1] }),
+      return h("span", { class: "tl__legend-item tl__legend-item--" + k[0] }, [
+        h("span", { class: "tl__legend-ink", text: k[1] }),
       ]);
     })));
 
@@ -910,7 +909,8 @@
       });
 
 
-      wrap.appendChild(h("div", { class: "tl__row" + (i === lastEvent ? " tl__row--last" : "") }, [
+      wrap.appendChild(h("div", { class: "tl__row tl__row--" + (row.conflict ? "conflict" : row.kind)
+        + (i === lastEvent ? " tl__row--last" : "") }, [
         h("div", { class: "tl__when" }, [
           h("span", { class: "tl__day t-label" + (sameDay ? " tl__day--same" : ""), text: sameDay ? "" : t.day }),
           h("span", { class: "tl__time t-caption", text: t.time }),
@@ -919,8 +919,10 @@
           h("span", { class: "tl__dot tl__dot--" + (row.conflict ? "conflict" : row.kind) }),
           h("span", { class: "tl__line" }),
         ]),
-        // 줄여 적은 제목은 마우스를 올리면 끝까지 보인다 (자세히에도 원문이 있다)
-        h("p", { class: "tl__title", text: row.title, title: row.full && row.full !== row.title ? row.full : null }),
+        // 줄이는 일은 CSS 에 맡긴다 — 자리가 좁을 때만 잘리고, 그때는 마우스를
+        // 올리면 원문이 끝까지 보인다 (자세히에도 원문이 있다)
+        h("p", { class: "tl__title", title: row.full || row.title },
+          [h("span", { class: "tl__text", text: row.title })]),
         more,
       ]));
     });
@@ -1708,6 +1710,14 @@
     api("api/cases/" + encodeURIComponent(id)).then(function (view) { drawCase(root, view); }, notFound);
   }
 
+  /** 탭을 옮기면 종이가 한 장 넘어간 것처럼 보이게 한다.
+      같은 애니메이션을 다시 걸려면 클래스를 뗀 뒤 리플로우를 한 번 일으켜야 한다. */
+  function turnPage(node) {
+    node.classList.remove("panel--turn");
+    void node.offsetWidth;
+    node.classList.add("panel--turn");
+  }
+
   function drawCase(root, c) {
     document.title = c.title + " · 타래";
 
@@ -1743,6 +1753,7 @@
         tab.setAttribute("aria-selected", "true");
         panel.textContent = "";
         panel.appendChild(i === 0 ? timelineCard(c) : i === 1 ? peopleCard(c) : slotsCard(c));
+        turnPage(panel);
         fillSide(i);
       });
       return tab;
