@@ -187,7 +187,11 @@ class TimelineBuilder:
         events: list[TimelineEvent], requirements: CaseRequirements
     ) -> tuple[list[StageStatus], Stage | None]:
         flow = requirements.stages
-        by_stage = {s: [e for e in events if e.stage is s] for s in flow}
+        # 사용자가 적은 메모는 단계를 채우지 않는다. 메모는 자료가 아니다 —
+        # 직접 적었다고 '그 단계 자료가 있다'가 되면, 빠진 자료를 찾아 주는 일이 무너진다.
+        # 타임라인에는 그대로 보이고(user_input 표시), 여기서만 세지 않는다.
+        counted = [e for e in events if e.evidence_level is not EvidenceLevel.USER]
+        by_stage = {s: [e for e in counted if e.stage is s] for s in flow}
         reached = [i for i, s in enumerate(flow) if by_stage[s]]
         current_idx = max(reached) if reached else None
         statuses = []

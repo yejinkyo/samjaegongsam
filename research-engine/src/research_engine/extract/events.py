@@ -7,6 +7,7 @@ import re
 from datetime import timedelta
 
 from ..schema import (
+    DocumentType,
     GRANULARITY_RANK,
     EntityMention,
     Event,
@@ -122,14 +123,28 @@ def event_from_line(
     text = line.text
     clause = text[clause_start:]
     found = find_trigger(clause)
-    if found is None:
-        return None
-    stage, trig = found
-    after = clause[trig.end():]  # '전화 안받음'처럼 부정이 단서 자체에 들어 있는 경우는 제외하고 본다
-    if P.REQUEST_OR_FUTURE.search(after) or P.is_negated(after) or clause.rstrip().endswith("?"):
-        return None
 
-    t_start, t_end = clause_start + trig.start(), clause_start + trig.end()
+    # 사용자가 직접 적은 메모는 단서를 못 찾아도 버리지 않는다.
+    #
+    # 스캔한 서류는 무슨 단계의 일인지 우리가 읽어 내야 하지만, 메모는 본인이
+    # "이 날 이런 일이 있었다"고 직접 말한 것이다. 단서에 걸리는 말로 적지 않았다고
+    # 사라지면, 적은 사람은 자기가 쓴 것이 어디로 갔는지 알 수 없다.
+    #
+    # 단계는 '발생'으로 두되, 이 줄이 단계를 채우지는 않는다 — 메모는 자료가 아니다
+    # (timeline/builder.py 의 _stage_status 참고).
+    if found is None:
+        if doc.doc_type is not DocumentType.USER_NOTE or not clause.strip():
+            return None
+        stage, trig = Stage.OCCURRENCE, None
+    else:
+        stage, trig = found
+        after = clause[trig.end():]  # '전화 안받음'처럼 부정이 단서 자체에 들어 있는 경우는 제외하고 본다
+        if P.REQUEST_OR_FUTURE.search(after) or P.is_negated(after) or clause.rstrip().endswith("?"):
+            return None
+
+    # 단서가 없으면 줄 전체를 그 자리로 본다
+    t_start, t_end = ((clause_start + trig.start(), clause_start + trig.end()) if trig
+                      else (clause_start, len(text)))
     base = 0.9 if doc.evidence_level is EvidenceLevel.RECORD else 0.8
     action = Sourced[str].at(
         line.ref(clause_start, len(text)), clause.strip(), round(base * line.span_confidence(t_start, t_end), 4)
@@ -165,7 +180,8 @@ def event_from_line(
         amount=amount,
         participant_mention_ids=[mm.mention_id for mm in mentions],
         evidence_level=doc.evidence_level,
-        action_kind="petition" if PETITION.search(clause) else occurrence_kind(clause) if stage is Stage.OCCURRENCE else None,
+        action_kind=("petition" if PETITION.search(clause)
+                     else occurrence_kind(clause) if stage is Stage.OCCURRENCE else None),
     )
 
 
