@@ -4,3 +4,6 @@ local-cases/
 
 # vercel link 가 만드는 프로젝트 연결 정보 — 사람마다 다르다
 .vercel/
+
+# vercel link 가 받아 두는 토큰(VERCEL_OIDC_TOKEN) — 올리지 않는다
+.env*
