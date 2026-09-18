@@ -785,7 +785,12 @@
             s.quote ? h("span", { class: "srclist__quote", text: "“" + s.quote + "”" }) : null,
           ]),
         ];
-        if (!s.href) return h("li", {}, [h("div", { class: "srclist__item" }, parts)]);
+        // 열 원본이 없으면 눌리는 것과 똑같이 생기면 안 된다 — 눌러도 아무 일이 없어
+        // '고장났다'로 읽힌다. 왜 못 여는지를 그 자리에 적는다.
+        if (!s.href) {
+          parts.push(h("span", { class: "srclist__none t-caption", text: "원본 없음" }));
+          return h("li", {}, [h("div", { class: "srclist__item srclist__item--none" }, parts)]);
+        }
 
         openable = true;
         parts.push(h("span", { class: "srclist__open t-caption", text: "원본 보기" }));
@@ -1640,7 +1645,10 @@
           h("span", { class: "t-body-m c-primary", text: s.name }),
           s.isNew ? h("span", { class: "srclist__new", text: "방금 추가" }) : null,
         ];
-        if (!s.href) return h("li", { class: "srclist__item" + (s.isNew ? " srclist__item--new" : "") }, parts);
+        if (!s.href) {
+          parts.push(h("span", { class: "srclist__none t-caption", text: "원본 없음" }));
+          return h("li", { class: "srclist__item srclist__item--none" + (s.isNew ? " srclist__item--new" : "") }, parts);
+        }
 
         parts.push(h("span", { class: "srclist__open t-caption", text: "원본 보기" }));
         var item = h("button", { type: "button", class: "srclist__item srclist__item--open" }, parts);

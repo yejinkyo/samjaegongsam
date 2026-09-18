@@ -1145,6 +1145,13 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 .na__title { font-size: 20px; }
 
+/* 열 원본이 없는 자료 — 눌리는 것과 구별되게 흐리게 두고 이유를 붙인다 */
+.srclist__item--none { opacity: 0.62; cursor: default; }
+.srclist__none {
+  margin-left: auto; padding: 2px 8px; border-radius: 999px;
+  background: var(--bg-sunken); color: var(--text-tertiary); white-space: nowrap;
+}
+
 /* ── 서류철 머리말 ──────────────────────────────────────────
    색면 위에는 아무것도 얹지 않는다. 명암을 넣으면 색이 뜨고 반들거려 보였다.
    종이로 보이게 하는 건 겹쳐 나온 한 장과 바닥에 지는 그림자뿐이다. */
