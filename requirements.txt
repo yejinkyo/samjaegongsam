@@ -1,0 +1,4 @@
+# Vercel 정리 함수(api/)가 쓰는 것 — 두 엔진의 런타임 의존성만 적는다.
+# 엔진 자체는 설치하지 않고 저장소 안의 소스를 불러온다(api/analyze.py).
+pydantic>=2.7
+korean-lunar-calendar>=0.3.1
