@@ -57,10 +57,13 @@
 
   function caseHref(id) { return "case.html?id=" + encodeURIComponent(id); }
 
-  /* 정리 서버(web/serve.py) API.
-     GitHub Pages 처럼 서버가 없으면 요청이 실패한다. 그때 화면은 등록을 막고 이유를 보여준다 —
+  /* 정리 서버 API. 두 가지가 있다.
+     - 로컬 정리 서버(web/serve.py): 사진을 서버가 읽고 사건을 서버에 저장한다
+     - 배포 환경(Vercel, api/): 저장하지 않는다. /api/status 가 mode "browser" 를 알리면 사건 조회·등록을
+       browser-store.js 가 맡는다 — 사진은 이 브라우저에서 읽고, 사건도 이 브라우저에 남는다
+     GitHub Pages 처럼 둘 다 없으면 요청이 실패한다. 그때 화면은 등록을 막고 이유를 보여준다 —
      올린 것처럼 꾸미지 않는다. 주소는 상대 경로라 하위 경로에 올려도 같은 규칙으로 돈다. */
-  function api(path, options) {
+  function fetchJson(path, options) {
     return fetch(path, options).then(function (res) {
       return res.json().catch(function () { return {}; }).then(function (body) {
         if (!res.ok) {
@@ -73,16 +76,37 @@
     });
   }
 
-  /** 서버가 있으면 {ocr, case_types}, 없으면 null. */
+  var statusPromise = null;
+
+  /** 서버가 있으면 {ocr, case_types, mode?}, 없으면 null. 한 화면에서 한 번만 묻는다. */
   function serverStatus() {
-    return api("api/status").catch(function () { return null; });
+    if (!statusPromise) statusPromise = fetchJson("api/status").catch(function () { return null; });
+    return statusPromise;
+  }
+
+  function inBrowserMode() {
+    return serverStatus().then(function (s) { return !!(s && s.mode === "browser" && window.TaraeBrowserStore); });
+  }
+
+  function api(path, options) {
+    if (path.indexOf("api/cases") !== 0) return fetchJson(path, options);
+    return inBrowserMode().then(function (browser) {
+      return browser ? window.TaraeBrowserStore.request(path, options) : fetchJson(path, options);
+    });
   }
 
   /** 이 서버에서 등록한 사건인가. 예시 사건(cases.js)은 자료를 더할 수 없다. */
   function isLocal(c) { return !!(c && c.local); }
 
-  /** 자료를 서버에 보낸다. 엔진이 다시 정리한 사건 화면 데이터가 돌아온다. */
-  function uploadForm(url, fields, items) {
+  /** 자료를 서버에 보낸다. 엔진이 다시 정리한 사건 화면 데이터가 돌아온다.
+      배포 환경에서는 사진을 이 브라우저에서 먼저 읽는다 — 그 진행 상황을 onProgress 로 알린다. */
+  function uploadForm(url, fields, items, onProgress) {
+    return inBrowserMode().then(function (browser) {
+      return browser ? window.TaraeBrowserStore.upload(url, fields, items, onProgress) : postForm(url, fields, items);
+    });
+  }
+
+  function postForm(url, fields, items) {
     var form = new FormData();
     Object.keys(fields).forEach(function (key) { if (fields[key]) form.append(key, fields[key]); });
     items.forEach(function (it) {
@@ -93,7 +117,7 @@
         form.append("note", it.note);
       }
     });
-    return api(url, { method: "POST", body: form });
+    return fetchJson(url, { method: "POST", body: form });
   }
 
   function errorText(err) {
@@ -369,7 +393,7 @@
     }
     var video = h("video", { class: "cam__view", autoplay: true, playsinline: true, muted: true });
     var shoot = h("button", { type: "button", class: "modal__save", text: "찍기" });
-    var note = h("p", { class: "modal__note", text: "찍은 사진은 자료 목록에 더해지고, 정리를 시작하면 이 컴퓨터의 정리 서버로만 보냅니다." });
+    var note = h("p", { class: "modal__note", text: "찍은 사진은 자료 목록에 더해지고, 정리를 시작하면 글자를 읽어 정리합니다." });
     var stream = null;
 
     function stop() {
@@ -565,7 +589,7 @@
       start.disabled = true;
       start.textContent = "정리하는 중…";
       say("자료를 읽고 정리하고 있어요. 사진이 많으면 조금 걸려요.");
-      uploadForm("api/cases", { case_type: pickedType, title: title.value.trim() }, items).then(function (view) {
+      uploadForm("api/cases", { case_type: pickedType, title: title.value.trim() }, items, function (text) { say(text); }).then(function (view) {
         location.href = caseHref(view.id);
       }, function (err) {
         start.disabled = false;
@@ -579,6 +603,7 @@
       drawChips();
       if (!s) say("정리 서버에 연결되지 않았어요. 이 화면에서는 자료를 정리할 수 없어요 — 저장소에서 py web/serve.py 로 열어 주세요.", true);
       else if (!s.ocr.ready) say(s.ocr.reason + " OCR 결과 JSON 과 메모는 정리할 수 있어요.");
+      else if (s.mode === "browser") say("사진은 이 브라우저에서 읽고, 읽은 글자만 정리 엔진에 보내요. 등록한 사건과 원본은 이 브라우저에만 남아요.");
     });
 
     drawList();

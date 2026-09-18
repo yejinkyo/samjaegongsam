@@ -3,5 +3,11 @@
   "framework": null,
   "installCommand": "",
   "buildCommand": "",
-  "outputDirectory": "web"
+  "outputDirectory": "web",
+  "functions": {
+    "api/*.py": {
+      "excludeFiles": "{web/**,local-cases/**,test_data/**,**/tests/**}",
+      "maxDuration": 60
+    }
+  }
 }

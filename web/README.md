@@ -73,27 +73,44 @@ curl -L -o ~/.tarae/tessdata/kor.traineddata https://github.com/tesseract-ocr/te
 
 ## 배포
 
-화면(`web/`)만 올린다. 빌드가 없는 정적 파일이다.
-
-| 어디 | 어떻게 |
+| 어디 | 무엇이 도는가 |
 |---|---|
-| GitHub Pages | `main` 에 `web/` 이 바뀌면 `.github/workflows/pages.yml` 이 올린다 |
-| Vercel | 저장소 루트의 `vercel.json`(프레임워크 없음 · 설치·빌드 없음 · `web/` 을 그대로 서빙)과 `.vercelignore` |
+| GitHub Pages | 화면만. `main` 에 `web/` 이 바뀌면 `.github/workflows/pages.yml` 이 올린다. 새 사건 등록은 막힌다 |
+| Vercel | 화면 + **정리 함수**(`api/`). 새 사건 등록이 실제로 돈다. `main` 에 push 하면 프로덕션, PR 마다 미리보기 |
 
-Vercel 은 저장소 루트에서 배포한다. 처음 한 번만 로그인·연결한다.
+### Vercel 에서 새 사건 등록이 도는 방식
+
+로컬 정리 서버(`serve.py`)는 사진을 Tesseract 로 읽고 사건을 `local-cases/` 에 쌓는다. Vercel 함수는 상태를 두지
+않으므로 그 두 가지를 **브라우저로 옮긴다**.
+
+```
+사진 → tesseract.js 로 이 브라우저에서 읽음 (assets/browser-store.js)
+OCR 결과 · 메모 → POST /api/analyze → 두 엔진을 돌려 화면 데이터만 돌려받음 (서버에 남지 않음)
+사건 · 원본 사진 · 화면 데이터 → 이 브라우저의 IndexedDB
+```
+
+- `/api/status` 가 `mode: "browser"` 를 알리면 `app.js` 가 사건 조회·등록을 `browser-store.js` 로 보낸다.
+  주소와 돌려주는 모양은 로컬 정리 서버와 같아서 화면 코드는 어느 쪽인지 몰라도 된다
+- **등록한 사건은 그 브라우저에만 보인다.** 다른 기기·다른 브라우저에서는 안 보인다. 로그인이 없어도 남의 사건이 섞이지 않는다
+- 사진 읽기는 처음 한 번 한국어 데이터를 CDN 에서 받는다. 시연 전에 그 브라우저로 한 번 등록해 두면 그 뒤로는 받지 않는다
+- 함수(`api/analyze.py` · `api/status.py`)는 두 엔진을 설치하지 않고 저장소 안의 소스를 불러온다. 설치하는 것은
+  루트 `requirements.txt`(두 엔진의 런타임 의존성)뿐이다
+- 함수 본문 한도가 4.5MB 라 사진 원본은 보내지 않는다 — 보내는 것은 읽은 글자(OCR 결과 JSON)와 메모뿐이다
+
+### Vercel 설정
+
+저장소 루트의 `vercel.json`(프레임워크 없음 · 설치·빌드 없음 · `web/` 을 그대로 서빙 · `api/*.py` 함수)과 `.vercelignore`.
+GitHub 저장소가 연결돼 있어 **`main` 에 병합하면 프로덕션이 자동으로 바뀐다.** CLI 로 올릴 때는 저장소 루트에서:
 
 ```bash
 npx vercel login
 npx vercel link --yes --project samjaegongsam
-npx vercel deploy --dry     # 올라갈 파일 목록 확인 — web/ 23개 + vercel.json 이어야 한다
-npx vercel deploy --prod
+npx vercel deploy --dry     # 올라갈 파일 목록 — web/ · api/ · 두 엔진 src · export_web.py 뿐이어야 한다
+npx vercel deploy           # 미리보기 (Vercel 로그인한 사람만 열림)
 ```
 
-- **`.vercelignore` 는 전부 빼고 `web/` 만 다시 넣는다.** 저장소 루트의 `local-cases/` 에 화면에서 올린 피해 자료가
-  있어서, 루트에서 CLI 로 배포해도 그런 파일이 올라가면 안 된다. `web/serve.py` · `web/tools/` · `web/README.md` 도 뺀다.
-- GitHub 저장소를 Vercel 에 연결하면(대시보드 → Import) push 마다 배포되고 PR 마다 미리보기 주소가 생긴다.
-  이때 Root Directory 는 비워 둔다 — 설정은 `vercel.json` 이 맡는다.
-- `/api/…` 요청은 Vercel 에서 404 가 난다. 화면은 그걸 '서버 없음'으로 읽고 등록을 막는다.
+- **`.vercelignore` 는 전부 빼고 필요한 것만 다시 넣는다.** 저장소 루트의 `local-cases/` 에 화면에서 올린 피해 자료가
+  있어서, 루트에서 CLI 로 배포해도 그런 파일이 올라가면 안 된다. 엔진은 `src/` 와 `tools/export_web.py` 만 — 테스트·픽스처·가상환경은 뺀다
 
 ## 데이터는 엔진에서만 온다
 
