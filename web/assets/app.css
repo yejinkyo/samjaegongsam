@@ -371,13 +371,15 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   display: inline-flex; align-items: center;
   max-width: 190px; padding: 11px 16px;
   border-radius: 999px; background: var(--brand-primary); color: var(--text-on-brand);
-  font: 600 15px/1.3 var(--font); letter-spacing: -0.01em;
+  font: 600 15px/1.3 var(--font); letter-spacing: -0.01em; white-space: nowrap;
 }
 /* 뿌리에서 갈래로 나가는 가로선 */
 .tree__rootwrap::after { content: ""; width: 26px; height: 2px; background: var(--border-strong); }
 
 .tree__branches, .tree__leaves { margin: 0; padding: 0; list-style: none; }
-.tree__branches { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+/* 자리가 모자라면 줄어들지 말고 넘쳐야 한다 — 줄어들면 글자가 한 자씩 세로로 선다.
+   .tree 가 overflow-x: auto 라 넘친 만큼 옆으로 밀어 볼 수 있다. */
+.tree__branches { flex: 1 0 auto; min-width: 330px; display: flex; flex-direction: column; gap: 6px; }
 
 .tree__branch { position: relative; display: flex; align-items: flex-start; gap: 0; padding-left: 26px; }
 /* 갈래를 잇는 세로선 — 첫 갈래 위쪽과 마지막 갈래 아래쪽은 비운다 */
@@ -395,11 +397,11 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   flex-shrink: 0; display: inline-flex; align-items: center; gap: 7px;
   margin-top: 12px; padding: 7px 14px;
   border-radius: 999px; background: var(--bg-brand-soft); color: var(--brand-primary);
-  font: 600 13px/1.3 var(--font);
+  font: 600 13px/1.3 var(--font); white-space: nowrap;
 }
 .tree__group-count { color: var(--text-tertiary); font-weight: 500; }
 
-.tree__leaves { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 6px; padding-left: 26px; position: relative; }
+.tree__leaves { flex: 1 0 auto; min-width: 250px; display: flex; flex-direction: column; gap: 6px; padding-left: 26px; position: relative; }
 .tree__leaves::before {
   content: ""; position: absolute; left: 0; top: 24px; bottom: 24px; width: 2px; background: var(--border-default);
 }
@@ -415,13 +417,14 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   background: var(--bg-surface); box-shadow: inset 0 0 0 1.5px var(--border-default);
 }
 .tnode__head { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
-.tnode__name { font: 600 15px/1.4 var(--font); color: var(--text-primary); }
+.tnode__name { font: 600 15px/1.4 var(--font); color: var(--text-primary); white-space: nowrap; }
 .tnode__role {
+  flex-shrink: 0; white-space: nowrap;
   padding: 2px 8px; border-radius: 999px;
   background: var(--bg-sunken); color: var(--text-secondary);
   font: 500 11.5px/1.5 var(--font);
 }
-.tnode__docs { font: 400 12px/1.5 var(--font); color: var(--text-tertiary); }
+.tnode__docs { font: 400 12px/1.5 var(--font); color: var(--text-tertiary); white-space: nowrap; }
 /* 엔진이 합치지 못하고 남긴 링크 — 점선으로 '아직 단정하지 않았다'를 보인다 */
 .tnode__same {
   display: flex; align-items: flex-start; gap: 6px;
@@ -856,4 +859,335 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .page-head { flex-direction: column; align-items: flex-start; }
   .dropzone__hint, .case-head__meta { white-space: normal; }
   .section { padding: 24px 20px; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   사건 상세 — 노트와 메모지
+   ───────────────────────────────────────────────────────────────────────
+   서류철(머리말)을 열면 안에서 노트가 나온다. 왼쪽 세로선 왼쪽에 날짜, 오른쪽에
+   손으로 적은 듯한 내용. 곁의 것들은 노트에 붙인 인덱스와 메모지다.
+
+   종이는 보라가 살짝 도는 흰색, 괘선은 회색. 인덱스와 메모지는 색을 흩뿌리지 않고
+   남색 → 보라 → 자주 → 자두 한 줄기로만 옮겨 간다 — 다 다르되 같은 계열이다.
+   서류철 머리말(.case-folder)은 아래 '서류철 머리말' 칸에서 따로 다룬다.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --note-paper: #fefeff;          /* 종이 — 흰색. 누런 기가 없어야 한다 */
+  --note-step: 48px;              /* 괘선 간격 — 모든 줄이 이 배수로 앉는다 */
+  --note-margin-x: 128px;         /* 세로 여백선이 서는 자리 = 날짜 칸 너비 */
+  --note-stack: #ddd8ea;          /* 밑에 깔린 종이의 가장자리 */
+  --note-rule: #eae8f0;           /* 가로 괘선 · 회색. 배경으로 그으면 1px 이
+                                     기기 픽셀에 걸쳐 번져서 굵어 보인다 — 예전
+                                     줄 테두리와 같은 두께로 읽히게 한 톤 옅게. */
+  --note-margin: #cdc9d6;         /* 세로 여백선 · 한 톤 진한 회색 */
+  --note-ink: #2b2733;            /* 검은 펜 */
+  --note-ink-dim: #8b8494;        /* 날짜 */
+  --note-red: #8c2f4d;            /* 불일치 — 보라와 붙는 버건디 펜 */
+  --note-marker: rgba(118, 111, 133, 0.24);   /* 은은한 연회색 형광펜 */
+
+}
+
+/* ── 탭 — 노트 위에 붙인 네모 인덱스 ──────────────────────────── */
+.tabs { gap: 6px; padding-top: 0; padding-left: 14px; margin-bottom: -1px; box-shadow: none; }
+.tab {
+  flex-direction: row; gap: 0;
+  padding: 10px 20px 11px;
+  border-radius: 8px 8px 0 0;
+  background: #efeaf7; color: var(--note-ink-dim);
+  box-shadow: inset 0 0 0 1px var(--note-rule);
+  font: 500 15px/1 var(--font); letter-spacing: 0;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+.tab::after { display: none; }
+.tab:hover { background: #e5dff2; }
+/* 펼친 쪽은 색이 진해지고 종이와 이어진다 */
+.tab[aria-selected="true"] {
+  background: var(--brand-primary); color: #fff;
+  box-shadow: none; font-weight: 600; font-size: 15px; letter-spacing: 0;
+}
+
+/* ── 노트 ──────────────────────────────────────────────────────
+   종이는 본문과 곁의 것들을 한 장으로 받친다 — 인덱스와 메모지가 따로 떠 있지
+   않고 이 종이에 붙어 있는 것으로 보여야 한다. 그래서 종이는 .tl 이 아니라
+   두 단을 함께 감싸는 .columns 가 된다.
+
+   괘선도 줄마다 긋지 않고 **종이의 배경으로** 긋는다. 줄에 테두리를 달면 글이
+   끝나는 곳에서 선도 같이 끝난다 — 인덱스 옆도, 마지막 줄 아래도 비어 버린다.
+   배경으로 그으면 종이가 있는 데까지 선이 따라간다. 대신 안의 모든 줄은
+   --note-step 의 배수로 앉아야 선 위에 글이 얹힌다. */
+.columns {
+  position: relative;
+  align-items: stretch; gap: 0;
+  border-radius: 8px;
+  background-color: var(--note-paper);
+  background-image:
+    /* 세로 여백선 — 날짜 칸 오른쪽에 한 줄, 종이 끝까지 */
+    linear-gradient(to right,
+      transparent 0, transparent calc(var(--note-margin-x) - 1px),
+      var(--note-margin) calc(var(--note-margin-x) - 1px), var(--note-margin) var(--note-margin-x),
+      transparent var(--note-margin-x)),
+    /* 가로 괘선 */
+    repeating-linear-gradient(to bottom,
+      transparent 0, transparent calc(var(--note-step) - 1px),
+      var(--note-rule) calc(var(--note-step) - 1px), var(--note-rule) var(--note-step));
+  /* 파일철에 여러 장이 겹쳐 있다 — 가장자리로 두 장이 비죽 나온다 */
+  box-shadow:
+    inset 0 0 0 1px var(--note-rule),
+    5px 5px 0 -1px var(--note-paper), 5px 5px 0 0 var(--note-stack),
+    11px 11px 0 -1px var(--note-paper), 11px 11px 0 0 var(--note-stack),
+    0 18px 32px -20px rgba(46, 27, 97, 0.5);
+}
+/* 안에 놓이는 카드는 저마다 배경을 갖지 않는다 — 종이는 한 장이다 */
+.tl,
+#panel > .card {
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+/* 타임라인은 줄이 종이 끝까지 가야 해서 여백이 없다 */
+.tl { padding: 0; }
+/* 인물·관계와 주장 대조는 종이 가장자리에 붙으면 아슬아슬해 보인다.
+   왼쪽은 세로 여백선 오른쪽에서 시작해 다른 줄들과 같은 자리에 선다. */
+#panel > .card:not(.tl) {
+  padding: 26px 32px 34px calc(var(--note-margin-x) + 18px);
+}
+/* 마지막 줄 아래에도 빈 괘선이 남는다 — 노트는 글이 끝난 데서 끝나지 않는다 */
+.tl::after { content: ""; display: block; min-height: calc(var(--note-step) * 2); }
+.tl__legend {
+  margin: 0; padding: 0 20px 0 calc(var(--note-margin-x) + 18px);
+  min-height: var(--note-step); align-items: center;
+  border-bottom: none;
+  color: var(--note-ink-dim);
+}
+
+.tl__row {
+  align-items: stretch; gap: 0;
+  min-height: var(--note-step);
+  padding: 0; border-radius: 0;
+  box-shadow: none;
+}
+/* 손이 지나가면 옅은 회색. 괘선이 비쳐야 해서 아주 묽게 둔다 */
+.tl__row:hover { background: rgba(88, 82, 102, 0.055); }
+
+/* 날짜 칸 — 세로선 왼쪽 */
+.tl__when {
+  width: var(--note-margin-x); flex-shrink: 0;
+  align-self: flex-start; min-height: var(--note-step);
+  display: flex; flex-direction: column; justify-content: center; gap: 1px;
+  padding: 0 16px 0 20px; text-align: right;
+  box-shadow: none;
+  font-variant-numeric: tabular-nums;
+}
+.tl__day { line-height: 1.35; }
+.tl__time { line-height: 1.3; }
+.tl__day { color: var(--note-ink); font-weight: 600; letter-spacing: 0; }
+.tl__time { color: var(--note-ink-dim); letter-spacing: 0; }
+
+/* 점과 세로 실선은 노트에서 쓰지 않는다 — 줄 자체가 칸이다 */
+.tl__rail { display: none; }
+
+/* 내용 — 세로선 오른쪽에 적은 것 */
+/* 한 줄이 괘선 한 칸. 글자에 칠하는 형광펜은 줄 높이가 아니라 글꼴 높이를
+   따라가므로 line-height 를 늘려도 그대로다.
+
+   줄임표는 CSS 가 붙인다 — 자료에서 온 문장을 미리 잘라 넣으면 화면이 넓어도
+   '…' 로 끝난다. 자리가 있으면 끝까지 보이고, 좁아지면 그때 잘린다. */
+.tl__title {
+  padding: 0 8px 0 18px;
+  font: 400 16px/var(--note-step) var(--font); color: var(--note-ink);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+/* 자료끼리 어긋난 줄은 붉은 펜으로 */
+.tl__row--conflict .tl__title { color: var(--note-red); }
+/* 사람의 말이라 아직 확인되지 않은 줄은 노란 형광펜으로 그어 둔다.
+   글자를 감싼 span 에 칠한다 — 블록에 칠하면 줄 전체가 띠가 된다.
+
+   띠의 높이·위치는 **px 로** 잡는다. 퍼센트로 잡으면 글꼴 높이의 소수점에
+   걸려 기기 픽셀마다 다르게 반올림되고, 그게 삐뚤빼뚤해 보이는 이유다. */
+.tl__row--claim .tl__text {
+  background: linear-gradient(var(--note-marker), var(--note-marker)) left bottom 1px / 100% 11px no-repeat;
+  padding: 0 2px;
+}
+/* 범례도 같은 표기로 보여 준다 — 색 동그라미는 이제 없다 */
+.tl__legend-item--claim .tl__legend-ink {
+  background: linear-gradient(var(--note-marker), var(--note-marker)) left bottom 1px / 100% 9px no-repeat;
+  padding: 0 2px; color: var(--note-ink);
+}
+.tl__legend-item--conflict .tl__legend-ink { color: var(--note-red); font-weight: 600; }
+.tl__legend-item--verified .tl__legend-ink { color: var(--note-ink); }
+.tl__legend-item--mine .tl__legend-ink { color: #5f5870; font-style: italic; }
+/* 내가 적은 줄은 연필로 적은 것처럼 */
+.tl__row--mine .tl__title { color: #5f5870; font-style: italic; }
+
+.tl__more {
+  align-self: center; margin-right: 14px;
+  border-radius: 6px; background: none;
+  color: var(--note-ink-dim); font: 500 12.5px/1.4 var(--font);
+  box-shadow: inset 0 0 0 1px var(--note-rule);
+  padding: 6px 10px;
+}
+.tl__more:hover { background: #f2ecff; color: var(--brand-primary); box-shadow: inset 0 0 0 1px var(--brand-primary); }
+
+/* 공백 구간도 한 칸이다 — 줄바꿈을 허용하면 칸이 늘어나 괘선과 어긋난다 */
+.tl__gap {
+  margin: 0 20px 0 calc(var(--note-margin-x) + 18px);
+  min-height: var(--note-step); height: var(--note-step); padding: 0 12px;
+  flex-wrap: nowrap; overflow: hidden;
+  border-radius: 6px; border-color: var(--note-margin);
+}
+.tl__gap > * { white-space: nowrap; }
+.tl__gap > :last-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+/* 직접 추가도 노트 위에 적는 한 줄이다 — 버튼처럼 떠 있지 않는다 */
+.tl__add {
+  align-self: stretch; display: flex; align-items: center;
+  min-height: var(--note-step);
+  padding: 0 20px 0 calc(var(--note-margin-x) + 18px);
+  font: 500 15px/1.5 var(--font);
+}
+.tl__add:hover { background: rgba(88, 82, 102, 0.055); }
+
+/* ── 글씨는 전부 같은 손이다 ───────────────────────────────────
+   타임라인 본문(400 / 넓은 자간 / --note-ink)을 노트 위 모든 글씨의 기준으로
+   삼는다. 앱 기본 스타일의 굵은 UI 글씨(500·600, 좁은 자간)가 섞이면 손으로
+   적은 노트가 아니라 화면처럼 읽힌다. */
+.page--case .tl__legend,
+.page--case .tl__more,
+.page--case .tl__add,
+.page--case .tl__gap,
+.page--case .tl__gap .t-label {
+  font-family: var(--font);
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--note-ink);
+}
+.page--case .tl__legend { font-size: 13px; color: var(--note-ink-dim); }
+.page--case .tl__more { font-size: 13px; color: var(--note-ink-dim); }
+/* 직접 적어 넣는 자리는 내가 하는 일이라 보라색으로 둔다 — 자료에서 온 줄과 구별된다 */
+.page--case .tl__add { font-size: 15px; color: var(--brand-primary); }
+.page--case .tl__gap,
+.page--case .tl__gap .t-label { font-size: 13px; color: var(--note-ink-dim); }
+/* 진한 보라 카드 위라 글씨는 흰색이다 — 노트 글씨 규칙(검은 잉크)을 따르면 안 보인다 */
+.page--case .na__title { color: var(--text-on-brand); }
+
+/* 탭을 누르면 종이가 한 장 넘어간다 */
+#panel { transform-origin: left center; backface-visibility: hidden; }
+.panel--turn { animation: note-turn 0.32s cubic-bezier(0.22, 0.61, 0.36, 1); }
+@keyframes note-turn {
+  from { opacity: 0.25; transform: perspective(1400px) rotateY(-11deg) translateX(-10px); }
+  to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .panel--turn { animation: none; }
+}
+
+/* ── 곁의 것들 ─────────────────────────────────────────────────
+   자료·확인·질문·다음 행동은 **원래 모양 그대로** 둔다. 색 딱지로 바꿔 보니
+   종이 흉내가 앞서고 무엇을 하는 버튼인지가 뒤로 밀렸다. 여기서 바꾸는 것은
+   자리(종이 위, 범례 줄 아래에서 시작)뿐이다.
+
+   위쪽 여백은 왼쪽 범례 줄(확인완료·주장·미확인·불일치)의 높이만큼 비운다 —
+   범례와 나란히 서면 노트의 머리글과 같은 줄처럼 읽힌다. */
+.rail { gap: 10px; flex: 0 1 320px; min-width: 248px; padding: 56px 18px 20px; }
+.srcbar { flex-direction: column; gap: 10px; }
+/* 넷 다 같은 흰 카드 한 장이다 — 이름은 왼쪽, 여는 표시(꺾쇠·펼침)는 오른쪽 끝.
+   테두리를 두껍게 긋는 대신 옅은 그림자로 종이 위에서 살짝 띄운다. */
+.srcbar--stack .srcbar__btn,
+.srcbar__btn,
+.issues__toggle,
+.issues__ask {
+  width: 100%;
+  display: flex; align-items: center; gap: 10px;
+  justify-content: flex-start; text-align: left;
+  min-height: 58px; padding: 16px 18px;
+  border-radius: 16px;
+  background: var(--bg-surface); color: var(--text-primary);
+  box-shadow:
+    inset 0 0 0 1px var(--border-default),
+    0 1px 2px rgba(24, 24, 24, 0.05),
+    0 10px 22px -16px rgba(46, 27, 97, 0.45);
+  font: 600 15px/1.4 var(--font);
+  transition: box-shadow 0.14s ease;
+}
+/* 오른쪽 끝으로 밀어 두는 것들 — 꺾쇠, 펼침 화살표 */
+.srcbar__btn .icon:last-child,
+.issues__ask .icon:last-child,
+.issues__chev { margin-left: auto; }
+.srcbar__btn:hover,
+.issues__ask:hover {
+  box-shadow:
+    inset 0 0 0 1px var(--border-strong),
+    0 2px 4px rgba(24, 24, 24, 0.06),
+    0 14px 26px -16px rgba(46, 27, 97, 0.55);
+}
+/* '자료 추가하기' 와 '전문가에게 물어볼 질문' 은 내가 하는 일이라 이름을 보라로 */
+.srcbar__btn--add,
+.issues__ask { color: var(--brand-primary); }
+/* '확인이 필요해요' 는 연회색 네모. 빨간 테두리로 카드를 두르면 경고가 너무 세다 —
+   빨간 ! 표와 개수만으로 충분히 눈에 든다. */
+.issues__toggle {
+  background: #f3f2f6;
+  box-shadow: inset 0 0 0 1px #e6e4ec;
+}
+.issues__toggle:hover {
+  background: #eeedf2;
+  box-shadow: inset 0 0 0 1px #dcd9e4;
+}
+
+/* 다음 행동은 진한 보라 한 덩어리 — 흰 카드들 사이에서 이것만 눈에 들어야 한다.
+   색만으로는 모자라서 안쪽 여백과 그림자도 한 단계 키운다. */
+.next-action {
+  background: var(--brand-strong); border-radius: 16px;
+  padding: 22px 22px 24px;
+  box-shadow:
+    0 2px 4px rgba(46, 27, 97, 0.24),
+    0 18px 34px -18px rgba(46, 27, 97, 0.8);
+}
+.na__title { font-size: 20px; }
+
+/* 열 원본이 없는 자료 — 눌리는 것과 구별되게 흐리게 두고 이유를 붙인다 */
+.srclist__item--none { opacity: 0.62; cursor: default; }
+.srclist__none {
+  margin-left: auto; padding: 2px 8px; border-radius: 999px;
+  background: var(--bg-sunken); color: var(--text-tertiary); white-space: nowrap;
+}
+
+/* ── 서류철 머리말 ──────────────────────────────────────────
+   색면 위에는 아무것도 얹지 않는다. 명암을 넣으면 색이 뜨고 반들거려 보였다.
+   종이로 보이게 하는 건 겹쳐 나온 한 장과 바닥에 지는 그림자뿐이다. */
+/* 탭은 표지보다 위에 있다. 표지에 z-index 를 주면서 탭이 그 아래로 내려가
+   아래 8px 이 가려졌고, 그 자리에 글자 아랫부분이 걸려 잘렸다. */
+.case-folder__tab {
+  z-index: 2;
+  box-shadow: -1px -1px 2px rgba(46, 27, 97, 0.18);
+}
+/* 목록의 서류철 아이콘처럼, 안에 든 종이 한 장이 위로 비어져 나온다.
+   칠하는 순서: 이 종이 → 표지(z-index 1) → 탭(z-index 2). */
+.case-folder::after {
+  content: ""; position: absolute; left: 22px; right: 22px; top: 20px; height: 26px;
+  border-radius: 8px 8px 0 0; background: var(--fold-sheet);
+  box-shadow: 0 -1px 2px rgba(46, 27, 97, 0.16);
+}
+.case-folder__body {
+  position: relative; z-index: 1;
+  box-shadow:
+    0 1px 2px rgba(46, 27, 97, 0.2),
+    0 14px 26px -14px rgba(46, 27, 97, 0.5);
+}
+
+
+@media (max-width: 1024px) {
+  .rail { flex: 0 1 292px; min-width: 228px; padding: 56px 14px 18px; }
+  /* 날짜 칸이 좁아지면 세로 여백선도 같이 온다 */
+  .page--case .columns { --note-margin-x: 96px; }
+  .tl__when { padding-left: 12px; }
+}
+/* 한 열로 접히면 종이는 그대로고 곁의 것들이 아래로 내려와 붙는다 */
+@media (max-width: 760px) {
+  .rail { flex: 0 1 auto; min-width: 0; width: 100%; padding: 4px 18px 18px; }
+  .page--case .columns { --note-margin-x: 96px; }
+  /* 좁은 화면에서는 세로선 오른쪽까지 밀 자리가 없다 — 가장자리 여백만 준다 */
+  #panel > .card:not(.tl) { padding: 20px 16px 26px; }
+  .tl__gap { margin-left: 0; margin-right: 12px; }
+  .tl__gap, .tl__add { padding-left: 14px; }
 }

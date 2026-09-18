@@ -205,14 +205,20 @@ _LEAD_DATE = re.compile(
 
 
 def _short_title(title: str) -> str:
+    """타임라인 한 줄에 적을 문장.
+
+    앞머리의 날짜는 뗀다 — 날짜는 왼쪽 칸에 이미 있다. 여러 문장이면 첫 문장만.
+
+    **길이로 자르지는 않는다.** 여기서 잘라 '…' 를 붙이면 화면이 아무리 넓어도
+    끝까지 안 보인다. 자리에 맞춰 줄이는 일은 화면(CSS)이 한다.
+    """
     text = _LEAD_DATE.sub("", title.strip(), count=1).strip()
     if len(text) < 2:
         text = title.strip()
     first = re.split(r"(?<=[.!?])\s+", text)[0].strip()
     if len(first) >= 2:
         text = first
-    text = text.rstrip(" .")
-    return text if len(text) <= 24 else text[:23].rstrip() + "…"
+    return text.rstrip(" .")
 
 
 def _full_text(event: dict[str, Any]) -> str:
@@ -276,7 +282,9 @@ def _timeline(result: dict[str, Any], docs: dict[str, dict], doc_index: dict[str
         rows.append((start, {
             "type": "event",
             "time": "시각 미상" if e.get("time_unknown") or not time else _event_time(time, multi_year),
-            "title": _short_title(e["title"]),
+            # 줄 이름은 잘리지 않은 원문에서 뽑는다 — 엔진이 '…' 로 줄여 둔 제목에서
+            # 뽑으면 화면이 아무리 넓어도 그 자리에서 끝난다
+            "title": _short_title(_full_text(e)),
             "full": _full_text(e),
             "kind": kind,
             "badge": badge,

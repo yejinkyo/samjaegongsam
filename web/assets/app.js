@@ -785,7 +785,12 @@
             s.quote ? h("span", { class: "srclist__quote", text: "“" + s.quote + "”" }) : null,
           ]),
         ];
-        if (!s.href) return h("li", {}, [h("div", { class: "srclist__item" }, parts)]);
+        // 열 원본이 없으면 눌리는 것과 똑같이 생기면 안 된다 — 눌러도 아무 일이 없어
+        // '고장났다'로 읽힌다. 왜 못 여는지를 그 자리에 적는다.
+        if (!s.href) {
+          parts.push(h("span", { class: "srclist__none t-caption", text: "원본 없음" }));
+          return h("li", {}, [h("div", { class: "srclist__item srclist__item--none" }, parts)]);
+        }
 
         openable = true;
         parts.push(h("span", { class: "srclist__open t-caption", text: "원본 보기" }));
@@ -879,9 +884,8 @@
       used[row.conflict ? "conflict" : row.kind] = true;
     });
     wrap.appendChild(h("div", { class: "tl__legend" }, KIND_LEGEND.filter(function (k) { return used[k[0]]; }).map(function (k) {
-      return h("span", { class: "tl__legend-item" }, [
-        h("span", { class: "tl__dot tl__dot--" + k[0], "aria-hidden": "true" }),
-        h("span", { text: k[1] }),
+      return h("span", { class: "tl__legend-item tl__legend-item--" + k[0] }, [
+        h("span", { class: "tl__legend-ink", text: k[1] }),
       ]);
     })));
 
@@ -910,7 +914,8 @@
       });
 
 
-      wrap.appendChild(h("div", { class: "tl__row" + (i === lastEvent ? " tl__row--last" : "") }, [
+      wrap.appendChild(h("div", { class: "tl__row tl__row--" + (row.conflict ? "conflict" : row.kind)
+        + (i === lastEvent ? " tl__row--last" : "") }, [
         h("div", { class: "tl__when" }, [
           h("span", { class: "tl__day t-label" + (sameDay ? " tl__day--same" : ""), text: sameDay ? "" : t.day }),
           h("span", { class: "tl__time t-caption", text: t.time }),
@@ -919,8 +924,10 @@
           h("span", { class: "tl__dot tl__dot--" + (row.conflict ? "conflict" : row.kind) }),
           h("span", { class: "tl__line" }),
         ]),
-        // 줄여 적은 제목은 마우스를 올리면 끝까지 보인다 (자세히에도 원문이 있다)
-        h("p", { class: "tl__title", text: row.title, title: row.full && row.full !== row.title ? row.full : null }),
+        // 줄이는 일은 CSS 에 맡긴다 — 자리가 좁을 때만 잘리고, 그때는 마우스를
+        // 올리면 원문이 끝까지 보인다 (자세히에도 원문이 있다)
+        h("p", { class: "tl__title", title: row.full || row.title },
+          [h("span", { class: "tl__text", text: row.title })]),
         more,
       ]));
     });
@@ -1559,7 +1566,10 @@
   }
 
   function askButton(c) {
-    var button = h("button", { type: "button", class: "issues__ask", text: "전문가에게 물어볼 질문" });
+    var button = h("button", { type: "button", class: "issues__ask" }, [
+      h("span", { text: "전문가에게 물어볼 질문" }),
+      icon("chevron-right", "18"),
+    ]);
     button.addEventListener("click", function () {
       var text = askSheet(c);
       var area = h("textarea", { class: "ask__text", rows: "14", readonly: true });
@@ -1635,7 +1645,10 @@
           h("span", { class: "t-body-m c-primary", text: s.name }),
           s.isNew ? h("span", { class: "srclist__new", text: "방금 추가" }) : null,
         ];
-        if (!s.href) return h("li", { class: "srclist__item" + (s.isNew ? " srclist__item--new" : "") }, parts);
+        if (!s.href) {
+          parts.push(h("span", { class: "srclist__none t-caption", text: "원본 없음" }));
+          return h("li", { class: "srclist__item srclist__item--none" + (s.isNew ? " srclist__item--new" : "") }, parts);
+        }
 
         parts.push(h("span", { class: "srclist__open t-caption", text: "원본 보기" }));
         var item = h("button", { type: "button", class: "srclist__item srclist__item--open" }, parts);
@@ -1653,12 +1666,17 @@
     var count = h("span", { class: "srcbar__count", text: String(c.sources.length) });
 
     var open = h("button", { type: "button", class: "srcbar__btn" }, [
+      icon("document", "18"),
       h("span", { text: "첨부한 자료" }),
       count,
+      icon("chevron-right", "18"),
     ]);
     open.addEventListener("click", function () { sourceListModal(c); });
 
-    var add = h("button", { type: "button", class: "srcbar__btn srcbar__btn--add" }, [h("span", { text: "+  자료 추가하기" })]);
+    var add = h("button", { type: "button", class: "srcbar__btn srcbar__btn--add" }, [
+      icon("plus", "18"),
+      h("span", { text: "자료 추가하기" }),
+    ]);
     add.addEventListener("click", function () {
       if (!isLocal(c)) {
         openModal("자료 추가하기", h("div", { class: "help" }, [
@@ -1708,6 +1726,14 @@
     api("api/cases/" + encodeURIComponent(id)).then(function (view) { drawCase(root, view); }, notFound);
   }
 
+  /** 탭을 옮기면 종이가 한 장 넘어간 것처럼 보이게 한다.
+      같은 애니메이션을 다시 걸려면 클래스를 뗀 뒤 리플로우를 한 번 일으켜야 한다. */
+  function turnPage(node) {
+    node.classList.remove("panel--turn");
+    void node.offsetWidth;
+    node.classList.add("panel--turn");
+  }
+
   function drawCase(root, c) {
     document.title = c.title + " · 타래";
 
@@ -1743,6 +1769,7 @@
         tab.setAttribute("aria-selected", "true");
         panel.textContent = "";
         panel.appendChild(i === 0 ? timelineCard(c) : i === 1 ? peopleCard(c) : slotsCard(c));
+        turnPage(panel);
         fillSide(i);
       });
       return tab;
