@@ -45,7 +45,7 @@ py web/serve.py
 - **읽을 수 있는 자료만 받는다.** 사진(이미지)과 OCR 결과 JSON. PDF·음성은 읽는 경로가 아직 없어 목록에 넣지 않고 그 이유를 알린다. 글 주소는 글을 가져오지 못하므로 '본인이 적은 메모'로 들어간다.
 - 등록한 사건과 올린 파일은 저장소 루트의 `local-cases/` 에만 남는다(gitignore). 어디로도 보내지 않는다. 엔진 실행 기록은 사건 폴더의 `run.log` 에 있다.
 - 서버는 `127.0.0.1` 에만 열린다 — 이 컴퓨터 밖에서는 접속할 수 없다.
-- **GitHub Pages 에는 이 서버가 없다.** 배포된 화면에서는 예시 사건만 보이고, 새 사건 등록은 "정리 서버에 연결되지 않았어요"라고 알리고 막는다.
+- **배포한 화면(GitHub Pages · Vercel)에는 이 서버가 없다.** 예시 사건만 보이고, 새 사건 등록은 "정리 서버에 연결되지 않았어요"라고 알리고 막는다. 등록을 배포 환경에서 돌리는 설계는 [`docs/등록-서버-배포-설계.md`](../docs/등록-서버-배포-설계.md).
 
 ### 사진을 읽으려면 (Tesseract OCR)
 
@@ -70,6 +70,30 @@ curl -L -o ~/.tarae/tessdata/kor.traineddata https://github.com/tesseract-ocr/te
 
 **OCR 정확도는 자료 모양에 크게 달려 있다.** 인쇄된 통지서는 대체로 읽지만 쉼표·마침표를 헷갈려 날짜(`2022. 9, 14.`)를
 놓치기도 하고, 손글씨는 많이 틀린다. 틀리게 읽힌 줄은 엔진이 '읽히지 않은 부분'으로 올리고 되묻는다.
+
+## 배포
+
+화면(`web/`)만 올린다. 빌드가 없는 정적 파일이다.
+
+| 어디 | 어떻게 |
+|---|---|
+| GitHub Pages | `main` 에 `web/` 이 바뀌면 `.github/workflows/pages.yml` 이 올린다 |
+| Vercel | 저장소 루트의 `vercel.json`(프레임워크 없음 · 설치·빌드 없음 · `web/` 을 그대로 서빙)과 `.vercelignore` |
+
+Vercel 은 저장소 루트에서 배포한다. 처음 한 번만 로그인·연결한다.
+
+```bash
+npx vercel login
+npx vercel link --yes --project samjaegongsam
+npx vercel deploy --dry     # 올라갈 파일 목록 확인 — web/ 23개 + vercel.json 이어야 한다
+npx vercel deploy --prod
+```
+
+- **`.vercelignore` 는 전부 빼고 `web/` 만 다시 넣는다.** 저장소 루트의 `local-cases/` 에 화면에서 올린 피해 자료가
+  있어서, 루트에서 CLI 로 배포해도 그런 파일이 올라가면 안 된다. `web/serve.py` · `web/tools/` · `web/README.md` 도 뺀다.
+- GitHub 저장소를 Vercel 에 연결하면(대시보드 → Import) push 마다 배포되고 PR 마다 미리보기 주소가 생긴다.
+  이때 Root Directory 는 비워 둔다 — 설정은 `vercel.json` 이 맡는다.
+- `/api/…` 요청은 Vercel 에서 404 가 난다. 화면은 그걸 '서버 없음'으로 읽고 등록을 막는다.
 
 ## 데이터는 엔진에서만 온다
 
