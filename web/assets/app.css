@@ -877,7 +877,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   --note-step: 48px;              /* 괘선 간격 — 모든 줄이 이 배수로 앉는다 */
   --note-margin-x: 128px;         /* 세로 여백선이 서는 자리 = 날짜 칸 너비 */
   --note-stack: #ddd8ea;          /* 밑에 깔린 종이의 가장자리 */
-  --note-clip: #aab0b8;           /* 클립 — 은색 */
   --note-rule: #eae8f0;           /* 가로 괘선 · 회색. 배경으로 그으면 1px 이
                                      기기 픽셀에 걸쳐 번져서 굵어 보인다 — 예전
                                      줄 테두리와 같은 두께로 읽히게 한 톤 옅게. */
@@ -885,16 +884,8 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   --note-ink: #2b2733;            /* 검은 펜 */
   --note-ink-dim: #8b8494;        /* 날짜 */
   --note-red: #8c2f4d;            /* 불일치 — 보라와 붙는 버건디 펜 */
-  --note-marker: rgba(247, 214, 106, 0.55);   /* 은은한 노란 형광펜 */
+  --note-marker: rgba(118, 111, 133, 0.24);   /* 은은한 연회색 형광펜 */
 
-  /* 인덱스·메모지 — 색을 흩뿌리지 않고 한 계열 안에서 하나씩 옮겨 간다.
-     파랑(첨부) → 보라(추가) → 난초(질문) → 분홍(확인 필요), 전부 파스텔로. */
-  --idx-files: #c79de3;   --idx-files-bg: #f5edfb;
-  --idx-add:   #ad92e4;   --idx-add-bg:   #f0ebfd;
-  --idx-ask:   #93b8ea;   --idx-ask-bg:   #eaf2fc;
-  --idx-issue: #f2a6c0;   --idx-issue-bg: #fdeff5;
-  --memo-next: #dacef7;           /* 다음 행동 메모지 · 라벤더 */
-  --memo-marker: rgba(104, 55, 198, 0.46);    /* 메모지 위 보라 형광펜 */
 }
 
 /* ── 탭 — 노트 위에 붙인 네모 인덱스 ──────────────────────────── */
@@ -963,29 +954,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 /* 마지막 줄 아래에도 빈 괘선이 남는다 — 노트는 글이 끝난 데서 끝나지 않는다 */
 .tl::after { content: ""; display: block; min-height: calc(var(--note-step) * 2); }
-
-/* ── 클립 — 파일철에 끼운 것처럼 종이 윗머리에 하나 ───────────── */
-.columns::before,
-.columns::after {
-  content: ""; position: absolute; z-index: 3;
-  border: 3.5px solid var(--note-clip);
-  pointer-events: none;
-}
-/* 두 고리의 중심이 같은 점(오른쪽 81.5px · 위 14px)이라 같은 각도로 돌리면
-   한 몸처럼 기울어진다. 종이에 꽂은 클립은 반듯하게 서 있지 않는다. */
-.columns::before,
-.columns::after { transform: rotate(21deg); }
-.columns::before {           /* 바깥 고리 */
-  top: -19px; right: 68px; width: 27px; height: 66px;
-  border-radius: 14px;
-  box-shadow: 0 2px 3px rgba(46, 27, 97, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.7);
-}
-.columns::after {            /* 안쪽 고리 — 아래로 열려 있다 */
-  top: -9px; right: 74px; width: 15px; height: 46px;
-  border-bottom: none;
-  border-radius: 8px 8px 0 0;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
-}
 .tl__legend {
   margin: 0; padding: 0 20px 0 calc(var(--note-margin-x) + 18px);
   min-height: var(--note-step); align-items: center;
@@ -1087,14 +1055,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .page--case .tl__more,
 .page--case .tl__add,
 .page--case .tl__gap,
-.page--case .tl__gap .t-label,
-.page--case .srcbar__btn,
-.page--case .issues__toggle,
-.page--case .issues__label,
-.page--case .issues__ask,
-.page--case .na__title,
-.page--case .na__more,
-.page--case .na__draft {
+.page--case .tl__gap .t-label {
   font-family: var(--font);
   font-weight: 400;
   letter-spacing: 0;
@@ -1106,14 +1067,8 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .page--case .tl__add { font-size: 15px; color: var(--brand-primary); }
 .page--case .tl__gap,
 .page--case .tl__gap .t-label { font-size: 13px; color: var(--note-ink-dim); }
-.page--case .srcbar__btn,
-.page--case .issues__toggle,
-.page--case .issues__label,
-.page--case .issues__ask { font-size: 15px; }
-.page--case .next-action__head .t-label { font-weight: 400; font-size: 13px; letter-spacing: 0; color: #5c4b8f; }
-.page--case .na__title { font-size: 18px; line-height: 1.5; }
-.page--case .na__more,
-.page--case .na__draft { font-size: 15px; color: var(--brand-strong); }
+/* 진한 보라 카드 위라 글씨는 흰색이다 — 노트 글씨 규칙(검은 잉크)을 따르면 안 보인다 */
+.page--case .na__title { color: var(--text-on-brand); }
 
 /* 탭을 누르면 종이가 한 장 넘어간다 */
 #panel { transform-origin: left center; backface-visibility: hidden; }
@@ -1127,64 +1082,68 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 
 /* ── 곁의 것들 ─────────────────────────────────────────────────
-   인덱스는 노트 옆에 붙인 색 딱지다. 왼쪽 끝에 진한 색 띠가 있고
-   그 오른쪽에 글씨가 적혀 있다 (보내 주신 인덱스 그림). */
-/* 곁의 것들도 종이 위다 — 종이 오른쪽 여백에 붙여 둔다.
-   위쪽 여백은 왼쪽 범례 줄(확인완료·주장·미확인·불일치)의 높이만큼 비운다.
-   범례와 나란히 서면 노트의 머리글과 인덱스가 같은 줄처럼 읽힌다. */
-.rail { gap: 10px; flex: 0 1 320px; min-width: 248px; padding: 56px 18px 20px; }
+   자료·확인·질문·다음 행동은 **원래 모양 그대로** 둔다. 색 딱지로 바꿔 보니
+   종이 흉내가 앞서고 무엇을 하는 버튼인지가 뒤로 밀렸다. 여기서 바꾸는 것은
+   자리(종이 위, 범례 줄 아래에서 시작)뿐이다.
 
-.srcbar { flex-direction: column; gap: 8px; }
-/* 종이 자체에는 명암을 주지 않는다 — 색은 평평하게 두고, 종이로 보이게 하는 건
-   바닥에 지는 그림자와 붙인 사람 손이 느껴지는 미세한 기울기뿐이다. */
+   위쪽 여백은 왼쪽 범례 줄(확인완료·주장·미확인·불일치)의 높이만큼 비운다 —
+   범례와 나란히 서면 노트의 머리글과 같은 줄처럼 읽힌다. */
+.rail { gap: 10px; flex: 0 1 320px; min-width: 248px; padding: 56px 18px 20px; }
+.srcbar { flex-direction: column; gap: 10px; }
+/* 넷 다 같은 흰 카드 한 장이다 — 이름은 왼쪽, 여는 표시(꺾쇠·펼침)는 오른쪽 끝.
+   테두리를 두껍게 긋는 대신 옅은 그림자로 종이 위에서 살짝 띄운다. */
+.srcbar--stack .srcbar__btn,
 .srcbar__btn,
 .issues__toggle,
 .issues__ask {
-  position: relative; width: 100%;
-  justify-content: flex-start; gap: 10px;
-  padding: 13px 16px 13px 30px;
-  border-radius: 2px;
-  color: var(--note-ink);
-  background: var(--idx-bg, #eee);
+  width: 100%;
+  display: flex; align-items: center; gap: 10px;
+  justify-content: flex-start; text-align: left;
+  min-height: 58px; padding: 16px 18px;
+  border-radius: 16px;
+  background: var(--bg-surface); color: var(--text-primary);
   box-shadow:
-    0 1px 1px rgba(46, 27, 97, 0.16),
-    1px 5px 9px -6px rgba(46, 27, 97, 0.5);
-  font: 500 14.5px/1.35 var(--font);
-  text-align: left;
-  transition: transform 0.12s ease, box-shadow 0.12s ease;
+    inset 0 0 0 1px var(--border-default),
+    0 1px 2px rgba(24, 24, 24, 0.05),
+    0 10px 22px -16px rgba(46, 27, 97, 0.45);
+  font: 600 15px/1.4 var(--font);
+  transition: box-shadow 0.14s ease;
 }
-.srcbar__btn::before,
-.issues__toggle::before,
-.issues__ask::before {
-  content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 18px;
-  border-radius: 2px 0 0 2px;
-  background: var(--idx-tab, #ccc);
-}
-/* 사람이 하나씩 붙인 것이라 각도가 조금씩 다르다 */
-.srcbar__btn--add { transform: rotate(-0.5deg); }
-.srcbar__btn:not(.srcbar__btn--add) { transform: rotate(0.4deg); }
-.issues__toggle { transform: rotate(-0.4deg); }
-.issues__ask { transform: rotate(0.5deg); }
-/* 손이 닿으면 한 겹 들린다 — 그림자만 깊어진다 */
+/* 오른쪽 끝으로 밀어 두는 것들 — 꺾쇠, 펼침 화살표 */
+.srcbar__btn .icon:last-child,
+.issues__ask .icon:last-child,
+.issues__chev { margin-left: auto; }
 .srcbar__btn:hover,
-.issues__toggle:hover,
 .issues__ask:hover {
-  filter: none;
   box-shadow:
-    0 2px 2px rgba(46, 27, 97, 0.16),
-    2px 9px 14px -8px rgba(46, 27, 97, 0.55);
+    inset 0 0 0 1px var(--border-strong),
+    0 2px 4px rgba(24, 24, 24, 0.06),
+    0 14px 26px -16px rgba(46, 27, 97, 0.55);
+}
+/* '자료 추가하기' 와 '전문가에게 물어볼 질문' 은 내가 하는 일이라 이름을 보라로 */
+.srcbar__btn--add,
+.issues__ask { color: var(--brand-primary); }
+/* '확인이 필요해요' 는 연회색 네모. 빨간 테두리로 카드를 두르면 경고가 너무 세다 —
+   빨간 ! 표와 개수만으로 충분히 눈에 든다. */
+.issues__toggle {
+  background: #f3f2f6;
+  box-shadow: inset 0 0 0 1px #e6e4ec;
+}
+.issues__toggle:hover {
+  background: #eeedf2;
+  box-shadow: inset 0 0 0 1px #dcd9e4;
 }
 
-.srcbar__btn--add { --idx-bg: var(--idx-add-bg); --idx-tab: var(--idx-add); }
-.srcbar__btn:not(.srcbar__btn--add) { --idx-bg: var(--idx-files-bg); --idx-tab: var(--idx-files); }
-.srcbar__count { background: rgba(255, 255, 255, 0.72); color: var(--note-ink); }
-
-.issues { gap: 8px; }
-.issues__toggle { --idx-bg: var(--idx-issue-bg); --idx-tab: var(--idx-issue); }
-.issues__label { font: 600 14.5px/1.35 var(--font); }
-.issues__mark { width: 19px; height: 19px; font-size: 12px; }
-.issues__count { background: rgba(255, 255, 255, 0.75); }
-.issues__ask { --idx-bg: var(--idx-ask-bg); --idx-tab: var(--idx-ask); color: var(--note-ink); justify-content: flex-start; }
+/* 다음 행동은 진한 보라 한 덩어리 — 흰 카드들 사이에서 이것만 눈에 들어야 한다.
+   색만으로는 모자라서 안쪽 여백과 그림자도 한 단계 키운다. */
+.next-action {
+  background: var(--brand-strong); border-radius: 16px;
+  padding: 22px 22px 24px;
+  box-shadow:
+    0 2px 4px rgba(46, 27, 97, 0.24),
+    0 18px 34px -18px rgba(46, 27, 97, 0.8);
+}
+.na__title { font-size: 20px; }
 
 /* ── 서류철 머리말 ──────────────────────────────────────────
    색면 위에는 아무것도 얹지 않는다. 명암을 넣으면 색이 뜨고 반들거려 보였다.
@@ -1209,54 +1168,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
     0 14px 26px -14px rgba(46, 27, 97, 0.5);
 }
 
-/* ── 다음 행동 — 네모난 메모지 ───────────────────────────────
-   평평한 네모 한 장은 종이로 안 보인다. 진짜처럼 보이게 하는 건 네 가지다.
-   (1) 아주 살짝 비뚤게 붙어 있다  (2) 종이는 균일한 색이 아니라 빛이 한쪽에서
-   든다  (3) 윗변은 밝고 아랫변은 어둡다  (4) 오른쪽 아래가 들려서 밑의 노트가
-   비친다. 그림자도 위는 붙고 아래로 퍼지게 나눠 준다. */
-.next-action {
-  position: relative;
-  transform: rotate(-0.7deg);
-  border-radius: 1px 2px 2px 3px;
-  padding: 17px 20px 19px;
-  color: var(--note-ink);
-  background:
-    linear-gradient(148deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 44%),
-    linear-gradient(180deg, #e5dcfc 0%, var(--memo-next) 34%, #cfc0f3 100%);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.72),
-    inset 0 -1px 0 rgba(78, 46, 165, 0.14),
-    0 1px 1px rgba(46, 27, 97, 0.18),
-    1px 7px 12px -7px rgba(46, 27, 97, 0.5);
-}
-/* 오른쪽 아래 모서리가 들린다 — 그 밑으로 노트가 보인다 */
-.next-action__head .t-label { color: var(--brand-strong); opacity: 1; letter-spacing: 0.5px; }
-.na__title { color: var(--note-ink); font: 600 19px/1.45 var(--font); }
-/* 기한은 스티커가 아니라 메모지에 적어 둔 말이다 — 보라색 글씨 한 마디 */
-.next-action__head .na__due {
-  padding: 0; margin: 0; border-radius: 0;
-  background: none; color: var(--brand-strong);
-  box-shadow: none; transform: none;
-  font: 600 15px/1.4 var(--font); letter-spacing: 0;
-}
-/* 메모지에 적은 말이지 버튼이 아니다 — 보라 형광펜으로 그어 둔 것처럼 */
-.na__buttons { gap: 16px; }
-.na__more,
-.na__buttons .na__more,
-.na__draft {
-  flex: 0 0 auto; align-self: flex-start; width: auto;
-  padding: 0 3px 1px; border-radius: 0;
-  background: none; box-shadow: none;
-  color: var(--brand-strong); font: 600 15px/1.7 var(--font);
-  background: linear-gradient(var(--memo-marker), var(--memo-marker)) left bottom 1px / 100% 10px no-repeat;
-}
-/* 손이 닿으면 형광펜이 글자를 덮는다 */
-.na__more:hover,
-.na__draft:hover {
-  filter: none;
-  background: linear-gradient(var(--memo-marker), var(--memo-marker)) left bottom 1px / 100% 20px no-repeat;
-}
-.modal__act { border-radius: 3px; }
 
 @media (max-width: 1024px) {
   .rail { flex: 0 1 292px; min-width: 228px; padding: 56px 14px 18px; }
@@ -1272,5 +1183,4 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   #panel > .card:not(.tl) { padding: 20px 16px 26px; }
   .tl__gap { margin-left: 0; margin-right: 12px; }
   .tl__gap, .tl__add { padding-left: 14px; }
-  .columns::before, .columns::after { display: none; }
 }

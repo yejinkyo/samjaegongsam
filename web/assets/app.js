@@ -1561,7 +1561,10 @@
   }
 
   function askButton(c) {
-    var button = h("button", { type: "button", class: "issues__ask", text: "전문가에게 물어볼 질문" });
+    var button = h("button", { type: "button", class: "issues__ask" }, [
+      h("span", { text: "전문가에게 물어볼 질문" }),
+      icon("chevron-right", "18"),
+    ]);
     button.addEventListener("click", function () {
       var text = askSheet(c);
       var area = h("textarea", { class: "ask__text", rows: "14", readonly: true });
@@ -1655,12 +1658,17 @@
     var count = h("span", { class: "srcbar__count", text: String(c.sources.length) });
 
     var open = h("button", { type: "button", class: "srcbar__btn" }, [
+      icon("document", "18"),
       h("span", { text: "첨부한 자료" }),
       count,
+      icon("chevron-right", "18"),
     ]);
     open.addEventListener("click", function () { sourceListModal(c); });
 
-    var add = h("button", { type: "button", class: "srcbar__btn srcbar__btn--add" }, [h("span", { text: "+  자료 추가하기" })]);
+    var add = h("button", { type: "button", class: "srcbar__btn srcbar__btn--add" }, [
+      icon("plus", "18"),
+      h("span", { text: "자료 추가하기" }),
+    ]);
     add.addEventListener("click", function () {
       if (!isLocal(c)) {
         openModal("자료 추가하기", h("div", { class: "help" }, [
