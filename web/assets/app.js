@@ -1785,7 +1785,11 @@
       body.appendChild(img);
     }
 
-    body.appendChild(h("p", { class: "modal__note", text: "올릴 때 받은 그대로예요. 이 컴퓨터 밖으로 나가지 않습니다." }));
+    // 예시 사건의 원본은 시연용으로 만든 사진이다(web/data/demo) — '올린 그대로'라고 하면 거짓말이 된다
+    var demo = /^data\/demo\//.test(src.href || "");
+    body.appendChild(h("p", { class: "modal__note", text: demo
+      ? "시연용으로 지어낸 가상 자료예요. 인물 · 사건 · 기관은 실제와 관계없습니다."
+      : "올릴 때 받은 그대로예요. 이 컴퓨터 밖으로 나가지 않습니다." }));
     openModal(src.name, body);
   }
 
@@ -1809,7 +1813,9 @@
       })),
       h("p", { class: "modal__note", text: isLocal(c)
         ? "이름을 누르면 올린 원본을 볼 수 있어요. 자료를 더하면 올린 자료 전체로 사건을 처음부터 다시 정리해요."
-        : "예시 사건이라 올린 원본이 없어요. 내 자료로 보려면 새 사건을 등록해 주세요." }),
+        : c.demo_originals
+          ? "시연용으로 지어낸 가상 자료예요. 이름을 누르면 원본을 볼 수 있어요."
+          : "예시 사건이라 올린 원본이 없어요. 내 자료로 보려면 새 사건을 등록해 주세요." }),
     ]));
   }
 

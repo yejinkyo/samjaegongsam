@@ -40,37 +40,51 @@ window.TARAE_CASES = [
       {
         "kind": "IMG",
         "name": "실종신고_접수증_2017.jpg",
-        "doc_id": "missing_report_2017"
+        "doc_id": "missing_report_2017",
+        "href": "data/demo/demo_missing_2017/missing_report_2017.jpg",
+        "media": "image/jpeg"
       },
       {
         "kind": "IMG",
         "name": "진술서_편의점직원.jpg",
-        "doc_id": "witness_station_2017"
+        "doc_id": "witness_station_2017",
+        "href": "data/demo/demo_missing_2017/witness_station_2017.jpg",
+        "media": "image/jpeg"
       },
       {
         "kind": "IMG",
         "name": "진술서_시장상인.jpg",
-        "doc_id": "witness_market_2017"
+        "doc_id": "witness_market_2017",
+        "href": "data/demo/demo_missing_2017/witness_market_2017.jpg",
+        "media": "image/jpeg"
       },
       {
         "kind": "IMG",
         "name": "가족_진술서.jpg",
-        "doc_id": "family_statement_2017"
+        "doc_id": "family_statement_2017",
+        "href": "data/demo/demo_missing_2017/family_statement_2017.jpg",
+        "media": "image/jpeg"
       },
       {
         "kind": "IMG",
         "name": "기사_2018.jpg",
-        "doc_id": "news_2018"
+        "doc_id": "news_2018",
+        "href": "data/demo/demo_missing_2017/news_2018.jpg",
+        "media": "image/jpeg"
       },
       {
         "kind": "IMG",
         "name": "수사중지_통지서_2019.jpg",
-        "doc_id": "suspension_notice_2019"
+        "doc_id": "suspension_notice_2019",
+        "href": "data/demo/demo_missing_2017/suspension_notice_2019.jpg",
+        "media": "image/jpeg"
       },
       {
         "kind": "IMG",
         "name": "진술서_2025.jpg",
-        "doc_id": "tip_statement_2025"
+        "doc_id": "tip_statement_2025",
+        "href": "data/demo/demo_missing_2017/tip_statement_2025.jpg",
+        "media": "image/jpeg"
       }
     ],
     "timeline": [
@@ -90,13 +104,17 @@ window.TARAE_CASES = [
             "name": "기사_2018.jpg",
             "doc_id": "news_2018",
             "line": 3,
-            "quote": "경찰은 정씨가 지난해 11월 1일 밤 11시쯤 ○○역 인근 CCTV에 마지막으로 찍혔다고 밝혔다."
+            "quote": "경찰은 정씨가 지난해 11월 1일 밤 11시쯤 ○○역 인근 CCTV에 마지막으로 찍혔다고 밝혔다.",
+            "href": "data/demo/demo_missing_2017/news_2018.jpg",
+            "media": "image/jpeg"
           },
           {
             "name": "기사_2018.jpg",
             "doc_id": "news_2018",
             "line": 3,
-            "quote": "11월 1일 밤 11시쯤"
+            "quote": "11월 1일 밤 11시쯤",
+            "href": "data/demo/demo_missing_2017/news_2018.jpg",
+            "media": "image/jpeg"
           }
         ]
       },
@@ -116,13 +134,17 @@ window.TARAE_CASES = [
             "name": "진술서_시장상인.jpg",
             "doc_id": "witness_market_2017",
             "line": 3,
-            "quote": "본인은 2017. 11. 2. 22시경 ○○시 중앙시장 앞에서 정하윤을 목격하였습니다."
+            "quote": "본인은 2017. 11. 2. 22시경 ○○시 중앙시장 앞에서 정하윤을 목격하였습니다.",
+            "href": "data/demo/demo_missing_2017/witness_market_2017.jpg",
+            "media": "image/jpeg"
           },
           {
             "name": "진술서_시장상인.jpg",
             "doc_id": "witness_market_2017",
             "line": 3,
-            "quote": "2017. 11. 2. 22시경"
+            "quote": "2017. 11. 2. 22시경",
+            "href": "data/demo/demo_missing_2017/witness_market_2017.jpg",
+            "media": "image/jpeg"
           }
         ]
       },
@@ -142,7 +164,9 @@ window.TARAE_CASES = [
             "name": "가족_진술서.jpg",
             "doc_id": "family_statement_2017",
             "line": 5,
-            "quote": "2017. 11. 3. 밤 112에 신고하였습니다."
+            "quote": "2017. 11. 3. 밤 112에 신고하였습니다.",
+            "href": "data/demo/demo_missing_2017/family_statement_2017.jpg",
+            "media": "image/jpeg"
           }
         ]
       },
@@ -162,13 +186,17 @@ window.TARAE_CASES = [
             "name": "실종신고_접수증_2017.jpg",
             "doc_id": "missing_report_2017",
             "line": 1,
-            "quote": "실종신고 접수증"
+            "quote": "실종신고 접수증",
+            "href": "data/demo/demo_missing_2017/missing_report_2017.jpg",
+            "media": "image/jpeg"
           },
           {
             "name": "실종신고_접수증_2017.jpg",
             "doc_id": "missing_report_2017",
             "line": 3,
-            "quote": "2017. 11. 4. 09:20"
+            "quote": "2017. 11. 4. 09:20",
+            "href": "data/demo/demo_missing_2017/missing_report_2017.jpg",
+            "media": "image/jpeg"
           }
         ]
       },
@@ -188,7 +216,9 @@ window.TARAE_CASES = [
             "name": "가족_진술서.jpg",
             "doc_id": "family_statement_2017",
             "line": 6,
-            "quote": "2017. 11. 10. ○○경찰서에 출석하여 참고인 조사를 받았습니다."
+            "quote": "2017. 11. 10. ○○경찰서에 출석하여 참고인 조사를 받았습니다.",
+            "href": "data/demo/demo_missing_2017/family_statement_2017.jpg",
+            "media": "image/jpeg"
           }
         ]
       },
@@ -234,13 +264,17 @@ window.TARAE_CASES = [
             "name": "수사중지_통지서_2019.jpg",
             "doc_id": "suspension_notice_2019",
             "line": 1,
-            "quote": "수사결과 통지서"
+            "quote": "수사결과 통지서",
+            "href": "data/demo/demo_missing_2017/suspension_notice_2019.jpg",
+            "media": "image/jpeg"
           },
           {
             "name": "수사중지_통지서_2019.jpg",
             "doc_id": "suspension_notice_2019",
             "line": 5,
-            "quote": "2019. 6. 17."
+            "quote": "2019. 6. 17.",
+            "href": "data/demo/demo_missing_2017/suspension_notice_2019.jpg",
+            "media": "image/jpeg"
           }
         ]
       },
@@ -266,13 +300,17 @@ window.TARAE_CASES = [
             "name": "진술서_2025.jpg",
             "doc_id": "tip_statement_2025",
             "line": 3,
-            "quote": "본인은 2025. 8. 14. 오후 ○○시 버스터미널 대합실에서 정하윤으로 보이는 여성을 목격하였습니다."
+            "quote": "본인은 2025. 8. 14. 오후 ○○시 버스터미널 대합실에서 정하윤으로 보이는 여성을 목격하였습니다.",
+            "href": "data/demo/demo_missing_2017/tip_statement_2025.jpg",
+            "media": "image/jpeg"
           },
           {
             "name": "진술서_2025.jpg",
             "doc_id": "tip_statement_2025",
             "line": 3,
-            "quote": "2025. 8. 14. 오후"
+            "quote": "2025. 8. 14. 오후",
+            "href": "data/demo/demo_missing_2017/tip_statement_2025.jpg",
+            "media": "image/jpeg"
           }
         ]
       },
@@ -5997,6 +6035,7 @@ window.TARAE_CASES = [
         "deadlines": []
       }
     },
-    "guide": true
+    "guide": true,
+    "demo_originals": true
   }
 ];

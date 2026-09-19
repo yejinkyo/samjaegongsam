@@ -252,3 +252,22 @@ def test_차이_의심도_자료끼리_어긋남_묶음에_둔다(export):
              "message": "최종 목격 일시: 차이가 있어 보입니다", "sources": [], "checked_doc_ids": []}
     groups = export._issues({"analysis": {"issues": [issue]}}, {})
     assert [g["label"] for g in groups] == ["자료끼리 어긋남"]
+
+
+# ── 예시 사건의 원본 사진 ─────────────────────────────────────────────
+
+
+def test_예시_사건의_원본_사진을_자료마다_잇는다(export, views):
+    """시연 사건은 web/data/demo 의 사진을 '원본 보기'로 연다 — 목록과 타임라인 출처 모두."""
+    view = views["demo_missing_2017"]
+    assert view["demo_originals"] is True
+    assert all(s["href"] == f"data/demo/demo_missing_2017/{s['doc_id']}.jpg" for s in view["sources"])
+    assert all((export.ROOT / "web" / s["href"]).is_file() for s in view["sources"])
+    row_sources = [s for row in view["timeline"] for s in row.get("sources") or [] if s.get("doc_id")]
+    assert row_sources and all(s.get("href") for s in row_sources if not s["doc_id"].startswith("note_"))
+
+
+def test_원본_폴더가_없으면_주소를_붙이지_않는다(export):
+    view = {"sources": [{"doc_id": "d1"}], "timeline": []}
+    export._link_originals(view, "data/demo/없는폴더")
+    assert "href" not in view["sources"][0]

@@ -896,11 +896,12 @@ def build_view(case_id: str, title: str, result: dict[str, Any]) -> dict[str, An
     }
 
 
-def _extra() -> list[tuple[str, str, Path, bool, bool]]:
+def _extra() -> list[tuple[str, str, Path, bool, bool, str | None]]:
     """직접 만든 사건 목록. 파일이 없으면 빈 목록 — 지금까지와 똑같이 돈다.
 
     ``"first": true`` 인 사건은 목록 맨 앞에 둔다(시연 때 처음 보이는 사건).
-    ``"guide": true`` 인 사건은 화면 위에 '둘러보기 안내' 띠를 단다."""
+    ``"guide": true`` 인 사건은 화면 위에 '둘러보기 안내' 띠를 단다.
+    ``"originals": "data/demo/<폴더>"`` 는 web/ 아래 원본 사진 폴더 — 자료마다 '원본 보기'를 붙인다."""
     if not EXTRA_CASES.exists():
         return []
     rows = json.loads(EXTRA_CASES.read_text(encoding="utf-8"))
@@ -911,8 +912,34 @@ def _extra() -> list[tuple[str, str, Path, bool, bool]]:
             path = ROOT / path
         if not path.exists():
             raise SystemExit(f"{EXTRA_CASES.name}: {row['result']} 를 찾지 못했습니다 — 엔진을 먼저 돌리세요")
-        out.append((row["id"], row["title"], path, bool(row.get("first")), bool(row.get("guide"))))
+        out.append((row["id"], row["title"], path, bool(row.get("first")), bool(row.get("guide")), row.get("originals")))
     return out
+
+
+ORIGINAL_TYPES = {".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png"}
+
+
+def _link_originals(view: dict[str, Any], folder: str) -> None:
+    """예시 사건에도 원본 사진이 있으면 자료마다 주소를 붙인다 — 로컬 서버의 with_files 와 같은 모양.
+
+    사진은 web/<folder>/<doc_id>.<확장자> 에 둔다. 없는 자료는 주소 없이 두어 화면이 '원본 없음'으로 그린다.
+    """
+    base = ROOT / "web" / folder
+    found = {f.stem: f for f in base.iterdir() if f.suffix.lower() in ORIGINAL_TYPES} if base.is_dir() else {}
+
+    def mark(src: dict[str, Any]) -> None:
+        f = found.get(src.get("doc_id") or "")
+        if f:
+            src["href"] = f"{folder}/{f.name}"
+            src["media"] = ORIGINAL_TYPES[f.suffix.lower()]
+
+    for src in view.get("sources") or []:
+        mark(src)
+    # 타임라인 '자세히'에서도 그 줄이 나온 원본을 바로 연다
+    for row in view.get("timeline") or []:
+        for src in row.get("sources") or []:
+            mark(src)
+    view["demo_originals"] = True
 
 
 def build_all() -> list[dict[str, Any]]:
@@ -920,10 +947,12 @@ def build_all() -> list[dict[str, Any]]:
     for case_id, title in CASES:
         result = json.loads((FIXTURES / f"{case_id}.json").read_text(encoding="utf-8"))
         views.append(build_view(case_id, title, result))
-    for case_id, title, path, pinned, guide in _extra():
+    for case_id, title, path, pinned, guide, originals in _extra():
         view = build_view(case_id, title, json.loads(path.read_text(encoding="utf-8")))
         if guide:
             view["guide"] = True
+        if originals:
+            _link_originals(view, originals)
         (first if pinned else views).append(view)
     return first + views
 
