@@ -30,17 +30,29 @@ from .schema import CaseState, CodeHit, Confidence
 # 검찰의 불기소 처분이 아니다 — 통지서에 그렇게 적혀 온다. 잘못 보면 경찰에 낼
 # 이의신청 대신 검찰 항고를 안내하게 되고, 실제로 열려 있는 불복 경로를 놓친다.
 # 표 자체가 판정 근거이므로 조건을 코드가 아니라 데이터로 적는다.
+#
+# 장기·미제 사건 서류는 대부분 2021년 수사권 조정 전의 것이라 그때 말을 알아들어야 한다.
+# - '기소중지'·'기소유예'에도 '기소'가 들어 있다. 재판 중(ST-401)으로 읽으면 멈춘 사건·끝난 사건을
+#   재판 중이라고 안내한다. 기소중지는 피의자를 찾지 못해 수사를 멈춘 검사의 결정(ST-201),
+#   기소유예는 불기소의 한 종류(ST-302)다
+# - '송치'는 경찰이 사건을 검찰로 넘긴 것이다. '불기소의견 송치'도 검사가 아직 결정하지 않았으므로
+#   불기소 줄보다 먼저 본다. '불송치' 안에도 '송치'가 들어 있어 뺀다
+# - '무혐의'는 '혐의없음'을 흔히 이르는 말, '각하'는 불기소 주문의 하나다
+# - '내사종결'(지금의 입건 전 조사 종결)은 입건되지 않고 끝난 것이라 입건 전 단계로 **추정**한다
 DECISION_TABLE: list[tuple[tuple[str, ...], tuple[str, ...], ST, Confidence]] = [
     (("재심",), (), ST.RETRIAL_PREP, Confidence.CONFIRMED),
     (("확정판결", "판결확정"), (), ST.JUDGMENT_FINAL, Confidence.CONFIRMED),
-    (("공소제기", "구공판", "구약식", "기소"), ("불기소",), ST.TRIAL_ONGOING, Confidence.CONFIRMED),
+    (("송치",), ("불송치",), ST.PROSECUTION_INVESTIGATING, Confidence.CONFIRMED),
+    (("공소제기", "구공판", "구약식", "기소"), ("불기소", "기소중지", "기소유예"), ST.TRIAL_ONGOING, Confidence.CONFIRMED),
     (("재정신청",), (), ST.ADJUDICATION_REQUEST, Confidence.CONFIRMED),
     (("항고", "이의신청"), (), ST.APPEAL_PENDING, Confidence.CONFIRMED),
-    (("불기소", "혐의없음", "공소권없음", "죄가안됨"), ("불송치",), ST.PROSECUTION_NO_CHARGE, Confidence.CONFIRMED),
+    (("불기소", "기소유예", "혐의없음", "무혐의", "공소권없음", "죄가안됨", "각하"), ("불송치",),
+     ST.PROSECUTION_NO_CHARGE, Confidence.CONFIRMED),
     (("불송치",), (), ST.POLICE_NO_REFERRAL, Confidence.CONFIRMED),
     # 통지서에 "수사중지"로만 적히기도 하고 사유를 붙여 "참고인중지"로 적히기도 한다.
     # 사유(피의자·참고인)는 아래에서 다시 갈라 ST-201 / ST-202 를 정한다.
-    (("수사중지", "수사 중지", "피의자중지", "참고인중지"), (), ST.SUSPENDED_SUSPECT, Confidence.CONFIRMED),
+    (("수사중지", "수사 중지", "피의자중지", "참고인중지", "기소중지"), (), ST.SUSPENDED_SUSPECT, Confidence.CONFIRMED),
+    (("내사종결", "내사 종결", "입건전조사 종결", "불입건"), (), ST.PRE_INVESTIGATION, Confidence.PRESUMED),
 ]
 
 # 결정 내용이 없을 때 현재 단계로 추정한다 (전부 '추정').
@@ -117,7 +129,7 @@ def st_from_decision(value: str, doc_ids: list[str] | None = None, *, confirmed:
         if code is ST.SUSPENDED_SUSPECT:
             if "참고인" in value:
                 code = ST.SUSPENDED_WITNESS
-            elif "피의자" not in value:
+            elif "피의자" not in value and "기소중지" not in value:  # 기소중지는 피의자를 찾지 못해 멈춘 것
                 return CodeHit(
                     code=ST.SUSPENDED_SUSPECT, label=label(ST.SUSPENDED_SUSPECT),
                     confidence=Confidence.PRESUMED,

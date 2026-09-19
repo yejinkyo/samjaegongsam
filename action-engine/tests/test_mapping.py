@@ -192,3 +192,27 @@ def test_불송치_혐의없음은_경찰_불송치다():
     # 불송치가 아닌 '혐의없음'은 그대로 검찰 불기소다
     assert st_from_decision("혐의없음").code == ST.PROSECUTION_NO_CHARGE
     assert st_from_decision("불기소(혐의없음)").code == ST.PROSECUTION_NO_CHARGE
+
+
+def test_2021년_이전_결정_문구를_알아듣는다():
+    """'기소중지'·'기소유예'에도 '기소'가 들어 있지만 재판 중이 아니다. 장기·미제 사건 서류에 흔한 말이다."""
+    from action_engine.mapping import st_from_decision
+
+    assert st_from_decision("기소중지").code == ST.SUSPENDED_SUSPECT
+    assert st_from_decision("기소중지").confidence is Confidence.CONFIRMED  # 피의자를 찾지 못해 멈춘 것 — 사유가 분명하다
+    assert st_from_decision("참고인중지").code == ST.SUSPENDED_WITNESS
+    assert st_from_decision("기소유예").code == ST.PROSECUTION_NO_CHARGE
+    assert st_from_decision("불기소(기소유예)").code == ST.PROSECUTION_NO_CHARGE
+    assert st_from_decision("무혐의").code == ST.PROSECUTION_NO_CHARGE
+    assert st_from_decision("각하").code == ST.PROSECUTION_NO_CHARGE
+    assert st_from_decision("불송치(각하)").code == ST.POLICE_NO_REFERRAL
+    # 송치는 검찰로 넘어간 것 — 불기소 의견이 붙어도 검사는 아직 결정하지 않았다
+    assert st_from_decision("송치").code == ST.PROSECUTION_INVESTIGATING
+    assert st_from_decision("불기소의견송치").code == ST.PROSECUTION_INVESTIGATING
+    assert st_from_decision("기소의견 송치").code == ST.PROSECUTION_INVESTIGATING
+    # 내사종결은 입건되지 않고 끝난 것 — 단계는 추정으로만 둔다
+    closed = st_from_decision("내사종결")
+    assert closed.code == ST.PRE_INVESTIGATION and closed.confidence is Confidence.PRESUMED
+    # 원래 뜻은 그대로다
+    assert st_from_decision("공소제기").code == ST.TRIAL_ONGOING
+    assert st_from_decision("구약식 기소").code == ST.TRIAL_ONGOING
