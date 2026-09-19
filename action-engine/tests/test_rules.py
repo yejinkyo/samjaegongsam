@@ -129,6 +129,18 @@ def test_채워진_기한은_실제로_계산된다():
     assert t012.submit_to and "고등검찰청" in t012.submit_to
 
 
+def test_검사의_기소중지는_이의제기가_아니라_항고_기한이다():
+    """검찰사건사무규칙 제147조 제1항 — 검사의 기소중지 · 참고인중지는 항고 대상이다."""
+    def codes(issuer):
+        st = CaseState(case_id="t", case_type="missing_person_suspended", as_of=date(2026, 9, 11),
+                       st=CodeHit(code=ST.SUSPENDED_SUSPECT, label="", reason="테스트", issuer=issuer))
+        return {t.code for t in compute_deadlines(st, {"decision_time": date(2026, 9, 1)})}
+
+    assert "TIM-012" in codes("prosecution") and "TIM-014" not in codes("prosecution")
+    assert "TIM-014" in codes("police") and "TIM-012" not in codes("police")
+    assert "TIM-014" in codes(None)  # 기관을 모르는 수사중지는 수사권 조정 뒤의 경찰 결정으로 본다
+
+
 def test_재정신청은_10일이다():
     """형사소송법 제260조 제3항."""
     t013 = next(

@@ -25,12 +25,15 @@ def _kb(monkeypatch, items):
     monkeypatch.setattr(C, "load_documents", lambda: {"actions": {"ACT-테스트": {"items": items}}})
 
 
-# ── 지식베이스가 비었을 때 (지금 상태) ──────────────────────────────────
+# ── 지식베이스가 비었을 때 ──────────────────────────────────────────────
 
 
-def test_필요서류가_비어있으면_체크리스트를_만들지_않는다():
+def test_필요서류가_비어있으면_체크리스트를_만들지_않는다(monkeypatch):
     """기한과 같은 원칙. 없는 것을 지어내면 신청이 반려된다."""
-    c = build_checklist("ACT-신규정보제출", DOCS)
+    from action_engine import checklist as C
+
+    monkeypatch.setattr(C, "load_documents", lambda: {"actions": {"ACT-테스트": {"check": "법령·서식 확인 필요"}}})
+    c = build_checklist("ACT-테스트", DOCS)
     assert c.items == []
     assert c.total == 0
     assert "법령·서식 확인" in c.unresolved
@@ -39,12 +42,17 @@ def test_필요서류가_비어있으면_체크리스트를_만들지_않는다(
 def test_서류를_채웠으면_근거가_붙는다():
     """채운 액션에는 서식명·제출처·근거가 있어야 한다. 비운 액션에는 무엇을 확인할지가 있어야 한다."""
     kb = load_documents()
-    assert kb["status"] == "draft_unverified"  # 법률 전문가 검수 전
+    assert kb["status"] == "verified"
+    assert "법률 전문가 검토는 아니다" in kb["verified_scope"]  # 조문 대조까지만 했다는 것을 숨기지 않는다
+    assert kb["verified_laws"] and all(law["MST"] and law["시행일자"] for law in kb["verified_laws"])
     for action, entry in kb["actions"].items():
         if entry.get("items"):
             assert entry.get("form_name"), f"{action} 에 서식명이 없습니다"
+            if entry.get("statute"):  # 온라인 조회(단계확인)는 서식이 아니다
+                assert entry.get("form_source"), f"{action} 에 서식 근거가 없습니다"
             assert entry.get("submit_to"), f"{action} 에 제출처가 없습니다"
             assert entry.get("statute") or entry.get("source"), f"{action} 에 근거 법령도 출처도 없습니다"
+            assert entry.get("verified", {}).get("at"), f"{action} 을 언제 무엇과 대조했는지가 없습니다"
         elif entry.get("no_submission"):
             assert entry.get("why"), f"{action} 에 제출 서류가 없는 이유가 없습니다"
         elif not entry.get("by_stage"):
@@ -61,20 +69,21 @@ def test_제출서류가_없는_단계는_못채움과_구별한다():
     assert c.unresolved is None
     assert c.no_submission and "확보" in c.no_submission
 
-    empty = build_checklist("ACT-신규정보제출", DOCS)
-    assert empty.no_submission is None  # 못 채운 것은 여전히 못 채운 것이다
-    assert empty.unresolved
+    for action in ("ACT-근거보완", "ACT-공백보완"):
+        entry = load_documents()["actions"][action]
+        assert entry.get("routes"), f"{action} 에 자료를 얻는 공식 경로가 없습니다"
+        assert all(r.get("statute") for r in entry["routes"])
 
 
 def test_피해자가_청구할_수_없는_증거보전은_안내하지_않는다():
     """형사소송법 제184조 제1항 — 청구권자는 검사·피고인·피의자·변호인뿐이다."""
     entry = load_documents()["actions"]["ACT-증거보존"]
-    assert entry["items"] == []
     assert any("제184조" in r["statute"] for r in entry["not_available"])
 
     c = build_checklist("ACT-증거보존", DOCS)
-    assert c.unresolved
     assert not any("증거보전" in i.label for i in c.items)
+    assert c.form_name == "자료·의견 제출서"  # 대신 수사기관에 보존·확보를 요청한다 (수사준칙 제25조)
+    assert "제25조" in c.statute
 
 
 def test_시효임박_재정신청은_불기소_단계에만_연결한다():
@@ -90,8 +99,8 @@ def test_시효임박_재정신청은_불기소_단계에만_연결한다():
     assert c.source and c.source.startswith("https://www.law.go.kr")
 
     police = build_checklist("ACT-공소시효", DOCS, st="ST-201")
-    assert police.items == []
-    assert police.unresolved  # 경찰 단계는 확인 전이라 안내하지 않는다
+    assert police.form_name == "자료·의견 제출서"  # 불기소 통지 전에는 재정신청을 할 수 없다
+    assert not any("재정신청" in i.label for i in police.items)
 
 
 def test_단계확인은_사건조회_경로와_출처를_준다():
@@ -128,10 +137,26 @@ def test_단계마다_서류가_다르면_ST로_갈라_조회한다():
     assert "고등검찰청" in c3.submit_to
 
 
-def test_아직_못_채운_액션은_체크리스트를_만들지_않는다():
-    c = build_checklist("ACT-모순확인", DOCS)
-    assert c.items == []
-    assert "확인 필요" in c.unresolved
+def test_검사의_기소중지는_항고장으로_간다():
+    """검찰사건사무규칙 제147조 제1항 — 기소중지·참고인중지도 불기소결정이라 항고 대상이다."""
+    police = build_checklist("ACT-불복기한", DOCS, st="ST-201", issuer="police")
+    assert police.form_name == "수사중지 결정 이의제기서"
+    prosecution = build_checklist("ACT-불복기한", DOCS, st="ST-201", issuer="prosecution")
+    assert prosecution.form_name == "항고장"
+    assert "고등검찰청" in prosecution.submit_to
+
+
+def test_비어_있던_여섯_행동이_모두_채워졌다():
+    """제출 서류가 있는 넷은 서식·제출처·근거를, 자료를 확보하는 둘은 공식 경로를 준다."""
+    for action in ("ACT-신규정보제출", "ACT-모순확인", "ACT-공소시효", "ACT-증거보존"):
+        c = build_checklist(action, DOCS)
+        assert c.unresolved is None, action
+        assert c.form_name and c.submit_to and c.statute, action
+        assert c.reason_heading == "요청 사항" and c.reason_note, action
+        assert any(i.state == "생성가능" for i in c.items), action
+    for action in ("ACT-근거보완", "ACT-공백보완"):
+        c = build_checklist(action, DOCS)
+        assert c.unresolved is None and c.no_submission, action
 
 
 def test_재정신청은_선행절차를_알려준다():
@@ -201,5 +226,6 @@ def test_카드에_체크리스트가_붙는다(missing, fraud):
         card = build_card(result)
         assert card.checklist is not None
         assert card.checklist.action == card.next_action.action
-        # 두 사건의 다음 행동(신규정보제출 · 모순확인)은 공식 경로를 확인하기 전이라 비어 있는 것이 정상이다
-        assert card.checklist.unresolved
+        # 두 사건의 다음 행동(신규정보제출 · 모순확인)은 수사준칙 제25조의 자료·의견 제출로 채워져 있다
+        assert card.checklist.unresolved is None
+        assert card.checklist.form_name == "자료·의견 제출서"
