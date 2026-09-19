@@ -6279,7 +6279,8 @@
         "evidence_level": "user",
         "needs_confirmation": false,
         "flags": [
-          "user_input"
+          "user_input",
+          "stage_guessed"
         ]
       },
       {
@@ -6489,7 +6490,8 @@
           "tl8",
           "tl10"
         ],
-        "evidence_level": "statement"
+        "evidence_level": "statement",
+        "noted_only": false
       },
       {
         "stage": "report",
@@ -6499,7 +6501,8 @@
           "tl7",
           "tl6"
         ],
-        "evidence_level": "statement"
+        "evidence_level": "statement",
+        "noted_only": false
       },
       {
         "stage": "receipt",
@@ -6508,7 +6511,8 @@
         "timeline_event_ids": [
           "tl1"
         ],
-        "evidence_level": "record"
+        "evidence_level": "record",
+        "noted_only": false
       },
       {
         "stage": "investigation",
@@ -6518,7 +6522,8 @@
           "tl9",
           "tl11"
         ],
-        "evidence_level": "statement"
+        "evidence_level": "statement",
+        "noted_only": false
       },
       {
         "stage": "outcome",
@@ -6528,7 +6533,8 @@
           "tl2",
           "tl3"
         ],
-        "evidence_level": "record"
+        "evidence_level": "record",
+        "noted_only": false
       }
     ],
     "current_stage": "outcome",
@@ -9068,7 +9074,8 @@
             "tl8",
             "tl10"
           ],
-          "evidence_level": "statement"
+          "evidence_level": "statement",
+          "noted_only": false
         },
         {
           "stage": "report",
@@ -9078,7 +9085,8 @@
             "tl7",
             "tl6"
           ],
-          "evidence_level": "statement"
+          "evidence_level": "statement",
+          "noted_only": false
         },
         {
           "stage": "receipt",
@@ -9087,7 +9095,8 @@
           "timeline_event_ids": [
             "tl1"
           ],
-          "evidence_level": "record"
+          "evidence_level": "record",
+          "noted_only": false
         },
         {
           "stage": "investigation",
@@ -9097,7 +9106,8 @@
             "tl9",
             "tl11"
           ],
-          "evidence_level": "statement"
+          "evidence_level": "statement",
+          "noted_only": false
         },
         {
           "stage": "outcome",
@@ -9107,7 +9117,8 @@
             "tl2",
             "tl3"
           ],
-          "evidence_level": "record"
+          "evidence_level": "record",
+          "noted_only": false
         }
       ],
       "current_stage": "outcome",

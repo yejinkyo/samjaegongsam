@@ -1154,14 +1154,16 @@
         "timeline_event_ids": [
           "tl2"
         ],
-        "evidence_level": "statement"
+        "evidence_level": "statement",
+        "noted_only": false
       },
       {
         "stage": "report",
         "label": "신고",
         "state": "skipped",
         "timeline_event_ids": [],
-        "evidence_level": null
+        "evidence_level": null,
+        "noted_only": false
       },
       {
         "stage": "receipt",
@@ -1170,21 +1172,24 @@
         "timeline_event_ids": [
           "tl1"
         ],
-        "evidence_level": "record"
+        "evidence_level": "record",
+        "noted_only": false
       },
       {
         "stage": "investigation",
         "label": "수사",
         "state": "pending",
         "timeline_event_ids": [],
-        "evidence_level": null
+        "evidence_level": null,
+        "noted_only": false
       },
       {
         "stage": "outcome",
         "label": "결과",
         "state": "pending",
         "timeline_event_ids": [],
-        "evidence_level": null
+        "evidence_level": null,
+        "noted_only": false
       }
     ],
     "current_stage": "receipt",
@@ -1603,14 +1608,16 @@
           "timeline_event_ids": [
             "tl2"
           ],
-          "evidence_level": "statement"
+          "evidence_level": "statement",
+          "noted_only": false
         },
         {
           "stage": "report",
           "label": "신고",
           "state": "skipped",
           "timeline_event_ids": [],
-          "evidence_level": null
+          "evidence_level": null,
+          "noted_only": false
         },
         {
           "stage": "receipt",
@@ -1619,21 +1626,24 @@
           "timeline_event_ids": [
             "tl1"
           ],
-          "evidence_level": "record"
+          "evidence_level": "record",
+          "noted_only": false
         },
         {
           "stage": "investigation",
           "label": "수사",
           "state": "pending",
           "timeline_event_ids": [],
-          "evidence_level": null
+          "evidence_level": null,
+          "noted_only": false
         },
         {
           "stage": "outcome",
           "label": "결과",
           "state": "pending",
           "timeline_event_ids": [],
-          "evidence_level": null
+          "evidence_level": null,
+          "noted_only": false
         }
       ],
       "current_stage": "receipt",
