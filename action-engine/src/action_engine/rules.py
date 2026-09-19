@@ -23,10 +23,6 @@ from .schema import ActionDecision, CaseCardOut, CaseState, CodeHit, Deadline, R
 
 DATA = Path(__file__).parent / "data"
 
-CRITICAL_DAYS = 7
-SOON_DAYS = 30
-
-
 @lru_cache(maxsize=1)
 def load_rules() -> dict[str, Any]:
     return json.loads((DATA / "rules.json").read_text(encoding="utf-8"))
@@ -38,13 +34,15 @@ def load_deadlines() -> dict[str, Any]:
 
 
 def _severity(days_left: int | None) -> str:
+    """남은 날로 급함 등급을 정한다. 7일 · 30일은 법령이 아니라 팀 기준이다 — 근거는 deadlines.json 의 severity."""
     if days_left is None:
         return "unknown"
     if days_left < 0:
         return "expired"
-    if days_left <= CRITICAL_DAYS:
+    bands = load_deadlines()["severity"]
+    if days_left <= bands["critical_days"]:
         return "critical"
-    if days_left <= SOON_DAYS:
+    if days_left <= bands["soon_days"]:
         return "soon"
     return "ok"
 

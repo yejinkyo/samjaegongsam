@@ -284,6 +284,7 @@ def test_기한이_채워지면_계산된다(monkeypatch):
 
     R.load_deadlines.cache_clear()
     monkeypatch.setattr(R, "load_deadlines", lambda: {
+        "severity": {"critical_days": 7, "soon_days": 30},
         "deadlines": [{"code": "TIM-011", "applies_to_st": ["ST-301"], "basis": "decision_time",
                        "basis_label": "통지 수령일", "period_days": 30, "statute": "○○법 §1"}]
     })
@@ -292,6 +293,16 @@ def test_기한이_채워지면_계산된다(monkeypatch):
     assert t.due_date == date(2026, 10, 1)
     assert t.days_left == 20
     assert t.severity == "soon"
+
+
+def test_급함_기준은_법령이_아니라_팀_기준이라고_적혀_있다():
+    """7일 · 30일은 어느 법에도 없다. 근거를 숨기면 법이 정한 구분처럼 읽힌다."""
+    bands = load_deadlines()["severity"]
+    assert bands["basis"] == "team_rule"
+    assert (bands["critical_days"], bands["soon_days"]) == (7, 30)
+    assert "법령에 없는" in bands["not_statutory"]
+    assert "제260조 제3항" in bands["critical_why"]  # 가장 짧은 법정 기한(재정신청 10일)에서 나온 선
+    assert "30일" in bands["soon_why"]
 
 
 @pytest.mark.parametrize("days,expected", [(-1, "expired"), (0, "critical"), (7, "critical"),
