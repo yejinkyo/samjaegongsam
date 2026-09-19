@@ -279,8 +279,45 @@ def test_실제_출력으로_끝까지_돈다(missing):
     # 수사중지 이의제기 30일은 계산되지만 2022년 결정이라 이미 지났다
     t014 = next(t for t in d.state.tim if t.code == "TIM-014")
     assert t014.severity == "expired"
-    # 공소시효·디지털 보존은 아직 못 채운 값이라 D-day 가 없다
-    assert all(t.days_left is None for t in d.state.tim if t.code in ("TIM-021", "TIM-031"))
+    tim = {t.code: t for t in d.state.tim}
+    # 통지서의 죄명이 '약취유인'뿐이라 법정형을 고를 수 없다 — 대상 · 목적을 짐작하지 않는다
+    assert tim["TIM-021"].days_left is None and "약취유인" in tim["TIM-021"].unresolved
+    # 통신 기록 보존은 2015-10 마지막 연락부터 세어 이미 지났다
+    assert tim["TIM-031"].severity == "expired"
+
+
+# ── 통신자료 보존(TIM-031)의 기산일 ─────────────────────────────────────
+
+
+def test_보존_기한은_메신저_대화일부터_센다(fraud):
+    """통신비밀보호법 시행령 제41조 — 통신사실확인자료는 통신이 있었던 날부터 보존한다."""
+    t031 = {t.code: t for t in run(fraud).state.tim}["TIM-031"]
+    assert t031.basis_date == date(2026, 6, 1)
+    assert t031.due_date == date(2026, 8, 30)
+    assert "메신저 대화" in t031.advisory
+
+
+def test_보존_기한은_다음으로_사라질_기록을_기준으로_한다():
+    """이미 사라진 기록을 기준으로 삼으면 남은 기록까지 없다고 안내하게 된다."""
+    from action_engine.rules import retention_basis
+
+    dates = [(date(2026, 1, 5), "옛 대화"), (date(2026, 7, 1), "최근 대화"), (date(2026, 8, 20), "마지막 연락")]
+    when, note = retention_basis(dates, 90, as_of=date(2026, 9, 11))
+    assert when == date(2026, 7, 1)  # 1월 기록은 이미 지났고, 7월 기록이 가장 먼저 사라진다
+    assert "2026-11-18" in note  # 마지막 연락(8/20) 기록이 남는 날
+    assert "이미 보존 기간이 지났습니다" in note
+
+    when, _ = retention_basis(dates[:1], 90, as_of=date(2026, 9, 11))
+    assert when == date(2026, 1, 5)  # 전부 지났으면 가장 늦은 날 — 만료로 보인다
+
+
+def test_화면에_적은_메모만으로는_보존_기한을_세지_않는다():
+    from action_engine.rules import communication_dates
+
+    result = {"documents": [{"doc_id": "n", "doc_type": "user_note", "file_name": "직접 입력"}],
+              "extraction": {"claims": [{"doc_id": "n", "evidence_level": "user", "slot": "last_contact_time",
+                                         "slot_time": {"start": "2026-06-02T00:00:00"}}]}}
+    assert communication_dates(result) == []
 
 
 def test_사기_사건도_끝까지_돈다(fraud):

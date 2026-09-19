@@ -101,8 +101,8 @@
     {
       "code": "TIM-031",
       "applies_to_st": ["*"],
-      "basis": "document_created",
-      "basis_label": "통신 발생일",
+      "basis": "communication_time",
+      "basis_label": "통신 발생일 (메신저 대화 · 마지막 연락)",
       "period_days": 90,
       "statute": "통신비밀보호법 시행령 제41조",
       "source": "https://www.law.go.kr/법령/통신비밀보호법 시행령/제41조",

@@ -117,6 +117,7 @@ def compute_deadlines(
             continue
 
         d.basis_date = basis.get(row.get("basis"))
+        d.advisory = basis_notes.get(row.get("basis"))
         if d.basis_date is None:
             d.unresolved = f"{row.get('basis_label')}을(를) 자료에서 찾지 못했습니다"
             out.append(d)
@@ -224,6 +225,47 @@ def incident_end_basis(result: dict[str, Any]) -> tuple[date | None, str | None]
     return None, None
 
 
+def communication_dates(result: dict[str, Any]) -> list[tuple[date, str]]:
+    """통신이 오간 날(통신사실확인자료가 생긴 날)과 그 출처.
+
+    메신저 대화의 메시지 시각과 '마지막 연락' 시점이다. 화면에 직접 적은 메모는 쓰지 않는다 —
+    사업자에게 보존을 요청할 때 근거로 내밀 수 있는 자료가 아니다.
+    """
+    from .mapping import _parse_date
+
+    types = {d["doc_id"]: d.get("doc_type") for d in result.get("documents", [])}
+    names = {d["doc_id"]: d.get("file_name") or d["doc_id"] for d in result.get("documents", [])}
+    out: set[tuple[date, str]] = set()
+    for c in result.get("extraction", {}).get("claims", []):
+        if c.get("evidence_level") == "user":
+            continue
+        if types.get(c["doc_id"]) == "messenger" and (when := _parse_date((c.get("said_at") or {}).get("start"))):
+            out.add((when, f"{names[c['doc_id']]}의 메신저 대화"))
+        if c.get("slot") == "last_contact_time" and (when := _parse_date((c.get("slot_time") or {}).get("start"))):
+            out.add((when, f"{names.get(c['doc_id'], c['doc_id'])}에 적힌 마지막 연락"))
+    return sorted(out)
+
+
+def retention_basis(dates: list[tuple[date, str]], period_days: int, as_of: date) -> tuple[date, str]:
+    """보존 기한을 어느 날부터 셀지 — **다음으로 사라질 기록**의 통신일.
+
+    통신 기록은 날마다 따로 사라진다. 이미 사라진 날을 기준으로 삼으면 남은 기록까지 없는 것으로
+    안내하고, 가장 늦은 날을 기준으로 삼으면 곧 사라질 기록을 놓친다. 그래서 아직 남은 기록 가운데
+    가장 먼저 사라질 날을 쓴다. 전부 지났으면 가장 늦은 날(이미 만료)을 쓴다.
+    """
+    alive = [(d, why) for d, why in dates if d + timedelta(days=period_days) >= as_of]
+    when, why = alive[0] if alive else dates[-1]
+    note = f"기산일은 {why}({when:%Y-%m-%d})입니다."
+    last, last_why = dates[-1]
+    if last != when:
+        note += (f" 가장 늦은 통신은 {last_why}({last:%Y-%m-%d})로, 그 기록은 "
+                 f"{last + timedelta(days=period_days):%Y-%m-%d}까지 남습니다.")
+    gone = [d for d, _ in dates if d + timedelta(days=period_days) < as_of]
+    if gone and alive:
+        note += f" 그보다 앞선 통신 {len(gone)}건은 이미 보존 기간이 지났습니다."
+    return when, note
+
+
 def run(result: dict[str, Any], st_override: CodeHit | None = None,
         decision_time: date | None = None) -> ActionDecision:
     """research-engine 출력 dict → 다음 행동 판정. 이 패키지의 입구.
@@ -245,12 +287,16 @@ def run(result: dict[str, Any], st_override: CodeHit | None = None,
     basis.setdefault("decision_time", _parse_date((slots.get("decision_time") or {}).get("value")))
     incident_end, incident_note = incident_end_basis(result)
     basis.setdefault("incident_end", incident_end)
-    basis.setdefault("document_created", None)
+    notes: dict[str, str] = {}
+    period = next((r["period_days"] for r in load_deadlines()["deadlines"] if r["code"] == "TIM-031"), None)
+    if (comms := communication_dates(result)) and period:
+        basis["communication_time"], notes["communication_time"] = retention_basis(comms, period, state.as_of)
     if decision_time:
         basis["decision_time"] = decision_time
     # 죄명은 research-engine 의 offence 슬롯 — 통지서마다 다르면 가장 최근 통지서의 죄명이다
     offence = (slots.get("offence") or {}).get("value")
-    notes = {"incident_end": incident_note} if incident_note else {}
+    if incident_note:
+        notes["incident_end"] = incident_note
     state.tim = compute_deadlines(state, basis, offence=offence, basis_notes=notes)
     return decide(state)
 
