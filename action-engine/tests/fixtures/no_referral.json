@@ -1036,7 +1036,7 @@
         "action_kind": null
       },
       {
-        "event_id": "receipt_2024:e6",
+        "event_id": "receipt_2024:e7",
         "doc_id": "receipt_2024",
         "stage": "receipt",
         "action": {
@@ -1101,7 +1101,7 @@
         "action_kind": null
       },
       {
-        "event_id": "no_referral_notice_2026:e10",
+        "event_id": "no_referral_notice_2026:e11",
         "doc_id": "no_referral_notice_2026",
         "stage": "outcome",
         "action": {
@@ -1215,6 +1215,28 @@
         "participant_mention_ids": [],
         "evidence_level": "statement",
         "action_kind": null
+      },
+      {
+        "event_id": "note_yoon:e1",
+        "doc_id": "note_yoon",
+        "stage": "occurrence",
+        "action": {
+          "source_doc_id": "note_yoon",
+          "page": 1,
+          "source_line": 1,
+          "source_line_end": null,
+          "source_bbox": null,
+          "char_start": 0,
+          "char_end": 55,
+          "quote": "통지서를 받고 은행에서 거래내역을 떼어 보니 제가 보낸 돈이 바로 다른 사람들에게 나뉘어 갔습니다.",
+          "value": "통지서를 받고 은행에서 거래내역을 떼어 보니 제가 보낸 돈이 바로 다른 사람들에게 나뉘어 갔습니다.",
+          "confidence": 0.8
+        },
+        "time": null,
+        "amount": null,
+        "participant_mention_ids": [],
+        "evidence_level": "user",
+        "action_kind": null
       }
     ],
     "claims": [
@@ -1241,8 +1263,8 @@
           "value": "죄명 사기",
           "confidence": 0.7743
         },
-        "slot": null,
-        "slot_value": null,
+        "slot": "offence",
+        "slot_value": "사기",
         "slot_time": null,
         "value_is_speaker_self": false,
         "subject": null,
@@ -1473,6 +1495,38 @@
         "evidence_level": "record"
       },
       {
+        "claim_id": "receipt_2024:c6",
+        "doc_id": "receipt_2024",
+        "speaker": "**경찰서",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "receipt_2024:m3",
+        "content": {
+          "source_doc_id": "receipt_2024",
+          "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 150.0,
+            "y1": 264.0
+          },
+          "char_start": 0,
+          "char_end": 5,
+          "quote": "죄명 사기",
+          "value": "죄명 사기",
+          "confidence": 0.8406
+        },
+        "slot": "offence",
+        "slot_value": "사기",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
         "claim_id": "no_referral_notice_2026:c6",
         "doc_id": "no_referral_notice_2026",
         "speaker": "**경찰서",
@@ -1506,6 +1560,38 @@
       },
       {
         "claim_id": "no_referral_notice_2026:c7",
+        "doc_id": "no_referral_notice_2026",
+        "speaker": "**경찰서",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "no_referral_notice_2026:m5",
+        "content": {
+          "source_doc_id": "no_referral_notice_2026",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 150.0,
+            "y1": 324.0
+          },
+          "char_start": 0,
+          "char_end": 5,
+          "quote": "죄명 사기",
+          "value": "죄명 사기",
+          "confidence": 0.8406
+        },
+        "slot": "offence",
+        "slot_value": "사기",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "no_referral_notice_2026:c8",
         "doc_id": "no_referral_notice_2026",
         "speaker": "**경찰서",
         "speaker_basis": "document_issuer",
@@ -1549,7 +1635,7 @@
         "evidence_level": "record"
       },
       {
-        "claim_id": "no_referral_notice_2026:c8",
+        "claim_id": "no_referral_notice_2026:c9",
         "doc_id": "no_referral_notice_2026",
         "speaker": "**경찰서",
         "speaker_basis": "document_issuer",
@@ -1581,7 +1667,7 @@
         "evidence_level": "record"
       },
       {
-        "claim_id": "no_referral_notice_2026:c9",
+        "claim_id": "no_referral_notice_2026:c10",
         "doc_id": "no_referral_notice_2026",
         "speaker": "**경찰서",
         "speaker_basis": "document_issuer",
@@ -2003,6 +2089,35 @@
         ]
       },
       {
+        "timeline_event_id": "tl5",
+        "stage": "occurrence",
+        "title": "통지서를 받고 은행에서 거래내역을 떼어 보니 제가 보낸 돈이 바로 다른…",
+        "time": null,
+        "time_unknown": true,
+        "amount": null,
+        "participant_entity_ids": [],
+        "event_ids": [
+          "note_yoon:e1"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "note_yoon",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": null,
+            "char_start": 0,
+            "char_end": 55,
+            "quote": "통지서를 받고 은행에서 거래내역을 떼어 보니 제가 보낸 돈이 바로 다른 사람들에게 나뉘어 갔습니다."
+          }
+        ],
+        "evidence_level": "user",
+        "needs_confirmation": true,
+        "flags": [
+          "user_input"
+        ]
+      },
+      {
         "timeline_event_id": "tl3",
         "stage": "transfer",
         "title": "8,500,000원 송금",
@@ -2111,7 +2226,7 @@
           "ent4"
         ],
         "event_ids": [
-          "receipt_2024:e6"
+          "receipt_2024:e7"
         ],
         "sources": [
           {
@@ -2176,7 +2291,7 @@
           "ent6"
         ],
         "event_ids": [
-          "no_referral_notice_2026:e10"
+          "no_referral_notice_2026:e11"
         ],
         "sources": [
           {
@@ -2796,6 +2911,34 @@
         ]
       },
       {
+        "slot": "offence",
+        "label": "죄명",
+        "stage": "receipt",
+        "required": false,
+        "state": "confirmed",
+        "value": "사기",
+        "claim_ids": [
+          "no_referral_notice_2026:c7"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "no_referral_notice_2026",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 150.0,
+              "y1": 324.0
+            },
+            "char_start": 0,
+            "char_end": 5,
+            "quote": "죄명 사기"
+          }
+        ]
+      },
+      {
         "slot": "case_number",
         "label": "사건번호",
         "stage": "investigation",
@@ -2831,7 +2974,7 @@
         "state": "confirmed",
         "value": "김도현",
         "claim_ids": [
-          "no_referral_notice_2026:c9"
+          "no_referral_notice_2026:c10"
         ],
         "sources": [
           {
@@ -2859,7 +3002,7 @@
         "state": "confirmed",
         "value": "불송치(혐의없음)",
         "claim_ids": [
-          "no_referral_notice_2026:c8"
+          "no_referral_notice_2026:c9"
         ],
         "sources": [
           {
@@ -2887,7 +3030,7 @@
         "state": "confirmed",
         "value": "2026-08-25",
         "claim_ids": [
-          "no_referral_notice_2026:c7"
+          "no_referral_notice_2026:c8"
         ],
         "sources": [
           {
@@ -2911,6 +3054,42 @@
     "pair_decisions": [
       {
         "pair_id": "pair1",
+        "claim_a_id": "complaint_2024:c5",
+        "claim_b_id": "receipt_2024:c6",
+        "slot": "offence",
+        "scores": {
+          "entailment": 0.6969,
+          "contradiction": 0.0155,
+          "neutral": 0.2876
+        },
+        "model_label": "entailment",
+        "label": "neutral",
+        "downgraded": true,
+        "reasons": [
+          "일치 점수 0.70 < 기준 0.70"
+        ],
+        "model_name": "slot-rule-v1"
+      },
+      {
+        "pair_id": "pair2",
+        "claim_a_id": "complaint_2024:c5",
+        "claim_b_id": "no_referral_notice_2026:c7",
+        "slot": "offence",
+        "scores": {
+          "entailment": 0.6969,
+          "contradiction": 0.0155,
+          "neutral": 0.2876
+        },
+        "model_label": "entailment",
+        "label": "neutral",
+        "downgraded": true,
+        "reasons": [
+          "일치 점수 0.70 < 기준 0.70"
+        ],
+        "model_name": "slot-rule-v1"
+      },
+      {
+        "pair_id": "pair3",
         "claim_a_id": "complaint_2024:c8",
         "claim_b_id": "bank_2026:c2",
         "slot": "transfer_time",

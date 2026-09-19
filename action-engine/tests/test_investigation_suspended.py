@@ -45,11 +45,12 @@ def test_다음_행동은_신규_정보_제출이다(suspended):
     assert card.source_trigger["key"] == "investigation_suspended/occurrence/new_fact/unrecorded_fact"
 
 
-def test_이의제기_기한은_이미_지났고_공소시효는_계산할_수_없다(suspended):
+def test_이의제기_기한은_이미_지났고_공소시효는_통지서의_죄명으로_계산한다(suspended):
     """중지 사건에도 불복 기한이 있다 — 통지 수령일부터 30일(경찰수사규칙 제101조).
 
     2023년 결정이라 이미 지났다. 만료 사실은 남기되 '다음 행동'으로는 올리지 않는다.
-    공소시효는 죄명이 없어 계산 자체가 불가능하다.
+    공소시효는 통지서의 죄명(사기 · 10년)과 고소장에 적힌 피해일(2021-05-18)로 계산한다.
+    피해일이 기록으로 확인된 날이 아니라는 사실은 숨기지 않는다.
     """
     deadlines = {d.code: d for d in build_card(suspended).tim}
     t014 = deadlines[TIM.APPEAL_SUSPENSION]
@@ -57,8 +58,11 @@ def test_이의제기_기한은_이미_지났고_공소시효는_계산할_수_�
     assert t014.severity == "expired"
     assert "상급경찰관서" in t014.submit_to
 
-    assert deadlines[TIM.STATUTE_LIMITATION].due_date is None
-    assert "죄명" in deadlines[TIM.STATUTE_LIMITATION].unresolved
+    limitation = deadlines[TIM.STATUTE_LIMITATION]
+    assert limitation.unresolved is None
+    assert limitation.statute == "형법 제347조 제1항"
+    assert limitation.due_date == date(2031, 5, 17)  # 초일 산입 — 10년 뒤 같은 날의 전날
+    assert "진술에 적힌 가장 이른 날(2021-05-18)" in limitation.advisory
     assert TIM.ALWAYS_REINVESTIGATION in deadlines  # 상시 가능한 것은 남는다
 
 

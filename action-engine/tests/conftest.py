@@ -36,3 +36,9 @@ def fraud() -> dict:
 def suspended() -> dict:
     """수사중지 — 2021 고소 → 2023 참고인중지 → 2025 목격 제보."""
     return _load("investigation_suspended.json")
+
+
+@pytest.fixture(scope="session")
+def reopened() -> dict:
+    """재수사 뒤 다시 중지 — 2008 '미성년자 약취·유인' 통지 → 2019 재입건 → 2022 '살인' 통지."""
+    return _load("long_unsolved_reopened.json")

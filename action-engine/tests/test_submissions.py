@@ -138,7 +138,7 @@ def test_받은_답은_추정으로만_올린다(recent):
 def test_받은_답으로_새_기한이_열린다(recent):
     """불기소를 받으면 항고 기한이 통지 수령일부터 다시 계산돼야 한다."""
     after = build_card(recent, [_answered("ACT-불복기한", date(2026, 9, 4), date(2026, 9, 14), "불기소")])
-    live = [t for t in after.tim if t.due_date]
+    live = [t for t in after.tim if t.due_date and t.code != "TIM-021"]  # 공소시효는 답과 상관없이 계산된다
     assert [t.code for t in live] == ["TIM-012"]
     assert live[0].basis_date == date(2026, 9, 14)          # 통지 받은 날부터 센다
     assert live[0].due_date == date(2026, 10, 14)           # 30일 (검찰청법 제10조)

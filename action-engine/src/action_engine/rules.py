@@ -53,6 +53,7 @@ def compute_deadlines(
     state: CaseState,
     basis: dict[str, date | None] | None = None,
     offence: str | None = None,
+    basis_notes: dict[str, str] | None = None,
 ) -> list[Deadline]:
     """D3 — 기한 산출.
 
@@ -60,6 +61,7 @@ def compute_deadlines(
     지식베이스가 비어 있는 지금은 대부분 여기로 떨어지는 것이 정상이다.
     """
     basis = basis or {}
+    basis_notes = basis_notes or {}
     out: list[Deadline] = []
 
     issuer = effective_issuer(state.st)
@@ -103,6 +105,8 @@ def compute_deadlines(
                 d.severity = _severity(r["days_left"])
                 d.statute = r["statute"]
                 d.advisory = f"{r['version_note']} ({r['years']}년). {r['caveat']}"
+                if basis_notes.get("incident_end"):
+                    d.advisory += " " + basis_notes["incident_end"]
             out.append(d)
             continue
 
@@ -188,6 +192,38 @@ def decide(state: CaseState) -> ActionDecision:
     return ActionDecision(main=hits[0] if hits else None, also=hits[1:], state=state)
 
 
+# 범행이 끝난 때를 가리키는 항목. 앞의 것이 사건 유형에 더 맞는 값이다 —
+# 실종은 마지막으로 목격된 때, 사기는 돈을 보낸 때, 그 밖에는 사건이 일어난 때.
+INCIDENT_END_SLOTS = ("last_seen_time", "transfer_time", "incident_time")
+
+
+def incident_end_basis(result: dict[str, Any]) -> tuple[date | None, str | None]:
+    """공소시효의 기산일(범행 종료일)과, 추정한 값이면 그 사실을 알리는 문장.
+
+    기록으로 확인된 항목 값을 먼저 쓴다. 없으면 진술 · 메모에 적힌 같은 항목의 날짜 가운데
+    **가장 이른 날**을 쓴다 — 늦은 날로 계산하면 이미 끝난 시효를 '아직 남았다'고 안내하게 된다.
+    화면에 직접 적은 메모는 쓰지 않는다.
+    """
+    from .mapping import _parse_date, _slot_map
+
+    slots = _slot_map(result)
+    for name in INCIDENT_END_SLOTS:
+        slot = slots.get(name) or {}
+        if slot.get("state") == "confirmed" and (when := _parse_date(slot.get("value"))):
+            return when, None
+    for name in INCIDENT_END_SLOTS:
+        said = [
+            when for c in result.get("extraction", {}).get("claims", [])
+            if c.get("slot") == name and c.get("evidence_level") != "user"
+            and (when := _parse_date((c.get("slot_time") or {}).get("start")))
+        ]
+        if said:
+            first = min(said)
+            return first, (f"범행 종료일이 기록으로 확인되지 않아, 진술에 적힌 가장 이른 날({first:%Y-%m-%d})을 "
+                           "기준으로 계산했습니다. 실제 범행이 더 늦게 끝났다면 시효도 그만큼 늦게 끝납니다.")
+    return None, None
+
+
 def run(result: dict[str, Any], st_override: CodeHit | None = None,
         decision_time: date | None = None) -> ActionDecision:
     """research-engine 출력 dict → 다음 행동 판정. 이 패키지의 입구.
@@ -207,13 +243,15 @@ def run(result: dict[str, Any], st_override: CodeHit | None = None,
         **basis_from_triggers(result.get("analysis", {}).get("action_triggers", [])),
     }
     basis.setdefault("decision_time", _parse_date((slots.get("decision_time") or {}).get("value")))
-    basis.setdefault("incident_end", _parse_date((slots.get("last_seen_time") or {}).get("value")))
+    incident_end, incident_note = incident_end_basis(result)
+    basis.setdefault("incident_end", incident_end)
     basis.setdefault("document_created", None)
     if decision_time:
         basis["decision_time"] = decision_time
-    # 죄명은 research-engine 이 아직 뽑지 않는다. 슬롯에 생기면 여기서 넘어간다.
+    # 죄명은 research-engine 의 offence 슬롯 — 통지서마다 다르면 가장 최근 통지서의 죄명이다
     offence = (slots.get("offence") or {}).get("value")
-    state.tim = compute_deadlines(state, basis, offence=offence)
+    notes = {"incident_end": incident_note} if incident_note else {}
+    state.tim = compute_deadlines(state, basis, offence=offence, basis_notes=notes)
     return decide(state)
 
 

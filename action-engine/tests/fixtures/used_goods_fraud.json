@@ -4881,6 +4881,16 @@
         "sources": []
       },
       {
+        "slot": "offence",
+        "label": "죄명",
+        "stage": "receipt",
+        "required": false,
+        "state": "missing",
+        "value": null,
+        "claim_ids": [],
+        "sources": []
+      },
+      {
         "slot": "case_number",
         "label": "사건번호",
         "stage": "investigation",

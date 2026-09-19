@@ -475,6 +475,13 @@ window.TARAE_CASES = [
         "said": []
       },
       {
+        "slot": "offence",
+        "value": null,
+        "state": "자료에 없음",
+        "severity": "unverified",
+        "said": []
+      },
+      {
         "slot": "사건번호",
         "value": null,
         "state": "자료에 없음",
@@ -1433,6 +1440,25 @@ window.TARAE_CASES = [
             "quote": "○○시 20대 남성 실종 넉 달째 행방 묘연"
           }
         ]
+      },
+      {
+        "type": "event",
+        "time": "시각 미상",
+        "title": "결정 통지서를 받은 뒤로 경찰에서 따로 연락 온 적이 없습니다",
+        "full": "결정 통지서를 받은 뒤로 경찰에서 따로 연락 온 적이 없습니다.",
+        "kind": "mine",
+        "badge": "내가 입력",
+        "conflict": false,
+        "needs_date": false,
+        "source": "출처 ①  직접 입력 · 1줄",
+        "sources": [
+          {
+            "name": "직접 입력",
+            "doc_id": "note_family",
+            "line": 1,
+            "quote": "결정 통지서를 받은 뒤로 경찰에서 따로 연락 온 적이 없습니다."
+          }
+        ]
       }
     ],
     "people": [
@@ -1612,6 +1638,20 @@ window.TARAE_CASES = [
           {
             "value": "2015-10-12 21:30",
             "doc": "실종신고_접수증_2015.jpg",
+            "speaker": "**경찰서",
+            "record": true
+          }
+        ]
+      },
+      {
+        "slot": "offence",
+        "value": "약취유인",
+        "state": "기록으로 확인",
+        "severity": "verified",
+        "said": [
+          {
+            "value": "약취유인",
+            "doc": "수사중지_결정통지서.jpg",
             "speaker": "**경찰서",
             "record": true
           }
@@ -2636,6 +2676,25 @@ window.TARAE_CASES = [
             "quote": "2026. 8. 18."
           }
         ]
+      },
+      {
+        "type": "event",
+        "time": "시각 미상",
+        "title": "결정 통지서를 받은 뒤로 경찰에서 따로 연락이 온 적이 없습니다",
+        "full": "결정 통지서를 받은 뒤로 경찰에서 따로 연락이 온 적이 없습니다.",
+        "kind": "mine",
+        "badge": "내가 입력",
+        "conflict": false,
+        "needs_date": false,
+        "source": "출처 ①  직접 입력 · 1줄",
+        "sources": [
+          {
+            "name": "직접 입력",
+            "doc_id": "note_victim",
+            "line": 1,
+            "quote": "결정 통지서를 받은 뒤로 경찰에서 따로 연락이 온 적이 없습니다."
+          }
+        ]
       }
     ],
     "people": [
@@ -2746,6 +2805,26 @@ window.TARAE_CASES = [
           {
             "value": "2021-005821",
             "doc": "접수증_2021.jpg",
+            "speaker": "**경찰서",
+            "record": true
+          }
+        ]
+      },
+      {
+        "slot": "offence",
+        "value": "사기",
+        "state": "기록으로 확인",
+        "severity": "verified",
+        "said": [
+          {
+            "value": "사기",
+            "doc": "접수증_2021.jpg",
+            "speaker": "**경찰서",
+            "record": true
+          },
+          {
+            "value": "사기",
+            "doc": "수사중지_결정통지서.jpg",
             "speaker": "**경찰서",
             "record": true
           }
@@ -3666,7 +3745,14 @@ window.TARAE_CASES = [
         "st": "경찰 불송치",
         "next": "기한 안에 결정에 대한 불복 절차 진행",
         "next_key": "ACT-불복기한",
-        "deadlines": []
+        "deadlines": [
+          {
+            "label": "형사 공소시효 임박",
+            "period_days": 3650,
+            "statute": "형법 제347조 제1항",
+            "submit_to": null
+          }
+        ]
       },
       "불기소": {
         "st": "검찰 불기소",
@@ -3678,6 +3764,12 @@ window.TARAE_CASES = [
             "period_days": 30,
             "statute": "검찰청법 제10조",
             "submit_to": "불기소 처분을 한 검사가 속한 지방검찰청 또는 지청을 거쳐 관할 고등검찰청 검사장"
+          },
+          {
+            "label": "형사 공소시효 임박",
+            "period_days": 3650,
+            "statute": "형법 제347조 제1항",
+            "submit_to": null
           }
         ]
       },
@@ -3691,6 +3783,12 @@ window.TARAE_CASES = [
             "period_days": 10,
             "statute": "형사소송법 제260조 제3항",
             "submit_to": "지방검찰청 검사장 또는 지청장"
+          },
+          {
+            "label": "형사 공소시효 임박",
+            "period_days": 3650,
+            "statute": "형법 제347조 제1항",
+            "submit_to": null
           }
         ]
       },
@@ -3704,6 +3802,12 @@ window.TARAE_CASES = [
             "period_days": 30,
             "statute": "경찰수사규칙 제101조 (검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정 제54조 제1항)",
             "submit_to": "해당 사법경찰관이 소속된 바로 위 상급경찰관서의 장 (소속 경찰관서에 제출하면 상급관서로 송부된다)"
+          },
+          {
+            "label": "형사 공소시효 임박",
+            "period_days": 3650,
+            "statute": "형법 제347조 제1항",
+            "submit_to": null
           }
         ]
       },
@@ -3717,6 +3821,12 @@ window.TARAE_CASES = [
             "period_days": 30,
             "statute": "경찰수사규칙 제101조 (검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정 제54조 제1항)",
             "submit_to": "해당 사법경찰관이 소속된 바로 위 상급경찰관서의 장 (소속 경찰관서에 제출하면 상급관서로 송부된다)"
+          },
+          {
+            "label": "형사 공소시효 임박",
+            "period_days": 3650,
+            "statute": "형법 제347조 제1항",
+            "submit_to": null
           }
         ]
       },
@@ -3724,7 +3834,14 @@ window.TARAE_CASES = [
         "st": "재판 진행 중",
         "next": "새로 확인된 정보를 수사기관에 제출",
         "next_key": "ACT-신규정보제출",
-        "deadlines": []
+        "deadlines": [
+          {
+            "label": "형사 공소시효 임박",
+            "period_days": 3650,
+            "statute": "형법 제347조 제1항",
+            "submit_to": null
+          }
+        ]
       }
     }
   },
@@ -3886,6 +4003,25 @@ window.TARAE_CASES = [
             "quote": "죄명 사기"
           }
         ]
+      },
+      {
+        "type": "event",
+        "time": "시각 미상",
+        "title": "통지서를 받고 은행에서 거래내역을 떼어 보니 제가 보낸 돈이 바로 다른 사람들에게 나뉘어 갔습니다",
+        "full": "통지서를 받고 은행에서 거래내역을 떼어 보니 제가 보낸 돈이 바로 다른 사람들에게 나뉘어 갔습니다.",
+        "kind": "mine",
+        "badge": "내가 입력",
+        "conflict": false,
+        "needs_date": false,
+        "source": "출처 ①  직접 입력 · 1줄",
+        "sources": [
+          {
+            "name": "직접 입력",
+            "doc_id": "note_yoon",
+            "line": 1,
+            "quote": "통지서를 받고 은행에서 거래내역을 떼어 보니 제가 보낸 돈이 바로 다른 사람들에게 나뉘어 갔습니다."
+          }
+        ]
       }
     ],
     "people": [
@@ -3984,6 +4120,32 @@ window.TARAE_CASES = [
           {
             "value": "2024-011234",
             "doc": "접수증_2024.jpg",
+            "speaker": "**경찰서",
+            "record": true
+          }
+        ]
+      },
+      {
+        "slot": "offence",
+        "value": "사기",
+        "state": "기록으로 확인",
+        "severity": "verified",
+        "said": [
+          {
+            "value": "사기",
+            "doc": "고소장_2024.jpg",
+            "speaker": "윤서진",
+            "record": false
+          },
+          {
+            "value": "사기",
+            "doc": "접수증_2024.jpg",
+            "speaker": "**경찰서",
+            "record": true
+          },
+          {
+            "value": "사기",
+            "doc": "불송치_결정통지서.jpg",
             "speaker": "**경찰서",
             "record": true
           }
@@ -4471,7 +4633,14 @@ window.TARAE_CASES = [
         "st": "경찰 불송치",
         "next": "기한 안에 결정에 대한 불복 절차 진행",
         "next_key": "ACT-불복기한",
-        "deadlines": []
+        "deadlines": [
+          {
+            "label": "형사 공소시효 임박",
+            "period_days": 3650,
+            "statute": "형법 제347조 제1항",
+            "submit_to": null
+          }
+        ]
       },
       "불기소": {
         "st": "검찰 불기소",
@@ -4483,6 +4652,12 @@ window.TARAE_CASES = [
             "period_days": 30,
             "statute": "검찰청법 제10조",
             "submit_to": "불기소 처분을 한 검사가 속한 지방검찰청 또는 지청을 거쳐 관할 고등검찰청 검사장"
+          },
+          {
+            "label": "형사 공소시효 임박",
+            "period_days": 3650,
+            "statute": "형법 제347조 제1항",
+            "submit_to": null
           }
         ]
       },
@@ -4496,6 +4671,12 @@ window.TARAE_CASES = [
             "period_days": 10,
             "statute": "형사소송법 제260조 제3항",
             "submit_to": "지방검찰청 검사장 또는 지청장"
+          },
+          {
+            "label": "형사 공소시효 임박",
+            "period_days": 3650,
+            "statute": "형법 제347조 제1항",
+            "submit_to": null
           }
         ]
       },
@@ -4509,6 +4690,12 @@ window.TARAE_CASES = [
             "period_days": 30,
             "statute": "경찰수사규칙 제101조 (검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정 제54조 제1항)",
             "submit_to": "해당 사법경찰관이 소속된 바로 위 상급경찰관서의 장 (소속 경찰관서에 제출하면 상급관서로 송부된다)"
+          },
+          {
+            "label": "형사 공소시효 임박",
+            "period_days": 3650,
+            "statute": "형법 제347조 제1항",
+            "submit_to": null
           }
         ]
       },
@@ -4522,6 +4709,12 @@ window.TARAE_CASES = [
             "period_days": 30,
             "statute": "경찰수사규칙 제101조 (검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정 제54조 제1항)",
             "submit_to": "해당 사법경찰관이 소속된 바로 위 상급경찰관서의 장 (소속 경찰관서에 제출하면 상급관서로 송부된다)"
+          },
+          {
+            "label": "형사 공소시효 임박",
+            "period_days": 3650,
+            "statute": "형법 제347조 제1항",
+            "submit_to": null
           }
         ]
       },
@@ -4529,7 +4722,14 @@ window.TARAE_CASES = [
         "st": "재판 진행 중",
         "next": "주장을 뒷받침할 근거 자료 보완",
         "next_key": "ACT-근거보완",
-        "deadlines": []
+        "deadlines": [
+          {
+            "label": "형사 공소시효 임박",
+            "period_days": 3650,
+            "statute": "형법 제347조 제1항",
+            "submit_to": null
+          }
+        ]
       }
     }
   },
@@ -4680,6 +4880,25 @@ window.TARAE_CASES = [
             "quote": "2024. 5. 30."
           }
         ]
+      },
+      {
+        "type": "event",
+        "time": "시각 미상",
+        "title": "통지서를 받았는데 비에 젖어서 결정 부분이 번졌습니다",
+        "full": "통지서를 받았는데 비에 젖어서 결정 부분이 번졌습니다. 무슨 결정인지 모르겠어요.",
+        "kind": "mine",
+        "badge": "내가 입력",
+        "conflict": false,
+        "needs_date": false,
+        "source": "출처 ①  직접 입력 · 1줄",
+        "sources": [
+          {
+            "name": "직접 입력",
+            "doc_id": "note_kang",
+            "line": 1,
+            "quote": "통지서를 받았는데 비에 젖어서 결정 부분이 번졌습니다. 무슨 결정인지 모르겠어요."
+          }
+        ]
       }
     ],
     "people": [
@@ -4759,6 +4978,26 @@ window.TARAE_CASES = [
             "value": "2022-003318",
             "doc": "접수증_2022.jpg",
             "speaker": "접수증_2022.jpg 발급처",
+            "record": true
+          }
+        ]
+      },
+      {
+        "slot": "offence",
+        "value": "사기",
+        "state": "기록으로 확인",
+        "severity": "verified",
+        "said": [
+          {
+            "value": "사기",
+            "doc": "접수증_2022.jpg",
+            "speaker": "접수증_2022.jpg 발급처",
+            "record": true
+          },
+          {
+            "value": "사기",
+            "doc": "수사결과_통지서_흐림.jpg",
+            "speaker": "**경찰서",
             "record": true
           }
         ]
@@ -5217,7 +5456,14 @@ window.TARAE_CASES = [
         "st": "경찰 불송치",
         "next": "기한 안에 결정에 대한 불복 절차 진행",
         "next_key": "ACT-불복기한",
-        "deadlines": []
+        "deadlines": [
+          {
+            "label": "형사 공소시효 임박",
+            "period_days": 3650,
+            "statute": "형법 제347조 제1항",
+            "submit_to": null
+          }
+        ]
       },
       "불기소": {
         "st": "검찰 불기소",
@@ -5229,6 +5475,12 @@ window.TARAE_CASES = [
             "period_days": 30,
             "statute": "검찰청법 제10조",
             "submit_to": "불기소 처분을 한 검사가 속한 지방검찰청 또는 지청을 거쳐 관할 고등검찰청 검사장"
+          },
+          {
+            "label": "형사 공소시효 임박",
+            "period_days": 3650,
+            "statute": "형법 제347조 제1항",
+            "submit_to": null
           }
         ]
       },
@@ -5242,6 +5494,12 @@ window.TARAE_CASES = [
             "period_days": 10,
             "statute": "형사소송법 제260조 제3항",
             "submit_to": "지방검찰청 검사장 또는 지청장"
+          },
+          {
+            "label": "형사 공소시효 임박",
+            "period_days": 3650,
+            "statute": "형법 제347조 제1항",
+            "submit_to": null
           }
         ]
       },
@@ -5255,6 +5513,12 @@ window.TARAE_CASES = [
             "period_days": 30,
             "statute": "경찰수사규칙 제101조 (검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정 제54조 제1항)",
             "submit_to": "해당 사법경찰관이 소속된 바로 위 상급경찰관서의 장 (소속 경찰관서에 제출하면 상급관서로 송부된다)"
+          },
+          {
+            "label": "형사 공소시효 임박",
+            "period_days": 3650,
+            "statute": "형법 제347조 제1항",
+            "submit_to": null
           }
         ]
       },
@@ -5268,6 +5532,12 @@ window.TARAE_CASES = [
             "period_days": 30,
             "statute": "경찰수사규칙 제101조 (검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정 제54조 제1항)",
             "submit_to": "해당 사법경찰관이 소속된 바로 위 상급경찰관서의 장 (소속 경찰관서에 제출하면 상급관서로 송부된다)"
+          },
+          {
+            "label": "형사 공소시효 임박",
+            "period_days": 3650,
+            "statute": "형법 제347조 제1항",
+            "submit_to": null
           }
         ]
       },
@@ -5275,7 +5545,14 @@ window.TARAE_CASES = [
         "st": "재판 진행 중",
         "next": "수사 기록 열람 신청",
         "next_key": "ACT-기록열람",
-        "deadlines": []
+        "deadlines": [
+          {
+            "label": "형사 공소시효 임박",
+            "period_days": 3650,
+            "statute": "형법 제347조 제1항",
+            "submit_to": null
+          }
+        ]
       }
     }
   }
