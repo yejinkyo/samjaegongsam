@@ -13,6 +13,7 @@
     {"slot": "last_contact_time", "stage": "occurrence", "label": "마지막 연락 시점", "required": false},
     {"slot": "receipt_number", "stage": "receipt", "label": "실종신고 접수번호", "required": true},
     {"slot": "receipt_time", "stage": "receipt", "label": "실종신고 접수 일시", "required": false},
+    {"slot": "offence", "stage": "receipt", "label": "죄명", "required": false},
     {"slot": "case_number", "stage": "investigation", "label": "사건번호", "required": true},
     {"slot": "investigator", "stage": "investigation", "label": "담당 수사관", "required": true},
     {"slot": "decision_type", "stage": "outcome", "label": "결정 내용", "required": true},

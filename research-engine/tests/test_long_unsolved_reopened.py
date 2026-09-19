@@ -84,3 +84,17 @@ def test_values_that_changed_over_time_are_not_conflicts(result):
     assert slots[ClaimSlot.CASE_NUMBER].state is SlotState.CONFIRMED
     assert slots[ClaimSlot.CASE_NUMBER].value == "2019형제20447"
     assert result.analysis.case_card.slots_done == 5
+
+
+def test_죄명이_바뀌면_가장_최근_통지서의_죄명을_쓴다(result):
+    """2008 통지서는 '미성년자 약취·유인', 재수사 뒤 2019 · 2022 통지서는 '살인'.
+
+    죄명도 결정 · 사건번호와 같은 차례 값이다. 옛 죄명이 대표값이 되면 공소시효를
+    엉뚱한 법정형으로 계산한다(살인은 시효가 폐지되었고 약취·유인은 아니다).
+    """
+    offences = {c.doc_id: c.slot_value for c in result.extraction.claims if c.slot is ClaimSlot.OFFENCE}
+    assert offences["suspension_notice_2008"] == "미성년자 약취·유인"
+    slots = {s.slot: s for s in result.analysis.slot_statuses}
+    assert slots[ClaimSlot.OFFENCE].state is SlotState.CONFIRMED
+    assert slots[ClaimSlot.OFFENCE].value == "살인"
+    assert not [i for i in result.analysis.issues if i.slot is ClaimSlot.OFFENCE]  # 바뀐 것은 어긋난 것이 아니다

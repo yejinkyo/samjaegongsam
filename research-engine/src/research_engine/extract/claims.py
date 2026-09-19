@@ -81,6 +81,8 @@ DECISION_TYPE = re.compile(
     r"수사\s*중지(?:\s*\([^)]*\))?|기소\s*중지|기소\s*유예|참고인\s*중지|피의자\s*중지|"
     r"불송치(?:\s*\([^)]*\))?|불기소(?:\s*\([^)]*\))?|혐의\s*없음|무혐의|내사\s*종결|각하|기각"
 )
+# 서식의 '죄명' 칸. 서술 속 '사기죄로 고소'는 잡지 않는다 — 칸으로 적힌 값만 죄명으로 쓴다.
+OFFENCE_LABEL = re.compile(r"죄\s*명\s*[:：|ㅣ]?\s*(?P<name>[가-힣][가-힣·ㆍ.,\s()]*?)\s*(?:등)?\s*$")
 ACCOUNT_IN = re.compile(r"입금|받는|수취|(?:로|으로)\s*(?:[\d,]+\s*만?\s*원\s*(?:을|를)?\s*)?(?:보내|송금|이체|입금)")
 ACCOUNT_OUT = re.compile(r"출금|보내는|제\s*계좌에서|내\s*계좌에서")
 
@@ -307,6 +309,12 @@ def claims_from_line(
         for m in DECISION_TYPE.finditer(clause):
             add(S.DECISION_TYPE, clause_start + m.start(), clause_start + m.end(), re.sub(r"\s", "", m.group(0)))
             break
+
+    offence = OFFENCE_LABEL.search(clause)
+    if offence:
+        name = re.sub(r"\s+", " ", offence["name"]).strip(" ,.")
+        s = clause_start + offence.start("name")
+        add(S.OFFENCE, s, s + len(offence["name"]), name)
 
     receipt_label = RECEIPT_TIME_LABEL.search(clause)
     receipt_trigger = STAGE_TRIGGERS[1][1].search(clause)

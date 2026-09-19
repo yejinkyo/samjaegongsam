@@ -49,7 +49,8 @@ def is_after_change(claim: Claim, change: Claim, document_dates: dict[str, Sourc
 # 값이 다른 것은 모순이 아니라 차례다.** 지금 상태는 가장 최근 기록이 말한다 — 옛 기록이 대표값이 되면
 # 행동 강령 엔진이 이미 지나간 단계를 기준으로 다음 행동을 고른다.
 DECISION_SLOTS = {ClaimSlot.DECISION_TYPE, ClaimSlot.DECISION_TIME}
-SUCCESSIVE_SLOTS = DECISION_SLOTS | {ClaimSlot.CASE_NUMBER, ClaimSlot.INVESTIGATOR}
+# 죄명도 차례로 바뀐다 — 재수사로 약취·유인 사건이 살인 사건이 되면 공소시효 계산이 통째로 달라진다.
+SUCCESSIVE_SLOTS = DECISION_SLOTS | {ClaimSlot.CASE_NUMBER, ClaimSlot.INVESTIGATOR, ClaimSlot.OFFENCE}
 
 
 def record_moments(claims: list[Claim], document_dates: dict[str, Sourced[TimeValue]]) -> dict[str, datetime]:

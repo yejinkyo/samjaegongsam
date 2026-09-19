@@ -189,3 +189,14 @@ def test_2021년_이전_결정_문구도_결정_내용으로_읽는다():
     assert decision("무혐의") == ["무혐의"]
     assert decision("불기소의견 송치") == ["불기소의견송치"]  # '불기소'로 잘리지 않는다
     assert decision("불송치(혐의없음)") == ["불송치(혐의없음)"]  # '송치' 문구가 불송치를 가로채지 않는다
+
+
+def test_죄명은_서식의_죄명_칸에서만_읽는다():
+    """공소시효는 죄명에서 출발한다. 서술 속 '사기죄로 고소'까지 죄명으로 잡으면 틀린 법정형으로 계산한다."""
+    def offence(lines, doc_type=DocumentType.NOTICE):
+        claims = Extractor().extract([_doc("n", lines, doc_type)], date(2026, 9, 19)).claims
+        return [c.slot_value for c in claims if c.slot is ClaimSlot.OFFENCE]
+
+    assert offence(["수사결과 통지서", "죄명 미성년자 약취·유인"]) == ["미성년자 약취·유인"]
+    assert offence(["수사결과 통지서", "죄 명 : 사기 등"]) == ["사기"]
+    assert offence(["2021. 5. 25. 사기죄로 고소하였습니다."], DocumentType.COMPLAINT) == []

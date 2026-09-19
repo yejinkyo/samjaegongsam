@@ -35,6 +35,7 @@ UNREADABLE_HINTS: dict[ClaimSlot, tuple[str, ...]] = {
     S.LAST_SEEN_TIME: ("목격",),
     S.DECISION_TIME: ("결정", "처분"),
     S.DECISION_TYPE: ("결정", "처분"),
+    S.OFFENCE: ("죄명",),
 }
 
 
