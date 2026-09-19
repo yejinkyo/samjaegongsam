@@ -88,7 +88,8 @@ def _abolished(offence: dict[str, Any], incident_end: date | None, as_of: date) 
     version, years = _period(offence, incident_end)
     if years is None:
         return {**base, "abolished": True,
-                "note": f"공소시효가 폐지된 범죄입니다. {version} 기간표가 비어 있어 폐지 시행 당시 시효가 남아 있었는지는 확인하지 못했습니다."}
+                "note": (f"공소시효가 폐지된 범죄입니다. {version} 기간표가 비어 있어 폐지 시행 당시 "
+                         "시효가 남아 있었는지는 확인하지 못했습니다.")}
     old_due = expiry_date(incident_end, years)
     if old_due < ABOLITION_DATE:
         # 폐지되기 전에 이미 끝났다 — 폐지 규정이 적용되지 않는다
