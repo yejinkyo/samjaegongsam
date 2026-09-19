@@ -53,12 +53,24 @@ def test_사건_하나만_화면_데이터로_바꾼다(export, monkeypatch, tmp
     assert not (tmp_path / "cases.js").exists()
 
 
-def test_절차가_확인되지_않았으면_칸을_채우지_않는다(views):
+def test_절차가_확인되지_않았으면_칸을_채우지_않는다(export, monkeypatch):
     """피그마 시안의 예시 문구(무엇을·어디에·어떻게·언제까지)를 대신 넣으면 안 된다."""
-    na = views["used_goods_fraud"]["next_action"]
+    from action_engine import checklist
+
+    monkeypatch.setattr(checklist, "load_documents", lambda: {"actions": {}})
+    na = {v["id"]: v for v in export.build_all()}["used_goods_fraud"]["next_action"]
     assert na["state"] == "unresolved"
     assert na["rows"] == []
     assert na["prepare"] is None
+
+
+def test_모순확인은_자료_의견_제출서로_채운다(views):
+    """수사준칙 제25조 — 법정 서식이 없어 서면 제출로 안내한다."""
+    na = views["used_goods_fraud"]["next_action"]
+    assert na["state"] == "filled"
+    rows = {r["k"]: r["v"] for r in na["rows"]}
+    assert rows["무엇을"] == "자료·의견 제출서"
+    assert "제25조" in rows["근거"]
 
 
 def test_채워진_절차는_지식베이스_값만_싣는다(views):

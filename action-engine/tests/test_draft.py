@@ -132,3 +132,15 @@ def test_적어_내는_서류가_아니면_초안을_만들지_않는다(recent)
     assert build_draft(recent, card, action="ACT-단계확인") is None
     # 지식베이스에 '생성가능' 으로 적힌 서류에는 그대로 만들어진다
     assert build_draft(recent, card, action="ACT-이의제기-수사중지") is not None
+
+
+def test_요청하는_서류는_이의_사유가_아니라_요청_사항을_비워_둔다(recent):
+    """자료·의견 제출서(수사준칙 제25조)는 결정에 불복하는 서류가 아니다. '이의 사유' 칸을 달면 잘못 쓰게 된다."""
+    card = build_card(recent)
+    for action in ("ACT-신규정보제출", "ACT-모순확인", "ACT-공소시효", "ACT-증거보존"):
+        d = build_draft(recent, card, action=action)
+        assert d is not None, action
+        headings = [s.heading for s in d.sections]
+        assert "요청 사항" in headings and "이의 사유" not in headings, action
+        ask = [s for s in d.sections if s.heading == "요청 사항"][0]
+        assert ask.lines == [] and "직접 적어" in ask.note, action
