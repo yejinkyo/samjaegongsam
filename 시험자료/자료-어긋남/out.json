@@ -2007,7 +2007,8 @@
         "evidence_level": "user",
         "needs_confirmation": true,
         "flags": [
-          "user_input"
+          "user_input",
+          "stage_guessed"
         ]
       },
       {
@@ -2320,7 +2321,8 @@
         "label": "발생",
         "state": "skipped",
         "timeline_event_ids": [],
-        "evidence_level": null
+        "evidence_level": null,
+        "noted_only": false
       },
       {
         "stage": "report",
@@ -2329,7 +2331,8 @@
         "timeline_event_ids": [
           "tl5"
         ],
-        "evidence_level": "statement"
+        "evidence_level": "statement",
+        "noted_only": false
       },
       {
         "stage": "receipt",
@@ -2338,14 +2341,16 @@
         "timeline_event_ids": [
           "tl1"
         ],
-        "evidence_level": "record"
+        "evidence_level": "record",
+        "noted_only": false
       },
       {
         "stage": "investigation",
         "label": "수사",
         "state": "skipped",
         "timeline_event_ids": [],
-        "evidence_level": null
+        "evidence_level": null,
+        "noted_only": false
       },
       {
         "stage": "outcome",
@@ -2354,7 +2359,8 @@
         "timeline_event_ids": [
           "tl2"
         ],
-        "evidence_level": "record"
+        "evidence_level": "record",
+        "noted_only": false
       }
     ],
     "current_stage": "outcome",
@@ -3451,7 +3457,8 @@
           "label": "발생",
           "state": "skipped",
           "timeline_event_ids": [],
-          "evidence_level": null
+          "evidence_level": null,
+          "noted_only": false
         },
         {
           "stage": "report",
@@ -3460,7 +3467,8 @@
           "timeline_event_ids": [
             "tl5"
           ],
-          "evidence_level": "statement"
+          "evidence_level": "statement",
+          "noted_only": false
         },
         {
           "stage": "receipt",
@@ -3469,14 +3477,16 @@
           "timeline_event_ids": [
             "tl1"
           ],
-          "evidence_level": "record"
+          "evidence_level": "record",
+          "noted_only": false
         },
         {
           "stage": "investigation",
           "label": "수사",
           "state": "skipped",
           "timeline_event_ids": [],
-          "evidence_level": null
+          "evidence_level": null,
+          "noted_only": false
         },
         {
           "stage": "outcome",
@@ -3485,7 +3495,8 @@
           "timeline_event_ids": [
             "tl2"
           ],
-          "evidence_level": "record"
+          "evidence_level": "record",
+          "noted_only": false
         }
       ],
       "current_stage": "outcome",

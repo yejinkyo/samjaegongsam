@@ -60,6 +60,10 @@ class StageStatus(BaseModel):
     state: StageState
     timeline_event_ids: list[str] = Field(default_factory=list)
     evidence_level: EvidenceLevel | None = None
+    noted_only: bool = Field(
+        default=False,
+        description="이 단계에 이른 근거가 직접 적은 메모뿐이다 — 진행은 반영하되 그 단계의 자료가 있는 것은 아니다",
+    )
 
 
 class TimeGap(BaseModel):

@@ -137,12 +137,15 @@ STAGE_TRACKS = {
 }
 
 
-def _stages(card) -> list[dict[str, str]]:
+def _stages(card) -> list[dict[str, Any]]:
     engine = {s["stage"]: s["state"] for s in card.stages}
+    # 직접 적은 메모로만 이른 단계 — 진행은 보여 주되 자료로 확인된 단계와 구별한다
+    noted = {s["stage"] for s in card.stages if s.get("noted_only")}
     track = STAGE_TRACKS.get(card.case_type)
     if not track:
         # 유형별 이름을 정하지 않은 사건은 엔진 단계를 그대로 쓴다
-        return [{"label": s["label"], "state": {"done": "done", "current": "current"}.get(s["state"], "todo")}
+        return [{"label": s["label"], "state": {"done": "done", "current": "current"}.get(s["state"], "todo"),
+                 "noted": s["stage"] in noted}
                 for s in card.stages]
 
     rows = []
@@ -156,7 +159,8 @@ def _stages(card) -> list[dict[str, str]]:
             state = "done"
         else:
             state = "todo"   # 자료가 없거나(skipped) 아직 오지 않은 단계
-        rows.append({"label": label, "state": state})
+        reached = [c for c in codes if engine.get(c) in ("done", "current")]
+        rows.append({"label": label, "state": state, "noted": bool(reached) and all(c in noted for c in reached)})
     return rows
 
 

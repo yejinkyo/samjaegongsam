@@ -268,7 +268,10 @@
   function track(stages, fixed) {
     return h("div", { class: "track" + (fixed ? " track--fixed" : ""), role: "list", "aria-label": "진행 단계" },
       stages.map(function (s) {
-        return h("div", { class: "step step--" + s.state, role: "listitem", "aria-current": s.state === "current" ? "step" : null }, [
+        // 직접 적은 메모로만 이른 단계는 점선으로 — 진행은 보이되 자료로 확인된 단계는 아니다
+        return h("div", { class: "step step--" + s.state + (s.noted ? " step--noted" : ""), role: "listitem",
+                          "aria-current": s.state === "current" ? "step" : null,
+                          title: s.noted ? "직접 적은 내용으로 알게 된 단계예요. 자료로 확인되지는 않았어요." : null }, [
           h("div", { class: "step__rail", "aria-hidden": "true" }, [h("span", { class: "step__line" }), h("span", { class: "step__dot" }), h("span", { class: "step__line" })]),
           h("span", { class: "step__label", text: s.label }),
         ]);

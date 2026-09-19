@@ -75,3 +75,29 @@ def test_cli_run_and_schema(tmp_path, capsys):
     assert main(["schema", "--out-dir", str(tmp_path / "schemas")]) == 0
     schema = json.loads((tmp_path / "schemas" / "action_trigger.schema.json").read_text(encoding="utf-8"))
     assert "key" in schema["properties"]
+
+
+def test_자료_없이_메모만_적은_사건도_진행_단계가_움직인다():
+    """기억나는 일만 적고 자료를 올리지 않은 사건. 메모를 단계에서 빼 버리면 진행 단계가 영영 비어 있다.
+
+    메모로 이른 단계는 noted_only 로 표시한다 — 그 단계의 '자료'가 생긴 것은 아니다.
+    """
+    from datetime import datetime
+
+    from research_engine.ingest import UserNote
+    from research_engine.pipeline import CaseInput, ResearchPipeline
+    from research_engine.schema import Stage, StageState
+
+    notes = [
+        UserNote(note_id="note1", text="2026. 3. 2. 중고 거래로 1,500,000원을 사기당했습니다.", created_at=datetime(2026, 9, 18, 10)),
+        UserNote(note_id="note2", text="2026. 3. 5. ○○경찰서에 고소했습니다.", created_at=datetime(2026, 9, 18, 10, 1)),
+        UserNote(note_id="note3", text="2026. 3. 20. 경찰서에서 출석해 조사를 받았습니다.", created_at=datetime(2026, 9, 18, 10, 2)),
+    ]
+    result = ResearchPipeline().run(CaseInput(case_id="notes-only", case_type="investigation_suspended",
+                                              as_of=datetime(2026, 9, 19).date(), user_notes=notes))
+    stages = {s.stage: s for s in result.timeline.stages}
+    assert result.timeline.current_stage is Stage.INVESTIGATION
+    assert stages[Stage.INVESTIGATION].state is StageState.CURRENT and stages[Stage.INVESTIGATION].noted_only
+    assert stages[Stage.REPORT].state is StageState.DONE and stages[Stage.REPORT].noted_only
+    assert stages[Stage.RECEIPT].state is StageState.SKIPPED  # 적은 적도 자료도 없는 단계
+    assert stages[Stage.REPORT].timeline_event_ids == []  # 메모는 그 단계의 자료로 세지 않는다

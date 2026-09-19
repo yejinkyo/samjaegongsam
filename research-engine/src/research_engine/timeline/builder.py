@@ -154,6 +154,9 @@ class TimelineBuilder:
             flags.append("user_input")
         if len({ev.doc_id for ev in cluster}) > 1:
             flags.append("multi_source")
+        if stage is Stage.OCCURRENCE and all(ev.action_kind is None for ev in cluster):
+            # 단서가 없어 '발생'에 둔 메모 (extract/events.py) — 무슨 단계의 일인지 모른다
+            flags.append("stage_guessed")
         needs = time is None or time.value.needs_confirmation
         return TimelineEvent(
             timeline_event_id=f"tl{n}",
@@ -187,12 +190,19 @@ class TimelineBuilder:
         events: list[TimelineEvent], requirements: CaseRequirements
     ) -> tuple[list[StageStatus], Stage | None]:
         flow = requirements.stages
-        # 사용자가 적은 메모는 단계를 채우지 않는다. 메모는 자료가 아니다 —
+        # 사용자가 적은 메모는 그 단계의 '자료'로 세지 않는다. 메모는 자료가 아니다 —
         # 직접 적었다고 '그 단계 자료가 있다'가 되면, 빠진 자료를 찾아 주는 일이 무너진다.
-        # 타임라인에는 그대로 보이고(user_input 표시), 여기서만 세지 않는다.
+        # (단계의 근거 이벤트 · 증거 수준에는 넣지 않는다.)
+        #
+        # 하지만 사건이 어디까지 왔는지는 메모로도 알 수 있다. 자료 없이 기억나는 일만 적은 사건에서
+        # 메모를 빼 버리면 진행 단계가 영영 비어 있다. 그래서 '지금 단계'는 메모까지 보고 정하고,
+        # 메모로만 이른 단계는 noted_only 로 표시한다.
         counted = [e for e in events if e.evidence_level is not EvidenceLevel.USER]
         by_stage = {s: [e for e in counted if e.stage is s] for s in flow}
-        reached = [i for i, s in enumerate(flow) if by_stage[s]]
+        # 단서가 없어 '발생'에 놓인 메모('통지서가 번졌습니다')는 어느 단계의 일인지 모르므로 세지 않는다
+        noted = {s for s in flow if any(e.stage is s and e.evidence_level is EvidenceLevel.USER
+                                        and "stage_guessed" not in e.flags for e in events)}
+        reached = [i for i, s in enumerate(flow) if by_stage[s] or s in noted]
         current_idx = max(reached) if reached else None
         statuses = []
         for i, s in enumerate(flow):
@@ -202,7 +212,7 @@ class TimelineBuilder:
             elif i == current_idx:
                 state = StageState.CURRENT
             else:
-                state = StageState.DONE if evs else StageState.SKIPPED
+                state = StageState.DONE if evs or s in noted else StageState.SKIPPED
             statuses.append(
                 StageStatus(
                     stage=s,
@@ -210,6 +220,7 @@ class TimelineBuilder:
                     state=state,
                     timeline_event_ids=[e.timeline_event_id for e in evs],
                     evidence_level=max((e.evidence_level for e in evs), key=EVIDENCE_RANK.__getitem__) if evs else None,
+                    noted_only=not evs and s in noted and state is not StageState.PENDING,
                 )
             )
         return statuses, flow[current_idx] if current_idx is not None else None
