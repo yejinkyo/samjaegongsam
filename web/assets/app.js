@@ -192,7 +192,7 @@
         h("h3", { class: "help__title", text: "이렇게 쓰세요" }),
         h("ol", { class: "help__steps" }, [
           h("li", { text: "사건을 등록하고 가진 자료를 사진으로 올려요. 접수증 · 통지서 · 문자 캡처 · 손으로 쓴 메모 무엇이든 괜찮아요." }),
-          h("li", { text: "타임라인에서 언제 무슨 일이 있었는지 확인해요. 줄 옆 '자세히'를 누르면 원문과 어느 자료에서 왔는지가 나와요." }),
+          h("li", { text: "타임라인에서 언제 무슨 일이 있었는지 확인해요." }),
           h("li", { text: "'확인이 필요해요'를 펼쳐 어긋난 것 · 아직 확인되지 않은 것 · 빠진 것을 봐요." }),
           h("li", { text: "'다음 행동'에서 지금 할 일 하나를 확인해요. 기한이 있으면 남은 날짜가 함께 떠요." }),
           h("li", { text: "막히면 '전문가에게 물어볼 질문'을 눌러 상담에 가져갈 질문을 뽑아요." }),
@@ -216,7 +216,6 @@
       block("하지 않는 것", [
         "누가 범인인지, 무엇이 진실인지는 판단하지 않아요. 자료에 적힌 것과 적히지 않은 것만 보여 드려요.",
         "법조문·기한·제출처는 검증된 자료에 있을 때만 알려 드려요. 확인되지 않은 것은 빈칸으로 두고 '확인 중'이라고 적어요. 잘못된 기한 하나가 사건을 끝낼 수 있으니까요.",
-        "법률 자문이 아니에요. 변호사·법률구조공단 상담을 대신하지 않아요.",
       ]),
     ]));
   }
@@ -301,6 +300,15 @@
   function toneOf(c) {
     return TONES[c.type] || 3;   // 아직 색을 정하지 않은 유형은 가장 옅은 색으로 둔다
   }
+  function visibleIssues(c) {
+    return (c.issues || []).filter(function (g) {
+      return g.label !== "빠진 정보" && g.label !== "읽히지 않은 부분";
+    });
+  }
+
+  function visibleIssueCount(c) {
+    return visibleIssues(c).reduce(function (sum, g) { return sum + g.items.length; }, 0);
+  }
 
   function folder(c, tone) {
     var next = activeAction(c);
@@ -316,6 +324,7 @@
         h("p", { class: "folder__status t-body-l", text: caseStatus(c) }),
         h("div", { class: "folder__peek" }, [
           h("p", { class: "folder__meta t-body-s", text: "확인 필요 " + c.need_count + " · 자료 " + c.doc_count + "개" }),
+                    h("p", { class: "folder__meta t-body-s", text: "확인 필요 " + visibleIssueCount(c) + " · 자료 " + c.doc_count + "개" }),
           h("p", { class: "folder__next t-body-m-strong", text: next ? next.label : "판단할 수 있는 행동이 아직 없어요" }),
           h("span", { class: "folder__more t-body-m-strong" }, [
             h("span", { text: "자세히 보기" }),
@@ -454,7 +463,7 @@
       onAdd({
         kind: "메모",
         name: text.length > 28 ? text.slice(0, 27) + "…" : text,
-        meta: "직접 적음 · 기록 자료가 아니라 본인 진술로 다룹니다",
+        meta: "직접 기록 · 기록 자료가 아니라 본인 진술로 다룹니다",
         text: text,
       });
       var dialog = document.querySelector("dialog.modal");
@@ -511,7 +520,7 @@
         return;
       }
       items.forEach(function (it, i) {
-        var remove = h("button", { type: "button", class: "file-row__remove t-body-s", "aria-label": it.name + " 빼기", text: "빼기" });
+        var remove = h("button", { type: "button", class: "file-row__remove t-body-s", "aria-label": it.name + " 제거", text: "×" });
         remove.addEventListener("click", function () { items.splice(i, 1); drawList(); });
         list.appendChild(h("div", { class: "file-row" }, [
           h("span", { class: "file-row__kind t-caption", text: it.kind }),
@@ -519,7 +528,6 @@
             h("p", { class: "t-body-m-strong c-primary", text: it.name, title: it.name }),
             h("p", { class: "t-body-s c-tertiary", text: it.meta }),
           ]),
-          badge("unverified", "정리 전"),
           remove,
         ]));
       });
@@ -709,7 +717,7 @@
     else c.timeline.splice(at, 0, row);
   }
 
-  /** 기억나는 일을 직접 적는 창. 엔진이 읽은 것과 섞이지 않게 '내가 적음'으로 들어간다. */
+  /** 기억나는 일을 직접 적는 창. 엔진이 읽은 것과 섞이지 않게 '직접 기록'으로 들어간다. */
   function addEventModal(c) {
     var when = h("input", { type: "date", id: "ev-when", class: "field__input" });
     var what = h("textarea", { id: "ev-what", class: "field__input field__input--area", rows: "3", placeholder: "예) 담당 수사관에게 전화했지만 연결되지 않았습니다" });
@@ -747,7 +755,7 @@
         time: when.value ? formatDay(c, when.value) : "시점 미상",
         title: text,
         kind: "mine",
-        badge: "내가 적음",
+        badge: "직접 기록",
         conflict: false,
         needs_date: !when.value,
         source: "직접 입력",
@@ -765,7 +773,7 @@
       save,
       h("p", { class: "modal__note", text: isLocal(c)
         ? "직접 적은 내용은 기록 자료가 아니라 본인 메모로 사건에 더해지고, 사건 전체를 다시 정리합니다. 날짜나 절차가 드러나지 않는 내용은 타임라인 대신 '확인이 필요해요'에만 반영될 수 있어요."
-        : "직접 적은 내용은 기록 자료가 아니라 '내가 적음'으로 표시됩니다. 예시 사건이라 이 화면에만 남습니다." }),
+        : "직접 적은 내용은 기록 자료가 아니라 '직접 기록'으로 표시됩니다. 예시 사건이라 이 화면에만 남습니다." }),
     ]));
   }
 
@@ -774,7 +782,7 @@
     ["verified", "확인완료"],
     ["claim", "주장 · 미확인"],
     ["conflict", "불일치"],
-    ["mine", "내가 적음"],
+    ["mine", "직접 기록"],
     ["submit", "내가 낸 것"],
     ["reply", "받은 회신"],
   ];
@@ -827,9 +835,6 @@
         item.addEventListener("click", function () { originalModal(s); });
         return h("li", {}, [item]);
       })));
-      body.appendChild(h("p", { class: "modal__note", text: openable
-        ? "출처를 누르면 올린 원본을 볼 수 있어요."
-        : "어느 자료 몇 줄에서 왔는지까지 보여드려요." }));
     }
     // 직접 적은 줄에만 둔다. 서류에서 읽어 낸 줄에는 만들지 않는다.
     if (row.kind === "mine" && c) {
@@ -1266,7 +1271,7 @@
   function openSubmitModal(c, action, done) {
     var maxDay = isoDay(new Date());
     var day = h("input", { id: "sub-day", type: "date", class: "field__input", value: maxDay, max: maxDay });
-    var hint = h("p", { class: "field__hint", text: "낸 날짜를 골라 주세요. 접수증에 적힌 날짜가 있으면 그 날짜로." });
+    var hint = h("p", { class: "field__hint", text: "" });
 
     var receipt = null;
     var picked = h("p", { class: "field__hint", text: "접수증이 없으면 낸 사실이 본인 말로만 남습니다." });
@@ -1279,7 +1284,7 @@
       }, "image/*,application/pdf");
     });
 
-    var save = h("button", { type: "button", class: "modal__save", text: "냈다고 기록하기" });
+    var save = h("button", { type: "button", class: "modal__save", text: "등록하기" });
     save.addEventListener("click", function () {
       if (!day.value) {
         hint.textContent = "낸 날짜를 골라 주세요.";
@@ -1633,7 +1638,10 @@
   /** 평소엔 버튼 한 줄로 접혀 있고, 누르면 아래로 펼쳐진다. */
   function issuesCard(c) {
     var list = h("div", { class: "issues__list", hidden: true });
-    c.issues.forEach(function (g) {
+    var visibleGroups = visibleIssues(c);
+    var visibleCount = visibleGroups.reduce(function (sum, g) { return sum + g.items.length; }, 0);
+
+    visibleGroups.forEach(function (g) {
       list.appendChild(h("p", { class: "issue-group__head t-label sev-" + g.severity }, [
         h("span", { class: "issue-group__dot" }),
         h("span", { text: g.label }),
@@ -1650,7 +1658,7 @@
     var toggle = h("button", { type: "button", class: "issues__toggle", "aria-expanded": "false" }, [
       h("span", { class: "issues__mark", "aria-hidden": "true", text: "!" }),
       h("span", { class: "issues__label", text: "확인이 필요해요" }),
-      h("span", { class: "issues__count", text: String(c.need_count) }),
+      h("span", { class: "issues__count", text: String(visibleCount) }),
       h("span", { class: "issues__chev", "aria-hidden": "true" }),
     ]);
     toggle.addEventListener("click", function () {
@@ -1670,18 +1678,16 @@
   var ASK_FRAME = {
     "자료끼리 어긋남": "자료마다 다르게 적혀 있습니다. 어느 쪽을 기준으로 봐야 하나요?",
     "확인되지 않음": "기록으로 확인되지 않는 내용입니다. 어떻게 확인할 수 있을까요?",
-    "빠진 정보": "이 자료가 없습니다. 어디에서 받을 수 있나요?",
-    "읽히지 않은 부분": "자료가 잘 읽히지 않습니다. 원본을 다시 내야 하나요?",
   };
 
   /** 상담에 가져갈 질문지를 만든다 — 사건 요약 + 확인이 필요한 것 + 다음 행동. */
   function askSheet(c) {
     var lines = [];
     lines.push("[사건] " + c.title + " (" + c.type_label + ")");
-    lines.push("[기간] " + c.period + " · 자료 " + c.sources.length + "개 · 확인 필요 " + c.need_count);
+    lines.push("[기간] " + c.period + " · 자료 " + c.sources.length + "개 · 확인 필요 " + visibleIssueCount(c));
     lines.push("");
 
-    (c.issues || []).forEach(function (g) {
+    visibleIssues(c).forEach(function (g) {
       var frame = ASK_FRAME[g.label] || "이 부분을 어떻게 보면 될까요?";
       lines.push("■ " + g.label + " — " + frame);
       g.items.forEach(function (it) {
@@ -1725,10 +1731,9 @@
       });
 
       openModal("전문가에게 물어볼 질문", h("div", { class: "ask" }, [
-        h("p", { class: "ask__lead", text: "지금 화면에 올라온 것에서 뽑았어요. 상담 전에 읽어 보고 빼거나 더할 수 있어요." }),
+        h("p", { class: "ask__lead", text: "지금 화면에 올라온 내용에서 뽑았어요. 상담 전에 읽어 보고 빼거나 더할 수 있어요." }),
         area,
         copy,
-        h("p", { class: "modal__note", text: "법률 자문이 아니라 물어볼 거리입니다. 답은 변호사·법률구조공단 같은 곳에서 들으세요." }),
       ]));
     });
     return button;
@@ -1946,6 +1951,7 @@
             ]),
             h("h1", { class: "t-display", text: c.title }),
             h("p", { class: "case-head__meta t-body-m case-folder__dim", text: c.period + "  ·  자료 " + c.doc_count + "개  ·  확인 필요 " + c.need_count }),
+                      h("p", { class: "case-head__meta t-body-m case-folder__dim", text: c.period + "  ·  자료 " + c.doc_count + "개  ·  확인 필요 " + visibleIssueCount(c) }),
           ]),
           h("div", { class: "case-head__progress" }, [
             h("span", { class: "t-caption case-folder__dim", text: "진행 단계" }),

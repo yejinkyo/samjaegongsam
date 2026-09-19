@@ -960,7 +960,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 /* 인물·관계와 주장 대조는 종이 가장자리에 붙으면 아슬아슬해 보인다.
    왼쪽은 세로 여백선 오른쪽에서 시작해 다른 줄들과 같은 자리에 선다. */
 #panel > .card:not(.tl) {
-  padding: 26px 32px 34px calc(var(--note-margin-x) + 18px);
+  padding: 26px 32px 34px;
 }
 /* 마지막 줄 아래에도 빈 괘선이 남는다 — 노트는 글이 끝난 데서 끝나지 않는다 */
 .tl::after { content: ""; display: block; min-height: calc(var(--note-step) * 2); }
