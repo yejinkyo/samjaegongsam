@@ -244,3 +244,11 @@ def test_엔진_점수와_자료_id_를_화면에_싣지_않는다(export):
 def test_항목과_상태_이름을_모두_한국어로_옮긴다(export):
     assert export.SLOT_LABELS["offence"] == "죄명"
     assert export.SLOT_STATES["unreadable"][0] == "읽히지 않음"
+
+
+def test_차이_의심도_자료끼리_어긋남_묶음에_둔다(export):
+    """엔진은 '확인되지 않음'으로 나누지만, 자료끼리 다른 곳은 맨 위 묶음에서 보여야 한다."""
+    issue = {"category": "unverified", "condition": "suspected_conflict", "priority": 1,
+             "message": "최종 목격 일시: 차이가 있어 보입니다", "sources": [], "checked_doc_ids": []}
+    groups = export._issues({"analysis": {"issues": [issue]}}, {})
+    assert [g["label"] for g in groups] == ["자료끼리 어긋남"]

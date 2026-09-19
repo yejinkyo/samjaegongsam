@@ -498,7 +498,11 @@ def _issues(result: dict[str, Any], docs: dict[str, dict]) -> list[dict[str, Any
     for category, label, severity in ISSUE_GROUPS:
         items = []
         for issue in sorted(result["analysis"]["issues"], key=lambda i: i["priority"]):
-            if issue["category"] != category:
+            # '차이가 있어 보이지만 판단 근거가 부족한' 것도 어긋남 묶음에 둔다 — 엔진은 확인되지 않음으로
+            # 분류하지만, 자료끼리 다른 곳을 짚는 것이 이 서비스의 강점이라 묻히면 안 된다. 문장이 '보이지만'
+            # 으로 단정하지 않으므로 묶음만 옮긴다.
+            shown = "inconsistency" if issue.get("condition") == "suspected_conflict" else issue["category"]
+            if shown != category:
                 continue
             if issue["sources"]:
                 s = issue["sources"][0]
