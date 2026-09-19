@@ -200,3 +200,19 @@ def test_죄명은_서식의_죄명_칸에서만_읽는다():
     assert offence(["수사결과 통지서", "죄명 미성년자 약취·유인"]) == ["미성년자 약취·유인"]
     assert offence(["수사결과 통지서", "죄 명 : 사기 등"]) == ["사기"]
     assert offence(["2021. 5. 25. 사기죄로 고소하였습니다."], DocumentType.COMPLAINT) == []
+
+
+def test_검사가_공소를_제기한_결정을_읽는다():
+    """재판이 시작된 사건을 단계 미확정으로 두면 수사기관에 낼 행동을 안내하게 된다."""
+    def decision(text):
+        doc = _doc("notice", ["처분결과 통지서", f"처분결과 {text}", "○○지방검찰청 검사"], DocumentType.NOTICE)
+        claims = Extractor().extract([doc], date(2026, 9, 19)).claims
+        return [c.slot_value for c in claims if c.slot is ClaimSlot.DECISION_TYPE]
+
+    assert decision("구공판(공소제기)") == ["구공판(공소제기)"]
+    assert decision("구약식") == ["구약식"]
+    assert decision("공소제기") == ["공소제기"]
+    assert decision("기소") == ["기소"]
+    assert decision("기소중지") == ["기소중지"]  # 기소가 아니다
+    assert decision("기소유예") == ["기소유예"]
+    assert decision("불기소(혐의없음)") == ["불기소(혐의없음)"]
