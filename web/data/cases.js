@@ -12,27 +12,33 @@ window.TARAE_CASES = [
     "stages": [
       {
         "label": "발생",
-        "state": "done"
+        "state": "done",
+        "noted": false
       },
       {
         "label": "송금",
-        "state": "done"
+        "state": "done",
+        "noted": false
       },
       {
         "label": "신고",
-        "state": "done"
+        "state": "done",
+        "noted": false
       },
       {
         "label": "접수",
-        "state": "current"
+        "state": "current",
+        "noted": false
       },
       {
         "label": "수사",
-        "state": "todo"
+        "state": "todo",
+        "noted": false
       },
       {
         "label": "결과",
-        "state": "todo"
+        "state": "todo",
+        "noted": false
       }
     ],
     "sources": [
@@ -4127,23 +4133,28 @@ window.TARAE_CASES = [
     "stages": [
       {
         "label": "발생",
-        "state": "done"
+        "state": "done",
+        "noted": false
       },
       {
         "label": "신고",
-        "state": "done"
+        "state": "done",
+        "noted": false
       },
       {
         "label": "수사",
-        "state": "todo"
+        "state": "todo",
+        "noted": false
       },
       {
         "label": "중지",
-        "state": "current"
+        "state": "current",
+        "noted": false
       },
       {
         "label": "재수사",
-        "state": "todo"
+        "state": "todo",
+        "noted": false
       }
     ],
     "sources": [
@@ -8924,23 +8935,28 @@ window.TARAE_CASES = [
     "stages": [
       {
         "label": "고소",
-        "state": "done"
+        "state": "done",
+        "noted": false
       },
       {
         "label": "접수",
-        "state": "done"
+        "state": "done",
+        "noted": false
       },
       {
         "label": "수사",
-        "state": "todo"
+        "state": "todo",
+        "noted": false
       },
       {
         "label": "중지",
-        "state": "current"
+        "state": "current",
+        "noted": false
       },
       {
         "label": "재개",
-        "state": "todo"
+        "state": "todo",
+        "noted": false
       }
     ],
     "sources": [
@@ -13431,23 +13447,28 @@ window.TARAE_CASES = [
     "stages": [
       {
         "label": "고소",
-        "state": "done"
+        "state": "done",
+        "noted": false
       },
       {
         "label": "접수",
-        "state": "done"
+        "state": "done",
+        "noted": false
       },
       {
         "label": "수사",
-        "state": "todo"
+        "state": "todo",
+        "noted": false
       },
       {
         "label": "중지",
-        "state": "current"
+        "state": "current",
+        "noted": false
       },
       {
         "label": "재개",
-        "state": "todo"
+        "state": "todo",
+        "noted": false
       }
     ],
     "sources": [
@@ -15474,23 +15495,28 @@ window.TARAE_CASES = [
     "stages": [
       {
         "label": "고소",
-        "state": "done"
+        "state": "done",
+        "noted": false
       },
       {
         "label": "접수",
-        "state": "done"
+        "state": "done",
+        "noted": false
       },
       {
         "label": "수사",
-        "state": "todo"
+        "state": "todo",
+        "noted": false
       },
       {
         "label": "중지",
-        "state": "current"
+        "state": "current",
+        "noted": false
       },
       {
         "label": "재개",
-        "state": "todo"
+        "state": "todo",
+        "noted": false
       }
     ],
     "sources": [
