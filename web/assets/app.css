@@ -526,6 +526,10 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .tl__dot--claim { background: var(--status-unverified); }
 .tl__dot--conflict { background: var(--status-conflict); }
 .tl__dot--mine { background: var(--bg-surface); border: 1.5px dashed var(--status-mine); }
+/* 내가 낸 것 · 받은 회신 · 다음 행동 — 자료에서 읽은 줄과 구별되게 */
+.tl__dot--submit { background: var(--brand-primary); }
+.tl__dot--reply { background: var(--bg-surface); border: 2px solid var(--brand-primary); }
+.tl__dot--next { background: var(--bg-surface); border: 1.5px dashed var(--brand-primary); }
 .tl__line { flex: 1 0 0; width: 2px; margin-top: 4px; background: var(--border-default); }
 .tl__row--last .tl__line { visibility: hidden; }
 
@@ -1022,6 +1026,11 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .tl__legend-item--mine .tl__legend-ink { color: #5f5870; font-style: italic; }
 /* 내가 적은 줄은 연필로 적은 것처럼 */
 .tl__row--mine .tl__title { color: #5f5870; font-style: italic; }
+.tl__row--submit .tl__title, .tl__row--reply .tl__title { color: var(--brand-primary); }
+.tl__row--next .tl__title { color: var(--brand-primary); font-weight: 600; }
+.tl__row--next .tl__day { color: var(--brand-primary); }
+.tl__legend-item--submit .tl__legend-ink, .tl__legend-item--reply .tl__legend-ink { color: var(--brand-primary); }
+.tl__legend-item--next .tl__legend-ink { color: var(--brand-primary); font-weight: 600; }
 
 .tl__more {
   align-self: center; margin-right: 14px;

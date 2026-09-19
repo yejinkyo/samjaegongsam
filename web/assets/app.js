@@ -743,6 +743,7 @@
       }
       insertEvent(c, {
         type: "event",
+        at: when.value || null,
         time: when.value ? formatDay(c, when.value) : "시점 미상",
         title: text,
         kind: "mine",
@@ -774,6 +775,9 @@
     ["claim", "주장 · 미확인"],
     ["conflict", "불일치"],
     ["mine", "내가 적음"],
+    ["submit", "내가 낸 것"],
+    ["reply", "받은 회신"],
+    ["next", "다음 행동"],
   ];
 
   /** 그 줄이 어떤 상태인지 — 팝업 제목 옆에 붙는 말. */
@@ -781,7 +785,7 @@
     var flags = [];
     if (row.conflict) flags.push(["conflict", "불일치"]);
     if (row.kind === "claim") flags.push(["unverified", row.badge]);
-    if (row.kind === "mine") flags.push(["mine", row.badge]);
+    if (row.kind === "mine" || row.kind === "submit" || row.kind === "reply") flags.push(["mine", row.badge]);
     if (row.needs_date) flags.push(["unverified", "날짜 확인 필요"]);
     if (!flags.length) flags.push(["verified", "확인 완료"]);
     return flags;
@@ -789,6 +793,7 @@
 
   /** 줄을 누르면 열리는 자세히 — 원문과 출처를 그대로 보여준다. */
   function timelineDetail(row, c, onRemoved) {
+    if (row.sub) return submissionDetail(row);
     // 제목에 원문을 그대로 쓴다 — 자세히를 눌렀는데 또 잘려 있으면 안 된다
     var full = row.full || row.title;
     var body = h("div", { class: "tldetail" }, [
@@ -838,6 +843,25 @@
       body.appendChild(h("div", { class: "tldetail__foot" }, [remove]));
     }
     openModal(full, body);
+  }
+
+  /** 낸 것 · 받은 답 줄의 자세히. 자료가 아니라 내가 기록한 것이라 출처 대신 기록을 보여 준다. */
+  function submissionDetail(row) {
+    var s = row.sub;
+    var lines = [
+      h("div", { class: "tldetail__flags" }, rowFlags(row).map(function (f) { return badge(f[0], f[1]); })),
+      h("p", { class: "t-body-s", text: dotDay(s.submitted_at) + "에 냄" + (s.to ? " · " + s.to : "") }),
+    ];
+    if (s.form_name) lines.push(h("p", { class: "t-body-s", text: "무엇을 · " + s.form_name }));
+    lines.push(h("p", { class: "t-body-s", text: s.receipt ? "접수증 · " + s.receipt : "접수증이 없어 낸 사실이 본인 기록으로만 남아요." }));
+    if (s.response) {
+      lines.push(h("p", { class: "t-body-s", text: dotDay(s.response.received_at) + "에 회신 받음"
+        + (s.response.decision_type ? " · " + s.response.decision_type : "") }));
+    } else {
+      lines.push(h("p", { class: "t-body-s", text: waitingText(s) }));
+    }
+    lines.push(h("p", { class: "modal__note", text: "내가 기록한 것이라 자료로 확인된 것은 아니에요. 통지서를 자료로 올리면 기록으로 바뀝니다. 고치거나 지우려면 오른쪽 '낸 것'에서 하세요." }));
+    openModal(row.full || row.title, h("div", { class: "tldetail" }, lines));
   }
 
   /* 직접 적은 줄만 지운다.
@@ -897,15 +921,61 @@
     openModal("직접 적은 줄 지우기", body);
   }
 
+  /** 낸 것 · 받은 답의 날짜 표기. 사건이 월일만 쓰는데 다른 해의 일이면 연도까지 적는다. */
+  function subDay(c, iso) {
+    var years = {};
+    c.timeline.forEach(function (r) { if (r.at) years[r.at.slice(0, 4)] = true; });
+    var same = Object.keys(years).length === 1 && years[iso.slice(0, 4)];
+    return same ? formatDay(c, iso) : iso.replace(/-/g, ".");
+  }
+
+  /** 타임라인에 올릴 줄 — 자료에서 읽은 줄에 내가 낸 것 · 받은 답을 날짜 순서대로 끼우고,
+   *  맨 끝에 지금 추천하는 다음 행동을 단다. 내고 답을 받을 때마다 끝 줄이 다음 단계로 바뀐다. */
+  function timelineRows(c) {
+    var extra = [];
+    subsOf(c.id).forEach(function (s) {
+      var what = s.form_name || s.label;
+      extra.push({
+        type: "event", kind: "submit", at: s.submitted_at, time: subDay(c, s.submitted_at),
+        title: "냄 · " + what, full: s.label + (s.form_name ? " — " + s.form_name : ""),
+        badge: "내가 낸 것", sub: s, sources: [],
+      });
+      if (s.response) {
+        var answer = s.response.decision_type ? s.response.decision_type + " 통지" : "회신 받음 (결정 내용 모름)";
+        extra.push({
+          type: "event", kind: "reply", at: s.response.received_at, time: subDay(c, s.response.received_at),
+          title: "회신 · " + answer, full: what + "에 대한 회신 — " + answer,
+          badge: "받은 회신", sub: s, sources: [],
+        });
+      }
+    });
+    extra.sort(function (a, b) { return a.at < b.at ? -1 : a.at > b.at ? 1 : 0; });
+
+    // 날짜를 모르는 줄(at 없음)은 맨 뒤에 모여 있다 — 날짜가 있는 기록은 그 앞에 둔다
+    var out = [];
+    var i = 0;
+    c.timeline.forEach(function (row) {
+      while (i < extra.length && (!row.at || extra[i].at < row.at)) out.push(extra[i++]);
+      out.push(row);
+    });
+    while (i < extra.length) out.push(extra[i++]);
+
+    var next = activeAction(c);
+    // 무엇을 낼지까지 적는다 — '불복 절차'만으로는 이의제기서인지 항고장인지 재정신청서인지 모른다
+    if (next) out.push({ type: "next", kind: "next", title: next.label + (next.form_name ? " · " + next.form_name : ""),
+                         due: next.due, why: next.why });
+    return out;
+  }
+
   function timelineCard(c) {
     var wrap = h("div", { class: "card tl" });
-    var rows = c.timeline;
+    var rows = timelineRows(c);
     var lastEvent = -1;
-    rows.forEach(function (row, i) { if (row.type === "event") lastEvent = i; });
+    rows.forEach(function (row, i) { if (row.type === "event" || row.type === "next") lastEvent = i; });
 
     var used = {};
     rows.forEach(function (row) {
-      if (row.type !== "event") return;
+      if (row.type !== "event" && row.type !== "next") return;
       used[row.conflict ? "conflict" : row.kind] = true;
     });
     wrap.appendChild(h("div", { class: "tl__legend" }, KIND_LEGEND.filter(function (k) { return used[k[0]]; }).map(function (k) {
@@ -921,6 +991,23 @@
         wrap.appendChild(h("div", { class: "tl__gap" }, [
           h("span", { class: "t-label", text: row.range }),
           h("span", { class: "t-body-s", text: row.text }),
+        ]));
+        return;
+      }
+
+      if (row.type === "next") {
+        // 아직 일어나지 않은 줄 — 날짜 대신 '다음'과 남은 날을 적는다
+        wrap.appendChild(h("div", { class: "tl__row tl__row--next" + (i === lastEvent ? " tl__row--last" : "") }, [
+          h("div", { class: "tl__when" }, [
+            h("span", { class: "tl__day t-label", text: "다음" }),
+            h("span", { class: "tl__time t-caption", text: row.due ? row.due.label : "" }),
+          ]),
+          h("div", { class: "tl__rail", "aria-hidden": "true" }, [
+            h("span", { class: "tl__dot tl__dot--next" }),
+            h("span", { class: "tl__line" }),
+          ]),
+          h("p", { class: "tl__title", title: row.why || row.title },
+            [h("span", { class: "tl__text", text: "추천 · " + row.title })]),
         ]));
         return;
       }
@@ -1062,53 +1149,83 @@
     try { localStorage.setItem(SUB_KEY, JSON.stringify(all)); } catch (e) { /* 저장이 막혀도 화면은 돈다 */ }
   }
 
+  // 같은 행동을 여러 번 낼 수 있다 — 이의제기서를 내고 불기소를 받으면 다음 '불복'은 항고장이다.
+  // 행동 키로 가리면 두 번째 제출이 첫 번째 기록을 덮어써서 앞선 제출과 답이 사라진다. 그래서 id 로 가린다.
   function subsOf(caseId) {
     var list = allSubs()[caseId];
-    return Array.isArray(list) ? list : [];
+    if (!Array.isArray(list)) return [];
+    // 예전 기록에는 id 가 없다 — 그때는 행동 하나에 기록 하나였으므로 행동 키와 낸 날로 만든다
+    return list.map(function (s) {
+      if (!s.id) s.id = s.action + "@" + s.submitted_at;
+      return s;
+    });
   }
 
   function putSub(caseId, sub) {
+    if (!sub.id) sub.id = sub.action + "@" + sub.submitted_at + "@" + Date.now();
     var all = allSubs();
-    all[caseId] = subsOf(caseId).filter(function (s) { return s.action !== sub.action; }).concat([sub]);
+    all[caseId] = subsOf(caseId).filter(function (s) { return s.id !== sub.id; }).concat([sub]);
     saveSubs(all);
   }
 
-  function dropSub(caseId, action) {
+  function dropSub(caseId, id) {
     var all = allSubs();
-    all[caseId] = subsOf(caseId).filter(function (s) { return s.action !== action; });
+    all[caseId] = subsOf(caseId).filter(function (s) { return s.id !== id; });
     saveSubs(all);
+  }
+
+  /** 받은 답 가운데 가장 나중 것. 결정 내용을 고른 것만 센다 — 모르는 답으로는 단계를 바꾸지 않는다. */
+  function latestAnswer(c) {
+    var answered = null;
+    subsOf(c.id).forEach(function (s) {
+      if (!s.response || !s.response.decision_type) return;
+      if (!answered || s.response.received_at >= answered.response.received_at) answered = s;
+    });
+    return answered;
+  }
+
+  /** 받은 날로 기한을 센다. 엔진이 미리 계산할 때는 기준일에 받았다고 두었으므로 날짜를 굳히지 않았다. */
+  function withDue(a, received) {
+    var copy = {};
+    for (var k in a) if (a.hasOwnProperty(k)) copy[k] = a[k];
+    copy.rows = (a.rows || []).slice();
+    var d = a.due_rule ? dueFrom(received, a.due_rule.period_days) : null;
+    if (d) {
+      copy.due = { label: d.days < 0 ? "기한 지남" : "D-" + d.days, text: d.text + " (" + a.due_rule.label + ")", severity: d.severity };
+      var where = copy.rows.findIndex(function (r) { return r.k === "어디에"; });
+      copy.rows.splice(where < 0 ? copy.rows.length : where + 1, 0, { k: "언제까지", v: copy.due.text });
+    }
+    return copy;
+  }
+
+  /** 지금 기준의 행동 목록(우선순위 순서).
+   *
+   * 답을 기록했으면 엔진이 그 답으로 미리 계산해 둔 목록을 쓴다 — 단계가 바뀌면 '불복'의 서류와
+   * 제출처가 바뀐다(수사중지면 이의제기서, 불기소면 항고장, 항고 기각이면 재정신청서). 옛 카드의
+   * 행을 그대로 쓰면 엉뚱한 서류를 안내한다. 받은 날로 센 기한이 이미 지났으면 다음 행동에서 뺀다
+   * — 엔진도 지난 기한은 다음 행동으로 올리지 않는다.
+   */
+  function actionsNow(c) {
+    var answered = latestAnswer(c);
+    var outcome = answered ? outcomeOf(c, answered) : null;
+    if (outcome && outcome.actions && outcome.actions.length) {
+      return outcome.actions
+        .map(function (a) { return withDue(a, answered.response.received_at); })
+        .filter(function (a) { return !(a.due && a.due.severity === "expired"); });
+    }
+    return (c.actions && c.actions.length) ? c.actions : (c.next_action ? [c.next_action] : []);
   }
 
   /** 지금 해야 할 행동 하나. 없으면 null.
    *
    * 답을 기다리는 중인 행동만 내린다. 답이 온 것은 그 건이 끝난 것이고, 그 답으로
    * 새 기한이 열릴 수 있다 — 불기소 통지를 받으면 항고 기한이 열리는 식이다.
-   * 그때는 엔진이 그 답으로 미리 계산해 둔 행동(outcome.next_key)을 쓴다.
+   * 그래서 내고 → 답을 받고 → 다음 행동을 고르는 일이 계속 이어진다.
    */
   function activeAction(c) {
-    var list = (c.actions && c.actions.length) ? c.actions : (c.next_action ? [c.next_action] : []);
-    if (!list.length) return null;
-
     var waiting = {};
-    var answered = null;
-    subsOf(c.id).forEach(function (s) {
-      if (!s.response) { waiting[s.action] = true; return; }
-      if (s.response.decision_type && (!answered || s.response.received_at > answered.response.received_at)) answered = s;
-    });
-
-    var outcome = answered ? outcomeOf(c, answered) : null;
-    if (outcome && outcome.next_key) {
-      var picked = list.filter(function (a) { return a.action === outcome.next_key; })[0];
-      if (picked && !waiting[picked.action]) {
-        // 기한은 이 카드에 실린 옛 값이 아니라 '낸 것' 카드에서 받은 날짜로 다시 센다
-        var copy = {};
-        for (var k in picked) if (picked.hasOwnProperty(k)) copy[k] = picked[k];
-        copy.due = null;
-        return copy;
-      }
-    }
-
-    var left = list.filter(function (a) { return !waiting[a.action]; });
+    subsOf(c.id).forEach(function (s) { if (!s.response) waiting[s.action] = true; });
+    var left = actionsNow(c).filter(function (a) { return !waiting[a.action]; });
     return left.length ? left[0] : null;
   }
 
@@ -1142,6 +1259,8 @@
 
   // 「회신 왔어요」에서 고를 수 있는 답. 목록도 결과도 엔진이 내보낸 것을 그대로 쓴다.
   var UNKNOWN_CHOICE = "잘 모르겠어요";
+  // 사건마다 엔진이 싣는 값이 먼저다(drawCase 에서 바꾼다). 없으면 엔진의 기본값과 같다.
+  var SEVERITY_DAYS = { critical: 7, soon: 30 };
 
   /** 기한 = 통지 수령일 + 기간. 엔진이 하는 계산과 같은 식이다(rules.compute_deadlines). */
   function dueFrom(received, periodDays) {
@@ -1150,8 +1269,9 @@
     var d = new Date(Number(p[0]), Number(p[1]) - 1, Number(p[2]) + periodDays);
     var now = new Date();
     var left = Math.round((d - new Date(now.getFullYear(), now.getMonth(), now.getDate())) / 86400000);
-    // 급한 정도를 가르는 기준도 엔진과 같다 (CRITICAL_DAYS 7 · SOON_DAYS 30)
-    var sev = left < 0 ? "expired" : left <= 7 ? "critical" : left <= 30 ? "soon" : "ok";
+    // 급한 정도를 가르는 기준도 엔진과 같다 — 팀 기준(deadlines.json 의 severity)을 엔진이 내보낸 값
+    var bands = SEVERITY_DAYS;
+    var sev = left < 0 ? "expired" : left <= bands.critical ? "critical" : left <= bands.soon ? "soon" : "ok";
     return {
       text: d.getFullYear() + "." + ("0" + (d.getMonth() + 1)).slice(-2) + "." + ("0" + d.getDate()).slice(-2) + "까지",
       days: left,
@@ -1277,7 +1397,7 @@
         actions.appendChild(got);
       }
       var undo = h("button", { type: "button", class: "sub__undo t-body-s", text: "기록 지우기" });
-      undo.addEventListener("click", function () { dropSub(c.id, sub.action); refresh(); });
+      undo.addEventListener("click", function () { dropSub(c.id, sub.id); refresh(); });
       actions.appendChild(undo);
 
       // 받은 답이 사건을 어떻게 바꾸는지. 엔진이 답마다 미리 낸 결과를 그대로 읽는다.
@@ -1762,8 +1882,18 @@
   function drawCase(root, c) {
     document.title = c.title + " · 타래";
 
+    if (c.severity_days) SEVERITY_DAYS = c.severity_days;
     var panel = h("div", { role: "tabpanel", id: "panel" }, [timelineCard(c)]);
     var rail = h("aside", { class: "rail" });
+    var tabIndex = 0;
+
+    // 내거나 답을 받으면 옆 카드만이 아니라 타임라인도 다시 그린다 — 거기에 낸 것 · 다음 행동이 올라가 있다
+    function refresh() {
+      fillSide(tabIndex);
+      if (tabIndex !== 0) return;
+      panel.textContent = "";
+      panel.appendChild(timelineCard(c));
+    }
 
     // 다음 행동·확인이 필요해요는 타임라인에서만 본다. 인물·주장 탭에서는
     // 그 화면에서 실제로 쓰는 것(자료 · 전문가 질문)만 옆에 둔다.
@@ -1778,8 +1908,8 @@
       // 자료는 어느 탭에서나 같은 자리(맨 위)에 둔다
       put(sourcesBar(c, true));
       if (index === 0) {
-        put(nextActionCard(c, function () { fillSide(0); }));
-        put(submittedCard(c, function () { fillSide(0); }));
+        put(nextActionCard(c, refresh));
+        put(submittedCard(c, refresh));
         put(issuesCard(c));
       } else {
         put(askButton(c));
@@ -1792,6 +1922,7 @@
       tab.addEventListener("click", function () {
         tabs.querySelectorAll(".tab").forEach(function (t) { t.setAttribute("aria-selected", "false"); });
         tab.setAttribute("aria-selected", "true");
+        tabIndex = i;
         panel.textContent = "";
         panel.appendChild(i === 0 ? timelineCard(c) : i === 1 ? peopleCard(c) : slotsCard(c));
         turnPage(panel);

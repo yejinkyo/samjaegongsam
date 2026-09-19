@@ -171,3 +171,51 @@ def test_재판_단계_사건은_범위_밖이라고_화면에_알린다(export)
     assert na["state"] == "no_submission" and "제294조의4" in na["note"]
     assert na["also"] == []  # 수사기관에 낼 행동을 참고사항으로도 띄우지 않는다
     assert na["draft"] is None
+
+
+# ── 낸 것 · 받은 답에 따라 다음 단계로 ──────────────────────────────────
+
+
+def test_답마다_그_단계에_맞는_행동_목록을_싣는다(views):
+    """화면은 엔진을 부를 수 없다. 답을 기록하면 엔진이 그 답으로 미리 계산한 목록을 그대로 쓴다.
+
+    옛 카드의 행을 쓰면 불기소를 받은 뒤에도 '이의제기서 · 상급경찰관서'를 안내하게 된다.
+    """
+    outcomes = views["suspension_recent"]["outcomes"]
+
+    def first(choice):
+        a = outcomes[choice]["actions"][0]
+        return a["action"], {r["k"]: r["v"] for r in a["rows"]}.get("무엇을"), a["due_rule"]
+
+    assert first("불기소") == ("ACT-불복기한", "항고장", {"label": "검찰 항고 기한", "period_days": 30})
+    assert first("항고 기각")[1:] == ("재정신청서", {"label": "법원 재정신청 기한", "period_days": 10})
+    assert first("참고인중지")[1] == "수사중지 결정 이의제기서"
+    assert first("기소")[0] == "ACT-재판단계"
+
+
+def test_답의_기한은_날짜로_굳히지_않는다(views):
+    """미리 계산할 때는 기준일에 받았다고 둔다. 실제로 받은 날은 사용자가 고르므로 화면이 기간을 더한다."""
+    for outcome in views["suspension_recent"]["outcomes"].values():
+        for a in outcome["actions"]:
+            assert a["due"] is None
+            assert "언제까지" not in [r["k"] for r in a["rows"]]
+
+
+def test_타임라인_줄에_날짜를_싣는다(views):
+    """화면이 낸 것 · 받은 답을 날짜 순서대로 끼워 넣을 수 있어야 한다."""
+    rows = views["long_unsolved_missing"]["timeline"]
+    dated = [r["at"] for r in rows if r.get("at")]
+    assert dated == sorted(dated)
+    assert all(r["at"] is None for r in rows if r["type"] == "event" and r["time"] == "시각 미상")
+
+
+def test_급함_기준을_화면에_넘긴다(views):
+    assert views["suspension_recent"]["severity_days"] == {"critical": 7, "soon": 30}
+
+
+def test_답으로_기록한_결정의_통지서를_가진_것으로_보지_않는다(views):
+    """자료함의 통지서는 이전 결정의 것이다. 새 통지서는 올리기 전까지 없다."""
+    a = views["suspension_recent"]["outcomes"]["불기소"]["actions"][0]
+    notice = next(i for i in a["prepare"]["items"] if "통지서" in i["label"])
+    assert notice["state"] == "미보유"
+    assert a["prepare"]["done"] == sum(1 for i in a["prepare"]["items"] if i["state"] == "보유")
