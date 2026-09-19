@@ -227,3 +227,20 @@ def test_답의_기한에는_통지_수령일부터_세는_것만_싣는다(view
     for outcome in views["suspension_recent"]["outcomes"].values():
         assert "형사 공소시효 임박" not in [t["label"] for t in outcome["deadlines"]]
     assert [t["label"] for t in views["suspension_recent"]["outcomes"]["불기소"]["deadlines"]] == ["검찰 항고 기한"]
+
+
+# ── 화면 말 ────────────────────────────────────────────────────────────
+
+
+def test_엔진_점수와_자료_id_를_화면에_싣지_않는다(export):
+    docs = {"news_2018": {"file_name": "기사_2018.jpg"}}
+    text = ("최종 목격 일시: 차이가 있어 보입니다 — ‘11-02’(news_2018 · 3줄) "
+            "(모순 점수 0.54 < 기준 0.70; 추출 신뢰도 낮음: news_2018 · 3줄 (0.60))")
+    assert export._plain(text, docs) == "최종 목격 일시: 차이가 있어 보입니다 — ‘11-02’(기사_2018.jpg · 3줄)"
+    # 판정 근거가 아닌 괄호는 그대로 둔다
+    assert export._plain("읽히지 않은 부분이 1곳 있습니다 (7줄)", docs) == "읽히지 않은 부분이 1곳 있습니다 (7줄)"
+
+
+def test_항목과_상태_이름을_모두_한국어로_옮긴다(export):
+    assert export.SLOT_LABELS["offence"] == "죄명"
+    assert export.SLOT_STATES["unreadable"][0] == "읽히지 않음"
