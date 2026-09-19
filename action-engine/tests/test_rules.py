@@ -20,11 +20,44 @@ def state(st: str = ST.SUSPENDED_SUSPECT, inf: list[str] | None = None, tim=None
 # ── 규칙표 자체 ─────────────────────────────────────────────────────────
 
 
-def test_규칙은_11줄이고_마지막은_기본행동이다():
+def test_규칙은_13줄이고_마지막은_기본행동이다():
+    """0번(재판 단계 — 범위 밖)과 11번(수사 중 — 진행상황 확인)이 단계 전용 줄이다."""
     rules = load_rules()["rules"]
-    assert len(rules) == 11
-    assert [r["no"] for r in rules] == list(range(1, 12))
+    assert len(rules) == 13
+    assert [r["no"] for r in rules] == list(range(0, 13))
     assert rules[-1]["when"] == {}  # 아무것도 안 맞아도 빈손으로 두지 않는다
+
+
+# ── 단계 전용 규칙 ──────────────────────────────────────────────────────
+
+
+@pytest.mark.parametrize("st", [ST.TRIAL_ONGOING, ST.JUDGMENT_FINAL, ST.RETRIAL_PREP])
+def test_재판_단계에는_수사기관에_낼_행동을_안내하지_않는다(st):
+    """새 정보 · 모순이 있어도 '수사기관에 제출'이 메인으로도 참고사항으로도 나오면 안 된다."""
+    d = decide(state(st=st, inf=[INF.NEW_STATEMENT, INF.CONTRADICTION_ACROSS]))
+    assert d.main.rule_no == 0 and d.main.action == "ACT-재판단계"
+    assert d.also == []
+
+
+@pytest.mark.parametrize("st", [ST.TRIAL_ONGOING, ST.JUDGMENT_FINAL, ST.RETRIAL_PREP])
+def test_재판_단계에는_수사_단계의_기한을_붙이지_않는다(st):
+    """공소가 제기되면 시효가 정지된다(형사소송법 제253조 제1항) — 시효 D-day 를 띄우면 틀린 경고다."""
+    codes = {t.code for t in compute_deadlines(state(st=st), {"incident_end": date(2020, 1, 1),
+                                                                 "communication_time": date(2026, 9, 1)})}
+    assert not codes & {"TIM-021", "TIM-031", "TIM-041", "TIM-042"}
+
+
+@pytest.mark.parametrize("st", [ST.PRE_INVESTIGATION, ST.POLICE_INVESTIGATING, ST.PROSECUTION_INVESTIGATING])
+def test_수사_중에는_진행상황_확인이_기본이다(st):
+    d = decide(state(st=st))
+    assert d.main.rule_no == 11 and d.main.action == "ACT-진행확인"
+
+
+def test_수사_중에도_새_정보가_있으면_제출이_먼저다():
+    """수사 중인 사건에 자료·의견을 내는 것(수사준칙 제25조)은 맞는 경로다."""
+    d = decide(state(st=ST.POLICE_INVESTIGATING, inf=[INF.NEW_STATEMENT]))
+    assert d.main.action == "ACT-신규정보제출"
+    assert "ACT-진행확인" in [h.action for h in d.also]
 
 
 def test_모든_규칙에_why가_있다():
@@ -55,8 +88,9 @@ def test_수사기록_미확인이_근거미비보다_먼저다():
 
 
 def test_아무것도_안_맞으면_상시행동이_남는다():
-    # 수사가 진행 중이고 정보 문제도 기한도 없는 상태 — 규칙 어느 것도 맞지 않는다
-    d = decide(state(st=ST.POLICE_INVESTIGATING, inf=[]))
+    # 중지된 사건에 정보 문제도 급한 기한도 없는 상태 — 규칙 어느 것도 맞지 않는다
+    # (수사 중인 사건은 이제 11번 진행상황 확인이 맞는다)
+    d = decide(state(st=ST.SUSPENDED_SUSPECT, inf=[]))
     assert d.main.action == "ACT-상시"
     assert d.also == []
 

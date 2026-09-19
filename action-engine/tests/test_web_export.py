@@ -155,3 +155,19 @@ def test_타임라인은_요약을_싣고_원문은_자세히에_둔다(views):
     assert {"연락 두절", "실종신고 접수", "마지막 목격 · ○○역 인근", "재수사 요청"} <= titles
     notice = next(r for r in events if r["title"].startswith("수사결과 통지"))
     assert notice["full"] == "수사결과 통지서"  # 원문은 그대로 남는다
+
+
+def test_재판_단계_사건은_범위_밖이라고_화면에_알린다(export):
+    """재판이 시작된 사건에 '수사기관에 새 정보 제출'을 띄우면 엉뚱한 곳에 내게 된다."""
+    import copy
+
+    result = copy.deepcopy(json.loads((export.FIXTURES / "suspension_recent.json").read_text(encoding="utf-8")))
+    for slot in result["analysis"]["slot_statuses"]:
+        if slot["slot"] == "decision_type":
+            slot["value"], slot["state"] = "구공판(공소제기)", "confirmed"
+    na = export.build_view("trial", "재판 중인 사건", result)["next_action"]
+    assert na["action"] == "ACT-재판단계"
+    assert "범위 밖" in na["label"]
+    assert na["state"] == "no_submission" and "제294조의4" in na["note"]
+    assert na["also"] == []  # 수사기관에 낼 행동을 참고사항으로도 띄우지 않는다
+    assert na["draft"] is None

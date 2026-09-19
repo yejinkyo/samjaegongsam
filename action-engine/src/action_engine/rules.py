@@ -69,6 +69,9 @@ def compute_deadlines(
         applies = row["applies_to_st"]
         if "*" not in applies and state.st.code not in applies:
             continue
+        # 재판 · 확정 · 재심 단계에는 수사 단계의 기한을 붙이지 않는다 — 이유는 행의 except_why
+        if state.st.code in row.get("except_st", []):
+            continue
         # 같은 단계라도 결정한 기관에 따라 불복 절차가 다르다 — 경찰 수사중지는 이의제기, 검사의 기소중지는 항고
         if row.get("issuer") and row["issuer"] != issuer:
             continue
@@ -189,6 +192,9 @@ def decide(state: CaseState) -> ActionDecision:
             hits.append(RuleHit(rule_no=rule["no"], action=rule["action"],
                                 condition=", ".join(f"{k}={v}" for k, v in when.items()),
                                 why=rule["why"], codes=codes))
+            if rule.get("stop"):
+                # 이 줄이 맞으면 뒤의 규칙은 보지 않는다 — 재판 단계에 '수사기관에 제출'이 참고사항으로 뜨면 안 된다
+                break
 
     return ActionDecision(main=hits[0] if hits else None, also=hits[1:], state=state)
 

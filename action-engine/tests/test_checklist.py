@@ -1,5 +1,7 @@
 """5단계 — 필요 서류 ↔ 자료함 대조 테스트."""
 
+import pytest
+
 from action_engine import build_card, build_checklist
 from action_engine.checklist import load_documents
 from action_engine.schema import Deadline
@@ -229,3 +231,16 @@ def test_카드에_체크리스트가_붙는다(missing, fraud):
         # 두 사건의 다음 행동(신규정보제출 · 모순확인)은 수사준칙 제25조의 자료·의견 제출로 채워져 있다
         assert card.checklist.unresolved is None
         assert card.checklist.form_name == "자료·의견 제출서"
+
+
+@pytest.mark.parametrize("st, statute", [("ST-401", "제294조의4"), ("ST-402", "제59조의2"), ("ST-403", "제424조")])
+def test_재판_단계는_범위_밖이라고_알리고_법원_경로를_준다(st, statute):
+    c = build_checklist("ACT-재판단계", DOCS, st=st)
+    assert c.no_submission and "범위 밖" in c.no_submission
+    assert statute in c.no_submission
+
+
+@pytest.mark.parametrize("st, word", [("ST-101", "고소"), ("ST-102", "경찰수사규칙 제11조"), ("ST-103", "수사준칙 제12조")])
+def test_수사_중에는_단계에_맞는_진행상황_확인_경로를_준다(st, word):
+    c = build_checklist("ACT-진행확인", DOCS, st=st)
+    assert c.no_submission and word in c.no_submission
