@@ -612,10 +612,10 @@
           "bbox": {
             "x0": 40.0,
             "y0": 40.0,
-            "x1": 568.0,
+            "x1": 502.0,
             "y1": 84.0
           },
-          "text": "○○시 20대 여성 실종 석 달째 행방 묘연",
+          "text": "○○시 20대 여성 석 달째 행방 묘연",
           "ocr_confidence": 0.94,
           "readability": 0.934,
           "readable": true,
@@ -790,10 +790,10 @@
             "x1": 414.0,
             "y1": 324.0
           },
-          "text": "결정일자 2019. 6. 1▒.",
-          "ocr_confidence": 0.48,
-          "readability": 0.2024,
-          "readable": false,
+          "text": "결정일자 2019. 6. 17.",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
           "script": "typewriter",
           "low_confidence_spans": [],
           "origin": "ocr"
@@ -826,9 +826,9 @@
             "x1": 568.0,
             "y1": 444.0
           },
-          "text": "이유 피의자를 특정할 수 ▒▒ 수사를 중지함",
-          "ocr_confidence": 0.52,
-          "readability": 0.1996,
+          "text": "이유 피의자를 특정할 수 ▒▒ 수사를 중▒함",
+          "ocr_confidence": 0.46,
+          "readability": 0.0925,
           "readable": false,
           "script": "typewriter",
           "low_confidence_spans": [],
@@ -873,21 +873,6 @@
       ],
       "unreadable": [
         {
-          "region_id": "suspension_notice_2019:u5",
-          "doc_id": "suspension_notice_2019",
-          "page": 1,
-          "line_no": 5,
-          "bbox": {
-            "x0": 40.0,
-            "y0": 280.0,
-            "x1": 414.0,
-            "y1": 324.0
-          },
-          "readability": 0.2024,
-          "reason": "판독 신뢰도 0.20 < 기준 0.65",
-          "ocr_guess": "결정일자 2019. 6. 1▒."
-        },
-        {
           "region_id": "suspension_notice_2019:u7",
           "doc_id": "suspension_notice_2019",
           "page": 1,
@@ -898,9 +883,9 @@
             "x1": 568.0,
             "y1": 444.0
           },
-          "readability": 0.1996,
-          "reason": "판독 신뢰도 0.20 < 기준 0.65",
-          "ocr_guess": "이유 피의자를 특정할 수 ▒▒ 수사를 중지함"
+          "readability": 0.0925,
+          "reason": "판독 신뢰도 0.09 < 기준 0.65",
+          "ocr_guess": "이유 피의자를 특정할 수 ▒▒ 수사를 중▒함"
         }
       ]
     },
@@ -1111,31 +1096,6 @@
     }
   ],
   "clarifications": [
-    {
-      "request_id": "suspension_notice_2019:u5:q",
-      "kind": "unreadable_text",
-      "question": "이 부분이 잘 읽히지 않습니다. 사진 속 글자를 보이는 대로 적어주시겠어요?",
-      "doc_id": "suspension_notice_2019",
-      "page": 1,
-      "line_no": 5,
-      "bbox": {
-        "x0": 40.0,
-        "y0": 280.0,
-        "x1": 414.0,
-        "y1": 324.0
-      },
-      "options": [
-        "읽을 수 없어요",
-        "중요하지 않은 부분이에요"
-      ],
-      "context": [
-        "죄명 약취유인",
-        "결정내용 수사중지(피의자중지)"
-      ],
-      "priority": 20,
-      "status": "pending",
-      "answer": null
-    },
     {
       "request_id": "suspension_notice_2019:u7:q",
       "kind": "unreadable_text",
@@ -1760,33 +1720,6 @@
         "action": {
           "source_doc_id": "news_2018",
           "page": 1,
-          "source_line": 1,
-          "source_line_end": null,
-          "source_bbox": {
-            "x0": 40.0,
-            "y0": 40.0,
-            "x1": 568.0,
-            "y1": 84.0
-          },
-          "char_start": 0,
-          "char_end": 24,
-          "quote": "○○시 20대 여성 실종 석 달째 행방 묘연",
-          "value": "○○시 20대 여성 실종 석 달째 행방 묘연",
-          "confidence": 0.7472
-        },
-        "time": null,
-        "amount": null,
-        "participant_mention_ids": [],
-        "evidence_level": "statement",
-        "action_kind": "disappearance"
-      },
-      {
-        "event_id": "news_2018:e3",
-        "doc_id": "news_2018",
-        "stage": "occurrence",
-        "action": {
-          "source_doc_id": "news_2018",
-          "page": 1,
           "source_line": 3,
           "source_line_end": null,
           "source_bbox": {
@@ -1836,7 +1769,7 @@
         "action_kind": "sighting"
       },
       {
-        "event_id": "suspension_notice_2019:e8",
+        "event_id": "suspension_notice_2019:e9",
         "doc_id": "suspension_notice_2019",
         "stage": "outcome",
         "action": {
@@ -1856,7 +1789,35 @@
           "value": "수사결과 통지서",
           "confidence": 0.8873
         },
-        "time": null,
+        "time": {
+          "source_doc_id": "suspension_notice_2019",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 414.0,
+            "y1": 324.0
+          },
+          "char_start": 5,
+          "char_end": 17,
+          "quote": "2019. 6. 17.",
+          "value": {
+            "raw": "2019. 6. 17.",
+            "start": "2019-06-17T00:00:00",
+            "end": "2019-06-18T00:00:00",
+            "granularity": "day",
+            "kind": "absolute",
+            "approximate": false,
+            "anchor": null,
+            "anchor_source": null,
+            "candidates": [],
+            "needs_confirmation": false,
+            "note": null
+          },
+          "confidence": 0.8873
+        },
         "amount": null,
         "participant_mention_ids": [
           "suspension_notice_2019:m1",
@@ -2332,38 +2293,6 @@
       {
         "claim_id": "news_2018:c2",
         "doc_id": "news_2018",
-        "speaker": "보도",
-        "speaker_basis": "document_author",
-        "speaker_mention_id": null,
-        "content": {
-          "source_doc_id": "news_2018",
-          "page": 1,
-          "source_line": 1,
-          "source_line_end": null,
-          "source_bbox": {
-            "x0": 40.0,
-            "y0": 40.0,
-            "x1": 568.0,
-            "y1": 84.0
-          },
-          "char_start": 0,
-          "char_end": 24,
-          "quote": "○○시 20대 여성 실종 석 달째 행방 묘연",
-          "value": "○○시 20대 여성 실종 석 달째 행방 묘연",
-          "confidence": 0.7939
-        },
-        "slot": null,
-        "slot_value": null,
-        "slot_time": null,
-        "value_is_speaker_self": false,
-        "subject": null,
-        "polarity": "affirm",
-        "said_at": null,
-        "evidence_level": "statement"
-      },
-      {
-        "claim_id": "news_2018:c4",
-        "doc_id": "news_2018",
         "speaker": "경찰",
         "speaker_basis": "reported_speech",
         "speaker_mention_id": null,
@@ -2406,7 +2335,7 @@
         "evidence_level": "statement"
       },
       {
-        "claim_id": "news_2018:c5",
+        "claim_id": "news_2018:c3",
         "doc_id": "news_2018",
         "speaker": "경찰",
         "speaker_basis": "reported_speech",
@@ -2522,6 +2451,50 @@
         "content": {
           "source_doc_id": "suspension_notice_2019",
           "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 414.0,
+            "y1": 324.0
+          },
+          "char_start": 0,
+          "char_end": 17,
+          "quote": "결정일자 2019. 6. 17.",
+          "value": "결정일자 2019. 6. 17.",
+          "confidence": 0.8406
+        },
+        "slot": "decision_time",
+        "slot_value": "2019-06-17",
+        "slot_time": {
+          "raw": "2019. 6. 17.",
+          "start": "2019-06-17T00:00:00",
+          "end": "2019-06-18T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "value_is_speaker_self": false,
+        "subject": "수사중지",
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "suspension_notice_2019:c7",
+        "doc_id": "suspension_notice_2019",
+        "speaker": "**경찰서",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "suspension_notice_2019:m3",
+        "content": {
+          "source_doc_id": "suspension_notice_2019",
+          "page": 1,
           "source_line": 6,
           "source_line_end": null,
           "source_bbox": {
@@ -2546,7 +2519,7 @@
         "evidence_level": "record"
       },
       {
-        "claim_id": "suspension_notice_2019:c7",
+        "claim_id": "suspension_notice_2019:c8",
         "doc_id": "suspension_notice_2019",
         "speaker": "**경찰서",
         "speaker_basis": "document_issuer",
@@ -3050,6 +3023,35 @@
         "confidence": 0.6748
       },
       {
+        "source_doc_id": "suspension_notice_2019",
+        "page": 1,
+        "source_line": 5,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 280.0,
+          "x1": 414.0,
+          "y1": 324.0
+        },
+        "char_start": 5,
+        "char_end": 17,
+        "quote": "2019. 6. 17.",
+        "value": {
+          "raw": "2019. 6. 17.",
+          "start": "2019-06-17T00:00:00",
+          "end": "2019-06-18T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8873
+      },
+      {
         "source_doc_id": "tip_statement_2025",
         "page": 1,
         "source_line": 3,
@@ -3302,6 +3304,35 @@
         },
         "confidence": 0.8873
       },
+      "suspension_notice_2019": {
+        "source_doc_id": "suspension_notice_2019",
+        "page": 1,
+        "source_line": 5,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 280.0,
+          "x1": 414.0,
+          "y1": 324.0
+        },
+        "char_start": 5,
+        "char_end": 17,
+        "quote": "2019. 6. 17.",
+        "value": {
+          "raw": "2019. 6. 17.",
+          "start": "2019-06-17T00:00:00",
+          "end": "2019-06-18T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8873
+      },
       "tip_statement_2025": {
         "source_doc_id": "tip_statement_2025",
         "page": 1,
@@ -3358,7 +3389,7 @@
         "amount": null,
         "participant_entity_ids": [],
         "event_ids": [
-          "news_2018:e3"
+          "news_2018:e1"
         ],
         "sources": [
           {
@@ -3618,7 +3649,7 @@
         ]
       },
       {
-        "timeline_event_id": "tl10",
+        "timeline_event_id": "tl9",
         "stage": "occurrence",
         "title": "2019년 통지서를 받은 뒤로 경찰에서 연락 온 적이 없습니다.",
         "time": {
@@ -3658,6 +3689,69 @@
           "user_input",
           "stage_guessed"
         ]
+      },
+      {
+        "timeline_event_id": "tl2",
+        "stage": "outcome",
+        "title": "수사결과 통지서",
+        "time": {
+          "raw": "2019. 6. 17.",
+          "start": "2019-06-17T00:00:00",
+          "end": "2019-06-18T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "time_unknown": false,
+        "amount": null,
+        "participant_entity_ids": [
+          "ent4",
+          "ent7",
+          "ent8"
+        ],
+        "event_ids": [
+          "suspension_notice_2019:e9"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "suspension_notice_2019",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 216.0,
+              "y1": 84.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": "수사결과 통지서"
+          },
+          {
+            "source_doc_id": "suspension_notice_2019",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 414.0,
+              "y1": 324.0
+            },
+            "char_start": 5,
+            "char_end": 17,
+            "quote": "2019. 6. 17."
+          }
+        ],
+        "evidence_level": "record",
+        "needs_confirmation": false,
+        "flags": []
       },
       {
         "timeline_event_id": "tl5",
@@ -3721,7 +3815,7 @@
         ]
       },
       {
-        "timeline_event_id": "tl9",
+        "timeline_event_id": "tl8",
         "stage": "occurrence",
         "title": "2025년 9월 목격 제보를 전화로 알렸지만 담당자가 바뀌었다고만 들었…",
         "time": {
@@ -3760,76 +3854,6 @@
         "flags": [
           "user_input"
         ]
-      },
-      {
-        "timeline_event_id": "tl8",
-        "stage": "occurrence",
-        "title": "○○시 20대 여성 실종 석 달째 행방 묘연",
-        "time": null,
-        "time_unknown": true,
-        "amount": null,
-        "participant_entity_ids": [],
-        "event_ids": [
-          "news_2018:e1"
-        ],
-        "sources": [
-          {
-            "source_doc_id": "news_2018",
-            "page": 1,
-            "source_line": 1,
-            "source_line_end": null,
-            "source_bbox": {
-              "x0": 40.0,
-              "y0": 40.0,
-              "x1": 568.0,
-              "y1": 84.0
-            },
-            "char_start": 0,
-            "char_end": 24,
-            "quote": "○○시 20대 여성 실종 석 달째 행방 묘연"
-          }
-        ],
-        "evidence_level": "statement",
-        "needs_confirmation": true,
-        "flags": [
-          "claim_only"
-        ]
-      },
-      {
-        "timeline_event_id": "tl2",
-        "stage": "outcome",
-        "title": "수사결과 통지서",
-        "time": null,
-        "time_unknown": true,
-        "amount": null,
-        "participant_entity_ids": [
-          "ent4",
-          "ent7",
-          "ent8"
-        ],
-        "event_ids": [
-          "suspension_notice_2019:e8"
-        ],
-        "sources": [
-          {
-            "source_doc_id": "suspension_notice_2019",
-            "page": 1,
-            "source_line": 1,
-            "source_line_end": null,
-            "source_bbox": {
-              "x0": 40.0,
-              "y0": 40.0,
-              "x1": 216.0,
-              "y1": 84.0
-            },
-            "char_start": null,
-            "char_end": null,
-            "quote": "수사결과 통지서"
-          }
-        ],
-        "evidence_level": "record",
-        "needs_confirmation": true,
-        "flags": []
       }
     ],
     "stages": [
@@ -3840,8 +3864,7 @@
         "timeline_event_ids": [
           "tl4",
           "tl3",
-          "tl5",
-          "tl8"
+          "tl5"
         ],
         "evidence_level": "statement",
         "noted_only": false
@@ -3891,9 +3914,16 @@
     "gaps": [
       {
         "start": "2018-02-05T08:31:00",
-        "end": "2025-08-14T12:00:00",
-        "hours": 65931.5,
+        "end": "2019-06-17T00:00:00",
+        "hours": 11919.5,
         "before_event_id": "doc:news_2018",
+        "after_event_id": "tl2"
+      },
+      {
+        "start": "2019-06-18T00:00:00",
+        "end": "2025-08-14T12:00:00",
+        "hours": 53988.0,
+        "before_event_id": "tl2",
         "after_event_id": "tl5"
       }
     ],
@@ -4314,95 +4344,10 @@
         "issue_id": "iss1",
         "category": "unreadable",
         "condition": "unreadable",
-        "message": "결정 일자: 올린 자료에서 찾지 못했고, 해당 내용이 있을 수 있는 부분이 읽히지 않았습니다",
-        "stage": "outcome",
-        "slot": "decision_time",
-        "sources": [
-          {
-            "source_doc_id": "suspension_notice_2019",
-            "page": 1,
-            "source_line": 5,
-            "source_line_end": null,
-            "source_bbox": {
-              "x0": 40.0,
-              "y0": 280.0,
-              "x1": 414.0,
-              "y1": 324.0
-            },
-            "char_start": null,
-            "char_end": null,
-            "quote": null
-          }
-        ],
-        "checked_doc_ids": [
-          "missing_report_2017",
-          "witness_station_2017",
-          "witness_market_2017",
-          "family_statement_2017",
-          "news_2018",
-          "suspension_notice_2019",
-          "tip_statement_2025",
-          "note_no_contact",
-          "note_tip"
-        ],
-        "related_claim_ids": [],
-        "related_event_ids": [],
-        "related_entity_ids": [],
-        "clarification_request_ids": [
-          "suspension_notice_2019:u5:q"
-        ],
-        "decision": null,
-        "trigger": {
-          "key": "missing_person_suspended/outcome/decision_time/unreadable",
-          "case_type": "missing_person_suspended",
-          "condition": "unreadable",
-          "stage": "outcome",
-          "slot": "decision_time",
-          "since": null,
-          "elapsed_days": null,
-          "evidence": [
-            {
-              "source_doc_id": "suspension_notice_2019",
-              "page": 1,
-              "source_line": 5,
-              "source_line_end": null,
-              "source_bbox": {
-                "x0": 40.0,
-                "y0": 280.0,
-                "x1": 414.0,
-                "y1": 324.0
-              },
-              "char_start": null,
-              "char_end": null,
-              "quote": null
-            }
-          ]
-        },
-        "priority": 20
-      },
-      {
-        "issue_id": "iss2",
-        "category": "unreadable",
-        "condition": "unreadable",
-        "message": "수사중지_통지서_2019.jpg에서 읽히지 않은 부분이 2곳 있습니다 (5, 7줄). 사진을 보고 알려주세요",
+        "message": "수사중지_통지서_2019.jpg에서 읽히지 않은 부분이 1곳 있습니다 (7줄). 사진을 보고 알려주세요",
         "stage": null,
         "slot": null,
         "sources": [
-          {
-            "source_doc_id": "suspension_notice_2019",
-            "page": 1,
-            "source_line": 5,
-            "source_line_end": null,
-            "source_bbox": {
-              "x0": 40.0,
-              "y0": 280.0,
-              "x1": 414.0,
-              "y1": 324.0
-            },
-            "char_start": null,
-            "char_end": null,
-            "quote": null
-          },
           {
             "source_doc_id": "suspension_notice_2019",
             "page": 1,
@@ -4424,7 +4369,6 @@
         "related_event_ids": [],
         "related_entity_ids": [],
         "clarification_request_ids": [
-          "suspension_notice_2019:u5:q",
           "suspension_notice_2019:u7:q"
         ],
         "decision": null,
@@ -4437,21 +4381,6 @@
           "since": null,
           "elapsed_days": null,
           "evidence": [
-            {
-              "source_doc_id": "suspension_notice_2019",
-              "page": 1,
-              "source_line": 5,
-              "source_line_end": null,
-              "source_bbox": {
-                "x0": 40.0,
-                "y0": 280.0,
-                "x1": 414.0,
-                "y1": 324.0
-              },
-              "char_start": null,
-              "char_end": null,
-              "quote": null
-            },
             {
               "source_doc_id": "suspension_notice_2019",
               "page": 1,
@@ -4472,10 +4401,10 @@
         "priority": 20
       },
       {
-        "issue_id": "iss3",
+        "issue_id": "iss2",
         "category": "unverified",
         "condition": "unrecorded_fact",
-        "message": "‘본인은 2017. 11. 2. 22시경 ○○시 중앙시장 앞에서 정하윤을…’ — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다. 수사 기록에 반영됐는지 확인이 필요합니다",
+        "message": "‘본인은 2017. 11. 2. 22시경 ○○시 중앙시장 앞에서 정하윤을…’ — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다. ‘수사결과 통지서’(2019-06-17)보다 앞선 내용입니다. 수사 기록에 반영됐는지 확인이 필요합니다",
         "stage": "occurrence",
         "slot": null,
         "sources": [
@@ -4572,10 +4501,10 @@
         "priority": 25
       },
       {
-        "issue_id": "iss4",
+        "issue_id": "iss3",
         "category": "unverified",
         "condition": "unrecorded_fact",
-        "message": "‘2019년 통지서를 받은 뒤로 경찰에서 연락 온 적이 없습니다.’ — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다. 수사 기록에 반영됐는지 확인이 필요합니다",
+        "message": "‘2019년 통지서를 받은 뒤로 경찰에서 연락 온 적이 없습니다.’ — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다. ‘수사결과 통지서’(2019-06-17) 이후에 나온 내용입니다. 수사 기록에 반영됐는지 확인이 필요합니다",
         "stage": "occurrence",
         "slot": null,
         "sources": [
@@ -4603,7 +4532,7 @@
         ],
         "related_claim_ids": [],
         "related_event_ids": [
-          "tl10"
+          "tl9"
         ],
         "related_entity_ids": [],
         "clarification_request_ids": [],
@@ -4632,10 +4561,10 @@
         "priority": 25
       },
       {
-        "issue_id": "iss5",
+        "issue_id": "iss4",
         "category": "unverified",
         "condition": "unrecorded_fact",
-        "message": "‘본인은 2025. 8. 14. 오후 ○○시 버스터미널 대합실에서 정하윤…’ — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다. 수사 기록에 반영됐는지 확인이 필요합니다",
+        "message": "‘본인은 2025. 8. 14. 오후 ○○시 버스터미널 대합실에서 정하윤…’ — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다. ‘수사결과 통지서’(2019-06-17) 이후에 나온 내용입니다. 수사 기록에 반영됐는지 확인이 필요합니다",
         "stage": "occurrence",
         "slot": null,
         "sources": [
@@ -4732,10 +4661,10 @@
         "priority": 25
       },
       {
-        "issue_id": "iss6",
+        "issue_id": "iss5",
         "category": "unverified",
         "condition": "unrecorded_fact",
-        "message": "‘2025년 9월 목격 제보를 전화로 알렸지만 담당자가 바뀌었다고만 들었…’ — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다. 수사 기록에 반영됐는지 확인이 필요합니다",
+        "message": "‘2025년 9월 목격 제보를 전화로 알렸지만 담당자가 바뀌었다고만 들었…’ — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다. ‘수사결과 통지서’(2019-06-17) 이후에 나온 내용입니다. 수사 기록에 반영됐는지 확인이 필요합니다",
         "stage": "occurrence",
         "slot": null,
         "sources": [
@@ -4763,7 +4692,7 @@
         ],
         "related_claim_ids": [],
         "related_event_ids": [
-          "tl9"
+          "tl8"
         ],
         "related_entity_ids": [],
         "clarification_request_ids": [],
@@ -4792,10 +4721,10 @@
         "priority": 25
       },
       {
-        "issue_id": "iss7",
+        "issue_id": "iss6",
         "category": "unverified",
         "condition": "possibly_outdated",
-        "message": "담당 수사관: 기록상 ‘한상우’(suspension_notice_2019 · 8줄)이지만, 이후 바뀌었다는 내용이 있습니다 — ‘2025년 9월 목격 제보를 전화로 알렸지만 담당자가 바뀌었다고만 들었습니다.’(note_tip · 1줄, 2025-09). 현재 담당 수사관 확인이 필요합니다",
+        "message": "담당 수사관: 기록상 ‘한상우’(suspension_notice_2019 · 8줄, 2019-06-17)이지만, 이후 바뀌었다는 내용이 있습니다 — ‘2025년 9월 목격 제보를 전화로 알렸지만 담당자가 바뀌었다고만 들었습니다.’(note_tip · 1줄, 2025-09). 현재 담당 수사관 확인이 필요합니다",
         "stage": "investigation",
         "slot": "investigator",
         "sources": [
@@ -4827,7 +4756,7 @@
         ],
         "checked_doc_ids": [],
         "related_claim_ids": [
-          "suspension_notice_2019:c7",
+          "suspension_notice_2019:c8",
           "note_tip:c2"
         ],
         "related_event_ids": [],
@@ -4873,6 +4802,76 @@
         "priority": 30
       },
       {
+        "issue_id": "iss7",
+        "category": "missing",
+        "condition": "stage_stalled",
+        "message": "‘수사결과 통지서’(2019-06-17) 이후 기관의 진행 기록이 없습니다 (2651일 경과)",
+        "stage": "outcome",
+        "slot": null,
+        "sources": [
+          {
+            "source_doc_id": "suspension_notice_2019",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 216.0,
+              "y1": 84.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": "수사결과 통지서"
+          }
+        ],
+        "checked_doc_ids": [
+          "missing_report_2017",
+          "witness_station_2017",
+          "witness_market_2017",
+          "family_statement_2017",
+          "news_2018",
+          "suspension_notice_2019",
+          "tip_statement_2025",
+          "note_no_contact",
+          "note_tip"
+        ],
+        "related_claim_ids": [],
+        "related_event_ids": [
+          "tl2"
+        ],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": null,
+        "trigger": {
+          "key": "missing_person_suspended/outcome/stage/stage_stalled",
+          "case_type": "missing_person_suspended",
+          "condition": "stage_stalled",
+          "stage": "outcome",
+          "slot": null,
+          "since": "2019-06-17T00:00:00",
+          "elapsed_days": 2651,
+          "evidence": [
+            {
+              "source_doc_id": "suspension_notice_2019",
+              "page": 1,
+              "source_line": 1,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 40.0,
+                "x1": 216.0,
+                "y1": 84.0
+              },
+              "char_start": null,
+              "char_end": null,
+              "quote": "수사결과 통지서"
+            }
+          ]
+        },
+        "priority": 35
+      },
+      {
         "issue_id": "iss8",
         "category": "unverified",
         "condition": "suspected_conflict",
@@ -4914,7 +4913,7 @@
         "checked_doc_ids": [],
         "related_claim_ids": [
           "missing_report_2017:c7",
-          "news_2018:c4"
+          "news_2018:c2"
         ],
         "related_event_ids": [],
         "related_entity_ids": [],
@@ -4922,7 +4921,7 @@
         "decision": {
           "pair_id": "pair1",
           "claim_a_id": "missing_report_2017:c7",
-          "claim_b_id": "news_2018:c4",
+          "claim_b_id": "news_2018:c2",
           "slot": "last_seen_time",
           "scores": {
             "entailment": 0.0121,
@@ -4986,7 +4985,7 @@
         "issue_id": "iss9",
         "category": "missing",
         "condition": "time_gap",
-        "message": "2018-02-05 ~ 2025-08-14 사이의 기록이 없습니다 (약 7.5년)",
+        "message": "2018-02-05 ~ 2019-06-17 사이의 기록이 없습니다 (약 1.4년)",
         "stage": null,
         "slot": null,
         "sources": [
@@ -5004,6 +5003,106 @@
             "char_start": 3,
             "char_end": 19,
             "quote": "2018.02.05 08:30"
+          },
+          {
+            "source_doc_id": "suspension_notice_2019",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 216.0,
+              "y1": 84.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": "수사결과 통지서"
+          }
+        ],
+        "checked_doc_ids": [
+          "missing_report_2017",
+          "witness_station_2017",
+          "witness_market_2017",
+          "family_statement_2017",
+          "news_2018",
+          "suspension_notice_2019",
+          "tip_statement_2025",
+          "note_no_contact",
+          "note_tip"
+        ],
+        "related_claim_ids": [],
+        "related_event_ids": [
+          "tl2"
+        ],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": null,
+        "trigger": {
+          "key": "missing_person_suspended/-/timeline/time_gap",
+          "case_type": "missing_person_suspended",
+          "condition": "time_gap",
+          "stage": null,
+          "slot": null,
+          "since": null,
+          "elapsed_days": null,
+          "evidence": [
+            {
+              "source_doc_id": "news_2018",
+              "page": 1,
+              "source_line": 2,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 100.0,
+                "x1": 634.0,
+                "y1": 144.0
+              },
+              "char_start": 3,
+              "char_end": 19,
+              "quote": "2018.02.05 08:30"
+            },
+            {
+              "source_doc_id": "suspension_notice_2019",
+              "page": 1,
+              "source_line": 1,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 40.0,
+                "x1": 216.0,
+                "y1": 84.0
+              },
+              "char_start": null,
+              "char_end": null,
+              "quote": "수사결과 통지서"
+            }
+          ]
+        },
+        "priority": 70
+      },
+      {
+        "issue_id": "iss10",
+        "category": "missing",
+        "condition": "time_gap",
+        "message": "2019-06-18 ~ 2025-08-14 사이의 기록이 없습니다 (약 6.2년)",
+        "stage": null,
+        "slot": null,
+        "sources": [
+          {
+            "source_doc_id": "suspension_notice_2019",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 216.0,
+              "y1": 84.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": "수사결과 통지서"
           },
           {
             "source_doc_id": "tip_statement_2025",
@@ -5034,6 +5133,7 @@
         ],
         "related_claim_ids": [],
         "related_event_ids": [
+          "tl2",
           "tl5"
         ],
         "related_entity_ids": [],
@@ -5049,19 +5149,19 @@
           "elapsed_days": null,
           "evidence": [
             {
-              "source_doc_id": "news_2018",
+              "source_doc_id": "suspension_notice_2019",
               "page": 1,
-              "source_line": 2,
+              "source_line": 1,
               "source_line_end": null,
               "source_bbox": {
                 "x0": 40.0,
-                "y0": 100.0,
-                "x1": 634.0,
-                "y1": 144.0
+                "y0": 40.0,
+                "x1": 216.0,
+                "y1": 84.0
               },
-              "char_start": 3,
-              "char_end": 19,
-              "quote": "2018.02.05 08:30"
+              "char_start": null,
+              "char_end": null,
+              "quote": "수사결과 통지서"
             },
             {
               "source_doc_id": "tip_statement_2025",
@@ -5242,7 +5342,7 @@
         "state": "outdated",
         "value": "한상우",
         "claim_ids": [
-          "suspension_notice_2019:c7",
+          "suspension_notice_2019:c8",
           "note_tip:c2"
         ],
         "sources": [
@@ -5281,7 +5381,7 @@
         "state": "confirmed",
         "value": "수사중지(피의자중지)",
         "claim_ids": [
-          "suspension_notice_2019:c6"
+          "suspension_notice_2019:c7"
         ],
         "sources": [
           {
@@ -5306,9 +5406,11 @@
         "label": "결정 일자",
         "stage": "outcome",
         "required": true,
-        "state": "unreadable",
-        "value": null,
-        "claim_ids": [],
+        "state": "confirmed",
+        "value": "2019-06-17",
+        "claim_ids": [
+          "suspension_notice_2019:c6"
+        ],
         "sources": [
           {
             "source_doc_id": "suspension_notice_2019",
@@ -5321,9 +5423,9 @@
               "x1": 414.0,
               "y1": 324.0
             },
-            "char_start": null,
-            "char_end": null,
-            "quote": null
+            "char_start": 0,
+            "char_end": 17,
+            "quote": "결정일자 2019. 6. 17."
           }
         ]
       }
@@ -5332,7 +5434,7 @@
       {
         "pair_id": "pair1",
         "claim_a_id": "missing_report_2017:c7",
-        "claim_b_id": "news_2018:c4",
+        "claim_b_id": "news_2018:c2",
         "slot": "last_seen_time",
         "scores": {
           "entailment": 0.0121,
@@ -5352,32 +5454,6 @@
     ],
     "action_triggers": [
       {
-        "key": "missing_person_suspended/outcome/decision_time/unreadable",
-        "case_type": "missing_person_suspended",
-        "condition": "unreadable",
-        "stage": "outcome",
-        "slot": "decision_time",
-        "since": null,
-        "elapsed_days": null,
-        "evidence": [
-          {
-            "source_doc_id": "suspension_notice_2019",
-            "page": 1,
-            "source_line": 5,
-            "source_line_end": null,
-            "source_bbox": {
-              "x0": 40.0,
-              "y0": 280.0,
-              "x1": 414.0,
-              "y1": 324.0
-            },
-            "char_start": null,
-            "char_end": null,
-            "quote": null
-          }
-        ]
-      },
-      {
         "key": "missing_person_suspended/-/document:notice/unreadable",
         "case_type": "missing_person_suspended",
         "condition": "unreadable",
@@ -5386,21 +5462,6 @@
         "since": null,
         "elapsed_days": null,
         "evidence": [
-          {
-            "source_doc_id": "suspension_notice_2019",
-            "page": 1,
-            "source_line": 5,
-            "source_line_end": null,
-            "source_bbox": {
-              "x0": 40.0,
-              "y0": 280.0,
-              "x1": 414.0,
-              "y1": 324.0
-            },
-            "char_start": null,
-            "char_end": null,
-            "quote": null
-          },
           {
             "source_doc_id": "suspension_notice_2019",
             "page": 1,
@@ -5496,6 +5557,32 @@
         ]
       },
       {
+        "key": "missing_person_suspended/outcome/stage/stage_stalled",
+        "case_type": "missing_person_suspended",
+        "condition": "stage_stalled",
+        "stage": "outcome",
+        "slot": null,
+        "since": "2019-06-17T00:00:00",
+        "elapsed_days": 2651,
+        "evidence": [
+          {
+            "source_doc_id": "suspension_notice_2019",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 216.0,
+              "y1": 84.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": "수사결과 통지서"
+          }
+        ]
+      },
+      {
         "key": "missing_person_suspended/occurrence/last_seen_time/suspected_conflict",
         "case_type": "missing_person_suspended",
         "condition": "suspected_conflict",
@@ -5561,19 +5648,19 @@
             "quote": "2018.02.05 08:30"
           },
           {
-            "source_doc_id": "tip_statement_2025",
+            "source_doc_id": "suspension_notice_2019",
             "page": 1,
-            "source_line": 3,
+            "source_line": 1,
             "source_line_end": null,
             "source_bbox": {
               "x0": 40.0,
-              "y0": 160.0,
-              "x1": 1316.0,
-              "y1": 204.0
+              "y0": 40.0,
+              "x1": 216.0,
+              "y1": 84.0
             },
-            "char_start": 0,
-            "char_end": 58,
-            "quote": "본인은 2025. 8. 14. 오후 ○○시 버스터미널 대합실에서 정하윤으로 보이는 여성을 목격하였습니다."
+            "char_start": null,
+            "char_end": null,
+            "quote": "수사결과 통지서"
           }
         ]
       }
@@ -5590,8 +5677,7 @@
           "timeline_event_ids": [
             "tl4",
             "tl3",
-            "tl5",
-            "tl8"
+            "tl5"
           ],
           "evidence_level": "statement",
           "noted_only": false
@@ -5639,28 +5725,28 @@
       ],
       "current_stage": "outcome",
       "evidence_doc_count": 7,
-      "needs_confirmation_count": 9,
-      "slots_done": 4,
+      "needs_confirmation_count": 10,
+      "slots_done": 5,
       "slots_total": 6,
       "next_trigger": {
-        "key": "missing_person_suspended/outcome/decision_time/unreadable",
+        "key": "missing_person_suspended/-/document:notice/unreadable",
         "case_type": "missing_person_suspended",
         "condition": "unreadable",
-        "stage": "outcome",
-        "slot": "decision_time",
+        "stage": null,
+        "slot": null,
         "since": null,
         "elapsed_days": null,
         "evidence": [
           {
             "source_doc_id": "suspension_notice_2019",
             "page": 1,
-            "source_line": 5,
+            "source_line": 7,
             "source_line_end": null,
             "source_bbox": {
               "x0": 40.0,
-              "y0": 280.0,
-              "x1": 414.0,
-              "y1": 324.0
+              "y0": 400.0,
+              "x1": 568.0,
+              "y1": 444.0
             },
             "char_start": null,
             "char_end": null,

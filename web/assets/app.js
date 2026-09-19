@@ -1656,7 +1656,7 @@
         h("span", { class: "issue-group__count", text: String(g.items.length) }),
       ]));
       g.items.forEach(function (it) {
-        list.appendChild(h("div", { class: "issue issue--" + g.severity }, [
+        list.appendChild(h("div", { class: "issue issue--" + g.severity, "data-kind": it.kind || null }, [
           h("p", { class: "issue__text", text: it.text }),
           it.how ? h("p", { class: "issue__how", text: it.how }) : null,
         ]));
@@ -1866,6 +1866,78 @@
     return h("div", { class: "srcbar" + (vertical ? " srcbar--stack" : "") }, [add, open]);
   }
 
+  /* 둘러보기 안내 — 시연 사건 위에 다는 번호 띠. 누르면 그 자리로 옮겨 잠깐 빛낸다.
+   *
+   * 화면을 가리는 단계별 안내 대신 띠를 둔다: 순서를 강요하지 않고, 닫으면 다시 뜨지 않는다.
+   * 어떤 사건에 달지는 화면 데이터의 guide 로 정한다(export_web.py · 사이트에-올릴-사건.json).
+   */
+  var GUIDE_KEY = "tarae.guide.closed.v1";
+
+  var GUIDE_STEPS = [
+    { title: "기록이 빈 기간", text: "수사중지 뒤 몇 년씩 아무 기록이 없는 구간을 짚어요",
+      find: function () { var gaps = document.querySelectorAll(".tl__gap"); return gaps[gaps.length - 1]; } },
+    { title: "자료끼리 어긋난 곳", text: "같은 날을 자료마다 다르게 적은 곳을 찾아요", issues: true,
+      find: function () {
+        return document.querySelector('.issue[data-kind="conflicting"], .issue[data-kind="suspected_conflict"]')
+          || document.querySelector(".issue");
+      } },
+    { title: "지금 할 일 하나", text: "놓치면 안 되는 것부터 골라 이유와 함께 보여 줘요",
+      find: function () { return document.querySelector(".next-action"); } },
+    { title: "서류 초안", text: "자료에 적힌 것만 모아 낼 서류의 초안을 만들어요",
+      find: function () { return document.querySelector(".na__draft"); } },
+  ];
+
+  function guideClosed() {
+    try { return localStorage.getItem(GUIDE_KEY) === "1"; } catch (e) { return false; }
+  }
+
+  function guideBand(showTimeline) {
+    if (guideClosed()) return null;
+
+    function spot(step) {
+      showTimeline();
+      if (step.issues) {
+        var toggle = document.querySelector(".issues__toggle");
+        if (toggle && toggle.getAttribute("aria-expanded") !== "true") toggle.click();
+      }
+      var target = step.find();
+      if (!target) return;
+      var still = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      target.scrollIntoView({ behavior: still ? "auto" : "smooth", block: "center" });
+      target.classList.remove("guide-spot");
+      void target.offsetWidth;
+      target.classList.add("guide-spot");
+      setTimeout(function () { target.classList.remove("guide-spot"); }, 2600);
+    }
+
+    var close = h("button", { type: "button", class: "guide__close", "aria-label": "안내 닫기", text: "✕" });
+    var band = h("section", { class: "guide", "aria-label": "둘러보기 안내" }, [
+      h("div", { class: "guide__head" }, [
+        h("p", { class: "guide__lead t-body-m-strong", text: "처음이라면 이 순서로 둘러보세요" }),
+        close,
+      ]),
+      h("ol", { class: "guide__steps" }, GUIDE_STEPS.map(function (step, i) {
+        var button = h("button", { type: "button", class: "guide__step" }, [
+          h("span", { class: "guide__num", "aria-hidden": "true", text: String(i + 1) }),
+          h("span", { class: "guide__body" }, [
+            h("span", { class: "guide__title t-body-m-strong", text: step.title }),
+            h("span", { class: "guide__text t-body-s", text: step.text }),
+          ]),
+        ]);
+        button.addEventListener("click", function () {
+          button.classList.add("guide__step--seen");
+          spot(step);
+        });
+        return h("li", {}, [button]);
+      })),
+    ]);
+    close.addEventListener("click", function () {
+      try { localStorage.setItem(GUIDE_KEY, "1"); } catch (e) { /* 저장이 막히면 이번 화면에서만 닫는다 */ }
+      band.remove();
+    });
+    return band;
+  }
+
   function renderCase(root) {
     var id = new URLSearchParams(location.search).get("id");
     function notFound() {
@@ -1939,12 +2011,18 @@
     }));
     fillSide(0);
 
+    function showTimeline() {
+      var first = tabs.querySelector(".tab");
+      if (first.getAttribute("aria-selected") !== "true") first.click();
+    }
+
     root.appendChild(h("div", { class: "disclaimer" }, [
       icon("info", 18),
       h("p", { class: "t-body-s c-secondary", text: "타래는 범인이나 사건의 진실을 판단하지 않습니다." }),
     ]));
     root.appendChild(h("main", { class: "page page--case" }, [
       backLink(),
+      c.guide ? guideBand(showTimeline) : null,
       // 목록에서 고른 폴더를 펼친 화면 — 탭과 색을 그대로 물려받는다
       h("section", { class: "case-folder folder--tone" + toneOf(c) }, [
         h("span", { class: "case-folder__tab" }, [h("span", { class: "t-label", text: c.type_label })]),

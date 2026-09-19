@@ -101,6 +101,7 @@ SLOT_LABELS = {
     "investigator": "담당 수사관",
     "decision_type": "결정 내용",
     "decision_time": "결정일",
+    "offence": "죄명",
 }
 
 # 항목 상태 — '확인됨'과 '말만 있음'을 섞지 않는다
@@ -112,6 +113,7 @@ SLOT_STATES = {
     "outdated": ("낡았을 수 있음", "unverified"),
     "missing": ("자료에 없음", "unverified"),
     "suspected_conflict": ("차이 의심", "conflict"),
+    "unreadable": ("읽히지 않음", "unverified"),
 }
 
 CIRCLED = "".join(chr(0x2460 + i) for i in range(20))  # ①~⑳
@@ -505,10 +507,33 @@ def _issues(result: dict[str, Any], docs: dict[str, dict]) -> list[dict[str, Any
                 how = f"확인한 자료 {len(issue['checked_doc_ids'])}개에서 찾지 못함"
             else:
                 how = ""
-            items.append({"text": issue["message"], "how": how})
+            items.append({"text": _plain(issue["message"], docs), "how": how, "kind": issue["condition"]})
         if items:
             groups.append({"label": label, "severity": severity, "items": items})
     return groups
+
+
+ASCII_ID = re.compile(r"(?<![A-Za-z0-9_])[A-Za-z][A-Za-z0-9_]*(?![A-Za-z0-9_])")
+
+
+def _drop_score_note(message: str) -> str:
+    """끝에 붙은 엔진 판정 근거 괄호 — "(모순 점수 0.54 < 기준 0.70; … (0.60))" — 를 뗀다. 괄호가 겹칠 수 있다."""
+    text = message.rstrip()
+    if not text.endswith(")"):
+        return message
+    depth = 0
+    for i in range(len(text) - 1, -1, -1):
+        depth += {")": 1, "(": -1}.get(text[i], 0)
+        if depth == 0:
+            return text[:i].rstrip() if "기준 " in text[i:] else message
+    return message
+
+
+def _plain(message: str, docs: dict[str, dict]) -> str:
+    """엔진 문장을 화면 말로 — 점수 괄호를 떼고, 자료 id 는 올린 파일 이름으로 바꾼다."""
+    message = _drop_score_note(message)
+    return ASCII_ID.sub(lambda m: docs[m.group(0)].get("file_name", m.group(0)) if m.group(0) in docs else m.group(0),
+                        message)
 
 
 def _slot_value(value: Any) -> str:
@@ -609,6 +634,7 @@ def _action(card, hit, result: dict[str, Any], prose: bool = True) -> dict[str, 
         return None
     reasons = {i.code: i.reason for i in card.inf}
     why = next((reasons[c] for c in hit.codes if c in reasons), hit.why)
+    why = _plain(why, {d["doc_id"]: d for d in result.get("documents", [])})
 
     deadline = next((t for t in card.tim if t.code in hit.codes and t.due_date), None)
     due = None
@@ -866,10 +892,11 @@ def build_view(case_id: str, title: str, result: dict[str, Any]) -> dict[str, An
     }
 
 
-def _extra() -> list[tuple[str, str, Path, bool]]:
+def _extra() -> list[tuple[str, str, Path, bool, bool]]:
     """직접 만든 사건 목록. 파일이 없으면 빈 목록 — 지금까지와 똑같이 돈다.
 
-    ``"first": true`` 인 사건은 목록 맨 앞에 둔다(시연 때 처음 보이는 사건)."""
+    ``"first": true`` 인 사건은 목록 맨 앞에 둔다(시연 때 처음 보이는 사건).
+    ``"guide": true`` 인 사건은 화면 위에 '둘러보기 안내' 띠를 단다."""
     if not EXTRA_CASES.exists():
         return []
     rows = json.loads(EXTRA_CASES.read_text(encoding="utf-8"))
@@ -880,7 +907,7 @@ def _extra() -> list[tuple[str, str, Path, bool]]:
             path = ROOT / path
         if not path.exists():
             raise SystemExit(f"{EXTRA_CASES.name}: {row['result']} 를 찾지 못했습니다 — 엔진을 먼저 돌리세요")
-        out.append((row["id"], row["title"], path, bool(row.get("first"))))
+        out.append((row["id"], row["title"], path, bool(row.get("first")), bool(row.get("guide"))))
     return out
 
 
@@ -889,8 +916,11 @@ def build_all() -> list[dict[str, Any]]:
     for case_id, title in CASES:
         result = json.loads((FIXTURES / f"{case_id}.json").read_text(encoding="utf-8"))
         views.append(build_view(case_id, title, result))
-    for case_id, title, path, pinned in _extra():
-        (first if pinned else views).append(build_view(case_id, title, json.loads(path.read_text(encoding="utf-8"))))
+    for case_id, title, path, pinned, guide in _extra():
+        view = build_view(case_id, title, json.loads(path.read_text(encoding="utf-8")))
+        if guide:
+            view["guide"] = True
+        (first if pinned else views).append(view)
     return first + views
 
 

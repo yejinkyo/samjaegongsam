@@ -8,7 +8,7 @@ window.TARAE_CASES = [
     "as_of": "2026.09.19",
     "period": "2017.11 – 2025.09",
     "doc_count": 7,
-    "need_count": 9,
+    "need_count": 10,
     "stages": [
       {
         "label": "발생",
@@ -195,8 +195,8 @@ window.TARAE_CASES = [
       {
         "type": "gap",
         "at": "2018-02-05",
-        "range": "2018.02.05 – 2025.08.14",
-        "text": "이 기간의 기록이 없어요 (약 7.5년)"
+        "range": "2018.02.05 – 2019.06.17",
+        "text": "이 기간의 기록이 없어요 (약 1.4년)"
       },
       {
         "type": "event",
@@ -217,6 +217,38 @@ window.TARAE_CASES = [
             "quote": "2019년 통지서를 받은 뒤로 경찰에서 연락 온 적이 없습니다."
           }
         ]
+      },
+      {
+        "type": "event",
+        "at": "2019-06-17",
+        "time": "2019.06.17",
+        "title": "수사결과 통지 — 수사중지(피의자중지)",
+        "full": "수사결과 통지서",
+        "kind": "verified",
+        "badge": "확인됨",
+        "conflict": false,
+        "needs_date": false,
+        "source": "출처 ⑥  수사중지_통지서_2019.jpg · 1줄 외 1곳",
+        "sources": [
+          {
+            "name": "수사중지_통지서_2019.jpg",
+            "doc_id": "suspension_notice_2019",
+            "line": 1,
+            "quote": "수사결과 통지서"
+          },
+          {
+            "name": "수사중지_통지서_2019.jpg",
+            "doc_id": "suspension_notice_2019",
+            "line": 5,
+            "quote": "2019. 6. 17."
+          }
+        ]
+      },
+      {
+        "type": "gap",
+        "at": "2019-06-18",
+        "range": "2019.06.18 – 2025.08.14",
+        "text": "이 기간의 기록이 없어요 (약 6.2년)"
       },
       {
         "type": "event",
@@ -261,46 +293,6 @@ window.TARAE_CASES = [
             "doc_id": "note_tip",
             "line": 1,
             "quote": "2025년 9월 목격 제보를 전화로 알렸지만 담당자가 바뀌었다고만 들었습니다."
-          }
-        ]
-      },
-      {
-        "type": "event",
-        "at": null,
-        "time": "시각 미상",
-        "title": "실종",
-        "full": "○○시 20대 여성 실종 석 달째 행방 묘연",
-        "kind": "claim",
-        "badge": "주장 · 미확인",
-        "conflict": false,
-        "needs_date": false,
-        "source": "출처 ⑤  기사_2018.jpg · 1줄",
-        "sources": [
-          {
-            "name": "기사_2018.jpg",
-            "doc_id": "news_2018",
-            "line": 1,
-            "quote": "○○시 20대 여성 실종 석 달째 행방 묘연"
-          }
-        ]
-      },
-      {
-        "type": "event",
-        "at": null,
-        "time": "시각 미상",
-        "title": "수사결과 통지 — 수사중지(피의자중지)",
-        "full": "수사결과 통지서",
-        "kind": "verified",
-        "badge": "확인됨",
-        "conflict": false,
-        "needs_date": false,
-        "source": "출처 ⑥  수사중지_통지서_2019.jpg · 1줄",
-        "sources": [
-          {
-            "name": "수사중지_통지서_2019.jpg",
-            "doc_id": "suspension_notice_2019",
-            "line": 1,
-            "quote": "수사결과 통지서"
           }
         ]
       }
@@ -465,7 +457,7 @@ window.TARAE_CASES = [
         ]
       },
       {
-        "slot": "offence",
+        "slot": "죄명",
         "value": "약취유인",
         "state": "기록으로 확인",
         "severity": "verified",
@@ -522,10 +514,17 @@ window.TARAE_CASES = [
       },
       {
         "slot": "결정일",
-        "value": null,
-        "state": "unreadable",
-        "severity": "unknown",
-        "said": []
+        "value": "2019-06-17",
+        "state": "기록으로 확인",
+        "severity": "verified",
+        "said": [
+          {
+            "value": "2019-06-17",
+            "doc": "수사중지_통지서_2019.jpg",
+            "speaker": "**경찰서",
+            "record": true
+          }
+        ]
       }
     ],
     "issues": [
@@ -534,28 +533,34 @@ window.TARAE_CASES = [
         "severity": "unknown",
         "items": [
           {
-            "text": "‘본인은 2017. 11. 2. 22시경 ○○시 중앙시장 앞에서 정하윤을…’ — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다. 수사 기록에 반영됐는지 확인이 필요합니다",
-            "how": "근거 · 진술서_시장상인.jpg 3줄"
+            "text": "‘본인은 2017. 11. 2. 22시경 ○○시 중앙시장 앞에서 정하윤을…’ — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다. ‘수사결과 통지서’(2019-06-17)보다 앞선 내용입니다. 수사 기록에 반영됐는지 확인이 필요합니다",
+            "how": "근거 · 진술서_시장상인.jpg 3줄",
+            "kind": "unrecorded_fact"
           },
           {
-            "text": "‘2019년 통지서를 받은 뒤로 경찰에서 연락 온 적이 없습니다.’ — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다. 수사 기록에 반영됐는지 확인이 필요합니다",
-            "how": "근거 · 직접 입력 1줄"
+            "text": "‘2019년 통지서를 받은 뒤로 경찰에서 연락 온 적이 없습니다.’ — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다. ‘수사결과 통지서’(2019-06-17) 이후에 나온 내용입니다. 수사 기록에 반영됐는지 확인이 필요합니다",
+            "how": "근거 · 직접 입력 1줄",
+            "kind": "unrecorded_fact"
           },
           {
-            "text": "‘본인은 2025. 8. 14. 오후 ○○시 버스터미널 대합실에서 정하윤…’ — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다. 수사 기록에 반영됐는지 확인이 필요합니다",
-            "how": "근거 · 진술서_2025.jpg 3줄"
+            "text": "‘본인은 2025. 8. 14. 오후 ○○시 버스터미널 대합실에서 정하윤…’ — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다. ‘수사결과 통지서’(2019-06-17) 이후에 나온 내용입니다. 수사 기록에 반영됐는지 확인이 필요합니다",
+            "how": "근거 · 진술서_2025.jpg 3줄",
+            "kind": "unrecorded_fact"
           },
           {
-            "text": "‘2025년 9월 목격 제보를 전화로 알렸지만 담당자가 바뀌었다고만 들었…’ — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다. 수사 기록에 반영됐는지 확인이 필요합니다",
-            "how": "근거 · 직접 입력 1줄"
+            "text": "‘2025년 9월 목격 제보를 전화로 알렸지만 담당자가 바뀌었다고만 들었…’ — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다. ‘수사결과 통지서’(2019-06-17) 이후에 나온 내용입니다. 수사 기록에 반영됐는지 확인이 필요합니다",
+            "how": "근거 · 직접 입력 1줄",
+            "kind": "unrecorded_fact"
           },
           {
-            "text": "담당 수사관: 기록상 ‘한상우’(suspension_notice_2019 · 8줄)이지만, 이후 바뀌었다는 내용이 있습니다 — ‘2025년 9월 목격 제보를 전화로 알렸지만 담당자가 바뀌었다고만 들었습니다.’(note_tip · 1줄, 2025-09). 현재 담당 수사관 확인이 필요합니다",
-            "how": "근거 · 수사중지_통지서_2019.jpg 8줄"
+            "text": "담당 수사관: 기록상 ‘한상우’(수사중지_통지서_2019.jpg · 8줄, 2019-06-17)이지만, 이후 바뀌었다는 내용이 있습니다 — ‘2025년 9월 목격 제보를 전화로 알렸지만 담당자가 바뀌었다고만 들었습니다.’(직접 입력 · 1줄, 2025-09). 현재 담당 수사관 확인이 필요합니다",
+            "how": "근거 · 수사중지_통지서_2019.jpg 8줄",
+            "kind": "possibly_outdated"
           },
           {
-            "text": "최종 목격 일시: 자료 사이에 차이가 있어 보이지만 판단 근거가 부족합니다 — ‘2017-11-02 21~24시’(missing_report_2017 · 6줄) / ‘2017-11-01 22시~01시’(news_2018 · 3줄) (모순 점수 0.54 < 기준 0.70; 다른 해석과의 차이 0.10 < 기준 0.40; 추출 신뢰도 낮음: news_2018 · 3줄 (0.60))",
-            "how": "근거 · 실종신고_접수증_2017.jpg 6줄"
+            "text": "최종 목격 일시: 자료 사이에 차이가 있어 보이지만 판단 근거가 부족합니다 — ‘2017-11-02 21~24시’(실종신고_접수증_2017.jpg · 6줄) / ‘2017-11-01 22시~01시’(기사_2018.jpg · 3줄)",
+            "how": "근거 · 실종신고_접수증_2017.jpg 6줄",
+            "kind": "suspected_conflict"
           }
         ]
       },
@@ -564,8 +569,19 @@ window.TARAE_CASES = [
         "severity": "gap",
         "items": [
           {
-            "text": "2018-02-05 ~ 2025-08-14 사이의 기록이 없습니다 (약 7.5년)",
-            "how": "근거 · 기사_2018.jpg 2줄"
+            "text": "‘수사결과 통지서’(2019-06-17) 이후 기관의 진행 기록이 없습니다 (2651일 경과)",
+            "how": "근거 · 수사중지_통지서_2019.jpg 1줄",
+            "kind": "stage_stalled"
+          },
+          {
+            "text": "2018-02-05 ~ 2019-06-17 사이의 기록이 없습니다 (약 1.4년)",
+            "how": "근거 · 기사_2018.jpg 2줄",
+            "kind": "time_gap"
+          },
+          {
+            "text": "2019-06-18 ~ 2025-08-14 사이의 기록이 없습니다 (약 6.2년)",
+            "how": "근거 · 수사중지_통지서_2019.jpg 1줄",
+            "kind": "time_gap"
           }
         ]
       },
@@ -574,12 +590,9 @@ window.TARAE_CASES = [
         "severity": "gap",
         "items": [
           {
-            "text": "결정 일자: 올린 자료에서 찾지 못했고, 해당 내용이 있을 수 있는 부분이 읽히지 않았습니다",
-            "how": "근거 · 수사중지_통지서_2019.jpg 5줄"
-          },
-          {
-            "text": "수사중지_통지서_2019.jpg에서 읽히지 않은 부분이 2곳 있습니다 (5, 7줄). 사진을 보고 알려주세요",
-            "how": "근거 · 수사중지_통지서_2019.jpg 5줄"
+            "text": "수사중지_통지서_2019.jpg에서 읽히지 않은 부분이 1곳 있습니다 (7줄). 사진을 보고 알려주세요",
+            "how": "근거 · 수사중지_통지서_2019.jpg 7줄",
+            "kind": "unreadable"
           }
         ]
       }
@@ -588,7 +601,7 @@ window.TARAE_CASES = [
       "rule_no": 6,
       "action": "ACT-신규정보제출",
       "label": "새로 확인된 정보를 수사기관에 제출",
-      "why": "진술서_시장상인.jpg 의 내용이 기록 자료에서 확인되지 않습니다",
+      "why": "진술서_2025.jpg 의 내용이 기록 자료에서 확인되지 않습니다",
       "rule_why": "새 정보는 중지·종결된 절차를 되살릴 수 있다",
       "due": null,
       "state": "filled",
@@ -680,6 +693,11 @@ window.TARAE_CASES = [
             "from": "case_record"
           },
           {
+            "label": "결정일",
+            "value": "2019-06-17",
+            "from": "case_record"
+          },
+          {
             "label": "서식",
             "value": "자료·의견 제출서",
             "from": "knowledge_base"
@@ -699,10 +717,6 @@ window.TARAE_CASES = [
           {
             "label": "담당 수사관",
             "reason": "자료에 '한상우' 로 적혀 있지만 기록으로 확인되지 않았습니다. 확인 후 적어 주세요."
-          },
-          {
-            "label": "결정일",
-            "reason": "자료에서 찾지 못했습니다."
           },
           {
             "label": "신청인 성명",
@@ -753,22 +767,16 @@ window.TARAE_CASES = [
                 "source": "가족_진술서.jpg 6줄"
               },
               {
+                "date": "2019. 6. 17.",
+                "text": "수사결과 통지서",
+                "level": "record",
+                "source": "수사중지_통지서_2019.jpg 1줄"
+              },
+              {
                 "date": "2025. 8. 14.",
                 "text": "본인은 2025. 8. 14. 오후 ○○시 버스터미널 대합실에서 정하윤…",
                 "level": "statement",
                 "source": "진술서_2025.jpg 3줄"
-              },
-              {
-                "date": null,
-                "text": "○○시 20대 여성 실종 석 달째 행방 묘연",
-                "level": "statement",
-                "source": "기사_2018.jpg 1줄"
-              },
-              {
-                "date": null,
-                "text": "수사결과 통지서",
-                "level": "record",
-                "source": "수사중지_통지서_2019.jpg 1줄"
               }
             ]
           },
@@ -786,7 +794,7 @@ window.TARAE_CASES = [
         "rule_no": 6,
         "action": "ACT-신규정보제출",
         "label": "새로 확인된 정보를 수사기관에 제출",
-        "why": "진술서_시장상인.jpg 의 내용이 기록 자료에서 확인되지 않습니다",
+        "why": "진술서_2025.jpg 의 내용이 기록 자료에서 확인되지 않습니다",
         "rule_why": "새 정보는 중지·종결된 절차를 되살릴 수 있다",
         "due": null,
         "state": "filled",
@@ -878,6 +886,11 @@ window.TARAE_CASES = [
               "from": "case_record"
             },
             {
+              "label": "결정일",
+              "value": "2019-06-17",
+              "from": "case_record"
+            },
+            {
               "label": "서식",
               "value": "자료·의견 제출서",
               "from": "knowledge_base"
@@ -897,10 +910,6 @@ window.TARAE_CASES = [
             {
               "label": "담당 수사관",
               "reason": "자료에 '한상우' 로 적혀 있지만 기록으로 확인되지 않았습니다. 확인 후 적어 주세요."
-            },
-            {
-              "label": "결정일",
-              "reason": "자료에서 찾지 못했습니다."
             },
             {
               "label": "신청인 성명",
@@ -951,22 +960,16 @@ window.TARAE_CASES = [
                   "source": "가족_진술서.jpg 6줄"
                 },
                 {
+                  "date": "2019. 6. 17.",
+                  "text": "수사결과 통지서",
+                  "level": "record",
+                  "source": "수사중지_통지서_2019.jpg 1줄"
+                },
+                {
                   "date": "2025. 8. 14.",
                   "text": "본인은 2025. 8. 14. 오후 ○○시 버스터미널 대합실에서 정하윤…",
                   "level": "statement",
                   "source": "진술서_2025.jpg 3줄"
-                },
-                {
-                  "date": null,
-                  "text": "○○시 20대 여성 실종 석 달째 행방 묘연",
-                  "level": "statement",
-                  "source": "기사_2018.jpg 1줄"
-                },
-                {
-                  "date": null,
-                  "text": "수사결과 통지서",
-                  "level": "record",
-                  "source": "수사중지_통지서_2019.jpg 1줄"
                 }
               ]
             },
@@ -983,7 +986,7 @@ window.TARAE_CASES = [
         "rule_no": 7,
         "action": "ACT-모순확인",
         "label": "자료끼리 어긋난 부분 확인 요청",
-        "why": "최종 목격 일시: 자료 사이에 차이가 있어 보이지만 판단 근거가 부족합니다 — ‘2017-11-02 21~24시’(missing_report_2017 · 6줄) / ‘2017-11-01 22시~01시’(news_2018 · 3줄) (모순 점수 0.54 < 기준 0.70; 다른 해석과의 차이 0.10 < 기준 0.40; 추출 신뢰도 낮음: news_2018 · 3줄 (0.60))",
+        "why": "최종 목격 일시: 자료 사이에 차이가 있어 보이지만 판단 근거가 부족합니다 — ‘2017-11-02 21~24시’(실종신고_접수증_2017.jpg · 6줄) / ‘2017-11-01 22시~01시’(기사_2018.jpg · 3줄)",
         "rule_why": "진술 모순은 재수사 사유가 된다",
         "due": null,
         "state": "filled",
@@ -1075,6 +1078,11 @@ window.TARAE_CASES = [
               "from": "case_record"
             },
             {
+              "label": "결정일",
+              "value": "2019-06-17",
+              "from": "case_record"
+            },
+            {
               "label": "서식",
               "value": "자료·의견 제출서",
               "from": "knowledge_base"
@@ -1094,10 +1102,6 @@ window.TARAE_CASES = [
             {
               "label": "담당 수사관",
               "reason": "자료에 '한상우' 로 적혀 있지만 기록으로 확인되지 않았습니다. 확인 후 적어 주세요."
-            },
-            {
-              "label": "결정일",
-              "reason": "자료에서 찾지 못했습니다."
             },
             {
               "label": "신청인 성명",
@@ -1148,22 +1152,16 @@ window.TARAE_CASES = [
                   "source": "가족_진술서.jpg 6줄"
                 },
                 {
+                  "date": "2019. 6. 17.",
+                  "text": "수사결과 통지서",
+                  "level": "record",
+                  "source": "수사중지_통지서_2019.jpg 1줄"
+                },
+                {
                   "date": "2025. 8. 14.",
                   "text": "본인은 2025. 8. 14. 오후 ○○시 버스터미널 대합실에서 정하윤…",
                   "level": "statement",
                   "source": "진술서_2025.jpg 3줄"
-                },
-                {
-                  "date": null,
-                  "text": "○○시 20대 여성 실종 석 달째 행방 묘연",
-                  "level": "statement",
-                  "source": "기사_2018.jpg 1줄"
-                },
-                {
-                  "date": null,
-                  "text": "수사결과 통지서",
-                  "level": "record",
-                  "source": "수사중지_통지서_2019.jpg 1줄"
                 }
               ]
             },
@@ -1180,7 +1178,7 @@ window.TARAE_CASES = [
         "rule_no": 8,
         "action": "ACT-기록열람",
         "label": "수사 기록 열람 신청",
-        "why": "‘본인은 2017. 11. 2. 22시경 ○○시 중앙시장 앞에서 정하윤을…’ — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다. 수사 기록에 반영됐는지 확인이 필요합니다",
+        "why": "‘본인은 2017. 11. 2. 22시경 ○○시 중앙시장 앞에서 정하윤을…’ — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다. ‘수사결과 통지서’(2019-06-17)보다 앞선 내용입니다. 수사 기록에 반영됐는지 확인이 필요합니다",
         "rule_why": "수사 기록 없이는 다른 판단이 불가능하다",
         "due": null,
         "state": "filled",
@@ -1267,6 +1265,11 @@ window.TARAE_CASES = [
               "from": "case_record"
             },
             {
+              "label": "결정일",
+              "value": "2019-06-17",
+              "from": "case_record"
+            },
+            {
               "label": "서식",
               "value": "수사기록 열람·등사 신청서",
               "from": "knowledge_base"
@@ -1286,10 +1289,6 @@ window.TARAE_CASES = [
             {
               "label": "담당 수사관",
               "reason": "자료에 '한상우' 로 적혀 있지만 기록으로 확인되지 않았습니다. 확인 후 적어 주세요."
-            },
-            {
-              "label": "결정일",
-              "reason": "자료에서 찾지 못했습니다."
             },
             {
               "label": "신청인 성명",
@@ -1340,22 +1339,16 @@ window.TARAE_CASES = [
                   "source": "가족_진술서.jpg 6줄"
                 },
                 {
+                  "date": "2019. 6. 17.",
+                  "text": "수사결과 통지서",
+                  "level": "record",
+                  "source": "수사중지_통지서_2019.jpg 1줄"
+                },
+                {
                   "date": "2025. 8. 14.",
                   "text": "본인은 2025. 8. 14. 오후 ○○시 버스터미널 대합실에서 정하윤…",
                   "level": "statement",
                   "source": "진술서_2025.jpg 3줄"
-                },
-                {
-                  "date": null,
-                  "text": "○○시 20대 여성 실종 석 달째 행방 묘연",
-                  "level": "statement",
-                  "source": "기사_2018.jpg 1줄"
-                },
-                {
-                  "date": null,
-                  "text": "수사결과 통지서",
-                  "level": "record",
-                  "source": "수사중지_통지서_2019.jpg 1줄"
                 }
               ]
             },
@@ -1372,7 +1365,7 @@ window.TARAE_CASES = [
         "rule_no": 9,
         "action": "ACT-근거보완",
         "label": "주장을 뒷받침할 근거 자료 보완",
-        "why": "결정 일자: 올린 자료에서 찾지 못했고, 해당 내용이 있을 수 있는 부분이 읽히지 않았습니다",
+        "why": "수사중지_통지서_2019.jpg에서 읽히지 않은 부분이 1곳 있습니다 (7줄). 사진을 보고 알려주세요",
         "rule_why": "근거 없는 주장은 판단 대상이 되지 않는다",
         "due": null,
         "state": "no_submission",
@@ -1414,7 +1407,7 @@ window.TARAE_CASES = [
         "rule_no": 10,
         "action": "ACT-공백보완",
         "label": "기록이 빈 기간의 자료 확보",
-        "why": "2018-02-05 ~ 2025-08-14 사이의 기록이 없습니다 (약 7.5년)",
+        "why": "2018-02-05 ~ 2019-06-17 사이의 기록이 없습니다 (약 1.4년)",
         "rule_why": "기록 공백은 반박 여지를 남긴다",
         "due": null,
         "state": "no_submission",
@@ -1571,6 +1564,11 @@ window.TARAE_CASES = [
                   "from": "case_record"
                 },
                 {
+                  "label": "결정일",
+                  "value": "2019-06-17",
+                  "from": "case_record"
+                },
+                {
                   "label": "서식",
                   "value": "불송치 결정 이의신청서",
                   "from": "knowledge_base"
@@ -1590,10 +1588,6 @@ window.TARAE_CASES = [
                 {
                   "label": "담당 수사관",
                   "reason": "자료에 '한상우' 로 적혀 있지만 기록으로 확인되지 않았습니다. 확인 후 적어 주세요."
-                },
-                {
-                  "label": "결정일",
-                  "reason": "자료에서 찾지 못했습니다."
                 },
                 {
                   "label": "신청인 성명",
@@ -1644,22 +1638,16 @@ window.TARAE_CASES = [
                       "source": "가족_진술서.jpg 6줄"
                     },
                     {
+                      "date": "2019. 6. 17.",
+                      "text": "수사결과 통지서",
+                      "level": "record",
+                      "source": "수사중지_통지서_2019.jpg 1줄"
+                    },
+                    {
                       "date": "2025. 8. 14.",
                       "text": "본인은 2025. 8. 14. 오후 ○○시 버스터미널 대합실에서 정하윤…",
                       "level": "statement",
                       "source": "진술서_2025.jpg 3줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "○○시 20대 여성 실종 석 달째 행방 묘연",
-                      "level": "statement",
-                      "source": "기사_2018.jpg 1줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "수사결과 통지서",
-                      "level": "record",
-                      "source": "수사중지_통지서_2019.jpg 1줄"
                     }
                   ]
                 },
@@ -1677,7 +1665,7 @@ window.TARAE_CASES = [
             "rule_no": 6,
             "action": "ACT-신규정보제출",
             "label": "새로 확인된 정보를 수사기관에 제출",
-            "why": "진술서_시장상인.jpg 의 내용이 기록 자료에서 확인되지 않습니다",
+            "why": "진술서_2025.jpg 의 내용이 기록 자료에서 확인되지 않습니다",
             "rule_why": "새 정보는 중지·종결된 절차를 되살릴 수 있다",
             "due": null,
             "state": "filled",
@@ -1775,6 +1763,11 @@ window.TARAE_CASES = [
                   "from": "case_record"
                 },
                 {
+                  "label": "결정일",
+                  "value": "2019-06-17",
+                  "from": "case_record"
+                },
+                {
                   "label": "서식",
                   "value": "자료·의견 제출서",
                   "from": "knowledge_base"
@@ -1794,10 +1787,6 @@ window.TARAE_CASES = [
                 {
                   "label": "담당 수사관",
                   "reason": "자료에 '한상우' 로 적혀 있지만 기록으로 확인되지 않았습니다. 확인 후 적어 주세요."
-                },
-                {
-                  "label": "결정일",
-                  "reason": "자료에서 찾지 못했습니다."
                 },
                 {
                   "label": "신청인 성명",
@@ -1848,22 +1837,16 @@ window.TARAE_CASES = [
                       "source": "가족_진술서.jpg 6줄"
                     },
                     {
+                      "date": "2019. 6. 17.",
+                      "text": "수사결과 통지서",
+                      "level": "record",
+                      "source": "수사중지_통지서_2019.jpg 1줄"
+                    },
+                    {
                       "date": "2025. 8. 14.",
                       "text": "본인은 2025. 8. 14. 오후 ○○시 버스터미널 대합실에서 정하윤…",
                       "level": "statement",
                       "source": "진술서_2025.jpg 3줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "○○시 20대 여성 실종 석 달째 행방 묘연",
-                      "level": "statement",
-                      "source": "기사_2018.jpg 1줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "수사결과 통지서",
-                      "level": "record",
-                      "source": "수사중지_통지서_2019.jpg 1줄"
                     }
                   ]
                 },
@@ -1881,7 +1864,7 @@ window.TARAE_CASES = [
             "rule_no": 7,
             "action": "ACT-모순확인",
             "label": "자료끼리 어긋난 부분 확인 요청",
-            "why": "최종 목격 일시: 자료 사이에 차이가 있어 보이지만 판단 근거가 부족합니다 — ‘2017-11-02 21~24시’(missing_report_2017 · 6줄) / ‘2017-11-01 22시~01시’(news_2018 · 3줄) (모순 점수 0.54 < 기준 0.70; 다른 해석과의 차이 0.10 < 기준 0.40; 추출 신뢰도 낮음: news_2018 · 3줄 (0.60))",
+            "why": "최종 목격 일시: 자료 사이에 차이가 있어 보이지만 판단 근거가 부족합니다 — ‘2017-11-02 21~24시’(실종신고_접수증_2017.jpg · 6줄) / ‘2017-11-01 22시~01시’(기사_2018.jpg · 3줄)",
             "rule_why": "진술 모순은 재수사 사유가 된다",
             "due": null,
             "state": "filled",
@@ -1979,6 +1962,11 @@ window.TARAE_CASES = [
                   "from": "case_record"
                 },
                 {
+                  "label": "결정일",
+                  "value": "2019-06-17",
+                  "from": "case_record"
+                },
+                {
                   "label": "서식",
                   "value": "자료·의견 제출서",
                   "from": "knowledge_base"
@@ -1998,10 +1986,6 @@ window.TARAE_CASES = [
                 {
                   "label": "담당 수사관",
                   "reason": "자료에 '한상우' 로 적혀 있지만 기록으로 확인되지 않았습니다. 확인 후 적어 주세요."
-                },
-                {
-                  "label": "결정일",
-                  "reason": "자료에서 찾지 못했습니다."
                 },
                 {
                   "label": "신청인 성명",
@@ -2052,22 +2036,16 @@ window.TARAE_CASES = [
                       "source": "가족_진술서.jpg 6줄"
                     },
                     {
+                      "date": "2019. 6. 17.",
+                      "text": "수사결과 통지서",
+                      "level": "record",
+                      "source": "수사중지_통지서_2019.jpg 1줄"
+                    },
+                    {
                       "date": "2025. 8. 14.",
                       "text": "본인은 2025. 8. 14. 오후 ○○시 버스터미널 대합실에서 정하윤…",
                       "level": "statement",
                       "source": "진술서_2025.jpg 3줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "○○시 20대 여성 실종 석 달째 행방 묘연",
-                      "level": "statement",
-                      "source": "기사_2018.jpg 1줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "수사결과 통지서",
-                      "level": "record",
-                      "source": "수사중지_통지서_2019.jpg 1줄"
                     }
                   ]
                 },
@@ -2085,7 +2063,7 @@ window.TARAE_CASES = [
             "rule_no": 8,
             "action": "ACT-기록열람",
             "label": "수사 기록 열람 신청",
-            "why": "‘본인은 2017. 11. 2. 22시경 ○○시 중앙시장 앞에서 정하윤을…’ — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다. 수사 기록에 반영됐는지 확인이 필요합니다",
+            "why": "‘본인은 2017. 11. 2. 22시경 ○○시 중앙시장 앞에서 정하윤을…’ — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다. ‘수사결과 통지서’(2019-06-17)보다 앞선 내용입니다. 수사 기록에 반영됐는지 확인이 필요합니다",
             "rule_why": "수사 기록 없이는 다른 판단이 불가능하다",
             "due": null,
             "state": "filled",
@@ -2178,6 +2156,11 @@ window.TARAE_CASES = [
                   "from": "case_record"
                 },
                 {
+                  "label": "결정일",
+                  "value": "2019-06-17",
+                  "from": "case_record"
+                },
+                {
                   "label": "서식",
                   "value": "수사기록 열람·등사 신청서",
                   "from": "knowledge_base"
@@ -2197,10 +2180,6 @@ window.TARAE_CASES = [
                 {
                   "label": "담당 수사관",
                   "reason": "자료에 '한상우' 로 적혀 있지만 기록으로 확인되지 않았습니다. 확인 후 적어 주세요."
-                },
-                {
-                  "label": "결정일",
-                  "reason": "자료에서 찾지 못했습니다."
                 },
                 {
                   "label": "신청인 성명",
@@ -2251,22 +2230,16 @@ window.TARAE_CASES = [
                       "source": "가족_진술서.jpg 6줄"
                     },
                     {
+                      "date": "2019. 6. 17.",
+                      "text": "수사결과 통지서",
+                      "level": "record",
+                      "source": "수사중지_통지서_2019.jpg 1줄"
+                    },
+                    {
                       "date": "2025. 8. 14.",
                       "text": "본인은 2025. 8. 14. 오후 ○○시 버스터미널 대합실에서 정하윤…",
                       "level": "statement",
                       "source": "진술서_2025.jpg 3줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "○○시 20대 여성 실종 석 달째 행방 묘연",
-                      "level": "statement",
-                      "source": "기사_2018.jpg 1줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "수사결과 통지서",
-                      "level": "record",
-                      "source": "수사중지_통지서_2019.jpg 1줄"
                     }
                   ]
                 },
@@ -2333,7 +2306,7 @@ window.TARAE_CASES = [
             "rule_no": 10,
             "action": "ACT-공백보완",
             "label": "기록이 빈 기간의 자료 확보",
-            "why": "2018-02-05 ~ 2025-08-14 사이의 기록이 없습니다 (약 7.5년)",
+            "why": "2018-02-05 ~ 2019-06-17 사이의 기록이 없습니다 (약 1.4년)",
             "rule_why": "기록 공백은 반박 여지를 남긴다",
             "due": null,
             "state": "no_submission",
@@ -2483,6 +2456,11 @@ window.TARAE_CASES = [
                   "from": "case_record"
                 },
                 {
+                  "label": "결정일",
+                  "value": "2019-06-17",
+                  "from": "case_record"
+                },
+                {
                   "label": "서식",
                   "value": "항고장",
                   "from": "knowledge_base"
@@ -2502,10 +2480,6 @@ window.TARAE_CASES = [
                 {
                   "label": "담당 수사관",
                   "reason": "자료에 '한상우' 로 적혀 있지만 기록으로 확인되지 않았습니다. 확인 후 적어 주세요."
-                },
-                {
-                  "label": "결정일",
-                  "reason": "자료에서 찾지 못했습니다."
                 },
                 {
                   "label": "신청인 성명",
@@ -2556,22 +2530,16 @@ window.TARAE_CASES = [
                       "source": "가족_진술서.jpg 6줄"
                     },
                     {
+                      "date": "2019. 6. 17.",
+                      "text": "수사결과 통지서",
+                      "level": "record",
+                      "source": "수사중지_통지서_2019.jpg 1줄"
+                    },
+                    {
                       "date": "2025. 8. 14.",
                       "text": "본인은 2025. 8. 14. 오후 ○○시 버스터미널 대합실에서 정하윤…",
                       "level": "statement",
                       "source": "진술서_2025.jpg 3줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "○○시 20대 여성 실종 석 달째 행방 묘연",
-                      "level": "statement",
-                      "source": "기사_2018.jpg 1줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "수사결과 통지서",
-                      "level": "record",
-                      "source": "수사중지_통지서_2019.jpg 1줄"
                     }
                   ]
                 },
@@ -2592,7 +2560,7 @@ window.TARAE_CASES = [
             "rule_no": 6,
             "action": "ACT-신규정보제출",
             "label": "새로 확인된 정보를 수사기관에 제출",
-            "why": "진술서_시장상인.jpg 의 내용이 기록 자료에서 확인되지 않습니다",
+            "why": "진술서_2025.jpg 의 내용이 기록 자료에서 확인되지 않습니다",
             "rule_why": "새 정보는 중지·종결된 절차를 되살릴 수 있다",
             "due": null,
             "state": "filled",
@@ -2690,6 +2658,11 @@ window.TARAE_CASES = [
                   "from": "case_record"
                 },
                 {
+                  "label": "결정일",
+                  "value": "2019-06-17",
+                  "from": "case_record"
+                },
+                {
                   "label": "서식",
                   "value": "자료·의견 제출서",
                   "from": "knowledge_base"
@@ -2709,10 +2682,6 @@ window.TARAE_CASES = [
                 {
                   "label": "담당 수사관",
                   "reason": "자료에 '한상우' 로 적혀 있지만 기록으로 확인되지 않았습니다. 확인 후 적어 주세요."
-                },
-                {
-                  "label": "결정일",
-                  "reason": "자료에서 찾지 못했습니다."
                 },
                 {
                   "label": "신청인 성명",
@@ -2763,22 +2732,16 @@ window.TARAE_CASES = [
                       "source": "가족_진술서.jpg 6줄"
                     },
                     {
+                      "date": "2019. 6. 17.",
+                      "text": "수사결과 통지서",
+                      "level": "record",
+                      "source": "수사중지_통지서_2019.jpg 1줄"
+                    },
+                    {
                       "date": "2025. 8. 14.",
                       "text": "본인은 2025. 8. 14. 오후 ○○시 버스터미널 대합실에서 정하윤…",
                       "level": "statement",
                       "source": "진술서_2025.jpg 3줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "○○시 20대 여성 실종 석 달째 행방 묘연",
-                      "level": "statement",
-                      "source": "기사_2018.jpg 1줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "수사결과 통지서",
-                      "level": "record",
-                      "source": "수사중지_통지서_2019.jpg 1줄"
                     }
                   ]
                 },
@@ -2796,7 +2759,7 @@ window.TARAE_CASES = [
             "rule_no": 7,
             "action": "ACT-모순확인",
             "label": "자료끼리 어긋난 부분 확인 요청",
-            "why": "최종 목격 일시: 자료 사이에 차이가 있어 보이지만 판단 근거가 부족합니다 — ‘2017-11-02 21~24시’(missing_report_2017 · 6줄) / ‘2017-11-01 22시~01시’(news_2018 · 3줄) (모순 점수 0.54 < 기준 0.70; 다른 해석과의 차이 0.10 < 기준 0.40; 추출 신뢰도 낮음: news_2018 · 3줄 (0.60))",
+            "why": "최종 목격 일시: 자료 사이에 차이가 있어 보이지만 판단 근거가 부족합니다 — ‘2017-11-02 21~24시’(실종신고_접수증_2017.jpg · 6줄) / ‘2017-11-01 22시~01시’(기사_2018.jpg · 3줄)",
             "rule_why": "진술 모순은 재수사 사유가 된다",
             "due": null,
             "state": "filled",
@@ -2894,6 +2857,11 @@ window.TARAE_CASES = [
                   "from": "case_record"
                 },
                 {
+                  "label": "결정일",
+                  "value": "2019-06-17",
+                  "from": "case_record"
+                },
+                {
                   "label": "서식",
                   "value": "자료·의견 제출서",
                   "from": "knowledge_base"
@@ -2913,10 +2881,6 @@ window.TARAE_CASES = [
                 {
                   "label": "담당 수사관",
                   "reason": "자료에 '한상우' 로 적혀 있지만 기록으로 확인되지 않았습니다. 확인 후 적어 주세요."
-                },
-                {
-                  "label": "결정일",
-                  "reason": "자료에서 찾지 못했습니다."
                 },
                 {
                   "label": "신청인 성명",
@@ -2967,22 +2931,16 @@ window.TARAE_CASES = [
                       "source": "가족_진술서.jpg 6줄"
                     },
                     {
+                      "date": "2019. 6. 17.",
+                      "text": "수사결과 통지서",
+                      "level": "record",
+                      "source": "수사중지_통지서_2019.jpg 1줄"
+                    },
+                    {
                       "date": "2025. 8. 14.",
                       "text": "본인은 2025. 8. 14. 오후 ○○시 버스터미널 대합실에서 정하윤…",
                       "level": "statement",
                       "source": "진술서_2025.jpg 3줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "○○시 20대 여성 실종 석 달째 행방 묘연",
-                      "level": "statement",
-                      "source": "기사_2018.jpg 1줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "수사결과 통지서",
-                      "level": "record",
-                      "source": "수사중지_통지서_2019.jpg 1줄"
                     }
                   ]
                 },
@@ -3000,7 +2958,7 @@ window.TARAE_CASES = [
             "rule_no": 8,
             "action": "ACT-기록열람",
             "label": "수사 기록 열람 신청",
-            "why": "‘본인은 2017. 11. 2. 22시경 ○○시 중앙시장 앞에서 정하윤을…’ — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다. 수사 기록에 반영됐는지 확인이 필요합니다",
+            "why": "‘본인은 2017. 11. 2. 22시경 ○○시 중앙시장 앞에서 정하윤을…’ — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다. ‘수사결과 통지서’(2019-06-17)보다 앞선 내용입니다. 수사 기록에 반영됐는지 확인이 필요합니다",
             "rule_why": "수사 기록 없이는 다른 판단이 불가능하다",
             "due": null,
             "state": "filled",
@@ -3093,6 +3051,11 @@ window.TARAE_CASES = [
                   "from": "case_record"
                 },
                 {
+                  "label": "결정일",
+                  "value": "2019-06-17",
+                  "from": "case_record"
+                },
+                {
                   "label": "서식",
                   "value": "수사기록 열람·등사 신청서",
                   "from": "knowledge_base"
@@ -3112,10 +3075,6 @@ window.TARAE_CASES = [
                 {
                   "label": "담당 수사관",
                   "reason": "자료에 '한상우' 로 적혀 있지만 기록으로 확인되지 않았습니다. 확인 후 적어 주세요."
-                },
-                {
-                  "label": "결정일",
-                  "reason": "자료에서 찾지 못했습니다."
                 },
                 {
                   "label": "신청인 성명",
@@ -3166,22 +3125,16 @@ window.TARAE_CASES = [
                       "source": "가족_진술서.jpg 6줄"
                     },
                     {
+                      "date": "2019. 6. 17.",
+                      "text": "수사결과 통지서",
+                      "level": "record",
+                      "source": "수사중지_통지서_2019.jpg 1줄"
+                    },
+                    {
                       "date": "2025. 8. 14.",
                       "text": "본인은 2025. 8. 14. 오후 ○○시 버스터미널 대합실에서 정하윤…",
                       "level": "statement",
                       "source": "진술서_2025.jpg 3줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "○○시 20대 여성 실종 석 달째 행방 묘연",
-                      "level": "statement",
-                      "source": "기사_2018.jpg 1줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "수사결과 통지서",
-                      "level": "record",
-                      "source": "수사중지_통지서_2019.jpg 1줄"
                     }
                   ]
                 },
@@ -3248,7 +3201,7 @@ window.TARAE_CASES = [
             "rule_no": 10,
             "action": "ACT-공백보완",
             "label": "기록이 빈 기간의 자료 확보",
-            "why": "2018-02-05 ~ 2025-08-14 사이의 기록이 없습니다 (약 7.5년)",
+            "why": "2018-02-05 ~ 2019-06-17 사이의 기록이 없습니다 (약 1.4년)",
             "rule_why": "기록 공백은 반박 여지를 남긴다",
             "due": null,
             "state": "no_submission",
@@ -3405,6 +3358,11 @@ window.TARAE_CASES = [
                   "from": "case_record"
                 },
                 {
+                  "label": "결정일",
+                  "value": "2019-06-17",
+                  "from": "case_record"
+                },
+                {
                   "label": "서식",
                   "value": "재정신청서",
                   "from": "knowledge_base"
@@ -3424,10 +3382,6 @@ window.TARAE_CASES = [
                 {
                   "label": "담당 수사관",
                   "reason": "자료에 '한상우' 로 적혀 있지만 기록으로 확인되지 않았습니다. 확인 후 적어 주세요."
-                },
-                {
-                  "label": "결정일",
-                  "reason": "자료에서 찾지 못했습니다."
                 },
                 {
                   "label": "신청인 성명",
@@ -3478,22 +3432,16 @@ window.TARAE_CASES = [
                       "source": "가족_진술서.jpg 6줄"
                     },
                     {
+                      "date": "2019. 6. 17.",
+                      "text": "수사결과 통지서",
+                      "level": "record",
+                      "source": "수사중지_통지서_2019.jpg 1줄"
+                    },
+                    {
                       "date": "2025. 8. 14.",
                       "text": "본인은 2025. 8. 14. 오후 ○○시 버스터미널 대합실에서 정하윤…",
                       "level": "statement",
                       "source": "진술서_2025.jpg 3줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "○○시 20대 여성 실종 석 달째 행방 묘연",
-                      "level": "statement",
-                      "source": "기사_2018.jpg 1줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "수사결과 통지서",
-                      "level": "record",
-                      "source": "수사중지_통지서_2019.jpg 1줄"
                     }
                   ]
                 },
@@ -3514,7 +3462,7 @@ window.TARAE_CASES = [
             "rule_no": 6,
             "action": "ACT-신규정보제출",
             "label": "새로 확인된 정보를 수사기관에 제출",
-            "why": "진술서_시장상인.jpg 의 내용이 기록 자료에서 확인되지 않습니다",
+            "why": "진술서_2025.jpg 의 내용이 기록 자료에서 확인되지 않습니다",
             "rule_why": "새 정보는 중지·종결된 절차를 되살릴 수 있다",
             "due": null,
             "state": "filled",
@@ -3612,6 +3560,11 @@ window.TARAE_CASES = [
                   "from": "case_record"
                 },
                 {
+                  "label": "결정일",
+                  "value": "2019-06-17",
+                  "from": "case_record"
+                },
+                {
                   "label": "서식",
                   "value": "자료·의견 제출서",
                   "from": "knowledge_base"
@@ -3631,10 +3584,6 @@ window.TARAE_CASES = [
                 {
                   "label": "담당 수사관",
                   "reason": "자료에 '한상우' 로 적혀 있지만 기록으로 확인되지 않았습니다. 확인 후 적어 주세요."
-                },
-                {
-                  "label": "결정일",
-                  "reason": "자료에서 찾지 못했습니다."
                 },
                 {
                   "label": "신청인 성명",
@@ -3685,22 +3634,16 @@ window.TARAE_CASES = [
                       "source": "가족_진술서.jpg 6줄"
                     },
                     {
+                      "date": "2019. 6. 17.",
+                      "text": "수사결과 통지서",
+                      "level": "record",
+                      "source": "수사중지_통지서_2019.jpg 1줄"
+                    },
+                    {
                       "date": "2025. 8. 14.",
                       "text": "본인은 2025. 8. 14. 오후 ○○시 버스터미널 대합실에서 정하윤…",
                       "level": "statement",
                       "source": "진술서_2025.jpg 3줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "○○시 20대 여성 실종 석 달째 행방 묘연",
-                      "level": "statement",
-                      "source": "기사_2018.jpg 1줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "수사결과 통지서",
-                      "level": "record",
-                      "source": "수사중지_통지서_2019.jpg 1줄"
                     }
                   ]
                 },
@@ -3718,7 +3661,7 @@ window.TARAE_CASES = [
             "rule_no": 7,
             "action": "ACT-모순확인",
             "label": "자료끼리 어긋난 부분 확인 요청",
-            "why": "최종 목격 일시: 자료 사이에 차이가 있어 보이지만 판단 근거가 부족합니다 — ‘2017-11-02 21~24시’(missing_report_2017 · 6줄) / ‘2017-11-01 22시~01시’(news_2018 · 3줄) (모순 점수 0.54 < 기준 0.70; 다른 해석과의 차이 0.10 < 기준 0.40; 추출 신뢰도 낮음: news_2018 · 3줄 (0.60))",
+            "why": "최종 목격 일시: 자료 사이에 차이가 있어 보이지만 판단 근거가 부족합니다 — ‘2017-11-02 21~24시’(실종신고_접수증_2017.jpg · 6줄) / ‘2017-11-01 22시~01시’(기사_2018.jpg · 3줄)",
             "rule_why": "진술 모순은 재수사 사유가 된다",
             "due": null,
             "state": "filled",
@@ -3816,6 +3759,11 @@ window.TARAE_CASES = [
                   "from": "case_record"
                 },
                 {
+                  "label": "결정일",
+                  "value": "2019-06-17",
+                  "from": "case_record"
+                },
+                {
                   "label": "서식",
                   "value": "자료·의견 제출서",
                   "from": "knowledge_base"
@@ -3835,10 +3783,6 @@ window.TARAE_CASES = [
                 {
                   "label": "담당 수사관",
                   "reason": "자료에 '한상우' 로 적혀 있지만 기록으로 확인되지 않았습니다. 확인 후 적어 주세요."
-                },
-                {
-                  "label": "결정일",
-                  "reason": "자료에서 찾지 못했습니다."
                 },
                 {
                   "label": "신청인 성명",
@@ -3889,22 +3833,16 @@ window.TARAE_CASES = [
                       "source": "가족_진술서.jpg 6줄"
                     },
                     {
+                      "date": "2019. 6. 17.",
+                      "text": "수사결과 통지서",
+                      "level": "record",
+                      "source": "수사중지_통지서_2019.jpg 1줄"
+                    },
+                    {
                       "date": "2025. 8. 14.",
                       "text": "본인은 2025. 8. 14. 오후 ○○시 버스터미널 대합실에서 정하윤…",
                       "level": "statement",
                       "source": "진술서_2025.jpg 3줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "○○시 20대 여성 실종 석 달째 행방 묘연",
-                      "level": "statement",
-                      "source": "기사_2018.jpg 1줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "수사결과 통지서",
-                      "level": "record",
-                      "source": "수사중지_통지서_2019.jpg 1줄"
                     }
                   ]
                 },
@@ -3922,7 +3860,7 @@ window.TARAE_CASES = [
             "rule_no": 8,
             "action": "ACT-기록열람",
             "label": "수사 기록 열람 신청",
-            "why": "‘본인은 2017. 11. 2. 22시경 ○○시 중앙시장 앞에서 정하윤을…’ — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다. 수사 기록에 반영됐는지 확인이 필요합니다",
+            "why": "‘본인은 2017. 11. 2. 22시경 ○○시 중앙시장 앞에서 정하윤을…’ — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다. ‘수사결과 통지서’(2019-06-17)보다 앞선 내용입니다. 수사 기록에 반영됐는지 확인이 필요합니다",
             "rule_why": "수사 기록 없이는 다른 판단이 불가능하다",
             "due": null,
             "state": "filled",
@@ -4015,6 +3953,11 @@ window.TARAE_CASES = [
                   "from": "case_record"
                 },
                 {
+                  "label": "결정일",
+                  "value": "2019-06-17",
+                  "from": "case_record"
+                },
+                {
                   "label": "서식",
                   "value": "수사기록 열람·등사 신청서",
                   "from": "knowledge_base"
@@ -4034,10 +3977,6 @@ window.TARAE_CASES = [
                 {
                   "label": "담당 수사관",
                   "reason": "자료에 '한상우' 로 적혀 있지만 기록으로 확인되지 않았습니다. 확인 후 적어 주세요."
-                },
-                {
-                  "label": "결정일",
-                  "reason": "자료에서 찾지 못했습니다."
                 },
                 {
                   "label": "신청인 성명",
@@ -4088,22 +4027,16 @@ window.TARAE_CASES = [
                       "source": "가족_진술서.jpg 6줄"
                     },
                     {
+                      "date": "2019. 6. 17.",
+                      "text": "수사결과 통지서",
+                      "level": "record",
+                      "source": "수사중지_통지서_2019.jpg 1줄"
+                    },
+                    {
                       "date": "2025. 8. 14.",
                       "text": "본인은 2025. 8. 14. 오후 ○○시 버스터미널 대합실에서 정하윤…",
                       "level": "statement",
                       "source": "진술서_2025.jpg 3줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "○○시 20대 여성 실종 석 달째 행방 묘연",
-                      "level": "statement",
-                      "source": "기사_2018.jpg 1줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "수사결과 통지서",
-                      "level": "record",
-                      "source": "수사중지_통지서_2019.jpg 1줄"
                     }
                   ]
                 },
@@ -4170,7 +4103,7 @@ window.TARAE_CASES = [
             "rule_no": 10,
             "action": "ACT-공백보완",
             "label": "기록이 빈 기간의 자료 확보",
-            "why": "2018-02-05 ~ 2025-08-14 사이의 기록이 없습니다 (약 7.5년)",
+            "why": "2018-02-05 ~ 2019-06-17 사이의 기록이 없습니다 (약 1.4년)",
             "rule_why": "기록 공백은 반박 여지를 남긴다",
             "due": null,
             "state": "no_submission",
@@ -4327,6 +4260,11 @@ window.TARAE_CASES = [
                   "from": "case_record"
                 },
                 {
+                  "label": "결정일",
+                  "value": "2019-06-17",
+                  "from": "case_record"
+                },
+                {
                   "label": "서식",
                   "value": "수사중지 결정 이의제기서",
                   "from": "knowledge_base"
@@ -4346,10 +4284,6 @@ window.TARAE_CASES = [
                 {
                   "label": "담당 수사관",
                   "reason": "자료에 '한상우' 로 적혀 있지만 기록으로 확인되지 않았습니다. 확인 후 적어 주세요."
-                },
-                {
-                  "label": "결정일",
-                  "reason": "자료에서 찾지 못했습니다."
                 },
                 {
                   "label": "신청인 성명",
@@ -4400,22 +4334,16 @@ window.TARAE_CASES = [
                       "source": "가족_진술서.jpg 6줄"
                     },
                     {
+                      "date": "2019. 6. 17.",
+                      "text": "수사결과 통지서",
+                      "level": "record",
+                      "source": "수사중지_통지서_2019.jpg 1줄"
+                    },
+                    {
                       "date": "2025. 8. 14.",
                       "text": "본인은 2025. 8. 14. 오후 ○○시 버스터미널 대합실에서 정하윤…",
                       "level": "statement",
                       "source": "진술서_2025.jpg 3줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "○○시 20대 여성 실종 석 달째 행방 묘연",
-                      "level": "statement",
-                      "source": "기사_2018.jpg 1줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "수사결과 통지서",
-                      "level": "record",
-                      "source": "수사중지_통지서_2019.jpg 1줄"
                     }
                   ]
                 },
@@ -4436,7 +4364,7 @@ window.TARAE_CASES = [
             "rule_no": 6,
             "action": "ACT-신규정보제출",
             "label": "새로 확인된 정보를 수사기관에 제출",
-            "why": "진술서_시장상인.jpg 의 내용이 기록 자료에서 확인되지 않습니다",
+            "why": "진술서_2025.jpg 의 내용이 기록 자료에서 확인되지 않습니다",
             "rule_why": "새 정보는 중지·종결된 절차를 되살릴 수 있다",
             "due": null,
             "state": "filled",
@@ -4534,6 +4462,11 @@ window.TARAE_CASES = [
                   "from": "case_record"
                 },
                 {
+                  "label": "결정일",
+                  "value": "2019-06-17",
+                  "from": "case_record"
+                },
+                {
                   "label": "서식",
                   "value": "자료·의견 제출서",
                   "from": "knowledge_base"
@@ -4553,10 +4486,6 @@ window.TARAE_CASES = [
                 {
                   "label": "담당 수사관",
                   "reason": "자료에 '한상우' 로 적혀 있지만 기록으로 확인되지 않았습니다. 확인 후 적어 주세요."
-                },
-                {
-                  "label": "결정일",
-                  "reason": "자료에서 찾지 못했습니다."
                 },
                 {
                   "label": "신청인 성명",
@@ -4607,22 +4536,16 @@ window.TARAE_CASES = [
                       "source": "가족_진술서.jpg 6줄"
                     },
                     {
+                      "date": "2019. 6. 17.",
+                      "text": "수사결과 통지서",
+                      "level": "record",
+                      "source": "수사중지_통지서_2019.jpg 1줄"
+                    },
+                    {
                       "date": "2025. 8. 14.",
                       "text": "본인은 2025. 8. 14. 오후 ○○시 버스터미널 대합실에서 정하윤…",
                       "level": "statement",
                       "source": "진술서_2025.jpg 3줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "○○시 20대 여성 실종 석 달째 행방 묘연",
-                      "level": "statement",
-                      "source": "기사_2018.jpg 1줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "수사결과 통지서",
-                      "level": "record",
-                      "source": "수사중지_통지서_2019.jpg 1줄"
                     }
                   ]
                 },
@@ -4640,7 +4563,7 @@ window.TARAE_CASES = [
             "rule_no": 7,
             "action": "ACT-모순확인",
             "label": "자료끼리 어긋난 부분 확인 요청",
-            "why": "최종 목격 일시: 자료 사이에 차이가 있어 보이지만 판단 근거가 부족합니다 — ‘2017-11-02 21~24시’(missing_report_2017 · 6줄) / ‘2017-11-01 22시~01시’(news_2018 · 3줄) (모순 점수 0.54 < 기준 0.70; 다른 해석과의 차이 0.10 < 기준 0.40; 추출 신뢰도 낮음: news_2018 · 3줄 (0.60))",
+            "why": "최종 목격 일시: 자료 사이에 차이가 있어 보이지만 판단 근거가 부족합니다 — ‘2017-11-02 21~24시’(실종신고_접수증_2017.jpg · 6줄) / ‘2017-11-01 22시~01시’(기사_2018.jpg · 3줄)",
             "rule_why": "진술 모순은 재수사 사유가 된다",
             "due": null,
             "state": "filled",
@@ -4738,6 +4661,11 @@ window.TARAE_CASES = [
                   "from": "case_record"
                 },
                 {
+                  "label": "결정일",
+                  "value": "2019-06-17",
+                  "from": "case_record"
+                },
+                {
                   "label": "서식",
                   "value": "자료·의견 제출서",
                   "from": "knowledge_base"
@@ -4757,10 +4685,6 @@ window.TARAE_CASES = [
                 {
                   "label": "담당 수사관",
                   "reason": "자료에 '한상우' 로 적혀 있지만 기록으로 확인되지 않았습니다. 확인 후 적어 주세요."
-                },
-                {
-                  "label": "결정일",
-                  "reason": "자료에서 찾지 못했습니다."
                 },
                 {
                   "label": "신청인 성명",
@@ -4811,22 +4735,16 @@ window.TARAE_CASES = [
                       "source": "가족_진술서.jpg 6줄"
                     },
                     {
+                      "date": "2019. 6. 17.",
+                      "text": "수사결과 통지서",
+                      "level": "record",
+                      "source": "수사중지_통지서_2019.jpg 1줄"
+                    },
+                    {
                       "date": "2025. 8. 14.",
                       "text": "본인은 2025. 8. 14. 오후 ○○시 버스터미널 대합실에서 정하윤…",
                       "level": "statement",
                       "source": "진술서_2025.jpg 3줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "○○시 20대 여성 실종 석 달째 행방 묘연",
-                      "level": "statement",
-                      "source": "기사_2018.jpg 1줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "수사결과 통지서",
-                      "level": "record",
-                      "source": "수사중지_통지서_2019.jpg 1줄"
                     }
                   ]
                 },
@@ -4844,7 +4762,7 @@ window.TARAE_CASES = [
             "rule_no": 8,
             "action": "ACT-기록열람",
             "label": "수사 기록 열람 신청",
-            "why": "‘본인은 2017. 11. 2. 22시경 ○○시 중앙시장 앞에서 정하윤을…’ — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다. 수사 기록에 반영됐는지 확인이 필요합니다",
+            "why": "‘본인은 2017. 11. 2. 22시경 ○○시 중앙시장 앞에서 정하윤을…’ — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다. ‘수사결과 통지서’(2019-06-17)보다 앞선 내용입니다. 수사 기록에 반영됐는지 확인이 필요합니다",
             "rule_why": "수사 기록 없이는 다른 판단이 불가능하다",
             "due": null,
             "state": "filled",
@@ -4937,6 +4855,11 @@ window.TARAE_CASES = [
                   "from": "case_record"
                 },
                 {
+                  "label": "결정일",
+                  "value": "2019-06-17",
+                  "from": "case_record"
+                },
+                {
                   "label": "서식",
                   "value": "수사기록 열람·등사 신청서",
                   "from": "knowledge_base"
@@ -4956,10 +4879,6 @@ window.TARAE_CASES = [
                 {
                   "label": "담당 수사관",
                   "reason": "자료에 '한상우' 로 적혀 있지만 기록으로 확인되지 않았습니다. 확인 후 적어 주세요."
-                },
-                {
-                  "label": "결정일",
-                  "reason": "자료에서 찾지 못했습니다."
                 },
                 {
                   "label": "신청인 성명",
@@ -5010,22 +4929,16 @@ window.TARAE_CASES = [
                       "source": "가족_진술서.jpg 6줄"
                     },
                     {
+                      "date": "2019. 6. 17.",
+                      "text": "수사결과 통지서",
+                      "level": "record",
+                      "source": "수사중지_통지서_2019.jpg 1줄"
+                    },
+                    {
                       "date": "2025. 8. 14.",
                       "text": "본인은 2025. 8. 14. 오후 ○○시 버스터미널 대합실에서 정하윤…",
                       "level": "statement",
                       "source": "진술서_2025.jpg 3줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "○○시 20대 여성 실종 석 달째 행방 묘연",
-                      "level": "statement",
-                      "source": "기사_2018.jpg 1줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "수사결과 통지서",
-                      "level": "record",
-                      "source": "수사중지_통지서_2019.jpg 1줄"
                     }
                   ]
                 },
@@ -5092,7 +5005,7 @@ window.TARAE_CASES = [
             "rule_no": 10,
             "action": "ACT-공백보완",
             "label": "기록이 빈 기간의 자료 확보",
-            "why": "2018-02-05 ~ 2025-08-14 사이의 기록이 없습니다 (약 7.5년)",
+            "why": "2018-02-05 ~ 2019-06-17 사이의 기록이 없습니다 (약 1.4년)",
             "rule_why": "기록 공백은 반박 여지를 남긴다",
             "due": null,
             "state": "no_submission",
@@ -5249,6 +5162,11 @@ window.TARAE_CASES = [
                   "from": "case_record"
                 },
                 {
+                  "label": "결정일",
+                  "value": "2019-06-17",
+                  "from": "case_record"
+                },
+                {
                   "label": "서식",
                   "value": "수사중지 결정 이의제기서",
                   "from": "knowledge_base"
@@ -5268,10 +5186,6 @@ window.TARAE_CASES = [
                 {
                   "label": "담당 수사관",
                   "reason": "자료에 '한상우' 로 적혀 있지만 기록으로 확인되지 않았습니다. 확인 후 적어 주세요."
-                },
-                {
-                  "label": "결정일",
-                  "reason": "자료에서 찾지 못했습니다."
                 },
                 {
                   "label": "신청인 성명",
@@ -5322,22 +5236,16 @@ window.TARAE_CASES = [
                       "source": "가족_진술서.jpg 6줄"
                     },
                     {
+                      "date": "2019. 6. 17.",
+                      "text": "수사결과 통지서",
+                      "level": "record",
+                      "source": "수사중지_통지서_2019.jpg 1줄"
+                    },
+                    {
                       "date": "2025. 8. 14.",
                       "text": "본인은 2025. 8. 14. 오후 ○○시 버스터미널 대합실에서 정하윤…",
                       "level": "statement",
                       "source": "진술서_2025.jpg 3줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "○○시 20대 여성 실종 석 달째 행방 묘연",
-                      "level": "statement",
-                      "source": "기사_2018.jpg 1줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "수사결과 통지서",
-                      "level": "record",
-                      "source": "수사중지_통지서_2019.jpg 1줄"
                     }
                   ]
                 },
@@ -5358,7 +5266,7 @@ window.TARAE_CASES = [
             "rule_no": 6,
             "action": "ACT-신규정보제출",
             "label": "새로 확인된 정보를 수사기관에 제출",
-            "why": "진술서_시장상인.jpg 의 내용이 기록 자료에서 확인되지 않습니다",
+            "why": "진술서_2025.jpg 의 내용이 기록 자료에서 확인되지 않습니다",
             "rule_why": "새 정보는 중지·종결된 절차를 되살릴 수 있다",
             "due": null,
             "state": "filled",
@@ -5456,6 +5364,11 @@ window.TARAE_CASES = [
                   "from": "case_record"
                 },
                 {
+                  "label": "결정일",
+                  "value": "2019-06-17",
+                  "from": "case_record"
+                },
+                {
                   "label": "서식",
                   "value": "자료·의견 제출서",
                   "from": "knowledge_base"
@@ -5475,10 +5388,6 @@ window.TARAE_CASES = [
                 {
                   "label": "담당 수사관",
                   "reason": "자료에 '한상우' 로 적혀 있지만 기록으로 확인되지 않았습니다. 확인 후 적어 주세요."
-                },
-                {
-                  "label": "결정일",
-                  "reason": "자료에서 찾지 못했습니다."
                 },
                 {
                   "label": "신청인 성명",
@@ -5529,22 +5438,16 @@ window.TARAE_CASES = [
                       "source": "가족_진술서.jpg 6줄"
                     },
                     {
+                      "date": "2019. 6. 17.",
+                      "text": "수사결과 통지서",
+                      "level": "record",
+                      "source": "수사중지_통지서_2019.jpg 1줄"
+                    },
+                    {
                       "date": "2025. 8. 14.",
                       "text": "본인은 2025. 8. 14. 오후 ○○시 버스터미널 대합실에서 정하윤…",
                       "level": "statement",
                       "source": "진술서_2025.jpg 3줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "○○시 20대 여성 실종 석 달째 행방 묘연",
-                      "level": "statement",
-                      "source": "기사_2018.jpg 1줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "수사결과 통지서",
-                      "level": "record",
-                      "source": "수사중지_통지서_2019.jpg 1줄"
                     }
                   ]
                 },
@@ -5562,7 +5465,7 @@ window.TARAE_CASES = [
             "rule_no": 7,
             "action": "ACT-모순확인",
             "label": "자료끼리 어긋난 부분 확인 요청",
-            "why": "최종 목격 일시: 자료 사이에 차이가 있어 보이지만 판단 근거가 부족합니다 — ‘2017-11-02 21~24시’(missing_report_2017 · 6줄) / ‘2017-11-01 22시~01시’(news_2018 · 3줄) (모순 점수 0.54 < 기준 0.70; 다른 해석과의 차이 0.10 < 기준 0.40; 추출 신뢰도 낮음: news_2018 · 3줄 (0.60))",
+            "why": "최종 목격 일시: 자료 사이에 차이가 있어 보이지만 판단 근거가 부족합니다 — ‘2017-11-02 21~24시’(실종신고_접수증_2017.jpg · 6줄) / ‘2017-11-01 22시~01시’(기사_2018.jpg · 3줄)",
             "rule_why": "진술 모순은 재수사 사유가 된다",
             "due": null,
             "state": "filled",
@@ -5660,6 +5563,11 @@ window.TARAE_CASES = [
                   "from": "case_record"
                 },
                 {
+                  "label": "결정일",
+                  "value": "2019-06-17",
+                  "from": "case_record"
+                },
+                {
                   "label": "서식",
                   "value": "자료·의견 제출서",
                   "from": "knowledge_base"
@@ -5679,10 +5587,6 @@ window.TARAE_CASES = [
                 {
                   "label": "담당 수사관",
                   "reason": "자료에 '한상우' 로 적혀 있지만 기록으로 확인되지 않았습니다. 확인 후 적어 주세요."
-                },
-                {
-                  "label": "결정일",
-                  "reason": "자료에서 찾지 못했습니다."
                 },
                 {
                   "label": "신청인 성명",
@@ -5733,22 +5637,16 @@ window.TARAE_CASES = [
                       "source": "가족_진술서.jpg 6줄"
                     },
                     {
+                      "date": "2019. 6. 17.",
+                      "text": "수사결과 통지서",
+                      "level": "record",
+                      "source": "수사중지_통지서_2019.jpg 1줄"
+                    },
+                    {
                       "date": "2025. 8. 14.",
                       "text": "본인은 2025. 8. 14. 오후 ○○시 버스터미널 대합실에서 정하윤…",
                       "level": "statement",
                       "source": "진술서_2025.jpg 3줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "○○시 20대 여성 실종 석 달째 행방 묘연",
-                      "level": "statement",
-                      "source": "기사_2018.jpg 1줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "수사결과 통지서",
-                      "level": "record",
-                      "source": "수사중지_통지서_2019.jpg 1줄"
                     }
                   ]
                 },
@@ -5766,7 +5664,7 @@ window.TARAE_CASES = [
             "rule_no": 8,
             "action": "ACT-기록열람",
             "label": "수사 기록 열람 신청",
-            "why": "‘본인은 2017. 11. 2. 22시경 ○○시 중앙시장 앞에서 정하윤을…’ — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다. 수사 기록에 반영됐는지 확인이 필요합니다",
+            "why": "‘본인은 2017. 11. 2. 22시경 ○○시 중앙시장 앞에서 정하윤을…’ — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다. ‘수사결과 통지서’(2019-06-17)보다 앞선 내용입니다. 수사 기록에 반영됐는지 확인이 필요합니다",
             "rule_why": "수사 기록 없이는 다른 판단이 불가능하다",
             "due": null,
             "state": "filled",
@@ -5859,6 +5757,11 @@ window.TARAE_CASES = [
                   "from": "case_record"
                 },
                 {
+                  "label": "결정일",
+                  "value": "2019-06-17",
+                  "from": "case_record"
+                },
+                {
                   "label": "서식",
                   "value": "수사기록 열람·등사 신청서",
                   "from": "knowledge_base"
@@ -5878,10 +5781,6 @@ window.TARAE_CASES = [
                 {
                   "label": "담당 수사관",
                   "reason": "자료에 '한상우' 로 적혀 있지만 기록으로 확인되지 않았습니다. 확인 후 적어 주세요."
-                },
-                {
-                  "label": "결정일",
-                  "reason": "자료에서 찾지 못했습니다."
                 },
                 {
                   "label": "신청인 성명",
@@ -5932,22 +5831,16 @@ window.TARAE_CASES = [
                       "source": "가족_진술서.jpg 6줄"
                     },
                     {
+                      "date": "2019. 6. 17.",
+                      "text": "수사결과 통지서",
+                      "level": "record",
+                      "source": "수사중지_통지서_2019.jpg 1줄"
+                    },
+                    {
                       "date": "2025. 8. 14.",
                       "text": "본인은 2025. 8. 14. 오후 ○○시 버스터미널 대합실에서 정하윤…",
                       "level": "statement",
                       "source": "진술서_2025.jpg 3줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "○○시 20대 여성 실종 석 달째 행방 묘연",
-                      "level": "statement",
-                      "source": "기사_2018.jpg 1줄"
-                    },
-                    {
-                      "date": null,
-                      "text": "수사결과 통지서",
-                      "level": "record",
-                      "source": "수사중지_통지서_2019.jpg 1줄"
                     }
                   ]
                 },
@@ -6014,7 +5907,7 @@ window.TARAE_CASES = [
             "rule_no": 10,
             "action": "ACT-공백보완",
             "label": "기록이 빈 기간의 자료 확보",
-            "why": "2018-02-05 ~ 2025-08-14 사이의 기록이 없습니다 (약 7.5년)",
+            "why": "2018-02-05 ~ 2019-06-17 사이의 기록이 없습니다 (약 1.4년)",
             "rule_why": "기록 공백은 반박 여지를 남긴다",
             "due": null,
             "state": "no_submission",
@@ -6097,6 +5990,7 @@ window.TARAE_CASES = [
         "next_key": "ACT-재판단계",
         "deadlines": []
       }
-    }
+    },
+    "guide": true
   }
 ];

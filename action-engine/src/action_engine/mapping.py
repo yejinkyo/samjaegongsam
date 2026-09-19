@@ -290,9 +290,16 @@ def resolve_inf(result: dict[str, Any]) -> list[CodeHit]:
     # research-engine 의 unrecorded_fact 가 바로 그 판정("이 사실이 기록 자료에서 확인되지 않는다")을
     # 해 주므로, 그 근거가 된 문서의 종류로 INF-01* 를 가른다.
     docs_by_id = {d.get("doc_id"): d for d in result.get("documents", [])}
-    for issue in analysis.get("issues", []):
-        if issue.get("condition") != "unrecorded_fact":
-            continue
+    # 이유 문장은 처음 잡힌 자료로 쓰인다. 새 정보에 가장 가까운 것은 가장 늦게 일어난 일이므로
+    # 최근 일부터 본다(시각을 모르는 것은 맨 뒤) — 2017년 진술보다 2025년 제보가 이유가 되어야 한다.
+    event_start = {e["timeline_event_id"]: (e.get("time") or {}).get("start")
+                   for e in (result.get("timeline") or {}).get("events", [])}
+
+    def latest(issue: dict[str, Any]) -> str:
+        return max((t for eid in issue.get("related_event_ids", []) if (t := event_start.get(eid))), default="")
+
+    unrecorded = [i for i in analysis.get("issues", []) if i.get("condition") == "unrecorded_fact"]
+    for issue in sorted(unrecorded, key=latest, reverse=True):
         key = (issue.get("trigger") or {}).get("key")
         for ref in issue.get("sources", []):
             doc = docs_by_id.get(ref.get("source_doc_id")) or {}

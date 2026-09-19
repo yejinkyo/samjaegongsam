@@ -133,6 +133,22 @@ def test_기록에_반영안된_자료만_신규정보로_본다(missing):
     assert INF.NEW_MEDIA not in hits
 
 
+def test_신규정보의_이유는_가장_최근_자료로_쓴다():
+    """반영 안 된 진술이 여럿이면 가장 늦게 일어난 일이 이유가 된다 — 새 정보에 가장 가깝다."""
+    def issue(doc_id, event_id):
+        return {"condition": "unrecorded_fact", "sources": [{"source_doc_id": doc_id}],
+                "related_event_ids": [event_id], "trigger": {"key": f"k/{doc_id}"}}
+    result = {
+        "documents": [{"doc_id": "old", "doc_type": "statement", "file_name": "진술서_2017.jpg"},
+                      {"doc_id": "new", "doc_type": "statement", "file_name": "진술서_2025.jpg"}],
+        "timeline": {"events": [{"timeline_event_id": "tl1", "time": {"start": "2017-11-02T21:00:00"}},
+                                {"timeline_event_id": "tl2", "time": {"start": "2025-08-14T12:00:00"}}]},
+        "analysis": {"issues": [issue("old", "tl1"), issue("new", "tl2")]},
+    }
+    hits = {h.code: h for h in resolve_inf(result)}
+    assert hits[INF.NEW_STATEMENT].reason.startswith("진술서_2025.jpg")
+
+
 def test_반영안된_자료가_없으면_신규정보는_켜지지_않는다(fraud):
     """사기 사건에는 unrecorded_fact 가 없다. 자료가 6개 있어도 INF-01 은 안 켜진다."""
     codes = {h.code for h in resolve_inf(fraud)}
