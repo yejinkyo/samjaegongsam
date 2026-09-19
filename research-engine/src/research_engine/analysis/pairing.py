@@ -7,7 +7,7 @@ from itertools import combinations
 
 from ..schema import Claim, ClaimSlot, ExtractionResult, Timeline
 from ..timeline.coref import mask_compatible
-from .changes import CHANGE_OF, decision_moments, is_after_change, latest_change, separate_decisions
+from .changes import CHANGE_OF, SUCCESSIVE_SLOTS, is_after_change, latest_change, record_moments, said_of_another_record, successive_records
 
 S = ClaimSlot
 # 한 사건 안에 여러 번 일어날 수 있어 슬롯만으로는 같은 일인지 알 수 없는 항목 — 쌍으로 비교하지 않는다
@@ -60,12 +60,13 @@ def candidate_pairs(extraction: ExtractionResult, timeline: Timeline | None = No
         if c.slot is S.TRANSFER_TIME and c.slot_time is not None and c.slot_time.is_resolved:
             transfer_times.setdefault(c.doc_id, []).append(c)
 
-    moments = decision_moments(extraction.claims, extraction.document_dates)
+    moments = record_moments(extraction.claims, extraction.document_dates)
     pairs: list[ClaimPair] = []
     by_slot: dict[ClaimSlot, list[Claim]] = {}
     for c in claims:
         by_slot.setdefault(c.slot, []).append(c)  # type: ignore[arg-type]
     for group in by_slot.values():
+        records = [c for c in group if c.doc_id in moments]
         for a, b in combinations(group, 2):
             if a.doc_id == b.doc_id:
                 continue
@@ -76,8 +77,12 @@ def candidate_pairs(extraction: ExtractionResult, timeline: Timeline | None = No
                 dd = extraction.document_dates
                 if is_after_change(a, change, dd) != is_after_change(b, change, dd):
                     relation = "different"
-            if separate_decisions(a, b, moments):
-                relation = "different"  # 1차·2차 결정처럼 차례로 내려진 결정은 모순이 아니다
+            if successive_records(a, b, moments):
+                relation = "different"  # 1차·2차 결정, 재입건 뒤 새 사건번호, 담당자 교체 — 차례이지 모순이 아니다
+            elif (a.doc_id in moments) != (b.doc_id in moments) and a.slot in SUCCESSIVE_SLOTS:
+                said, record = (b, a) if a.doc_id in moments else (a, b)
+                if said_of_another_record(said, record, records):
+                    relation = "different"  # 진정서가 지금 기록을 말한 것 — 옛 기록과는 비교하지 않는다
             if relation == "different":
                 continue
             pairs.append(ClaimPair(a, b, relation == "same"))

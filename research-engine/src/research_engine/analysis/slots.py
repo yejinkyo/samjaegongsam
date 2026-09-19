@@ -17,7 +17,7 @@ from ..schema import (
     Timeline,
     TimeValue,
 )
-from .changes import DECISION_SLOTS, decision_moments, is_after_change, latest_change, latest_decision_doc
+from .changes import SUCCESSIVE_SLOTS, is_after_change, latest_change, latest_records, record_moments
 
 S = ClaimSlot
 TIME_SLOTS = {S.TRANSFER_TIME, S.RECEIPT_TIME, S.INCIDENT_TIME, S.LAST_SEEN_TIME, S.LAST_CONTACT_TIME, S.DECISION_TIME}
@@ -88,6 +88,7 @@ def evaluate_slots(
     document_dates: dict[str, Sourced[TimeValue]] | None = None,
 ) -> list[SlotStatus]:
     dd = document_dates or {}
+    moments = record_moments(claims, dd)
     flow = requirements.stages
     current_idx = flow.index(timeline.current_stage) if timeline.current_stage in flow else -1
     contradicted = {cid for d in decisions if d.label is NliLabel.CONTRADICTION for cid in (d.claim_a_id, d.claim_b_id)}
@@ -97,12 +98,12 @@ def evaluate_slots(
         if stage_idx > current_idx + 1:
             continue  # 아직 도달하지 않은 단계의 항목은 '빠짐'으로 보지 않는다
         cs = [c for c in claims if c.slot is req.slot and (req.subject is None or c.subject in (req.subject, None))]
-        if req.slot in DECISION_SLOTS:
-            # 결정이 여러 번이면 가장 최근 통지서의 값이 지금 상태다. 옛 통지서는 이력이지 낡은 값이 아니다.
-            moments = decision_moments(claims, dd)
-            latest = latest_decision_doc(moments)
+        if req.slot in SUCCESSIVE_SLOTS:
+            # 서로 다른 때 나온 기록끼리는 가장 최근 것이 지금 값이다(결정 · 재입건 뒤 사건번호 · 바뀐 담당자).
+            # 옛 기록은 이력이지 낡은 값이 아니라서 '바뀌었을 수 있음'으로도 올리지 않는다.
+            latest = latest_records(cs, moments)
             if latest is not None:
-                cs = [c for c in cs if c.doc_id == latest or c.doc_id not in moments]
+                cs = [c for c in cs if c.doc_id in latest or c.doc_id not in moments]
         change = latest_change(claims, req.slot, dd)
         stale: list[Claim] = []
         if change is not None:
