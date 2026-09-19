@@ -104,7 +104,8 @@ def test_자정을_넘는_시간대를_어색하게_적지_않는다(views):
 
 def test_커밋된_화면_데이터가_엔진_출력과_같다(export):
     """엔진이나 픽스처를 고치고 export_web.py 를 다시 돌리지 않으면 여기서 걸린다."""
-    assert export.OUT.read_text(encoding="utf-8") == export.render(export.build_all())
+    screen_views = [v for v in export.build_all() if v["id"] not in export.SKIP_ON_SCREEN]
+    assert export.OUT.read_text(encoding="utf-8") == export.render(screen_views)
 
 
 # ── 타임라인 줄 이름 ─────────────────────────────────────────────────────
