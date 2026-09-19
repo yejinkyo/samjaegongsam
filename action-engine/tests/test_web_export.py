@@ -219,3 +219,10 @@ def test_답으로_기록한_결정의_통지서를_가진_것으로_보지_않�
     notice = next(i for i in a["prepare"]["items"] if "통지서" in i["label"])
     assert notice["state"] == "미보유"
     assert a["prepare"]["done"] == sum(1 for i in a["prepare"]["items"] if i["state"] == "보유")
+
+
+def test_답의_기한에는_통지_수령일부터_세는_것만_싣는다(views):
+    """화면은 고른 수령일에 기간을 더한다. 공소시효(범행 종료일부터 N년)를 실으면 수령일 + 10년이 된다."""
+    for outcome in views["suspension_recent"]["outcomes"].values():
+        assert "형사 공소시효 임박" not in [t["label"] for t in outcome["deadlines"]]
+    assert [t["label"] for t in views["suspension_recent"]["outcomes"]["불기소"]["deadlines"]] == ["검찰 항고 기한"]

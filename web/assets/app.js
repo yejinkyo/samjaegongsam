@@ -859,7 +859,7 @@
     } else {
       lines.push(h("p", { class: "t-body-s", text: waitingText(s) }));
     }
-    lines.push(h("p", { class: "modal__note", text: "내가 기록한 것이라 자료로 확인된 것은 아니에요. 통지서를 자료로 올리면 기록으로 바뀝니다. 고치거나 지우려면 오른쪽 '낸 것'에서 하세요." }));
+    lines.push(h("p", { class: "modal__note", text: "내가 기록한 것이라 자료로 확인된 것은 아니에요. 통지서를 자료로 올리면 기록으로 바뀝니다." }));
     openModal(row.full || row.title, h("div", { class: "tldetail" }, lines));
   }
 
@@ -1382,7 +1382,6 @@
       var result = null;
       if (outcome) {
         var lines = [
-          h("p", { class: "sub__outcome-head t-label", text: "이 답으로 달라진 것" }),
           h("p", { class: "t-body-s", text: "사건 단계 · " + outcome.st }),
         ];
         (outcome.deadlines || []).forEach(function (t) {
@@ -1415,14 +1414,21 @@
       ]);
     }));
 
-    return h("section", { class: "subs" }, [
-      h("div", { class: "subs__head" }, [
+    var box = h("details", { class: "subs" }, [
+      h("summary", { class: "subs__head" }, [
         h("span", { class: "t-label", text: "낸 것" }),
         h("span", { class: "subs__count t-label", text: String(subs.length) }),
+        h("span", { class: "subs__chevron", "aria-hidden": "true" }),
       ]),
       list,
     ]);
+    box.open = !!subsOpen[c.id];
+    box.addEventListener("toggle", function () { subsOpen[c.id] = box.open; });
+    return box;
   }
+
+  // 사건마다 '낸 것'을 펼쳐 두었는지. 새로 그려도 닫히지 않게 기억한다(처음엔 접혀 있다)
+  var subsOpen = {};
 
   // ── 서류 초안 ────────────────────────────────────────────────────────
   //
@@ -1928,7 +1934,7 @@
 
     root.appendChild(h("div", { class: "disclaimer" }, [
       icon("info", 18),
-      h("p", { class: "t-body-s c-secondary", text: "타래는 범인이나 사건의 진실을 판단하지 않습니다. 지금 자료로 확인되는 것과 아직 확인되지 않은 것을 나누어 보여드립니다." }),
+      h("p", { class: "t-body-s c-secondary", text: "타래는 범인이나 사건의 진실을 판단하지 않습니다." }),
     ]));
     root.appendChild(h("main", { class: "page page--case" }, [
       backLink(),

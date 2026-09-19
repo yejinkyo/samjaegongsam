@@ -722,7 +722,11 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
    답이 없는 동안은 노란 바탕으로 둔다(확인이 필요해요의 '확인되지 않음'과 같은 색).
    답이 오면 색을 뺀다 — 더 볼 일이 없다는 뜻이다. */
 .subs { display: flex; flex-direction: column; gap: 12px; padding: 20px 22px; border-radius: 18px; background: var(--bg-elevated); box-shadow: var(--shadow-card); }
-.subs__head { display: flex; align-items: center; gap: 8px; color: var(--text-secondary); }
+.subs__head { display: flex; align-items: center; gap: 8px; color: var(--text-secondary); cursor: pointer; list-style: none; }
+.subs__head::-webkit-details-marker { display: none; }
+.subs:not([open]) { gap: 0; }
+.subs__chevron { width: 8px; height: 8px; margin-left: auto; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg); transition: transform 0.15s; }
+.subs[open] .subs__chevron { transform: rotate(-135deg); }
 .subs__count { display: flex; align-items: center; justify-content: center; min-width: 22px; height: 22px; padding: 0 7px; border-radius: 999px; background: var(--bg-sunken); color: var(--text-secondary); }
 .subs__list { display: flex; flex-direction: column; gap: 10px; }
 
@@ -751,7 +755,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 /* 받은 답이 사건을 어떻게 바꾸는지 — 낸 것 카드 안에 이어 붙인다 */
 .sub__answer { margin-top: 2px; color: var(--brand-primary); }
 .sub__outcome { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; padding: 12px 14px; border-radius: 10px; background: var(--bg-elevated); }
-.sub__outcome-head { color: var(--text-tertiary); }
 .sub__outcome-note { color: var(--text-tertiary); }
 .sub__due { display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border-radius: 8px; background: var(--bg-sunken); box-shadow: inset 3px 0 0 var(--bar, var(--border-strong)); }
 .sub__due .t-caption { color: var(--text-tertiary); }
