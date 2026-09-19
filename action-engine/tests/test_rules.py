@@ -380,3 +380,11 @@ def test_사건이_다르면_다른_행동이_나온다(missing, fraud):
     assert a.main.rule_no != b.main.rule_no
     assert a.main.action == "ACT-신규정보제출"  # 2019 목격 진술이 2022 통지서에 반영 안 됨
     assert b.main.action == "ACT-모순확인"  # 송금액이 자료마다 다름
+
+
+def test_이미_지난_불복_기한은_5번에_걸리지_않는다():
+    """장기 미제 사건의 옛 중지 결정 — 닫힌 이의제기 경로를 다음 행동으로 올리지 않는다."""
+    expired = Deadline(code="TIM-014", label="이의제기", severity="expired")
+    open_ = Deadline(code="TIM-014", label="이의제기", severity="soon")
+    assert decide(state(st=ST.SUSPENDED_SUSPECT, tim=[expired])).main.action == "ACT-상시"
+    assert decide(state(st=ST.SUSPENDED_SUSPECT, tim=[open_])).main.rule_no == 5

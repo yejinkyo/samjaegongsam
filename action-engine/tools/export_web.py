@@ -444,6 +444,8 @@ def _timeline(result: dict[str, Any], docs: dict[str, dict], doc_index: dict[str
         start = _dt(time.get("start")) or datetime.max
         rows.append((start, {
             "type": "event",
+            # 화면이 '낸 것 · 받은 답'을 날짜 순서대로 끼워 넣을 때 쓴다. 시각을 모르면 없다
+            "at": f"{start:%Y-%m-%d}" if start != datetime.max else None,
             "time": "시각 미상" if e.get("time_unknown") or not time else _event_time(time, multi_year),
             # 무슨 일이었는지 요약한 이름. 요약할 수 없으면 잘리지 않은 원문의 첫 문장 —
             # 엔진이 '…' 로 줄여 둔 제목에서 뽑으면 화면이 아무리 넓어도 그 자리에서 끝난다
@@ -472,6 +474,7 @@ def _timeline(result: dict[str, Any], docs: dict[str, dict], doc_index: dict[str
         span = f"약 {years:.1f}년" if years >= 1 else f"약 {round(g['hours'] / 24)}일"
         rows.append((start, {
             "type": "gap",
+            "at": f"{start:%Y-%m-%d}",
             "range": f"{start:%Y.%m.%d} – {end:%Y.%m.%d}",
             "text": f"이 기간의 기록이 없어요 ({span})",
         }))
@@ -586,7 +589,7 @@ def _period(result: dict[str, Any]) -> str:
     return f"{a:%Y.%m.%d} – {b:%m.%d}"
 
 
-def _action(card, hit, result: dict[str, Any]) -> dict[str, Any] | None:
+def _action(card, hit, result: dict[str, Any], prose: bool = True) -> dict[str, Any] | None:
     """행동 하나를 화면 dict 로. 준비물·제출처는 그 행동에 맞춰 다시 대조한다.
 
     다음 행동 하나만이 아니라 후보 전부를 이렇게 만들어 둔다. 사용자가 '냈어요'를
@@ -650,7 +653,7 @@ def _action(card, hit, result: dict[str, Any]) -> dict[str, Any] | None:
         "submit_to": c.submit_to if c else None,
         "form_name": c.form_name if c else None,
         # 낼 서류가 정해진 행동에만 초안이 붙는다
-        "draft": _draft(card, result, hit.action),
+        "draft": _draft(card, result, hit.action, prose=prose),
     }
 
 
@@ -658,6 +661,13 @@ def _action(card, hit, result: dict[str, Any]) -> dict[str, Any] | None:
 # mapping.DECISION_TABLE 이 읽을 수 있는 말만 둔다 — 표에 없는 말을 고르게 해 놓고
 # 아무 일도 일어나지 않으면 사용자는 기능이 고장 난 줄 안다.
 RESPONSE_CHOICES = ["불송치", "불기소", "항고 기각", "피의자중지", "참고인중지", "기소"]
+
+
+def _severity_days() -> dict[str, int]:
+    from action_engine.rules import load_deadlines
+
+    bands = load_deadlines()["severity"]
+    return {"critical": bands["critical_days"], "soon": bands["soon_days"]}
 
 
 def _outcomes(case_id: str, result: dict[str, Any]) -> dict[str, Any]:
@@ -681,6 +691,9 @@ def _outcomes(case_id: str, result: dict[str, Any]) -> dict[str, Any]:
         live = [t for t in card.tim if t.due_date]
         out[choice] = {
             "st": card.st.label,
+            # 이 답을 받았을 때의 행동 목록 — 무엇을 · 어디에가 새 단계에 맞춰 다시 대조돼 있다.
+            # (불기소를 받으면 '불복'은 이의제기서가 아니라 항고장이다. 옛 카드의 행을 쓰면 안 된다.)
+            "actions": _answer_actions(card, result),
             "next": ACTION_LABELS.get(card.next_action.action, card.next_action.action) if card.next_action else None,
             # 화면이 actions 목록에서 이 행동을 찾아 그대로 그린다
             "next_key": card.next_action.action if card.next_action else None,
@@ -696,8 +709,65 @@ def _outcomes(case_id: str, result: dict[str, Any]) -> dict[str, Any]:
     return out
 
 
-def _draft(card, result: dict[str, Any], action: str | None) -> dict[str, Any] | None:
-    """낼 서류의 초안. 만들 서류가 정해져 있지 않으면 화면도 아무것도 그리지 않는다."""
+def _action_tims(action: str) -> set[str]:
+    """그 행동을 부르는 규칙이 보는 기한 코드. 단계로 발화한 규칙(5번)은 근거 코드에 기한이 없어서 쓴다."""
+    from action_engine.rules import load_rules
+
+    codes: set[str] = set()
+
+    def walk(when: dict[str, Any]) -> None:
+        codes.update(when.get("tim_code", []))
+        for sub in when.get("any", []):
+            walk(sub)
+
+    for rule in load_rules()["rules"]:
+        if rule["action"] == action:
+            walk(rule.get("when") or {})
+    return codes
+
+
+def _unmark_new_notice(view: dict[str, Any]) -> None:
+    """새로 받은 답의 통지서는 자료함에 없다 — 옛 통지서가 있다고 '보유'로 두지 않는다.
+
+    자료함의 통지서는 이전 결정(예: 수사중지)의 것이다. 불기소를 받았다고 기록했을 뿐 그 통지서를
+    올리지 않았는데 '불기소 이유 통지서 — 보유'로 보이면, 없는 서류를 가진 줄 알고 준비하지 않는다.
+    """
+    prepare = view.get("prepare")
+    if not prepare:
+        return
+    for item in prepare["items"]:
+        if item["state"] == "보유" and "통지서" in item["label"]:
+            item["state"] = "미보유"
+    prepare["done"] = sum(1 for i in prepare["items"] if i["state"] == "보유")
+
+
+def _answer_actions(card, result: dict[str, Any]) -> list[dict[str, Any]]:
+    """답을 받은 뒤의 행동 목록. 기한은 날짜로 굳히지 않고 기간만 싣는다.
+
+    미리 계산할 때는 기준일에 답을 받았다고 두지만, 실제로 받은 날은 사용자가 고른다.
+    그래서 '언제까지' 행과 D-day 를 빼고 ``due_rule``(기간)을 실어 화면이 받은 날에 더하게 한다.
+    """
+    out = []
+    for hit in ([card.next_action] if card.next_action else []) + list(card.also):
+        view = _action(card, hit, result, prose=False)
+        if not view:
+            continue
+        codes = set(hit.codes) | _action_tims(hit.action)
+        deadline = next((t for t in card.tim if t.code in codes and t.period_days), None)
+        view["due"] = None
+        view["rows"] = [r for r in view["rows"] if r["k"] != "언제까지"]
+        view["due_rule"] = {"label": deadline.label, "period_days": deadline.period_days} if deadline else None
+        _unmark_new_notice(view)
+        out.append(view)
+    return out
+
+
+def _draft(card, result: dict[str, Any], action: str | None, prose: bool = True) -> dict[str, Any] | None:
+    """낼 서류의 초안. 만들 서류가 정해져 있지 않으면 화면도 아무것도 그리지 않는다.
+
+    ``prose`` 가 False 면 문장으로 엮지 않고 골격만 싣는다 — 답마다 미리 계산하는 초안까지
+    모델을 부르면 답 하나에 호출이 여러 번 늘어난다.
+    """
     from action_engine.draft import build_draft
 
     from action_engine.polish import polish
@@ -708,13 +778,16 @@ def _draft(card, result: dict[str, Any], action: str | None) -> dict[str, Any] |
 
     # 문장으로 엮는 것은 선택이다. 키가 없거나 검사에 걸리면 골격만 싣는다 —
     # 화면은 둘 다 그릴 줄 알아야 하고, 없다고 비지 않는다.
-    prose = polish(d)
-    if prose.rejected:
-        print(f"  {action}: 문장 다듬기를 건너뜁니다 — {prose.rejected}")
+    text = None
+    if prose:
+        polished = polish(d)
+        if polished.rejected:
+            print(f"  {action}: 문장 다듬기를 건너뜁니다 — {polished.rejected}")
+        text = polished.text
 
     return {
         "is_draft": d.is_draft,
-        "prose": prose.text,
+        "prose": text,
         "form_name": d.form_name,
         "form_source": d.form_source,
         "form_url": d.form_url,
@@ -770,6 +843,8 @@ def build_view(case_id: str, title: str, result: dict[str, Any]) -> dict[str, An
         "actions": _actions(card, result),
         # 「회신 왔어요」에서 답을 고르면 이 표에서 그 답의 결과를 꺼내 쓴다
         "response_choices": RESPONSE_CHOICES,
+        # 받은 날로 기한을 다시 셀 때 화면이 쓰는 급함 기준 — 팀 기준이라 엔진의 값을 그대로 넘긴다
+        "severity_days": _severity_days(),
         "outcomes": _outcomes(case_id, result),
     }
 
