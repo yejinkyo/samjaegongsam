@@ -195,3 +195,32 @@ def test_유형이_요구하지_않는_항목도_한글_이름으로_나온다()
     assert SLOT_DEFAULT_LABELS[ClaimSlot.TRANSFER_TIME] == "돈이 오간 시점"
     # 모든 항목에 이름이 있어야 한다 — 하나라도 빠지면 그 항목만 영어로 샌다
     assert set(SLOT_DEFAULT_LABELS) == set(ClaimSlot)
+
+
+def _decision(doc, kind, when, level=EvidenceLevel.RECORD):
+    """통지서 한 장이 알리는 결정 — 결정 내용과 결정 일자 두 주장."""
+    day = datetime.fromisoformat(when)
+    return [claim(ClaimSlot.DECISION_TYPE, kind, doc, level=level),
+            claim(ClaimSlot.DECISION_TIME, when, doc, level=level, time=tv(day, day + timedelta(days=1)))]
+
+
+def test_차례로_내려진_두_결정은_모순으로_비교하지_않는다():
+    claims = _decision("notice_2008", "수사중지(피의자중지)", "2008-03-21") + _decision("notice_2022", "수사중지(참고인중지)", "2022-09-14")
+    pairs = candidate_pairs(ExtractionResult(claims=claims))
+    assert not [p for p in pairs if p.a.slot in (ClaimSlot.DECISION_TYPE, ClaimSlot.DECISION_TIME)]
+
+
+def test_같은_날_결정을_알린_두_통지서는_여전히_비교한다():
+    """사본 두 장처럼 결정 시점이 같으면 같은 결정이다 — 내용이 다르면 모순 판정의 몫으로 남긴다."""
+    claims = _decision("copy_a", "수사중지(피의자중지)", "2022-09-14") + _decision("copy_b", "불송치(혐의없음)", "2022-09-14")
+    pairs = candidate_pairs(ExtractionResult(claims=claims))
+    assert [p for p in pairs if p.a.slot is ClaimSlot.DECISION_TYPE]
+
+
+def test_결정을_말한_진술은_통지서와_계속_비교한다():
+    """진정서가 결정 일자를 다르게 적었으면 새 결정이 아니라 어긋난 말이다."""
+    claims = _decision("notice_2022", "수사중지(참고인중지)", "2022-09-14") + [
+        claim(ClaimSlot.DECISION_TIME, "2022-09-20", "petition", level=EvidenceLevel.STATEMENT,
+              time=tv(datetime(2022, 9, 20), datetime(2022, 9, 21)))]
+    pairs = candidate_pairs(ExtractionResult(claims=claims))
+    assert [p for p in pairs if p.a.slot is ClaimSlot.DECISION_TIME]
