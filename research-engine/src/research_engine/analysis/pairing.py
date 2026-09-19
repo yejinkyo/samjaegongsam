@@ -7,7 +7,7 @@ from itertools import combinations
 
 from ..schema import Claim, ClaimSlot, ExtractionResult, Timeline
 from ..timeline.coref import mask_compatible
-from .changes import CHANGE_OF, is_after_change, latest_change
+from .changes import CHANGE_OF, decision_moments, is_after_change, latest_change, separate_decisions
 
 S = ClaimSlot
 # 한 사건 안에 여러 번 일어날 수 있어 슬롯만으로는 같은 일인지 알 수 없는 항목 — 쌍으로 비교하지 않는다
@@ -60,6 +60,7 @@ def candidate_pairs(extraction: ExtractionResult, timeline: Timeline | None = No
         if c.slot is S.TRANSFER_TIME and c.slot_time is not None and c.slot_time.is_resolved:
             transfer_times.setdefault(c.doc_id, []).append(c)
 
+    moments = decision_moments(extraction.claims, extraction.document_dates)
     pairs: list[ClaimPair] = []
     by_slot: dict[ClaimSlot, list[Claim]] = {}
     for c in claims:
@@ -75,6 +76,8 @@ def candidate_pairs(extraction: ExtractionResult, timeline: Timeline | None = No
                 dd = extraction.document_dates
                 if is_after_change(a, change, dd) != is_after_change(b, change, dd):
                     relation = "different"
+            if separate_decisions(a, b, moments):
+                relation = "different"  # 1차·2차 결정처럼 차례로 내려진 결정은 모순이 아니다
             if relation == "different":
                 continue
             pairs.append(ClaimPair(a, b, relation == "same"))

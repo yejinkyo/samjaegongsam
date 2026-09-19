@@ -17,7 +17,7 @@ from ..schema import (
     Timeline,
     TimeValue,
 )
-from .changes import is_after_change, latest_change
+from .changes import DECISION_SLOTS, decision_moments, is_after_change, latest_change, latest_decision_doc
 
 S = ClaimSlot
 TIME_SLOTS = {S.TRANSFER_TIME, S.RECEIPT_TIME, S.INCIDENT_TIME, S.LAST_SEEN_TIME, S.LAST_CONTACT_TIME, S.DECISION_TIME}
@@ -97,6 +97,12 @@ def evaluate_slots(
         if stage_idx > current_idx + 1:
             continue  # 아직 도달하지 않은 단계의 항목은 '빠짐'으로 보지 않는다
         cs = [c for c in claims if c.slot is req.slot and (req.subject is None or c.subject in (req.subject, None))]
+        if req.slot in DECISION_SLOTS:
+            # 결정이 여러 번이면 가장 최근 통지서의 값이 지금 상태다. 옛 통지서는 이력이지 낡은 값이 아니다.
+            moments = decision_moments(claims, dd)
+            latest = latest_decision_doc(moments)
+            if latest is not None:
+                cs = [c for c in cs if c.doc_id == latest or c.doc_id not in moments]
         change = latest_change(claims, req.slot, dd)
         stale: list[Claim] = []
         if change is not None:

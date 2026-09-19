@@ -61,19 +61,23 @@ def test_unreadable_lines_and_unknown_form_are_asked_back(result):
     assert pending["family_memo:u4:q"].kind is ClarificationKind.UNREADABLE_TEXT
 
 
-def test_the_older_decision_wins_the_decision_type_slot(result):
-    """알려진 한계: 2008년 1차 결정이 대표값이 되어 2022년 참고인중지가 가려진다.
+def test_the_latest_decision_is_the_current_state(result):
+    """결정이 두 번(2008 피의자중지 → 2022 참고인중지)이면 가장 최근 통지서가 지금 상태다.
 
-    기능 2 가 이 값으로 ST 를 판정하므로 ST-202(참고인중지)여야 할 카드가 ST-201 로 나온다.
+    옛 결정이 대표값이 되면 기능 2 가 ST-201(피의자중지)을 기준으로 다음 행동을 고른다.
     """
     slots = {s.slot: s for s in result.analysis.slot_statuses}
     assert slots[ClaimSlot.DECISION_TYPE].state is SlotState.CONFIRMED
-    assert slots[ClaimSlot.DECISION_TYPE].value == "수사중지(피의자중지)"  # 2008 통지서
-    assert slots[ClaimSlot.DECISION_TIME].state is SlotState.CONFLICTING  # 결정일자는 두 개로 갈린다
+    assert slots[ClaimSlot.DECISION_TYPE].value == "수사중지(참고인중지)"  # 2022 통지서
+    assert slots[ClaimSlot.DECISION_TIME].state is SlotState.CONFIRMED
+    assert slots[ClaimSlot.DECISION_TIME].value == "2022-09-14"
 
 
 def test_values_that_changed_over_time_are_reported_as_conflicts(result):
-    """알려진 오탐: 재입건·담당자 교체·2회 결정은 어긋난 게 아니라 시점이 다른 것이다."""
+    """알려진 오탐: 재입건·담당자 교체는 어긋난 게 아니라 시점이 다른 것이다.
+
+    두 번 내려진 결정은 이제 차례로 본다(결정 일자는 빠졌다). 사건번호·담당 수사관은 아직 남아 있다.
+    """
     conflicting = {i.slot for i in result.analysis.issues if i.condition is GapCondition.CONFLICTING}
-    assert conflicting == {ClaimSlot.CASE_NUMBER, ClaimSlot.DECISION_TIME, ClaimSlot.INVESTIGATOR}
-    assert result.analysis.case_card.slots_done == 3
+    assert conflicting == {ClaimSlot.CASE_NUMBER, ClaimSlot.INVESTIGATOR}
+    assert result.analysis.case_card.slots_done == 4
