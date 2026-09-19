@@ -25,6 +25,7 @@ from pathlib import Path
 from typing import Any
 
 from action_engine import build_card
+from action_engine.mapping import effective_issuer
 
 ROOT = Path(__file__).resolve().parents[2]
 FIXTURES = Path(__file__).resolve().parents[1] / "tests" / "fixtures"
@@ -446,7 +447,7 @@ def _action(card, hit, result: dict[str, Any]) -> dict[str, Any] | None:
         }
 
     rows: list[dict[str, str]] = []
-    c = build_checklist(hit.action, result.get("documents", []), card.tim, st=card.st.code)
+    c = build_checklist(hit.action, result.get("documents", []), card.tim, st=card.st.code, issuer=effective_issuer(card.st))
     state = "unresolved"
     note = None
     prepare = None

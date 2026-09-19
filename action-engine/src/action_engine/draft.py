@@ -127,7 +127,9 @@ def build_draft(result: dict[str, Any], card: CaseCardOut, action: str | None = 
     if not action:
         return None
 
-    check = build_checklist(action, result.get("documents", []), card.tim, st=card.st.code)
+    from .mapping import effective_issuer
+
+    check = build_checklist(action, result.get("documents", []), card.tim, st=card.st.code, issuer=effective_issuer(card.st))
     if not check.form_name:
         # 낼 서류가 사전에 없다. 서식 이름을 지어내면 그대로 잘못된 서류를 쓰게 된다.
         return None
@@ -178,9 +180,10 @@ def build_draft(result: dict[str, Any], card: CaseCardOut, action: str | None = 
             lines=lines,
             note="자료에 적힌 날짜와 문구를 시간순으로 옮긴 것입니다. 문장을 다듬어 쓰세요.",
         ),
+        # 판단이 들어가는 칸 — 이의신청·항고는 '이의 사유', 자료 제출은 '요청 사항'. 제목과 안내는 지식베이스가 정한다
         DraftSection(
-            heading="이의 사유",
-            note="타래는 이 칸을 대신 쓰지 않습니다. 왜 결정에 동의할 수 없는지는 직접 적어 주세요.",
+            heading=check.reason_heading or "이의 사유",
+            note=check.reason_note or "타래는 이 칸을 대신 쓰지 않습니다. 왜 결정에 동의할 수 없는지는 직접 적어 주세요.",
         ),
     ]
 

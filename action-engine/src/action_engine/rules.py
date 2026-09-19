@@ -18,6 +18,7 @@ from pathlib import Path
 from typing import Any
 
 from .codes import label
+from .mapping import effective_issuer
 from .schema import ActionDecision, CaseCardOut, CaseState, CodeHit, Deadline, RuleHit, Submission
 
 DATA = Path(__file__).parent / "data"
@@ -61,9 +62,13 @@ def compute_deadlines(
     basis = basis or {}
     out: list[Deadline] = []
 
+    issuer = effective_issuer(state.st)
     for row in load_deadlines()["deadlines"]:
         applies = row["applies_to_st"]
         if "*" not in applies and state.st.code not in applies:
+            continue
+        # 같은 단계라도 결정한 기관에 따라 불복 절차가 다르다 — 경찰 수사중지는 이의제기, 검사의 기소중지는 항고
+        if row.get("issuer") and row["issuer"] != issuer:
             continue
 
         code = row["code"]
@@ -241,6 +246,7 @@ def build_card(result: dict[str, Any], submissions: list[Submission] | None = No
         result.get("documents", []),
         decision.state.tim,
         st=decision.state.st.code,
+        issuer=effective_issuer(decision.state.st),
     )
     out = CaseCardOut(
         case_type=card.get("case_type", result.get("case_type", "")),

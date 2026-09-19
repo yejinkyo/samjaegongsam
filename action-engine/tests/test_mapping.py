@@ -48,11 +48,50 @@ def test_결정내용_문자열로_단계가_갈린다():
 
     assert case("불송치") == ST.POLICE_NO_REFERRAL
     assert case("불기소") == ST.PROSECUTION_NO_CHARGE
-    assert case("혐의없음") == ST.PROSECUTION_NO_CHARGE
+    assert case("혐의없음") == ST.UNKNOWN  # 경찰도 검찰도 쓰는 말 — 낸 기관을 모르면 고르지 않는다
     assert case("이의신청 접수") == ST.APPEAL_PENDING
     assert case("재정신청") == ST.ADJUDICATION_REQUEST
     assert case("참고인중지") == ST.SUSPENDED_WITNESS
     assert case("피의자중지") == ST.SUSPENDED_SUSPECT
+
+
+def _decided(value: str, speaker: str | None = None, when: str | None = None):
+    slots = [{"slot": "decision_type", "value": value, "state": "confirmed", "stage": "outcome", "required": True,
+              "claim_ids": ["n:c1"], "sources": [{"source_doc_id": "n"}]}]
+    if when:
+        slots.append({"slot": "decision_time", "value": when, "state": "confirmed", "stage": "outcome",
+                      "required": True, "sources": []})
+    claims = [{"claim_id": "n:c1", "speaker": speaker}] if speaker else []
+    return resolve_st({"analysis": {"slot_statuses": slots}, "extraction": {"claims": claims},
+                       "timeline": {"current_stage": "outcome"}})
+
+
+def test_혐의없음은_통지서를_낸_기관으로_가른다():
+    """'혐의없음'은 경찰 불송치와 검찰 불기소에 함께 쓰는 사유다. 낸 기관이 다르면 불복 절차도 다르다."""
+    police = _decided("혐의없음", speaker="**경찰서")
+    assert police.code == ST.POLICE_NO_REFERRAL and police.issuer == "police"
+    prosecution = _decided("혐의없음", speaker="**지방검찰청")
+    assert prosecution.code == ST.PROSECUTION_NO_CHARGE and prosecution.issuer == "prosecution"
+
+
+def test_수사권_조정_전_결정은_검찰의_결정이다():
+    """2021-01-01 전에는 경찰에 불송치 결정권이 없었다."""
+    old = _decided("혐의없음", when="2019-05-02")
+    assert old.code == ST.PROSECUTION_NO_CHARGE and old.issuer == "prosecution"
+
+
+def test_낸_기관을_모르면_단계를_고르지_않는다():
+    unknown = _decided("혐의없음", speaker="notice.png 발급처", when="2024-03-01")
+    assert unknown.code == ST.UNKNOWN
+    assert unknown.confidence is Confidence.UNDETERMINED
+    assert set(unknown.ambiguous_between) == {ST.POLICE_NO_REFERRAL, ST.PROSECUTION_NO_CHARGE}
+
+
+def test_결정_문구가_기관을_밝히면_그걸_따른다():
+    assert _decided("불송치(혐의없음)", speaker="**지방검찰청").code == ST.POLICE_NO_REFERRAL
+    stop = _decided("기소중지")
+    assert stop.code == ST.SUSPENDED_SUSPECT and stop.issuer == "prosecution"
+    assert "항고" in stop.reason
 
 
 def test_결정내용이_흔들리면_확정으로_올리지_않는다():

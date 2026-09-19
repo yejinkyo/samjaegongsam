@@ -28,6 +28,10 @@ class CodeHit(BaseModel):
     source_trigger_keys: list[str] = Field(default_factory=list, description="근거가 된 research-engine 트리거")
     source_doc_ids: list[str] = Field(default_factory=list)
     ambiguous_between: list[str] = Field(default_factory=list, description="둘 중 하나인데 자료로 못 가른 경우")
+    issuer: str | None = Field(
+        default=None,
+        description="결정을 낸 기관 — police(경찰) · prosecution(검찰). 기한·불복 서류가 기관에 따라 갈린다. 모르면 None",
+    )
 
 
 class Deadline(BaseModel):
@@ -84,6 +88,8 @@ class Checklist(BaseModel):
     prerequisite: str | None = Field(default=None, description="먼저 거쳐야 하는 절차")
     source: str | None = Field(default=None, description="확인한 공식 출처 주소")
     advisory: str | None = Field(default=None, description="서류 외에 함께 알려줄 것")
+    reason_heading: str | None = Field(default=None, description="초안에서 사용자가 직접 쓰는 칸의 제목. 없으면 '이의 사유'")
+    reason_note: str | None = Field(default=None, description="그 칸에 붙이는 안내")
 
 
 class SubmissionResponse(BaseModel):

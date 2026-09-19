@@ -14,6 +14,7 @@ ST 판정은 그 값을 우선순위 표에 넣어 내린다.
 
 from __future__ import annotations
 
+import re
 from datetime import date, datetime
 from typing import Any
 
@@ -54,6 +55,35 @@ DECISION_TABLE: list[tuple[tuple[str, ...], tuple[str, ...], ST, Confidence]] = 
     (("수사중지", "수사 중지", "피의자중지", "참고인중지", "기소중지"), (), ST.SUSPENDED_SUSPECT, Confidence.CONFIRMED),
     (("내사종결", "내사 종결", "입건전조사 종결", "불입건"), (), ST.PRE_INVESTIGATION, Confidence.PRESUMED),
 ]
+
+# ── 결정을 낸 기관 ──────────────────────────────────────────────────────
+# 같은 말을 경찰과 검찰이 모두 쓰는 결정 사유. 경찰의 불송치(수사준칙 제51조제1항제3호)와 검사의
+# 불기소(제52조제1항제2호)가 '혐의없음 · 죄가안됨 · 공소권없음 · 각하'를 함께 쓴다. 이 말만 있으면
+# 불송치인지 불기소인지 모른다 — 틀리면 경찰에 낼 이의신청 대신 검찰 항고를 안내하게 된다.
+SHARED_REASONS = ("혐의없음", "무혐의", "죄가안됨", "공소권없음", "각하")
+# 한쪽 기관만 내리는 결정 — 결정 문구만으로 기관이 정해진다 (수사준칙 제51조 · 제52조)
+PROSECUTION_ONLY = ("기소중지", "기소유예", "불기소", "공소제기", "구공판", "구약식")
+POLICE_ONLY = ("수사중지", "불송치")
+# 통지서 발급 기관 (research-engine 이 기록 자료의 화자로 넘겨준다: '**경찰서' · '**지방검찰청')
+POLICE_ISSUER = re.compile(r"경찰서|경찰청|경찰관서")
+PROSECUTION_ISSUER = re.compile(r"검찰청|지청")
+# 수사권 조정 시행일. 그 전에는 경찰에 불송치·수사중지 결정 권한이 없어 수사 결정은 모두 검사가 했다
+REFORM_DATE = date(2021, 1, 1)
+# 결정 기관을 모를 때 단계만으로 정하는 기관. 중지는 조정 이후 흔한 경찰 결정을 기본으로 본다
+DEFAULT_ISSUER: dict[str, str] = {
+    ST.POLICE_NO_REFERRAL: "police",
+    ST.SUSPENDED_SUSPECT: "police",
+    ST.SUSPENDED_WITNESS: "police",
+    ST.PROSECUTION_NO_CHARGE: "prosecution",
+    ST.APPEAL_PENDING: "prosecution",
+    ST.ADJUDICATION_REQUEST: "prosecution",
+}
+
+
+def effective_issuer(st: CodeHit) -> str | None:
+    """기한·불복 서류를 고를 때 쓰는 기관. 자료로 가린 기관이 먼저고, 없으면 단계로 정한다."""
+    return st.issuer or DEFAULT_ISSUER.get(st.code)
+
 
 # 결정 내용이 없을 때 현재 단계로 추정한다 (전부 '추정').
 STAGE_FALLBACK: dict[str, ST] = {
@@ -146,6 +176,45 @@ def st_from_decision(value: str, doc_ids: list[str] | None = None, *, confirmed:
     return None
 
 
+def _decision_date(result: dict[str, Any], decision: dict[str, Any]) -> date | None:
+    """결정 시점: 결정일자 슬롯 → 결정을 적은 문서의 작성일."""
+    when = _parse_date((_slot_map(result).get("decision_time") or {}).get("value"))
+    if when:
+        return when
+    dates = (result.get("extraction") or {}).get("document_dates") or {}
+    for src in decision.get("sources", []):
+        value = (dates.get(src.get("source_doc_id")) or {}).get("value") or {}
+        when = _parse_date(value.get("start"))
+        if when:
+            return when
+    return None
+
+
+def decision_issuer(result: dict[str, Any], decision: dict[str, Any], value: str) -> str | None:
+    """결정을 낸 기관. 결정 문구 → 통지서 발급 기관 → 결정 시점(수사권 조정 전이면 검찰) 순."""
+    if "송치" in value and "불송치" not in value:
+        return "police"  # 검찰송치는 사법경찰관의 결정이다 (수사준칙 제51조제1항제2호)
+    if any(word in value for word in PROSECUTION_ONLY):
+        return "prosecution"
+    if any(word in value for word in POLICE_ONLY):
+        return "police"
+    ids = set(decision.get("claim_ids") or [])
+    speakers = [c.get("speaker") or "" for c in (result.get("extraction") or {}).get("claims", []) if c.get("claim_id") in ids]
+    police = any(POLICE_ISSUER.search(s) for s in speakers)
+    prosecution = any(PROSECUTION_ISSUER.search(s) for s in speakers)
+    if police != prosecution:
+        return "police" if police else "prosecution"
+    when = _decision_date(result, decision)
+    if when is not None and when < REFORM_DATE:
+        return "prosecution"
+    return None
+
+
+def _only_shared_reason(value: str) -> bool:
+    """'혐의없음'처럼 경찰·검찰이 함께 쓰는 사유만 있고 불송치·불기소를 밝히지 않았는가."""
+    return any(w in value for w in SHARED_REASONS) and not any(w in value for w in ("불송치", "불기소", "기소유예"))
+
+
 def resolve_st(result: dict[str, Any]) -> CodeHit:
     """D1 — 절차 단계 판정. 상호배타이므로 하나만 돌려준다."""
     slots = _slot_map(result)
@@ -155,6 +224,26 @@ def resolve_st(result: dict[str, Any]) -> CodeHit:
 
     hit = st_from_decision(value, doc_ids, confirmed=decision.get("state") == "confirmed")
     if hit:
+        issuer = decision_issuer(result, decision, value)
+        if _only_shared_reason(value):
+            if issuer == "police":
+                hit = CodeHit(
+                    code=ST.POLICE_NO_REFERRAL, label=label(ST.POLICE_NO_REFERRAL), confidence=hit.confidence,
+                    reason=f"결정 내용 '{value}' 가 경찰의 통지서에 적혀 있어 경찰 불송치로 봅니다",
+                    source_doc_ids=doc_ids,
+                )
+            elif issuer is None:
+                return CodeHit(
+                    code=ST.UNKNOWN, label=label(ST.UNKNOWN), confidence=Confidence.UNDETERMINED,
+                    reason=(f"결정 내용 '{value}' 은 경찰 불송치와 검찰 불기소에 모두 쓰는 말이라, "
+                            "통지서를 낸 기관(경찰서 · 검찰청)을 알아야 단계를 정할 수 있습니다"),
+                    source_doc_ids=doc_ids,
+                    ambiguous_between=[ST.POLICE_NO_REFERRAL, ST.PROSECUTION_NO_CHARGE],
+                )
+        if issuer == "prosecution" and hit.code in (ST.SUSPENDED_SUSPECT, ST.SUSPENDED_WITNESS):
+            # 검사의 기소중지 · 참고인중지는 불기소결정에 포함되어 항고 대상이다 (검찰사건사무규칙 제147조제1항)
+            hit.reason += " — 검사의 결정이라 불복은 항고입니다"
+        hit.issuer = issuer
         return hit
 
     stage = result.get("timeline", {}).get("current_stage")

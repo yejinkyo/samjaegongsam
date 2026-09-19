@@ -30,6 +30,7 @@ def build_checklist(
     documents: list[dict[str, Any]],
     deadlines: list[Deadline] | None = None,
     st: str | None = None,
+    issuer: str | None = None,
 ) -> Checklist:
     """액션 하나에 필요한 서류를 자료함과 맞춰 본다.
 
@@ -44,10 +45,11 @@ def build_checklist(
     actions = kb.get("actions") or {}
     entry = actions.get(action or "") or {}
 
-    # 단계별로 서류가 갈리는 액션은 ST 로 다시 조회한다
+    # 단계별로 서류가 갈리는 액션은 ST 로 다시 조회한다. 결정한 기관에 따라 또 갈리면 'ST/기관' 키가 먼저다
+    # (검사의 기소중지는 ST-201 이지만 이의제기서가 아니라 항고장이다)
     by_stage = entry.get("by_stage") or {}
     if by_stage and st:
-        resolved = by_stage.get(st)
+        resolved = (issuer and by_stage.get(f"{st}/{issuer}")) or by_stage.get(st)
         if resolved:
             action = resolved
             entry = actions.get(resolved) or {}
@@ -108,4 +110,6 @@ def build_checklist(
         prerequisite=entry.get("prerequisite"),
         source=entry.get("source"),
         advisory=entry.get("advisory"),
+        reason_heading=entry.get("reason_heading"),
+        reason_note=entry.get("reason_note"),
     )
