@@ -69,7 +69,8 @@ def test_출처_없는_사건은_넣지_않는다(recent):
 
     assert draft.dropped == 1
     history = [s for s in draft.sections if s.heading == "사건 경위"][0]
-    assert len(history.lines) == len(recent["timeline"]["events"]) - 1
+    mine = sum(1 for e in recent["timeline"]["events"] if e.get("evidence_level") == "user")  # 직접 적은 메모는 원래 빠진다
+    assert len(history.lines) == len(recent["timeline"]["events"]) - 1 - mine
 
 
 def test_법조문과_제출처는_지식베이스에서만_온다(draft):

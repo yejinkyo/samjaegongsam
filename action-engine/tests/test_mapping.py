@@ -1,5 +1,7 @@
 """research-engine 출력 → ST·INF 변환 (A안) 테스트."""
 
+import pytest
+
 from action_engine import INF, ST, Confidence, resolve_inf, resolve_st, to_case_state
 
 # ── ST ──────────────────────────────────────────────────────────────────
@@ -150,12 +152,12 @@ def test_송금액_모순은_진술간_모순으로_옮긴다(fraud):
     assert any("transfer_amount" in k for k in hits[INF.CONTRADICTION_ACROSS].source_trigger_keys)
 
 
-def _conflict(speaker_a: str, speaker_b: str) -> dict:
+def _conflict(speaker_a: str, speaker_b: str, basis: str = "document_author") -> dict:
     return {
         "documents": [],
         "extraction": {"claims": [
-            {"claim_id": "c1", "speaker": speaker_a},
-            {"claim_id": "c2", "speaker": speaker_b},
+            {"claim_id": "c1", "speaker": speaker_a, "speaker_basis": basis},
+            {"claim_id": "c2", "speaker": speaker_b, "speaker_basis": basis},
         ]},
         "analysis": {"issues": [{
             "condition": "conflicting", "message": "값이 엇갈립니다", "sources": [],
@@ -181,6 +183,21 @@ def test_다른_화자면_진술_간_모순이다():
 def test_화자를_모르면_동일인으로_올리지_않는다():
     codes = {h.code for h in resolve_inf(_conflict("", ""))}
     assert INF.CONTRADICTION_ACROSS in codes
+    assert INF.CONTRADICTION_SELF not in codes
+
+
+def test_기관_문서끼리_어긋난_것은_동일인_번복이_아니다():
+    """접수증과 통지서가 다르면 기록끼리 어긋난 것이다. 게다가 기관 이름은 '**경찰서'로 가려져 와서
+    서로 다른 경찰서의 문서도 같은 화자로 보인다."""
+    codes = {h.code for h in resolve_inf(_conflict("**경찰서", "**경찰서", basis="document_issuer"))}
+    assert INF.CONTRADICTION_ACROSS in codes
+    assert INF.CONTRADICTION_SELF not in codes
+
+
+@pytest.mark.parametrize("who", ["보도", "진술인", "작성자 미상", "이**"])
+def test_사람_하나를_가리키지_않는_화자는_동일인으로_보지_않는다(who):
+    """두 기사가 모두 '보도', 이름을 못 찾은 두 진술서가 모두 '진술인'이어도 같은 사람이 아니다."""
+    codes = {h.code for h in resolve_inf(_conflict(who, who))}
     assert INF.CONTRADICTION_SELF not in codes
 
 

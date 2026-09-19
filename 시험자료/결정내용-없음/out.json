@@ -468,7 +468,7 @@
         "action_kind": "fraud"
       },
       {
-        "event_id": "receipt_2025:e5",
+        "event_id": "receipt_2025:e6",
         "doc_id": "receipt_2025",
         "stage": "receipt",
         "action": {
@@ -749,6 +749,38 @@
           "needs_confirmation": false,
           "note": null
         },
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "receipt_2025:c5",
+        "doc_id": "receipt_2025",
+        "speaker": "접수증_2025.jpg 발급처",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": null,
+        "content": {
+          "source_doc_id": "receipt_2025",
+          "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 150.0,
+            "y1": 264.0
+          },
+          "char_start": 0,
+          "char_end": 5,
+          "quote": "죄명 사기",
+          "value": "죄명 사기",
+          "confidence": 0.8406
+        },
+        "slot": "offence",
+        "slot_value": "사기",
+        "slot_time": null,
         "value_is_speaker_self": false,
         "subject": null,
         "polarity": "affirm",
@@ -1075,7 +1107,7 @@
           "ent3"
         ],
         "event_ids": [
-          "receipt_2025:e5"
+          "receipt_2025:e6"
         ],
         "sources": [
           {
@@ -1458,6 +1490,34 @@
             "char_start": 0,
             "char_end": 16,
             "quote": "접수번호 2025-044120"
+          }
+        ]
+      },
+      {
+        "slot": "offence",
+        "label": "죄명",
+        "stage": "receipt",
+        "required": false,
+        "state": "confirmed",
+        "value": "사기",
+        "claim_ids": [
+          "receipt_2025:c5"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "receipt_2025",
+            "page": 1,
+            "source_line": 4,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 220.0,
+              "x1": 150.0,
+              "y1": 264.0
+            },
+            "char_start": 0,
+            "char_end": 5,
+            "quote": "죄명 사기"
           }
         ]
       },

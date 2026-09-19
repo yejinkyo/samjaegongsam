@@ -833,7 +833,7 @@
         "action_kind": null
       },
       {
-        "event_id": "receipt_2022:e5",
+        "event_id": "receipt_2022:e6",
         "doc_id": "receipt_2022",
         "stage": "receipt",
         "action": {
@@ -891,7 +891,7 @@
         "action_kind": null
       },
       {
-        "event_id": "blurred_notice_2024:e6",
+        "event_id": "blurred_notice_2024:e7",
         "doc_id": "blurred_notice_2024",
         "stage": "outcome",
         "action": {
@@ -947,6 +947,28 @@
           "blurred_notice_2024:m3"
         ],
         "evidence_level": "record",
+        "action_kind": null
+      },
+      {
+        "event_id": "note_kang:e1",
+        "doc_id": "note_kang",
+        "stage": "occurrence",
+        "action": {
+          "source_doc_id": "note_kang",
+          "page": 1,
+          "source_line": 1,
+          "source_line_end": null,
+          "source_bbox": null,
+          "char_start": 0,
+          "char_end": 45,
+          "quote": "통지서를 받았는데 비에 젖어서 결정 부분이 번졌습니다. 무슨 결정인지 모르겠어요.",
+          "value": "통지서를 받았는데 비에 젖어서 결정 부분이 번졌습니다. 무슨 결정인지 모르겠어요.",
+          "confidence": 0.8
+        },
+        "time": null,
+        "amount": null,
+        "participant_mention_ids": [],
+        "evidence_level": "user",
         "action_kind": null
       }
     ],
@@ -1136,6 +1158,38 @@
         "evidence_level": "record"
       },
       {
+        "claim_id": "receipt_2022:c5",
+        "doc_id": "receipt_2022",
+        "speaker": "접수증_2022.jpg 발급처",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": null,
+        "content": {
+          "source_doc_id": "receipt_2022",
+          "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 150.0,
+            "y1": 264.0
+          },
+          "char_start": 0,
+          "char_end": 5,
+          "quote": "죄명 사기",
+          "value": "죄명 사기",
+          "confidence": 0.8406
+        },
+        "slot": "offence",
+        "slot_value": "사기",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
         "claim_id": "blurred_notice_2024:c4",
         "doc_id": "blurred_notice_2024",
         "speaker": "**경찰서",
@@ -1169,6 +1223,38 @@
       },
       {
         "claim_id": "blurred_notice_2024:c5",
+        "doc_id": "blurred_notice_2024",
+        "speaker": "**경찰서",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "blurred_notice_2024:m3",
+        "content": {
+          "source_doc_id": "blurred_notice_2024",
+          "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 150.0,
+            "y1": 264.0
+          },
+          "char_start": 0,
+          "char_end": 5,
+          "quote": "죄명 사기",
+          "value": "죄명 사기",
+          "confidence": 0.8216
+        },
+        "slot": "offence",
+        "slot_value": "사기",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "blurred_notice_2024:c6",
         "doc_id": "blurred_notice_2024",
         "speaker": "**경찰서",
         "speaker_basis": "document_issuer",
@@ -1425,6 +1511,35 @@
     "case_type": "investigation_suspended",
     "events": [
       {
+        "timeline_event_id": "tl5",
+        "stage": "occurrence",
+        "title": "통지서를 받았는데 비에 젖어서 결정 부분이 번졌습니다. 무슨 결정인지 …",
+        "time": null,
+        "time_unknown": true,
+        "amount": null,
+        "participant_entity_ids": [],
+        "event_ids": [
+          "note_kang:e1"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "note_kang",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": null,
+            "char_start": 0,
+            "char_end": 45,
+            "quote": "통지서를 받았는데 비에 젖어서 결정 부분이 번졌습니다. 무슨 결정인지 모르겠어요."
+          }
+        ],
+        "evidence_level": "user",
+        "needs_confirmation": true,
+        "flags": [
+          "user_input"
+        ]
+      },
+      {
         "timeline_event_id": "tl3",
         "stage": "transfer",
         "title": "2,300,000원 송금",
@@ -1557,7 +1672,7 @@
           "ent3"
         ],
         "event_ids": [
-          "receipt_2022:e5"
+          "receipt_2022:e6"
         ],
         "sources": [
           {
@@ -1620,7 +1735,7 @@
           "ent4"
         ],
         "event_ids": [
-          "blurred_notice_2024:e6"
+          "blurred_notice_2024:e7"
         ],
         "sources": [
           {
@@ -2355,6 +2470,34 @@
         ]
       },
       {
+        "slot": "offence",
+        "label": "죄명",
+        "stage": "receipt",
+        "required": false,
+        "state": "confirmed",
+        "value": "사기",
+        "claim_ids": [
+          "blurred_notice_2024:c5"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "blurred_notice_2024",
+            "page": 1,
+            "source_line": 4,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 220.0,
+              "x1": 150.0,
+              "y1": 264.0
+            },
+            "char_start": 0,
+            "char_end": 5,
+            "quote": "죄명 사기"
+          }
+        ]
+      },
+      {
         "slot": "case_number",
         "label": "사건번호",
         "stage": "investigation",
@@ -2426,7 +2569,7 @@
         "state": "confirmed",
         "value": "2024-05-30",
         "claim_ids": [
-          "blurred_notice_2024:c5"
+          "blurred_notice_2024:c6"
         ],
         "sources": [
           {

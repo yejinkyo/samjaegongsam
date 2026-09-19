@@ -201,6 +201,7 @@ class ClaimSlot(StrEnum):
     CASE_NUMBER = "case_number"
     DECISION_TIME = "decision_time"
     DECISION_TYPE = "decision_type"
+    OFFENCE = "offence"  # 죄명 — 공소시효 계산의 출발점. 재수사 뒤 바뀔 수 있다(약취·유인 → 살인)
 
 
 # 항목의 기본 이름. 사건 유형이 그 항목을 요구하지 않아도 화면에는 한글로 나와야 한다.
@@ -223,6 +224,7 @@ SLOT_DEFAULT_LABELS: dict[ClaimSlot, str] = {
     ClaimSlot.CASE_NUMBER: "사건번호",
     ClaimSlot.DECISION_TIME: "결정 일자",
     ClaimSlot.DECISION_TYPE: "결정 내용",
+    ClaimSlot.OFFENCE: "죄명",
 }
 
 

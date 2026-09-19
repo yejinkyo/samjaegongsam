@@ -11,6 +11,7 @@
   "slots": [
     {"slot": "incident_time", "stage": "occurrence", "label": "사건 발생 시점", "required": true},
     {"slot": "receipt_number", "stage": "receipt", "label": "신고·진정 접수번호", "required": false},
+    {"slot": "offence", "stage": "receipt", "label": "죄명", "required": false},
     {"slot": "case_number", "stage": "investigation", "label": "사건번호", "required": true},
     {"slot": "investigator", "stage": "investigation", "label": "담당 수사관", "required": false},
     {"slot": "decision_type", "stage": "outcome", "label": "결정 내용", "required": true},

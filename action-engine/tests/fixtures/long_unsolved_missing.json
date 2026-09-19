@@ -1629,7 +1629,7 @@
         "action_kind": "sighting"
       },
       {
-        "event_id": "suspension_notice_2022:e8",
+        "event_id": "suspension_notice_2022:e9",
         "doc_id": "suspension_notice_2022",
         "stage": "outcome",
         "action": {
@@ -1965,6 +1965,28 @@
           "mother_memo:m1"
         ],
         "evidence_level": "statement",
+        "action_kind": null
+      },
+      {
+        "event_id": "note_family:e1",
+        "doc_id": "note_family",
+        "stage": "occurrence",
+        "action": {
+          "source_doc_id": "note_family",
+          "page": 1,
+          "source_line": 1,
+          "source_line_end": null,
+          "source_bbox": null,
+          "char_start": 0,
+          "char_end": 35,
+          "quote": "결정 통지서를 받은 뒤로 경찰에서 따로 연락 온 적이 없습니다.",
+          "value": "결정 통지서를 받은 뒤로 경찰에서 따로 연락 온 적이 없습니다.",
+          "confidence": 0.8
+        },
+        "time": null,
+        "amount": null,
+        "participant_mention_ids": [],
+        "evidence_level": "user",
         "action_kind": null
       }
     ],
@@ -2382,6 +2404,38 @@
         "content": {
           "source_doc_id": "suspension_notice_2022",
           "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 194.0,
+            "y1": 264.0
+          },
+          "char_start": 0,
+          "char_end": 7,
+          "quote": "죄명 약취유인",
+          "value": "죄명 약취유인",
+          "confidence": 0.8593
+        },
+        "slot": "offence",
+        "slot_value": "약취유인",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "suspension_notice_2022:c6",
+        "doc_id": "suspension_notice_2022",
+        "speaker": "**경찰서",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "suspension_notice_2022:m3",
+        "content": {
+          "source_doc_id": "suspension_notice_2022",
+          "page": 1,
           "source_line": 5,
           "source_line_end": null,
           "source_bbox": {
@@ -2418,7 +2472,7 @@
         "evidence_level": "record"
       },
       {
-        "claim_id": "suspension_notice_2022:c6",
+        "claim_id": "suspension_notice_2022:c7",
         "doc_id": "suspension_notice_2022",
         "speaker": "**경찰서",
         "speaker_basis": "document_issuer",
@@ -2450,7 +2504,7 @@
         "evidence_level": "record"
       },
       {
-        "claim_id": "suspension_notice_2022:c7",
+        "claim_id": "suspension_notice_2022:c8",
         "doc_id": "suspension_notice_2022",
         "speaker": "**경찰서",
         "speaker_basis": "document_issuer",
@@ -3906,6 +3960,35 @@
         ]
       },
       {
+        "timeline_event_id": "tl9",
+        "stage": "occurrence",
+        "title": "결정 통지서를 받은 뒤로 경찰에서 따로 연락 온 적이 없습니다.",
+        "time": null,
+        "time_unknown": true,
+        "amount": null,
+        "participant_entity_ids": [],
+        "event_ids": [
+          "note_family:e1"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "note_family",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": null,
+            "char_start": 0,
+            "char_end": 35,
+            "quote": "결정 통지서를 받은 뒤로 경찰에서 따로 연락 온 적이 없습니다."
+          }
+        ],
+        "evidence_level": "user",
+        "needs_confirmation": true,
+        "flags": [
+          "user_input"
+        ]
+      },
+      {
         "timeline_event_id": "tl2",
         "stage": "outcome",
         "title": "수사결과 통지서",
@@ -3930,7 +4013,7 @@
           "ent7"
         ],
         "event_ids": [
-          "suspension_notice_2022:e8"
+          "suspension_notice_2022:e9"
         ],
         "sources": [
           {
@@ -4800,7 +4883,7 @@
         ],
         "checked_doc_ids": [],
         "related_claim_ids": [
-          "suspension_notice_2022:c7",
+          "suspension_notice_2022:c8",
           "mother_memo:c7"
         ],
         "related_event_ids": [],
@@ -5487,6 +5570,34 @@
         ]
       },
       {
+        "slot": "offence",
+        "label": "죄명",
+        "stage": "receipt",
+        "required": false,
+        "state": "confirmed",
+        "value": "약취유인",
+        "claim_ids": [
+          "suspension_notice_2022:c5"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "suspension_notice_2022",
+            "page": 1,
+            "source_line": 4,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 220.0,
+              "x1": 194.0,
+              "y1": 264.0
+            },
+            "char_start": 0,
+            "char_end": 7,
+            "quote": "죄명 약취유인"
+          }
+        ]
+      },
+      {
         "slot": "case_number",
         "label": "사건번호",
         "stage": "investigation",
@@ -5522,7 +5633,7 @@
         "state": "outdated",
         "value": "박정호",
         "claim_ids": [
-          "suspension_notice_2022:c7",
+          "suspension_notice_2022:c8",
           "mother_memo:c7"
         ],
         "sources": [
@@ -5581,7 +5692,7 @@
         "state": "confirmed",
         "value": "수사중지(피의자중지)",
         "claim_ids": [
-          "suspension_notice_2022:c6"
+          "suspension_notice_2022:c7"
         ],
         "sources": [
           {
@@ -5609,7 +5720,7 @@
         "state": "confirmed",
         "value": "2022-03-15",
         "claim_ids": [
-          "suspension_notice_2022:c5"
+          "suspension_notice_2022:c6"
         ],
         "sources": [
           {

@@ -88,6 +88,9 @@ def _history(result: dict[str, Any], docs: dict[str, dict]) -> tuple[list[DraftL
     events.sort(key=lambda e: ((e.get("time") or {}).get("start") or "9999"))
 
     for event in events:
+        if event.get("evidence_level") == "user":
+            # 화면에 직접 적은 메모는 제출할 자료가 아니다 — 경위에 옮기면 붙일 첨부가 없는 문장이 된다
+            continue
         cites = _citations(event, docs)
         if not cites:
             # 출처를 달 수 없는 문장은 초안에서 버린다 (Sourced 원칙과 같다)

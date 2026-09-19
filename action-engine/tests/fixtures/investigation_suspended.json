@@ -1173,7 +1173,7 @@
         "action_kind": null
       },
       {
-        "event_id": "receipt_2021:e6",
+        "event_id": "receipt_2021:e7",
         "doc_id": "receipt_2021",
         "stage": "receipt",
         "action": {
@@ -1232,7 +1232,7 @@
         "action_kind": null
       },
       {
-        "event_id": "suspension_notice_2023:e9",
+        "event_id": "suspension_notice_2023:e10",
         "doc_id": "suspension_notice_2023",
         "stage": "outcome",
         "action": {
@@ -1345,6 +1345,28 @@
         "participant_mention_ids": [],
         "evidence_level": "statement",
         "action_kind": "sighting"
+      },
+      {
+        "event_id": "note_victim:e1",
+        "doc_id": "note_victim",
+        "stage": "occurrence",
+        "action": {
+          "source_doc_id": "note_victim",
+          "page": 1,
+          "source_line": 1,
+          "source_line_end": null,
+          "source_bbox": null,
+          "char_start": 0,
+          "char_end": 36,
+          "quote": "결정 통지서를 받은 뒤로 경찰에서 따로 연락이 온 적이 없습니다.",
+          "value": "결정 통지서를 받은 뒤로 경찰에서 따로 연락이 온 적이 없습니다.",
+          "confidence": 0.8
+        },
+        "time": null,
+        "amount": null,
+        "participant_mention_ids": [],
+        "evidence_level": "user",
+        "action_kind": null
       }
     ],
     "claims": [
@@ -1501,6 +1523,38 @@
         "evidence_level": "record"
       },
       {
+        "claim_id": "receipt_2021:c6",
+        "doc_id": "receipt_2021",
+        "speaker": "**경찰서",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "receipt_2021:m3",
+        "content": {
+          "source_doc_id": "receipt_2021",
+          "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 150.0,
+            "y1": 264.0
+          },
+          "char_start": 0,
+          "char_end": 5,
+          "quote": "죄명 사기",
+          "value": "죄명 사기",
+          "confidence": 0.8363
+        },
+        "slot": "offence",
+        "slot_value": "사기",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
         "claim_id": "suspension_notice_2023:c5",
         "doc_id": "suspension_notice_2023",
         "speaker": "**경찰서",
@@ -1534,6 +1588,38 @@
       },
       {
         "claim_id": "suspension_notice_2023:c6",
+        "doc_id": "suspension_notice_2023",
+        "speaker": "**경찰서",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "suspension_notice_2023:m4",
+        "content": {
+          "source_doc_id": "suspension_notice_2023",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 150.0,
+            "y1": 324.0
+          },
+          "char_start": 0,
+          "char_end": 5,
+          "quote": "죄명 사기",
+          "value": "죄명 사기",
+          "confidence": 0.8593
+        },
+        "slot": "offence",
+        "slot_value": "사기",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "suspension_notice_2023:c7",
         "doc_id": "suspension_notice_2023",
         "speaker": "**경찰서",
         "speaker_basis": "document_issuer",
@@ -1577,7 +1663,7 @@
         "evidence_level": "record"
       },
       {
-        "claim_id": "suspension_notice_2023:c7",
+        "claim_id": "suspension_notice_2023:c8",
         "doc_id": "suspension_notice_2023",
         "speaker": "**경찰서",
         "speaker_basis": "document_issuer",
@@ -1609,7 +1695,7 @@
         "evidence_level": "record"
       },
       {
-        "claim_id": "suspension_notice_2023:c8",
+        "claim_id": "suspension_notice_2023:c9",
         "doc_id": "suspension_notice_2023",
         "speaker": "**경찰서",
         "speaker_basis": "document_issuer",
@@ -2147,7 +2233,7 @@
           "ent3"
         ],
         "event_ids": [
-          "receipt_2021:e6"
+          "receipt_2021:e7"
         ],
         "sources": [
           {
@@ -2211,7 +2297,7 @@
           "ent5"
         ],
         "event_ids": [
-          "suspension_notice_2023:e9"
+          "suspension_notice_2023:e10"
         ],
         "sources": [
           {
@@ -2293,6 +2379,35 @@
         "needs_confirmation": false,
         "flags": [
           "claim_only"
+        ]
+      },
+      {
+        "timeline_event_id": "tl6",
+        "stage": "occurrence",
+        "title": "결정 통지서를 받은 뒤로 경찰에서 따로 연락이 온 적이 없습니다.",
+        "time": null,
+        "time_unknown": true,
+        "amount": null,
+        "participant_entity_ids": [],
+        "event_ids": [
+          "note_victim:e1"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "note_victim",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": null,
+            "char_start": 0,
+            "char_end": 36,
+            "quote": "결정 통지서를 받은 뒤로 경찰에서 따로 연락이 온 적이 없습니다."
+          }
+        ],
+        "evidence_level": "user",
+        "needs_confirmation": true,
+        "flags": [
+          "user_input"
         ]
       }
     ],
@@ -3194,6 +3309,34 @@
         ]
       },
       {
+        "slot": "offence",
+        "label": "죄명",
+        "stage": "receipt",
+        "required": false,
+        "state": "confirmed",
+        "value": "사기",
+        "claim_ids": [
+          "suspension_notice_2023:c6"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "suspension_notice_2023",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 150.0,
+              "y1": 324.0
+            },
+            "char_start": 0,
+            "char_end": 5,
+            "quote": "죄명 사기"
+          }
+        ]
+      },
+      {
         "slot": "case_number",
         "label": "사건번호",
         "stage": "investigation",
@@ -3229,7 +3372,7 @@
         "state": "confirmed",
         "value": "한지훈",
         "claim_ids": [
-          "suspension_notice_2023:c8"
+          "suspension_notice_2023:c9"
         ],
         "sources": [
           {
@@ -3257,7 +3400,7 @@
         "state": "confirmed",
         "value": "수사중지(참고인중지)",
         "claim_ids": [
-          "suspension_notice_2023:c7"
+          "suspension_notice_2023:c8"
         ],
         "sources": [
           {
@@ -3285,7 +3428,7 @@
         "state": "confirmed",
         "value": "2023-02-09",
         "claim_ids": [
-          "suspension_notice_2023:c6"
+          "suspension_notice_2023:c7"
         ],
         "sources": [
           {

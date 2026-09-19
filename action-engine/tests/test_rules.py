@@ -20,11 +20,44 @@ def state(st: str = ST.SUSPENDED_SUSPECT, inf: list[str] | None = None, tim=None
 # ── 규칙표 자체 ─────────────────────────────────────────────────────────
 
 
-def test_규칙은_11줄이고_마지막은_기본행동이다():
+def test_규칙은_13줄이고_마지막은_기본행동이다():
+    """0번(재판 단계 — 범위 밖)과 11번(수사 중 — 진행상황 확인)이 단계 전용 줄이다."""
     rules = load_rules()["rules"]
-    assert len(rules) == 11
-    assert [r["no"] for r in rules] == list(range(1, 12))
+    assert len(rules) == 13
+    assert [r["no"] for r in rules] == list(range(0, 13))
     assert rules[-1]["when"] == {}  # 아무것도 안 맞아도 빈손으로 두지 않는다
+
+
+# ── 단계 전용 규칙 ──────────────────────────────────────────────────────
+
+
+@pytest.mark.parametrize("st", [ST.TRIAL_ONGOING, ST.JUDGMENT_FINAL, ST.RETRIAL_PREP])
+def test_재판_단계에는_수사기관에_낼_행동을_안내하지_않는다(st):
+    """새 정보 · 모순이 있어도 '수사기관에 제출'이 메인으로도 참고사항으로도 나오면 안 된다."""
+    d = decide(state(st=st, inf=[INF.NEW_STATEMENT, INF.CONTRADICTION_ACROSS]))
+    assert d.main.rule_no == 0 and d.main.action == "ACT-재판단계"
+    assert d.also == []
+
+
+@pytest.mark.parametrize("st", [ST.TRIAL_ONGOING, ST.JUDGMENT_FINAL, ST.RETRIAL_PREP])
+def test_재판_단계에는_수사_단계의_기한을_붙이지_않는다(st):
+    """공소가 제기되면 시효가 정지된다(형사소송법 제253조 제1항) — 시효 D-day 를 띄우면 틀린 경고다."""
+    codes = {t.code for t in compute_deadlines(state(st=st), {"incident_end": date(2020, 1, 1),
+                                                                 "communication_time": date(2026, 9, 1)})}
+    assert not codes & {"TIM-021", "TIM-031", "TIM-041", "TIM-042"}
+
+
+@pytest.mark.parametrize("st", [ST.PRE_INVESTIGATION, ST.POLICE_INVESTIGATING, ST.PROSECUTION_INVESTIGATING])
+def test_수사_중에는_진행상황_확인이_기본이다(st):
+    d = decide(state(st=st))
+    assert d.main.rule_no == 11 and d.main.action == "ACT-진행확인"
+
+
+def test_수사_중에도_새_정보가_있으면_제출이_먼저다():
+    """수사 중인 사건에 자료·의견을 내는 것(수사준칙 제25조)은 맞는 경로다."""
+    d = decide(state(st=ST.POLICE_INVESTIGATING, inf=[INF.NEW_STATEMENT]))
+    assert d.main.action == "ACT-신규정보제출"
+    assert "ACT-진행확인" in [h.action for h in d.also]
 
 
 def test_모든_규칙에_why가_있다():
@@ -55,8 +88,9 @@ def test_수사기록_미확인이_근거미비보다_먼저다():
 
 
 def test_아무것도_안_맞으면_상시행동이_남는다():
-    # 수사가 진행 중이고 정보 문제도 기한도 없는 상태 — 규칙 어느 것도 맞지 않는다
-    d = decide(state(st=ST.POLICE_INVESTIGATING, inf=[]))
+    # 중지된 사건에 정보 문제도 급한 기한도 없는 상태 — 규칙 어느 것도 맞지 않는다
+    # (수사 중인 사건은 이제 11번 진행상황 확인이 맞는다)
+    d = decide(state(st=ST.SUSPENDED_SUSPECT, inf=[]))
     assert d.main.action == "ACT-상시"
     assert d.also == []
 
@@ -250,6 +284,7 @@ def test_기한이_채워지면_계산된다(monkeypatch):
 
     R.load_deadlines.cache_clear()
     monkeypatch.setattr(R, "load_deadlines", lambda: {
+        "severity": {"critical_days": 7, "soon_days": 30},
         "deadlines": [{"code": "TIM-011", "applies_to_st": ["ST-301"], "basis": "decision_time",
                        "basis_label": "통지 수령일", "period_days": 30, "statute": "○○법 §1"}]
     })
@@ -258,6 +293,16 @@ def test_기한이_채워지면_계산된다(monkeypatch):
     assert t.due_date == date(2026, 10, 1)
     assert t.days_left == 20
     assert t.severity == "soon"
+
+
+def test_급함_기준은_법령이_아니라_팀_기준이라고_적혀_있다():
+    """7일 · 30일은 어느 법에도 없다. 근거를 숨기면 법이 정한 구분처럼 읽힌다."""
+    bands = load_deadlines()["severity"]
+    assert bands["basis"] == "team_rule"
+    assert (bands["critical_days"], bands["soon_days"]) == (7, 30)
+    assert "법령에 없는" in bands["not_statutory"]
+    assert "제260조 제3항" in bands["critical_why"]  # 가장 짧은 법정 기한(재정신청 10일)에서 나온 선
+    assert "30일" in bands["soon_why"]
 
 
 @pytest.mark.parametrize("days,expected", [(-1, "expired"), (0, "critical"), (7, "critical"),
@@ -279,8 +324,45 @@ def test_실제_출력으로_끝까지_돈다(missing):
     # 수사중지 이의제기 30일은 계산되지만 2022년 결정이라 이미 지났다
     t014 = next(t for t in d.state.tim if t.code == "TIM-014")
     assert t014.severity == "expired"
-    # 공소시효·디지털 보존은 아직 못 채운 값이라 D-day 가 없다
-    assert all(t.days_left is None for t in d.state.tim if t.code in ("TIM-021", "TIM-031"))
+    tim = {t.code: t for t in d.state.tim}
+    # 통지서의 죄명이 '약취유인'뿐이라 법정형을 고를 수 없다 — 대상 · 목적을 짐작하지 않는다
+    assert tim["TIM-021"].days_left is None and "약취유인" in tim["TIM-021"].unresolved
+    # 통신 기록 보존은 2015-10 마지막 연락부터 세어 이미 지났다
+    assert tim["TIM-031"].severity == "expired"
+
+
+# ── 통신자료 보존(TIM-031)의 기산일 ─────────────────────────────────────
+
+
+def test_보존_기한은_메신저_대화일부터_센다(fraud):
+    """통신비밀보호법 시행령 제41조 — 통신사실확인자료는 통신이 있었던 날부터 보존한다."""
+    t031 = {t.code: t for t in run(fraud).state.tim}["TIM-031"]
+    assert t031.basis_date == date(2026, 6, 1)
+    assert t031.due_date == date(2026, 8, 30)
+    assert "메신저 대화" in t031.advisory
+
+
+def test_보존_기한은_다음으로_사라질_기록을_기준으로_한다():
+    """이미 사라진 기록을 기준으로 삼으면 남은 기록까지 없다고 안내하게 된다."""
+    from action_engine.rules import retention_basis
+
+    dates = [(date(2026, 1, 5), "옛 대화"), (date(2026, 7, 1), "최근 대화"), (date(2026, 8, 20), "마지막 연락")]
+    when, note = retention_basis(dates, 90, as_of=date(2026, 9, 11))
+    assert when == date(2026, 7, 1)  # 1월 기록은 이미 지났고, 7월 기록이 가장 먼저 사라진다
+    assert "2026-11-18" in note  # 마지막 연락(8/20) 기록이 남는 날
+    assert "이미 보존 기간이 지났습니다" in note
+
+    when, _ = retention_basis(dates[:1], 90, as_of=date(2026, 9, 11))
+    assert when == date(2026, 1, 5)  # 전부 지났으면 가장 늦은 날 — 만료로 보인다
+
+
+def test_화면에_적은_메모만으로는_보존_기한을_세지_않는다():
+    from action_engine.rules import communication_dates
+
+    result = {"documents": [{"doc_id": "n", "doc_type": "user_note", "file_name": "직접 입력"}],
+              "extraction": {"claims": [{"doc_id": "n", "evidence_level": "user", "slot": "last_contact_time",
+                                         "slot_time": {"start": "2026-06-02T00:00:00"}}]}}
+    assert communication_dates(result) == []
 
 
 def test_사기_사건도_끝까지_돈다(fraud):
