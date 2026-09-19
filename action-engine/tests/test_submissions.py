@@ -187,3 +187,34 @@ def test_가장_나중에_받은_답을_쓴다(recent):
         _answered("ACT-기록열람", date(2026, 9, 2), date(2026, 9, 14), "불기소"),
     ]
     assert build_card(recent, subs).st.code == ST.PROSECUTION_NO_CHARGE
+
+
+# ── 내고 · 답을 받고 · 다음 단계로 ──────────────────────────────────────
+
+
+def test_같은_단계의_새_통지도_받은_날부터_기한을_다시_센다(recent):
+    """재수사 뒤 또 피의자중지를 받으면 이의제기 30일은 새 통지 수령일부터다. 옛 결정일로 세면 이미 지난 기한이 된다."""
+    as_of = date.fromisoformat(recent["as_of"])
+    card = build_card(recent, [_answered("ACT-불복기한", as_of - timedelta(days=20), as_of - timedelta(days=3), "피의자중지")])
+    t014 = {t.code: t for t in card.tim}["TIM-014"]
+    assert t014.basis_date == as_of - timedelta(days=3)
+    assert t014.days_left == 27
+
+
+def test_방금_받은_불복_기한은_급하지_않아도_다음_행동에_뜬다(recent):
+    """30일이 남은 이의제기 기한이 7일 안으로 들어올 때까지 목록에서 사라져 있으면 안 된다."""
+    as_of = date.fromisoformat(recent["as_of"])
+    card = build_card(recent, [_answered("ACT-신규정보제출", as_of - timedelta(days=5), as_of, "참고인중지")])
+    assert card.next_action.action == "ACT-불복기한" and card.next_action.rule_no == 5
+    assert card.checklist.form_name == "수사중지 결정 이의제기서"
+
+
+def test_답을_받을_때마다_불복_서류가_다음_단계로_이어진다(recent):
+    """수사중지 → 이의제기서, 불기소 → 항고장, 항고 기각 → 재정신청서."""
+    as_of = date.fromisoformat(recent["as_of"])
+    forms = []
+    for decision in ("피의자중지", "불기소", "항고 기각"):
+        card = build_card(recent, [_answered("ACT-불복기한", as_of - timedelta(days=5), as_of, decision)])
+        assert card.next_action.action == "ACT-불복기한"
+        forms.append(card.checklist.form_name)
+    assert forms == ["수사중지 결정 이의제기서", "항고장", "재정신청서"]

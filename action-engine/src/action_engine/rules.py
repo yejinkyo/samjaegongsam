@@ -149,6 +149,13 @@ def _matches(when: dict[str, Any], state: CaseState) -> list[str]:
 
     hit: list[str] = []
 
+    if "any" in when:
+        # 조건 묶음 가운데 하나라도 맞으면 된다 (묶음 안은 AND). 맞은 첫 묶음의 근거 코드를 쓴다
+        found = next((codes for sub in when["any"] if (codes := _matches(sub, state))), [])
+        if not found:
+            return []
+        hit.extend(found)
+
     if "st" in when:
         if state.st.code not in when["st"]:
             return []
@@ -326,7 +333,9 @@ def build_card(result: dict[str, Any], submissions: list[Submission] | None = No
 
     answered_st = st_from_responses(submissions or [])
     answered = latest_answer(submissions or [])
-    if answered_st and answered and answered_st.code != decision.state.st.code:
+    if answered_st and answered:
+        # 단계가 같아도 다시 돌린다 — 새로 받은 통지는 기한을 받은 날부터 다시 센다
+        # (재수사 뒤 또 수사중지를 받으면 이의제기 30일은 새 통지 수령일부터다)
         decision = run(result, st_override=answered_st, decision_time=answered.response.received_at)
     card = result.get("analysis", {}).get("case_card", {}) or {}
     checklist = build_checklist(
