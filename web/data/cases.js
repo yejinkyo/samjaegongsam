@@ -66,7 +66,7 @@ window.TARAE_CASES = [
       {
         "type": "event",
         "time": "06/01 10:22",
-        "title": "네 판매 중입니다",
+        "title": "거래 대화",
         "full": "네 판매 중입니다. 미개봉 새 상품이에요",
         "kind": "claim",
         "badge": "주장 · 미확인",
@@ -165,7 +165,7 @@ window.TARAE_CASES = [
       {
         "type": "event",
         "time": "06/02 17~22시경",
-        "title": "전화 안받음",
+        "title": "연락 두절",
         "full": "6/2 저녁 전화 안받음",
         "kind": "claim",
         "badge": "주장 · 미확인",
@@ -190,7 +190,7 @@ window.TARAE_CASES = [
       {
         "type": "event",
         "time": "06/03",
-        "title": "사이버수사대 신고함",
+        "title": "사이버수사대 신고",
         "full": "6/3 사이버수사대 신고함",
         "kind": "claim",
         "badge": "주장 · 미확인",
@@ -209,7 +209,7 @@ window.TARAE_CASES = [
       {
         "type": "event",
         "time": "06/03 09:12",
-        "title": "사이버범죄 신고 접수증",
+        "title": "사이버범죄 신고 접수",
         "full": "사이버범죄 신고 접수증",
         "kind": "verified",
         "badge": "확인됨",
@@ -1222,7 +1222,7 @@ window.TARAE_CASES = [
       {
         "type": "event",
         "time": "2015.10.10\n20~24시경",
-        "title": "연락 끊김",
+        "title": "연락 두절",
         "full": "15년 10월 10일 밤 연락 끊김",
         "kind": "claim",
         "badge": "주장 · 미확인",
@@ -1241,7 +1241,7 @@ window.TARAE_CASES = [
       {
         "type": "event",
         "time": "2015.10.10\n22시~익일 1시경",
-        "title": "경찰은 김씨가 지난해 10월 10일 밤 11시쯤 ○○역 인근 CCTV에 마지막으로 찍혔다고 밝혔다",
+        "title": "마지막 목격 · ○○역 인근",
         "full": "경찰은 김씨가 지난해 10월 10일 밤 11시쯤 ○○역 인근 CCTV에 마지막으로 찍혔다고 밝혔다.",
         "kind": "claim",
         "badge": "주장 · 미확인",
@@ -1278,7 +1278,7 @@ window.TARAE_CASES = [
       {
         "type": "event",
         "time": "2015.10.12",
-        "title": "경찰서 실종신고",
+        "title": "실종신고",
         "full": "10월 12일 경찰서 실종신고",
         "kind": "claim",
         "badge": "주장 · 미확인",
@@ -1297,7 +1297,7 @@ window.TARAE_CASES = [
       {
         "type": "event",
         "time": "2015.10.12\n21:30",
-        "title": "실종신고 접수증",
+        "title": "실종신고 접수",
         "full": "실종신고 접수증",
         "kind": "verified",
         "badge": "확인됨",
@@ -1327,7 +1327,7 @@ window.TARAE_CASES = [
       {
         "type": "event",
         "time": "2019.03",
-        "title": "본인은 2019년 3월 초순 오후 ○○시장 입구에서 김민수로 보이는 남성을 목격하였습니다",
+        "title": "목격 · ○○시장 입구",
         "full": "본인은 2019년 3월 초순 오후 ○○시장 입구에서 김민수로 보이는 남성을 목격하였습니다.",
         "kind": "claim",
         "badge": "주장 · 미확인",
@@ -1363,7 +1363,7 @@ window.TARAE_CASES = [
       {
         "type": "event",
         "time": "2022.03.15",
-        "title": "수사결과 통지서",
+        "title": "수사결과 통지 — 수사중지(피의자중지)",
         "full": "수사결과 통지서",
         "kind": "verified",
         "badge": "확인됨",
@@ -1393,7 +1393,7 @@ window.TARAE_CASES = [
       {
         "type": "event",
         "time": "2023.04.02",
-        "title": "실종된 아들 김민수 사건(2016형제12345)의 재수사를 요청합니다",
+        "title": "재수사 요청",
         "full": "2015. 10. 10. 실종된 아들 김민수 사건(2016형제12345)의 재수사를 요청합니다.",
         "kind": "claim",
         "badge": "주장 · 미확인",
@@ -1418,7 +1418,7 @@ window.TARAE_CASES = [
       {
         "type": "event",
         "time": "시각 미상",
-        "title": "○○시 20대 남성 실종 넉 달째 행방 묘연",
+        "title": "실종",
         "full": "○○시 20대 남성 실종 넉 달째 행방 묘연",
         "kind": "claim",
         "badge": "주장 · 미확인",
@@ -2517,7 +2517,7 @@ window.TARAE_CASES = [
       {
         "type": "event",
         "time": "2021.05.18",
-        "title": "18,000,000원 발생",
+        "title": "18,000,000원 사기 피해",
         "full": "18,000,000원 발생",
         "kind": "claim",
         "badge": "주장 · 미확인",
@@ -2542,7 +2542,7 @@ window.TARAE_CASES = [
       {
         "type": "event",
         "time": "2021.05.25",
-        "title": "○○경찰서에 고소하였습니다",
+        "title": "○○경찰서 고소",
         "full": "2021. 5. 25. ○○경찰서에 고소하였습니다.",
         "kind": "claim",
         "badge": "주장 · 미확인",
@@ -2561,7 +2561,7 @@ window.TARAE_CASES = [
       {
         "type": "event",
         "time": "2021.05.25\n14:20",
-        "title": "접 수 증",
+        "title": "사건 접수",
         "full": "접 수 증",
         "kind": "verified",
         "badge": "확인됨",
@@ -2591,7 +2591,7 @@ window.TARAE_CASES = [
       {
         "type": "event",
         "time": "2025.06.03",
-        "title": "○○시 중앙시장 앞에서 박현수를 목격하였습니다",
+        "title": "목격 · ○○시 중앙시장 앞",
         "full": "2025. 6. 3. ○○시 중앙시장 앞에서 박현수를 목격하였습니다.",
         "kind": "claim",
         "badge": "주장 · 미확인",
@@ -2615,7 +2615,7 @@ window.TARAE_CASES = [
       {
         "type": "event",
         "time": "2026.08.18",
-        "title": "수사결과 통지서",
+        "title": "수사결과 통지 — 수사중지(피의자중지)",
         "full": "수사결과 통지서",
         "kind": "verified",
         "badge": "확인됨",
@@ -3816,7 +3816,7 @@ window.TARAE_CASES = [
       {
         "type": "event",
         "time": "2024.03.20\n11:05",
-        "title": "접 수 증",
+        "title": "사건 접수",
         "full": "접 수 증",
         "kind": "verified",
         "badge": "확인됨",
@@ -3846,7 +3846,7 @@ window.TARAE_CASES = [
       {
         "type": "event",
         "time": "2026.08.25",
-        "title": "수사결과 통지서",
+        "title": "수사결과 통지 — 불송치",
         "full": "수사결과 통지서",
         "kind": "verified",
         "badge": "확인됨",
@@ -3871,7 +3871,7 @@ window.TARAE_CASES = [
       {
         "type": "event",
         "time": "시각 미상",
-        "title": "죄명 사기",
+        "title": "사기 피해",
         "full": "죄명 사기",
         "kind": "claim",
         "badge": "주장 · 미확인",
@@ -4610,7 +4610,7 @@ window.TARAE_CASES = [
       {
         "type": "event",
         "time": "2022.03.02",
-        "title": "○○경찰서에 고소하였습니다",
+        "title": "○○경찰서 고소",
         "full": "2022. 3. 2. ○○경찰서에 고소하였습니다.",
         "kind": "claim",
         "badge": "주장 · 미확인",
@@ -4629,7 +4629,7 @@ window.TARAE_CASES = [
       {
         "type": "event",
         "time": "2022.03.02\n09:40",
-        "title": "접 수 증",
+        "title": "사건 접수",
         "full": "접 수 증",
         "kind": "verified",
         "badge": "확인됨",
@@ -4659,7 +4659,7 @@ window.TARAE_CASES = [
       {
         "type": "event",
         "time": "2024.05.30",
-        "title": "수사결과 통지서",
+        "title": "수사결과 통지",
         "full": "수사결과 통지서",
         "kind": "verified",
         "badge": "확인됨",

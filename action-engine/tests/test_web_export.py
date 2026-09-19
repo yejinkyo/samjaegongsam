@@ -105,3 +105,53 @@ def test_자정을_넘는_시간대를_어색하게_적지_않는다(views):
 def test_커밋된_화면_데이터가_엔진_출력과_같다(export):
     """엔진이나 픽스처를 고치고 export_web.py 를 다시 돌리지 않으면 여기서 걸린다."""
     assert export.OUT.read_text(encoding="utf-8") == export.render(export.build_all())
+
+
+# ── 타임라인 줄 이름 ─────────────────────────────────────────────────────
+
+
+def _one_event(doc_type: str, lines: list[str], line_no: int, *, stage="occurrence", kind=None, time=None, issued=None):
+    doc = {"doc_id": "d", "doc_type": doc_type, "lines": [{"line_no": i + 1, "text": t} for i, t in enumerate(lines)]}
+    event = {"stage": stage, "title": lines[line_no - 1], "time": {"start": time} if time else None,
+             "event_ids": ["d:e1"], "evidence_level": "statement",
+             "sources": [{"source_doc_id": "d", "source_line": line_no, "quote": lines[line_no - 1]}]}
+    result = {"extraction": {"events": [{"event_id": "d:e1", "action_kind": kind}], "mentions": [],
+                             "document_dates": {"d": {"value": {"start": issued}}} if issued else {}}}
+    return event, result, {"d": doc}
+
+
+def test_양식_문서는_그_문서가_뜻하는_일로_적는다(export):
+    """유전자 채취 확인서의 '대상자 …' 줄을 그대로 붙이면 무슨 일이었는지 알 수 없다."""
+    lines = ["유전자 검사 대 상물 채취 확인서", "관리번호 2025-DNA-0142", "대상자 조말순 (실종자 임세진의 모)",
+             "위 대상물은 실종아동등 프로파일링시스템 등록을 위하여", "채취되었음을 확인합니다."]
+    assert export._summary(*_one_event("unknown", lines, 3, kind="disappearance")) == "DNA 채취 — 실종자 유전자 등록"
+
+
+def test_양식에_적힌_다른_날의_일은_그_일로_적는다(export):
+    """접수증에 적힌 '최종목격 11/4 23:20' 을 '실종신고 접수'로 적으면 날짜와 일이 어긋난다."""
+    lines = ["실종신고 접수증", "접수일시 2006. 11. 6.", "최종목격 ㅣ 2006. 11. 4. 23:20경 ○○천 제방길"]
+    event = _one_event("receipt", lines, 3, kind="sighting", time="2006-11-04T23:20:00", issued="2006-11-06T00:00:00")
+    assert export._summary(*event) == "마지막 목격 · ○○천 제방길"
+
+
+def test_통지서는_결정_내용을_함께_적는다(export):
+    lines = ["수사결과 통지서", "사건번호 2019형제20447", "결정 내용 수사중지(참고인중지)"]
+    assert export._summary(*_one_event("notice", lines, 1, stage="outcome")) == "수사결과 통지 — 수사중지(참고인중지)"
+
+
+def test_사람이_쓴_글의_둘째_줄을_문서_제목으로_읽지_않는다(export):
+    lines = ["15년 10월 10일 밤 연락 끊김", "10월 12일 경찰서 실종신고"]
+    assert export._summary(*_one_event("memo", lines, 1, kind="contact_lost")) == "연락 두절"
+
+
+def test_요약할_수_없으면_지어내지_않는다(export):
+    """표에 없는 일은 None — 화면은 원문 첫 문장을 쓴다."""
+    assert export._summary(*_one_event("statement", ["그날 날씨가 흐렸습니다."], 1)) is None
+
+
+def test_타임라인은_요약을_싣고_원문은_자세히에_둔다(views):
+    events = [r for r in views["long_unsolved_missing"]["timeline"] if r["type"] == "event"]
+    titles = {r["title"] for r in events}
+    assert {"연락 두절", "실종신고 접수", "마지막 목격 · ○○역 인근", "재수사 요청"} <= titles
+    notice = next(r for r in events if r["title"].startswith("수사결과 통지"))
+    assert notice["full"] == "수사결과 통지서"  # 원문은 그대로 남는다
