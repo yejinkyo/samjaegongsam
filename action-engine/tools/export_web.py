@@ -670,6 +670,13 @@ def _severity_days() -> dict[str, int]:
     return {"critical": bands["critical_days"], "soon": bands["soon_days"]}
 
 
+def _from_notice() -> set[str]:
+    """통지 수령일(decision_time)을 기산일로 쓰는 기한 코드."""
+    from action_engine.rules import load_deadlines
+
+    return {row["code"] for row in load_deadlines()["deadlines"] if row.get("basis") == "decision_time"}
+
+
 def _outcomes(case_id: str, result: dict[str, Any]) -> dict[str, Any]:
     """결정 내용마다 사건이 어떻게 달라지는지 미리 계산해 둔다.
 
@@ -688,7 +695,9 @@ def _outcomes(case_id: str, result: dict[str, Any]) -> dict[str, Any]:
             response=SubmissionResponse(received_at=received, decision_type=choice),
         )
         card = build_card(result, [sub])
-        live = [t for t in card.tim if t.due_date]
+        # 통지 수령일부터 세는 기한만 싣는다 — 화면이 사용자가 고른 수령일에 기간을 더하기 때문이다.
+        # 공소시효는 범행 종료일부터 센다. 수령일에 10년을 더하면 엉뚱한 만료일이 나온다.
+        live = [t for t in card.tim if t.due_date and t.code in _from_notice()]
         out[choice] = {
             "st": card.st.label,
             # 이 답을 받았을 때의 행동 목록 — 무엇을 · 어디에가 새 단계에 맞춰 다시 대조돼 있다.

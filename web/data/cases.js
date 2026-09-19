@@ -1738,14 +1738,7 @@ window.TARAE_CASES = [
         ],
         "next": "기한 안에 결정에 대한 불복 절차 진행",
         "next_key": "ACT-불복기한",
-        "deadlines": [
-          {
-            "label": "디지털 데이터 보존 기한",
-            "period_days": 90,
-            "statute": "통신비밀보호법 시행령 제41조",
-            "submit_to": null
-          }
-        ]
+        "deadlines": []
       },
       "불기소": {
         "st": "검찰 불기소",
@@ -2323,12 +2316,6 @@ window.TARAE_CASES = [
             "period_days": 30,
             "statute": "검찰청법 제10조",
             "submit_to": "불기소 처분을 한 검사가 속한 지방검찰청 또는 지청을 거쳐 관할 고등검찰청 검사장"
-          },
-          {
-            "label": "디지털 데이터 보존 기한",
-            "period_days": 90,
-            "statute": "통신비밀보호법 시행령 제41조",
-            "submit_to": null
           }
         ]
       },
@@ -2908,12 +2895,6 @@ window.TARAE_CASES = [
             "period_days": 10,
             "statute": "형사소송법 제260조 제3항",
             "submit_to": "지방검찰청 검사장 또는 지청장"
-          },
-          {
-            "label": "디지털 데이터 보존 기한",
-            "period_days": 90,
-            "statute": "통신비밀보호법 시행령 제41조",
-            "submit_to": null
           }
         ]
       },
@@ -3493,12 +3474,6 @@ window.TARAE_CASES = [
             "period_days": 30,
             "statute": "경찰수사규칙 제101조 (검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정 제54조 제1항)",
             "submit_to": "해당 사법경찰관이 소속된 바로 위 상급경찰관서의 장 (소속 경찰관서에 제출하면 상급관서로 송부된다)"
-          },
-          {
-            "label": "디지털 데이터 보존 기한",
-            "period_days": 90,
-            "statute": "통신비밀보호법 시행령 제41조",
-            "submit_to": null
           }
         ]
       },
@@ -4078,12 +4053,6 @@ window.TARAE_CASES = [
             "period_days": 30,
             "statute": "경찰수사규칙 제101조 (검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정 제54조 제1항)",
             "submit_to": "해당 사법경찰관이 소속된 바로 위 상급경찰관서의 장 (소속 경찰관서에 제출하면 상급관서로 송부된다)"
-          },
-          {
-            "label": "디지털 데이터 보존 기한",
-            "period_days": 90,
-            "statute": "통신비밀보호법 시행령 제41조",
-            "submit_to": null
           }
         ]
       },
@@ -6087,14 +6056,7 @@ window.TARAE_CASES = [
         ],
         "next": "기한 안에 결정에 대한 불복 절차 진행",
         "next_key": "ACT-불복기한",
-        "deadlines": [
-          {
-            "label": "디지털 데이터 보존 기한",
-            "period_days": 90,
-            "statute": "통신비밀보호법 시행령 제41조",
-            "submit_to": null
-          }
-        ]
+        "deadlines": []
       },
       "불기소": {
         "st": "검찰 불기소",
@@ -6784,12 +6746,6 @@ window.TARAE_CASES = [
             "period_days": 30,
             "statute": "검찰청법 제10조",
             "submit_to": "불기소 처분을 한 검사가 속한 지방검찰청 또는 지청을 거쳐 관할 고등검찰청 검사장"
-          },
-          {
-            "label": "디지털 데이터 보존 기한",
-            "period_days": 90,
-            "statute": "통신비밀보호법 시행령 제41조",
-            "submit_to": null
           }
         ]
       },
@@ -7481,12 +7437,6 @@ window.TARAE_CASES = [
             "period_days": 10,
             "statute": "형사소송법 제260조 제3항",
             "submit_to": "지방검찰청 검사장 또는 지청장"
-          },
-          {
-            "label": "디지털 데이터 보존 기한",
-            "period_days": 90,
-            "statute": "통신비밀보호법 시행령 제41조",
-            "submit_to": null
           }
         ]
       },
@@ -8178,12 +8128,6 @@ window.TARAE_CASES = [
             "period_days": 30,
             "statute": "경찰수사규칙 제101조 (검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정 제54조 제1항)",
             "submit_to": "해당 사법경찰관이 소속된 바로 위 상급경찰관서의 장 (소속 경찰관서에 제출하면 상급관서로 송부된다)"
-          },
-          {
-            "label": "디지털 데이터 보존 기한",
-            "period_days": 90,
-            "statute": "통신비밀보호법 시행령 제41조",
-            "submit_to": null
           }
         ]
       },
@@ -8875,12 +8819,6 @@ window.TARAE_CASES = [
             "period_days": 30,
             "statute": "경찰수사규칙 제101조 (검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정 제54조 제1항)",
             "submit_to": "해당 사법경찰관이 소속된 바로 위 상급경찰관서의 장 (소속 경찰관서에 제출하면 상급관서로 송부된다)"
-          },
-          {
-            "label": "디지털 데이터 보존 기한",
-            "period_days": 90,
-            "statute": "통신비밀보호법 시행령 제41조",
-            "submit_to": null
           }
         ]
       },
@@ -10798,14 +10736,7 @@ window.TARAE_CASES = [
         ],
         "next": "기한 안에 결정에 대한 불복 절차 진행",
         "next_key": "ACT-불복기한",
-        "deadlines": [
-          {
-            "label": "형사 공소시효 임박",
-            "period_days": 3650,
-            "statute": "형법 제347조 제1항",
-            "submit_to": null
-          }
-        ]
+        "deadlines": []
       },
       "불기소": {
         "st": "검찰 불기소",
@@ -11444,12 +11375,6 @@ window.TARAE_CASES = [
             "period_days": 30,
             "statute": "검찰청법 제10조",
             "submit_to": "불기소 처분을 한 검사가 속한 지방검찰청 또는 지청을 거쳐 관할 고등검찰청 검사장"
-          },
-          {
-            "label": "형사 공소시효 임박",
-            "period_days": 3650,
-            "statute": "형법 제347조 제1항",
-            "submit_to": null
           }
         ]
       },
@@ -12090,12 +12015,6 @@ window.TARAE_CASES = [
             "period_days": 10,
             "statute": "형사소송법 제260조 제3항",
             "submit_to": "지방검찰청 검사장 또는 지청장"
-          },
-          {
-            "label": "형사 공소시효 임박",
-            "period_days": 3650,
-            "statute": "형법 제347조 제1항",
-            "submit_to": null
           }
         ]
       },
@@ -12736,12 +12655,6 @@ window.TARAE_CASES = [
             "period_days": 30,
             "statute": "경찰수사규칙 제101조 (검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정 제54조 제1항)",
             "submit_to": "해당 사법경찰관이 소속된 바로 위 상급경찰관서의 장 (소속 경찰관서에 제출하면 상급관서로 송부된다)"
-          },
-          {
-            "label": "형사 공소시효 임박",
-            "period_days": 3650,
-            "statute": "형법 제347조 제1항",
-            "submit_to": null
           }
         ]
       },
@@ -13382,12 +13295,6 @@ window.TARAE_CASES = [
             "period_days": 30,
             "statute": "경찰수사규칙 제101조 (검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정 제54조 제1항)",
             "submit_to": "해당 사법경찰관이 소속된 바로 위 상급경찰관서의 장 (소속 경찰관서에 제출하면 상급관서로 송부된다)"
-          },
-          {
-            "label": "형사 공소시효 임박",
-            "period_days": 3650,
-            "statute": "형법 제347조 제1항",
-            "submit_to": null
           }
         ]
       },
@@ -14445,14 +14352,7 @@ window.TARAE_CASES = [
         ],
         "next": "기한 안에 결정에 대한 불복 절차 진행",
         "next_key": "ACT-불복기한",
-        "deadlines": [
-          {
-            "label": "형사 공소시효 임박",
-            "period_days": 3650,
-            "statute": "형법 제347조 제1항",
-            "submit_to": null
-          }
-        ]
+        "deadlines": []
       },
       "불기소": {
         "st": "검찰 불기소",
@@ -14690,12 +14590,6 @@ window.TARAE_CASES = [
             "period_days": 30,
             "statute": "검찰청법 제10조",
             "submit_to": "불기소 처분을 한 검사가 속한 지방검찰청 또는 지청을 거쳐 관할 고등검찰청 검사장"
-          },
-          {
-            "label": "형사 공소시효 임박",
-            "period_days": 3650,
-            "statute": "형법 제347조 제1항",
-            "submit_to": null
           }
         ]
       },
@@ -14935,12 +14829,6 @@ window.TARAE_CASES = [
             "period_days": 10,
             "statute": "형사소송법 제260조 제3항",
             "submit_to": "지방검찰청 검사장 또는 지청장"
-          },
-          {
-            "label": "형사 공소시효 임박",
-            "period_days": 3650,
-            "statute": "형법 제347조 제1항",
-            "submit_to": null
           }
         ]
       },
@@ -15180,12 +15068,6 @@ window.TARAE_CASES = [
             "period_days": 30,
             "statute": "경찰수사규칙 제101조 (검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정 제54조 제1항)",
             "submit_to": "해당 사법경찰관이 소속된 바로 위 상급경찰관서의 장 (소속 경찰관서에 제출하면 상급관서로 송부된다)"
-          },
-          {
-            "label": "형사 공소시효 임박",
-            "period_days": 3650,
-            "statute": "형법 제347조 제1항",
-            "submit_to": null
           }
         ]
       },
@@ -15425,12 +15307,6 @@ window.TARAE_CASES = [
             "period_days": 30,
             "statute": "경찰수사규칙 제101조 (검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정 제54조 제1항)",
             "submit_to": "해당 사법경찰관이 소속된 바로 위 상급경찰관서의 장 (소속 경찰관서에 제출하면 상급관서로 송부된다)"
-          },
-          {
-            "label": "형사 공소시효 임박",
-            "period_days": 3650,
-            "statute": "형법 제347조 제1항",
-            "submit_to": null
           }
         ]
       },
@@ -16602,14 +16478,7 @@ window.TARAE_CASES = [
         ],
         "next": "기한 안에 결정에 대한 불복 절차 진행",
         "next_key": "ACT-불복기한",
-        "deadlines": [
-          {
-            "label": "형사 공소시효 임박",
-            "period_days": 3650,
-            "statute": "형법 제347조 제1항",
-            "submit_to": null
-          }
-        ]
+        "deadlines": []
       },
       "불기소": {
         "st": "검찰 불기소",
@@ -17026,12 +16895,6 @@ window.TARAE_CASES = [
             "period_days": 30,
             "statute": "검찰청법 제10조",
             "submit_to": "불기소 처분을 한 검사가 속한 지방검찰청 또는 지청을 거쳐 관할 고등검찰청 검사장"
-          },
-          {
-            "label": "형사 공소시효 임박",
-            "period_days": 3650,
-            "statute": "형법 제347조 제1항",
-            "submit_to": null
           }
         ]
       },
@@ -17450,12 +17313,6 @@ window.TARAE_CASES = [
             "period_days": 10,
             "statute": "형사소송법 제260조 제3항",
             "submit_to": "지방검찰청 검사장 또는 지청장"
-          },
-          {
-            "label": "형사 공소시효 임박",
-            "period_days": 3650,
-            "statute": "형법 제347조 제1항",
-            "submit_to": null
           }
         ]
       },
@@ -17874,12 +17731,6 @@ window.TARAE_CASES = [
             "period_days": 30,
             "statute": "경찰수사규칙 제101조 (검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정 제54조 제1항)",
             "submit_to": "해당 사법경찰관이 소속된 바로 위 상급경찰관서의 장 (소속 경찰관서에 제출하면 상급관서로 송부된다)"
-          },
-          {
-            "label": "형사 공소시효 임박",
-            "period_days": 3650,
-            "statute": "형법 제347조 제1항",
-            "submit_to": null
           }
         ]
       },
@@ -18298,12 +18149,6 @@ window.TARAE_CASES = [
             "period_days": 30,
             "statute": "경찰수사규칙 제101조 (검사와 사법경찰관의 상호협력과 일반적 수사준칙에 관한 규정 제54조 제1항)",
             "submit_to": "해당 사법경찰관이 소속된 바로 위 상급경찰관서의 장 (소속 경찰관서에 제출하면 상급관서로 송부된다)"
-          },
-          {
-            "label": "형사 공소시효 임박",
-            "period_days": 3650,
-            "statute": "형법 제347조 제1항",
-            "submit_to": null
           }
         ]
       },
