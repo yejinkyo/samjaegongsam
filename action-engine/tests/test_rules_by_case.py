@@ -17,13 +17,9 @@ from action_engine import build_card
 
 RULES = Path(__file__).parent / "fixtures" / "rules"
 
-# 서류가 아니라 엔진 쪽 이유로 아직 닿지 못하는 규칙
-BLOCKED = {
-    "00-재판단계": "research-engine 이 '구공판(공소제기)' 를 결정 내용으로 읽지 못해 단계 미확정(ST-UNKNOWN)이 된다",
-    "10-공백보완": "research-engine 에 감정서 문서 종류가 없어 INF-043(전문 분석 미실시)이 늘 켜지고 9번이 먼저 발화한다",
-    "11-진행확인": "INF-043 이 늘 켜지고, 수사 중인 사건은 아직 없는 '결정 내용'을 빠진 항목(INF-041)으로 센다",
-    "12-상시": "INF-043 이 늘 켜져 9번이 먼저 발화한다",
-}
+# 서류가 아니라 엔진 쪽 이유로 아직 닿지 못하는 규칙. 비어 있는 것이 정상이다 —
+# 새로 막히면 원인을 적어 여기에 넣는다(고쳐지면 XPASS 로 실패해서 알려 준다).
+BLOCKED: dict[str, str] = {}
 
 CASES = sorted(p.stem for p in RULES.glob("*.json"))
 

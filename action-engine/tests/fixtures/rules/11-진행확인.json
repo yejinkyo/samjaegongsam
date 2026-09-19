@@ -7,17 +7,18 @@
       "doc_id": "complaint_2026",
       "file_name": "고소장_2026.jpg",
       "doc_type": "complaint",
-      "doc_type_confidence": 0.8864,
+      "doc_type_confidence": 0.8845,
       "doc_type_scores": {
         "judgment": 0.0022,
-        "complaint": 0.8864,
+        "complaint": 0.8845,
         "statement": 0.0022,
         "transcript": 0.0022,
         "receipt": 0.0022,
         "notice": 0.0022,
         "messenger": 0.0022,
+        "forensic": 0.0022,
         "news": 0.0022,
-        "memo": 0.0982
+        "memo": 0.098
       },
       "evidence_level": "statement",
       "captured_at": "2026-09-18T09:00:00",
@@ -127,15 +128,16 @@
       "doc_id": "receipt_2026",
       "file_name": "접수증_2026.jpg",
       "doc_type": "receipt",
-      "doc_type_confidence": 0.9701,
+      "doc_type_confidence": 0.9669,
       "doc_type_scores": {
         "judgment": 0.0032,
         "complaint": 0.0032,
         "statement": 0.0032,
         "transcript": 0.0032,
-        "receipt": 0.9701,
+        "receipt": 0.9669,
         "notice": 0.0032,
         "messenger": 0.0032,
+        "forensic": 0.0032,
         "news": 0.0032,
         "memo": 0.0072
       },
@@ -283,15 +285,16 @@
       "doc_id": "transfer_2026",
       "file_name": "이체확인증_2026.jpg",
       "doc_type": "receipt",
-      "doc_type_confidence": 0.9776,
+      "doc_type_confidence": 0.9753,
       "doc_type_scores": {
         "judgment": 0.0024,
         "complaint": 0.0024,
         "statement": 0.0024,
         "transcript": 0.0024,
-        "receipt": 0.9776,
+        "receipt": 0.9753,
         "notice": 0.0024,
         "messenger": 0.0024,
+        "forensic": 0.0024,
         "news": 0.0024,
         "memo": 0.0054
       },
@@ -403,17 +406,18 @@
       "doc_id": "progress_2026",
       "file_name": "수사진행상황_통지서.jpg",
       "doc_type": "notice",
-      "doc_type_confidence": 0.6473,
+      "doc_type_confidence": 0.6271,
       "doc_type_scores": {
-        "judgment": 0.0322,
-        "complaint": 0.0876,
-        "statement": 0.0322,
-        "transcript": 0.0322,
-        "receipt": 0.0322,
-        "notice": 0.6473,
-        "messenger": 0.0322,
-        "news": 0.0322,
-        "memo": 0.0717
+        "judgment": 0.0312,
+        "complaint": 0.0849,
+        "statement": 0.0312,
+        "transcript": 0.0312,
+        "receipt": 0.0312,
+        "notice": 0.6271,
+        "messenger": 0.0312,
+        "forensic": 0.0312,
+        "news": 0.0312,
+        "memo": 0.0695
       },
       "evidence_level": "record",
       "captured_at": "2026-09-18T10:05:00",
@@ -576,20 +580,21 @@
     {
       "doc_id": "forensic_2026",
       "file_name": "감정서_2026.jpg",
-      "doc_type": "unknown",
-      "doc_type_confidence": 0.2176,
+      "doc_type": "forensic",
+      "doc_type_confidence": 0.9753,
       "doc_type_scores": {
-        "judgment": 0.0978,
-        "complaint": 0.0978,
-        "statement": 0.0978,
-        "transcript": 0.0978,
-        "receipt": 0.0978,
-        "notice": 0.0978,
-        "messenger": 0.0978,
-        "news": 0.0978,
-        "memo": 0.2176
+        "judgment": 0.0024,
+        "complaint": 0.0024,
+        "statement": 0.0024,
+        "transcript": 0.0024,
+        "receipt": 0.0024,
+        "notice": 0.0024,
+        "messenger": 0.0024,
+        "forensic": 0.9753,
+        "news": 0.0024,
+        "memo": 0.0054
       },
-      "evidence_level": "statement",
+      "evidence_level": "record",
       "captured_at": "2026-09-18T10:10:00",
       "pages": [
         {
@@ -694,32 +699,7 @@
       "unreadable": []
     }
   ],
-  "clarifications": [
-    {
-      "request_id": "forensic_2026:q-doctype",
-      "kind": "document_type",
-      "question": "이 자료는 어떤 종류인가요?",
-      "doc_id": "forensic_2026",
-      "page": 1,
-      "line_no": null,
-      "bbox": null,
-      "options": [
-        "판결문",
-        "고소장·진정서",
-        "진술서",
-        "녹취록",
-        "영수증·확인증",
-        "수사·처분 통지서",
-        "메모",
-        "메신저 대화",
-        "보도"
-      ],
-      "context": [],
-      "priority": 10,
-      "status": "pending",
-      "answer": null
-    }
-  ],
+  "clarifications": [],
   "extraction": {
     "mentions": [
       {
@@ -1178,16 +1158,16 @@
           "char_end": 16,
           "quote": "감정대상 거래 대화 캡처 원본",
           "value": "감정대상 거래 대화 캡처 원본",
-          "confidence": 0.7472
+          "confidence": 0.8406
         },
         "time": null,
         "amount": null,
         "participant_mention_ids": [],
-        "evidence_level": "statement",
+        "evidence_level": "record",
         "action_kind": "dealing"
       },
       {
-        "event_id": "forensic_2026:e3",
+        "event_id": "forensic_2026:e2",
         "doc_id": "forensic_2026",
         "stage": "investigation",
         "action": {
@@ -1205,12 +1185,12 @@
           "char_end": 9,
           "quote": "○○과학수사연구소",
           "value": "○○과학수사연구소",
-          "confidence": 0.7472
+          "confidence": 0.8406
         },
         "time": null,
         "amount": null,
         "participant_mention_ids": [],
-        "evidence_level": "statement",
+        "evidence_level": "record",
         "action_kind": null
       }
     ],
@@ -1728,70 +1708,6 @@
         "polarity": "affirm",
         "said_at": null,
         "evidence_level": "record"
-      },
-      {
-        "claim_id": "forensic_2026:c2",
-        "doc_id": "forensic_2026",
-        "speaker": "작성자 미상",
-        "speaker_basis": "document_author",
-        "speaker_mention_id": null,
-        "content": {
-          "source_doc_id": "forensic_2026",
-          "page": 1,
-          "source_line": 3,
-          "source_line_end": null,
-          "source_bbox": {
-            "x0": 40.0,
-            "y0": 160.0,
-            "x1": 392.0,
-            "y1": 204.0
-          },
-          "char_start": 0,
-          "char_end": 16,
-          "quote": "감정대상 거래 대화 캡처 원본",
-          "value": "감정대상 거래 대화 캡처 원본",
-          "confidence": 0.7939
-        },
-        "slot": null,
-        "slot_value": null,
-        "slot_time": null,
-        "value_is_speaker_self": false,
-        "subject": null,
-        "polarity": "affirm",
-        "said_at": null,
-        "evidence_level": "statement"
-      },
-      {
-        "claim_id": "forensic_2026:c4",
-        "doc_id": "forensic_2026",
-        "speaker": "작성자 미상",
-        "speaker_basis": "document_author",
-        "speaker_mention_id": null,
-        "content": {
-          "source_doc_id": "forensic_2026",
-          "page": 1,
-          "source_line": 5,
-          "source_line_end": null,
-          "source_bbox": {
-            "x0": 40.0,
-            "y0": 280.0,
-            "x1": 238.0,
-            "y1": 324.0
-          },
-          "char_start": 0,
-          "char_end": 9,
-          "quote": "○○과학수사연구소",
-          "value": "○○과학수사연구소",
-          "confidence": 0.7939
-        },
-        "slot": null,
-        "slot_value": null,
-        "slot_time": null,
-        "value_is_speaker_self": false,
-        "subject": null,
-        "polarity": "affirm",
-        "said_at": null,
-        "evidence_level": "statement"
       }
     ],
     "times": [
@@ -2135,7 +2051,7 @@
     "case_type": "investigation_suspended",
     "events": [
       {
-        "timeline_event_id": "tl4",
+        "timeline_event_id": "tl3",
         "stage": "occurrence",
         "title": "감정대상 거래 대화 캡처 원본",
         "time": null,
@@ -2162,11 +2078,9 @@
             "quote": "감정대상 거래 대화 캡처 원본"
           }
         ],
-        "evidence_level": "statement",
+        "evidence_level": "record",
         "needs_confirmation": true,
-        "flags": [
-          "claim_only"
-        ]
+        "flags": []
       },
       {
         "timeline_event_id": "tl2",
@@ -2245,7 +2159,7 @@
         "flags": []
       },
       {
-        "timeline_event_id": "tl3",
+        "timeline_event_id": "tl5",
         "stage": "report",
         "title": "2026. 7. 3. ○○경찰서에 고소하였습니다.",
         "time": {
@@ -2362,7 +2276,7 @@
         "flags": []
       },
       {
-        "timeline_event_id": "tl5",
+        "timeline_event_id": "tl4",
         "stage": "investigation",
         "title": "○○과학수사연구소",
         "time": null,
@@ -2370,7 +2284,7 @@
         "amount": null,
         "participant_entity_ids": [],
         "event_ids": [
-          "forensic_2026:e3"
+          "forensic_2026:e2"
         ],
         "sources": [
           {
@@ -2389,11 +2303,9 @@
             "quote": "○○과학수사연구소"
           }
         ],
-        "evidence_level": "statement",
+        "evidence_level": "record",
         "needs_confirmation": true,
-        "flags": [
-          "claim_only"
-        ]
+        "flags": []
       }
     ],
     "stages": [
@@ -2402,16 +2314,16 @@
         "label": "발생",
         "state": "done",
         "timeline_event_ids": [
-          "tl4"
+          "tl3"
         ],
-        "evidence_level": "statement"
+        "evidence_level": "record"
       },
       {
         "stage": "report",
         "label": "신고",
         "state": "done",
         "timeline_event_ids": [
-          "tl3"
+          "tl5"
         ],
         "evidence_level": "statement"
       },
@@ -2429,9 +2341,9 @@
         "label": "수사",
         "state": "current",
         "timeline_event_ids": [
-          "tl5"
+          "tl4"
         ],
-        "evidence_level": "statement"
+        "evidence_level": "record"
       },
       {
         "stage": "outcome",
@@ -2989,16 +2901,16 @@
           "label": "발생",
           "state": "done",
           "timeline_event_ids": [
-            "tl4"
+            "tl3"
           ],
-          "evidence_level": "statement"
+          "evidence_level": "record"
         },
         {
           "stage": "report",
           "label": "신고",
           "state": "done",
           "timeline_event_ids": [
-            "tl3"
+            "tl5"
           ],
           "evidence_level": "statement"
         },
@@ -3016,9 +2928,9 @@
           "label": "수사",
           "state": "current",
           "timeline_event_ids": [
-            "tl5"
+            "tl4"
           ],
-          "evidence_level": "statement"
+          "evidence_level": "record"
         },
         {
           "stage": "outcome",

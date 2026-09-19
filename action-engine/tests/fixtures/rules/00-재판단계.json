@@ -7,17 +7,18 @@
       "doc_id": "complaint_2024",
       "file_name": "고소장_2024.jpg",
       "doc_type": "complaint",
-      "doc_type_confidence": 0.8864,
+      "doc_type_confidence": 0.8845,
       "doc_type_scores": {
         "judgment": 0.0022,
-        "complaint": 0.8864,
+        "complaint": 0.8845,
         "statement": 0.0022,
         "transcript": 0.0022,
         "receipt": 0.0022,
         "notice": 0.0022,
         "messenger": 0.0022,
+        "forensic": 0.0022,
         "news": 0.0022,
-        "memo": 0.0982
+        "memo": 0.098
       },
       "evidence_level": "statement",
       "captured_at": "2026-09-18T09:00:00",
@@ -127,15 +128,16 @@
       "doc_id": "receipt_2024",
       "file_name": "접수증_2024.jpg",
       "doc_type": "receipt",
-      "doc_type_confidence": 0.9701,
+      "doc_type_confidence": 0.9669,
       "doc_type_scores": {
         "judgment": 0.0032,
         "complaint": 0.0032,
         "statement": 0.0032,
         "transcript": 0.0032,
-        "receipt": 0.9701,
+        "receipt": 0.9669,
         "notice": 0.0032,
         "messenger": 0.0032,
+        "forensic": 0.0032,
         "news": 0.0032,
         "memo": 0.0072
       },
@@ -265,17 +267,18 @@
       "doc_id": "disposition_2026",
       "file_name": "처분결과_통지서.jpg",
       "doc_type": "notice",
-      "doc_type_confidence": 0.8465,
+      "doc_type_confidence": 0.8348,
       "doc_type_scores": {
-        "judgment": 0.014,
-        "complaint": 0.0381,
-        "statement": 0.014,
-        "transcript": 0.014,
-        "receipt": 0.014,
-        "notice": 0.8465,
-        "messenger": 0.014,
-        "news": 0.014,
-        "memo": 0.0312
+        "judgment": 0.0138,
+        "complaint": 0.0376,
+        "statement": 0.0138,
+        "transcript": 0.0138,
+        "receipt": 0.0138,
+        "notice": 0.8348,
+        "messenger": 0.0138,
+        "forensic": 0.0138,
+        "news": 0.0138,
+        "memo": 0.0308
       },
       "evidence_level": "record",
       "captured_at": "2026-09-18T10:05:00",
@@ -828,7 +831,7 @@
         "action_kind": null
       },
       {
-        "event_id": "disposition_2026:e9",
+        "event_id": "disposition_2026:e10",
         "doc_id": "disposition_2026",
         "stage": "outcome",
         "action": {
@@ -1215,6 +1218,38 @@
           "note": null
         },
         "value_is_speaker_self": false,
+        "subject": "구공판",
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "disposition_2026:c9",
+        "doc_id": "disposition_2026",
+        "speaker": "**지방검찰청",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "disposition_2026:m4",
+        "content": {
+          "source_doc_id": "disposition_2026",
+          "page": 1,
+          "source_line": 7,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 400.0,
+            "x1": 348.0,
+            "y1": 444.0
+          },
+          "char_start": 0,
+          "char_end": 14,
+          "quote": "처분결과 구공판(공소제기)",
+          "value": "처분결과 구공판(공소제기)",
+          "confidence": 0.8406
+        },
+        "slot": "decision_type",
+        "slot_value": "구공판(공소제기)",
+        "slot_time": null,
+        "value_is_speaker_self": false,
         "subject": null,
         "polarity": "affirm",
         "said_at": null,
@@ -1560,7 +1595,7 @@
           "ent7"
         ],
         "event_ids": [
-          "disposition_2026:e9"
+          "disposition_2026:e10"
         ],
         "sources": [
           {
@@ -1995,36 +2030,6 @@
       {
         "issue_id": "iss2",
         "category": "missing",
-        "condition": "missing",
-        "message": "결정 내용: 올린 자료에서 찾지 못했습니다",
-        "stage": "outcome",
-        "slot": "decision_type",
-        "sources": [],
-        "checked_doc_ids": [
-          "complaint_2024",
-          "receipt_2024",
-          "disposition_2026"
-        ],
-        "related_claim_ids": [],
-        "related_event_ids": [],
-        "related_entity_ids": [],
-        "clarification_request_ids": [],
-        "decision": null,
-        "trigger": {
-          "key": "investigation_suspended/outcome/decision_type/missing",
-          "case_type": "investigation_suspended",
-          "condition": "missing",
-          "stage": "outcome",
-          "slot": "decision_type",
-          "since": null,
-          "elapsed_days": null,
-          "evidence": []
-        },
-        "priority": 30
-      },
-      {
-        "issue_id": "iss3",
-        "category": "missing",
         "condition": "stage_skipped",
         "message": "‘발생’ 단계에 해당하는 자료가 없습니다",
         "stage": "occurrence",
@@ -2053,7 +2058,7 @@
         "priority": 45
       },
       {
-        "issue_id": "iss4",
+        "issue_id": "iss3",
         "category": "missing",
         "condition": "stage_skipped",
         "message": "‘수사’ 단계에 해당하는 자료가 없습니다",
@@ -2083,7 +2088,7 @@
         "priority": 45
       },
       {
-        "issue_id": "iss5",
+        "issue_id": "iss4",
         "category": "missing",
         "condition": "time_gap",
         "message": "2024-04-02 ~ 2026-08-20 사이의 기록이 없습니다 (약 2.4년)",
@@ -2288,10 +2293,28 @@
         "label": "결정 내용",
         "stage": "outcome",
         "required": true,
-        "state": "missing",
-        "value": null,
-        "claim_ids": [],
-        "sources": []
+        "state": "confirmed",
+        "value": "구공판(공소제기)",
+        "claim_ids": [
+          "disposition_2026:c9"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "disposition_2026",
+            "page": 1,
+            "source_line": 7,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 400.0,
+              "x1": 348.0,
+              "y1": 444.0
+            },
+            "char_start": 0,
+            "char_end": 14,
+            "quote": "처분결과 구공판(공소제기)"
+          }
+        ]
       },
       {
         "slot": "decision_time",
@@ -2330,16 +2353,6 @@
         "condition": "missing",
         "stage": "occurrence",
         "slot": "incident_time",
-        "since": null,
-        "elapsed_days": null,
-        "evidence": []
-      },
-      {
-        "key": "investigation_suspended/outcome/decision_type/missing",
-        "case_type": "investigation_suspended",
-        "condition": "missing",
-        "stage": "outcome",
-        "slot": "decision_type",
         "since": null,
         "elapsed_days": null,
         "evidence": []
@@ -2455,8 +2468,8 @@
       ],
       "current_stage": "outcome",
       "evidence_doc_count": 3,
-      "needs_confirmation_count": 5,
-      "slots_done": 2,
+      "needs_confirmation_count": 4,
+      "slots_done": 3,
       "slots_total": 4,
       "next_trigger": {
         "key": "investigation_suspended/occurrence/incident_time/missing",

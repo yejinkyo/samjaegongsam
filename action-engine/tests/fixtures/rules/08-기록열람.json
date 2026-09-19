@@ -7,17 +7,18 @@
       "doc_id": "complaint_2023",
       "file_name": "고소장_2023.jpg",
       "doc_type": "complaint",
-      "doc_type_confidence": 0.8864,
+      "doc_type_confidence": 0.8845,
       "doc_type_scores": {
         "judgment": 0.0022,
-        "complaint": 0.8864,
+        "complaint": 0.8845,
         "statement": 0.0022,
         "transcript": 0.0022,
         "receipt": 0.0022,
         "notice": 0.0022,
         "messenger": 0.0022,
+        "forensic": 0.0022,
         "news": 0.0022,
-        "memo": 0.0982
+        "memo": 0.098
       },
       "evidence_level": "statement",
       "captured_at": "2026-09-18T09:00:00",
@@ -127,15 +128,16 @@
       "doc_id": "receipt_2023",
       "file_name": "접수증_2023.jpg",
       "doc_type": "receipt",
-      "doc_type_confidence": 0.9701,
+      "doc_type_confidence": 0.9669,
       "doc_type_scores": {
         "judgment": 0.0032,
         "complaint": 0.0032,
         "statement": 0.0032,
         "transcript": 0.0032,
-        "receipt": 0.9701,
+        "receipt": 0.9669,
         "notice": 0.0032,
         "messenger": 0.0032,
+        "forensic": 0.0032,
         "news": 0.0032,
         "memo": 0.0072
       },
@@ -265,15 +267,16 @@
       "doc_id": "notice_2024",
       "file_name": "수사중지_결정통지서.jpg",
       "doc_type": "notice",
-      "doc_type_confidence": 0.9614,
+      "doc_type_confidence": 0.9601,
       "doc_type_scores": {
         "judgment": 0.0029,
-        "complaint": 0.0263,
+        "complaint": 0.0262,
         "statement": 0.0013,
         "transcript": 0.0013,
         "receipt": 0.0013,
-        "notice": 0.9614,
+        "notice": 0.9601,
         "messenger": 0.0013,
+        "forensic": 0.0013,
         "news": 0.0013,
         "memo": 0.0029
       },
@@ -474,20 +477,21 @@
     {
       "doc_id": "forensic_2024",
       "file_name": "감정서_2024.jpg",
-      "doc_type": "unknown",
-      "doc_type_confidence": 0.2014,
+      "doc_type": "forensic",
+      "doc_type_confidence": 0.9733,
       "doc_type_scores": {
-        "judgment": 0.0905,
-        "complaint": 0.0905,
-        "statement": 0.0905,
-        "transcript": 0.0905,
-        "receipt": 0.0905,
-        "notice": 0.1649,
-        "messenger": 0.0905,
-        "news": 0.0905,
-        "memo": 0.2014
+        "judgment": 0.0024,
+        "complaint": 0.0024,
+        "statement": 0.0024,
+        "transcript": 0.0024,
+        "receipt": 0.0024,
+        "notice": 0.0044,
+        "messenger": 0.0024,
+        "forensic": 0.9733,
+        "news": 0.0024,
+        "memo": 0.0054
       },
-      "evidence_level": "statement",
+      "evidence_level": "record",
       "captured_at": "2026-09-18T10:10:00",
       "pages": [
         {
@@ -592,32 +596,7 @@
       "unreadable": []
     }
   ],
-  "clarifications": [
-    {
-      "request_id": "forensic_2024:q-doctype",
-      "kind": "document_type",
-      "question": "이 자료는 어떤 종류인가요?",
-      "doc_id": "forensic_2024",
-      "page": 1,
-      "line_no": null,
-      "bbox": null,
-      "options": [
-        "판결문",
-        "고소장·진정서",
-        "진술서",
-        "녹취록",
-        "영수증·확인증",
-        "수사·처분 통지서",
-        "메모",
-        "메신저 대화",
-        "보도"
-      ],
-      "context": [],
-      "priority": 10,
-      "status": "pending",
-      "answer": null
-    }
-  ],
+  "clarifications": [],
   "extraction": {
     "mentions": [
       {
@@ -1057,12 +1036,12 @@
           "char_end": 9,
           "quote": "○○과학수사연구소",
           "value": "○○과학수사연구소",
-          "confidence": 0.7472
+          "confidence": 0.8406
         },
         "time": null,
         "amount": null,
         "participant_mention_ids": [],
-        "evidence_level": "statement",
+        "evidence_level": "record",
         "action_kind": null
       }
     ],
@@ -1454,38 +1433,6 @@
         "polarity": "affirm",
         "said_at": null,
         "evidence_level": "record"
-      },
-      {
-        "claim_id": "forensic_2024:c3",
-        "doc_id": "forensic_2024",
-        "speaker": "작성자 미상",
-        "speaker_basis": "document_author",
-        "speaker_mention_id": null,
-        "content": {
-          "source_doc_id": "forensic_2024",
-          "page": 1,
-          "source_line": 5,
-          "source_line_end": null,
-          "source_bbox": {
-            "x0": 40.0,
-            "y0": 280.0,
-            "x1": 238.0,
-            "y1": 324.0
-          },
-          "char_start": 0,
-          "char_end": 9,
-          "quote": "○○과학수사연구소",
-          "value": "○○과학수사연구소",
-          "confidence": 0.7939
-        },
-        "slot": null,
-        "slot_value": null,
-        "slot_time": null,
-        "value_is_speaker_self": false,
-        "subject": null,
-        "polarity": "affirm",
-        "said_at": null,
-        "evidence_level": "statement"
       }
     ],
     "times": [
@@ -1730,7 +1677,7 @@
     "case_type": "investigation_suspended",
     "events": [
       {
-        "timeline_event_id": "tl3",
+        "timeline_event_id": "tl4",
         "stage": "report",
         "title": "2023. 10. 30. ○○경찰서에 고소하였습니다.",
         "time": {
@@ -1841,7 +1788,7 @@
         "flags": []
       },
       {
-        "timeline_event_id": "tl4",
+        "timeline_event_id": "tl3",
         "stage": "investigation",
         "title": "○○과학수사연구소",
         "time": null,
@@ -1868,11 +1815,9 @@
             "quote": "○○과학수사연구소"
           }
         ],
-        "evidence_level": "statement",
+        "evidence_level": "record",
         "needs_confirmation": true,
-        "flags": [
-          "claim_only"
-        ]
+        "flags": []
       },
       {
         "timeline_event_id": "tl2",
@@ -1952,7 +1897,7 @@
         "label": "신고",
         "state": "done",
         "timeline_event_ids": [
-          "tl3"
+          "tl4"
         ],
         "evidence_level": "statement"
       },
@@ -1970,9 +1915,9 @@
         "label": "수사",
         "state": "done",
         "timeline_event_ids": [
-          "tl4"
+          "tl3"
         ],
-        "evidence_level": "statement"
+        "evidence_level": "record"
       },
       {
         "stage": "outcome",
@@ -1990,7 +1935,7 @@
         "start": "2023-10-31T00:00:00",
         "end": "2024-11-04T00:00:00",
         "hours": 8880.0,
-        "before_event_id": "tl3",
+        "before_event_id": "tl4",
         "after_event_id": "tl2"
       }
     ],
@@ -2445,7 +2390,7 @@
         ],
         "related_claim_ids": [],
         "related_event_ids": [
-          "tl3",
+          "tl4",
           "tl2"
         ],
         "related_entity_ids": [],
@@ -2782,7 +2727,7 @@
           "label": "신고",
           "state": "done",
           "timeline_event_ids": [
-            "tl3"
+            "tl4"
           ],
           "evidence_level": "statement"
         },
@@ -2800,9 +2745,9 @@
           "label": "수사",
           "state": "done",
           "timeline_event_ids": [
-            "tl4"
+            "tl3"
           ],
-          "evidence_level": "statement"
+          "evidence_level": "record"
         },
         {
           "stage": "outcome",
