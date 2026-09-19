@@ -323,8 +323,7 @@
         h("p", { class: "folder__title t-title", text: c.title }),
         h("p", { class: "folder__status t-body-l", text: caseStatus(c) }),
         h("div", { class: "folder__peek" }, [
-          h("p", { class: "folder__meta t-body-s", text: "확인 필요 " + c.need_count + " · 자료 " + c.doc_count + "개" }),
-                    h("p", { class: "folder__meta t-body-s", text: "확인 필요 " + visibleIssueCount(c) + " · 자료 " + c.doc_count + "개" }),
+          h("p", { class: "folder__meta t-body-s", text: "확인 필요 " + visibleIssueCount(c) + " · 자료 " + c.doc_count + "개" }),
           h("p", { class: "folder__next t-body-m-strong", text: next ? next.label : "판단할 수 있는 행동이 아직 없어요" }),
           h("span", { class: "folder__more t-body-m-strong" }, [
             h("span", { text: "자세히 보기" }),
@@ -1950,8 +1949,7 @@
                 : null,
             ]),
             h("h1", { class: "t-display", text: c.title }),
-            h("p", { class: "case-head__meta t-body-m case-folder__dim", text: c.period + "  ·  자료 " + c.doc_count + "개  ·  확인 필요 " + c.need_count }),
-                      h("p", { class: "case-head__meta t-body-m case-folder__dim", text: c.period + "  ·  자료 " + c.doc_count + "개  ·  확인 필요 " + visibleIssueCount(c) }),
+            h("p", { class: "case-head__meta t-body-m case-folder__dim", text: c.period + "  ·  자료 " + c.doc_count + "개  ·  확인 필요 " + visibleIssueCount(c) }),
           ]),
           h("div", { class: "case-head__progress" }, [
             h("span", { class: "t-caption case-folder__dim", text: "진행 단계" }),
