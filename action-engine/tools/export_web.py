@@ -38,6 +38,10 @@ CASES = [
     ("suspension_recent", "고소 사건 (수사중지)"),
 ]
 
+# 픽스처 세 건은 테스트가 직접 참조해서 계속 둔다(위 CASES). 다만 지금은 화면에는 올리지 않는다 —
+# 심사용 화면은 시연 사건(EXTRA_CASES) 하나로 좁혔다. 다시 올리려면 여기서 뺀다.
+SKIP_ON_SCREEN = {"used_goods_fraud", "long_unsolved_missing", "suspension_recent"}
+
 # 직접 만든 사건을 화면에서도 보려고 여기에 적는다. 파일이 없으면 위의 세 건만 올라간다.
 #
 #   [{"id": "missing_2006", "title": "2006년 실종 사건",
@@ -913,9 +917,10 @@ def main() -> None:
         return
 
     views = build_all()
+    screen_views = [v for v in views if v["id"] not in SKIP_ON_SCREEN]
     OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text(render(views), encoding="utf-8")
-    print(f"{OUT.relative_to(ROOT)} — 사건 {len(views)}건")
+    OUT.write_text(render(screen_views), encoding="utf-8")
+    print(f"{OUT.relative_to(ROOT)} — 사건 {len(screen_views)}건")
 
 
 if __name__ == "__main__":
