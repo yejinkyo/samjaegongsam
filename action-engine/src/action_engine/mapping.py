@@ -113,6 +113,11 @@ CONDITION_TO_INF: dict[str, INF] = {
 }
 
 # 자료 종류 → 신규 정보 유입(INF-01*). 파일 종류만 보면 정해지므로 규칙으로 판정한다.
+# 감정(유전자 · 유류품 · 디지털 포렌식)이 수사의 핵심인 사건 유형. 여기서만 감정 자료가 없는 것을
+# '전문 분석 미실시'(INF-043)로 본다. 모든 사건에 켜면 대부분의 사기 사건처럼 감정이 필요 없는 사건도
+# 늘 9번(근거보완)으로 떨어져, 그 뒤의 규칙(10 공백 · 11 진행확인 · 12 상시)에 영영 닿지 않는다.
+FORENSIC_CASE_TYPES = {"missing_person_suspended"}
+
 DOCTYPE_TO_INF: dict[str, INF] = {
     "statement": INF.NEW_STATEMENT,
     "memo": INF.NEW_STATEMENT,
@@ -298,10 +303,15 @@ def resolve_inf(result: dict[str, Any]) -> list[CodeHit]:
 
     # 2) 모순·공백·근거미비 → issue 의 condition 으로 판정
     speakers = {c["claim_id"]: c for c in result.get("extraction", {}).get("claims", [])}
+    current_stage = (result.get("timeline") or {}).get("current_stage")
     for issue in analysis.get("issues", []):
         cond = issue.get("condition")
         code = CONDITION_TO_INF.get(cond)
         if code is None:
+            continue
+        # 아직 결정 단계에 이르지 않은 사건의 '결정 내용 · 결정 일자 없음'은 근거가 빠진 것이 아니다 —
+        # 결정이 아직 없을 뿐이다. 수사 중인 사건이 늘 9번(근거보완)으로 떨어지게 된다.
+        if cond == "missing" and issue.get("stage") == "outcome" and current_stage != "outcome":
             continue
         # 같은 화자의 진술이 엇갈리면 INF-023
         if cond == "conflicting" and _same_speaker(issue, speakers):
@@ -310,8 +320,9 @@ def resolve_inf(result: dict[str, Any]) -> list[CodeHit]:
         add(code, issue.get("message", ""), key=(issue.get("trigger") or {}).get("key"),
             doc_ids=[s["source_doc_id"] for s in issue.get("sources", [])], conf=conf)
 
-    # 3) 감정 자료가 없으면 전문 분석 미실시
-    if not any(d.get("doc_type") == "forensic" for d in result.get("documents", [])):
+    # 3) 감정이 핵심인 사건 유형인데 감정 자료가 없으면 전문 분석 미실시
+    if (result.get("case_type") in FORENSIC_CASE_TYPES
+            and not any(d.get("doc_type") == "forensic" for d in result.get("documents", []))):
         add(INF.ANALYSIS_NOT_DONE, "감정 결과 자료가 자료함에 없습니다")
 
     return sorted(hits.values(), key=lambda h: h.code)
