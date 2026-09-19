@@ -201,9 +201,33 @@ def test_사람_하나를_가리키지_않는_화자는_동일인으로_보지_�
     assert INF.CONTRADICTION_SELF not in codes
 
 
-def test_감정자료가_없으면_전문분석_미실시(missing, fraud):
-    for result in (missing, fraud):
-        assert INF.ANALYSIS_NOT_DONE in {h.code for h in resolve_inf(result)}
+def test_감정이_핵심인_사건에_감정자료가_없으면_전문분석_미실시(missing):
+    """실종 사건은 유전자 · 유류품 감정이 수사의 핵심이다."""
+    assert INF.ANALYSIS_NOT_DONE in {h.code for h in resolve_inf(missing)}
+
+
+def test_감정이_필요_없는_사건에는_전문분석_미실시를_켜지_않는다(fraud):
+    """모든 사건에 켜면 대부분의 사기 사건이 늘 9번(근거보완)으로 떨어져 10 · 11 · 12번에 닿지 않는다."""
+    assert INF.ANALYSIS_NOT_DONE not in {h.code for h in resolve_inf(fraud)}
+
+
+def test_감정서를_올리면_전문분석_미실시가_꺼진다(missing):
+    import copy
+
+    result = copy.deepcopy(missing)
+    result["documents"].append({"doc_id": "f1", "doc_type": "forensic", "file_name": "감정서.jpg"})
+    assert INF.ANALYSIS_NOT_DONE not in {h.code for h in resolve_inf(result)}
+
+
+def test_결정_전_사건의_결정_없음은_근거_미비가_아니다():
+    """수사 중인 사건에 '결정 내용'이 없는 것은 결정이 아직 없어서다. 결과 단계에 온 사건만 빠진 것으로 본다."""
+    def result(stage):
+        return {"documents": [], "extraction": {"claims": []}, "timeline": {"current_stage": stage},
+                "analysis": {"issues": [{"condition": "missing", "stage": "outcome", "slot": "decision_type",
+                                         "message": "결정 내용: 올린 자료에서 찾지 못했습니다", "sources": []}]}}
+
+    assert INF.SOURCE_MISSING not in {h.code for h in resolve_inf(result("investigation"))}
+    assert INF.SOURCE_MISSING in {h.code for h in resolve_inf(result("outcome"))}
 
 
 def test_대응코드가_없는_조건은_옮기지_않는다():

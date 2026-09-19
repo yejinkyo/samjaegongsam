@@ -21,6 +21,7 @@ class DocumentType(StrEnum):
     MEMO = "memo"  # 손글씨 메모
     MESSENGER = "messenger"  # 메신저 대화 캡처
     NEWS = "news"  # 보도
+    FORENSIC = "forensic"  # 감정서 · 감정 결과 통보서 (국립과학수사연구원 등 감정 기관 발급 기록)
     USER_NOTE = "user_note"  # 사용자가 직접 입력
     UNKNOWN = "unknown"
 
@@ -35,6 +36,7 @@ DOC_TYPE_LABELS: dict[DocumentType, str] = {
     DocumentType.MEMO: "메모",
     DocumentType.MESSENGER: "메신저 대화",
     DocumentType.NEWS: "보도",
+    DocumentType.FORENSIC: "감정서",
     DocumentType.USER_NOTE: "직접 입력",
     DocumentType.UNKNOWN: "미분류",
 }
@@ -52,7 +54,7 @@ EVIDENCE_RANK = {EvidenceLevel.RECORD: 3, EvidenceLevel.STATEMENT: 2, EvidenceLe
 
 
 def evidence_level_for(doc_type: DocumentType) -> EvidenceLevel:
-    if doc_type in (DocumentType.JUDGMENT, DocumentType.RECEIPT, DocumentType.NOTICE):
+    if doc_type in (DocumentType.JUDGMENT, DocumentType.RECEIPT, DocumentType.NOTICE, DocumentType.FORENSIC):
         return EvidenceLevel.RECORD
     if doc_type is DocumentType.USER_NOTE:
         return EvidenceLevel.USER

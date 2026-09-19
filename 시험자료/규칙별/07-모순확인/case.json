@@ -1,0 +1,16 @@
+{
+  "case_id": "rule-07-모순확인",
+  "case_type": "used_goods_fraud",
+  "as_of": "2026-09-19",
+  "documents": [
+    "transfer_0902.json",
+    "statement_0905.json",
+    "ecrm_0905.json"
+  ],
+  "user_notes": [],
+  "expect": {
+    "rule": 7,
+    "action": "ACT-모순확인"
+  },
+  "why": "보낸 금액이 자료마다 다르다(진술 30만원, 이체확인증 35만원)"
+}

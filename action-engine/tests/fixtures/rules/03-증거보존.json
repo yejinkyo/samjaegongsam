@@ -1,0 +1,2653 @@
+{
+  "case_id": "rule-03-증거보존",
+  "case_type": "used_goods_fraud",
+  "as_of": "2026-09-19",
+  "documents": [
+    {
+      "doc_id": "kakao_0625",
+      "file_name": "카톡_0625.png",
+      "doc_type": "messenger",
+      "doc_type_confidence": 0.9999,
+      "doc_type_scores": {
+        "judgment": 0.0,
+        "complaint": 0.0,
+        "statement": 0.0,
+        "transcript": 0.0,
+        "receipt": 0.0,
+        "notice": 0.0,
+        "messenger": 0.9999,
+        "forensic": 0.0,
+        "news": 0.0,
+        "memo": 0.0
+      },
+      "evidence_level": "statement",
+      "captured_at": "2026-09-18T20:10:00",
+      "pages": [
+        {
+          "page_no": 1,
+          "width": 1080.0,
+          "height": 440.0,
+          "image_ref": null
+        }
+      ],
+      "lines": [
+        {
+          "doc_id": "kakao_0625",
+          "line_no": 1,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 392.0,
+            "y1": 84.0
+          },
+          "text": "2026년 6월 25일 목요일",
+          "ocr_confidence": 0.98,
+          "readability": 0.9661,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "kakao_0625",
+          "line_no": 2,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 744.0,
+            "y1": 144.0
+          },
+          "text": "[나] [오후 3:10] 캠핑 의자 아직 판매 중이신가요?",
+          "ocr_confidence": 0.94,
+          "readability": 0.9548,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "kakao_0625",
+          "line_no": 3,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 612.0,
+            "y1": 204.0
+          },
+          "text": "[가을캠프] [오후 3:12] 네 판매 중입니다",
+          "ocr_confidence": 0.94,
+          "readability": 0.9548,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "kakao_0625",
+          "line_no": 4,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 1118.0,
+            "y1": 264.0
+          },
+          "text": "[가을캠프] [오후 3:20] 농협 302-****-5521-** 로 18만원 보내주세요",
+          "ocr_confidence": 0.94,
+          "readability": 0.9548,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "kakao_0625",
+          "line_no": 5,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 480.0,
+            "y1": 324.0
+          },
+          "text": "[나] [오후 3:31] 송금했습니다",
+          "ocr_confidence": 0.94,
+          "readability": 0.9548,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "kakao_0625",
+          "line_no": 6,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 340.0,
+            "x1": 722.0,
+            "y1": 384.0
+          },
+          "text": "[나] [오후 9:40] 발송하셨나요? 연락 부탁드립니다",
+          "ocr_confidence": 0.94,
+          "readability": 0.9548,
+          "readable": true,
+          "script": "printed",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        }
+      ],
+      "unreadable": []
+    },
+    {
+      "doc_id": "ecrm_0629",
+      "file_name": "사이버범죄_신고접수증.pdf",
+      "doc_type": "receipt",
+      "doc_type_confidence": 0.9669,
+      "doc_type_scores": {
+        "judgment": 0.0032,
+        "complaint": 0.0032,
+        "statement": 0.0032,
+        "transcript": 0.0032,
+        "receipt": 0.9669,
+        "notice": 0.0032,
+        "messenger": 0.0032,
+        "forensic": 0.0032,
+        "news": 0.0032,
+        "memo": 0.0072
+      },
+      "evidence_level": "record",
+      "captured_at": "2026-09-18T20:12:00",
+      "pages": [
+        {
+          "page_no": 1,
+          "width": 1080.0,
+          "height": 440.0,
+          "image_ref": null
+        }
+      ],
+      "lines": [
+        {
+          "doc_id": "ecrm_0629",
+          "line_no": 1,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 304.0,
+            "y1": 84.0
+          },
+          "text": "사이버범죄 신고 접수증",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "ecrm_0629",
+          "line_no": 2,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 568.0,
+            "y1": 144.0
+          },
+          "text": "접수번호 ECRM-2026-0629-4410",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "ecrm_0629",
+          "line_no": 3,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 546.0,
+            "y1": 204.0
+          },
+          "text": "접수일시 2026. 6. 29. 11:05",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "ecrm_0629",
+          "line_no": 4,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 150.0,
+            "y1": 264.0
+          },
+          "text": "죄명 사기",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "ecrm_0629",
+          "line_no": 5,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 194.0,
+            "y1": 324.0
+          },
+          "text": "신고인 백하준",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "ecrm_0629",
+          "line_no": 6,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 340.0,
+            "x1": 260.0,
+            "y1": 384.0
+          },
+          "text": "경찰청 사이버수사국",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        }
+      ],
+      "unreadable": []
+    }
+  ],
+  "clarifications": [],
+  "extraction": {
+    "mentions": [
+      {
+        "mention_id": "kakao_0625:m1",
+        "doc_id": "kakao_0625",
+        "kind": "person",
+        "name": {
+          "source_doc_id": "kakao_0625",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 744.0,
+            "y1": 144.0
+          },
+          "char_start": 1,
+          "char_end": 2,
+          "quote": "나",
+          "value": "나",
+          "confidence": 0.8593
+        },
+        "normalized": "나",
+        "role": "사용자"
+      },
+      {
+        "mention_id": "kakao_0625:m2",
+        "doc_id": "kakao_0625",
+        "kind": "nickname",
+        "name": {
+          "source_doc_id": "kakao_0625",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 612.0,
+            "y1": 204.0
+          },
+          "char_start": 1,
+          "char_end": 5,
+          "quote": "가을캠프",
+          "value": "가을캠프",
+          "confidence": 0.8116
+        },
+        "normalized": "가을캠프",
+        "role": "대화 상대"
+      },
+      {
+        "mention_id": "kakao_0625:m3",
+        "doc_id": "kakao_0625",
+        "kind": "nickname",
+        "name": {
+          "source_doc_id": "kakao_0625",
+          "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 1118.0,
+            "y1": 264.0
+          },
+          "char_start": 1,
+          "char_end": 5,
+          "quote": "가을캠프",
+          "value": "가을캠프",
+          "confidence": 0.8116
+        },
+        "normalized": "가을캠프",
+        "role": "대화 상대"
+      },
+      {
+        "mention_id": "kakao_0625:m4",
+        "doc_id": "kakao_0625",
+        "kind": "account",
+        "name": {
+          "source_doc_id": "kakao_0625",
+          "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 1118.0,
+            "y1": 264.0
+          },
+          "char_start": 20,
+          "char_end": 36,
+          "quote": "302-****-5521-**",
+          "value": "302-****-5521-**",
+          "confidence": 0.8593
+        },
+        "normalized": "302****5521**",
+        "role": null
+      },
+      {
+        "mention_id": "kakao_0625:m5",
+        "doc_id": "kakao_0625",
+        "kind": "organization",
+        "name": {
+          "source_doc_id": "kakao_0625",
+          "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 1118.0,
+            "y1": 264.0
+          },
+          "char_start": 17,
+          "char_end": 19,
+          "quote": "농협",
+          "value": "농협",
+          "confidence": 0.7638
+        },
+        "normalized": "농협은행",
+        "role": null
+      },
+      {
+        "mention_id": "kakao_0625:m6",
+        "doc_id": "kakao_0625",
+        "kind": "person",
+        "name": {
+          "source_doc_id": "kakao_0625",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 480.0,
+            "y1": 324.0
+          },
+          "char_start": 1,
+          "char_end": 2,
+          "quote": "나",
+          "value": "나",
+          "confidence": 0.8593
+        },
+        "normalized": "나",
+        "role": "사용자"
+      },
+      {
+        "mention_id": "kakao_0625:m7",
+        "doc_id": "kakao_0625",
+        "kind": "person",
+        "name": {
+          "source_doc_id": "kakao_0625",
+          "page": 1,
+          "source_line": 6,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 340.0,
+            "x1": 722.0,
+            "y1": 384.0
+          },
+          "char_start": 1,
+          "char_end": 2,
+          "quote": "나",
+          "value": "나",
+          "confidence": 0.8593
+        },
+        "normalized": "나",
+        "role": "사용자"
+      },
+      {
+        "mention_id": "ecrm_0629:m1",
+        "doc_id": "ecrm_0629",
+        "kind": "receipt_number",
+        "name": {
+          "source_doc_id": "ecrm_0629",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 568.0,
+            "y1": 144.0
+          },
+          "char_start": 5,
+          "char_end": 24,
+          "quote": "ECRM-2026-0629-4410",
+          "value": "ECRM-2026-0629-4410",
+          "confidence": 0.7939
+        },
+        "normalized": "ECRM-2026-0629-4410",
+        "role": null
+      },
+      {
+        "mention_id": "ecrm_0629:m2",
+        "doc_id": "ecrm_0629",
+        "kind": "person",
+        "name": {
+          "source_doc_id": "ecrm_0629",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 194.0,
+            "y1": 324.0
+          },
+          "char_start": 4,
+          "char_end": 7,
+          "quote": "백하준",
+          "value": "백하준",
+          "confidence": 0.7472
+        },
+        "normalized": "백하준",
+        "role": "신고인"
+      },
+      {
+        "mention_id": "ecrm_0629:m3",
+        "doc_id": "ecrm_0629",
+        "kind": "organization",
+        "name": {
+          "source_doc_id": "ecrm_0629",
+          "page": 1,
+          "source_line": 6,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 340.0,
+            "x1": 260.0,
+            "y1": 384.0
+          },
+          "char_start": 0,
+          "char_end": 3,
+          "quote": "경찰청",
+          "value": "경찰청",
+          "confidence": 0.7005
+        },
+        "normalized": "경찰청",
+        "role": null
+      }
+    ],
+    "events": [
+      {
+        "event_id": "kakao_0625:e8",
+        "doc_id": "kakao_0625",
+        "stage": "occurrence",
+        "action": {
+          "source_doc_id": "kakao_0625",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 612.0,
+            "y1": 204.0
+          },
+          "char_start": 17,
+          "char_end": 26,
+          "quote": "네 판매 중입니다",
+          "value": "네 판매 중입니다",
+          "confidence": 0.7638
+        },
+        "time": {
+          "source_doc_id": "kakao_0625",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 612.0,
+            "y1": 204.0
+          },
+          "char_start": 8,
+          "char_end": 15,
+          "quote": "오후 3:12",
+          "value": {
+            "raw": "오후 3:12",
+            "start": "2026-06-25T15:12:00",
+            "end": "2026-06-25T15:13:00",
+            "granularity": "minute",
+            "kind": "contextual",
+            "approximate": false,
+            "anchor": "2026-06-25",
+            "anchor_source": "message_date",
+            "candidates": [],
+            "needs_confirmation": false,
+            "note": "날짜는 앞선 날짜 표시(또는 문서 기준일)에서 가져옴"
+          },
+          "confidence": 0.6168
+        },
+        "amount": null,
+        "participant_mention_ids": [
+          "kakao_0625:m2"
+        ],
+        "evidence_level": "statement",
+        "action_kind": "dealing"
+      },
+      {
+        "event_id": "kakao_0625:e11",
+        "doc_id": "kakao_0625",
+        "stage": "transfer",
+        "action": {
+          "source_doc_id": "kakao_0625",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 480.0,
+            "y1": 324.0
+          },
+          "char_start": 14,
+          "char_end": 20,
+          "quote": "송금했습니다",
+          "value": "송금했습니다",
+          "confidence": 0.7638
+        },
+        "time": {
+          "source_doc_id": "kakao_0625",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 480.0,
+            "y1": 324.0
+          },
+          "char_start": 5,
+          "char_end": 12,
+          "quote": "오후 3:31",
+          "value": {
+            "raw": "오후 3:31",
+            "start": "2026-06-25T03:31:00",
+            "end": "2026-06-25T15:32:00",
+            "granularity": "minute",
+            "kind": "contextual",
+            "approximate": true,
+            "anchor": "2026-06-25",
+            "anchor_source": "message_date",
+            "candidates": [],
+            "needs_confirmation": false,
+            "note": "메시지를 보낸 시각 이전에 일어난 일로 추정"
+          },
+          "confidence": 0.6168
+        },
+        "amount": null,
+        "participant_mention_ids": [
+          "kakao_0625:m6"
+        ],
+        "evidence_level": "statement",
+        "action_kind": null
+      },
+      {
+        "event_id": "ecrm_0629:e7",
+        "doc_id": "ecrm_0629",
+        "stage": "receipt",
+        "action": {
+          "source_doc_id": "ecrm_0629",
+          "page": 1,
+          "source_line": 1,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 304.0,
+            "y1": 84.0
+          },
+          "char_start": null,
+          "char_end": null,
+          "quote": "사이버범죄 신고 접수증",
+          "value": "사이버범죄 신고 접수증",
+          "confidence": 0.8873
+        },
+        "time": {
+          "source_doc_id": "ecrm_0629",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 546.0,
+            "y1": 204.0
+          },
+          "char_start": 5,
+          "char_end": 23,
+          "quote": "2026. 6. 29. 11:05",
+          "value": {
+            "raw": "2026. 6. 29. 11:05",
+            "start": "2026-06-29T11:05:00",
+            "end": "2026-06-29T11:06:00",
+            "granularity": "minute",
+            "kind": "absolute",
+            "approximate": false,
+            "anchor": null,
+            "anchor_source": null,
+            "candidates": [
+              {
+                "start": "2026-06-29T23:05:00",
+                "end": "2026-06-29T23:06:00",
+                "reason": "오전/오후 표기 없음"
+              }
+            ],
+            "needs_confirmation": false,
+            "note": null
+          },
+          "confidence": 0.8873
+        },
+        "amount": null,
+        "participant_mention_ids": [
+          "ecrm_0629:m1",
+          "ecrm_0629:m2",
+          "ecrm_0629:m3"
+        ],
+        "evidence_level": "record",
+        "action_kind": null
+      }
+    ],
+    "claims": [
+      {
+        "claim_id": "kakao_0625:c9",
+        "doc_id": "kakao_0625",
+        "speaker": "가을캠프",
+        "speaker_basis": "message_prefix",
+        "speaker_mention_id": "kakao_0625:m1",
+        "content": {
+          "source_doc_id": "kakao_0625",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 612.0,
+            "y1": 204.0
+          },
+          "char_start": 17,
+          "char_end": 26,
+          "quote": "네 판매 중입니다",
+          "value": "네 판매 중입니다",
+          "confidence": 0.8116
+        },
+        "slot": null,
+        "slot_value": null,
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": {
+          "raw": "오후 3:12",
+          "start": "2026-06-25T15:12:00",
+          "end": "2026-06-25T15:13:00",
+          "granularity": "minute",
+          "kind": "contextual",
+          "approximate": false,
+          "anchor": "2026-06-25",
+          "anchor_source": "message_date",
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": "날짜는 앞선 날짜 표시(또는 문서 기준일)에서 가져옴"
+        },
+        "evidence_level": "statement"
+      },
+      {
+        "claim_id": "kakao_0625:c10",
+        "doc_id": "kakao_0625",
+        "speaker": "가을캠프",
+        "speaker_basis": "message_prefix",
+        "speaker_mention_id": "kakao_0625:m1",
+        "content": {
+          "source_doc_id": "kakao_0625",
+          "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 1118.0,
+            "y1": 264.0
+          },
+          "char_start": 17,
+          "char_end": 49,
+          "quote": "농협 302-****-5521-** 로 18만원 보내주세요",
+          "value": "농협 302-****-5521-** 로 18만원 보내주세요",
+          "confidence": 0.8116
+        },
+        "slot": "account_number",
+        "slot_value": "302****5521**",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": "deposit",
+        "polarity": "affirm",
+        "said_at": {
+          "raw": "오후 3:20",
+          "start": "2026-06-25T15:20:00",
+          "end": "2026-06-25T15:21:00",
+          "granularity": "minute",
+          "kind": "contextual",
+          "approximate": false,
+          "anchor": "2026-06-25",
+          "anchor_source": "message_date",
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": "날짜는 앞선 날짜 표시(또는 문서 기준일)에서 가져옴"
+        },
+        "evidence_level": "statement"
+      },
+      {
+        "claim_id": "kakao_0625:c12",
+        "doc_id": "kakao_0625",
+        "speaker": "나",
+        "speaker_basis": "message_prefix",
+        "speaker_mention_id": "kakao_0625:m1",
+        "content": {
+          "source_doc_id": "kakao_0625",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 480.0,
+            "y1": 324.0
+          },
+          "char_start": 14,
+          "char_end": 20,
+          "quote": "송금했습니다",
+          "value": "송금했습니다",
+          "confidence": 0.5681
+        },
+        "slot": "transfer_time",
+        "slot_value": null,
+        "slot_time": {
+          "raw": "오후 3:31",
+          "start": "2026-06-25T03:31:00",
+          "end": "2026-06-25T15:32:00",
+          "granularity": "minute",
+          "kind": "contextual",
+          "approximate": true,
+          "anchor": "2026-06-25",
+          "anchor_source": "message_date",
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": "메시지를 보낸 시각 이전에 일어난 일로 추정"
+        },
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": {
+          "raw": "오후 3:31",
+          "start": "2026-06-25T15:31:00",
+          "end": "2026-06-25T15:32:00",
+          "granularity": "minute",
+          "kind": "contextual",
+          "approximate": false,
+          "anchor": "2026-06-25",
+          "anchor_source": "message_date",
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": "날짜는 앞선 날짜 표시(또는 문서 기준일)에서 가져옴"
+        },
+        "evidence_level": "statement"
+      },
+      {
+        "claim_id": "kakao_0625:c13",
+        "doc_id": "kakao_0625",
+        "speaker": "나",
+        "speaker_basis": "message_prefix",
+        "speaker_mention_id": "kakao_0625:m1",
+        "content": {
+          "source_doc_id": "kakao_0625",
+          "page": 1,
+          "source_line": 6,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 340.0,
+            "x1": 722.0,
+            "y1": 384.0
+          },
+          "char_start": 14,
+          "char_end": 31,
+          "quote": "발송하셨나요? 연락 부탁드립니다",
+          "value": "발송하셨나요? 연락 부탁드립니다",
+          "confidence": 0.8116
+        },
+        "slot": null,
+        "slot_value": null,
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": {
+          "raw": "오후 9:40",
+          "start": "2026-06-25T21:40:00",
+          "end": "2026-06-25T21:41:00",
+          "granularity": "minute",
+          "kind": "contextual",
+          "approximate": false,
+          "anchor": "2026-06-25",
+          "anchor_source": "message_date",
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": "날짜는 앞선 날짜 표시(또는 문서 기준일)에서 가져옴"
+        },
+        "evidence_level": "statement"
+      },
+      {
+        "claim_id": "ecrm_0629:c4",
+        "doc_id": "ecrm_0629",
+        "speaker": "경찰청",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "ecrm_0629:m3",
+        "content": {
+          "source_doc_id": "ecrm_0629",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 568.0,
+            "y1": 144.0
+          },
+          "char_start": 0,
+          "char_end": 24,
+          "quote": "접수번호 ECRM-2026-0629-4410",
+          "value": "접수번호 ECRM-2026-0629-4410",
+          "confidence": 0.8406
+        },
+        "slot": "receipt_number",
+        "slot_value": "ECRM-2026-0629-4410",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "ecrm_0629:c5",
+        "doc_id": "ecrm_0629",
+        "speaker": "경찰청",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "ecrm_0629:m3",
+        "content": {
+          "source_doc_id": "ecrm_0629",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 546.0,
+            "y1": 204.0
+          },
+          "char_start": 0,
+          "char_end": 23,
+          "quote": "접수일시 2026. 6. 29. 11:05",
+          "value": "접수일시 2026. 6. 29. 11:05",
+          "confidence": 0.8406
+        },
+        "slot": "receipt_time",
+        "slot_value": "2026-06-29 11:05",
+        "slot_time": {
+          "raw": "2026. 6. 29. 11:05",
+          "start": "2026-06-29T11:05:00",
+          "end": "2026-06-29T11:06:00",
+          "granularity": "minute",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [
+            {
+              "start": "2026-06-29T23:05:00",
+              "end": "2026-06-29T23:06:00",
+              "reason": "오전/오후 표기 없음"
+            }
+          ],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "ecrm_0629:c6",
+        "doc_id": "ecrm_0629",
+        "speaker": "경찰청",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "ecrm_0629:m3",
+        "content": {
+          "source_doc_id": "ecrm_0629",
+          "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 150.0,
+            "y1": 264.0
+          },
+          "char_start": 0,
+          "char_end": 5,
+          "quote": "죄명 사기",
+          "value": "죄명 사기",
+          "confidence": 0.8406
+        },
+        "slot": "offence",
+        "slot_value": "사기",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      }
+    ],
+    "times": [
+      {
+        "source_doc_id": "kakao_0625",
+        "page": 1,
+        "source_line": 2,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 100.0,
+          "x1": 744.0,
+          "y1": 144.0
+        },
+        "char_start": 5,
+        "char_end": 12,
+        "quote": "오후 3:10",
+        "value": {
+          "raw": "오후 3:10",
+          "start": "2026-06-25T15:10:00",
+          "end": "2026-06-25T15:11:00",
+          "granularity": "minute",
+          "kind": "contextual",
+          "approximate": false,
+          "anchor": "2026-06-25",
+          "anchor_source": "message_date",
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": "날짜는 앞선 날짜 표시(또는 문서 기준일)에서 가져옴"
+        },
+        "confidence": 0.771
+      },
+      {
+        "source_doc_id": "kakao_0625",
+        "page": 1,
+        "source_line": 3,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 160.0,
+          "x1": 612.0,
+          "y1": 204.0
+        },
+        "char_start": 8,
+        "char_end": 15,
+        "quote": "오후 3:12",
+        "value": {
+          "raw": "오후 3:12",
+          "start": "2026-06-25T15:12:00",
+          "end": "2026-06-25T15:13:00",
+          "granularity": "minute",
+          "kind": "contextual",
+          "approximate": false,
+          "anchor": "2026-06-25",
+          "anchor_source": "message_date",
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": "날짜는 앞선 날짜 표시(또는 문서 기준일)에서 가져옴"
+        },
+        "confidence": 0.771
+      },
+      {
+        "source_doc_id": "kakao_0625",
+        "page": 1,
+        "source_line": 4,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 220.0,
+          "x1": 1118.0,
+          "y1": 264.0
+        },
+        "char_start": 8,
+        "char_end": 15,
+        "quote": "오후 3:20",
+        "value": {
+          "raw": "오후 3:20",
+          "start": "2026-06-25T15:20:00",
+          "end": "2026-06-25T15:21:00",
+          "granularity": "minute",
+          "kind": "contextual",
+          "approximate": false,
+          "anchor": "2026-06-25",
+          "anchor_source": "message_date",
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": "날짜는 앞선 날짜 표시(또는 문서 기준일)에서 가져옴"
+        },
+        "confidence": 0.771
+      },
+      {
+        "source_doc_id": "kakao_0625",
+        "page": 1,
+        "source_line": 5,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 280.0,
+          "x1": 480.0,
+          "y1": 324.0
+        },
+        "char_start": 5,
+        "char_end": 12,
+        "quote": "오후 3:31",
+        "value": {
+          "raw": "오후 3:31",
+          "start": "2026-06-25T15:31:00",
+          "end": "2026-06-25T15:32:00",
+          "granularity": "minute",
+          "kind": "contextual",
+          "approximate": false,
+          "anchor": "2026-06-25",
+          "anchor_source": "message_date",
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": "날짜는 앞선 날짜 표시(또는 문서 기준일)에서 가져옴"
+        },
+        "confidence": 0.771
+      },
+      {
+        "source_doc_id": "kakao_0625",
+        "page": 1,
+        "source_line": 6,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 340.0,
+          "x1": 722.0,
+          "y1": 384.0
+        },
+        "char_start": 5,
+        "char_end": 12,
+        "quote": "오후 9:40",
+        "value": {
+          "raw": "오후 9:40",
+          "start": "2026-06-25T21:40:00",
+          "end": "2026-06-25T21:41:00",
+          "granularity": "minute",
+          "kind": "contextual",
+          "approximate": false,
+          "anchor": "2026-06-25",
+          "anchor_source": "message_date",
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": "날짜는 앞선 날짜 표시(또는 문서 기준일)에서 가져옴"
+        },
+        "confidence": 0.771
+      },
+      {
+        "source_doc_id": "ecrm_0629",
+        "page": 1,
+        "source_line": 3,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 160.0,
+          "x1": 546.0,
+          "y1": 204.0
+        },
+        "char_start": 5,
+        "char_end": 23,
+        "quote": "2026. 6. 29. 11:05",
+        "value": {
+          "raw": "2026. 6. 29. 11:05",
+          "start": "2026-06-29T11:05:00",
+          "end": "2026-06-29T11:06:00",
+          "granularity": "minute",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [
+            {
+              "start": "2026-06-29T23:05:00",
+              "end": "2026-06-29T23:06:00",
+              "reason": "오전/오후 표기 없음"
+            }
+          ],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8873
+      }
+    ],
+    "document_dates": {
+      "ecrm_0629": {
+        "source_doc_id": "ecrm_0629",
+        "page": 1,
+        "source_line": 3,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 160.0,
+          "x1": 546.0,
+          "y1": 204.0
+        },
+        "char_start": 5,
+        "char_end": 23,
+        "quote": "2026. 6. 29. 11:05",
+        "value": {
+          "raw": "2026. 6. 29. 11:05",
+          "start": "2026-06-29T11:05:00",
+          "end": "2026-06-29T11:06:00",
+          "granularity": "minute",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [
+            {
+              "start": "2026-06-29T23:05:00",
+              "end": "2026-06-29T23:06:00",
+              "reason": "오전/오후 표기 없음"
+            }
+          ],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8873
+      }
+    },
+    "clarifications": []
+  },
+  "timeline": {
+    "case_type": "used_goods_fraud",
+    "events": [
+      {
+        "timeline_event_id": "tl3",
+        "stage": "transfer",
+        "title": "송금했습니다",
+        "time": {
+          "raw": "오후 3:31",
+          "start": "2026-06-25T03:31:00",
+          "end": "2026-06-25T15:32:00",
+          "granularity": "minute",
+          "kind": "contextual",
+          "approximate": true,
+          "anchor": "2026-06-25",
+          "anchor_source": "message_date",
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": "메시지를 보낸 시각 이전에 일어난 일로 추정"
+        },
+        "time_unknown": false,
+        "amount": null,
+        "participant_entity_ids": [
+          "ent1"
+        ],
+        "event_ids": [
+          "kakao_0625:e11"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "kakao_0625",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 480.0,
+              "y1": 324.0
+            },
+            "char_start": 14,
+            "char_end": 20,
+            "quote": "송금했습니다"
+          },
+          {
+            "source_doc_id": "kakao_0625",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 480.0,
+              "y1": 324.0
+            },
+            "char_start": 5,
+            "char_end": 12,
+            "quote": "오후 3:31"
+          }
+        ],
+        "evidence_level": "statement",
+        "needs_confirmation": false,
+        "flags": [
+          "claim_only"
+        ]
+      },
+      {
+        "timeline_event_id": "tl2",
+        "stage": "occurrence",
+        "title": "네 판매 중입니다",
+        "time": {
+          "raw": "오후 3:12",
+          "start": "2026-06-25T15:12:00",
+          "end": "2026-06-25T15:13:00",
+          "granularity": "minute",
+          "kind": "contextual",
+          "approximate": false,
+          "anchor": "2026-06-25",
+          "anchor_source": "message_date",
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": "날짜는 앞선 날짜 표시(또는 문서 기준일)에서 가져옴"
+        },
+        "time_unknown": false,
+        "amount": null,
+        "participant_entity_ids": [
+          "ent2"
+        ],
+        "event_ids": [
+          "kakao_0625:e8"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "kakao_0625",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 612.0,
+              "y1": 204.0
+            },
+            "char_start": 17,
+            "char_end": 26,
+            "quote": "네 판매 중입니다"
+          },
+          {
+            "source_doc_id": "kakao_0625",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 612.0,
+              "y1": 204.0
+            },
+            "char_start": 8,
+            "char_end": 15,
+            "quote": "오후 3:12"
+          }
+        ],
+        "evidence_level": "statement",
+        "needs_confirmation": false,
+        "flags": [
+          "claim_only"
+        ]
+      },
+      {
+        "timeline_event_id": "tl1",
+        "stage": "receipt",
+        "title": "사이버범죄 신고 접수증",
+        "time": {
+          "raw": "2026. 6. 29. 11:05",
+          "start": "2026-06-29T11:05:00",
+          "end": "2026-06-29T11:06:00",
+          "granularity": "minute",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [
+            {
+              "start": "2026-06-29T23:05:00",
+              "end": "2026-06-29T23:06:00",
+              "reason": "오전/오후 표기 없음"
+            }
+          ],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "time_unknown": false,
+        "amount": null,
+        "participant_entity_ids": [
+          "ent5",
+          "ent6",
+          "ent7"
+        ],
+        "event_ids": [
+          "ecrm_0629:e7"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "ecrm_0629",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 304.0,
+              "y1": 84.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": "사이버범죄 신고 접수증"
+          },
+          {
+            "source_doc_id": "ecrm_0629",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 546.0,
+              "y1": 204.0
+            },
+            "char_start": 5,
+            "char_end": 23,
+            "quote": "2026. 6. 29. 11:05"
+          }
+        ],
+        "evidence_level": "record",
+        "needs_confirmation": false,
+        "flags": []
+      }
+    ],
+    "stages": [
+      {
+        "stage": "occurrence",
+        "label": "발생",
+        "state": "done",
+        "timeline_event_ids": [
+          "tl2"
+        ],
+        "evidence_level": "statement"
+      },
+      {
+        "stage": "transfer",
+        "label": "송금",
+        "state": "done",
+        "timeline_event_ids": [
+          "tl3"
+        ],
+        "evidence_level": "statement"
+      },
+      {
+        "stage": "report",
+        "label": "신고",
+        "state": "skipped",
+        "timeline_event_ids": [],
+        "evidence_level": null
+      },
+      {
+        "stage": "receipt",
+        "label": "접수",
+        "state": "current",
+        "timeline_event_ids": [
+          "tl1"
+        ],
+        "evidence_level": "record"
+      },
+      {
+        "stage": "investigation",
+        "label": "수사",
+        "state": "pending",
+        "timeline_event_ids": [],
+        "evidence_level": null
+      },
+      {
+        "stage": "outcome",
+        "label": "결과",
+        "state": "pending",
+        "timeline_event_ids": [],
+        "evidence_level": null
+      }
+    ],
+    "current_stage": "receipt",
+    "gaps": [
+      {
+        "start": "2026-06-25T15:32:00",
+        "end": "2026-06-29T11:05:00",
+        "hours": 91.5,
+        "before_event_id": "tl3",
+        "after_event_id": "tl1"
+      }
+    ],
+    "entities": [
+      {
+        "entity_id": "ent1",
+        "kind": "person",
+        "canonical_name": "나",
+        "aliases": [
+          "나"
+        ],
+        "roles": [
+          "사용자"
+        ],
+        "mention_ids": [
+          "kakao_0625:m1",
+          "kakao_0625:m6",
+          "kakao_0625:m7"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "kakao_0625",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 744.0,
+              "y1": 144.0
+            },
+            "char_start": 1,
+            "char_end": 2,
+            "quote": "나"
+          },
+          {
+            "source_doc_id": "kakao_0625",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 480.0,
+              "y1": 324.0
+            },
+            "char_start": 1,
+            "char_end": 2,
+            "quote": "나"
+          },
+          {
+            "source_doc_id": "kakao_0625",
+            "page": 1,
+            "source_line": 6,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 340.0,
+              "x1": 722.0,
+              "y1": 384.0
+            },
+            "char_start": 1,
+            "char_end": 2,
+            "quote": "나"
+          }
+        ],
+        "merge_confidence": 0.9,
+        "possible_same_as": []
+      },
+      {
+        "entity_id": "ent2",
+        "kind": "nickname",
+        "canonical_name": "가을캠프",
+        "aliases": [
+          "가을캠프"
+        ],
+        "roles": [
+          "대화 상대"
+        ],
+        "mention_ids": [
+          "kakao_0625:m2",
+          "kakao_0625:m3"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "kakao_0625",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 612.0,
+              "y1": 204.0
+            },
+            "char_start": 1,
+            "char_end": 5,
+            "quote": "가을캠프"
+          },
+          {
+            "source_doc_id": "kakao_0625",
+            "page": 1,
+            "source_line": 4,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 220.0,
+              "x1": 1118.0,
+              "y1": 264.0
+            },
+            "char_start": 1,
+            "char_end": 5,
+            "quote": "가을캠프"
+          }
+        ],
+        "merge_confidence": 0.9,
+        "possible_same_as": []
+      },
+      {
+        "entity_id": "ent3",
+        "kind": "account",
+        "canonical_name": "302****5521**",
+        "aliases": [
+          "302-****-5521-**"
+        ],
+        "roles": [],
+        "mention_ids": [
+          "kakao_0625:m4"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "kakao_0625",
+            "page": 1,
+            "source_line": 4,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 220.0,
+              "x1": 1118.0,
+              "y1": 264.0
+            },
+            "char_start": 20,
+            "char_end": 36,
+            "quote": "302-****-5521-**"
+          }
+        ],
+        "merge_confidence": 1.0,
+        "possible_same_as": []
+      },
+      {
+        "entity_id": "ent4",
+        "kind": "organization",
+        "canonical_name": "농협은행",
+        "aliases": [
+          "농협"
+        ],
+        "roles": [],
+        "mention_ids": [
+          "kakao_0625:m5"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "kakao_0625",
+            "page": 1,
+            "source_line": 4,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 220.0,
+              "x1": 1118.0,
+              "y1": 264.0
+            },
+            "char_start": 17,
+            "char_end": 19,
+            "quote": "농협"
+          }
+        ],
+        "merge_confidence": 1.0,
+        "possible_same_as": []
+      },
+      {
+        "entity_id": "ent5",
+        "kind": "receipt_number",
+        "canonical_name": "ECRM-2026-0629-4410",
+        "aliases": [
+          "ECRM-2026-0629-4410"
+        ],
+        "roles": [],
+        "mention_ids": [
+          "ecrm_0629:m1"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "ecrm_0629",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 568.0,
+              "y1": 144.0
+            },
+            "char_start": 5,
+            "char_end": 24,
+            "quote": "ECRM-2026-0629-4410"
+          }
+        ],
+        "merge_confidence": 1.0,
+        "possible_same_as": []
+      },
+      {
+        "entity_id": "ent6",
+        "kind": "person",
+        "canonical_name": "백하준",
+        "aliases": [
+          "백하준"
+        ],
+        "roles": [
+          "신고인"
+        ],
+        "mention_ids": [
+          "ecrm_0629:m2"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "ecrm_0629",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 194.0,
+              "y1": 324.0
+            },
+            "char_start": 4,
+            "char_end": 7,
+            "quote": "백하준"
+          }
+        ],
+        "merge_confidence": 1.0,
+        "possible_same_as": []
+      },
+      {
+        "entity_id": "ent7",
+        "kind": "organization",
+        "canonical_name": "경찰청",
+        "aliases": [
+          "경찰청"
+        ],
+        "roles": [],
+        "mention_ids": [
+          "ecrm_0629:m3"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "ecrm_0629",
+            "page": 1,
+            "source_line": 6,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 340.0,
+              "x1": 260.0,
+              "y1": 384.0
+            },
+            "char_start": 0,
+            "char_end": 3,
+            "quote": "경찰청"
+          }
+        ],
+        "merge_confidence": 1.0,
+        "possible_same_as": []
+      }
+    ],
+    "mention_to_entity": {
+      "kakao_0625:m1": "ent1",
+      "kakao_0625:m6": "ent1",
+      "kakao_0625:m7": "ent1",
+      "kakao_0625:m2": "ent2",
+      "kakao_0625:m3": "ent2",
+      "kakao_0625:m4": "ent3",
+      "kakao_0625:m5": "ent4",
+      "ecrm_0629:m1": "ent5",
+      "ecrm_0629:m2": "ent6",
+      "ecrm_0629:m3": "ent7"
+    }
+  },
+  "analysis": {
+    "case_id": "rule-03-증거보존",
+    "case_type": "used_goods_fraud",
+    "as_of": "2026-09-19",
+    "issues": [
+      {
+        "issue_id": "iss1",
+        "category": "missing",
+        "condition": "missing",
+        "message": "송금 금액: 올린 자료에서 찾지 못했습니다",
+        "stage": "transfer",
+        "slot": "transfer_amount",
+        "sources": [],
+        "checked_doc_ids": [
+          "kakao_0625",
+          "ecrm_0629"
+        ],
+        "related_claim_ids": [],
+        "related_event_ids": [],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": null,
+        "trigger": {
+          "key": "used_goods_fraud/transfer/transfer_amount/missing",
+          "case_type": "used_goods_fraud",
+          "condition": "missing",
+          "stage": "transfer",
+          "slot": "transfer_amount",
+          "since": null,
+          "elapsed_days": null,
+          "evidence": []
+        },
+        "priority": 30
+      },
+      {
+        "issue_id": "iss2",
+        "category": "missing",
+        "condition": "missing",
+        "message": "입금 계좌 예금주 명의: 올린 자료에서 찾지 못했습니다",
+        "stage": "transfer",
+        "slot": "account_holder",
+        "sources": [],
+        "checked_doc_ids": [
+          "kakao_0625",
+          "ecrm_0629"
+        ],
+        "related_claim_ids": [],
+        "related_event_ids": [],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": null,
+        "trigger": {
+          "key": "used_goods_fraud/transfer/account_holder/missing",
+          "case_type": "used_goods_fraud",
+          "condition": "missing",
+          "stage": "transfer",
+          "slot": "account_holder",
+          "since": null,
+          "elapsed_days": null,
+          "evidence": []
+        },
+        "priority": 30
+      },
+      {
+        "issue_id": "iss3",
+        "category": "missing",
+        "condition": "stage_stalled",
+        "message": "‘사이버범죄 신고 접수증’(2026-06-29 11:05) 이후 기관의 진행 기록이 없습니다 (82일 경과)",
+        "stage": "receipt",
+        "slot": null,
+        "sources": [
+          {
+            "source_doc_id": "ecrm_0629",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 304.0,
+              "y1": 84.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": "사이버범죄 신고 접수증"
+          }
+        ],
+        "checked_doc_ids": [
+          "kakao_0625",
+          "ecrm_0629"
+        ],
+        "related_claim_ids": [],
+        "related_event_ids": [
+          "tl1"
+        ],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": null,
+        "trigger": {
+          "key": "used_goods_fraud/receipt/stage/stage_stalled",
+          "case_type": "used_goods_fraud",
+          "condition": "stage_stalled",
+          "stage": "receipt",
+          "slot": null,
+          "since": "2026-06-29T11:05:00",
+          "elapsed_days": 82,
+          "evidence": [
+            {
+              "source_doc_id": "ecrm_0629",
+              "page": 1,
+              "source_line": 1,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 40.0,
+                "x1": 304.0,
+                "y1": 84.0
+              },
+              "char_start": null,
+              "char_end": null,
+              "quote": "사이버범죄 신고 접수증"
+            }
+          ]
+        },
+        "priority": 35
+      },
+      {
+        "issue_id": "iss4",
+        "category": "missing",
+        "condition": "missing",
+        "message": "담당 수사관: 올린 자료에서 찾지 못했습니다",
+        "stage": "investigation",
+        "slot": "investigator",
+        "sources": [],
+        "checked_doc_ids": [
+          "kakao_0625",
+          "ecrm_0629"
+        ],
+        "related_claim_ids": [],
+        "related_event_ids": [],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": null,
+        "trigger": {
+          "key": "used_goods_fraud/investigation/investigator/missing",
+          "case_type": "used_goods_fraud",
+          "condition": "missing",
+          "stage": "investigation",
+          "slot": "investigator",
+          "since": null,
+          "elapsed_days": null,
+          "evidence": []
+        },
+        "priority": 40
+      },
+      {
+        "issue_id": "iss5",
+        "category": "missing",
+        "condition": "missing",
+        "message": "사건번호: 올린 자료에서 찾지 못했습니다",
+        "stage": "investigation",
+        "slot": "case_number",
+        "sources": [],
+        "checked_doc_ids": [
+          "kakao_0625",
+          "ecrm_0629"
+        ],
+        "related_claim_ids": [],
+        "related_event_ids": [],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": null,
+        "trigger": {
+          "key": "used_goods_fraud/investigation/case_number/missing",
+          "case_type": "used_goods_fraud",
+          "condition": "missing",
+          "stage": "investigation",
+          "slot": "case_number",
+          "since": null,
+          "elapsed_days": null,
+          "evidence": []
+        },
+        "priority": 40
+      },
+      {
+        "issue_id": "iss6",
+        "category": "missing",
+        "condition": "stage_skipped",
+        "message": "‘신고’ 단계에 해당하는 자료가 없습니다",
+        "stage": "report",
+        "slot": null,
+        "sources": [],
+        "checked_doc_ids": [
+          "kakao_0625",
+          "ecrm_0629"
+        ],
+        "related_claim_ids": [],
+        "related_event_ids": [],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": null,
+        "trigger": {
+          "key": "used_goods_fraud/report/stage/stage_skipped",
+          "case_type": "used_goods_fraud",
+          "condition": "stage_skipped",
+          "stage": "report",
+          "slot": null,
+          "since": null,
+          "elapsed_days": null,
+          "evidence": []
+        },
+        "priority": 45
+      },
+      {
+        "issue_id": "iss7",
+        "category": "unverified",
+        "condition": "claimed_only",
+        "message": "입금 계좌번호: 가을캠프의 말만 있고 이를 뒷받침하는 기록 자료가 없습니다 — ‘농협 302-****-5521-** 로 18만원 보내주세요’(kakao_0625 · 4줄)",
+        "stage": "transfer",
+        "slot": "account_number",
+        "sources": [
+          {
+            "source_doc_id": "kakao_0625",
+            "page": 1,
+            "source_line": 4,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 220.0,
+              "x1": 1118.0,
+              "y1": 264.0
+            },
+            "char_start": 17,
+            "char_end": 49,
+            "quote": "농협 302-****-5521-** 로 18만원 보내주세요"
+          }
+        ],
+        "checked_doc_ids": [],
+        "related_claim_ids": [
+          "kakao_0625:c10"
+        ],
+        "related_event_ids": [],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": null,
+        "trigger": {
+          "key": "used_goods_fraud/transfer/account_number/claimed_only",
+          "case_type": "used_goods_fraud",
+          "condition": "claimed_only",
+          "stage": "transfer",
+          "slot": "account_number",
+          "since": null,
+          "elapsed_days": null,
+          "evidence": [
+            {
+              "source_doc_id": "kakao_0625",
+              "page": 1,
+              "source_line": 4,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 220.0,
+                "x1": 1118.0,
+                "y1": 264.0
+              },
+              "char_start": 17,
+              "char_end": 49,
+              "quote": "농협 302-****-5521-** 로 18만원 보내주세요"
+            }
+          ]
+        },
+        "priority": 50
+      },
+      {
+        "issue_id": "iss8",
+        "category": "unverified",
+        "condition": "low_confidence",
+        "message": "송금 일시: ‘2026-06-25 03:31~15:32’(kakao_0625 · 5줄) — 자료에서 읽어낸 값의 신뢰도가 낮아 확인이 필요합니다",
+        "stage": "transfer",
+        "slot": "transfer_time",
+        "sources": [
+          {
+            "source_doc_id": "kakao_0625",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 480.0,
+              "y1": 324.0
+            },
+            "char_start": 14,
+            "char_end": 20,
+            "quote": "송금했습니다"
+          }
+        ],
+        "checked_doc_ids": [],
+        "related_claim_ids": [
+          "kakao_0625:c12"
+        ],
+        "related_event_ids": [],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": null,
+        "trigger": {
+          "key": "used_goods_fraud/transfer/transfer_time/low_confidence",
+          "case_type": "used_goods_fraud",
+          "condition": "low_confidence",
+          "stage": "transfer",
+          "slot": "transfer_time",
+          "since": null,
+          "elapsed_days": null,
+          "evidence": [
+            {
+              "source_doc_id": "kakao_0625",
+              "page": 1,
+              "source_line": 5,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 280.0,
+                "x1": 480.0,
+                "y1": 324.0
+              },
+              "char_start": 14,
+              "char_end": 20,
+              "quote": "송금했습니다"
+            }
+          ]
+        },
+        "priority": 55
+      },
+      {
+        "issue_id": "iss9",
+        "category": "missing",
+        "condition": "time_gap",
+        "message": "06/25 15:32 ~ 06/29 11:05 사이의 기록이 없습니다 (약 4일)",
+        "stage": null,
+        "slot": null,
+        "sources": [
+          {
+            "source_doc_id": "kakao_0625",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 480.0,
+              "y1": 324.0
+            },
+            "char_start": 14,
+            "char_end": 20,
+            "quote": "송금했습니다"
+          },
+          {
+            "source_doc_id": "ecrm_0629",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 304.0,
+              "y1": 84.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": "사이버범죄 신고 접수증"
+          }
+        ],
+        "checked_doc_ids": [
+          "kakao_0625",
+          "ecrm_0629"
+        ],
+        "related_claim_ids": [],
+        "related_event_ids": [
+          "tl3",
+          "tl1"
+        ],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": null,
+        "trigger": {
+          "key": "used_goods_fraud/-/timeline/time_gap",
+          "case_type": "used_goods_fraud",
+          "condition": "time_gap",
+          "stage": null,
+          "slot": null,
+          "since": null,
+          "elapsed_days": null,
+          "evidence": [
+            {
+              "source_doc_id": "kakao_0625",
+              "page": 1,
+              "source_line": 5,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 280.0,
+                "x1": 480.0,
+                "y1": 324.0
+              },
+              "char_start": 14,
+              "char_end": 20,
+              "quote": "송금했습니다"
+            },
+            {
+              "source_doc_id": "ecrm_0629",
+              "page": 1,
+              "source_line": 1,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 40.0,
+                "x1": 304.0,
+                "y1": 84.0
+              },
+              "char_start": null,
+              "char_end": null,
+              "quote": "사이버범죄 신고 접수증"
+            }
+          ]
+        },
+        "priority": 70
+      }
+    ],
+    "slot_statuses": [
+      {
+        "slot": "transfer_amount",
+        "label": "송금 금액",
+        "stage": "transfer",
+        "required": true,
+        "state": "missing",
+        "value": null,
+        "claim_ids": [],
+        "sources": []
+      },
+      {
+        "slot": "transfer_time",
+        "label": "송금 일시",
+        "stage": "transfer",
+        "required": true,
+        "state": "low_confidence",
+        "value": null,
+        "claim_ids": [
+          "kakao_0625:c12"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "kakao_0625",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 480.0,
+              "y1": 324.0
+            },
+            "char_start": 14,
+            "char_end": 20,
+            "quote": "송금했습니다"
+          }
+        ]
+      },
+      {
+        "slot": "account_number",
+        "label": "입금 계좌번호",
+        "stage": "transfer",
+        "required": true,
+        "state": "claimed_only",
+        "value": null,
+        "claim_ids": [
+          "kakao_0625:c10"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "kakao_0625",
+            "page": 1,
+            "source_line": 4,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 220.0,
+              "x1": 1118.0,
+              "y1": 264.0
+            },
+            "char_start": 17,
+            "char_end": 49,
+            "quote": "농협 302-****-5521-** 로 18만원 보내주세요"
+          }
+        ]
+      },
+      {
+        "slot": "account_holder",
+        "label": "입금 계좌 예금주 명의",
+        "stage": "transfer",
+        "required": true,
+        "state": "missing",
+        "value": null,
+        "claim_ids": [],
+        "sources": []
+      },
+      {
+        "slot": "shipment_sent",
+        "label": "판매자 발송 여부",
+        "stage": "transfer",
+        "required": false,
+        "state": "missing",
+        "value": null,
+        "claim_ids": [],
+        "sources": []
+      },
+      {
+        "slot": "tracking_number",
+        "label": "송장번호",
+        "stage": "transfer",
+        "required": false,
+        "state": "missing",
+        "value": null,
+        "claim_ids": [],
+        "sources": []
+      },
+      {
+        "slot": "receipt_number",
+        "label": "신고 접수번호",
+        "stage": "receipt",
+        "required": true,
+        "state": "confirmed",
+        "value": "ECRM-2026-0629-4410",
+        "claim_ids": [
+          "ecrm_0629:c4"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "ecrm_0629",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 568.0,
+              "y1": 144.0
+            },
+            "char_start": 0,
+            "char_end": 24,
+            "quote": "접수번호 ECRM-2026-0629-4410"
+          }
+        ]
+      },
+      {
+        "slot": "receipt_time",
+        "label": "신고 접수 일시",
+        "stage": "receipt",
+        "required": true,
+        "state": "confirmed",
+        "value": "2026-06-29 11:05",
+        "claim_ids": [
+          "ecrm_0629:c5"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "ecrm_0629",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 546.0,
+              "y1": 204.0
+            },
+            "char_start": 0,
+            "char_end": 23,
+            "quote": "접수일시 2026. 6. 29. 11:05"
+          }
+        ]
+      },
+      {
+        "slot": "investigator",
+        "label": "담당 수사관",
+        "stage": "investigation",
+        "required": true,
+        "state": "missing",
+        "value": null,
+        "claim_ids": [],
+        "sources": []
+      },
+      {
+        "slot": "offence",
+        "label": "죄명",
+        "stage": "receipt",
+        "required": false,
+        "state": "confirmed",
+        "value": "사기",
+        "claim_ids": [
+          "ecrm_0629:c6"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "ecrm_0629",
+            "page": 1,
+            "source_line": 4,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 220.0,
+              "x1": 150.0,
+              "y1": 264.0
+            },
+            "char_start": 0,
+            "char_end": 5,
+            "quote": "죄명 사기"
+          }
+        ]
+      },
+      {
+        "slot": "case_number",
+        "label": "사건번호",
+        "stage": "investigation",
+        "required": true,
+        "state": "missing",
+        "value": null,
+        "claim_ids": [],
+        "sources": []
+      }
+    ],
+    "pair_decisions": [],
+    "action_triggers": [
+      {
+        "key": "used_goods_fraud/transfer/transfer_amount/missing",
+        "case_type": "used_goods_fraud",
+        "condition": "missing",
+        "stage": "transfer",
+        "slot": "transfer_amount",
+        "since": null,
+        "elapsed_days": null,
+        "evidence": []
+      },
+      {
+        "key": "used_goods_fraud/transfer/account_holder/missing",
+        "case_type": "used_goods_fraud",
+        "condition": "missing",
+        "stage": "transfer",
+        "slot": "account_holder",
+        "since": null,
+        "elapsed_days": null,
+        "evidence": []
+      },
+      {
+        "key": "used_goods_fraud/receipt/stage/stage_stalled",
+        "case_type": "used_goods_fraud",
+        "condition": "stage_stalled",
+        "stage": "receipt",
+        "slot": null,
+        "since": "2026-06-29T11:05:00",
+        "elapsed_days": 82,
+        "evidence": [
+          {
+            "source_doc_id": "ecrm_0629",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 304.0,
+              "y1": 84.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": "사이버범죄 신고 접수증"
+          }
+        ]
+      },
+      {
+        "key": "used_goods_fraud/investigation/investigator/missing",
+        "case_type": "used_goods_fraud",
+        "condition": "missing",
+        "stage": "investigation",
+        "slot": "investigator",
+        "since": null,
+        "elapsed_days": null,
+        "evidence": []
+      },
+      {
+        "key": "used_goods_fraud/investigation/case_number/missing",
+        "case_type": "used_goods_fraud",
+        "condition": "missing",
+        "stage": "investigation",
+        "slot": "case_number",
+        "since": null,
+        "elapsed_days": null,
+        "evidence": []
+      },
+      {
+        "key": "used_goods_fraud/report/stage/stage_skipped",
+        "case_type": "used_goods_fraud",
+        "condition": "stage_skipped",
+        "stage": "report",
+        "slot": null,
+        "since": null,
+        "elapsed_days": null,
+        "evidence": []
+      },
+      {
+        "key": "used_goods_fraud/transfer/account_number/claimed_only",
+        "case_type": "used_goods_fraud",
+        "condition": "claimed_only",
+        "stage": "transfer",
+        "slot": "account_number",
+        "since": null,
+        "elapsed_days": null,
+        "evidence": [
+          {
+            "source_doc_id": "kakao_0625",
+            "page": 1,
+            "source_line": 4,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 220.0,
+              "x1": 1118.0,
+              "y1": 264.0
+            },
+            "char_start": 17,
+            "char_end": 49,
+            "quote": "농협 302-****-5521-** 로 18만원 보내주세요"
+          }
+        ]
+      },
+      {
+        "key": "used_goods_fraud/transfer/transfer_time/low_confidence",
+        "case_type": "used_goods_fraud",
+        "condition": "low_confidence",
+        "stage": "transfer",
+        "slot": "transfer_time",
+        "since": null,
+        "elapsed_days": null,
+        "evidence": [
+          {
+            "source_doc_id": "kakao_0625",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 480.0,
+              "y1": 324.0
+            },
+            "char_start": 14,
+            "char_end": 20,
+            "quote": "송금했습니다"
+          }
+        ]
+      },
+      {
+        "key": "used_goods_fraud/-/timeline/time_gap",
+        "case_type": "used_goods_fraud",
+        "condition": "time_gap",
+        "stage": null,
+        "slot": null,
+        "since": null,
+        "elapsed_days": null,
+        "evidence": [
+          {
+            "source_doc_id": "kakao_0625",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 480.0,
+              "y1": 324.0
+            },
+            "char_start": 14,
+            "char_end": 20,
+            "quote": "송금했습니다"
+          },
+          {
+            "source_doc_id": "ecrm_0629",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 304.0,
+              "y1": 84.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": "사이버범죄 신고 접수증"
+          }
+        ]
+      }
+    ],
+    "case_card": {
+      "case_type": "used_goods_fraud",
+      "case_type_label": "중고거래 사기",
+      "requirements_status": "draft_unverified",
+      "stages": [
+        {
+          "stage": "occurrence",
+          "label": "발생",
+          "state": "done",
+          "timeline_event_ids": [
+            "tl2"
+          ],
+          "evidence_level": "statement"
+        },
+        {
+          "stage": "transfer",
+          "label": "송금",
+          "state": "done",
+          "timeline_event_ids": [
+            "tl3"
+          ],
+          "evidence_level": "statement"
+        },
+        {
+          "stage": "report",
+          "label": "신고",
+          "state": "skipped",
+          "timeline_event_ids": [],
+          "evidence_level": null
+        },
+        {
+          "stage": "receipt",
+          "label": "접수",
+          "state": "current",
+          "timeline_event_ids": [
+            "tl1"
+          ],
+          "evidence_level": "record"
+        },
+        {
+          "stage": "investigation",
+          "label": "수사",
+          "state": "pending",
+          "timeline_event_ids": [],
+          "evidence_level": null
+        },
+        {
+          "stage": "outcome",
+          "label": "결과",
+          "state": "pending",
+          "timeline_event_ids": [],
+          "evidence_level": null
+        }
+      ],
+      "current_stage": "receipt",
+      "evidence_doc_count": 2,
+      "needs_confirmation_count": 9,
+      "slots_done": 2,
+      "slots_total": 8,
+      "next_trigger": {
+        "key": "used_goods_fraud/transfer/transfer_amount/missing",
+        "case_type": "used_goods_fraud",
+        "condition": "missing",
+        "stage": "transfer",
+        "slot": "transfer_amount",
+        "since": null,
+        "elapsed_days": null,
+        "evidence": []
+      }
+    }
+  }
+}

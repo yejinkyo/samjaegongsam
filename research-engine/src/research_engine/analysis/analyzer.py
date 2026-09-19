@@ -277,15 +277,15 @@ class CaseAnalyzer:
         # 8) 사건 이후에 나왔지만 기록 자료로 확인되지 않는 사실 — 재수사 요청의 '새로 확인된 사실' 후보
         if requirements.flag_unrecorded_facts:
             for ev, decision in _unrecorded_facts(timeline):
-                cites = ", ".join(dict.fromkeys(s.cite() for s in ev.sources))
-                when = ev.time.iso() if ev.time else "시점 미상"  # type: ignore[union-attr]
+                # 날짜와 출처(문서 id · 줄)는 문장에 넣지 않는다. 화면이 출처를 따로 보여 주고,
+                # 직접 적은 메모의 id('note2')는 사용자에게 뜻이 없다
                 relation = ""
                 if decision is not None and decision.time is not None and ev.time is not None:
                     d_when = decision.time.iso()
                     relation = (f" ‘{decision.title}’({d_when})보다 앞선 내용입니다." if ev.time.end <= decision.time.start
                                 else f" ‘{decision.title}’({d_when}) 이후에 나온 내용입니다.")
                 add(IssueCategory.UNVERIFIED, C.UNRECORDED_FACT,
-                    f"‘{ev.title}’({when}, {cites}) — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다."
+                    f"‘{ev.title}’ — 기록 자료(통지서·접수증 등)에서는 확인되지 않는 진술입니다."
                     f"{relation} 수사 기록에 반영됐는지 확인이 필요합니다",
                     stage=ev.stage, sources=ev.sources, checked=checked_docs, event_ids=[ev.timeline_event_id],
                     subject="new_fact", since=ev.time.start if ev.time else None)

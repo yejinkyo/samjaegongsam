@@ -1,0 +1,16 @@
+{
+  "case_id": "rule-04-단계확인",
+  "case_type": "investigation_suspended",
+  "as_of": "2026-09-19",
+  "documents": [
+    "complaint_2023.json",
+    "receipt_2023.json",
+    "notice_blur.json"
+  ],
+  "user_notes": [],
+  "expect": {
+    "rule": 4,
+    "action": "ACT-단계확인"
+  },
+  "why": "통지서의 결정 부분이 번져 읽히지 않는다 — 결정을 모르면 나머지 판단이 무의미하다"
+}

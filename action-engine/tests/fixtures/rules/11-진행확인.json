@@ -1,0 +1,2960 @@
+{
+  "case_id": "rule-11-진행확인",
+  "case_type": "investigation_suspended",
+  "as_of": "2026-09-19",
+  "documents": [
+    {
+      "doc_id": "complaint_2026",
+      "file_name": "고소장_2026.jpg",
+      "doc_type": "complaint",
+      "doc_type_confidence": 0.8845,
+      "doc_type_scores": {
+        "judgment": 0.0022,
+        "complaint": 0.8845,
+        "statement": 0.0022,
+        "transcript": 0.0022,
+        "receipt": 0.0022,
+        "notice": 0.0022,
+        "messenger": 0.0022,
+        "forensic": 0.0022,
+        "news": 0.0022,
+        "memo": 0.098
+      },
+      "evidence_level": "statement",
+      "captured_at": "2026-09-18T09:00:00",
+      "pages": [
+        {
+          "page_no": 1,
+          "width": 1080.0,
+          "height": 380.0,
+          "image_ref": null
+        }
+      ],
+      "lines": [
+        {
+          "doc_id": "complaint_2026",
+          "line_no": 1,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 150.0,
+            "y1": 84.0
+          },
+          "text": "고 소 장",
+          "ocr_confidence": 0.94,
+          "readability": 0.852,
+          "readable": true,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "complaint_2026",
+          "line_no": 2,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 194.0,
+            "y1": 144.0
+          },
+          "text": "고소인 진서율",
+          "ocr_confidence": 0.94,
+          "readability": 0.9047,
+          "readable": true,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "complaint_2026",
+          "line_no": 3,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 238.0,
+            "y1": 204.0
+          },
+          "text": "피고소인 성명불상",
+          "ocr_confidence": 0.94,
+          "readability": 0.9047,
+          "readable": true,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "complaint_2026",
+          "line_no": 4,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 854.0,
+            "y1": 264.0
+          },
+          "text": "2026. 7. 1. 노트북 대금 1,200,000원을 보냈습니다.",
+          "ocr_confidence": 0.94,
+          "readability": 0.9047,
+          "readable": true,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "complaint_2026",
+          "line_no": 5,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 634.0,
+            "y1": 324.0
+          },
+          "text": "2026. 7. 3. ○○경찰서에 고소하였습니다.",
+          "ocr_confidence": 0.94,
+          "readability": 0.9047,
+          "readable": true,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        }
+      ],
+      "unreadable": []
+    },
+    {
+      "doc_id": "receipt_2026",
+      "file_name": "접수증_2026.jpg",
+      "doc_type": "receipt",
+      "doc_type_confidence": 0.9669,
+      "doc_type_scores": {
+        "judgment": 0.0032,
+        "complaint": 0.0032,
+        "statement": 0.0032,
+        "transcript": 0.0032,
+        "receipt": 0.9669,
+        "notice": 0.0032,
+        "messenger": 0.0032,
+        "forensic": 0.0032,
+        "news": 0.0032,
+        "memo": 0.0072
+      },
+      "evidence_level": "record",
+      "captured_at": "2026-09-18T10:00:00",
+      "pages": [
+        {
+          "page_no": 1,
+          "width": 1080.0,
+          "height": 500.0,
+          "image_ref": null
+        }
+      ],
+      "lines": [
+        {
+          "doc_id": "receipt_2026",
+          "line_no": 1,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 150.0,
+            "y1": 84.0
+          },
+          "text": "접 수 증",
+          "ocr_confidence": 0.94,
+          "readability": 0.8957,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "receipt_2026",
+          "line_no": 2,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 392.0,
+            "y1": 144.0
+          },
+          "text": "접수번호 2026-054410",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "receipt_2026",
+          "line_no": 3,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 524.0,
+            "y1": 204.0
+          },
+          "text": "접수일시 2026. 7. 3. 10:00",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "receipt_2026",
+          "line_no": 4,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 150.0,
+            "y1": 264.0
+          },
+          "text": "죄명 사기",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "receipt_2026",
+          "line_no": 5,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 524.0,
+            "y1": 324.0
+          },
+          "text": "발생일시 2026. 7. 1. 사기 피해",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "receipt_2026",
+          "line_no": 6,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 340.0,
+            "x1": 194.0,
+            "y1": 384.0
+          },
+          "text": "신고인 진서율",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "receipt_2026",
+          "line_no": 7,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 400.0,
+            "x1": 238.0,
+            "y1": 444.0
+          },
+          "text": "○○경찰서 민원실",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        }
+      ],
+      "unreadable": []
+    },
+    {
+      "doc_id": "transfer_2026",
+      "file_name": "이체확인증_2026.jpg",
+      "doc_type": "receipt",
+      "doc_type_confidence": 0.9753,
+      "doc_type_scores": {
+        "judgment": 0.0024,
+        "complaint": 0.0024,
+        "statement": 0.0024,
+        "transcript": 0.0024,
+        "receipt": 0.9753,
+        "notice": 0.0024,
+        "messenger": 0.0024,
+        "forensic": 0.0024,
+        "news": 0.0024,
+        "memo": 0.0054
+      },
+      "evidence_level": "record",
+      "captured_at": "2026-09-18T09:10:00",
+      "pages": [
+        {
+          "page_no": 1,
+          "width": 1080.0,
+          "height": 380.0,
+          "image_ref": null
+        }
+      ],
+      "lines": [
+        {
+          "doc_id": "transfer_2026",
+          "line_no": 1,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 150.0,
+            "y1": 84.0
+          },
+          "text": "이체확인증",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "transfer_2026",
+          "line_no": 2,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 524.0,
+            "y1": 144.0
+          },
+          "text": "거래일시 2026. 7. 1. 14:20",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "transfer_2026",
+          "line_no": 3,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 370.0,
+            "y1": 204.0
+          },
+          "text": "이체금액 1,200,000원",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "transfer_2026",
+          "line_no": 4,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 194.0,
+            "y1": 264.0
+          },
+          "text": "받는분 박*진",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "transfer_2026",
+          "line_no": 5,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 128.0,
+            "y1": 324.0
+          },
+          "text": "우리은행",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        }
+      ],
+      "unreadable": []
+    },
+    {
+      "doc_id": "progress_2026",
+      "file_name": "수사진행상황_통지서.jpg",
+      "doc_type": "notice",
+      "doc_type_confidence": 0.6271,
+      "doc_type_scores": {
+        "judgment": 0.0312,
+        "complaint": 0.0849,
+        "statement": 0.0312,
+        "transcript": 0.0312,
+        "receipt": 0.0312,
+        "notice": 0.6271,
+        "messenger": 0.0312,
+        "forensic": 0.0312,
+        "news": 0.0312,
+        "memo": 0.0695
+      },
+      "evidence_level": "record",
+      "captured_at": "2026-09-18T10:05:00",
+      "pages": [
+        {
+          "page_no": 1,
+          "width": 1080.0,
+          "height": 560.0,
+          "image_ref": null
+        }
+      ],
+      "lines": [
+        {
+          "doc_id": "progress_2026",
+          "line_no": 1,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 260.0,
+            "y1": 84.0
+          },
+          "text": "수사진행상황 통지서",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "progress_2026",
+          "line_no": 2,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 392.0,
+            "y1": 144.0
+          },
+          "text": "사건번호 2026형제20233",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "progress_2026",
+          "line_no": 3,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 194.0,
+            "y1": 204.0
+          },
+          "text": "고소인 진서율",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "progress_2026",
+          "line_no": 4,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 150.0,
+            "y1": 264.0
+          },
+          "text": "죄명 사기",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "progress_2026",
+          "line_no": 5,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 392.0,
+            "y1": 324.0
+          },
+          "text": "통지일자 2026. 8. 5.",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "progress_2026",
+          "line_no": 6,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 340.0,
+            "x1": 238.0,
+            "y1": 384.0
+          },
+          "text": "진행상황 수사 중",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "progress_2026",
+          "line_no": 7,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 400.0,
+            "x1": 326.0,
+            "y1": 444.0
+          },
+          "text": "담당 수사관 경장 남궁현",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "progress_2026",
+          "line_no": 8,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 460.0,
+            "x1": 172.0,
+            "y1": 504.0
+          },
+          "text": "○○경찰서장",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        }
+      ],
+      "unreadable": []
+    },
+    {
+      "doc_id": "forensic_2026",
+      "file_name": "감정서_2026.jpg",
+      "doc_type": "forensic",
+      "doc_type_confidence": 0.9753,
+      "doc_type_scores": {
+        "judgment": 0.0024,
+        "complaint": 0.0024,
+        "statement": 0.0024,
+        "transcript": 0.0024,
+        "receipt": 0.0024,
+        "notice": 0.0024,
+        "messenger": 0.0024,
+        "forensic": 0.9753,
+        "news": 0.0024,
+        "memo": 0.0054
+      },
+      "evidence_level": "record",
+      "captured_at": "2026-09-18T10:10:00",
+      "pages": [
+        {
+          "page_no": 1,
+          "width": 1080.0,
+          "height": 380.0,
+          "image_ref": null
+        }
+      ],
+      "lines": [
+        {
+          "doc_id": "forensic_2026",
+          "line_no": 1,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 150.0,
+            "y1": 84.0
+          },
+          "text": "감 정 서",
+          "ocr_confidence": 0.94,
+          "readability": 0.8957,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "forensic_2026",
+          "line_no": 2,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 392.0,
+            "y1": 144.0
+          },
+          "text": "감정일자 2026. 8. 1.",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "forensic_2026",
+          "line_no": 3,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 392.0,
+            "y1": 204.0
+          },
+          "text": "감정대상 거래 대화 캡처 원본",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "forensic_2026",
+          "line_no": 4,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 436.0,
+            "y1": 264.0
+          },
+          "text": "감정결과 대상물에서 특이사항 없음",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "forensic_2026",
+          "line_no": 5,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 238.0,
+            "y1": 324.0
+          },
+          "text": "○○과학수사연구소",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        }
+      ],
+      "unreadable": []
+    }
+  ],
+  "clarifications": [],
+  "extraction": {
+    "mentions": [
+      {
+        "mention_id": "complaint_2026:m1",
+        "doc_id": "complaint_2026",
+        "kind": "person",
+        "name": {
+          "source_doc_id": "complaint_2026",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 194.0,
+            "y1": 144.0
+          },
+          "char_start": 4,
+          "char_end": 7,
+          "quote": "진서율",
+          "value": "진서율",
+          "confidence": 0.7238
+        },
+        "normalized": "진서율",
+        "role": "고소인"
+      },
+      {
+        "mention_id": "complaint_2026:m2",
+        "doc_id": "complaint_2026",
+        "kind": "organization",
+        "name": {
+          "source_doc_id": "complaint_2026",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 634.0,
+            "y1": 324.0
+          },
+          "char_start": 12,
+          "char_end": 17,
+          "quote": "○○경찰서",
+          "value": "○○경찰서",
+          "confidence": 0.6785
+        },
+        "normalized": "**경찰서",
+        "role": null
+      },
+      {
+        "mention_id": "receipt_2026:m1",
+        "doc_id": "receipt_2026",
+        "kind": "receipt_number",
+        "name": {
+          "source_doc_id": "receipt_2026",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 392.0,
+            "y1": 144.0
+          },
+          "char_start": 5,
+          "char_end": 16,
+          "quote": "2026-054410",
+          "value": "2026-054410",
+          "confidence": 0.7939
+        },
+        "normalized": "2026-054410",
+        "role": null
+      },
+      {
+        "mention_id": "receipt_2026:m2",
+        "doc_id": "receipt_2026",
+        "kind": "person",
+        "name": {
+          "source_doc_id": "receipt_2026",
+          "page": 1,
+          "source_line": 6,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 340.0,
+            "x1": 194.0,
+            "y1": 384.0
+          },
+          "char_start": 4,
+          "char_end": 7,
+          "quote": "진서율",
+          "value": "진서율",
+          "confidence": 0.7472
+        },
+        "normalized": "진서율",
+        "role": "신고인"
+      },
+      {
+        "mention_id": "receipt_2026:m3",
+        "doc_id": "receipt_2026",
+        "kind": "organization",
+        "name": {
+          "source_doc_id": "receipt_2026",
+          "page": 1,
+          "source_line": 7,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 400.0,
+            "x1": 238.0,
+            "y1": 444.0
+          },
+          "char_start": 0,
+          "char_end": 5,
+          "quote": "○○경찰서",
+          "value": "○○경찰서",
+          "confidence": 0.7005
+        },
+        "normalized": "**경찰서",
+        "role": null
+      },
+      {
+        "mention_id": "transfer_2026:m1",
+        "doc_id": "transfer_2026",
+        "kind": "organization",
+        "name": {
+          "source_doc_id": "transfer_2026",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 128.0,
+            "y1": 324.0
+          },
+          "char_start": 0,
+          "char_end": 4,
+          "quote": "우리은행",
+          "value": "우리은행",
+          "confidence": 0.7005
+        },
+        "normalized": "우리은행",
+        "role": null
+      },
+      {
+        "mention_id": "progress_2026:m1",
+        "doc_id": "progress_2026",
+        "kind": "case_number",
+        "name": {
+          "source_doc_id": "progress_2026",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 392.0,
+            "y1": 144.0
+          },
+          "char_start": 5,
+          "char_end": 16,
+          "quote": "2026형제20233",
+          "value": "2026형제20233",
+          "confidence": 0.8406
+        },
+        "normalized": "2026형제20233",
+        "role": null
+      },
+      {
+        "mention_id": "progress_2026:m2",
+        "doc_id": "progress_2026",
+        "kind": "person",
+        "name": {
+          "source_doc_id": "progress_2026",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 194.0,
+            "y1": 204.0
+          },
+          "char_start": 4,
+          "char_end": 7,
+          "quote": "진서율",
+          "value": "진서율",
+          "confidence": 0.7472
+        },
+        "normalized": "진서율",
+        "role": "고소인"
+      },
+      {
+        "mention_id": "progress_2026:m3",
+        "doc_id": "progress_2026",
+        "kind": "person",
+        "name": {
+          "source_doc_id": "progress_2026",
+          "page": 1,
+          "source_line": 7,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 400.0,
+            "x1": 326.0,
+            "y1": 444.0
+          },
+          "char_start": 10,
+          "char_end": 13,
+          "quote": "남궁현",
+          "value": "남궁현",
+          "confidence": 0.7472
+        },
+        "normalized": "남궁현",
+        "role": "담당수사관"
+      },
+      {
+        "mention_id": "progress_2026:m4",
+        "doc_id": "progress_2026",
+        "kind": "organization",
+        "name": {
+          "source_doc_id": "progress_2026",
+          "page": 1,
+          "source_line": 8,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 460.0,
+            "x1": 172.0,
+            "y1": 504.0
+          },
+          "char_start": 0,
+          "char_end": 5,
+          "quote": "○○경찰서",
+          "value": "○○경찰서",
+          "confidence": 0.7005
+        },
+        "normalized": "**경찰서",
+        "role": null
+      }
+    ],
+    "events": [
+      {
+        "event_id": "complaint_2026:e5",
+        "doc_id": "complaint_2026",
+        "stage": "report",
+        "action": {
+          "source_doc_id": "complaint_2026",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 634.0,
+            "y1": 324.0
+          },
+          "char_start": 0,
+          "char_end": 27,
+          "quote": "2026. 7. 3. ○○경찰서에 고소하였습니다.",
+          "value": "2026. 7. 3. ○○경찰서에 고소하였습니다.",
+          "confidence": 0.7238
+        },
+        "time": {
+          "source_doc_id": "complaint_2026",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 634.0,
+            "y1": 324.0
+          },
+          "char_start": 0,
+          "char_end": 11,
+          "quote": "2026. 7. 3.",
+          "value": {
+            "raw": "2026. 7. 3.",
+            "start": "2026-07-03T00:00:00",
+            "end": "2026-07-04T00:00:00",
+            "granularity": "day",
+            "kind": "absolute",
+            "approximate": false,
+            "anchor": null,
+            "anchor_source": null,
+            "candidates": [],
+            "needs_confirmation": false,
+            "note": null
+          },
+          "confidence": 0.8595
+        },
+        "amount": null,
+        "participant_mention_ids": [
+          "complaint_2026:m2"
+        ],
+        "evidence_level": "statement",
+        "action_kind": null
+      },
+      {
+        "event_id": "receipt_2026:e8",
+        "doc_id": "receipt_2026",
+        "stage": "receipt",
+        "action": {
+          "source_doc_id": "receipt_2026",
+          "page": 1,
+          "source_line": 1,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 150.0,
+            "y1": 84.0
+          },
+          "char_start": null,
+          "char_end": null,
+          "quote": "접 수 증",
+          "value": "접 수 증",
+          "confidence": 0.8509
+        },
+        "time": {
+          "source_doc_id": "receipt_2026",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 524.0,
+            "y1": 204.0
+          },
+          "char_start": 5,
+          "char_end": 22,
+          "quote": "2026. 7. 3. 10:00",
+          "value": {
+            "raw": "2026. 7. 3. 10:00",
+            "start": "2026-07-03T10:00:00",
+            "end": "2026-07-03T10:01:00",
+            "granularity": "minute",
+            "kind": "absolute",
+            "approximate": false,
+            "anchor": null,
+            "anchor_source": null,
+            "candidates": [
+              {
+                "start": "2026-07-03T22:00:00",
+                "end": "2026-07-03T22:01:00",
+                "reason": "오전/오후 표기 없음"
+              }
+            ],
+            "needs_confirmation": false,
+            "note": null
+          },
+          "confidence": 0.8873
+        },
+        "amount": null,
+        "participant_mention_ids": [
+          "receipt_2026:m1",
+          "receipt_2026:m2",
+          "receipt_2026:m3"
+        ],
+        "evidence_level": "record",
+        "action_kind": null
+      },
+      {
+        "event_id": "transfer_2026:e5",
+        "doc_id": "transfer_2026",
+        "stage": "transfer",
+        "action": {
+          "source_doc_id": "transfer_2026",
+          "page": 1,
+          "source_line": 1,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 150.0,
+            "y1": 84.0
+          },
+          "char_start": null,
+          "char_end": null,
+          "quote": "이체확인증",
+          "value": "이체확인증",
+          "confidence": 0.8873
+        },
+        "time": {
+          "source_doc_id": "transfer_2026",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 524.0,
+            "y1": 144.0
+          },
+          "char_start": 5,
+          "char_end": 22,
+          "quote": "2026. 7. 1. 14:20",
+          "value": {
+            "raw": "2026. 7. 1. 14:20",
+            "start": "2026-07-01T14:20:00",
+            "end": "2026-07-01T14:21:00",
+            "granularity": "minute",
+            "kind": "absolute",
+            "approximate": false,
+            "anchor": null,
+            "anchor_source": null,
+            "candidates": [],
+            "needs_confirmation": false,
+            "note": null
+          },
+          "confidence": 0.8873
+        },
+        "amount": {
+          "source_doc_id": "transfer_2026",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 370.0,
+            "y1": 204.0
+          },
+          "char_start": 5,
+          "char_end": 15,
+          "quote": "1,200,000원",
+          "value": 1200000,
+          "confidence": 0.8873
+        },
+        "participant_mention_ids": [
+          "transfer_2026:m1"
+        ],
+        "evidence_level": "record",
+        "action_kind": null
+      },
+      {
+        "event_id": "forensic_2026:e1",
+        "doc_id": "forensic_2026",
+        "stage": "occurrence",
+        "action": {
+          "source_doc_id": "forensic_2026",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 392.0,
+            "y1": 204.0
+          },
+          "char_start": 0,
+          "char_end": 16,
+          "quote": "감정대상 거래 대화 캡처 원본",
+          "value": "감정대상 거래 대화 캡처 원본",
+          "confidence": 0.8406
+        },
+        "time": null,
+        "amount": null,
+        "participant_mention_ids": [],
+        "evidence_level": "record",
+        "action_kind": "dealing"
+      },
+      {
+        "event_id": "forensic_2026:e2",
+        "doc_id": "forensic_2026",
+        "stage": "investigation",
+        "action": {
+          "source_doc_id": "forensic_2026",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 238.0,
+            "y1": 324.0
+          },
+          "char_start": 0,
+          "char_end": 9,
+          "quote": "○○과학수사연구소",
+          "value": "○○과학수사연구소",
+          "confidence": 0.8406
+        },
+        "time": null,
+        "amount": null,
+        "participant_mention_ids": [],
+        "evidence_level": "record",
+        "action_kind": null
+      }
+    ],
+    "claims": [
+      {
+        "claim_id": "complaint_2026:c3",
+        "doc_id": "complaint_2026",
+        "speaker": "진서율",
+        "speaker_basis": "document_author",
+        "speaker_mention_id": "complaint_2026:m1",
+        "content": {
+          "source_doc_id": "complaint_2026",
+          "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 854.0,
+            "y1": 264.0
+          },
+          "char_start": 0,
+          "char_end": 37,
+          "quote": "2026. 7. 1. 노트북 대금 1,200,000원을 보냈습니다.",
+          "value": "2026. 7. 1. 노트북 대금 1,200,000원을 보냈습니다.",
+          "confidence": 0.769
+        },
+        "slot": "transfer_amount",
+        "slot_value": "1200000",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "statement"
+      },
+      {
+        "claim_id": "complaint_2026:c4",
+        "doc_id": "complaint_2026",
+        "speaker": "진서율",
+        "speaker_basis": "document_author",
+        "speaker_mention_id": "complaint_2026:m1",
+        "content": {
+          "source_doc_id": "complaint_2026",
+          "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 854.0,
+            "y1": 264.0
+          },
+          "char_start": 0,
+          "char_end": 37,
+          "quote": "2026. 7. 1. 노트북 대금 1,200,000원을 보냈습니다.",
+          "value": "2026. 7. 1. 노트북 대금 1,200,000원을 보냈습니다.",
+          "confidence": 0.769
+        },
+        "slot": "transfer_time",
+        "slot_value": "2026-07-01",
+        "slot_time": {
+          "raw": "2026. 7. 1.",
+          "start": "2026-07-01T00:00:00",
+          "end": "2026-07-02T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "value_is_speaker_self": false,
+        "subject": "1200000",
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "statement"
+      },
+      {
+        "claim_id": "complaint_2026:c6",
+        "doc_id": "complaint_2026",
+        "speaker": "진서율",
+        "speaker_basis": "document_author",
+        "speaker_mention_id": "complaint_2026:m1",
+        "content": {
+          "source_doc_id": "complaint_2026",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 634.0,
+            "y1": 324.0
+          },
+          "char_start": 0,
+          "char_end": 27,
+          "quote": "2026. 7. 3. ○○경찰서에 고소하였습니다.",
+          "value": "2026. 7. 3. ○○경찰서에 고소하였습니다.",
+          "confidence": 0.769
+        },
+        "slot": null,
+        "slot_value": null,
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "statement"
+      },
+      {
+        "claim_id": "receipt_2026:c4",
+        "doc_id": "receipt_2026",
+        "speaker": "**경찰서",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "receipt_2026:m3",
+        "content": {
+          "source_doc_id": "receipt_2026",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 392.0,
+            "y1": 144.0
+          },
+          "char_start": 0,
+          "char_end": 16,
+          "quote": "접수번호 2026-054410",
+          "value": "접수번호 2026-054410",
+          "confidence": 0.8406
+        },
+        "slot": "receipt_number",
+        "slot_value": "2026-054410",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "receipt_2026:c5",
+        "doc_id": "receipt_2026",
+        "speaker": "**경찰서",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "receipt_2026:m3",
+        "content": {
+          "source_doc_id": "receipt_2026",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 524.0,
+            "y1": 204.0
+          },
+          "char_start": 0,
+          "char_end": 22,
+          "quote": "접수일시 2026. 7. 3. 10:00",
+          "value": "접수일시 2026. 7. 3. 10:00",
+          "confidence": 0.8406
+        },
+        "slot": "receipt_time",
+        "slot_value": "2026-07-03 10:00",
+        "slot_time": {
+          "raw": "2026. 7. 3. 10:00",
+          "start": "2026-07-03T10:00:00",
+          "end": "2026-07-03T10:01:00",
+          "granularity": "minute",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [
+            {
+              "start": "2026-07-03T22:00:00",
+              "end": "2026-07-03T22:01:00",
+              "reason": "오전/오후 표기 없음"
+            }
+          ],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "receipt_2026:c6",
+        "doc_id": "receipt_2026",
+        "speaker": "**경찰서",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "receipt_2026:m3",
+        "content": {
+          "source_doc_id": "receipt_2026",
+          "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 150.0,
+            "y1": 264.0
+          },
+          "char_start": 0,
+          "char_end": 5,
+          "quote": "죄명 사기",
+          "value": "죄명 사기",
+          "confidence": 0.8406
+        },
+        "slot": "offence",
+        "slot_value": "사기",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "receipt_2026:c7",
+        "doc_id": "receipt_2026",
+        "speaker": "**경찰서",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "receipt_2026:m3",
+        "content": {
+          "source_doc_id": "receipt_2026",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 524.0,
+            "y1": 324.0
+          },
+          "char_start": 0,
+          "char_end": 22,
+          "quote": "발생일시 2026. 7. 1. 사기 피해",
+          "value": "발생일시 2026. 7. 1. 사기 피해",
+          "confidence": 0.8406
+        },
+        "slot": "incident_time",
+        "slot_value": "2026-07-01",
+        "slot_time": {
+          "raw": "2026. 7. 1.",
+          "start": "2026-07-01T00:00:00",
+          "end": "2026-07-02T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "transfer_2026:c2",
+        "doc_id": "transfer_2026",
+        "speaker": "우리은행",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "transfer_2026:m1",
+        "content": {
+          "source_doc_id": "transfer_2026",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 524.0,
+            "y1": 144.0
+          },
+          "char_start": 0,
+          "char_end": 22,
+          "quote": "거래일시 2026. 7. 1. 14:20",
+          "value": "거래일시 2026. 7. 1. 14:20",
+          "confidence": 0.8406
+        },
+        "slot": "transfer_time",
+        "slot_value": "2026-07-01 14:20",
+        "slot_time": {
+          "raw": "2026. 7. 1. 14:20",
+          "start": "2026-07-01T14:20:00",
+          "end": "2026-07-01T14:21:00",
+          "granularity": "minute",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "value_is_speaker_self": false,
+        "subject": "1200000",
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "transfer_2026:c3",
+        "doc_id": "transfer_2026",
+        "speaker": "우리은행",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "transfer_2026:m1",
+        "content": {
+          "source_doc_id": "transfer_2026",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 370.0,
+            "y1": 204.0
+          },
+          "char_start": 0,
+          "char_end": 15,
+          "quote": "이체금액 1,200,000원",
+          "value": "이체금액 1,200,000원",
+          "confidence": 0.8406
+        },
+        "slot": "transfer_amount",
+        "slot_value": "1200000",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "transfer_2026:c4",
+        "doc_id": "transfer_2026",
+        "speaker": "우리은행",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "transfer_2026:m1",
+        "content": {
+          "source_doc_id": "transfer_2026",
+          "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 194.0,
+            "y1": 264.0
+          },
+          "char_start": 0,
+          "char_end": 7,
+          "quote": "받는분 박*진",
+          "value": "받는분 박*진",
+          "confidence": 0.8406
+        },
+        "slot": "account_holder",
+        "slot_value": "박*진",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "progress_2026:c5",
+        "doc_id": "progress_2026",
+        "speaker": "**경찰서",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "progress_2026:m4",
+        "content": {
+          "source_doc_id": "progress_2026",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 392.0,
+            "y1": 144.0
+          },
+          "char_start": 0,
+          "char_end": 16,
+          "quote": "사건번호 2026형제20233",
+          "value": "사건번호 2026형제20233",
+          "confidence": 0.8406
+        },
+        "slot": "case_number",
+        "slot_value": "2026형제20233",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "progress_2026:c6",
+        "doc_id": "progress_2026",
+        "speaker": "**경찰서",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "progress_2026:m4",
+        "content": {
+          "source_doc_id": "progress_2026",
+          "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 150.0,
+            "y1": 264.0
+          },
+          "char_start": 0,
+          "char_end": 5,
+          "quote": "죄명 사기",
+          "value": "죄명 사기",
+          "confidence": 0.8406
+        },
+        "slot": "offence",
+        "slot_value": "사기",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "progress_2026:c7",
+        "doc_id": "progress_2026",
+        "speaker": "**경찰서",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "progress_2026:m4",
+        "content": {
+          "source_doc_id": "progress_2026",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 392.0,
+            "y1": 324.0
+          },
+          "char_start": 0,
+          "char_end": 16,
+          "quote": "통지일자 2026. 8. 5.",
+          "value": "통지일자 2026. 8. 5.",
+          "confidence": 0.8406
+        },
+        "slot": "decision_time",
+        "slot_value": "2026-08-05",
+        "slot_time": {
+          "raw": "2026. 8. 5.",
+          "start": "2026-08-05T00:00:00",
+          "end": "2026-08-06T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "progress_2026:c8",
+        "doc_id": "progress_2026",
+        "speaker": "**경찰서",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "progress_2026:m4",
+        "content": {
+          "source_doc_id": "progress_2026",
+          "page": 1,
+          "source_line": 7,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 400.0,
+            "x1": 326.0,
+            "y1": 444.0
+          },
+          "char_start": 0,
+          "char_end": 13,
+          "quote": "담당 수사관 경장 남궁현",
+          "value": "담당 수사관 경장 남궁현",
+          "confidence": 0.8406
+        },
+        "slot": "investigator",
+        "slot_value": "남궁현",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      }
+    ],
+    "times": [
+      {
+        "source_doc_id": "complaint_2026",
+        "page": 1,
+        "source_line": 4,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 220.0,
+          "x1": 854.0,
+          "y1": 264.0
+        },
+        "char_start": 0,
+        "char_end": 11,
+        "quote": "2026. 7. 1.",
+        "value": {
+          "raw": "2026. 7. 1.",
+          "start": "2026-07-01T00:00:00",
+          "end": "2026-07-02T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8595
+      },
+      {
+        "source_doc_id": "complaint_2026",
+        "page": 1,
+        "source_line": 5,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 280.0,
+          "x1": 634.0,
+          "y1": 324.0
+        },
+        "char_start": 0,
+        "char_end": 11,
+        "quote": "2026. 7. 3.",
+        "value": {
+          "raw": "2026. 7. 3.",
+          "start": "2026-07-03T00:00:00",
+          "end": "2026-07-04T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8595
+      },
+      {
+        "source_doc_id": "receipt_2026",
+        "page": 1,
+        "source_line": 3,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 160.0,
+          "x1": 524.0,
+          "y1": 204.0
+        },
+        "char_start": 5,
+        "char_end": 22,
+        "quote": "2026. 7. 3. 10:00",
+        "value": {
+          "raw": "2026. 7. 3. 10:00",
+          "start": "2026-07-03T10:00:00",
+          "end": "2026-07-03T10:01:00",
+          "granularity": "minute",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [
+            {
+              "start": "2026-07-03T22:00:00",
+              "end": "2026-07-03T22:01:00",
+              "reason": "오전/오후 표기 없음"
+            }
+          ],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8873
+      },
+      {
+        "source_doc_id": "receipt_2026",
+        "page": 1,
+        "source_line": 5,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 280.0,
+          "x1": 524.0,
+          "y1": 324.0
+        },
+        "char_start": 5,
+        "char_end": 16,
+        "quote": "2026. 7. 1.",
+        "value": {
+          "raw": "2026. 7. 1.",
+          "start": "2026-07-01T00:00:00",
+          "end": "2026-07-02T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8873
+      },
+      {
+        "source_doc_id": "transfer_2026",
+        "page": 1,
+        "source_line": 2,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 100.0,
+          "x1": 524.0,
+          "y1": 144.0
+        },
+        "char_start": 5,
+        "char_end": 22,
+        "quote": "2026. 7. 1. 14:20",
+        "value": {
+          "raw": "2026. 7. 1. 14:20",
+          "start": "2026-07-01T14:20:00",
+          "end": "2026-07-01T14:21:00",
+          "granularity": "minute",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8873
+      },
+      {
+        "source_doc_id": "progress_2026",
+        "page": 1,
+        "source_line": 5,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 280.0,
+          "x1": 392.0,
+          "y1": 324.0
+        },
+        "char_start": 5,
+        "char_end": 16,
+        "quote": "2026. 8. 5.",
+        "value": {
+          "raw": "2026. 8. 5.",
+          "start": "2026-08-05T00:00:00",
+          "end": "2026-08-06T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8873
+      },
+      {
+        "source_doc_id": "forensic_2026",
+        "page": 1,
+        "source_line": 2,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 100.0,
+          "x1": 392.0,
+          "y1": 144.0
+        },
+        "char_start": 5,
+        "char_end": 16,
+        "quote": "2026. 8. 1.",
+        "value": {
+          "raw": "2026. 8. 1.",
+          "start": "2026-08-01T00:00:00",
+          "end": "2026-08-02T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8873
+      }
+    ],
+    "document_dates": {
+      "complaint_2026": {
+        "source_doc_id": "complaint_2026",
+        "page": 1,
+        "source_line": 5,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 280.0,
+          "x1": 634.0,
+          "y1": 324.0
+        },
+        "char_start": 0,
+        "char_end": 11,
+        "quote": "2026. 7. 3.",
+        "value": {
+          "raw": "2026. 7. 3.",
+          "start": "2026-07-03T00:00:00",
+          "end": "2026-07-04T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8595
+      },
+      "receipt_2026": {
+        "source_doc_id": "receipt_2026",
+        "page": 1,
+        "source_line": 3,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 160.0,
+          "x1": 524.0,
+          "y1": 204.0
+        },
+        "char_start": 5,
+        "char_end": 22,
+        "quote": "2026. 7. 3. 10:00",
+        "value": {
+          "raw": "2026. 7. 3. 10:00",
+          "start": "2026-07-03T10:00:00",
+          "end": "2026-07-03T10:01:00",
+          "granularity": "minute",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [
+            {
+              "start": "2026-07-03T22:00:00",
+              "end": "2026-07-03T22:01:00",
+              "reason": "오전/오후 표기 없음"
+            }
+          ],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8873
+      },
+      "transfer_2026": {
+        "source_doc_id": "transfer_2026",
+        "page": 1,
+        "source_line": 2,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 100.0,
+          "x1": 524.0,
+          "y1": 144.0
+        },
+        "char_start": 5,
+        "char_end": 22,
+        "quote": "2026. 7. 1. 14:20",
+        "value": {
+          "raw": "2026. 7. 1. 14:20",
+          "start": "2026-07-01T14:20:00",
+          "end": "2026-07-01T14:21:00",
+          "granularity": "minute",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8873
+      },
+      "progress_2026": {
+        "source_doc_id": "progress_2026",
+        "page": 1,
+        "source_line": 5,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 280.0,
+          "x1": 392.0,
+          "y1": 324.0
+        },
+        "char_start": 5,
+        "char_end": 16,
+        "quote": "2026. 8. 5.",
+        "value": {
+          "raw": "2026. 8. 5.",
+          "start": "2026-08-05T00:00:00",
+          "end": "2026-08-06T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8873
+      }
+    },
+    "clarifications": []
+  },
+  "timeline": {
+    "case_type": "investigation_suspended",
+    "events": [
+      {
+        "timeline_event_id": "tl3",
+        "stage": "occurrence",
+        "title": "감정대상 거래 대화 캡처 원본",
+        "time": null,
+        "time_unknown": true,
+        "amount": null,
+        "participant_entity_ids": [],
+        "event_ids": [
+          "forensic_2026:e1"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "forensic_2026",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 392.0,
+              "y1": 204.0
+            },
+            "char_start": 0,
+            "char_end": 16,
+            "quote": "감정대상 거래 대화 캡처 원본"
+          }
+        ],
+        "evidence_level": "record",
+        "needs_confirmation": true,
+        "flags": []
+      },
+      {
+        "timeline_event_id": "tl2",
+        "stage": "transfer",
+        "title": "1,200,000원 송금",
+        "time": {
+          "raw": "2026. 7. 1. 14:20",
+          "start": "2026-07-01T14:20:00",
+          "end": "2026-07-01T14:21:00",
+          "granularity": "minute",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "time_unknown": false,
+        "amount": 1200000,
+        "participant_entity_ids": [
+          "ent4"
+        ],
+        "event_ids": [
+          "transfer_2026:e5"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "transfer_2026",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 150.0,
+              "y1": 84.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": "이체확인증"
+          },
+          {
+            "source_doc_id": "transfer_2026",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 524.0,
+              "y1": 144.0
+            },
+            "char_start": 5,
+            "char_end": 22,
+            "quote": "2026. 7. 1. 14:20"
+          },
+          {
+            "source_doc_id": "transfer_2026",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 370.0,
+              "y1": 204.0
+            },
+            "char_start": 5,
+            "char_end": 15,
+            "quote": "1,200,000원"
+          }
+        ],
+        "evidence_level": "record",
+        "needs_confirmation": false,
+        "flags": []
+      },
+      {
+        "timeline_event_id": "tl5",
+        "stage": "report",
+        "title": "2026. 7. 3. ○○경찰서에 고소하였습니다.",
+        "time": {
+          "raw": "2026. 7. 3.",
+          "start": "2026-07-03T00:00:00",
+          "end": "2026-07-04T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "time_unknown": false,
+        "amount": null,
+        "participant_entity_ids": [
+          "ent2"
+        ],
+        "event_ids": [
+          "complaint_2026:e5"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "complaint_2026",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 634.0,
+              "y1": 324.0
+            },
+            "char_start": 0,
+            "char_end": 27,
+            "quote": "2026. 7. 3. ○○경찰서에 고소하였습니다."
+          }
+        ],
+        "evidence_level": "statement",
+        "needs_confirmation": false,
+        "flags": [
+          "claim_only"
+        ]
+      },
+      {
+        "timeline_event_id": "tl1",
+        "stage": "receipt",
+        "title": "접 수 증",
+        "time": {
+          "raw": "2026. 7. 3. 10:00",
+          "start": "2026-07-03T10:00:00",
+          "end": "2026-07-03T10:01:00",
+          "granularity": "minute",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [
+            {
+              "start": "2026-07-03T22:00:00",
+              "end": "2026-07-03T22:01:00",
+              "reason": "오전/오후 표기 없음"
+            }
+          ],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "time_unknown": false,
+        "amount": null,
+        "participant_entity_ids": [
+          "ent1",
+          "ent2",
+          "ent3"
+        ],
+        "event_ids": [
+          "receipt_2026:e8"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "receipt_2026",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 150.0,
+              "y1": 84.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": "접 수 증"
+          },
+          {
+            "source_doc_id": "receipt_2026",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 524.0,
+              "y1": 204.0
+            },
+            "char_start": 5,
+            "char_end": 22,
+            "quote": "2026. 7. 3. 10:00"
+          }
+        ],
+        "evidence_level": "record",
+        "needs_confirmation": false,
+        "flags": []
+      },
+      {
+        "timeline_event_id": "tl4",
+        "stage": "investigation",
+        "title": "○○과학수사연구소",
+        "time": null,
+        "time_unknown": true,
+        "amount": null,
+        "participant_entity_ids": [],
+        "event_ids": [
+          "forensic_2026:e2"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "forensic_2026",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 238.0,
+              "y1": 324.0
+            },
+            "char_start": 0,
+            "char_end": 9,
+            "quote": "○○과학수사연구소"
+          }
+        ],
+        "evidence_level": "record",
+        "needs_confirmation": true,
+        "flags": []
+      }
+    ],
+    "stages": [
+      {
+        "stage": "occurrence",
+        "label": "발생",
+        "state": "done",
+        "timeline_event_ids": [
+          "tl3"
+        ],
+        "evidence_level": "record"
+      },
+      {
+        "stage": "report",
+        "label": "신고",
+        "state": "done",
+        "timeline_event_ids": [
+          "tl5"
+        ],
+        "evidence_level": "statement"
+      },
+      {
+        "stage": "receipt",
+        "label": "접수",
+        "state": "done",
+        "timeline_event_ids": [
+          "tl1"
+        ],
+        "evidence_level": "record"
+      },
+      {
+        "stage": "investigation",
+        "label": "수사",
+        "state": "current",
+        "timeline_event_ids": [
+          "tl4"
+        ],
+        "evidence_level": "record"
+      },
+      {
+        "stage": "outcome",
+        "label": "결과",
+        "state": "pending",
+        "timeline_event_ids": [],
+        "evidence_level": null
+      }
+    ],
+    "current_stage": "investigation",
+    "gaps": [],
+    "entities": [
+      {
+        "entity_id": "ent1",
+        "kind": "person",
+        "canonical_name": "진서율",
+        "aliases": [
+          "진서율"
+        ],
+        "roles": [
+          "고소인",
+          "신고인"
+        ],
+        "mention_ids": [
+          "complaint_2026:m1",
+          "receipt_2026:m2",
+          "progress_2026:m2"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "complaint_2026",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 194.0,
+              "y1": 144.0
+            },
+            "char_start": 4,
+            "char_end": 7,
+            "quote": "진서율"
+          },
+          {
+            "source_doc_id": "receipt_2026",
+            "page": 1,
+            "source_line": 6,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 340.0,
+              "x1": 194.0,
+              "y1": 384.0
+            },
+            "char_start": 4,
+            "char_end": 7,
+            "quote": "진서율"
+          },
+          {
+            "source_doc_id": "progress_2026",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 194.0,
+              "y1": 204.0
+            },
+            "char_start": 4,
+            "char_end": 7,
+            "quote": "진서율"
+          }
+        ],
+        "merge_confidence": 0.9,
+        "possible_same_as": []
+      },
+      {
+        "entity_id": "ent2",
+        "kind": "organization",
+        "canonical_name": "**경찰서",
+        "aliases": [
+          "○○경찰서"
+        ],
+        "roles": [],
+        "mention_ids": [
+          "complaint_2026:m2",
+          "receipt_2026:m3",
+          "progress_2026:m4"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "complaint_2026",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 634.0,
+              "y1": 324.0
+            },
+            "char_start": 12,
+            "char_end": 17,
+            "quote": "○○경찰서"
+          },
+          {
+            "source_doc_id": "receipt_2026",
+            "page": 1,
+            "source_line": 7,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 400.0,
+              "x1": 238.0,
+              "y1": 444.0
+            },
+            "char_start": 0,
+            "char_end": 5,
+            "quote": "○○경찰서"
+          },
+          {
+            "source_doc_id": "progress_2026",
+            "page": 1,
+            "source_line": 8,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 460.0,
+              "x1": 172.0,
+              "y1": 504.0
+            },
+            "char_start": 0,
+            "char_end": 5,
+            "quote": "○○경찰서"
+          }
+        ],
+        "merge_confidence": 0.9,
+        "possible_same_as": []
+      },
+      {
+        "entity_id": "ent3",
+        "kind": "receipt_number",
+        "canonical_name": "2026-054410",
+        "aliases": [
+          "2026-054410"
+        ],
+        "roles": [],
+        "mention_ids": [
+          "receipt_2026:m1"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "receipt_2026",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 392.0,
+              "y1": 144.0
+            },
+            "char_start": 5,
+            "char_end": 16,
+            "quote": "2026-054410"
+          }
+        ],
+        "merge_confidence": 1.0,
+        "possible_same_as": []
+      },
+      {
+        "entity_id": "ent4",
+        "kind": "organization",
+        "canonical_name": "우리은행",
+        "aliases": [
+          "우리은행"
+        ],
+        "roles": [],
+        "mention_ids": [
+          "transfer_2026:m1"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "transfer_2026",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 128.0,
+              "y1": 324.0
+            },
+            "char_start": 0,
+            "char_end": 4,
+            "quote": "우리은행"
+          }
+        ],
+        "merge_confidence": 1.0,
+        "possible_same_as": []
+      },
+      {
+        "entity_id": "ent5",
+        "kind": "case_number",
+        "canonical_name": "2026형제20233",
+        "aliases": [
+          "2026형제20233"
+        ],
+        "roles": [],
+        "mention_ids": [
+          "progress_2026:m1"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "progress_2026",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 392.0,
+              "y1": 144.0
+            },
+            "char_start": 5,
+            "char_end": 16,
+            "quote": "2026형제20233"
+          }
+        ],
+        "merge_confidence": 1.0,
+        "possible_same_as": []
+      },
+      {
+        "entity_id": "ent6",
+        "kind": "person",
+        "canonical_name": "남궁현",
+        "aliases": [
+          "남궁현"
+        ],
+        "roles": [
+          "담당수사관"
+        ],
+        "mention_ids": [
+          "progress_2026:m3"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "progress_2026",
+            "page": 1,
+            "source_line": 7,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 400.0,
+              "x1": 326.0,
+              "y1": 444.0
+            },
+            "char_start": 10,
+            "char_end": 13,
+            "quote": "남궁현"
+          }
+        ],
+        "merge_confidence": 1.0,
+        "possible_same_as": []
+      }
+    ],
+    "mention_to_entity": {
+      "complaint_2026:m1": "ent1",
+      "receipt_2026:m2": "ent1",
+      "progress_2026:m2": "ent1",
+      "complaint_2026:m2": "ent2",
+      "receipt_2026:m3": "ent2",
+      "progress_2026:m4": "ent2",
+      "receipt_2026:m1": "ent3",
+      "transfer_2026:m1": "ent4",
+      "progress_2026:m1": "ent5",
+      "progress_2026:m3": "ent6"
+    }
+  },
+  "analysis": {
+    "case_id": "rule-11-진행확인",
+    "case_type": "investigation_suspended",
+    "as_of": "2026-09-19",
+    "issues": [
+      {
+        "issue_id": "iss1",
+        "category": "missing",
+        "condition": "missing",
+        "message": "결정 내용: 올린 자료에서 찾지 못했습니다",
+        "stage": "outcome",
+        "slot": "decision_type",
+        "sources": [],
+        "checked_doc_ids": [
+          "complaint_2026",
+          "receipt_2026",
+          "transfer_2026",
+          "progress_2026",
+          "forensic_2026"
+        ],
+        "related_claim_ids": [],
+        "related_event_ids": [],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": null,
+        "trigger": {
+          "key": "investigation_suspended/outcome/decision_type/missing",
+          "case_type": "investigation_suspended",
+          "condition": "missing",
+          "stage": "outcome",
+          "slot": "decision_type",
+          "since": null,
+          "elapsed_days": null,
+          "evidence": []
+        },
+        "priority": 40
+      }
+    ],
+    "slot_statuses": [
+      {
+        "slot": "incident_time",
+        "label": "사건 발생 시점",
+        "stage": "occurrence",
+        "required": true,
+        "state": "confirmed",
+        "value": "2026-07-01",
+        "claim_ids": [
+          "receipt_2026:c7"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "receipt_2026",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 524.0,
+              "y1": 324.0
+            },
+            "char_start": 0,
+            "char_end": 22,
+            "quote": "발생일시 2026. 7. 1. 사기 피해"
+          }
+        ]
+      },
+      {
+        "slot": "receipt_number",
+        "label": "신고·진정 접수번호",
+        "stage": "receipt",
+        "required": false,
+        "state": "confirmed",
+        "value": "2026-054410",
+        "claim_ids": [
+          "receipt_2026:c4"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "receipt_2026",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 392.0,
+              "y1": 144.0
+            },
+            "char_start": 0,
+            "char_end": 16,
+            "quote": "접수번호 2026-054410"
+          }
+        ]
+      },
+      {
+        "slot": "offence",
+        "label": "죄명",
+        "stage": "receipt",
+        "required": false,
+        "state": "confirmed",
+        "value": "사기",
+        "claim_ids": [
+          "progress_2026:c6"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "progress_2026",
+            "page": 1,
+            "source_line": 4,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 220.0,
+              "x1": 150.0,
+              "y1": 264.0
+            },
+            "char_start": 0,
+            "char_end": 5,
+            "quote": "죄명 사기"
+          }
+        ]
+      },
+      {
+        "slot": "case_number",
+        "label": "사건번호",
+        "stage": "investigation",
+        "required": true,
+        "state": "confirmed",
+        "value": "2026형제20233",
+        "claim_ids": [
+          "progress_2026:c5"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "progress_2026",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 392.0,
+              "y1": 144.0
+            },
+            "char_start": 0,
+            "char_end": 16,
+            "quote": "사건번호 2026형제20233"
+          }
+        ]
+      },
+      {
+        "slot": "investigator",
+        "label": "담당 수사관",
+        "stage": "investigation",
+        "required": false,
+        "state": "confirmed",
+        "value": "남궁현",
+        "claim_ids": [
+          "progress_2026:c8"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "progress_2026",
+            "page": 1,
+            "source_line": 7,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 400.0,
+              "x1": 326.0,
+              "y1": 444.0
+            },
+            "char_start": 0,
+            "char_end": 13,
+            "quote": "담당 수사관 경장 남궁현"
+          }
+        ]
+      },
+      {
+        "slot": "decision_type",
+        "label": "결정 내용",
+        "stage": "outcome",
+        "required": true,
+        "state": "missing",
+        "value": null,
+        "claim_ids": [],
+        "sources": []
+      },
+      {
+        "slot": "decision_time",
+        "label": "결정 일자",
+        "stage": "outcome",
+        "required": true,
+        "state": "confirmed",
+        "value": "2026-08-05",
+        "claim_ids": [
+          "progress_2026:c7"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "progress_2026",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 392.0,
+              "y1": 324.0
+            },
+            "char_start": 0,
+            "char_end": 16,
+            "quote": "통지일자 2026. 8. 5."
+          }
+        ]
+      }
+    ],
+    "pair_decisions": [
+      {
+        "pair_id": "pair1",
+        "claim_a_id": "complaint_2026:c3",
+        "claim_b_id": "transfer_2026:c3",
+        "slot": "transfer_amount",
+        "scores": {
+          "entailment": 0.7306,
+          "contradiction": 0.0154,
+          "neutral": 0.2541
+        },
+        "model_label": "entailment",
+        "label": "entailment",
+        "downgraded": false,
+        "reasons": [],
+        "model_name": "slot-rule-v1"
+      },
+      {
+        "pair_id": "pair2",
+        "claim_a_id": "complaint_2026:c4",
+        "claim_b_id": "transfer_2026:c2",
+        "slot": "transfer_time",
+        "scores": {
+          "entailment": 0.6536,
+          "contradiction": 0.0154,
+          "neutral": 0.331
+        },
+        "model_label": "entailment",
+        "label": "neutral",
+        "downgraded": true,
+        "reasons": [
+          "일치 점수 0.65 < 기준 0.70"
+        ],
+        "model_name": "slot-rule-v1"
+      }
+    ],
+    "action_triggers": [
+      {
+        "key": "investigation_suspended/outcome/decision_type/missing",
+        "case_type": "investigation_suspended",
+        "condition": "missing",
+        "stage": "outcome",
+        "slot": "decision_type",
+        "since": null,
+        "elapsed_days": null,
+        "evidence": []
+      }
+    ],
+    "case_card": {
+      "case_type": "investigation_suspended",
+      "case_type_label": "수사중지 사건",
+      "requirements_status": "draft_unverified",
+      "stages": [
+        {
+          "stage": "occurrence",
+          "label": "발생",
+          "state": "done",
+          "timeline_event_ids": [
+            "tl3"
+          ],
+          "evidence_level": "record"
+        },
+        {
+          "stage": "report",
+          "label": "신고",
+          "state": "done",
+          "timeline_event_ids": [
+            "tl5"
+          ],
+          "evidence_level": "statement"
+        },
+        {
+          "stage": "receipt",
+          "label": "접수",
+          "state": "done",
+          "timeline_event_ids": [
+            "tl1"
+          ],
+          "evidence_level": "record"
+        },
+        {
+          "stage": "investigation",
+          "label": "수사",
+          "state": "current",
+          "timeline_event_ids": [
+            "tl4"
+          ],
+          "evidence_level": "record"
+        },
+        {
+          "stage": "outcome",
+          "label": "결과",
+          "state": "pending",
+          "timeline_event_ids": [],
+          "evidence_level": null
+        }
+      ],
+      "current_stage": "investigation",
+      "evidence_doc_count": 5,
+      "needs_confirmation_count": 1,
+      "slots_done": 3,
+      "slots_total": 4,
+      "next_trigger": {
+        "key": "investigation_suspended/outcome/decision_type/missing",
+        "case_type": "investigation_suspended",
+        "condition": "missing",
+        "stage": "outcome",
+        "slot": "decision_type",
+        "since": null,
+        "elapsed_days": null,
+        "evidence": []
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "rule-05-불복-불송치",
+  "case_type": "investigation_suspended",
+  "as_of": "2026-09-19",
+  "documents": [
+    "complaint_2025.json",
+    "receipt_2025.json",
+    "notice_2026.json"
+  ],
+  "user_notes": [],
+  "expect": {
+    "rule": 5,
+    "action": "ACT-불복기한"
+  },
+  "why": "경찰이 불송치 결정을 했다 — 이의신청은 법정 기한이 없어도 먼저 알려야 할 경로다"
+}

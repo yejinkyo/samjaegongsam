@@ -133,3 +133,18 @@ def test_tesseract_syllables_are_joined_by_gap_not_by_space():
     assert join_words(words) == "사건번호 2019형제20447"
     assert join_words(list(reversed(words))) == "사건번호 2019형제20447"  # 상자 순서가 섞여 와도 왼쪽부터
     assert join_words([]) == ""
+
+
+def test_감정서를_감정서로_분류하고_기록으로_본다():
+    """감정서가 '미분류'로 떨어지면 기능 2가 '전문 분석 미실시'를 가릴 수 없다."""
+    from research_engine.schema import evidence_level_for
+
+    pred = KeywordDocClassifier().predict(
+        ["감 정 서", "감정일자 2025. 12. 9.", "감정대상 계약서 필적", "감정결과 동일 필적으로 판단됨", "국립과학수사연구원"])
+    assert pred.doc_type is DocumentType.FORENSIC
+    assert evidence_level_for(DocumentType.FORENSIC) is EvidenceLevel.RECORD
+    # 유전자 '채취' 확인서는 감정 결과가 아니다
+    pred = KeywordDocClassifier().predict(
+        ["유전자 검사 대상물 채취 확인서", "관리번호 2025-DNA-0142", "위 대상물은 실종아동등 프로파일링시스템 등록을 위하여",
+         "채취되었음을 확인합니다.", "○○경찰서"])
+    assert pred.doc_type is not DocumentType.FORENSIC

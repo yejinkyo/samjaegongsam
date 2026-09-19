@@ -1,0 +1,2415 @@
+{
+  "case_id": "rule-01-공소시효",
+  "case_type": "investigation_suspended",
+  "as_of": "2026-09-19",
+  "documents": [
+    {
+      "doc_id": "complaint_2016",
+      "file_name": "고소장_2016.jpg",
+      "doc_type": "complaint",
+      "doc_type_confidence": 0.8845,
+      "doc_type_scores": {
+        "judgment": 0.0022,
+        "complaint": 0.8845,
+        "statement": 0.0022,
+        "transcript": 0.0022,
+        "receipt": 0.0022,
+        "notice": 0.0022,
+        "messenger": 0.0022,
+        "forensic": 0.0022,
+        "news": 0.0022,
+        "memo": 0.098
+      },
+      "evidence_level": "statement",
+      "captured_at": "2026-09-18T09:00:00",
+      "pages": [
+        {
+          "page_no": 1,
+          "width": 1080.0,
+          "height": 380.0,
+          "image_ref": null
+        }
+      ],
+      "lines": [
+        {
+          "doc_id": "complaint_2016",
+          "line_no": 1,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 150.0,
+            "y1": 84.0
+          },
+          "text": "고 소 장",
+          "ocr_confidence": 0.94,
+          "readability": 0.852,
+          "readable": true,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "complaint_2016",
+          "line_no": 2,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 194.0,
+            "y1": 144.0
+          },
+          "text": "고소인 서민재",
+          "ocr_confidence": 0.94,
+          "readability": 0.9047,
+          "readable": true,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "complaint_2016",
+          "line_no": 3,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 238.0,
+            "y1": 204.0
+          },
+          "text": "피고소인 성명불상",
+          "ocr_confidence": 0.94,
+          "readability": 0.9047,
+          "readable": true,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "complaint_2016",
+          "line_no": 4,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 1008.0,
+            "y1": 264.0
+          },
+          "text": "2016. 9. 24. 중고차 계약금 명목으로 3,000,000원을 보냈습니다.",
+          "ocr_confidence": 0.94,
+          "readability": 0.9047,
+          "readable": true,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "complaint_2016",
+          "line_no": 5,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 656.0,
+            "y1": 324.0
+          },
+          "text": "2016. 10. 2. ○○경찰서에 고소하였습니다.",
+          "ocr_confidence": 0.94,
+          "readability": 0.9047,
+          "readable": true,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        }
+      ],
+      "unreadable": []
+    },
+    {
+      "doc_id": "receipt_2016",
+      "file_name": "접수증_2016.jpg",
+      "doc_type": "receipt",
+      "doc_type_confidence": 0.9669,
+      "doc_type_scores": {
+        "judgment": 0.0032,
+        "complaint": 0.0032,
+        "statement": 0.0032,
+        "transcript": 0.0032,
+        "receipt": 0.9669,
+        "notice": 0.0032,
+        "messenger": 0.0032,
+        "forensic": 0.0032,
+        "news": 0.0032,
+        "memo": 0.0072
+      },
+      "evidence_level": "record",
+      "captured_at": "2026-09-18T10:00:00",
+      "pages": [
+        {
+          "page_no": 1,
+          "width": 1080.0,
+          "height": 440.0,
+          "image_ref": null
+        }
+      ],
+      "lines": [
+        {
+          "doc_id": "receipt_2016",
+          "line_no": 1,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 150.0,
+            "y1": 84.0
+          },
+          "text": "접 수 증",
+          "ocr_confidence": 0.94,
+          "readability": 0.8957,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "receipt_2016",
+          "line_no": 2,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 392.0,
+            "y1": 144.0
+          },
+          "text": "접수번호 2016-073310",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "receipt_2016",
+          "line_no": 3,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 546.0,
+            "y1": 204.0
+          },
+          "text": "접수일시 2016. 10. 2. 15:20",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "receipt_2016",
+          "line_no": 4,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 150.0,
+            "y1": 264.0
+          },
+          "text": "죄명 사기",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "receipt_2016",
+          "line_no": 5,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 194.0,
+            "y1": 324.0
+          },
+          "text": "신고인 서민재",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "receipt_2016",
+          "line_no": 6,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 340.0,
+            "x1": 238.0,
+            "y1": 384.0
+          },
+          "text": "○○경찰서 민원실",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        }
+      ],
+      "unreadable": []
+    },
+    {
+      "doc_id": "notice_2017",
+      "file_name": "기소중지_통지서.jpg",
+      "doc_type": "notice",
+      "doc_type_confidence": 0.8985,
+      "doc_type_scores": {
+        "judgment": 0.0074,
+        "complaint": 0.0667,
+        "statement": 0.0033,
+        "transcript": 0.0033,
+        "receipt": 0.0033,
+        "notice": 0.8985,
+        "messenger": 0.0033,
+        "forensic": 0.0033,
+        "news": 0.0033,
+        "memo": 0.0074
+      },
+      "evidence_level": "record",
+      "captured_at": "2026-09-18T10:05:00",
+      "pages": [
+        {
+          "page_no": 1,
+          "width": 1080.0,
+          "height": 680.0,
+          "image_ref": null
+        }
+      ],
+      "lines": [
+        {
+          "doc_id": "notice_2017",
+          "line_no": 1,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 216.0,
+            "y1": 84.0
+          },
+          "text": "수사결과 통지서",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "notice_2017",
+          "line_no": 2,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 392.0,
+            "y1": 144.0
+          },
+          "text": "사건번호 2016형제58812",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "notice_2017",
+          "line_no": 3,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 194.0,
+            "y1": 204.0
+          },
+          "text": "고소인 서민재",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "notice_2017",
+          "line_no": 4,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 238.0,
+            "y1": 264.0
+          },
+          "text": "피고소인 성명불상",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "notice_2017",
+          "line_no": 5,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 150.0,
+            "y1": 324.0
+          },
+          "text": "죄명 사기",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "notice_2017",
+          "line_no": 6,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 340.0,
+            "x1": 414.0,
+            "y1": 384.0
+          },
+          "text": "결정일자 2017. 5. 12.",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "notice_2017",
+          "line_no": 7,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 400.0,
+            "x1": 238.0,
+            "y1": 444.0
+          },
+          "text": "결정내용 기소중지",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "notice_2017",
+          "line_no": 8,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 460.0,
+            "x1": 282.0,
+            "y1": 504.0
+          },
+          "text": "이유 피의자 소재불명",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "notice_2017",
+          "line_no": 9,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 520.0,
+            "x1": 326.0,
+            "y1": 564.0
+          },
+          "text": "담당 수사관 검사 윤태호",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "notice_2017",
+          "line_no": 10,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 580.0,
+            "x1": 194.0,
+            "y1": 624.0
+          },
+          "text": "○○지방검찰청",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        }
+      ],
+      "unreadable": []
+    }
+  ],
+  "clarifications": [],
+  "extraction": {
+    "mentions": [
+      {
+        "mention_id": "complaint_2016:m1",
+        "doc_id": "complaint_2016",
+        "kind": "person",
+        "name": {
+          "source_doc_id": "complaint_2016",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 194.0,
+            "y1": 144.0
+          },
+          "char_start": 4,
+          "char_end": 7,
+          "quote": "서민재",
+          "value": "서민재",
+          "confidence": 0.7238
+        },
+        "normalized": "서민재",
+        "role": "고소인"
+      },
+      {
+        "mention_id": "complaint_2016:m2",
+        "doc_id": "complaint_2016",
+        "kind": "organization",
+        "name": {
+          "source_doc_id": "complaint_2016",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 656.0,
+            "y1": 324.0
+          },
+          "char_start": 13,
+          "char_end": 18,
+          "quote": "○○경찰서",
+          "value": "○○경찰서",
+          "confidence": 0.6785
+        },
+        "normalized": "**경찰서",
+        "role": null
+      },
+      {
+        "mention_id": "receipt_2016:m1",
+        "doc_id": "receipt_2016",
+        "kind": "receipt_number",
+        "name": {
+          "source_doc_id": "receipt_2016",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 392.0,
+            "y1": 144.0
+          },
+          "char_start": 5,
+          "char_end": 16,
+          "quote": "2016-073310",
+          "value": "2016-073310",
+          "confidence": 0.7939
+        },
+        "normalized": "2016-073310",
+        "role": null
+      },
+      {
+        "mention_id": "receipt_2016:m2",
+        "doc_id": "receipt_2016",
+        "kind": "person",
+        "name": {
+          "source_doc_id": "receipt_2016",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 194.0,
+            "y1": 324.0
+          },
+          "char_start": 4,
+          "char_end": 7,
+          "quote": "서민재",
+          "value": "서민재",
+          "confidence": 0.7472
+        },
+        "normalized": "서민재",
+        "role": "신고인"
+      },
+      {
+        "mention_id": "receipt_2016:m3",
+        "doc_id": "receipt_2016",
+        "kind": "organization",
+        "name": {
+          "source_doc_id": "receipt_2016",
+          "page": 1,
+          "source_line": 6,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 340.0,
+            "x1": 238.0,
+            "y1": 384.0
+          },
+          "char_start": 0,
+          "char_end": 5,
+          "quote": "○○경찰서",
+          "value": "○○경찰서",
+          "confidence": 0.7005
+        },
+        "normalized": "**경찰서",
+        "role": null
+      },
+      {
+        "mention_id": "notice_2017:m1",
+        "doc_id": "notice_2017",
+        "kind": "case_number",
+        "name": {
+          "source_doc_id": "notice_2017",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 392.0,
+            "y1": 144.0
+          },
+          "char_start": 5,
+          "char_end": 16,
+          "quote": "2016형제58812",
+          "value": "2016형제58812",
+          "confidence": 0.8406
+        },
+        "normalized": "2016형제58812",
+        "role": null
+      },
+      {
+        "mention_id": "notice_2017:m2",
+        "doc_id": "notice_2017",
+        "kind": "person",
+        "name": {
+          "source_doc_id": "notice_2017",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 194.0,
+            "y1": 204.0
+          },
+          "char_start": 4,
+          "char_end": 7,
+          "quote": "서민재",
+          "value": "서민재",
+          "confidence": 0.7472
+        },
+        "normalized": "서민재",
+        "role": "고소인"
+      },
+      {
+        "mention_id": "notice_2017:m3",
+        "doc_id": "notice_2017",
+        "kind": "person",
+        "name": {
+          "source_doc_id": "notice_2017",
+          "page": 1,
+          "source_line": 9,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 520.0,
+            "x1": 326.0,
+            "y1": 564.0
+          },
+          "char_start": 7,
+          "char_end": 9,
+          "quote": "검사",
+          "value": "검사",
+          "confidence": 0.7472
+        },
+        "normalized": "검사",
+        "role": "담당수사관"
+      },
+      {
+        "mention_id": "notice_2017:m4",
+        "doc_id": "notice_2017",
+        "kind": "organization",
+        "name": {
+          "source_doc_id": "notice_2017",
+          "page": 1,
+          "source_line": 10,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 580.0,
+            "x1": 194.0,
+            "y1": 624.0
+          },
+          "char_start": 0,
+          "char_end": 7,
+          "quote": "○○지방검찰청",
+          "value": "○○지방검찰청",
+          "confidence": 0.7005
+        },
+        "normalized": "**지방검찰청",
+        "role": null
+      }
+    ],
+    "events": [
+      {
+        "event_id": "complaint_2016:e5",
+        "doc_id": "complaint_2016",
+        "stage": "report",
+        "action": {
+          "source_doc_id": "complaint_2016",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 656.0,
+            "y1": 324.0
+          },
+          "char_start": 0,
+          "char_end": 28,
+          "quote": "2016. 10. 2. ○○경찰서에 고소하였습니다.",
+          "value": "2016. 10. 2. ○○경찰서에 고소하였습니다.",
+          "confidence": 0.7238
+        },
+        "time": {
+          "source_doc_id": "complaint_2016",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 656.0,
+            "y1": 324.0
+          },
+          "char_start": 0,
+          "char_end": 12,
+          "quote": "2016. 10. 2.",
+          "value": {
+            "raw": "2016. 10. 2.",
+            "start": "2016-10-02T00:00:00",
+            "end": "2016-10-03T00:00:00",
+            "granularity": "day",
+            "kind": "absolute",
+            "approximate": false,
+            "anchor": null,
+            "anchor_source": null,
+            "candidates": [],
+            "needs_confirmation": false,
+            "note": null
+          },
+          "confidence": 0.8595
+        },
+        "amount": null,
+        "participant_mention_ids": [
+          "complaint_2016:m2"
+        ],
+        "evidence_level": "statement",
+        "action_kind": null
+      },
+      {
+        "event_id": "receipt_2016:e7",
+        "doc_id": "receipt_2016",
+        "stage": "receipt",
+        "action": {
+          "source_doc_id": "receipt_2016",
+          "page": 1,
+          "source_line": 1,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 150.0,
+            "y1": 84.0
+          },
+          "char_start": null,
+          "char_end": null,
+          "quote": "접 수 증",
+          "value": "접 수 증",
+          "confidence": 0.8509
+        },
+        "time": {
+          "source_doc_id": "receipt_2016",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 546.0,
+            "y1": 204.0
+          },
+          "char_start": 5,
+          "char_end": 23,
+          "quote": "2016. 10. 2. 15:20",
+          "value": {
+            "raw": "2016. 10. 2. 15:20",
+            "start": "2016-10-02T15:20:00",
+            "end": "2016-10-02T15:21:00",
+            "granularity": "minute",
+            "kind": "absolute",
+            "approximate": false,
+            "anchor": null,
+            "anchor_source": null,
+            "candidates": [],
+            "needs_confirmation": false,
+            "note": null
+          },
+          "confidence": 0.8873
+        },
+        "amount": null,
+        "participant_mention_ids": [
+          "receipt_2016:m1",
+          "receipt_2016:m2",
+          "receipt_2016:m3"
+        ],
+        "evidence_level": "record",
+        "action_kind": null
+      },
+      {
+        "event_id": "notice_2017:e10",
+        "doc_id": "notice_2017",
+        "stage": "outcome",
+        "action": {
+          "source_doc_id": "notice_2017",
+          "page": 1,
+          "source_line": 1,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 216.0,
+            "y1": 84.0
+          },
+          "char_start": null,
+          "char_end": null,
+          "quote": "수사결과 통지서",
+          "value": "수사결과 통지서",
+          "confidence": 0.8873
+        },
+        "time": {
+          "source_doc_id": "notice_2017",
+          "page": 1,
+          "source_line": 6,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 340.0,
+            "x1": 414.0,
+            "y1": 384.0
+          },
+          "char_start": 5,
+          "char_end": 17,
+          "quote": "2017. 5. 12.",
+          "value": {
+            "raw": "2017. 5. 12.",
+            "start": "2017-05-12T00:00:00",
+            "end": "2017-05-13T00:00:00",
+            "granularity": "day",
+            "kind": "absolute",
+            "approximate": false,
+            "anchor": null,
+            "anchor_source": null,
+            "candidates": [],
+            "needs_confirmation": false,
+            "note": null
+          },
+          "confidence": 0.8873
+        },
+        "amount": null,
+        "participant_mention_ids": [
+          "notice_2017:m1",
+          "notice_2017:m2",
+          "notice_2017:m3",
+          "notice_2017:m4"
+        ],
+        "evidence_level": "record",
+        "action_kind": null
+      }
+    ],
+    "claims": [
+      {
+        "claim_id": "complaint_2016:c3",
+        "doc_id": "complaint_2016",
+        "speaker": "서민재",
+        "speaker_basis": "document_author",
+        "speaker_mention_id": "complaint_2016:m1",
+        "content": {
+          "source_doc_id": "complaint_2016",
+          "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 1008.0,
+            "y1": 264.0
+          },
+          "char_start": 0,
+          "char_end": 44,
+          "quote": "2016. 9. 24. 중고차 계약금 명목으로 3,000,000원을 보냈습니다.",
+          "value": "2016. 9. 24. 중고차 계약금 명목으로 3,000,000원을 보냈습니다.",
+          "confidence": 0.769
+        },
+        "slot": "transfer_amount",
+        "slot_value": "3000000",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "statement"
+      },
+      {
+        "claim_id": "complaint_2016:c4",
+        "doc_id": "complaint_2016",
+        "speaker": "서민재",
+        "speaker_basis": "document_author",
+        "speaker_mention_id": "complaint_2016:m1",
+        "content": {
+          "source_doc_id": "complaint_2016",
+          "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 1008.0,
+            "y1": 264.0
+          },
+          "char_start": 0,
+          "char_end": 44,
+          "quote": "2016. 9. 24. 중고차 계약금 명목으로 3,000,000원을 보냈습니다.",
+          "value": "2016. 9. 24. 중고차 계약금 명목으로 3,000,000원을 보냈습니다.",
+          "confidence": 0.769
+        },
+        "slot": "transfer_time",
+        "slot_value": "2016-09-24",
+        "slot_time": {
+          "raw": "2016. 9. 24.",
+          "start": "2016-09-24T00:00:00",
+          "end": "2016-09-25T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "value_is_speaker_self": false,
+        "subject": "3000000",
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "statement"
+      },
+      {
+        "claim_id": "complaint_2016:c6",
+        "doc_id": "complaint_2016",
+        "speaker": "서민재",
+        "speaker_basis": "document_author",
+        "speaker_mention_id": "complaint_2016:m1",
+        "content": {
+          "source_doc_id": "complaint_2016",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 656.0,
+            "y1": 324.0
+          },
+          "char_start": 0,
+          "char_end": 28,
+          "quote": "2016. 10. 2. ○○경찰서에 고소하였습니다.",
+          "value": "2016. 10. 2. ○○경찰서에 고소하였습니다.",
+          "confidence": 0.769
+        },
+        "slot": null,
+        "slot_value": null,
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "statement"
+      },
+      {
+        "claim_id": "receipt_2016:c4",
+        "doc_id": "receipt_2016",
+        "speaker": "**경찰서",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "receipt_2016:m3",
+        "content": {
+          "source_doc_id": "receipt_2016",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 392.0,
+            "y1": 144.0
+          },
+          "char_start": 0,
+          "char_end": 16,
+          "quote": "접수번호 2016-073310",
+          "value": "접수번호 2016-073310",
+          "confidence": 0.8406
+        },
+        "slot": "receipt_number",
+        "slot_value": "2016-073310",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "receipt_2016:c5",
+        "doc_id": "receipt_2016",
+        "speaker": "**경찰서",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "receipt_2016:m3",
+        "content": {
+          "source_doc_id": "receipt_2016",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 546.0,
+            "y1": 204.0
+          },
+          "char_start": 0,
+          "char_end": 23,
+          "quote": "접수일시 2016. 10. 2. 15:20",
+          "value": "접수일시 2016. 10. 2. 15:20",
+          "confidence": 0.8406
+        },
+        "slot": "receipt_time",
+        "slot_value": "2016-10-02 15:20",
+        "slot_time": {
+          "raw": "2016. 10. 2. 15:20",
+          "start": "2016-10-02T15:20:00",
+          "end": "2016-10-02T15:21:00",
+          "granularity": "minute",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "receipt_2016:c6",
+        "doc_id": "receipt_2016",
+        "speaker": "**경찰서",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "receipt_2016:m3",
+        "content": {
+          "source_doc_id": "receipt_2016",
+          "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 150.0,
+            "y1": 264.0
+          },
+          "char_start": 0,
+          "char_end": 5,
+          "quote": "죄명 사기",
+          "value": "죄명 사기",
+          "confidence": 0.8406
+        },
+        "slot": "offence",
+        "slot_value": "사기",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "notice_2017:c5",
+        "doc_id": "notice_2017",
+        "speaker": "**지방검찰청",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "notice_2017:m4",
+        "content": {
+          "source_doc_id": "notice_2017",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 392.0,
+            "y1": 144.0
+          },
+          "char_start": 0,
+          "char_end": 16,
+          "quote": "사건번호 2016형제58812",
+          "value": "사건번호 2016형제58812",
+          "confidence": 0.8406
+        },
+        "slot": "case_number",
+        "slot_value": "2016형제58812",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "notice_2017:c6",
+        "doc_id": "notice_2017",
+        "speaker": "**지방검찰청",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "notice_2017:m4",
+        "content": {
+          "source_doc_id": "notice_2017",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 150.0,
+            "y1": 324.0
+          },
+          "char_start": 0,
+          "char_end": 5,
+          "quote": "죄명 사기",
+          "value": "죄명 사기",
+          "confidence": 0.8406
+        },
+        "slot": "offence",
+        "slot_value": "사기",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "notice_2017:c7",
+        "doc_id": "notice_2017",
+        "speaker": "**지방검찰청",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "notice_2017:m4",
+        "content": {
+          "source_doc_id": "notice_2017",
+          "page": 1,
+          "source_line": 6,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 340.0,
+            "x1": 414.0,
+            "y1": 384.0
+          },
+          "char_start": 0,
+          "char_end": 17,
+          "quote": "결정일자 2017. 5. 12.",
+          "value": "결정일자 2017. 5. 12.",
+          "confidence": 0.8406
+        },
+        "slot": "decision_time",
+        "slot_value": "2017-05-12",
+        "slot_time": {
+          "raw": "2017. 5. 12.",
+          "start": "2017-05-12T00:00:00",
+          "end": "2017-05-13T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "value_is_speaker_self": false,
+        "subject": "기소중지",
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "notice_2017:c8",
+        "doc_id": "notice_2017",
+        "speaker": "**지방검찰청",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "notice_2017:m4",
+        "content": {
+          "source_doc_id": "notice_2017",
+          "page": 1,
+          "source_line": 7,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 400.0,
+            "x1": 238.0,
+            "y1": 444.0
+          },
+          "char_start": 0,
+          "char_end": 9,
+          "quote": "결정내용 기소중지",
+          "value": "결정내용 기소중지",
+          "confidence": 0.8406
+        },
+        "slot": "decision_type",
+        "slot_value": "기소중지",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "notice_2017:c9",
+        "doc_id": "notice_2017",
+        "speaker": "**지방검찰청",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "notice_2017:m4",
+        "content": {
+          "source_doc_id": "notice_2017",
+          "page": 1,
+          "source_line": 9,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 520.0,
+            "x1": 326.0,
+            "y1": 564.0
+          },
+          "char_start": 0,
+          "char_end": 13,
+          "quote": "담당 수사관 검사 윤태호",
+          "value": "담당 수사관 검사 윤태호",
+          "confidence": 0.8406
+        },
+        "slot": "investigator",
+        "slot_value": "검사",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      }
+    ],
+    "times": [
+      {
+        "source_doc_id": "complaint_2016",
+        "page": 1,
+        "source_line": 4,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 220.0,
+          "x1": 1008.0,
+          "y1": 264.0
+        },
+        "char_start": 0,
+        "char_end": 12,
+        "quote": "2016. 9. 24.",
+        "value": {
+          "raw": "2016. 9. 24.",
+          "start": "2016-09-24T00:00:00",
+          "end": "2016-09-25T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8595
+      },
+      {
+        "source_doc_id": "complaint_2016",
+        "page": 1,
+        "source_line": 5,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 280.0,
+          "x1": 656.0,
+          "y1": 324.0
+        },
+        "char_start": 0,
+        "char_end": 12,
+        "quote": "2016. 10. 2.",
+        "value": {
+          "raw": "2016. 10. 2.",
+          "start": "2016-10-02T00:00:00",
+          "end": "2016-10-03T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8595
+      },
+      {
+        "source_doc_id": "receipt_2016",
+        "page": 1,
+        "source_line": 3,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 160.0,
+          "x1": 546.0,
+          "y1": 204.0
+        },
+        "char_start": 5,
+        "char_end": 23,
+        "quote": "2016. 10. 2. 15:20",
+        "value": {
+          "raw": "2016. 10. 2. 15:20",
+          "start": "2016-10-02T15:20:00",
+          "end": "2016-10-02T15:21:00",
+          "granularity": "minute",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8873
+      },
+      {
+        "source_doc_id": "notice_2017",
+        "page": 1,
+        "source_line": 6,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 340.0,
+          "x1": 414.0,
+          "y1": 384.0
+        },
+        "char_start": 5,
+        "char_end": 17,
+        "quote": "2017. 5. 12.",
+        "value": {
+          "raw": "2017. 5. 12.",
+          "start": "2017-05-12T00:00:00",
+          "end": "2017-05-13T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8873
+      }
+    ],
+    "document_dates": {
+      "complaint_2016": {
+        "source_doc_id": "complaint_2016",
+        "page": 1,
+        "source_line": 5,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 280.0,
+          "x1": 656.0,
+          "y1": 324.0
+        },
+        "char_start": 0,
+        "char_end": 12,
+        "quote": "2016. 10. 2.",
+        "value": {
+          "raw": "2016. 10. 2.",
+          "start": "2016-10-02T00:00:00",
+          "end": "2016-10-03T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8595
+      },
+      "receipt_2016": {
+        "source_doc_id": "receipt_2016",
+        "page": 1,
+        "source_line": 3,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 160.0,
+          "x1": 546.0,
+          "y1": 204.0
+        },
+        "char_start": 5,
+        "char_end": 23,
+        "quote": "2016. 10. 2. 15:20",
+        "value": {
+          "raw": "2016. 10. 2. 15:20",
+          "start": "2016-10-02T15:20:00",
+          "end": "2016-10-02T15:21:00",
+          "granularity": "minute",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8873
+      },
+      "notice_2017": {
+        "source_doc_id": "notice_2017",
+        "page": 1,
+        "source_line": 6,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 340.0,
+          "x1": 414.0,
+          "y1": 384.0
+        },
+        "char_start": 5,
+        "char_end": 17,
+        "quote": "2017. 5. 12.",
+        "value": {
+          "raw": "2017. 5. 12.",
+          "start": "2017-05-12T00:00:00",
+          "end": "2017-05-13T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8873
+      }
+    },
+    "clarifications": []
+  },
+  "timeline": {
+    "case_type": "investigation_suspended",
+    "events": [
+      {
+        "timeline_event_id": "tl3",
+        "stage": "report",
+        "title": "2016. 10. 2. ○○경찰서에 고소하였습니다.",
+        "time": {
+          "raw": "2016. 10. 2.",
+          "start": "2016-10-02T00:00:00",
+          "end": "2016-10-03T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "time_unknown": false,
+        "amount": null,
+        "participant_entity_ids": [
+          "ent2"
+        ],
+        "event_ids": [
+          "complaint_2016:e5"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "complaint_2016",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 656.0,
+              "y1": 324.0
+            },
+            "char_start": 0,
+            "char_end": 28,
+            "quote": "2016. 10. 2. ○○경찰서에 고소하였습니다."
+          }
+        ],
+        "evidence_level": "statement",
+        "needs_confirmation": false,
+        "flags": [
+          "claim_only"
+        ]
+      },
+      {
+        "timeline_event_id": "tl1",
+        "stage": "receipt",
+        "title": "접 수 증",
+        "time": {
+          "raw": "2016. 10. 2. 15:20",
+          "start": "2016-10-02T15:20:00",
+          "end": "2016-10-02T15:21:00",
+          "granularity": "minute",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "time_unknown": false,
+        "amount": null,
+        "participant_entity_ids": [
+          "ent1",
+          "ent2",
+          "ent3"
+        ],
+        "event_ids": [
+          "receipt_2016:e7"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "receipt_2016",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 150.0,
+              "y1": 84.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": "접 수 증"
+          },
+          {
+            "source_doc_id": "receipt_2016",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 546.0,
+              "y1": 204.0
+            },
+            "char_start": 5,
+            "char_end": 23,
+            "quote": "2016. 10. 2. 15:20"
+          }
+        ],
+        "evidence_level": "record",
+        "needs_confirmation": false,
+        "flags": []
+      },
+      {
+        "timeline_event_id": "tl2",
+        "stage": "outcome",
+        "title": "수사결과 통지서",
+        "time": {
+          "raw": "2017. 5. 12.",
+          "start": "2017-05-12T00:00:00",
+          "end": "2017-05-13T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "time_unknown": false,
+        "amount": null,
+        "participant_entity_ids": [
+          "ent1",
+          "ent4",
+          "ent5",
+          "ent6"
+        ],
+        "event_ids": [
+          "notice_2017:e10"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "notice_2017",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 216.0,
+              "y1": 84.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": "수사결과 통지서"
+          },
+          {
+            "source_doc_id": "notice_2017",
+            "page": 1,
+            "source_line": 6,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 340.0,
+              "x1": 414.0,
+              "y1": 384.0
+            },
+            "char_start": 5,
+            "char_end": 17,
+            "quote": "2017. 5. 12."
+          }
+        ],
+        "evidence_level": "record",
+        "needs_confirmation": false,
+        "flags": []
+      }
+    ],
+    "stages": [
+      {
+        "stage": "occurrence",
+        "label": "발생",
+        "state": "skipped",
+        "timeline_event_ids": [],
+        "evidence_level": null
+      },
+      {
+        "stage": "report",
+        "label": "신고",
+        "state": "done",
+        "timeline_event_ids": [
+          "tl3"
+        ],
+        "evidence_level": "statement"
+      },
+      {
+        "stage": "receipt",
+        "label": "접수",
+        "state": "done",
+        "timeline_event_ids": [
+          "tl1"
+        ],
+        "evidence_level": "record"
+      },
+      {
+        "stage": "investigation",
+        "label": "수사",
+        "state": "skipped",
+        "timeline_event_ids": [],
+        "evidence_level": null
+      },
+      {
+        "stage": "outcome",
+        "label": "결과",
+        "state": "current",
+        "timeline_event_ids": [
+          "tl2"
+        ],
+        "evidence_level": "record"
+      }
+    ],
+    "current_stage": "outcome",
+    "gaps": [],
+    "entities": [
+      {
+        "entity_id": "ent1",
+        "kind": "person",
+        "canonical_name": "서민재",
+        "aliases": [
+          "서민재"
+        ],
+        "roles": [
+          "고소인",
+          "신고인"
+        ],
+        "mention_ids": [
+          "complaint_2016:m1",
+          "receipt_2016:m2",
+          "notice_2017:m2"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "complaint_2016",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 194.0,
+              "y1": 144.0
+            },
+            "char_start": 4,
+            "char_end": 7,
+            "quote": "서민재"
+          },
+          {
+            "source_doc_id": "receipt_2016",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 194.0,
+              "y1": 324.0
+            },
+            "char_start": 4,
+            "char_end": 7,
+            "quote": "서민재"
+          },
+          {
+            "source_doc_id": "notice_2017",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 194.0,
+              "y1": 204.0
+            },
+            "char_start": 4,
+            "char_end": 7,
+            "quote": "서민재"
+          }
+        ],
+        "merge_confidence": 0.9,
+        "possible_same_as": []
+      },
+      {
+        "entity_id": "ent2",
+        "kind": "organization",
+        "canonical_name": "**경찰서",
+        "aliases": [
+          "○○경찰서"
+        ],
+        "roles": [],
+        "mention_ids": [
+          "complaint_2016:m2",
+          "receipt_2016:m3"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "complaint_2016",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 656.0,
+              "y1": 324.0
+            },
+            "char_start": 13,
+            "char_end": 18,
+            "quote": "○○경찰서"
+          },
+          {
+            "source_doc_id": "receipt_2016",
+            "page": 1,
+            "source_line": 6,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 340.0,
+              "x1": 238.0,
+              "y1": 384.0
+            },
+            "char_start": 0,
+            "char_end": 5,
+            "quote": "○○경찰서"
+          }
+        ],
+        "merge_confidence": 0.9,
+        "possible_same_as": []
+      },
+      {
+        "entity_id": "ent3",
+        "kind": "receipt_number",
+        "canonical_name": "2016-073310",
+        "aliases": [
+          "2016-073310"
+        ],
+        "roles": [],
+        "mention_ids": [
+          "receipt_2016:m1"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "receipt_2016",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 392.0,
+              "y1": 144.0
+            },
+            "char_start": 5,
+            "char_end": 16,
+            "quote": "2016-073310"
+          }
+        ],
+        "merge_confidence": 1.0,
+        "possible_same_as": []
+      },
+      {
+        "entity_id": "ent4",
+        "kind": "case_number",
+        "canonical_name": "2016형제58812",
+        "aliases": [
+          "2016형제58812"
+        ],
+        "roles": [],
+        "mention_ids": [
+          "notice_2017:m1"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "notice_2017",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 392.0,
+              "y1": 144.0
+            },
+            "char_start": 5,
+            "char_end": 16,
+            "quote": "2016형제58812"
+          }
+        ],
+        "merge_confidence": 1.0,
+        "possible_same_as": []
+      },
+      {
+        "entity_id": "ent5",
+        "kind": "person",
+        "canonical_name": "검사",
+        "aliases": [
+          "검사"
+        ],
+        "roles": [
+          "담당수사관"
+        ],
+        "mention_ids": [
+          "notice_2017:m3"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "notice_2017",
+            "page": 1,
+            "source_line": 9,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 520.0,
+              "x1": 326.0,
+              "y1": 564.0
+            },
+            "char_start": 7,
+            "char_end": 9,
+            "quote": "검사"
+          }
+        ],
+        "merge_confidence": 1.0,
+        "possible_same_as": []
+      },
+      {
+        "entity_id": "ent6",
+        "kind": "organization",
+        "canonical_name": "**지방검찰청",
+        "aliases": [
+          "○○지방검찰청"
+        ],
+        "roles": [],
+        "mention_ids": [
+          "notice_2017:m4"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "notice_2017",
+            "page": 1,
+            "source_line": 10,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 580.0,
+              "x1": 194.0,
+              "y1": 624.0
+            },
+            "char_start": 0,
+            "char_end": 7,
+            "quote": "○○지방검찰청"
+          }
+        ],
+        "merge_confidence": 1.0,
+        "possible_same_as": []
+      }
+    ],
+    "mention_to_entity": {
+      "complaint_2016:m1": "ent1",
+      "receipt_2016:m2": "ent1",
+      "notice_2017:m2": "ent1",
+      "complaint_2016:m2": "ent2",
+      "receipt_2016:m3": "ent2",
+      "receipt_2016:m1": "ent3",
+      "notice_2017:m1": "ent4",
+      "notice_2017:m3": "ent5",
+      "notice_2017:m4": "ent6"
+    }
+  },
+  "analysis": {
+    "case_id": "rule-01-공소시효",
+    "case_type": "investigation_suspended",
+    "as_of": "2026-09-19",
+    "issues": [
+      {
+        "issue_id": "iss1",
+        "category": "missing",
+        "condition": "missing",
+        "message": "사건 발생 시점: 올린 자료에서 찾지 못했습니다",
+        "stage": "occurrence",
+        "slot": "incident_time",
+        "sources": [],
+        "checked_doc_ids": [
+          "complaint_2016",
+          "receipt_2016",
+          "notice_2017"
+        ],
+        "related_claim_ids": [],
+        "related_event_ids": [],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": null,
+        "trigger": {
+          "key": "investigation_suspended/occurrence/incident_time/missing",
+          "case_type": "investigation_suspended",
+          "condition": "missing",
+          "stage": "occurrence",
+          "slot": "incident_time",
+          "since": null,
+          "elapsed_days": null,
+          "evidence": []
+        },
+        "priority": 30
+      },
+      {
+        "issue_id": "iss2",
+        "category": "missing",
+        "condition": "stage_stalled",
+        "message": "‘수사결과 통지서’(2017-05-12) 이후 기관의 진행 기록이 없습니다 (3417일 경과)",
+        "stage": "outcome",
+        "slot": null,
+        "sources": [
+          {
+            "source_doc_id": "notice_2017",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 216.0,
+              "y1": 84.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": "수사결과 통지서"
+          }
+        ],
+        "checked_doc_ids": [
+          "complaint_2016",
+          "receipt_2016",
+          "notice_2017"
+        ],
+        "related_claim_ids": [],
+        "related_event_ids": [
+          "tl2"
+        ],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": null,
+        "trigger": {
+          "key": "investigation_suspended/outcome/stage/stage_stalled",
+          "case_type": "investigation_suspended",
+          "condition": "stage_stalled",
+          "stage": "outcome",
+          "slot": null,
+          "since": "2017-05-12T00:00:00",
+          "elapsed_days": 3417,
+          "evidence": [
+            {
+              "source_doc_id": "notice_2017",
+              "page": 1,
+              "source_line": 1,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 40.0,
+                "x1": 216.0,
+                "y1": 84.0
+              },
+              "char_start": null,
+              "char_end": null,
+              "quote": "수사결과 통지서"
+            }
+          ]
+        },
+        "priority": 35
+      },
+      {
+        "issue_id": "iss3",
+        "category": "missing",
+        "condition": "stage_skipped",
+        "message": "‘발생’ 단계에 해당하는 자료가 없습니다",
+        "stage": "occurrence",
+        "slot": null,
+        "sources": [],
+        "checked_doc_ids": [
+          "complaint_2016",
+          "receipt_2016",
+          "notice_2017"
+        ],
+        "related_claim_ids": [],
+        "related_event_ids": [],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": null,
+        "trigger": {
+          "key": "investigation_suspended/occurrence/stage/stage_skipped",
+          "case_type": "investigation_suspended",
+          "condition": "stage_skipped",
+          "stage": "occurrence",
+          "slot": null,
+          "since": null,
+          "elapsed_days": null,
+          "evidence": []
+        },
+        "priority": 45
+      },
+      {
+        "issue_id": "iss4",
+        "category": "missing",
+        "condition": "stage_skipped",
+        "message": "‘수사’ 단계에 해당하는 자료가 없습니다",
+        "stage": "investigation",
+        "slot": null,
+        "sources": [],
+        "checked_doc_ids": [
+          "complaint_2016",
+          "receipt_2016",
+          "notice_2017"
+        ],
+        "related_claim_ids": [],
+        "related_event_ids": [],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": null,
+        "trigger": {
+          "key": "investigation_suspended/investigation/stage/stage_skipped",
+          "case_type": "investigation_suspended",
+          "condition": "stage_skipped",
+          "stage": "investigation",
+          "slot": null,
+          "since": null,
+          "elapsed_days": null,
+          "evidence": []
+        },
+        "priority": 45
+      }
+    ],
+    "slot_statuses": [
+      {
+        "slot": "incident_time",
+        "label": "사건 발생 시점",
+        "stage": "occurrence",
+        "required": true,
+        "state": "missing",
+        "value": null,
+        "claim_ids": [],
+        "sources": []
+      },
+      {
+        "slot": "receipt_number",
+        "label": "신고·진정 접수번호",
+        "stage": "receipt",
+        "required": false,
+        "state": "confirmed",
+        "value": "2016-073310",
+        "claim_ids": [
+          "receipt_2016:c4"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "receipt_2016",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 392.0,
+              "y1": 144.0
+            },
+            "char_start": 0,
+            "char_end": 16,
+            "quote": "접수번호 2016-073310"
+          }
+        ]
+      },
+      {
+        "slot": "offence",
+        "label": "죄명",
+        "stage": "receipt",
+        "required": false,
+        "state": "confirmed",
+        "value": "사기",
+        "claim_ids": [
+          "notice_2017:c6"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "notice_2017",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 150.0,
+              "y1": 324.0
+            },
+            "char_start": 0,
+            "char_end": 5,
+            "quote": "죄명 사기"
+          }
+        ]
+      },
+      {
+        "slot": "case_number",
+        "label": "사건번호",
+        "stage": "investigation",
+        "required": true,
+        "state": "confirmed",
+        "value": "2016형제58812",
+        "claim_ids": [
+          "notice_2017:c5"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "notice_2017",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 392.0,
+              "y1": 144.0
+            },
+            "char_start": 0,
+            "char_end": 16,
+            "quote": "사건번호 2016형제58812"
+          }
+        ]
+      },
+      {
+        "slot": "investigator",
+        "label": "담당 수사관",
+        "stage": "investigation",
+        "required": false,
+        "state": "confirmed",
+        "value": "검사",
+        "claim_ids": [
+          "notice_2017:c9"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "notice_2017",
+            "page": 1,
+            "source_line": 9,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 520.0,
+              "x1": 326.0,
+              "y1": 564.0
+            },
+            "char_start": 0,
+            "char_end": 13,
+            "quote": "담당 수사관 검사 윤태호"
+          }
+        ]
+      },
+      {
+        "slot": "decision_type",
+        "label": "결정 내용",
+        "stage": "outcome",
+        "required": true,
+        "state": "confirmed",
+        "value": "기소중지",
+        "claim_ids": [
+          "notice_2017:c8"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "notice_2017",
+            "page": 1,
+            "source_line": 7,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 400.0,
+              "x1": 238.0,
+              "y1": 444.0
+            },
+            "char_start": 0,
+            "char_end": 9,
+            "quote": "결정내용 기소중지"
+          }
+        ]
+      },
+      {
+        "slot": "decision_time",
+        "label": "결정 일자",
+        "stage": "outcome",
+        "required": true,
+        "state": "confirmed",
+        "value": "2017-05-12",
+        "claim_ids": [
+          "notice_2017:c7"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "notice_2017",
+            "page": 1,
+            "source_line": 6,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 340.0,
+              "x1": 414.0,
+              "y1": 384.0
+            },
+            "char_start": 0,
+            "char_end": 17,
+            "quote": "결정일자 2017. 5. 12."
+          }
+        ]
+      }
+    ],
+    "pair_decisions": [],
+    "action_triggers": [
+      {
+        "key": "investigation_suspended/occurrence/incident_time/missing",
+        "case_type": "investigation_suspended",
+        "condition": "missing",
+        "stage": "occurrence",
+        "slot": "incident_time",
+        "since": null,
+        "elapsed_days": null,
+        "evidence": []
+      },
+      {
+        "key": "investigation_suspended/outcome/stage/stage_stalled",
+        "case_type": "investigation_suspended",
+        "condition": "stage_stalled",
+        "stage": "outcome",
+        "slot": null,
+        "since": "2017-05-12T00:00:00",
+        "elapsed_days": 3417,
+        "evidence": [
+          {
+            "source_doc_id": "notice_2017",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 216.0,
+              "y1": 84.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": "수사결과 통지서"
+          }
+        ]
+      },
+      {
+        "key": "investigation_suspended/occurrence/stage/stage_skipped",
+        "case_type": "investigation_suspended",
+        "condition": "stage_skipped",
+        "stage": "occurrence",
+        "slot": null,
+        "since": null,
+        "elapsed_days": null,
+        "evidence": []
+      },
+      {
+        "key": "investigation_suspended/investigation/stage/stage_skipped",
+        "case_type": "investigation_suspended",
+        "condition": "stage_skipped",
+        "stage": "investigation",
+        "slot": null,
+        "since": null,
+        "elapsed_days": null,
+        "evidence": []
+      }
+    ],
+    "case_card": {
+      "case_type": "investigation_suspended",
+      "case_type_label": "수사중지 사건",
+      "requirements_status": "draft_unverified",
+      "stages": [
+        {
+          "stage": "occurrence",
+          "label": "발생",
+          "state": "skipped",
+          "timeline_event_ids": [],
+          "evidence_level": null
+        },
+        {
+          "stage": "report",
+          "label": "신고",
+          "state": "done",
+          "timeline_event_ids": [
+            "tl3"
+          ],
+          "evidence_level": "statement"
+        },
+        {
+          "stage": "receipt",
+          "label": "접수",
+          "state": "done",
+          "timeline_event_ids": [
+            "tl1"
+          ],
+          "evidence_level": "record"
+        },
+        {
+          "stage": "investigation",
+          "label": "수사",
+          "state": "skipped",
+          "timeline_event_ids": [],
+          "evidence_level": null
+        },
+        {
+          "stage": "outcome",
+          "label": "결과",
+          "state": "current",
+          "timeline_event_ids": [
+            "tl2"
+          ],
+          "evidence_level": "record"
+        }
+      ],
+      "current_stage": "outcome",
+      "evidence_doc_count": 3,
+      "needs_confirmation_count": 4,
+      "slots_done": 3,
+      "slots_total": 4,
+      "next_trigger": {
+        "key": "investigation_suspended/occurrence/incident_time/missing",
+        "case_type": "investigation_suspended",
+        "condition": "missing",
+        "stage": "occurrence",
+        "slot": "incident_time",
+        "since": null,
+        "elapsed_days": null,
+        "evidence": []
+      }
+    }
+  }
+}

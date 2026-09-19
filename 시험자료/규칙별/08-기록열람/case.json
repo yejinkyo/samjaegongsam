@@ -1,0 +1,17 @@
+{
+  "case_id": "rule-08-기록열람",
+  "case_type": "investigation_suspended",
+  "as_of": "2026-09-19",
+  "documents": [
+    "complaint_2023.json",
+    "receipt_2023.json",
+    "notice_2024.json",
+    "forensic_2024.json"
+  ],
+  "user_notes": [],
+  "expect": {
+    "rule": 8,
+    "action": "ACT-기록열람"
+  },
+  "why": "수사중지 결정 뒤 1년 넘게 아무 기록이 없다 — 수사 기록을 확인하지 못한 상태다"
+}

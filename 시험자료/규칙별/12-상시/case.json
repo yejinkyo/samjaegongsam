@@ -1,0 +1,18 @@
+{
+  "case_id": "rule-12-상시",
+  "case_type": "investigation_suspended",
+  "as_of": "2026-09-19",
+  "documents": [
+    "complaint_2026.json",
+    "receipt_2026.json",
+    "transfer_2026.json",
+    "notice_2026.json",
+    "forensic_2026.json"
+  ],
+  "user_notes": [],
+  "expect": {
+    "rule": 12,
+    "action": "ACT-상시"
+  },
+  "why": "수사중지 결정 이의제기 기한은 지났고, 다른 정보 문제도 없다 — 언제든 쓸 수 있는 경로만 남는다"
+}
