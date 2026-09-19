@@ -222,6 +222,166 @@ def _short_title(title: str) -> str:
     return text.rstrip(" .")
 
 
+# ── 타임라인 줄 이름: 무슨 일이 있었는가 ────────────────────────────────
+#
+# 원문 한 줄을 그대로 붙이면 '위 대상물은 … 등록을 위하여' 처럼 무슨 일인지 알 수 없는
+# 문장이 뜬다. 그래서 자료의 종류와 행위로 짧게 요약한다.
+#
+# 요약에 쓰는 말은 아래 표에서만 고른다. 장소 · 이름 · 금액은 그 줄에 적힌 값을 옮길 뿐이다.
+# 표에 없는 일은 지어내지 않고 원문 첫 문장으로 둔다. 원문은 '자세히'(full)에 그대로 있다.
+
+def _flat(text: str) -> str:
+    """OCR 이 글자 사이에 넣은 빈칸을 뗀다 ('실 종 신 고' → '실종신고')."""
+    return re.sub(r"\s+", "", text)
+
+
+# 결정 내용. 앞의 것이 더 구체적이다 — '참고인중지'가 '수사중지'보다 먼저다.
+_DECISIONS = [
+    ("참고인중지", "수사중지(참고인중지)"), ("피의자중지", "수사중지(피의자중지)"), ("수사중지", "수사중지"),
+    ("기소중지", "기소중지"), ("불송치", "불송치"), ("불기소", "불기소"), ("기소유예", "기소유예"),
+    ("혐의없음", "혐의없음"), ("공소권없음", "공소권없음"), ("죄가안됨", "죄가안됨"), ("각하", "각하"),
+]
+_DECISION_LINE = re.compile(r"결정|처분|주문|사유|내용")
+
+
+def _decision(lines: list[str]) -> str | None:
+    """결정 내용. '결정·처분' 이 적힌 줄을 먼저 보고, 없으면 문서 전체에서 찾는다."""
+    labelled = [_flat(t) for t in lines if _DECISION_LINE.search(_flat(t))]
+    for pool in (labelled, [_flat(t) for t in lines]):
+        text = " ".join(pool)
+        for word, label in _DECISIONS:
+            if word in text:
+                return label
+    return None
+
+
+# 사람이 쓴 글은 양식이 아니다 — 메모 둘째 줄의 '실종신고'를 문서 제목으로 읽으면 안 된다
+_NARRATIVE = {"memo", "statement", "complaint", "news", "messenger", "transcript", "user_note"}
+
+
+def _doc_label(doc: dict[str, Any]) -> str | None:
+    """정해진 양식(접수증 · 통지서 · 확인서)이면 그 문서가 뜻하는 일. 양식이 아니면 None."""
+    if doc.get("doc_type") in _NARRATIVE:
+        return None
+    lines = [ln["text"] for ln in doc.get("lines", [])]
+    head, body = _flat(" ".join(lines[:2])), _flat(" ".join(lines))  # 제목은 맨 위 한두 줄에 있다
+    if re.search(r"유전자|DNA", head, re.I):
+        if re.search(r"결과|감정", head):
+            return "DNA 검사 결과"
+        if "채취" in head:
+            return "DNA 채취 — 실종자 유전자 등록" if re.search(r"프로파일링|실종아동", body) else "DNA 채취"
+        return "DNA 검사"
+    if "실종신고" in head:
+        return "실종신고 접수"
+    if "사이버범죄" in head and "접수" in head:
+        return "사이버범죄 신고 접수"
+    if re.search(r"접수증|접수확인", head):
+        return "사건 접수"
+    if "진행상황" in head:
+        return "수사 진행상황 통지" + (" — 사건 재배당" if "재배당" in body else "")
+    if re.search(r"통지서|결정서", head) and re.search(r"수사|결정|처분|결과", head):
+        decision = _decision(lines)
+        return f"수사결과 통지 — {decision}" if decision else "수사결과 통지"
+    return None
+
+
+# 장소: 숫자 없는 낱말 한두 개가 장소 꼬리말로 끝나는 자리 ('○○천 제방길', '○○시장 입구')
+_PLACE = re.compile(
+    r"(?<!\S)((?:(?![^\s]*(?:쯤|경|오전|오후|밤|낮|새벽|저녁|아침)\s)[^\s\d,.:;|ㅣ()]+\s)?[^\s\d,.:;|ㅣ()]*(?:역|천|길|시장|공원|골목|하류|갈대밭|편의점|터미널|정류장|아파트)"
+    r"(?:\s?(?:입구|앞|인근|근처))?)(?=에서|에|\s|$)"
+)
+_FOUND = re.compile(r"([가-힣]+?)(?:이|가)\s*발견")
+_AGENCY = re.compile(r"([^\s,.]*(?:경찰서|수사대|지구대|파출소|경찰청|검찰청|지청))")
+
+
+def _place(text: str) -> str | None:
+    m = _PLACE.search(text)
+    return m.group(1).strip() if m else None
+
+
+def _line_people(result: dict[str, Any], source: dict[str, Any]) -> list[str]:
+    names = {
+        m["normalized"] or m["name"]["value"]
+        for m in result["extraction"]["mentions"]
+        if m["kind"] == "person" and m["doc_id"] == source["source_doc_id"]
+        and m["name"]["source_line"] == source["source_line"]
+    }
+    return sorted(names)
+
+
+def _event_label(e: dict[str, Any], kinds: set[str], text: str, result: dict[str, Any]) -> str | None:
+    """한 줄에 적힌 행위로 요약한다. 표에 없는 행위면 None."""
+    flat = _flat(text)
+    stage = e["stage"]
+    if "sighting" in kinds:
+        label = "마지막 목격" if re.search(r"마지막|최종", flat) else "목격"
+        where = _place(text)
+        return f"{label} · {where}" if where else label
+    if (found := _FOUND.search(text)) and stage == "occurrence":
+        return f"{found.group(1)} 발견"
+    if "contact_lost" in kinds:
+        return "연락 두절"
+    if "disappearance" in kinds:
+        people = _line_people(result, e["sources"][0]) if e["sources"] else []
+        return f"{people[-1]} 실종" if len(people) == 1 else "실종"
+    amount = e.get("amount")
+    amount = amount.get("value") if isinstance(amount, dict) else amount
+    if "fraud" in kinds:
+        return f"{amount:,}원 사기 피해" if isinstance(amount, int) else "사기 피해"
+    if "violence" in kinds:
+        return "폭행 피해"
+    if "harm" in kinds:
+        return "피해"
+    if "dealing" in kinds:
+        return "거래 대화"
+    if "petition" in kinds or stage == "report":
+        for word, label in (("재수사", "재수사 요청"), ("이의신청", "이의신청"), ("재기신청", "재기신청"),
+                            ("실종신고", "실종신고"), ("고소", "고소"), ("고발", "고발"), ("진정", "진정"),
+                            ("112", "112 신고"), ("신고", "신고")):
+            if word in flat:
+                agency = _AGENCY.search(text) if label in ("고소", "고발", "진정", "신고") else None
+                return f"{agency.group(1).rstrip('에')} {label}" if agency else label
+        return None
+    if stage == "transfer":
+        return f"{amount:,}원 송금" if isinstance(amount, int) else "송금"
+    if stage == "receipt":
+        return "사건 접수"
+    if stage == "investigation":
+        for pattern, label in ((r"재배당", "사건 재배당"), (r"조사를?받은.{0,6}없|조사를?받지않", "경찰 조사를 받지 않았다는 진술"),
+                               (r"초동수사|수사가?늦어", "수사가 늦었다는 주장"), (r"압수|수색", "압수 · 수색"),
+                               (r"소환|출석", "출석 조사"), (r"입건", "입건"), (r"(?<!불)송치", "검찰 송치")):
+            if re.search(pattern, flat):
+                return label
+        return None
+    if stage == "outcome":
+        decision = _decision([text])
+        return f"수사결과 — {decision}" if decision else None
+    return None
+
+
+def _summary(e: dict[str, Any], result: dict[str, Any], docs: dict[str, dict]) -> str | None:
+    """타임라인 한 줄 이름. 요약할 수 없으면 None — 부른 쪽이 원문 첫 문장을 쓴다."""
+    if not e["sources"]:
+        return None
+    source = e["sources"][0]
+    doc = docs.get(source["source_doc_id"], {})
+    if doc.get("doc_type") == "user_note" or e.get("evidence_level") == "user":
+        return None  # 본인이 직접 적은 말은 그대로 둔다
+    by_id = {x["event_id"]: x for x in result["extraction"]["events"]}
+    kinds = {k for i in e.get("event_ids", []) if (k := (by_id.get(i) or {}).get("action_kind"))}
+    text = _full_text(e)
+
+    # 양식 문서의 줄은 그 문서가 뜻하는 일이다. 다만 발급일과 다른 날의 일
+    # (접수증의 '최종목격 11/4 23:20')은 그 줄에 적힌 일로 요약한다.
+    label = _doc_label(doc) if doc else None
+    if label:
+        issued = ((result["extraction"].get("document_dates") or {}).get(doc["doc_id"]) or {}).get("value") or {}
+        when, day = (e.get("time") or {}).get("start"), issued.get("start")
+        if source["source_line"] <= 2 or not when or (day and when[:10] == day[:10]):
+            return label
+    return _event_label(e, kinds, text, result)
+
+
 def _full_text(event: dict[str, Any]) -> str:
     """'자세히'에 보여줄 원문.
 
@@ -283,9 +443,9 @@ def _timeline(result: dict[str, Any], docs: dict[str, dict], doc_index: dict[str
         rows.append((start, {
             "type": "event",
             "time": "시각 미상" if e.get("time_unknown") or not time else _event_time(time, multi_year),
-            # 줄 이름은 잘리지 않은 원문에서 뽑는다 — 엔진이 '…' 로 줄여 둔 제목에서
-            # 뽑으면 화면이 아무리 넓어도 그 자리에서 끝난다
-            "title": _short_title(_full_text(e)),
+            # 무슨 일이었는지 요약한 이름. 요약할 수 없으면 잘리지 않은 원문의 첫 문장 —
+            # 엔진이 '…' 로 줄여 둔 제목에서 뽑으면 화면이 아무리 넓어도 그 자리에서 끝난다
+            "title": _summary(e, result, docs) or _short_title(_full_text(e)),
             "full": _full_text(e),
             "kind": kind,
             "badge": badge,
