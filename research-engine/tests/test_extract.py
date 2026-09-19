@@ -174,3 +174,18 @@ def test_돈이_아닌_것을_건넨_것은_금전_이동이_아니다():
     doc = _doc("statement", ["2023. 7. 9. 담당 수사관에게 서류를 건넸습니다."], DocumentType.STATEMENT)
     res = Extractor().extract([doc], date(2026, 9, 16))
     assert not any(e.stage is Stage.TRANSFER for e in res.events)
+
+
+def test_2021년_이전_결정_문구도_결정_내용으로_읽는다():
+    """장기·미제 사건 서류는 대부분 수사권 조정 전의 것이다. 그때 쓰던 결정 문구도 결정 내용으로 뽑는다."""
+    def decision(text):
+        doc = _doc("notice", ["처분결과 통지서", f"처분결과 {text}", "○○지방검찰청 검사"], DocumentType.NOTICE)
+        claims = Extractor().extract([doc], date(2026, 9, 19)).claims
+        return [c.slot_value for c in claims if c.slot is ClaimSlot.DECISION_TYPE]
+
+    assert decision("기소중지") == ["기소중지"]
+    assert decision("기소유예") == ["기소유예"]
+    assert decision("참고인중지") == ["참고인중지"]
+    assert decision("무혐의") == ["무혐의"]
+    assert decision("불기소의견 송치") == ["불기소의견송치"]  # '불기소'로 잘리지 않는다
+    assert decision("불송치(혐의없음)") == ["불송치(혐의없음)"]  # '송치' 문구가 불송치를 가로채지 않는다
