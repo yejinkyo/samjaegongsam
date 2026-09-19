@@ -84,8 +84,8 @@ def test_자료_없이_메모만_적은_사건도_진행_단계가_움직인다(
     """
     from datetime import datetime
 
-    from research_engine.pipeline import CaseInput, ResearchPipeline
     from research_engine.ingest import UserNote
+    from research_engine.pipeline import CaseInput, ResearchPipeline
     from research_engine.schema import Stage, StageState
 
     notes = [
