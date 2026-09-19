@@ -1,3 +1,4 @@
 [
-  { "id": "demo_missing_2017", "title": "2017년 실종, 9년째 미제", "result": "시험자료/시연-실종사건/out.json", "first": true, "guide": true }
+  { "id": "demo_missing_2017", "title": "2017년 실종, 9년째 미제", "result": "시험자료/시연-실종사건/out.json", "first": true, "guide": true,
+    "originals": "data/demo/demo_missing_2017" }
 ]
