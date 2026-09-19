@@ -224,3 +224,32 @@ def test_결정을_말한_진술은_통지서와_계속_비교한다():
               time=tv(datetime(2022, 9, 20), datetime(2022, 9, 21)))]
     pairs = candidate_pairs(ExtractionResult(claims=claims))
     assert [p for p in pairs if p.a.slot is ClaimSlot.DECISION_TIME]
+
+
+def test_재입건으로_바뀐_사건번호와_바뀐_담당자는_모순으로_비교하지_않는다():
+    """사건번호·담당 수사관이 적힌 통지서가 서로 다른 때 나왔으면 차례다 — 결정 일자가 그 통지서의 시점이다."""
+    claims = (_decision("notice_2008", "수사중지(피의자중지)", "2008-03-21")
+              + _decision("notice_2022", "수사중지(참고인중지)", "2022-09-14")
+              + [claim(ClaimSlot.CASE_NUMBER, "2007형제1182", "notice_2008"),
+                 claim(ClaimSlot.CASE_NUMBER, "2019형제20447", "notice_2022"),
+                 claim(ClaimSlot.INVESTIGATOR, "노일성", "notice_2008"),
+                 claim(ClaimSlot.INVESTIGATOR, "문상철", "notice_2022")])
+    pairs = candidate_pairs(ExtractionResult(claims=claims))
+    assert not [p for p in pairs if p.a.slot in (ClaimSlot.CASE_NUMBER, ClaimSlot.INVESTIGATOR)]
+
+
+def test_진정서가_지금_사건번호를_적으면_옛_번호와_비교하지_않지만_엉뚱한_번호는_잡는다():
+    records = (_decision("notice_2008", "수사중지(피의자중지)", "2008-03-21")
+               + _decision("notice_2022", "수사중지(참고인중지)", "2022-09-14")
+               + [claim(ClaimSlot.CASE_NUMBER, "2007형제1182", "notice_2008"),
+                  claim(ClaimSlot.CASE_NUMBER, "2019형제20447", "notice_2022")])
+
+    def compared_with(petition_value):
+        said = claim(ClaimSlot.CASE_NUMBER, petition_value, "petition", level=EvidenceLevel.STATEMENT)
+        pairs = candidate_pairs(ExtractionResult(claims=records + [said]))
+        return sorted({(p.a if p.b.doc_id == "petition" else p.b).doc_id
+                       for p in pairs if "petition" in (p.a.doc_id, p.b.doc_id)})
+
+    assert compared_with("2019형제20447") == ["notice_2022"]  # 지금 번호 — 옛 통지서와는 비교하지 않는다
+    assert compared_with("2020형제99999") == ["notice_2008", "notice_2022"]  # 어느 기록과도 안 맞으면 계속 비교
+

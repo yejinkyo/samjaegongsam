@@ -73,11 +73,14 @@ def test_the_latest_decision_is_the_current_state(result):
     assert slots[ClaimSlot.DECISION_TIME].value == "2022-09-14"
 
 
-def test_values_that_changed_over_time_are_reported_as_conflicts(result):
-    """알려진 오탐: 재입건·담당자 교체는 어긋난 게 아니라 시점이 다른 것이다.
+def test_values_that_changed_over_time_are_not_conflicts(result):
+    """재입건 뒤 새 사건번호 · 담당 수사관 교체 · 두 번의 결정은 어긋난 게 아니라 차례다.
 
-    두 번 내려진 결정은 이제 차례로 본다(결정 일자는 빠졌다). 사건번호·담당 수사관은 아직 남아 있다.
+    서로 다른 때 나온 통지서끼리는 비교하지 않고, 가장 최근 통지서의 값을 지금 값으로 쓴다.
+    진정서가 지금 사건번호를 적은 것도 재입건 전 옛 번호와 어긋난 것으로 보지 않는다.
     """
-    conflicting = {i.slot for i in result.analysis.issues if i.condition is GapCondition.CONFLICTING}
-    assert conflicting == {ClaimSlot.CASE_NUMBER, ClaimSlot.INVESTIGATOR}
-    assert result.analysis.case_card.slots_done == 4
+    assert not [i for i in result.analysis.issues if i.condition is GapCondition.CONFLICTING]
+    slots = {s.slot: s for s in result.analysis.slot_statuses}
+    assert slots[ClaimSlot.CASE_NUMBER].state is SlotState.CONFIRMED
+    assert slots[ClaimSlot.CASE_NUMBER].value == "2019형제20447"
+    assert result.analysis.case_card.slots_done == 5
