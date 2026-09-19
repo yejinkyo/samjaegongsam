@@ -1,0 +1,2761 @@
+{
+  "case_id": "rule-07-모순확인",
+  "case_type": "used_goods_fraud",
+  "as_of": "2026-09-19",
+  "documents": [
+    {
+      "doc_id": "transfer_0902",
+      "file_name": "이체확인증.jpg",
+      "doc_type": "receipt",
+      "doc_type_confidence": 0.9776,
+      "doc_type_scores": {
+        "judgment": 0.0024,
+        "complaint": 0.0024,
+        "statement": 0.0024,
+        "transcript": 0.0024,
+        "receipt": 0.9776,
+        "notice": 0.0024,
+        "messenger": 0.0024,
+        "news": 0.0024,
+        "memo": 0.0054
+      },
+      "evidence_level": "record",
+      "captured_at": "2026-09-18T20:00:00",
+      "pages": [
+        {
+          "page_no": 1,
+          "width": 1080.0,
+          "height": 440.0,
+          "image_ref": null
+        }
+      ],
+      "lines": [
+        {
+          "doc_id": "transfer_0902",
+          "line_no": 1,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 150.0,
+            "y1": 84.0
+          },
+          "text": "이체확인증",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "transfer_0902",
+          "line_no": 2,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 524.0,
+            "y1": 144.0
+          },
+          "text": "거래일시 2026. 9. 2. 13:40",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "transfer_0902",
+          "line_no": 3,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 326.0,
+            "y1": 204.0
+          },
+          "text": "이체금액 350,000원",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "transfer_0902",
+          "line_no": 4,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 194.0,
+            "y1": 264.0
+          },
+          "text": "받는분 김*수",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "transfer_0902",
+          "line_no": 5,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 524.0,
+            "y1": 324.0
+          },
+          "text": "입금계좌 신한 110-***-***912",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "transfer_0902",
+          "line_no": 6,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 340.0,
+            "x1": 128.0,
+            "y1": 384.0
+          },
+          "text": "신한은행",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        }
+      ],
+      "unreadable": []
+    },
+    {
+      "doc_id": "statement_0905",
+      "file_name": "진술서_0905.jpg",
+      "doc_type": "statement",
+      "doc_type_confidence": 0.7687,
+      "doc_type_scores": {
+        "judgment": 0.0085,
+        "complaint": 0.0085,
+        "statement": 0.7687,
+        "transcript": 0.0085,
+        "receipt": 0.0085,
+        "notice": 0.0085,
+        "messenger": 0.0085,
+        "news": 0.0085,
+        "memo": 0.1715
+      },
+      "evidence_level": "statement",
+      "captured_at": "2026-09-18T20:05:00",
+      "pages": [
+        {
+          "page_no": 1,
+          "width": 1080.0,
+          "height": 320.0,
+          "image_ref": null
+        }
+      ],
+      "lines": [
+        {
+          "doc_id": "statement_0905",
+          "line_no": 1,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 150.0,
+            "y1": 84.0
+          },
+          "text": "진 술 서",
+          "ocr_confidence": 0.94,
+          "readability": 0.852,
+          "readable": true,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "statement_0905",
+          "line_no": 2,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 194.0,
+            "y1": 144.0
+          },
+          "text": "진술인 류시안",
+          "ocr_confidence": 0.94,
+          "readability": 0.9047,
+          "readable": true,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "statement_0905",
+          "line_no": 3,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 1052.0,
+            "y1": 204.0
+          },
+          "text": "2026. 9. 2. 판매자 김*수에게 게임기 대금 300,000원을 송금했습니다.",
+          "ocr_confidence": 0.94,
+          "readability": 0.9047,
+          "readable": true,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "statement_0905",
+          "line_no": 4,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 546.0,
+            "y1": 264.0
+          },
+          "text": "그 뒤로 판매자와 연락이 되지 않았습니다.",
+          "ocr_confidence": 0.94,
+          "readability": 0.9047,
+          "readable": true,
+          "script": "handwritten",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        }
+      ],
+      "unreadable": []
+    },
+    {
+      "doc_id": "ecrm_0905",
+      "file_name": "사이버범죄_신고접수증.pdf",
+      "doc_type": "receipt",
+      "doc_type_confidence": 0.9701,
+      "doc_type_scores": {
+        "judgment": 0.0032,
+        "complaint": 0.0032,
+        "statement": 0.0032,
+        "transcript": 0.0032,
+        "receipt": 0.9701,
+        "notice": 0.0032,
+        "messenger": 0.0032,
+        "news": 0.0032,
+        "memo": 0.0072
+      },
+      "evidence_level": "record",
+      "captured_at": "2026-09-18T20:06:00",
+      "pages": [
+        {
+          "page_no": 1,
+          "width": 1080.0,
+          "height": 440.0,
+          "image_ref": null
+        }
+      ],
+      "lines": [
+        {
+          "doc_id": "ecrm_0905",
+          "line_no": 1,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 304.0,
+            "y1": 84.0
+          },
+          "text": "사이버범죄 신고 접수증",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "ecrm_0905",
+          "line_no": 2,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 568.0,
+            "y1": 144.0
+          },
+          "text": "접수번호 ECRM-2026-0905-1188",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "ecrm_0905",
+          "line_no": 3,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 524.0,
+            "y1": 204.0
+          },
+          "text": "접수일시 2026. 9. 5. 10:20",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "ecrm_0905",
+          "line_no": 4,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 150.0,
+            "y1": 264.0
+          },
+          "text": "죄명 사기",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "ecrm_0905",
+          "line_no": 5,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 194.0,
+            "y1": 324.0
+          },
+          "text": "신고인 류시안",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        },
+        {
+          "doc_id": "ecrm_0905",
+          "line_no": 6,
+          "page": 1,
+          "bbox": {
+            "x0": 40.0,
+            "y0": 340.0,
+            "x1": 260.0,
+            "y1": 384.0
+          },
+          "text": "경찰청 사이버수사국",
+          "ocr_confidence": 0.94,
+          "readability": 0.934,
+          "readable": true,
+          "script": "typewriter",
+          "low_confidence_spans": [],
+          "origin": "ocr"
+        }
+      ],
+      "unreadable": []
+    }
+  ],
+  "clarifications": [],
+  "extraction": {
+    "mentions": [
+      {
+        "mention_id": "transfer_0902:m1",
+        "doc_id": "transfer_0902",
+        "kind": "account",
+        "name": {
+          "source_doc_id": "transfer_0902",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 524.0,
+            "y1": 324.0
+          },
+          "char_start": 8,
+          "char_end": 22,
+          "quote": "110-***-***912",
+          "value": "110-***-***912",
+          "confidence": 0.8406
+        },
+        "normalized": "110******912",
+        "role": null
+      },
+      {
+        "mention_id": "transfer_0902:m2",
+        "doc_id": "transfer_0902",
+        "kind": "organization",
+        "name": {
+          "source_doc_id": "transfer_0902",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 524.0,
+            "y1": 324.0
+          },
+          "char_start": 5,
+          "char_end": 7,
+          "quote": "신한",
+          "value": "신한",
+          "confidence": 0.7472
+        },
+        "normalized": "신한은행",
+        "role": null
+      },
+      {
+        "mention_id": "transfer_0902:m3",
+        "doc_id": "transfer_0902",
+        "kind": "organization",
+        "name": {
+          "source_doc_id": "transfer_0902",
+          "page": 1,
+          "source_line": 6,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 340.0,
+            "x1": 128.0,
+            "y1": 384.0
+          },
+          "char_start": 0,
+          "char_end": 4,
+          "quote": "신한은행",
+          "value": "신한은행",
+          "confidence": 0.7005
+        },
+        "normalized": "신한은행",
+        "role": null
+      },
+      {
+        "mention_id": "statement_0905:m1",
+        "doc_id": "statement_0905",
+        "kind": "person",
+        "name": {
+          "source_doc_id": "statement_0905",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 194.0,
+            "y1": 144.0
+          },
+          "char_start": 4,
+          "char_end": 7,
+          "quote": "류시안",
+          "value": "류시안",
+          "confidence": 0.7238
+        },
+        "normalized": "류시안",
+        "role": "진술인"
+      },
+      {
+        "mention_id": "statement_0905:m2",
+        "doc_id": "statement_0905",
+        "kind": "person",
+        "name": {
+          "source_doc_id": "statement_0905",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 1052.0,
+            "y1": 204.0
+          },
+          "char_start": 16,
+          "char_end": 19,
+          "quote": "김*수",
+          "value": "김*수",
+          "confidence": 0.7238
+        },
+        "normalized": "김*수",
+        "role": "판매자"
+      },
+      {
+        "mention_id": "ecrm_0905:m1",
+        "doc_id": "ecrm_0905",
+        "kind": "receipt_number",
+        "name": {
+          "source_doc_id": "ecrm_0905",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 568.0,
+            "y1": 144.0
+          },
+          "char_start": 5,
+          "char_end": 24,
+          "quote": "ECRM-2026-0905-1188",
+          "value": "ECRM-2026-0905-1188",
+          "confidence": 0.7939
+        },
+        "normalized": "ECRM-2026-0905-1188",
+        "role": null
+      },
+      {
+        "mention_id": "ecrm_0905:m2",
+        "doc_id": "ecrm_0905",
+        "kind": "person",
+        "name": {
+          "source_doc_id": "ecrm_0905",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 194.0,
+            "y1": 324.0
+          },
+          "char_start": 4,
+          "char_end": 7,
+          "quote": "류시안",
+          "value": "류시안",
+          "confidence": 0.7472
+        },
+        "normalized": "류시안",
+        "role": "신고인"
+      },
+      {
+        "mention_id": "ecrm_0905:m3",
+        "doc_id": "ecrm_0905",
+        "kind": "organization",
+        "name": {
+          "source_doc_id": "ecrm_0905",
+          "page": 1,
+          "source_line": 6,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 340.0,
+            "x1": 260.0,
+            "y1": 384.0
+          },
+          "char_start": 0,
+          "char_end": 3,
+          "quote": "경찰청",
+          "value": "경찰청",
+          "confidence": 0.7005
+        },
+        "normalized": "경찰청",
+        "role": null
+      }
+    ],
+    "events": [
+      {
+        "event_id": "transfer_0902:e8",
+        "doc_id": "transfer_0902",
+        "stage": "transfer",
+        "action": {
+          "source_doc_id": "transfer_0902",
+          "page": 1,
+          "source_line": 1,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 150.0,
+            "y1": 84.0
+          },
+          "char_start": null,
+          "char_end": null,
+          "quote": "이체확인증",
+          "value": "이체확인증",
+          "confidence": 0.8873
+        },
+        "time": {
+          "source_doc_id": "transfer_0902",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 524.0,
+            "y1": 144.0
+          },
+          "char_start": 5,
+          "char_end": 22,
+          "quote": "2026. 9. 2. 13:40",
+          "value": {
+            "raw": "2026. 9. 2. 13:40",
+            "start": "2026-09-02T13:40:00",
+            "end": "2026-09-02T13:41:00",
+            "granularity": "minute",
+            "kind": "absolute",
+            "approximate": false,
+            "anchor": null,
+            "anchor_source": null,
+            "candidates": [],
+            "needs_confirmation": false,
+            "note": null
+          },
+          "confidence": 0.8873
+        },
+        "amount": {
+          "source_doc_id": "transfer_0902",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 326.0,
+            "y1": 204.0
+          },
+          "char_start": 5,
+          "char_end": 13,
+          "quote": "350,000원",
+          "value": 350000,
+          "confidence": 0.8873
+        },
+        "participant_mention_ids": [
+          "transfer_0902:m1",
+          "transfer_0902:m2",
+          "transfer_0902:m3"
+        ],
+        "evidence_level": "record",
+        "action_kind": null
+      },
+      {
+        "event_id": "statement_0905:e3",
+        "doc_id": "statement_0905",
+        "stage": "transfer",
+        "action": {
+          "source_doc_id": "statement_0905",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 1052.0,
+            "y1": 204.0
+          },
+          "char_start": 0,
+          "char_end": 46,
+          "quote": "2026. 9. 2. 판매자 김*수에게 게임기 대금 300,000원을 송금했습니다.",
+          "value": "2026. 9. 2. 판매자 김*수에게 게임기 대금 300,000원을 송금했습니다.",
+          "confidence": 0.7238
+        },
+        "time": {
+          "source_doc_id": "statement_0905",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 1052.0,
+            "y1": 204.0
+          },
+          "char_start": 0,
+          "char_end": 11,
+          "quote": "2026. 9. 2.",
+          "value": {
+            "raw": "2026. 9. 2.",
+            "start": "2026-09-02T00:00:00",
+            "end": "2026-09-03T00:00:00",
+            "granularity": "day",
+            "kind": "absolute",
+            "approximate": false,
+            "anchor": null,
+            "anchor_source": null,
+            "candidates": [],
+            "needs_confirmation": false,
+            "note": null
+          },
+          "confidence": 0.8595
+        },
+        "amount": {
+          "source_doc_id": "statement_0905",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 1052.0,
+            "y1": 204.0
+          },
+          "char_start": 27,
+          "char_end": 37,
+          "quote": "금 300,000원",
+          "value": 300000,
+          "confidence": 0.8142
+        },
+        "participant_mention_ids": [
+          "statement_0905:m2"
+        ],
+        "evidence_level": "statement",
+        "action_kind": null
+      },
+      {
+        "event_id": "ecrm_0905:e7",
+        "doc_id": "ecrm_0905",
+        "stage": "receipt",
+        "action": {
+          "source_doc_id": "ecrm_0905",
+          "page": 1,
+          "source_line": 1,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 40.0,
+            "x1": 304.0,
+            "y1": 84.0
+          },
+          "char_start": null,
+          "char_end": null,
+          "quote": "사이버범죄 신고 접수증",
+          "value": "사이버범죄 신고 접수증",
+          "confidence": 0.8873
+        },
+        "time": {
+          "source_doc_id": "ecrm_0905",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 524.0,
+            "y1": 204.0
+          },
+          "char_start": 5,
+          "char_end": 22,
+          "quote": "2026. 9. 5. 10:20",
+          "value": {
+            "raw": "2026. 9. 5. 10:20",
+            "start": "2026-09-05T10:20:00",
+            "end": "2026-09-05T10:21:00",
+            "granularity": "minute",
+            "kind": "absolute",
+            "approximate": false,
+            "anchor": null,
+            "anchor_source": null,
+            "candidates": [
+              {
+                "start": "2026-09-05T22:20:00",
+                "end": "2026-09-05T22:21:00",
+                "reason": "오전/오후 표기 없음"
+              }
+            ],
+            "needs_confirmation": false,
+            "note": null
+          },
+          "confidence": 0.8873
+        },
+        "amount": null,
+        "participant_mention_ids": [
+          "ecrm_0905:m1",
+          "ecrm_0905:m2",
+          "ecrm_0905:m3"
+        ],
+        "evidence_level": "record",
+        "action_kind": null
+      }
+    ],
+    "claims": [
+      {
+        "claim_id": "transfer_0902:c4",
+        "doc_id": "transfer_0902",
+        "speaker": "신한은행",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "transfer_0902:m2",
+        "content": {
+          "source_doc_id": "transfer_0902",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 524.0,
+            "y1": 144.0
+          },
+          "char_start": 0,
+          "char_end": 22,
+          "quote": "거래일시 2026. 9. 2. 13:40",
+          "value": "거래일시 2026. 9. 2. 13:40",
+          "confidence": 0.8406
+        },
+        "slot": "transfer_time",
+        "slot_value": "2026-09-02 13:40",
+        "slot_time": {
+          "raw": "2026. 9. 2. 13:40",
+          "start": "2026-09-02T13:40:00",
+          "end": "2026-09-02T13:41:00",
+          "granularity": "minute",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "value_is_speaker_self": false,
+        "subject": "350000",
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "transfer_0902:c5",
+        "doc_id": "transfer_0902",
+        "speaker": "신한은행",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "transfer_0902:m2",
+        "content": {
+          "source_doc_id": "transfer_0902",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 326.0,
+            "y1": 204.0
+          },
+          "char_start": 0,
+          "char_end": 13,
+          "quote": "이체금액 350,000원",
+          "value": "이체금액 350,000원",
+          "confidence": 0.8406
+        },
+        "slot": "transfer_amount",
+        "slot_value": "350000",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "transfer_0902:c6",
+        "doc_id": "transfer_0902",
+        "speaker": "신한은행",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "transfer_0902:m2",
+        "content": {
+          "source_doc_id": "transfer_0902",
+          "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 194.0,
+            "y1": 264.0
+          },
+          "char_start": 0,
+          "char_end": 7,
+          "quote": "받는분 김*수",
+          "value": "받는분 김*수",
+          "confidence": 0.8406
+        },
+        "slot": "account_holder",
+        "slot_value": "김*수",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": "110******912",
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "transfer_0902:c7",
+        "doc_id": "transfer_0902",
+        "speaker": "신한은행",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "transfer_0902:m2",
+        "content": {
+          "source_doc_id": "transfer_0902",
+          "page": 1,
+          "source_line": 5,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 280.0,
+            "x1": 524.0,
+            "y1": 324.0
+          },
+          "char_start": 0,
+          "char_end": 22,
+          "quote": "입금계좌 신한 110-***-***912",
+          "value": "입금계좌 신한 110-***-***912",
+          "confidence": 0.8406
+        },
+        "slot": "account_number",
+        "slot_value": "110******912",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": "deposit",
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "statement_0905:c4",
+        "doc_id": "statement_0905",
+        "speaker": "류시안",
+        "speaker_basis": "document_author",
+        "speaker_mention_id": "statement_0905:m1",
+        "content": {
+          "source_doc_id": "statement_0905",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 1052.0,
+            "y1": 204.0
+          },
+          "char_start": 0,
+          "char_end": 46,
+          "quote": "2026. 9. 2. 판매자 김*수에게 게임기 대금 300,000원을 송금했습니다.",
+          "value": "2026. 9. 2. 판매자 김*수에게 게임기 대금 300,000원을 송금했습니다.",
+          "confidence": 0.769
+        },
+        "slot": "transfer_amount",
+        "slot_value": "300000",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "statement"
+      },
+      {
+        "claim_id": "statement_0905:c5",
+        "doc_id": "statement_0905",
+        "speaker": "류시안",
+        "speaker_basis": "document_author",
+        "speaker_mention_id": "statement_0905:m1",
+        "content": {
+          "source_doc_id": "statement_0905",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 1052.0,
+            "y1": 204.0
+          },
+          "char_start": 0,
+          "char_end": 46,
+          "quote": "2026. 9. 2. 판매자 김*수에게 게임기 대금 300,000원을 송금했습니다.",
+          "value": "2026. 9. 2. 판매자 김*수에게 게임기 대금 300,000원을 송금했습니다.",
+          "confidence": 0.769
+        },
+        "slot": "transfer_time",
+        "slot_value": "2026-09-02",
+        "slot_time": {
+          "raw": "2026. 9. 2.",
+          "start": "2026-09-02T00:00:00",
+          "end": "2026-09-03T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "value_is_speaker_self": false,
+        "subject": "300000",
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "statement"
+      },
+      {
+        "claim_id": "ecrm_0905:c4",
+        "doc_id": "ecrm_0905",
+        "speaker": "경찰청",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "ecrm_0905:m3",
+        "content": {
+          "source_doc_id": "ecrm_0905",
+          "page": 1,
+          "source_line": 2,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 100.0,
+            "x1": 568.0,
+            "y1": 144.0
+          },
+          "char_start": 0,
+          "char_end": 24,
+          "quote": "접수번호 ECRM-2026-0905-1188",
+          "value": "접수번호 ECRM-2026-0905-1188",
+          "confidence": 0.8406
+        },
+        "slot": "receipt_number",
+        "slot_value": "ECRM-2026-0905-1188",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "ecrm_0905:c5",
+        "doc_id": "ecrm_0905",
+        "speaker": "경찰청",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "ecrm_0905:m3",
+        "content": {
+          "source_doc_id": "ecrm_0905",
+          "page": 1,
+          "source_line": 3,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 160.0,
+            "x1": 524.0,
+            "y1": 204.0
+          },
+          "char_start": 0,
+          "char_end": 22,
+          "quote": "접수일시 2026. 9. 5. 10:20",
+          "value": "접수일시 2026. 9. 5. 10:20",
+          "confidence": 0.8406
+        },
+        "slot": "receipt_time",
+        "slot_value": "2026-09-05 10:20",
+        "slot_time": {
+          "raw": "2026. 9. 5. 10:20",
+          "start": "2026-09-05T10:20:00",
+          "end": "2026-09-05T10:21:00",
+          "granularity": "minute",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [
+            {
+              "start": "2026-09-05T22:20:00",
+              "end": "2026-09-05T22:21:00",
+              "reason": "오전/오후 표기 없음"
+            }
+          ],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      },
+      {
+        "claim_id": "ecrm_0905:c6",
+        "doc_id": "ecrm_0905",
+        "speaker": "경찰청",
+        "speaker_basis": "document_issuer",
+        "speaker_mention_id": "ecrm_0905:m3",
+        "content": {
+          "source_doc_id": "ecrm_0905",
+          "page": 1,
+          "source_line": 4,
+          "source_line_end": null,
+          "source_bbox": {
+            "x0": 40.0,
+            "y0": 220.0,
+            "x1": 150.0,
+            "y1": 264.0
+          },
+          "char_start": 0,
+          "char_end": 5,
+          "quote": "죄명 사기",
+          "value": "죄명 사기",
+          "confidence": 0.8406
+        },
+        "slot": "offence",
+        "slot_value": "사기",
+        "slot_time": null,
+        "value_is_speaker_self": false,
+        "subject": null,
+        "polarity": "affirm",
+        "said_at": null,
+        "evidence_level": "record"
+      }
+    ],
+    "times": [
+      {
+        "source_doc_id": "transfer_0902",
+        "page": 1,
+        "source_line": 2,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 100.0,
+          "x1": 524.0,
+          "y1": 144.0
+        },
+        "char_start": 5,
+        "char_end": 22,
+        "quote": "2026. 9. 2. 13:40",
+        "value": {
+          "raw": "2026. 9. 2. 13:40",
+          "start": "2026-09-02T13:40:00",
+          "end": "2026-09-02T13:41:00",
+          "granularity": "minute",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8873
+      },
+      {
+        "source_doc_id": "statement_0905",
+        "page": 1,
+        "source_line": 3,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 160.0,
+          "x1": 1052.0,
+          "y1": 204.0
+        },
+        "char_start": 0,
+        "char_end": 11,
+        "quote": "2026. 9. 2.",
+        "value": {
+          "raw": "2026. 9. 2.",
+          "start": "2026-09-02T00:00:00",
+          "end": "2026-09-03T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8595
+      },
+      {
+        "source_doc_id": "ecrm_0905",
+        "page": 1,
+        "source_line": 3,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 160.0,
+          "x1": 524.0,
+          "y1": 204.0
+        },
+        "char_start": 5,
+        "char_end": 22,
+        "quote": "2026. 9. 5. 10:20",
+        "value": {
+          "raw": "2026. 9. 5. 10:20",
+          "start": "2026-09-05T10:20:00",
+          "end": "2026-09-05T10:21:00",
+          "granularity": "minute",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [
+            {
+              "start": "2026-09-05T22:20:00",
+              "end": "2026-09-05T22:21:00",
+              "reason": "오전/오후 표기 없음"
+            }
+          ],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8873
+      }
+    ],
+    "document_dates": {
+      "transfer_0902": {
+        "source_doc_id": "transfer_0902",
+        "page": 1,
+        "source_line": 2,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 100.0,
+          "x1": 524.0,
+          "y1": 144.0
+        },
+        "char_start": 5,
+        "char_end": 22,
+        "quote": "2026. 9. 2. 13:40",
+        "value": {
+          "raw": "2026. 9. 2. 13:40",
+          "start": "2026-09-02T13:40:00",
+          "end": "2026-09-02T13:41:00",
+          "granularity": "minute",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8873
+      },
+      "statement_0905": {
+        "source_doc_id": "statement_0905",
+        "page": 1,
+        "source_line": 3,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 160.0,
+          "x1": 1052.0,
+          "y1": 204.0
+        },
+        "char_start": 0,
+        "char_end": 11,
+        "quote": "2026. 9. 2.",
+        "value": {
+          "raw": "2026. 9. 2.",
+          "start": "2026-09-02T00:00:00",
+          "end": "2026-09-03T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8595
+      },
+      "ecrm_0905": {
+        "source_doc_id": "ecrm_0905",
+        "page": 1,
+        "source_line": 3,
+        "source_line_end": null,
+        "source_bbox": {
+          "x0": 40.0,
+          "y0": 160.0,
+          "x1": 524.0,
+          "y1": 204.0
+        },
+        "char_start": 5,
+        "char_end": 22,
+        "quote": "2026. 9. 5. 10:20",
+        "value": {
+          "raw": "2026. 9. 5. 10:20",
+          "start": "2026-09-05T10:20:00",
+          "end": "2026-09-05T10:21:00",
+          "granularity": "minute",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [
+            {
+              "start": "2026-09-05T22:20:00",
+              "end": "2026-09-05T22:21:00",
+              "reason": "오전/오후 표기 없음"
+            }
+          ],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "confidence": 0.8873
+      }
+    },
+    "clarifications": []
+  },
+  "timeline": {
+    "case_type": "used_goods_fraud",
+    "events": [
+      {
+        "timeline_event_id": "tl3",
+        "stage": "transfer",
+        "title": "300,000원 송금",
+        "time": {
+          "raw": "2026. 9. 2.",
+          "start": "2026-09-02T00:00:00",
+          "end": "2026-09-03T00:00:00",
+          "granularity": "day",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "time_unknown": false,
+        "amount": 300000,
+        "participant_entity_ids": [
+          "ent4"
+        ],
+        "event_ids": [
+          "statement_0905:e3"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "statement_0905",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 1052.0,
+              "y1": 204.0
+            },
+            "char_start": 0,
+            "char_end": 46,
+            "quote": "2026. 9. 2. 판매자 김*수에게 게임기 대금 300,000원을 송금했습니다."
+          },
+          {
+            "source_doc_id": "statement_0905",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 1052.0,
+              "y1": 204.0
+            },
+            "char_start": 27,
+            "char_end": 37,
+            "quote": "금 300,000원"
+          }
+        ],
+        "evidence_level": "statement",
+        "needs_confirmation": false,
+        "flags": [
+          "claim_only"
+        ]
+      },
+      {
+        "timeline_event_id": "tl1",
+        "stage": "transfer",
+        "title": "350,000원 송금",
+        "time": {
+          "raw": "2026. 9. 2. 13:40",
+          "start": "2026-09-02T13:40:00",
+          "end": "2026-09-02T13:41:00",
+          "granularity": "minute",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "time_unknown": false,
+        "amount": 350000,
+        "participant_entity_ids": [
+          "ent1",
+          "ent2"
+        ],
+        "event_ids": [
+          "transfer_0902:e8"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "transfer_0902",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 150.0,
+              "y1": 84.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": "이체확인증"
+          },
+          {
+            "source_doc_id": "transfer_0902",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 524.0,
+              "y1": 144.0
+            },
+            "char_start": 5,
+            "char_end": 22,
+            "quote": "2026. 9. 2. 13:40"
+          },
+          {
+            "source_doc_id": "transfer_0902",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 326.0,
+              "y1": 204.0
+            },
+            "char_start": 5,
+            "char_end": 13,
+            "quote": "350,000원"
+          }
+        ],
+        "evidence_level": "record",
+        "needs_confirmation": false,
+        "flags": []
+      },
+      {
+        "timeline_event_id": "tl2",
+        "stage": "receipt",
+        "title": "사이버범죄 신고 접수증",
+        "time": {
+          "raw": "2026. 9. 5. 10:20",
+          "start": "2026-09-05T10:20:00",
+          "end": "2026-09-05T10:21:00",
+          "granularity": "minute",
+          "kind": "absolute",
+          "approximate": false,
+          "anchor": null,
+          "anchor_source": null,
+          "candidates": [
+            {
+              "start": "2026-09-05T22:20:00",
+              "end": "2026-09-05T22:21:00",
+              "reason": "오전/오후 표기 없음"
+            }
+          ],
+          "needs_confirmation": false,
+          "note": null
+        },
+        "time_unknown": false,
+        "amount": null,
+        "participant_entity_ids": [
+          "ent3",
+          "ent5",
+          "ent6"
+        ],
+        "event_ids": [
+          "ecrm_0905:e7"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "ecrm_0905",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 304.0,
+              "y1": 84.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": "사이버범죄 신고 접수증"
+          },
+          {
+            "source_doc_id": "ecrm_0905",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 524.0,
+              "y1": 204.0
+            },
+            "char_start": 5,
+            "char_end": 22,
+            "quote": "2026. 9. 5. 10:20"
+          }
+        ],
+        "evidence_level": "record",
+        "needs_confirmation": false,
+        "flags": []
+      }
+    ],
+    "stages": [
+      {
+        "stage": "occurrence",
+        "label": "발생",
+        "state": "skipped",
+        "timeline_event_ids": [],
+        "evidence_level": null
+      },
+      {
+        "stage": "transfer",
+        "label": "송금",
+        "state": "done",
+        "timeline_event_ids": [
+          "tl3",
+          "tl1"
+        ],
+        "evidence_level": "record"
+      },
+      {
+        "stage": "report",
+        "label": "신고",
+        "state": "skipped",
+        "timeline_event_ids": [],
+        "evidence_level": null
+      },
+      {
+        "stage": "receipt",
+        "label": "접수",
+        "state": "current",
+        "timeline_event_ids": [
+          "tl2"
+        ],
+        "evidence_level": "record"
+      },
+      {
+        "stage": "investigation",
+        "label": "수사",
+        "state": "pending",
+        "timeline_event_ids": [],
+        "evidence_level": null
+      },
+      {
+        "stage": "outcome",
+        "label": "결과",
+        "state": "pending",
+        "timeline_event_ids": [],
+        "evidence_level": null
+      }
+    ],
+    "current_stage": "receipt",
+    "gaps": [
+      {
+        "start": "2026-09-03T00:00:00",
+        "end": "2026-09-05T10:20:00",
+        "hours": 58.3,
+        "before_event_id": "tl3",
+        "after_event_id": "tl2"
+      }
+    ],
+    "entities": [
+      {
+        "entity_id": "ent1",
+        "kind": "account",
+        "canonical_name": "110******912",
+        "aliases": [
+          "110-***-***912"
+        ],
+        "roles": [],
+        "mention_ids": [
+          "transfer_0902:m1"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "transfer_0902",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 524.0,
+              "y1": 324.0
+            },
+            "char_start": 8,
+            "char_end": 22,
+            "quote": "110-***-***912"
+          }
+        ],
+        "merge_confidence": 1.0,
+        "possible_same_as": []
+      },
+      {
+        "entity_id": "ent2",
+        "kind": "organization",
+        "canonical_name": "신한은행",
+        "aliases": [
+          "신한",
+          "신한은행"
+        ],
+        "roles": [],
+        "mention_ids": [
+          "transfer_0902:m2",
+          "transfer_0902:m3"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "transfer_0902",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 524.0,
+              "y1": 324.0
+            },
+            "char_start": 5,
+            "char_end": 7,
+            "quote": "신한"
+          },
+          {
+            "source_doc_id": "transfer_0902",
+            "page": 1,
+            "source_line": 6,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 340.0,
+              "x1": 128.0,
+              "y1": 384.0
+            },
+            "char_start": 0,
+            "char_end": 4,
+            "quote": "신한은행"
+          }
+        ],
+        "merge_confidence": 0.9,
+        "possible_same_as": []
+      },
+      {
+        "entity_id": "ent3",
+        "kind": "person",
+        "canonical_name": "류시안",
+        "aliases": [
+          "류시안"
+        ],
+        "roles": [
+          "신고인",
+          "진술인"
+        ],
+        "mention_ids": [
+          "statement_0905:m1",
+          "ecrm_0905:m2"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "statement_0905",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 194.0,
+              "y1": 144.0
+            },
+            "char_start": 4,
+            "char_end": 7,
+            "quote": "류시안"
+          },
+          {
+            "source_doc_id": "ecrm_0905",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 194.0,
+              "y1": 324.0
+            },
+            "char_start": 4,
+            "char_end": 7,
+            "quote": "류시안"
+          }
+        ],
+        "merge_confidence": 0.9,
+        "possible_same_as": []
+      },
+      {
+        "entity_id": "ent4",
+        "kind": "person",
+        "canonical_name": "김*수",
+        "aliases": [
+          "김*수"
+        ],
+        "roles": [
+          "판매자"
+        ],
+        "mention_ids": [
+          "statement_0905:m2"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "statement_0905",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 1052.0,
+              "y1": 204.0
+            },
+            "char_start": 16,
+            "char_end": 19,
+            "quote": "김*수"
+          }
+        ],
+        "merge_confidence": 1.0,
+        "possible_same_as": []
+      },
+      {
+        "entity_id": "ent5",
+        "kind": "receipt_number",
+        "canonical_name": "ECRM-2026-0905-1188",
+        "aliases": [
+          "ECRM-2026-0905-1188"
+        ],
+        "roles": [],
+        "mention_ids": [
+          "ecrm_0905:m1"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "ecrm_0905",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 568.0,
+              "y1": 144.0
+            },
+            "char_start": 5,
+            "char_end": 24,
+            "quote": "ECRM-2026-0905-1188"
+          }
+        ],
+        "merge_confidence": 1.0,
+        "possible_same_as": []
+      },
+      {
+        "entity_id": "ent6",
+        "kind": "organization",
+        "canonical_name": "경찰청",
+        "aliases": [
+          "경찰청"
+        ],
+        "roles": [],
+        "mention_ids": [
+          "ecrm_0905:m3"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "ecrm_0905",
+            "page": 1,
+            "source_line": 6,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 340.0,
+              "x1": 260.0,
+              "y1": 384.0
+            },
+            "char_start": 0,
+            "char_end": 3,
+            "quote": "경찰청"
+          }
+        ],
+        "merge_confidence": 1.0,
+        "possible_same_as": []
+      }
+    ],
+    "mention_to_entity": {
+      "transfer_0902:m1": "ent1",
+      "transfer_0902:m2": "ent2",
+      "transfer_0902:m3": "ent2",
+      "statement_0905:m1": "ent3",
+      "ecrm_0905:m2": "ent3",
+      "statement_0905:m2": "ent4",
+      "ecrm_0905:m1": "ent5",
+      "ecrm_0905:m3": "ent6"
+    }
+  },
+  "analysis": {
+    "case_id": "rule-07-모순확인",
+    "case_type": "used_goods_fraud",
+    "as_of": "2026-09-19",
+    "issues": [
+      {
+        "issue_id": "iss1",
+        "category": "inconsistency",
+        "condition": "conflicting",
+        "message": "송금 금액: 자료마다 다르게 적혀 있습니다 — ‘350,000원’(transfer_0902 · 3줄) / ‘300,000원’(statement_0905 · 3줄)",
+        "stage": "transfer",
+        "slot": "transfer_amount",
+        "sources": [
+          {
+            "source_doc_id": "transfer_0902",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 326.0,
+              "y1": 204.0
+            },
+            "char_start": 0,
+            "char_end": 13,
+            "quote": "이체금액 350,000원"
+          },
+          {
+            "source_doc_id": "statement_0905",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 1052.0,
+              "y1": 204.0
+            },
+            "char_start": 0,
+            "char_end": 46,
+            "quote": "2026. 9. 2. 판매자 김*수에게 게임기 대금 300,000원을 송금했습니다."
+          }
+        ],
+        "checked_doc_ids": [],
+        "related_claim_ids": [
+          "transfer_0902:c5",
+          "statement_0905:c4"
+        ],
+        "related_event_ids": [],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": {
+          "pair_id": "pair2",
+          "claim_a_id": "transfer_0902:c5",
+          "claim_b_id": "statement_0905:c4",
+          "slot": "transfer_amount",
+          "scores": {
+            "entailment": 0.0154,
+            "contradiction": 0.7152,
+            "neutral": 0.2694
+          },
+          "model_label": "contradiction",
+          "label": "contradiction",
+          "downgraded": false,
+          "reasons": [],
+          "model_name": "slot-rule-v1"
+        },
+        "trigger": {
+          "key": "used_goods_fraud/transfer/transfer_amount/conflicting",
+          "case_type": "used_goods_fraud",
+          "condition": "conflicting",
+          "stage": "transfer",
+          "slot": "transfer_amount",
+          "since": null,
+          "elapsed_days": null,
+          "evidence": [
+            {
+              "source_doc_id": "transfer_0902",
+              "page": 1,
+              "source_line": 3,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 160.0,
+                "x1": 326.0,
+                "y1": 204.0
+              },
+              "char_start": 0,
+              "char_end": 13,
+              "quote": "이체금액 350,000원"
+            },
+            {
+              "source_doc_id": "statement_0905",
+              "page": 1,
+              "source_line": 3,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 160.0,
+                "x1": 1052.0,
+                "y1": 204.0
+              },
+              "char_start": 0,
+              "char_end": 46,
+              "quote": "2026. 9. 2. 판매자 김*수에게 게임기 대금 300,000원을 송금했습니다."
+            }
+          ]
+        },
+        "priority": 10
+      },
+      {
+        "issue_id": "iss2",
+        "category": "missing",
+        "condition": "stage_stalled",
+        "message": "‘사이버범죄 신고 접수증’(2026-09-05 10:20) 이후 기관의 진행 기록이 없습니다 (14일 경과)",
+        "stage": "receipt",
+        "slot": null,
+        "sources": [
+          {
+            "source_doc_id": "ecrm_0905",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 304.0,
+              "y1": 84.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": "사이버범죄 신고 접수증"
+          }
+        ],
+        "checked_doc_ids": [
+          "transfer_0902",
+          "statement_0905",
+          "ecrm_0905"
+        ],
+        "related_claim_ids": [],
+        "related_event_ids": [
+          "tl2"
+        ],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": null,
+        "trigger": {
+          "key": "used_goods_fraud/receipt/stage/stage_stalled",
+          "case_type": "used_goods_fraud",
+          "condition": "stage_stalled",
+          "stage": "receipt",
+          "slot": null,
+          "since": "2026-09-05T10:20:00",
+          "elapsed_days": 14,
+          "evidence": [
+            {
+              "source_doc_id": "ecrm_0905",
+              "page": 1,
+              "source_line": 1,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 40.0,
+                "x1": 304.0,
+                "y1": 84.0
+              },
+              "char_start": null,
+              "char_end": null,
+              "quote": "사이버범죄 신고 접수증"
+            }
+          ]
+        },
+        "priority": 35
+      },
+      {
+        "issue_id": "iss3",
+        "category": "missing",
+        "condition": "missing",
+        "message": "담당 수사관: 올린 자료에서 찾지 못했습니다",
+        "stage": "investigation",
+        "slot": "investigator",
+        "sources": [],
+        "checked_doc_ids": [
+          "transfer_0902",
+          "statement_0905",
+          "ecrm_0905"
+        ],
+        "related_claim_ids": [],
+        "related_event_ids": [],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": null,
+        "trigger": {
+          "key": "used_goods_fraud/investigation/investigator/missing",
+          "case_type": "used_goods_fraud",
+          "condition": "missing",
+          "stage": "investigation",
+          "slot": "investigator",
+          "since": null,
+          "elapsed_days": null,
+          "evidence": []
+        },
+        "priority": 40
+      },
+      {
+        "issue_id": "iss4",
+        "category": "missing",
+        "condition": "missing",
+        "message": "사건번호: 올린 자료에서 찾지 못했습니다",
+        "stage": "investigation",
+        "slot": "case_number",
+        "sources": [],
+        "checked_doc_ids": [
+          "transfer_0902",
+          "statement_0905",
+          "ecrm_0905"
+        ],
+        "related_claim_ids": [],
+        "related_event_ids": [],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": null,
+        "trigger": {
+          "key": "used_goods_fraud/investigation/case_number/missing",
+          "case_type": "used_goods_fraud",
+          "condition": "missing",
+          "stage": "investigation",
+          "slot": "case_number",
+          "since": null,
+          "elapsed_days": null,
+          "evidence": []
+        },
+        "priority": 40
+      },
+      {
+        "issue_id": "iss5",
+        "category": "missing",
+        "condition": "stage_skipped",
+        "message": "‘발생’ 단계에 해당하는 자료가 없습니다",
+        "stage": "occurrence",
+        "slot": null,
+        "sources": [],
+        "checked_doc_ids": [
+          "transfer_0902",
+          "statement_0905",
+          "ecrm_0905"
+        ],
+        "related_claim_ids": [],
+        "related_event_ids": [],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": null,
+        "trigger": {
+          "key": "used_goods_fraud/occurrence/stage/stage_skipped",
+          "case_type": "used_goods_fraud",
+          "condition": "stage_skipped",
+          "stage": "occurrence",
+          "slot": null,
+          "since": null,
+          "elapsed_days": null,
+          "evidence": []
+        },
+        "priority": 45
+      },
+      {
+        "issue_id": "iss6",
+        "category": "missing",
+        "condition": "stage_skipped",
+        "message": "‘신고’ 단계에 해당하는 자료가 없습니다",
+        "stage": "report",
+        "slot": null,
+        "sources": [],
+        "checked_doc_ids": [
+          "transfer_0902",
+          "statement_0905",
+          "ecrm_0905"
+        ],
+        "related_claim_ids": [],
+        "related_event_ids": [],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": null,
+        "trigger": {
+          "key": "used_goods_fraud/report/stage/stage_skipped",
+          "case_type": "used_goods_fraud",
+          "condition": "stage_skipped",
+          "stage": "report",
+          "slot": null,
+          "since": null,
+          "elapsed_days": null,
+          "evidence": []
+        },
+        "priority": 45
+      },
+      {
+        "issue_id": "iss7",
+        "category": "missing",
+        "condition": "time_gap",
+        "message": "09/03 00:00 ~ 09/05 10:20 사이의 기록이 없습니다 (약 2일)",
+        "stage": null,
+        "slot": null,
+        "sources": [
+          {
+            "source_doc_id": "statement_0905",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 1052.0,
+              "y1": 204.0
+            },
+            "char_start": 0,
+            "char_end": 46,
+            "quote": "2026. 9. 2. 판매자 김*수에게 게임기 대금 300,000원을 송금했습니다."
+          },
+          {
+            "source_doc_id": "ecrm_0905",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 304.0,
+              "y1": 84.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": "사이버범죄 신고 접수증"
+          }
+        ],
+        "checked_doc_ids": [
+          "transfer_0902",
+          "statement_0905",
+          "ecrm_0905"
+        ],
+        "related_claim_ids": [],
+        "related_event_ids": [
+          "tl3",
+          "tl2"
+        ],
+        "related_entity_ids": [],
+        "clarification_request_ids": [],
+        "decision": null,
+        "trigger": {
+          "key": "used_goods_fraud/-/timeline/time_gap",
+          "case_type": "used_goods_fraud",
+          "condition": "time_gap",
+          "stage": null,
+          "slot": null,
+          "since": null,
+          "elapsed_days": null,
+          "evidence": [
+            {
+              "source_doc_id": "statement_0905",
+              "page": 1,
+              "source_line": 3,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 160.0,
+                "x1": 1052.0,
+                "y1": 204.0
+              },
+              "char_start": 0,
+              "char_end": 46,
+              "quote": "2026. 9. 2. 판매자 김*수에게 게임기 대금 300,000원을 송금했습니다."
+            },
+            {
+              "source_doc_id": "ecrm_0905",
+              "page": 1,
+              "source_line": 1,
+              "source_line_end": null,
+              "source_bbox": {
+                "x0": 40.0,
+                "y0": 40.0,
+                "x1": 304.0,
+                "y1": 84.0
+              },
+              "char_start": null,
+              "char_end": null,
+              "quote": "사이버범죄 신고 접수증"
+            }
+          ]
+        },
+        "priority": 70
+      }
+    ],
+    "slot_statuses": [
+      {
+        "slot": "transfer_amount",
+        "label": "송금 금액",
+        "stage": "transfer",
+        "required": true,
+        "state": "conflicting",
+        "value": null,
+        "claim_ids": [
+          "transfer_0902:c5",
+          "statement_0905:c4"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "transfer_0902",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 326.0,
+              "y1": 204.0
+            },
+            "char_start": 0,
+            "char_end": 13,
+            "quote": "이체금액 350,000원"
+          },
+          {
+            "source_doc_id": "statement_0905",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 1052.0,
+              "y1": 204.0
+            },
+            "char_start": 0,
+            "char_end": 46,
+            "quote": "2026. 9. 2. 판매자 김*수에게 게임기 대금 300,000원을 송금했습니다."
+          }
+        ]
+      },
+      {
+        "slot": "transfer_time",
+        "label": "송금 일시",
+        "stage": "transfer",
+        "required": true,
+        "state": "confirmed",
+        "value": "2026-09-02 13:40",
+        "claim_ids": [
+          "transfer_0902:c4"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "transfer_0902",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 524.0,
+              "y1": 144.0
+            },
+            "char_start": 0,
+            "char_end": 22,
+            "quote": "거래일시 2026. 9. 2. 13:40"
+          }
+        ]
+      },
+      {
+        "slot": "account_number",
+        "label": "입금 계좌번호",
+        "stage": "transfer",
+        "required": true,
+        "state": "confirmed",
+        "value": "110******912",
+        "claim_ids": [
+          "transfer_0902:c7"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "transfer_0902",
+            "page": 1,
+            "source_line": 5,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 280.0,
+              "x1": 524.0,
+              "y1": 324.0
+            },
+            "char_start": 0,
+            "char_end": 22,
+            "quote": "입금계좌 신한 110-***-***912"
+          }
+        ]
+      },
+      {
+        "slot": "account_holder",
+        "label": "입금 계좌 예금주 명의",
+        "stage": "transfer",
+        "required": true,
+        "state": "confirmed",
+        "value": "김*수",
+        "claim_ids": [
+          "transfer_0902:c6"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "transfer_0902",
+            "page": 1,
+            "source_line": 4,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 220.0,
+              "x1": 194.0,
+              "y1": 264.0
+            },
+            "char_start": 0,
+            "char_end": 7,
+            "quote": "받는분 김*수"
+          }
+        ]
+      },
+      {
+        "slot": "shipment_sent",
+        "label": "판매자 발송 여부",
+        "stage": "transfer",
+        "required": false,
+        "state": "missing",
+        "value": null,
+        "claim_ids": [],
+        "sources": []
+      },
+      {
+        "slot": "tracking_number",
+        "label": "송장번호",
+        "stage": "transfer",
+        "required": false,
+        "state": "missing",
+        "value": null,
+        "claim_ids": [],
+        "sources": []
+      },
+      {
+        "slot": "receipt_number",
+        "label": "신고 접수번호",
+        "stage": "receipt",
+        "required": true,
+        "state": "confirmed",
+        "value": "ECRM-2026-0905-1188",
+        "claim_ids": [
+          "ecrm_0905:c4"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "ecrm_0905",
+            "page": 1,
+            "source_line": 2,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 100.0,
+              "x1": 568.0,
+              "y1": 144.0
+            },
+            "char_start": 0,
+            "char_end": 24,
+            "quote": "접수번호 ECRM-2026-0905-1188"
+          }
+        ]
+      },
+      {
+        "slot": "receipt_time",
+        "label": "신고 접수 일시",
+        "stage": "receipt",
+        "required": true,
+        "state": "confirmed",
+        "value": "2026-09-05 10:20",
+        "claim_ids": [
+          "ecrm_0905:c5"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "ecrm_0905",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 524.0,
+              "y1": 204.0
+            },
+            "char_start": 0,
+            "char_end": 22,
+            "quote": "접수일시 2026. 9. 5. 10:20"
+          }
+        ]
+      },
+      {
+        "slot": "investigator",
+        "label": "담당 수사관",
+        "stage": "investigation",
+        "required": true,
+        "state": "missing",
+        "value": null,
+        "claim_ids": [],
+        "sources": []
+      },
+      {
+        "slot": "offence",
+        "label": "죄명",
+        "stage": "receipt",
+        "required": false,
+        "state": "confirmed",
+        "value": "사기",
+        "claim_ids": [
+          "ecrm_0905:c6"
+        ],
+        "sources": [
+          {
+            "source_doc_id": "ecrm_0905",
+            "page": 1,
+            "source_line": 4,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 220.0,
+              "x1": 150.0,
+              "y1": 264.0
+            },
+            "char_start": 0,
+            "char_end": 5,
+            "quote": "죄명 사기"
+          }
+        ]
+      },
+      {
+        "slot": "case_number",
+        "label": "사건번호",
+        "stage": "investigation",
+        "required": true,
+        "state": "missing",
+        "value": null,
+        "claim_ids": [],
+        "sources": []
+      }
+    ],
+    "pair_decisions": [
+      {
+        "pair_id": "pair1",
+        "claim_a_id": "transfer_0902:c4",
+        "claim_b_id": "statement_0905:c5",
+        "slot": "transfer_time",
+        "scores": {
+          "entailment": 0.6536,
+          "contradiction": 0.0154,
+          "neutral": 0.331
+        },
+        "model_label": "entailment",
+        "label": "neutral",
+        "downgraded": true,
+        "reasons": [
+          "일치 점수 0.65 < 기준 0.70"
+        ],
+        "model_name": "slot-rule-v1"
+      },
+      {
+        "pair_id": "pair2",
+        "claim_a_id": "transfer_0902:c5",
+        "claim_b_id": "statement_0905:c4",
+        "slot": "transfer_amount",
+        "scores": {
+          "entailment": 0.0154,
+          "contradiction": 0.7152,
+          "neutral": 0.2694
+        },
+        "model_label": "contradiction",
+        "label": "contradiction",
+        "downgraded": false,
+        "reasons": [],
+        "model_name": "slot-rule-v1"
+      }
+    ],
+    "action_triggers": [
+      {
+        "key": "used_goods_fraud/transfer/transfer_amount/conflicting",
+        "case_type": "used_goods_fraud",
+        "condition": "conflicting",
+        "stage": "transfer",
+        "slot": "transfer_amount",
+        "since": null,
+        "elapsed_days": null,
+        "evidence": [
+          {
+            "source_doc_id": "transfer_0902",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 326.0,
+              "y1": 204.0
+            },
+            "char_start": 0,
+            "char_end": 13,
+            "quote": "이체금액 350,000원"
+          },
+          {
+            "source_doc_id": "statement_0905",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 1052.0,
+              "y1": 204.0
+            },
+            "char_start": 0,
+            "char_end": 46,
+            "quote": "2026. 9. 2. 판매자 김*수에게 게임기 대금 300,000원을 송금했습니다."
+          }
+        ]
+      },
+      {
+        "key": "used_goods_fraud/receipt/stage/stage_stalled",
+        "case_type": "used_goods_fraud",
+        "condition": "stage_stalled",
+        "stage": "receipt",
+        "slot": null,
+        "since": "2026-09-05T10:20:00",
+        "elapsed_days": 14,
+        "evidence": [
+          {
+            "source_doc_id": "ecrm_0905",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 304.0,
+              "y1": 84.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": "사이버범죄 신고 접수증"
+          }
+        ]
+      },
+      {
+        "key": "used_goods_fraud/investigation/investigator/missing",
+        "case_type": "used_goods_fraud",
+        "condition": "missing",
+        "stage": "investigation",
+        "slot": "investigator",
+        "since": null,
+        "elapsed_days": null,
+        "evidence": []
+      },
+      {
+        "key": "used_goods_fraud/investigation/case_number/missing",
+        "case_type": "used_goods_fraud",
+        "condition": "missing",
+        "stage": "investigation",
+        "slot": "case_number",
+        "since": null,
+        "elapsed_days": null,
+        "evidence": []
+      },
+      {
+        "key": "used_goods_fraud/occurrence/stage/stage_skipped",
+        "case_type": "used_goods_fraud",
+        "condition": "stage_skipped",
+        "stage": "occurrence",
+        "slot": null,
+        "since": null,
+        "elapsed_days": null,
+        "evidence": []
+      },
+      {
+        "key": "used_goods_fraud/report/stage/stage_skipped",
+        "case_type": "used_goods_fraud",
+        "condition": "stage_skipped",
+        "stage": "report",
+        "slot": null,
+        "since": null,
+        "elapsed_days": null,
+        "evidence": []
+      },
+      {
+        "key": "used_goods_fraud/-/timeline/time_gap",
+        "case_type": "used_goods_fraud",
+        "condition": "time_gap",
+        "stage": null,
+        "slot": null,
+        "since": null,
+        "elapsed_days": null,
+        "evidence": [
+          {
+            "source_doc_id": "statement_0905",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 1052.0,
+              "y1": 204.0
+            },
+            "char_start": 0,
+            "char_end": 46,
+            "quote": "2026. 9. 2. 판매자 김*수에게 게임기 대금 300,000원을 송금했습니다."
+          },
+          {
+            "source_doc_id": "ecrm_0905",
+            "page": 1,
+            "source_line": 1,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 40.0,
+              "x1": 304.0,
+              "y1": 84.0
+            },
+            "char_start": null,
+            "char_end": null,
+            "quote": "사이버범죄 신고 접수증"
+          }
+        ]
+      }
+    ],
+    "case_card": {
+      "case_type": "used_goods_fraud",
+      "case_type_label": "중고거래 사기",
+      "requirements_status": "draft_unverified",
+      "stages": [
+        {
+          "stage": "occurrence",
+          "label": "발생",
+          "state": "skipped",
+          "timeline_event_ids": [],
+          "evidence_level": null
+        },
+        {
+          "stage": "transfer",
+          "label": "송금",
+          "state": "done",
+          "timeline_event_ids": [
+            "tl3",
+            "tl1"
+          ],
+          "evidence_level": "record"
+        },
+        {
+          "stage": "report",
+          "label": "신고",
+          "state": "skipped",
+          "timeline_event_ids": [],
+          "evidence_level": null
+        },
+        {
+          "stage": "receipt",
+          "label": "접수",
+          "state": "current",
+          "timeline_event_ids": [
+            "tl2"
+          ],
+          "evidence_level": "record"
+        },
+        {
+          "stage": "investigation",
+          "label": "수사",
+          "state": "pending",
+          "timeline_event_ids": [],
+          "evidence_level": null
+        },
+        {
+          "stage": "outcome",
+          "label": "결과",
+          "state": "pending",
+          "timeline_event_ids": [],
+          "evidence_level": null
+        }
+      ],
+      "current_stage": "receipt",
+      "evidence_doc_count": 3,
+      "needs_confirmation_count": 7,
+      "slots_done": 5,
+      "slots_total": 8,
+      "next_trigger": {
+        "key": "used_goods_fraud/transfer/transfer_amount/conflicting",
+        "case_type": "used_goods_fraud",
+        "condition": "conflicting",
+        "stage": "transfer",
+        "slot": "transfer_amount",
+        "since": null,
+        "elapsed_days": null,
+        "evidence": [
+          {
+            "source_doc_id": "transfer_0902",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 326.0,
+              "y1": 204.0
+            },
+            "char_start": 0,
+            "char_end": 13,
+            "quote": "이체금액 350,000원"
+          },
+          {
+            "source_doc_id": "statement_0905",
+            "page": 1,
+            "source_line": 3,
+            "source_line_end": null,
+            "source_bbox": {
+              "x0": 40.0,
+              "y0": 160.0,
+              "x1": 1052.0,
+              "y1": 204.0
+            },
+            "char_start": 0,
+            "char_end": 46,
+            "quote": "2026. 9. 2. 판매자 김*수에게 게임기 대금 300,000원을 송금했습니다."
+          }
+        ]
+      }
+    }
+  }
+}

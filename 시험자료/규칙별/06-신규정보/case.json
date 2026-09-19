@@ -1,0 +1,17 @@
+{
+  "case_id": "rule-06-신규정보",
+  "case_type": "investigation_suspended",
+  "as_of": "2026-09-19",
+  "documents": [
+    "complaint_2022.json",
+    "receipt_2022.json",
+    "notice_2024.json",
+    "statement_2026.json"
+  ],
+  "user_notes": [],
+  "expect": {
+    "rule": 6,
+    "action": "ACT-신규정보제출"
+  },
+  "why": "수사중지 결정 뒤에 나온 목격 진술 — 기록에 반영되지 않은 새 정보다"
+}

@@ -1,0 +1,65 @@
+{
+  "doc_id": "transfer_2026",
+  "file_name": "이체확인증_2026.jpg",
+  "captured_at": "2026-09-18T09:10:00",
+  "pages": [
+    {
+      "page_no": 1,
+      "width": 1080,
+      "height": 380,
+      "script_hint": "typewriter",
+      "lines": [
+        {
+          "text": "이체확인증",
+          "bbox": [
+            40,
+            40,
+            150,
+            84
+          ],
+          "confidence": 0.94
+        },
+        {
+          "text": "거래일시 2026. 7. 1. 14:20",
+          "bbox": [
+            40,
+            100,
+            524,
+            144
+          ],
+          "confidence": 0.94
+        },
+        {
+          "text": "이체금액 1,200,000원",
+          "bbox": [
+            40,
+            160,
+            370,
+            204
+          ],
+          "confidence": 0.94
+        },
+        {
+          "text": "받는분 박*진",
+          "bbox": [
+            40,
+            220,
+            194,
+            264
+          ],
+          "confidence": 0.94
+        },
+        {
+          "text": "우리은행",
+          "bbox": [
+            40,
+            280,
+            128,
+            324
+          ],
+          "confidence": 0.94
+        }
+      ]
+    }
+  ]
+}

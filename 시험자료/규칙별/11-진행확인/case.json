@@ -1,0 +1,18 @@
+{
+  "case_id": "rule-11-진행확인",
+  "case_type": "investigation_suspended",
+  "as_of": "2026-09-19",
+  "documents": [
+    "complaint_2026.json",
+    "receipt_2026.json",
+    "transfer_2026.json",
+    "progress_2026.json",
+    "forensic_2026.json"
+  ],
+  "user_notes": [],
+  "expect": {
+    "rule": 11,
+    "action": "ACT-진행확인"
+  },
+  "why": "경찰이 수사 중인 사건 — 결정 전이고 기한 · 정보 문제가 없다"
+}

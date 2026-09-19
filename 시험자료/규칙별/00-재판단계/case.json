@@ -1,0 +1,16 @@
+{
+  "case_id": "rule-00-재판단계",
+  "case_type": "investigation_suspended",
+  "as_of": "2026-09-19",
+  "documents": [
+    "complaint_2024.json",
+    "receipt_2024.json",
+    "disposition_2026.json"
+  ],
+  "user_notes": [],
+  "expect": {
+    "rule": 0,
+    "action": "ACT-재판단계"
+  },
+  "why": "검찰이 공소를 제기(구공판)한 사건 — 재판이 시작되어 수사기관에 낼 행동을 안내하면 안 된다"
+}

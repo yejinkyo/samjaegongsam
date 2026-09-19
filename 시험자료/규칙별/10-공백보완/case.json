@@ -1,0 +1,18 @@
+{
+  "case_id": "rule-10-공백보완",
+  "case_type": "investigation_suspended",
+  "as_of": "2026-09-19",
+  "documents": [
+    "complaint_2025.json",
+    "receipt_2025.json",
+    "transfer_2024.json",
+    "notice_2026.json",
+    "forensic_2025.json"
+  ],
+  "user_notes": [],
+  "expect": {
+    "rule": 10,
+    "action": "ACT-공백보완"
+  },
+  "why": "사건 발생과 고소 사이에 1년 넘는 기록 공백이 있다 — 다른 문제는 없다"
+}

@@ -1,0 +1,15 @@
+{
+  "case_id": "rule-09-근거보완",
+  "case_type": "investigation_suspended",
+  "as_of": "2026-09-19",
+  "documents": [
+    "complaint_2026.json",
+    "receipt_2026.json"
+  ],
+  "user_notes": [],
+  "expect": {
+    "rule": 9,
+    "action": "ACT-근거보완"
+  },
+  "why": "결정이 나지 않은 사건인데 피해 날짜가 고소장(본인 말)에만 있다 — 근거 자료가 없다"
+}

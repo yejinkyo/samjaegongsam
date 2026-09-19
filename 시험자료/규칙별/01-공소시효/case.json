@@ -1,0 +1,16 @@
+{
+  "case_id": "rule-01-공소시효",
+  "case_type": "investigation_suspended",
+  "as_of": "2026-09-19",
+  "documents": [
+    "complaint_2016.json",
+    "receipt_2016.json",
+    "notice_2017.json"
+  ],
+  "user_notes": [],
+  "expect": {
+    "rule": 1,
+    "action": "ACT-공소시효"
+  },
+  "why": "2016년 사기 — 공소시효(10년) 만료가 며칠 남지 않았다"
+}

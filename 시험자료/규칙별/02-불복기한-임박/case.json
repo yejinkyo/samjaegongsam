@@ -1,0 +1,16 @@
+{
+  "case_id": "rule-02-불복기한-임박",
+  "case_type": "investigation_suspended",
+  "as_of": "2026-09-19",
+  "documents": [
+    "complaint_2025.json",
+    "receipt_2025.json",
+    "notice_2026.json"
+  ],
+  "user_notes": [],
+  "expect": {
+    "rule": 2,
+    "action": "ACT-불복기한"
+  },
+  "why": "경찰의 수사중지 결정을 받은 지 25일 — 이의제기 30일 기한이 5일 남았다"
+}

@@ -1,0 +1,55 @@
+{
+  "doc_id": "statement_2026",
+  "file_name": "진술서_2026.jpg",
+  "captured_at": "2026-09-18T09:30:00",
+  "pages": [
+    {
+      "page_no": 1,
+      "width": 1080,
+      "height": 320,
+      "script_hint": "handwritten",
+      "lines": [
+        {
+          "text": "진 술 서",
+          "bbox": [
+            40,
+            40,
+            150,
+            84
+          ],
+          "confidence": 0.94
+        },
+        {
+          "text": "진술인 윤채원",
+          "bbox": [
+            40,
+            100,
+            194,
+            144
+          ],
+          "confidence": 0.94
+        },
+        {
+          "text": "2026. 7. 2. ○○시 버스터미널 앞에서 이준혁을 목격하였습니다.",
+          "bbox": [
+            40,
+            160,
+            898,
+            204
+          ],
+          "confidence": 0.94
+        },
+        {
+          "text": "당시 흰색 승용차를 타고 있었습니다.",
+          "bbox": [
+            40,
+            220,
+            480,
+            264
+          ],
+          "confidence": 0.94
+        }
+      ]
+    }
+  ]
+}
