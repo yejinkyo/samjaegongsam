@@ -5990,6 +5990,7 @@ window.TARAE_CASES = [
         "next_key": "ACT-재판단계",
         "deadlines": []
       }
-    }
+    },
+    "guide": true
   }
 ];

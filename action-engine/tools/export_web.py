@@ -892,10 +892,11 @@ def build_view(case_id: str, title: str, result: dict[str, Any]) -> dict[str, An
     }
 
 
-def _extra() -> list[tuple[str, str, Path, bool]]:
+def _extra() -> list[tuple[str, str, Path, bool, bool]]:
     """직접 만든 사건 목록. 파일이 없으면 빈 목록 — 지금까지와 똑같이 돈다.
 
-    ``"first": true`` 인 사건은 목록 맨 앞에 둔다(시연 때 처음 보이는 사건)."""
+    ``"first": true`` 인 사건은 목록 맨 앞에 둔다(시연 때 처음 보이는 사건).
+    ``"guide": true`` 인 사건은 화면 위에 '둘러보기 안내' 띠를 단다."""
     if not EXTRA_CASES.exists():
         return []
     rows = json.loads(EXTRA_CASES.read_text(encoding="utf-8"))
@@ -906,7 +907,7 @@ def _extra() -> list[tuple[str, str, Path, bool]]:
             path = ROOT / path
         if not path.exists():
             raise SystemExit(f"{EXTRA_CASES.name}: {row['result']} 를 찾지 못했습니다 — 엔진을 먼저 돌리세요")
-        out.append((row["id"], row["title"], path, bool(row.get("first"))))
+        out.append((row["id"], row["title"], path, bool(row.get("first")), bool(row.get("guide"))))
     return out
 
 
@@ -915,8 +916,11 @@ def build_all() -> list[dict[str, Any]]:
     for case_id, title in CASES:
         result = json.loads((FIXTURES / f"{case_id}.json").read_text(encoding="utf-8"))
         views.append(build_view(case_id, title, result))
-    for case_id, title, path, pinned in _extra():
-        (first if pinned else views).append(build_view(case_id, title, json.loads(path.read_text(encoding="utf-8"))))
+    for case_id, title, path, pinned, guide in _extra():
+        view = build_view(case_id, title, json.loads(path.read_text(encoding="utf-8")))
+        if guide:
+            view["guide"] = True
+        (first if pinned else views).append(view)
     return first + views
 
 

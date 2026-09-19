@@ -1215,3 +1215,55 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .tl__gap { margin-left: 0; margin-right: 12px; }
   .tl__gap, .tl__add { padding-left: 14px; }
 }
+
+/* 둘러보기 안내 — 시연 사건 위 번호 띠 (app.js 의 guideBand) */
+.guide {
+  display: flex; flex-direction: column; gap: 12px;
+  padding: 16px 20px; border-radius: 16px;
+  background: var(--bg-brand-soft); border: 1px solid var(--border-default);
+}
+.guide__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.guide__lead { color: var(--brand-strong); }
+.guide__close {
+  width: 32px; height: 32px; border: 0; border-radius: 999px; background: transparent;
+  color: var(--text-secondary); font-size: 16px; cursor: pointer;
+}
+.guide__close:hover { background: var(--bg-surface); }
+.guide__steps {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px;
+}
+.guide__step {
+  width: 100%; height: 100%; display: flex; align-items: flex-start; gap: 10px;
+  padding: 12px 14px; border-radius: 12px; text-align: left; cursor: pointer;
+  background: var(--bg-surface); border: 1px solid var(--border-default); color: var(--text-primary);
+  font: inherit; transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.guide__step:hover { border-color: var(--brand-primary); transform: translateY(-1px); }
+.guide__step:focus-visible { outline: 2px solid var(--brand-primary); outline-offset: 2px; }
+.guide__num {
+  flex: none; width: 24px; height: 24px; border-radius: 999px; display: grid; place-items: center;
+  background: var(--brand-primary); color: var(--text-on-brand); font: 700 13px/1 var(--font);
+}
+.guide__step--seen .guide__num { background: var(--bg-surface); color: var(--brand-primary); box-shadow: inset 0 0 0 2px var(--brand-primary); }
+.guide__body { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.guide__text { color: var(--text-secondary); }
+/* 안내가 가리킨 자리 — 잠깐 테두리를 빛낸다 */
+.guide-spot { animation: guide-spot 2.6s ease; border-radius: 12px; }
+@keyframes guide-spot {
+  0%, 70% { box-shadow: 0 0 0 3px var(--brand-primary), 0 0 0 9px rgba(124, 92, 255, 0.22); }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+@media (max-width: 900px) {
+  .guide__steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 520px) {
+  .guide { padding: 14px 16px; }
+  .guide__steps { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .guide__step { transition: none; }
+  .guide__step:hover { transform: none; }
+  .guide-spot { animation: none; box-shadow: 0 0 0 3px var(--brand-primary); }
+}
+
