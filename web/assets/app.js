@@ -777,7 +777,6 @@
     ["mine", "내가 적음"],
     ["submit", "내가 낸 것"],
     ["reply", "받은 회신"],
-    ["next", "다음 행동"],
   ];
 
   /** 그 줄이 어떤 상태인지 — 팝업 제목 옆에 붙는 말. */
@@ -929,8 +928,8 @@
     return same ? formatDay(c, iso) : iso.replace(/-/g, ".");
   }
 
-  /** 타임라인에 올릴 줄 — 자료에서 읽은 줄에 내가 낸 것 · 받은 답을 날짜 순서대로 끼우고,
-   *  맨 끝에 지금 추천하는 다음 행동을 단다. 내고 답을 받을 때마다 끝 줄이 다음 단계로 바뀐다. */
+  /** 타임라인에 올릴 줄 — 자료에서 읽은 줄에 내가 낸 것 · 받은 답을 날짜 순서대로 끼운다.
+   *  타임라인은 이미 있었던 일만 적는다. 앞으로 할 일은 '다음 행동' 카드의 몫이다. */
   function timelineRows(c) {
     var extra = [];
     subsOf(c.id).forEach(function (s) {
@@ -959,11 +958,6 @@
       out.push(row);
     });
     while (i < extra.length) out.push(extra[i++]);
-
-    var next = activeAction(c);
-    // 무엇을 낼지까지 적는다 — '불복 절차'만으로는 이의제기서인지 항고장인지 재정신청서인지 모른다
-    if (next) out.push({ type: "next", kind: "next", title: next.label + (next.form_name ? " · " + next.form_name : ""),
-                         due: next.due, why: next.why });
     return out;
   }
 
@@ -971,11 +965,11 @@
     var wrap = h("div", { class: "card tl" });
     var rows = timelineRows(c);
     var lastEvent = -1;
-    rows.forEach(function (row, i) { if (row.type === "event" || row.type === "next") lastEvent = i; });
+    rows.forEach(function (row, i) { if (row.type === "event") lastEvent = i; });
 
     var used = {};
     rows.forEach(function (row) {
-      if (row.type !== "event" && row.type !== "next") return;
+      if (row.type !== "event") return;
       used[row.conflict ? "conflict" : row.kind] = true;
     });
     wrap.appendChild(h("div", { class: "tl__legend" }, KIND_LEGEND.filter(function (k) { return used[k[0]]; }).map(function (k) {
@@ -991,23 +985,6 @@
         wrap.appendChild(h("div", { class: "tl__gap" }, [
           h("span", { class: "t-label", text: row.range }),
           h("span", { class: "t-body-s", text: row.text }),
-        ]));
-        return;
-      }
-
-      if (row.type === "next") {
-        // 아직 일어나지 않은 줄 — 날짜 대신 '다음'과 남은 날을 적는다
-        wrap.appendChild(h("div", { class: "tl__row tl__row--next" + (i === lastEvent ? " tl__row--last" : "") }, [
-          h("div", { class: "tl__when" }, [
-            h("span", { class: "tl__day t-label", text: "다음" }),
-            h("span", { class: "tl__time t-caption", text: row.due ? row.due.label : "" }),
-          ]),
-          h("div", { class: "tl__rail", "aria-hidden": "true" }, [
-            h("span", { class: "tl__dot tl__dot--next" }),
-            h("span", { class: "tl__line" }),
-          ]),
-          h("p", { class: "tl__title", title: row.why || row.title },
-            [h("span", { class: "tl__text", text: "추천 · " + row.title })]),
         ]));
         return;
       }
@@ -1561,6 +1538,22 @@
     return button;
   }
 
+  /** 카드 제목 아래 한 줄 — 무엇을 · 언제까지, 그리고 받은 답으로 바뀐 추천이면 어느 답 때문인지.
+   *  '불복 절차'만으로는 이의제기서인지 항고장인지 재정신청서인지 모른다. */
+  function nextActionSub(c, next) {
+    var parts = [];
+    if (next.form_name) parts.push(next.form_name);
+    if (next.due && next.due.text) parts.push(next.due.text);
+    var answered = latestAnswer(c);
+    var lines = [];
+    if (parts.length) lines.push(h("p", { class: "na__sub t-body-s", text: parts.join(" · ") }));
+    if (answered && outcomeOf(c, answered)) {
+      lines.push(h("p", { class: "na__basis t-caption", text: dotDay(answered.response.received_at) + "에 받은 '"
+        + answered.response.decision_type + "' 회신으로 다시 고른 행동이에요" }));
+    }
+    return lines.length ? h("div", { class: "na__subs" }, lines) : null;
+  }
+
   function nextActionCard(c, refresh) {
     var next = activeAction(c);
     if (!next) return null;
@@ -1631,6 +1624,7 @@
           : next.unverified ? h("span", { class: "t-caption", text: "검수 전 안내" }) : null,
       ]),
       h("h2", { id: "na-title", class: "na__title", text: next.label }),
+      nextActionSub(c, next),
       h("div", { class: "na__buttons" }, [more]),
       draftButton(c, next),
     ]);
