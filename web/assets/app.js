@@ -1913,7 +1913,7 @@
     var close = h("button", { type: "button", class: "guide__close", "aria-label": "안내 닫기", text: "✕" });
     var band = h("section", { class: "guide", "aria-label": "둘러보기 안내" }, [
       h("div", { class: "guide__head" }, [
-        h("p", { class: "guide__lead t-body-m-strong", text: "처음이라면 이 순서로 둘러보세요" }),
+        h("p", { class: "guide__lead t-body-m-strong", text: "[가이드라인] 이 순서로 둘러보세요 — 누르면 확인할 수 있어요" }),
         close,
       ]),
       h("ol", { class: "guide__steps" }, GUIDE_STEPS.map(function (step, i) {
