@@ -1886,6 +1886,8 @@
       } },
     { title: "지금 할 일", text: "지금 할 수 있는 일을 보여 줘요",
       find: function () { return document.querySelector(".next-action"); } },
+    { title: "서류 초안", text: "자료에 적힌 것만 모아 낼 서류의 초안을 만들어요",
+      find: function () { return document.querySelector(".na__draft"); } },
   ];
 
   function guideClosed() {
