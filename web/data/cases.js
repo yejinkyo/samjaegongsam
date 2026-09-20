@@ -525,7 +525,7 @@ window.TARAE_CASES = [
       {
         "slot": "담당 수사관",
         "value": "한상우",
-        "state": "낡았을 수 있음",
+        "state": "오래됨",
         "severity": "unverified",
         "said": [
           {
