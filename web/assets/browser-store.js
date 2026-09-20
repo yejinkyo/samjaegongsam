@@ -47,7 +47,7 @@
   function openDb() {
     if (!dbPromise) {
       dbPromise = new Promise(function (resolve, reject) {
-        if (!window.indexedDB) return reject(fail("이 브라우저는 사건을 저장할 수 없어요(IndexedDB 없음)."));
+        if (!window.indexedDB) return reject(fail("이 브라우저는 사건을 저장할 수 없어요."));
         var req = indexedDB.open(DB_NAME, 1);
         req.onupgradeneeded = function () { req.result.createObjectStore(STORE, { keyPath: "id" }); };
         req.onsuccess = function () { resolve(req.result); };
@@ -287,7 +287,7 @@
     }, Promise.resolve()).then(function () {
       progressListener = null;
       if (!rec.documents.length && !rec.notes.length) throw fail("올린 자료가 없어요. 사진이나 메모를 하나 이상 더해 주세요.");
-      if (onProgress) onProgress("두 엔진이 자료를 정리하고 있어요…");
+      if (onProgress) onProgress("자료를 정리하고 있어요…");
       return rec;
     }, function (err) {
       progressListener = null;
