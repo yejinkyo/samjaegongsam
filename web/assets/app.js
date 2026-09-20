@@ -278,6 +278,12 @@
   function toneOf(c) {
     return TONES[c.type] || 3;   // 아직 색을 정하지 않은 유형은 가장 옅은 색으로 둔다
   }
+
+  /* 시연용으로 지어낸 사건인지. 화면에 적어 두지 않으면 실제 사건으로 읽힌다 —
+     실종 사건은 특히 그렇다. 등록한 사건과 섞여 있으므로 카드와 상세 양쪽에 적는다. */
+  function isSample(c) {
+    return /^demo_/.test(c.id || "");
+  }
   function visibleIssues(c) {
     return (c.issues || []).filter(function (g) {
       return g.label !== "빠진 정보" && g.label !== "읽히지 않은 부분";
@@ -298,6 +304,7 @@
       h("div", { class: "folder__body" }, [
         // 기한은 놓치면 되돌릴 수 없어서 마우스를 올리기 전에도 보이게 둔다
         due ? h("span", { class: "folder__due t-label", text: due.label }) : null,
+        isSample(c) ? h("span", { class: "folder__sample t-label", text: "가상 사건" }) : null,
         h("p", { class: "folder__title t-title", text: c.title }),
         h("p", { class: "folder__status t-body-l", text: caseStatus(c) }),
         h("div", { class: "folder__peek" }, [
@@ -2091,6 +2098,13 @@
       if (first.getAttribute("aria-selected") !== "true") first.click();
     }
 
+    // 가상 사건이라는 말은 서비스 원칙 문구와 섞지 않는다 — 섞으면 둘 다 흘려 읽는다
+    if (isSample(c)) {
+      root.appendChild(h("div", { class: "sample-band" }, [
+        h("span", { class: "sample-band__mark t-label", text: "가상 사건" }),
+        h("p", { class: "t-body-s", text: "화면을 보여 주려고 지어낸 사건이에요. 실제 사건 · 인물이 아닙니다." }),
+      ]));
+    }
     root.appendChild(h("div", { class: "disclaimer" }, [
       icon("info", 18),
       h("p", { class: "t-body-s c-secondary", text: "타래는 범인이나 사건의 진실을 판단하지 않습니다." }),
