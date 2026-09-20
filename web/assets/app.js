@@ -1888,6 +1888,8 @@
       find: function () { return document.querySelector(".next-action"); } },
     { title: "서류 초안", text: "자료에 적힌 것만 모아 낼 서류의 초안을 만들어요",
       find: function () { return document.querySelector(".na__draft"); } },
+    { title: "도우미 챗봇", text: "사건을 보면서 바로 물어볼 수 있어요", chat: true,
+      find: function () { return document.querySelector(".chat__fab"); } },
   ];
 
   function guideClosed() {
@@ -1899,6 +1901,11 @@
 
     function spot(step) {
       showTimeline();
+      // 챗봇 칸은 대화창을 열어 준다 — 버튼만 빛나면 무엇이 열리는지 모른다
+      if (step.chat) {
+        var fab = document.querySelector(".chat__fab");
+        if (fab && fab.getAttribute("aria-expanded") !== "true") fab.click();
+      }
       if (step.issues) {
         var toggle = document.querySelector(".issues__toggle");
         if (toggle && toggle.getAttribute("aria-expanded") !== "true") toggle.click();
@@ -1961,16 +1968,7 @@
     return svg;
   }
 
-  function chatSuggestions(c) {
-    var out = [];
-    var next = activeAction(c);
-    // 사건마다 행동 이름이 달라 조사가 어긋난다 — 이름을 넣지 않고 묻는다
-    if (next) out.push("지금 할 일이 왜 이것인가요?");
-    if (visibleIssues(c).some(function (g) { return g.label === "자료 간 모순"; })) out.push("자료끼리 어긋난 곳이 어디인가요?");
-    if ((c.timeline || []).some(function (row) { return row.type === "gap"; })) out.push("기록이 비어 있는 기간은 왜 중요한가요?");
-    out.push("이 사건에 더 필요한 자료가 뭔가요?");
-    return out.slice(0, 3);
-  }
+  var CHAT_SUGGESTIONS = ["지금 내가 뭘 해야할까?", "자료에서 이상한 부분 있어?", "그 다음으로는 뭘 해야해?"];
 
   function chatDock(c) {
     var log = h("div", { class: "chat__log", role: "log", "aria-live": "polite" });
@@ -1988,8 +1986,7 @@
       input.value = "";
       log.appendChild(bubble("me", question));
       // 답을 지어내지 않는다 — 아직 준비 중이라고만 적고, 지금 쓸 수 있는 자리를 알려 준다
-      log.appendChild(bubble("bot", "아직 답변은 준비 중이에요. 지금은 화면만 있어요."));
-      log.appendChild(bubble("bot", "대신 ‘전문가에게 물어볼 질문’에서 상담에 가져갈 질문을 뽑을 수 있어요."));
+      log.appendChild(bubble("bot", "답변 기능은 준비 중이에요."));
       log.scrollTop = log.scrollHeight;
     }
 
@@ -1997,9 +1994,9 @@
     input.addEventListener("keydown", function (e) { if (e.key === "Enter") ask(); });
 
     log.appendChild(bubble("bot", "‘" + c.title + "’ 사건을 보고 있어요. 궁금한 것을 물어보세요."));
-    log.appendChild(bubble("bot", "답변 기능은 준비 중이에요. 지금은 화면만 보여 드려요."));
+    log.appendChild(bubble("bot", "답변 기능은 준비 중이에요."));
 
-    var chips = h("div", { class: "chat__chips" }, chatSuggestions(c).map(function (q) {
+    var chips = h("div", { class: "chat__chips" }, CHAT_SUGGESTIONS.map(function (q) {
       var chip = h("button", { type: "button", class: "chat__chip t-caption", text: q });
       chip.addEventListener("click", function () { ask(q); });
       return chip;
