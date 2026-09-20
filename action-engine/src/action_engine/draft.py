@@ -181,12 +181,12 @@ def build_draft(result: dict[str, Any], card: CaseCardOut, action: str | None = 
         DraftSection(
             heading="사건 경위",
             lines=lines,
-            note="자료에 적힌 날짜와 문구를 시간순으로 옮긴 것입니다. 문장을 다듬어 쓰세요.",
+            note="첨부하신 자료를 기반으로 정리했습니다.",
         ),
         # 판단이 들어가는 칸 — 이의신청·항고는 '이의 사유', 자료 제출은 '요청 사항'. 제목과 안내는 지식베이스가 정한다
         DraftSection(
             heading=check.reason_heading or "이의 사유",
-            note=check.reason_note or "타래는 이 칸을 대신 쓰지 않습니다. 왜 결정에 동의할 수 없는지는 직접 적어 주세요.",
+            note=check.reason_note or "자세한 사유는 직접 적어 주세요.",
         ),
     ]
 

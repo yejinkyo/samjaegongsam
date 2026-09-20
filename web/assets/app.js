@@ -240,8 +240,7 @@
     var account = dropdown(avatar, [
       { label: "내 정보", onClick: function () {
         openModal("내 정보", h("div", { class: "help" }, [
-          h("p", { class: "help__text", text: me && me.name ? "아이디 · " + me.name : "데모 화면을 보고 있어요." }),
-          h("p", { class: "help__text", text: "지금은 화면만 있는 데모예요. 실제 계정이 만들어지지는 않습니다." }),
+          h("p", { class: "help__text", text: "데모 화면입니다." }),
         ]));
       } },
       logout,
@@ -451,8 +450,8 @@
   /** 자료가 없어도 기억나는 내용을 적어 둘 수 있게 한다. */
   function openMemoModal(onAdd) {
     var what = h("textarea", { id: "memo-what", class: "field__input field__input--area", rows: "5", placeholder: "예) 6월 2일 저녁에 판매자에게 전화했지만 받지 않았습니다" });
-    var hint = h("p", { class: "field__hint", text: "날짜가 기억나면 함께 적어 주세요. 정리를 시작하면 시간축에 같이 올립니다." });
-    var save = h("button", { type: "button", class: "modal__save", text: "자료에 더하기" });
+    var hint = h("p", { class: "field__hint", text: "날짜가 기억나면 함께 적어 주세요." });
+    var save = h("button", { type: "button", class: "modal__save", text: "추가하기" });
 
     save.addEventListener("click", function () {
       var text = what.value.trim();
@@ -518,7 +517,7 @@
       list.textContent = "";
       count.textContent = String(items.length);
       if (!items.length) {
-        list.appendChild(h("p", { class: "empty-files t-body-s c-tertiary", text: "아직 올린 자료가 없어요. 사진 한 장부터 시작해도 괜찮아요." }));
+        list.appendChild(h("p", { class: "empty-files t-body-s c-tertiary", text: "아직 올린 자료가 없어요. 사진 한 장만 올려도 돼요." }));
         return;
       }
       items.forEach(function (it, i) {
@@ -580,12 +579,12 @@
     }
     url.addEventListener("keydown", function (e) { if (e.key === "Enter") addUrl(); });
 
-    var memoButton = h("button", { type: "button", class: "add-event t-body-m-strong c-brand", text: "+  기억나는 내용을 직접 적기 (선택)", style: "padding:0" });
+    var memoButton = h("button", { type: "button", class: "add-event t-body-m-strong c-brand", text: "+  기억나는 내용 직접 기록하기 (선택)", style: "padding:0" });
     memoButton.addEventListener("click", function () {
       openMemoModal(function (memo) { memo.note = memo.text; items.push(memo); drawList(); });
     });
 
-    var title = h("input", { id: "case-title", type: "text", class: "field__input", maxlength: "60", placeholder: "비워 두면 유형과 등록한 날짜로 이름을 붙여요" });
+    var title = h("input", { id: "case-title", type: "text", class: "field__input", maxlength: "60", placeholder: "비워두면 유형과 등록한 날짜로 등록됩니다" });
 
     var start = h("button", { type: "button", class: "btn btn--primary t-body-m-strong", text: "정리 시작하기" });
     start.addEventListener("click", function () {
@@ -644,7 +643,6 @@
         ]),
         h("div", { class: "list-head" }, [h("span", { class: "t-label c-secondary", text: "올린 자료" }), count]),
         list,
-        h("p", { class: "note t-body-s c-secondary", text: "날짜가 정리의 뼈대가 됩니다. 서류에 날짜가 없으면 사진을 찍은 날을 기준으로 삼아요." }),
         memoButton,
       ]),
       h("div", { class: "cta" }, [
@@ -1276,7 +1274,7 @@
     var hint = h("p", { class: "field__hint", text: "" });
 
     var receipt = null;
-    var picked = h("p", { class: "field__hint", text: "접수증이 없으면 낸 사실이 본인 말로만 남습니다." });
+    var picked = h("p", { class: "field__hint", text: "접수증이 없으면 낸 사실이 정확하지 않아요." });
     var pick = h("button", { type: "button", class: "sub__btn t-body-s", text: "접수증 고르기" });
     pick.addEventListener("click", function () {
       pickFiles(function (files) {
@@ -1312,7 +1310,7 @@
     if (action.form_name) rows.push(h("p", { class: "t-body-s c-secondary", text: "무엇을 · " + action.form_name }));
     if (action.submit_to) rows.push(h("p", { class: "t-body-s c-secondary", text: "어디에 · " + action.submit_to }));
 
-    openModal("냈어요", h("div", { class: "evform" }, [
+    openModal("제출했어요", h("div", { class: "evform" }, [
       h("div", { class: "sub__what" }, rows),
       h("div", { class: "field" }, [h("label", { for: "sub-day", text: "언제 냈나요?" }), day, hint]),
       h("div", { class: "field" }, [
@@ -1321,7 +1319,6 @@
         picked,
       ]),
       save,
-      h("p", { class: "modal__note", text: "기록은 이 브라우저에만 남고 어디로도 보내지 않습니다. 회신 기한을 대신 판단하지는 않아요." }),
     ]));
   }
 
@@ -1338,7 +1335,7 @@
     what.value = UNKNOWN_CHOICE;
     var whatHint = h("p", { class: "field__hint", text: "통지서에 적힌 결정 이름이에요. 모르겠으면 그대로 두세요." });
 
-    var save = h("button", { type: "button", class: "modal__save", text: "회신 받았다고 기록하기" });
+    var save = h("button", { type: "button", class: "modal__save", text: "등록하기" });
     save.addEventListener("click", function () {
       if (!day.value) {
         hint.textContent = "받은 날짜를 골라 주세요.";
@@ -1362,7 +1359,7 @@
       h("div", { class: "field" }, [h("label", { for: "res-day", text: "언제 받았나요?" }), day, hint]),
       h("div", { class: "field" }, [h("label", { for: "res-what", text: "어떤 결정이었나요?" }), what, whatHint]),
       save,
-      h("p", { class: "modal__note", text: "고른 결정으로 사건 단계와 다음 행동을 다시 계산합니다. 통지서를 자료로 올리면 기록으로 확인된 것으로 바뀝니다." }),
+      h("p", { class: "modal__note", text: "고른 결정으로 사건 단계와 다음 행동을 다시 알려드려요." }),
     ]));
   }
 
@@ -1402,7 +1399,7 @@
           ]));
         });
         if (outcome.next) lines.push(h("p", { class: "t-body-s", text: "다음 행동 · " + outcome.next }));
-        lines.push(h("p", { class: "t-caption sub__outcome-note", text: "고르신 결정으로 계산했어요. 통지서를 자료로 올리면 기록으로 확인된 것이 됩니다." }));
+        lines.push(h("p", { class: "t-caption sub__outcome-note", text: "통지서를 자료로 올리면 기록으로 확인된 것이 됩니다." }));
         result = h("div", { class: "sub__outcome" }, lines);
       }
 
@@ -1539,7 +1536,7 @@
       if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, function () {});
     });
     body.appendChild(copy);
-    body.appendChild(h("p", { class: "modal__note", text: "자료에 있는 날짜와 문구만 모았습니다. 사유처럼 판단이 들어가는 칸은 비워 두었어요 — 타래는 대신 쓰지 않습니다." }));
+    body.appendChild(h("p", { class: "modal__note", text: "판단이 들어가는 칸은 비워 두었어요." }));
 
     openModal("서류 초안", body);
   }
@@ -1684,7 +1681,7 @@
 
   // 갈래마다 어떻게 물을지. 질문 문장은 여기서 정하고, 내용은 엔진이 올린 것을 그대로 넣는다.
   var ASK_FRAME = {
-    "자료끼리 어긋남": "자료마다 다르게 적혀 있습니다. 어느 쪽을 기준으로 봐야 하나요?",
+    "자료 간 모순": "자료마다 다르게 적혀 있습니다. 어느 쪽을 기준으로 봐야 하나요?",
     "확인되지 않음": "기록으로 확인되지 않는 내용입니다. 어떻게 확인할 수 있을까요?",
   };
 
@@ -1739,7 +1736,7 @@
       });
 
       openModal("전문가에게 물어볼 질문", h("div", { class: "ask" }, [
-        h("p", { class: "ask__lead", text: "지금 화면에 올라온 내용에서 뽑았어요. 상담 전에 읽어 보고 빼거나 더할 수 있어요." }),
+        h("p", { class: "ask__lead", text: "수사 현황을 기반으로 만든 질문이에요." }),
         area,
         copy,
       ]));
@@ -1880,14 +1877,14 @@
   var GUIDE_KEY = "tarae.guide.closed.v1";
 
   var GUIDE_STEPS = [
-    { title: "기록이 빈 기간", text: "수사중지 뒤 몇 년씩 아무 기록이 없는 구간을 짚어요",
-      find: function () { var gaps = document.querySelectorAll(".tl__gap"); return gaps[gaps.length - 1]; } },
-    { title: "자료끼리 어긋난 곳", text: "같은 날을 자료마다 다르게 적은 곳을 찾아요", issues: true,
+    { title: "사건 기록", text: "타임라인 · 인물 · 관계 · 주장 대조 별로 수사 현황을 깔끔하게 확인해요",
+      find: function () { return document.querySelector(".tabs"); } },
+    { title: "모순점 발견", text: "기록에서 어긋난 주장이나 모순점을 찾아요", issues: true,
       find: function () {
         return document.querySelector('.issue[data-kind="conflicting"], .issue[data-kind="suspected_conflict"]')
           || document.querySelector(".issue");
       } },
-    { title: "지금 할 일 하나", text: "놓치면 안 되는 것부터 골라 이유와 함께 보여 줘요",
+    { title: "지금 할 일", text: "지금 할 수 있는 일을 보여 줘요",
       find: function () { return document.querySelector(".next-action"); } },
     { title: "서류 초안", text: "자료에 적힌 것만 모아 낼 서류의 초안을 만들어요",
       find: function () { return document.querySelector(".na__draft"); } },
