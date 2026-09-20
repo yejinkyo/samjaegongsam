@@ -2102,7 +2102,7 @@
     if (isSample(c)) {
       root.appendChild(h("div", { class: "sample-band" }, [
         h("span", { class: "sample-band__mark t-label", text: "가상 사건" }),
-        h("p", { class: "t-body-s", text: "화면을 보여 주려고 지어낸 사건이에요. 실제 사건 · 인물이 아닙니다." }),
+        h("p", { class: "t-body-s", text: "데모용 가상 사건입니다. 실제 사건 · 인물이 아닙니다." }),
       ]));
     }
     root.appendChild(h("div", { class: "disclaimer" }, [
