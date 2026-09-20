@@ -1888,6 +1888,8 @@
       find: function () { return document.querySelector(".next-action"); } },
     { title: "서류 초안", text: "자료에 적힌 것만 모아 낼 서류의 초안을 만들어요",
       find: function () { return document.querySelector(".na__draft"); } },
+    { title: "도우미 챗봇", text: "사건을 보면서 바로 물어볼 수 있어요", chat: true,
+      find: function () { return document.querySelector(".chat__fab"); } },
   ];
 
   function guideClosed() {
@@ -1899,6 +1901,11 @@
 
     function spot(step) {
       showTimeline();
+      // 챗봇 칸은 대화창을 열어 준다 — 버튼만 빛나면 무엇이 열리는지 모른다
+      if (step.chat) {
+        var fab = document.querySelector(".chat__fab");
+        if (fab && fab.getAttribute("aria-expanded") !== "true") fab.click();
+      }
       if (step.issues) {
         var toggle = document.querySelector(".issues__toggle");
         if (toggle && toggle.getAttribute("aria-expanded") !== "true") toggle.click();
@@ -1939,6 +1946,95 @@
       band.remove();
     });
     return band;
+  }
+
+  /* 사건 도우미 — 우측 아래에 붙어 있는 챗봇 화면.
+   *
+   * 지금은 화면만 있다. 답을 지어내면 이 서비스가 하지 않기로 한 일(사실 판단)을 하게 되므로,
+   * 보낸 질문은 그대로 두고 '아직 답하지 않는다'고 적는다. 물어볼 거리는 이 사건에서 실제로
+   * 찾은 것(모순 · 공백 · 다음 행동)으로 만든다.
+   */
+  function chatIcon() {
+    var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("viewBox", "0 0 24 24");
+    svg.setAttribute("width", "26");
+    svg.setAttribute("height", "26");
+    svg.setAttribute("aria-hidden", "true");
+    var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("d", "M12 3.6c-4.8 0-8.6 3.2-8.6 7.1 0 2.2 1.2 4.2 3.2 5.5-.2 1-.6 2.1-1.4 3.1 1.7-.2 3.1-.8 4.2-1.7"
+                      + " .8.2 1.7.3 2.6.3 4.8 0 8.6-3.2 8.6-7.2S16.8 3.6 12 3.6Z");
+    path.setAttribute("fill", "currentColor");
+    svg.appendChild(path);
+    return svg;
+  }
+
+  var CHAT_SUGGESTIONS = ["지금 내가 뭘 해야할까?", "자료에서 이상한 부분 있어?", "그 다음으로는 뭘 해야해?"];
+
+  function chatDock(c) {
+    var log = h("div", { class: "chat__log", role: "log", "aria-live": "polite" });
+    var input = h("input", { type: "text", class: "chat__input", placeholder: "이 사건에 대해 물어보세요",
+                             "aria-label": "질문 입력" });
+    var send = h("button", { type: "button", class: "chat__send t-body-m-strong", text: "보내기" });
+
+    function bubble(who, text) {
+      return h("div", { class: "chat__msg chat__msg--" + who }, [h("p", { class: "t-body-s", text: text })]);
+    }
+
+    function ask(text) {
+      var question = (text || input.value).trim();
+      if (!question) return;
+      input.value = "";
+      log.appendChild(bubble("me", question));
+      // 답을 지어내지 않는다 — 아직 준비 중이라고만 적고, 지금 쓸 수 있는 자리를 알려 준다
+      log.appendChild(bubble("bot", "답변 기능은 준비 중이에요."));
+      log.scrollTop = log.scrollHeight;
+    }
+
+    send.addEventListener("click", function () { ask(); });
+    input.addEventListener("keydown", function (e) { if (e.key === "Enter") ask(); });
+
+    log.appendChild(bubble("bot", "‘" + c.title + "’ 사건을 보고 있어요. 궁금한 것을 물어보세요."));
+    log.appendChild(bubble("bot", "답변 기능은 준비 중이에요."));
+
+    var chips = h("div", { class: "chat__chips" }, CHAT_SUGGESTIONS.map(function (q) {
+      var chip = h("button", { type: "button", class: "chat__chip t-caption", text: q });
+      chip.addEventListener("click", function () { ask(q); });
+      return chip;
+    }));
+
+    var close = h("button", { type: "button", class: "chat__close", "aria-label": "닫기", text: "✕" });
+    var panel = h("section", { class: "chat__panel", hidden: true, "aria-label": "사건 도우미" }, [
+      h("div", { class: "chat__head" }, [
+        h("div", { class: "chat__title" }, [
+          h("span", { class: "t-body-m-strong", text: "사건 도우미" }),
+          h("span", { class: "chat__soon t-caption", text: "준비 중" }),
+        ]),
+        close,
+      ]),
+      log,
+      chips,
+      h("div", { class: "chat__form" }, [input, send]),
+    ]);
+
+    var fab = h("button", { type: "button", class: "chat__fab", "aria-expanded": "false", "aria-label": "사건 도우미 열기" },
+                [chatIcon()]);
+
+    function open(show) {
+      panel.hidden = !show;
+      fab.setAttribute("aria-expanded", String(show));
+      fab.setAttribute("aria-label", show ? "사건 도우미 닫기" : "사건 도우미 열기");
+      fab.classList.toggle("chat__fab--open", show);
+      if (show) input.focus();
+    }
+
+    fab.addEventListener("click", function () { open(panel.hidden); });
+    close.addEventListener("click", function () { open(false); });
+    document.addEventListener("keydown", function (e) {
+      // 팝업이 열려 있으면 그쪽 닫기가 먼저다 — 여기서 가로채지 않는다
+      if (e.key === "Escape" && !panel.hidden && !document.querySelector("dialog.modal[open]")) open(false);
+    });
+
+    return h("div", { class: "chat" }, [panel, fab]);
   }
 
   function renderCase(root) {
@@ -2023,6 +2119,8 @@
       icon("info", 18),
       h("p", { class: "t-body-s c-secondary", text: "타래는 범인이나 사건의 진실을 판단하지 않습니다." }),
     ]));
+    // 사건 도우미는 화면 위에 떠 있다 — main 안에 두면 같이 스크롤된다
+    root.appendChild(chatDock(c));
     root.appendChild(h("main", { class: "page page--case" }, [
       backLink(),
       c.guide ? guideBand(showTimeline) : null,
