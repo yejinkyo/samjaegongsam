@@ -68,7 +68,7 @@ ACTION_LABELS = {
 }
 
 ISSUE_GROUPS = [
-    ("inconsistency", "자료끼리 어긋남", "conflict"),
+    ("inconsistency", "자료 간 모순", "conflict"),
     ("unverified", "확인되지 않음", "unknown"),
     ("missing", "빠진 정보", "gap"),
     ("unreadable", "읽히지 않은 부분", "gap"),
@@ -506,7 +506,7 @@ def _issues(result: dict[str, Any], docs: dict[str, dict]) -> list[dict[str, Any
                 continue
             if issue["sources"]:
                 s = issue["sources"][0]
-                how = f"근거 · {docs.get(s['source_doc_id'], {}).get('file_name', s['source_doc_id'])} {s['source_line']}줄"
+                how = f"근거 · {docs.get(s['source_doc_id'], {}).get('file_name', s['source_doc_id'])}"
             elif issue["checked_doc_ids"]:
                 how = f"확인한 자료 {len(issue['checked_doc_ids'])}개에서 찾지 못함"
             else:
@@ -518,6 +518,8 @@ def _issues(result: dict[str, Any], docs: dict[str, dict]) -> list[dict[str, Any
 
 
 ASCII_ID = re.compile(r"(?<![A-Za-z0-9_])[A-Za-z][A-Za-z0-9_]*(?![A-Za-z0-9_])")
+# 엔진 문장이 출처로 붙이는 줄 번호 — '통지서.jpg · 8줄' 의 '· 8줄'. 화면은 자료 이름까지만 보여 준다.
+LINE_NO = re.compile(r"\s*·\s*\d+줄")
 
 
 def _drop_score_note(message: str) -> str:
@@ -534,8 +536,9 @@ def _drop_score_note(message: str) -> str:
 
 
 def _plain(message: str, docs: dict[str, dict]) -> str:
-    """엔진 문장을 화면 말로 — 점수 괄호를 떼고, 자료 id 는 올린 파일 이름으로 바꾼다."""
+    """엔진 문장을 화면 말로 — 점수 괄호와 줄 번호를 떼고, 자료 id 는 올린 파일 이름으로 바꾼다."""
     message = _drop_score_note(message)
+    message = LINE_NO.sub("", message)
     return ASCII_ID.sub(lambda m: docs[m.group(0)].get("file_name", m.group(0)) if m.group(0) in docs else m.group(0),
                         message)
 

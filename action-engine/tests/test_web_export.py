@@ -232,11 +232,11 @@ def test_답의_기한에는_통지_수령일부터_세는_것만_싣는다(view
 # ── 화면 말 ────────────────────────────────────────────────────────────
 
 
-def test_엔진_점수와_자료_id_를_화면에_싣지_않는다(export):
+def test_엔진_점수와_자료_id_와_줄번호를_화면에_싣지_않는다(export):
     docs = {"news_2018": {"file_name": "기사_2018.jpg"}}
     text = ("최종 목격 일시: 차이가 있어 보입니다 — ‘11-02’(news_2018 · 3줄) "
             "(모순 점수 0.54 < 기준 0.70; 추출 신뢰도 낮음: news_2018 · 3줄 (0.60))")
-    assert export._plain(text, docs) == "최종 목격 일시: 차이가 있어 보입니다 — ‘11-02’(기사_2018.jpg · 3줄)"
+    assert export._plain(text, docs) == "최종 목격 일시: 차이가 있어 보입니다 — ‘11-02’(기사_2018.jpg)"
     # 판정 근거가 아닌 괄호는 그대로 둔다
     assert export._plain("읽히지 않은 부분이 1곳 있습니다 (7줄)", docs) == "읽히지 않은 부분이 1곳 있습니다 (7줄)"
 
@@ -251,7 +251,7 @@ def test_차이_의심도_자료끼리_어긋남_묶음에_둔다(export):
     issue = {"category": "unverified", "condition": "suspected_conflict", "priority": 1,
              "message": "최종 목격 일시: 차이가 있어 보입니다", "sources": [], "checked_doc_ids": []}
     groups = export._issues({"analysis": {"issues": [issue]}}, {})
-    assert [g["label"] for g in groups] == ["자료끼리 어긋남"]
+    assert [g["label"] for g in groups] == ["자료 간 모순"]
 
 
 # ── 예시 사건의 원본 사진 ─────────────────────────────────────────────
