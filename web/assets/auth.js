@@ -98,15 +98,12 @@
    * 있어서, 두는 순간 남이 우리 앱 행세를 할 수 있다. 그래서 서버가 생기기 전에는
    * 만들 수 없다. 되는 척하는 버튼을 두는 대신 왜 안 되는지 적는다.
    */
-  var SOCIAL_NAMES = { kakao: "카카오", naver: "네이버", google: "구글" };
-
   function wireSocial() {
     document.querySelectorAll("[data-social]").forEach(function (button) {
       button.addEventListener("click", function () {
-        var name = SOCIAL_NAMES[button.getAttribute("data-social")] || "간편";
         var note = document.querySelector(".social__note");
         if (note) {
-          note.textContent = name + " 가입은 서버가 있어야 연결할 수 있어요. 지금은 아이디로 가입해 주세요.";
+          note.textContent = "준비 중입니다.";
           note.classList.add("social__note--warn");
         }
       });
