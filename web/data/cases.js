@@ -4,7 +4,7 @@ window.TARAE_CASES = [
     "id": "demo_missing_2017",
     "title": "2017년 실종, 9년째 미제",
     "type": "missing_person_suspended",
-    "type_label": "실종 사건 · 수사중지",
+    "type_label": "실종 사건",
     "as_of": "2026.09.19",
     "period": "2017.11 – 2025.09",
     "doc_count": 7,

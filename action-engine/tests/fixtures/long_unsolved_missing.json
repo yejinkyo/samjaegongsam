@@ -6121,7 +6121,7 @@
     ],
     "case_card": {
       "case_type": "missing_person_suspended",
-      "case_type_label": "실종 사건 · 수사중지",
+      "case_type_label": "실종 사건",
       "requirements_status": "draft_unverified",
       "stages": [
         {
