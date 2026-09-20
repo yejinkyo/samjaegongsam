@@ -1,6 +1,6 @@
 {
   "case_type": "missing_person_suspended",
-  "label": "실종 사건 · 수사중지",
+  "label": "실종 사건",
   "status": "draft_unverified",
   "note": "장기 미제 실종 사건 파일럿용 초안 (proposal.md §4 1차 타겟, §10 파일럿). 재개 요건과 필수 항목은 법률 전문가 검수 후 확정해야 한다. 절차 안내 문구는 두지 않는다.",
   "stages": ["occurrence", "report", "receipt", "investigation", "outcome"],
