@@ -110,7 +110,7 @@ SLOT_STATES = {
     "claimed_only": ("말만 있고 기록 없음", "unverified"),
     "conflicting": ("자료마다 다름", "conflict"),
     "low_confidence": ("판독 신뢰도 낮음", "unverified"),
-    "outdated": ("낡았을 수 있음", "unverified"),
+    "outdated": ("오래됨", "unverified"),
     "missing": ("자료에 없음", "unverified"),
     "suspected_conflict": ("차이 의심", "conflict"),
     "unreadable": ("읽히지 않음", "unverified"),
