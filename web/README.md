@@ -104,7 +104,7 @@ GitHub 저장소가 연결돼 있어 **`main` 에 병합하면 프로덕션이 �
 
 ```bash
 npx vercel login
-npx vercel link --yes --project samjaegongsam
+npx vercel link --yes --project tarae-kr
 npx vercel deploy --dry     # 올라갈 파일 목록 — web/ · api/ · 두 엔진 src · export_web.py 뿐이어야 한다
 npx vercel deploy           # 미리보기 (Vercel 로그인한 사람만 열림)
 ```
